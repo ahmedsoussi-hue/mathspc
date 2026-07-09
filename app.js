@@ -321,6 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupModals();
     setupQuizEngine();
     setupPremiumCheckout();
+    setupInteractiveTools();
 });
 
 // --- STATE STORAGE ---
@@ -1166,4 +1167,144 @@ try {
     `, styleSheet.cssRules.length);
 } catch (e) {
     console.log("Dynamically added CSS rule error: " + e);
+}
+
+// --- INTERACTIVE MATHS & PHYSICS TOOLS ---
+function setupInteractiveTools() {
+    // 1. Maths Tool: Delta Calculator
+    const btnCalcDelta = document.getElementById("btn-calc-delta");
+    if (btnCalcDelta) {
+        btnCalcDelta.addEventListener("click", () => {
+            const a = parseFloat(document.getElementById("calc-a").value);
+            const b = parseFloat(document.getElementById("calc-b").value);
+            const c = parseFloat(document.getElementById("calc-c").value);
+            const resultDiv = document.getElementById("delta-result");
+
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                resultDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer des coefficients valides.</p>`;
+                resultDiv.style.display = "block";
+                return;
+            }
+
+            if (a === 0) {
+                const x = -c / b;
+                resultDiv.innerHTML = `
+                    <div class="result-title">Équation du 1er degré (a = 0) :</div>
+                    <div class="result-value">${b}x + ${c} = 0</div>
+                    <div class="result-explanation">Solution unique : <strong>x = ${x.toFixed(3)}</strong></div>
+                `;
+            } else {
+                const delta = b * b - 4 * a * c;
+                let html = `
+                    <div class="result-title">Résultats :</div>
+                    <div class="result-value">Δ = b² - 4ac = (${b})² - 4(${a})(${c}) = <strong>${delta}</strong></div>
+                `;
+
+                if (delta > 0) {
+                    const x1 = (-b - Math.sqrt(delta)) / (2 * a);
+                    const x2 = (-b + Math.sqrt(delta)) / (2 * a);
+                    html += `
+                        <div class="result-explanation">
+                            <span style="color: var(--success); font-weight: 600;">Δ > 0 : Deux solutions réelles distinctes</span><br>
+                            x₁ = <strong>${x1.toFixed(3)}</strong><br>
+                            x₂ = <strong>${x2.toFixed(3)}</strong><br>
+                            Factorisation : <strong>${a}(x - ${x1 >= 0 ? x1.toFixed(2) : '('+x1.toFixed(2)+')'})(x - ${x2 >= 0 ? x2.toFixed(2) : '('+x2.toFixed(2)+')'})</strong>
+                        </div>
+                    `;
+                } else if (delta === 0) {
+                    const x0 = -b / (2 * a);
+                    html += `
+                        <div class="result-explanation">
+                            <span style="color: var(--secondary); font-weight: 600;">Δ = 0 : Une solution réelle double</span><br>
+                            x₀ = <strong>${x0.toFixed(3)}</strong><br>
+                            Factorisation : <strong>${a}(x - ${x0 >= 0 ? x0.toFixed(2) : '('+x0.toFixed(2)+')'})²</strong>
+                        </div>
+                    `;
+                } else {
+                    const realPart = (-b / (2 * a)).toFixed(3);
+                    const imagPart = (Math.sqrt(-delta) / (2 * a)).toFixed(3);
+                    html += `
+                        <div class="result-explanation">
+                            <span style="color: var(--accent); font-weight: 600;">Δ < 0 : Pas de solution réelle</span> (Deux solutions complexes conjuguées)<br>
+                            z₁ = <strong>${realPart} - i${Math.abs(imagPart)}</strong><br>
+                            z₂ = <strong>${realPart} + i${Math.abs(imagPart)}</strong>
+                        </div>
+                    `;
+                }
+                resultDiv.innerHTML = html;
+            }
+            resultDiv.style.display = "block";
+        });
+    }
+
+    // 2. Physics Tool: Wave Velocity & Delay Calculator
+    const tabCalcV = document.getElementById("tab-calc-v");
+    const tabCalcTau = document.getElementById("tab-calc-tau");
+    const fieldT = document.getElementById("field-t");
+    const fieldV = document.getElementById("field-v");
+    const btnCalcWave = document.getElementById("btn-calc-wave");
+    const resultWaveDiv = document.getElementById("wave-result");
+
+    let currentMode = "v";
+
+    if (tabCalcV && tabCalcTau) {
+        tabCalcV.addEventListener("click", () => {
+            currentMode = "v";
+            tabCalcV.classList.add("active");
+            tabCalcTau.classList.remove("active");
+            fieldT.style.display = "block";
+            fieldV.style.display = "none";
+            resultWaveDiv.style.display = "none";
+        });
+
+        tabCalcTau.addEventListener("click", () => {
+            currentMode = "tau";
+            tabCalcTau.classList.add("active");
+            tabCalcV.classList.remove("active");
+            fieldT.style.display = "none";
+            fieldV.style.display = "block";
+            resultWaveDiv.style.display = "none";
+        });
+    }
+
+    if (btnCalcWave) {
+        btnCalcWave.addEventListener("click", () => {
+            const d = parseFloat(document.getElementById("wave-d").value);
+            
+            if (isNaN(d) || d <= 0) {
+                resultWaveDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer une distance d > 0.</p>`;
+                resultWaveDiv.style.display = "block";
+                return;
+            }
+
+            if (currentMode === "v") {
+                const t = parseFloat(document.getElementById("wave-t").value);
+                if (isNaN(t) || t <= 0) {
+                    resultWaveDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer une durée Δt > 0.</p>`;
+                    resultWaveDiv.style.display = "block";
+                    return;
+                }
+                const v = d / t;
+                resultWaveDiv.innerHTML = `
+                    <div class="result-title">Résultat :</div>
+                    <div class="result-value">v = d / Δt = ${d} / ${t} = <strong>${v.toFixed(3)} m/s</strong></div>
+                    <div class="result-explanation">La célérité de l'onde est de <strong>${v.toFixed(2)} m/s</strong>. En km/h : <strong>${(v * 3.6).toFixed(2)} km/h</strong>.</div>
+                `;
+            } else {
+                const v = parseFloat(document.getElementById("wave-v").value);
+                if (isNaN(v) || v <= 0) {
+                    resultWaveDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer une célérité v > 0.</p>`;
+                    resultWaveDiv.style.display = "block";
+                    return;
+                }
+                const tau = d / v;
+                resultWaveDiv.innerHTML = `
+                    <div class="result-title">Résultat :</div>
+                    <div class="result-value">τ = d / v = ${d} / ${v} = <strong>${tau.toFixed(3)} s</strong></div>
+                    <div class="result-explanation">Le retard temporel τ est de <strong>${(tau * 1000).toFixed(2)} ms</strong>.</div>
+                `;
+            }
+            resultWaveDiv.style.display = "block";
+        });
+    }
 }

@@ -2178,6 +2178,290 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--success);
 }
 
+/* Interactive Subjects Sections */
+.subjects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0 50px 0;
+}
+
+.subject-section-card {
+    background: var(--bg-surface);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.subject-section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    transition: all var(--transition-normal);
+}
+
+.math-section::before {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.physics-section::before {
+    background: linear-gradient(90deg, var(--accent), #f59e0b);
+}
+
+.subject-section-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-color-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.math-section:hover {
+    box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+}
+
+.physics-section:hover {
+    box-shadow: 0 20px 40px -15px rgba(244, 63, 94, 0.15);
+}
+
+.subject-section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.subject-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.math-icon-bg {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    box-shadow: 0 8px 20px -6px var(--primary);
+}
+
+.physics-icon-bg {
+    background: linear-gradient(135deg, var(--accent), #f59e0b);
+    box-shadow: 0 8px 20px -6px var(--accent);
+}
+
+.subject-title-area h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.subject-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.subject-section-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Interactive Tool inside Card */
+.interactive-tool-box {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.light-theme .interactive-tool-box {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tool-header h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tool-header p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.tool-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Inputs and Forms */
+.calc-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-field label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.input-field input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+    width: 100%;
+}
+
+.light-theme .input-field input {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.input-field input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.calc-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.85rem;
+}
+
+.calc-result {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--primary);
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.light-theme .calc-result {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.physics-section .calc-result {
+    border-left-color: var(--accent);
+}
+
+.result-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.result-value {
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.result-explanation {
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Wave Calc specific tabs */
+.calc-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.calc-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all var(--transition-fast);
+}
+
+.calc-tab-btn.active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.light-theme .calc-tab-btn.active {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.subject-key-concepts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.concept-tag {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.light-theme .concept-tag {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.subject-action-btn {
+    margin-top: auto;
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
@@ -2210,6 +2494,10 @@ h1, h2, h3, h4, h5, h6 {
     }
     .level-grid {
         grid-template-columns: 1fr;
+    }
+    .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
     .progress-stats-grid {
         grid-template-columns: 1fr;
