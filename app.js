@@ -1,5 +1,5 @@
 /* ==========================================================================
-   APP.JS - ALLOSCHOOL MATH-PC
+   APP.JS - MATHS ET PHYSIQUES
    Logic: Navigation, Dynamic Cards, Interactive Quizzes, LocalStorage,
           Simulated Payments, Custom Toast and Theme Toggling.
    ========================================================================== */
@@ -326,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- STATE STORAGE ---
 function loadStateFromStorage() {
-    const saved = localStorage.getItem("alloschool_state");
+    const saved = localStorage.getItem("maths_physiques_state");
     if (saved) {
         try {
             userState = { ...userState, ...JSON.parse(saved) };
@@ -342,7 +342,7 @@ function loadStateFromStorage() {
 }
 
 function saveStateToStorage() {
-    localStorage.setItem("alloschool_state", JSON.stringify(userState));
+    localStorage.setItem("maths_physiques_state", JSON.stringify(userState));
 }
 
 // --- DASHBOARD LOGIC ---
@@ -456,7 +456,7 @@ function initTheme() {
     const lightIcon = themeBtn.querySelector(".light-icon");
     
     // Check local storage or system preference
-    const savedTheme = localStorage.getItem("alloschool_theme") || "dark";
+    const savedTheme = localStorage.getItem("maths_physiques_theme") || "dark";
     if (savedTheme === "light") {
         document.body.classList.add("light-theme");
         darkIcon.style.display = "none";
@@ -466,12 +466,12 @@ function initTheme() {
     themeBtn.addEventListener("click", () => {
         const isLight = document.body.classList.toggle("light-theme");
         if (isLight) {
-            localStorage.setItem("alloschool_theme", "light");
+            localStorage.setItem("maths_physiques_theme", "light");
             darkIcon.style.display = "none";
             lightIcon.style.display = "block";
             showToast("Thème clair activé.", false);
         } else {
-            localStorage.setItem("alloschool_theme", "dark");
+            localStorage.setItem("maths_physiques_theme", "dark");
             darkIcon.style.display = "block";
             lightIcon.style.display = "none";
             showToast("Thème sombre activé.", false);

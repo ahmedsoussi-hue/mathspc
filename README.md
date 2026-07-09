@@ -1,6 +1,6 @@
-# AlloSchool Math-PC
+# Maths et Physiques
 
-AlloSchool Math-PC est une plateforme éducative moderne conçue pour aider les élèves à maîtriser les **Mathématiques** et la **Physique-Chimie**, conformément au programme scolaire marocain (MEN).
+Maths et Physiques est une plateforme éducative moderne conçue pour aider les élèves à maîtriser les **Mathématiques** et la **Physique-Chimie**, conformément au programme scolaire marocain (MEN).
 
 ## 🚀 Fonctionnalités
 
