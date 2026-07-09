@@ -39,9 +39,15 @@ const chaptersData = [
                 title: "Exercice 2 : Application du TVI",
                 statement: "Démontrer que l'équation <strong>x³ + x - 1 = 0</strong> admet une unique solution réelle sur l'intervalle [0, 1].",
                 solution: "Soit f(x) = x³ + x - 1. f est continue sur [0, 1] comme fonction polynôme.<br>Calculons la dérivée : f'(x) = 3x² + 1. f'(x) > 0 pour tout x réel, donc f est strictement croissante sur [0, 1].<br>f(0) = -1 et f(1) = 1.<br>Comme 0 est compris entre f(0) et f(1) (c'est-à-dire -1 < 0 < 1), et que f est continue et strictement monotone, l'équation f(x) = 0 admet une <strong>unique solution</strong> sur [0, 1] d'après le TVI."
+            },
+            {
+                title: "Exercice 3 : Devoir Surveillé N°2 - Étude de fonctions et exponentielles (Pr. Soussi)",
+                statement: "<strong>Partie I :</strong> Soit $g$ la fonction définie sur $\\mathbb{R}$ par : $g(x) = 1 - (x^2 + 1)e^{-x}$.<br>1) Montrer que $g'(x) = (x - 1)^2 e^{-x}$ et dresser son tableau de variations.<br>2) En déduire le signe de $g(x)$ sur $\\mathbb{R}$.<br><br><strong>Partie II :</strong> Soit $f$ la fonction définie sur $\\mathbb{R}$ par : $f(x) = x - 1 + (x^2 + 2x + 3)e^{-x}$.<br>1) Déterminer la limite de $f$ en $+\\infty$, et montrer que la droite (D) : $y = x - 1$ est asymptote oblique à la courbe $(C)$.<br>2) Déterminer la limite de $f$ en $-\\infty$ et étudier la branche infinie.<br>3) Montrer que $f'(x) = g(x)$ et dresser le tableau de variations de $f$.<br>4) Montrer que l'équation $f(x) = x$ admet une unique solution $\\alpha \\in ]2, 3[$.",
+                solution: "<strong>1) Dérivée de g :</strong> $g'(x) = 0 - [2x \\cdot e^{-x} + (x^2+1)(-e^{-x})] = (x^2 - 2x + 1)e^{-x} = (x-1)^2 e^{-x}$. Comme $(x-1)^2 \\ge 0$ et $e^{-x} > 0$, $g'(x) \\ge 0$, donc $g$ est strictement croissante sur $\\mathbb{R}$.<br><strong>2) Signe de g :</strong> On a $g(0) = 1 - (0+1)e^0 = 0$. Comme $g$ est strictement croissante :<br>- Si $x \\le 0$, $g(x) \\le g(0) = 0$.<br>- Si $x \\ge 0$, $g(x) \\ge g(0) = 0$.<br><br><strong>Partie II :</strong><br><strong>1) Limite en $+\\infty$ :</strong> $\\lim_{x\\to+\\infty} (x^2+2x+3)e^{-x} = 0$ (croissances comparées), donc $\\lim_{x\\to+\\infty} f(x) = +\\infty$. La différence $f(x) - (x-1) = (x^2+2x+3)e^{-x}$ tend vers $0$ en $+\\infty$, donc la droite $y = x - 1$ est une asymptote oblique à $(C)$ au voisinage de $+\\infty$.<br><strong>2) Limite en $-\\infty$ :</strong> En factorisant par $e^{-x}$, $\\lim_{x\\to-\\infty} f(x) = +\\infty$. On a $\\lim_{x\\to-\\infty} f(x)/x = -\\infty$ (branche parabolique de direction $(Oy)$).<br><strong>3) Dérivée de f :</strong> $f'(x) = 1 + [(2x+2)e^{-x} - (x^2+2x+3)e^{-x}] = 1 - (x^2+1)e^{-x} = g(x)$. Le signe de $f'(x)$ est celui de $g(x)$. Ainsi, $f$ est décroissante sur $]-\\infty, 0]$ et croissante sur $[0, +\\infty[$.<br><strong>4) TVI :</strong> Posons $h(x) = f(x) - x = (x^2+2x+3)e^{-x} - 1$. La fonction $h$ est continue et strictement décroissante sur $[2, 3]$. On calcule $h(2) \\approx 0.4 > 0$ et $h(3) \\approx -0.2 < 0$. D'après le TVI, l'équation $h(x) = 0$ (soit $f(x) = x$) admet une unique solution $\\alpha$ dans l'intervalle $]2, 3[$."
             }
         ],
         exams: [
+            { title: "Devoir Surveillé N°2 - Complexes & Étude de fonctions", type: "Devoir Surveillé", year: 2026, description: "Devoir N°2 Semestre 2 rédigé par Pr. Ahmed Soussi. Contient des exercices sur les nombres complexes et l'étude complète de fonctions numériques avec exponentielles.", file: "Devoir-2.pdf" },
             { title: "Session Ordinaire 2024 - Sciences Physiques", type: "National", year: 2024 },
             { title: "Session de Rattrapage 2023 - Sciences Physiques", type: "National", year: 2023 }
         ]
@@ -799,12 +805,18 @@ window.openChapterModal = function(chapterId) {
         chap.exams.forEach(exam => {
             const examDiv = document.createElement("div");
             examDiv.className = "exam-item";
+            
+            let downloadAction = `simulateDownloadExam('${exam.title}')`;
+            if (exam.file) {
+                downloadAction = `downloadRealFile('${exam.file}', '${exam.title}')`;
+            }
+            
             examDiv.innerHTML = `
                 <div class="exam-details">
-                    <h5>Examen ${exam.type} (${exam.year})</h5>
-                    <p>Sujet officiel complet + Corrigé type rédigé par des inspecteurs.</p>
+                    <h5>${exam.type === "Devoir Surveillé" ? exam.title : `Examen ${exam.type} (${exam.year})`}</h5>
+                    <p>${exam.description || 'Sujet officiel complet + Corrigé type rédigé par des inspecteurs.'}</p>
                 </div>
-                <button class="btn btn-secondary" onclick="simulateDownloadExam('${exam.title}')">
+                <button class="btn btn-secondary" onclick="${downloadAction}">
                     <i data-lucide="download"></i> PDF
                 </button>
             `;
@@ -855,6 +867,19 @@ window.simulateDownloadExam = function(title) {
     setTimeout(() => {
         showToast("Sujet & Corrigé téléchargés !", true);
     }, 2000);
+};
+
+window.downloadRealFile = function(fileUrl, title) {
+    showToast(`Téléchargement de : ${title}...`, false);
+    setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        link.download = fileUrl.split('/').pop();
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Fichier téléchargé avec succès !", true);
+    }, 1500);
 };
 
 // --- INTERACTIVE QUIZ ENGINE ---
