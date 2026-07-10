@@ -569,6 +569,7 @@ const chaptersData = [
         ],
         exams: [
             { title: "Examen Normalisé Local - Tronc Commun", type: "Régional", year: 2023 }
+        ]
     }
 ];
 
