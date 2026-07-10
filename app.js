@@ -305,7 +305,7 @@ let userState = {
     completedChapters: [], // IDs of mastered chapters
     completedQuizzes: {}, // { quizId: score }
     premiumUser: false,
-    userName: "Élève",
+    userName: "Dr. Soussi",
     currentTab: "home"
 };
 
@@ -328,6 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupQuizEngine();
     setupPremiumCheckout();
     setupInteractiveTools();
+    setupProfileModal();
 });
 
 // --- STATE STORAGE ---
@@ -336,14 +337,26 @@ function loadStateFromStorage() {
     if (saved) {
         try {
             userState = { ...userState, ...JSON.parse(saved) };
+            if (!userState.userName || userState.userName === "Élève") {
+                userState.userName = "Dr. Soussi";
+            }
+            
+            const userNameEl = document.querySelector(".user-name");
             if (userState.premiumUser) {
                 document.querySelector(".user-profile").classList.add("premium-active");
-                document.querySelector(".user-name").innerHTML = `Élève <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
+                userNameEl.innerHTML = `${userState.userName} <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
                 lucide.createIcons();
+            } else {
+                userNameEl.textContent = userState.userName;
             }
+            
+            const bioNameEl = document.querySelector(".bio-display-name");
+            if (bioNameEl) bioNameEl.textContent = userState.userName;
         } catch (e) {
             console.error("Error parsing local state, resetting to default.", e);
         }
+    } else {
+        document.querySelector(".user-name").textContent = userState.userName;
     }
 }
 
@@ -421,10 +434,14 @@ document.getElementById("resetProgressBtn").addEventListener("click", () => {
     userState.completedChapters = [];
     userState.completedQuizzes = {};
     userState.premiumUser = false;
+    userState.userName = "Dr. Soussi";
     
     // Reset User name representation
     document.querySelector(".user-profile").classList.remove("premium-active");
-    document.querySelector(".user-name").textContent = "Élève";
+    document.querySelector(".user-name").textContent = userState.userName;
+    
+    const bioNameEl = document.querySelector(".bio-display-name");
+    if (bioNameEl) bioNameEl.textContent = userState.userName;
     
     saveStateToStorage();
     updateDashboardUI();
@@ -1145,7 +1162,7 @@ function setupPremiumCheckout() {
             
             // UI representation header
             document.querySelector(".user-profile").classList.add("premium-active");
-            document.querySelector(".user-name").innerHTML = `Élève <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
+            document.querySelector(".user-name").innerHTML = `${userState.userName} <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
             lucide.createIcons();
 
             closeCheckoutModal();
@@ -1330,6 +1347,79 @@ function setupInteractiveTools() {
                 `;
             }
             resultWaveDiv.style.display = "block";
+        });
+    }
+}
+
+// --- USER PROFILE MODAL ENGINE ---
+function setupProfileModal() {
+    const profileBtn = document.getElementById("userProfileBtn");
+    const profileModal = document.getElementById("profileModal");
+    const closeBtn = document.getElementById("profileCloseBtn");
+    const backdrop = document.getElementById("profileModalBackdrop");
+    const resetBtn = document.getElementById("resetProfileStateBtn");
+    const editBtn = document.getElementById("profileEditBtn");
+
+    if (profileBtn && profileModal) {
+        profileBtn.addEventListener("click", () => {
+            profileModal.classList.add("active");
+        });
+    }
+
+    const closeProfile = () => {
+        profileModal.classList.remove("active");
+    };
+
+    if (closeBtn) closeBtn.addEventListener("click", closeProfile);
+    if (backdrop) backdrop.addEventListener("click", closeProfile);
+
+    // Reset progress from profile
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            if (confirm("Voulez-vous vraiment réinitialiser toutes vos statistiques ?")) {
+                userState.completedChapters = [];
+                userState.completedQuizzes = {};
+                userState.premiumUser = false;
+                userState.userName = "Dr. Soussi";
+                
+                document.querySelector(".user-profile").classList.remove("premium-active");
+                document.querySelector(".user-name").textContent = userState.userName;
+                
+                const bioNameEl = document.querySelector(".bio-display-name");
+                if (bioNameEl) bioNameEl.textContent = userState.userName;
+                
+                saveStateToStorage();
+                updateDashboardUI();
+                renderChapters();
+                closeProfile();
+                showToast("Statistiques réinitialisées avec succès.", false);
+            }
+        });
+    }
+
+    // Edit profile name dynamic simulation
+    if (editBtn) {
+        editBtn.addEventListener("click", () => {
+            const newName = prompt("Entrez votre nouveau nom d'utilisateur :", userState.userName);
+            if (newName && newName.trim() !== "") {
+                userState.userName = newName.trim();
+                
+                // Update username in header (considering premium status)
+                const userNameEl = document.querySelector(".user-name");
+                if (userState.premiumUser) {
+                    userNameEl.innerHTML = `${userState.userName} <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
+                    lucide.createIcons();
+                } else {
+                    userNameEl.textContent = userState.userName;
+                }
+                
+                // Update username display in bio
+                const bioNameEl = document.querySelector(".bio-display-name");
+                if (bioNameEl) bioNameEl.textContent = userState.userName;
+                
+                saveStateToStorage();
+                showToast("Profil mis à jour !", true);
+            }
         });
     }
 }

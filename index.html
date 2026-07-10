@@ -41,8 +41,10 @@
                     <i data-lucide="sun" class="light-icon" style="display: none;"></i>
                 </button>
                 <div class="user-profile" id="userProfileBtn">
-                    <div class="avatar">S</div>
-                    <span class="user-name">Élève</span>
+                    <div class="avatar">
+                        <img src="profile.jpg" alt="Dr. Soussi" id="userAvatarImg">
+                    </div>
+                    <span class="user-name">Dr. Soussi</span>
                 </div>
             </div>
         </div>
@@ -646,12 +648,67 @@
             </div>
             <div class="footer-links-group">
                 <h4>Légal & Contact</h4>
-                <a href="mailto:support@maths-physiques.ma"><i data-lucide="mail"></i> support@maths-physiques.ma</a>
-                <a href="tel:+212600000000"><i data-lucide="phone"></i> +212 600 000 000</a>
+                <a href="mailto:mathspc@gmail.com"><i data-lucide="mail"></i> mathspc@gmail.com</a>
+                <a href="tel:+212613044172"><i data-lucide="phone"></i> +212 613-044172</a>
                 <span>© 2026 Maths et Physiques. Développé pour la réussite scolaire.</span>
             </div>
         </div>
     </footer>
+
+    <!-- User Profile Modal (Instagram Style) -->
+    <div class="lesson-modal" id="profileModal">
+        <div class="modal-backdrop" id="profileModalBackdrop"></div>
+        <div class="modal-card profile-modal-card">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <span class="modal-badge"><i data-lucide="user"></i> Profil Enseignant</span>
+                    <h3>Mon Compte</h3>
+                </div>
+                <button class="modal-close" id="profileCloseBtn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body profile-modal-body">
+                <div class="instagram-profile-header">
+                    <div class="instagram-avatar-wrapper">
+                        <img src="profile.jpg" alt="Dr. Soussi" class="instagram-avatar">
+                        <div class="instagram-badge"><i data-lucide="instagram"></i></div>
+                    </div>
+                    <div class="instagram-meta">
+                        <h3 class="instagram-username">@mathsbysoussi</h3>
+                        <a href="https://www.instagram.com/mathsbysoussi/" target="_blank" class="instagram-link-btn">
+                            Voir sur Instagram <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="instagram-stats">
+                    <div class="stat-box">
+                        <span class="stat-val">1</span>
+                        <span class="stat-lbl">Publication</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val">108</span>
+                        <span class="stat-lbl">Abonnés</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val">129</span>
+                        <span class="stat-lbl">Abonnements</span>
+                    </div>
+                </div>
+
+                <div class="instagram-bio">
+                    <h4 class="bio-display-name">maths by soussi</h4>
+                    <p class="bio-tagline">🎓 Professeur de maths | Dr. Soussi</p>
+                    <p class="bio-detail">✨ Beyond Numbers - Enseigner les maths avec élégance.</p>
+                    <p class="bio-inspiration">💡 Entre science et inspiration ✨</p>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn btn-outline" id="profileEditBtn"><i data-lucide="edit-3"></i> Modifier le profil</button>
+                    <button class="btn btn-danger" id="resetProfileStateBtn"><i data-lucide="refresh-cw"></i> Réinitialiser les données</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Notification Toast -->
     <div class="toast-notification" id="toastNotification">
