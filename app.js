@@ -8,7 +8,7 @@
 const chaptersData = [
     {
         id: "math-lim-cont",
-        title: "Limites et Continuité",
+        title: "Limites et continuité",
         level: "2bac-pc",
         subject: "math",
         description: "Étude des limites, continuité d'une fonction numérique, Théorème des Valeurs Intermédiaires (TVI) et fonctions réciproques.",
@@ -26,7 +26,7 @@ const chaptersData = [
             <ul>
                 <li>lim (x → 0) (sin x / x) = 1</li>
                 <li>lim (x → 0) ((1 - cos x) / x²) = 1/2</li>
-                <li>lim (x → +∞) (eˣ / x) = +∞</li>
+                <li>lim (x → +∞) (e\u02e3 / x) = +\u221e</li>
             </ul>
         `,
         exercises: [
@@ -50,6 +50,357 @@ const chaptersData = [
             { title: "Devoir Surveillé N°2 - Complexes & Étude de fonctions", type: "Devoir Surveillé", year: 2026, description: "Devoir N°2 Semestre 2 rédigé par Pr. Ahmed Soussi. Contient des exercices sur les nombres complexes et l'étude complète de fonctions numériques avec exponentielles.", file: "Devoir-2.pdf" },
             { title: "Session Ordinaire 2024 - Sciences Physiques", type: "National", year: 2024 },
             { title: "Session de Rattrapage 2023 - Sciences Physiques", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "math-deriv-etude",
+        title: "Dérivation et étude des fonctions",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Calcul de dérivées, tangentes, sens de variation, extremums, branches infinies, concavité et étude complète de fonctions.",
+        courseContent: `
+            <h4>1. Dérivabilité en un point</h4>
+            <p>Une fonction $f$ est dérivable en $x_0$ si le taux d'accroissement admet une limite finie $l$ en $x_0$ :</p>
+            <div class="math-formula">lim (x → x₀) (f(x) - f(x₀)) / (x - x₀) = f'(x₀)</div>
+            <p>Géométriquement, la courbe $(C_f)$ admet une tangente au point $A(x_0, f(x_0))$ de coefficient directeur $f'(x_0)$.</p>
+
+            <h4>2. Sens de variation d'une fonction</h4>
+            <p>Soit $f$ une fonction dérivable sur un intervalle $I$ :</p>
+            <ul>
+                <li>Si $f'(x) \ge 0$ pour tout $x \in I$, alors $f$ est croissante sur $I$.</li>
+                <li>Si $f'(x) \le 0$ pour tout $x \in I$, alors $f$ est décroissante sur $I$.</li>
+            </ul>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Équation de la tangente",
+                statement: "Déterminer l'équation de la tangente à la courbe de f(x) = x² - 3x au point d'abscisse x₀ = 2.",
+                solution: "Calculons f(2) = 2² - 3(2) = -2.<br>Dérivée : f'(x) = 2x - 3. D'où f'(2) = 2(2) - 3 = 1.<br>L'équation est : y = f'(2)(x - 2) + f(2) = 1(x - 2) - 2 = x - 4."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°2 - Modèle A", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-suites",
+        title: "Suites numériques",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Suites arithmétiques et géométriques, récurrence, convergence, limites de suites et suites de type f(Un).",
+        courseContent: `
+            <h4>1. Raisonnement par récurrence</h4>
+            <p>Pour démontrer qu'une propriété $P(n)$ est vraie pour tout $n \ge n_0$ :</p>
+            <ul>
+                <li><strong>Initialisation :</strong> On montre que $P(n_0)$ est vraie.</li>
+                <li><strong>Hérédité :</strong> On suppose que $P(n)$ est vraie pour un certain $n$ et on montre que $P(n+1)$ est vraie.</li>
+            </ul>
+
+            <h4>2. Limite d'une suite géométrique</h4>
+            <p>Soit $q$ un réel. La suite $u_n = q^n$ a pour limite :</p>
+            <div class="math-formula">lim (n → +∞) qⁿ = 0 (si -1 < q < 1) ; lim (n → +∞) qⁿ = +∞ (si q > 1)</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Limite de suite rationnelle",
+                statement: "Calculer la limite de Un = (3n² + 5) / (2n² - 1) quand n tend vers l'infini.",
+                solution: "En factorisant par le terme de plus haut degré : Un = n²(3 + 5/n²) / [n²(2 - 1/n²)] = (3 + 5/n²) / (2 - 1/n²).<br>Quand n → +∞, 5/n² → 0 et 1/n² → 0, donc <strong>lim Un = 3/2</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°3 - Suites et Fonctions", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-primitives",
+        title: "Fonctions primitives",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Définition d'une primitive, primitives des fonctions usuelles et opérations pour déterminer les primitives.",
+        courseContent: `
+            <h4>1. Définition générale</h4>
+            <p>Une fonction $F$ est une primitive de la fonction $f$ sur un intervalle $I$ si $F$ est dérivable sur $I$ et :</p>
+            <div class="math-formula">F'(x) = f(x)  (pour tout x ∈ I)</div>
+
+            <h4>2. Primitives de référence</h4>
+            <ul>
+                <li>f(x) = xⁿ  =>  F(x) = (xⁿ⁺¹) / (n + 1) + C  (pour n ≠ -1)</li>
+                <li>f(x) = 1/x  =>  F(x) = ln(|x|) + C</li>
+                <li>f(x) = eˣ  =>  F(x) = eˣ + C</li>
+            </ul>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Primitive simple",
+                statement: "Déterminer la primitive de f(x) = 3x² + 4x - 1 qui s'annule en x = 0.",
+                solution: "La primitive générale est F(x) = x³ + 2x² - x + C.<br>Puisque F(0) = 0, on a C = 0.<br>La solution est donc <strong>F(x) = x³ + 2x² - x</strong>."
+            }
+        ],
+        exams: [
+            { title: "Contrôle Continu N°1 - Semestre 2", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-logarithmes",
+        title: "Fonctions logarithmiques",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Étude complète de la fonction logarithme népérien (ln) : propriétés algébriques, limites de référence et dérivées.",
+        courseContent: `
+            <h4>1. Définition et Ensemble de définition</h4>
+            <p>La fonction logarithme népérien, notée $ln$, est l'unique primitive de la fonction $x \mapsto 1/x$ sur $]0, +\infty[$ qui s'annule en 1.</p>
+
+            <h4>2. Propriétés fondamentales</h4>
+            <ul>
+                <li>ln(a × b) = ln(a) + ln(b)</li>
+                <li>ln(a / b) = ln(a) - ln(b)</li>
+                <li>ln(aʳ) = r × ln(a)</li>
+            </ul>
+
+            <h4>3. Limites aux bornes</h4>
+            <div class="math-formula">lim (x → +∞) ln(x) = +∞  ;  lim (x → 0⁺) ln(x) = -∞</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Résolution d'équation",
+                statement: "Résoudre dans R l'équation : ln(x - 2) = 0.",
+                solution: "L'équation est définie pour x > 2.<br>ln(x - 2) = 0 <=> x - 2 = 1 <=> x = 3.<br>Comme 3 ∈ ]2, +∞[, l'ensemble des solutions est <strong>S = {3}</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°3 - Logarithmes et Intégrales", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-complexes-pc",
+        title: "Nombres complexes",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Forme algébrique, conjugué, module, argument, forme trigonométrique et résolution d'équations dans C.",
+        courseContent: `
+            <h4>1. Forme algébrique et conjugué</h4>
+            <p>Tout nombre complexe $z$ s'écrit sous la forme unique :</p>
+            <div class="math-formula">z = a + ib  (a ∈ R et b ∈ R)</div>
+            <p>Le conjugué de $z$ est $\\bar{z} = a - ib$.</p>
+
+            <h4>2. Module et Forme trigonométrique</h4>
+            <p>Le module de $z$ est $|z| = \\sqrt{a^2 + b^2}$. La forme trigonométrique est :</p>
+            <div class="math-formula">z = |z|(cos θ + i sin θ)</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Équation du second degré dans C",
+                statement: "Résoudre dans C l'équation : z² - 2z + 5 = 0.",
+                solution: "Le discriminant est Δ = (-2)² - 4(1)(5) = 4 - 20 = -16 = (4i)².<br>Les solutions sont complexes conjuguées : z₁ = (2 - 4i)/2 = 1 - 2i et z₂ = 1 + 2i.<br><strong>S = {1 - 2i ; 1 + 2i}</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°4 - Complexes 1", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-devoirs-sem1",
+        title: "Devoirs 1er Semestre",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Recueil de devoirs surveillés du premier semestre couvrant les limites, la continuité, les suites et les fonctions.",
+        courseContent: `
+            <h4>Préparation efficace au 1er Semestre</h4>
+            <p>Révisez l'ensemble des notions de rentrée grâce aux devoirs types rédigés par les professeurs.</p>
+        `,
+        exercises: [
+            {
+                title: "Devoir Blanc 1",
+                statement: "Sujet comprenant l'étude complète d'une fonction avec étude de la continuité et du TVI, suivi d'une partie sur les suites.",
+                solution: "Consultez les fichiers PDF dans les ressources de la classe."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°1", type: "Devoir", year: 2026 },
+            { title: "Devoir Surveillé N°2", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-exponentielles",
+        title: "Fonctions exponentielles",
+        level: "2bac-pc",
+        subject: "math",
+        description: "La fonction exponentielle (exp) : propriétés algébriques, limites de référence et étude complète.",
+        courseContent: `
+            <h4>1. Définition</h4>
+            <p>La fonction exponentielle, notée $x \\mapsto e^x$, est la fonction réciproque de la fonction logarithme népérien $ln$.</p>
+            <div class="math-formula">y = eˣ  <=>  x = ln(y)  (pour y > 0)</div>
+
+            <h4>2. Limites de référence</h4>
+            <ul>
+                <li>lim (x → +∞) eˣ = +∞  ;  lim (x → -∞) eˣ = 0</li>
+                <li>lim (x → +∞) eˣ/x = +∞  (Croissance comparée)</li>
+            </ul>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Simplification d'expression",
+                statement: "Simplifier l'expression : A = (e²ˣ × e⁻ˣ) / e³.",
+                solution: "En appliquant les règles de calcul des puissances : A = e²ˣ⁻ˣ⁻³ = eˣ⁻³."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°5 - Exponentielles", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-complexes-p2",
+        title: "Nombres complexes (Partie 2)",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Applications géométriques des nombres complexes : distances, angles et écritures complexes des transformations.",
+        courseContent: `
+            <h4>1. Distance et Argument</h4>
+            <p>Soient $A(z_A)$ et $B(z_B)$ deux points. La distance $AB = |z_B - z_A|$.</p>
+            <p>L'angle orienté $(\\vec{u}, \\vec{AB}) \\equiv arg(z_B - z_A) \\pmod{2\\pi}$.</p>
+
+            <h4>2. Écritures complexes de transformations</h4>
+            <ul>
+                <li><strong>Translation :</strong> z' = z + b (de vecteur d'affixe b)</li>
+                <li><strong>Homothétie :</strong> z' - ω = k(z - ω) (de centre Ω(ω) et rapport k)</li>
+                <li><strong>Rotation :</strong> z' - ω = e^(iθ)(z - ω) (de centre Ω(ω) et d'angle θ)</li>
+            </ul>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Écriture complexe d'une rotation",
+                statement: "Déterminer l'écriture complexe de la rotation R de centre Ω(2 + i) et d'angle π/2.",
+                solution: "La formule est z' - ω = e^(iπ/2)(z - ω) <=> z' - (2 + i) = i(z - 2 - i).<br>Ce qui donne : z' = iz - 2i + 1 + 2 + i = iz + 3 - i."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°6 - Complexes & Géométrie", type: "Devoir", year: 2026 }
+        ]
+    },
+    {
+        id: "math-integral",
+        title: "Calcul intégral",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Intégration d'une fonction continue, valeur moyenne, intégration par parties et calcul d'aires.",
+        courseContent: `
+            <h4>1. Définition et Propriétés</h4>
+            <p>Soit $F$ une primitive de $f$ sur $[a,b]$. L'intégrale de $f$ de $a$ à $b$ est :</p>
+            <div class="math-formula">∫(a à b) f(x) dx = [F(x)](a à b) = F(b) - F(a)</div>
+
+            <h4>2. Intégration par parties (IPP)</h4>
+            <p>Si $u$ et $v$ sont deux fonctions dérivables sur $[a,b]$ à dérivées continues :</p>
+            <div class="math-formula">∫(a à b) u'(x)v(x) dx = [u(x)v(x)](a à b) - ∫(a à b) u(x)v'(x) dx</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul d'intégrale par IPP",
+                statement: "Calculer l'intégrale : I = ∫(1 à e) x ln(x) dx.",
+                solution: "Posons u'(x) = x => u(x) = x²/2 et v(x) = ln(x) => v'(x) = 1/x.<br>I = [x²/2 ln(x)](1 à e) - ∫(1 à e) x/2 dx = (e²/2) - [x²/4](1 à e) = e²/2 - (e²/4 - 1/4) = (e² + 1) / 4."
+            }
+        ],
+        exams: [
+            { title: "Examen National 2024 - Calcul Intégral", type: "National", year: 2024 }
+        ]
+    },
+    {
+        id: "math-equa-diff",
+        title: "Équations différentielles",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Résolution des équations y' = ay + b et y'' + ay' + by = 0 et leurs applications en physique.",
+        courseContent: `
+            <h4>1. Équations du premier ordre</h4>
+            <p>L'équation $y' = ay$ a pour solutions générales $y(x) = C e^{ax}$ (avec $C \in R$).</p>
+            <p>L'équation $y' = ay + b$ ($a \neq 0$) a pour solutions générales $y(x) = C e^{ax} - b/a$.</p>
+
+            <h4>2. Équations du second ordre</h4>
+            <p>Pour résoudre $y'' + ay' + by = 0$, on résout l'équation caractéristique $r^2 + ar + b = 0$. Les solutions dépendent du signe du discriminant $\Delta$.</p>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Équation homogène du 2nd degré",
+                statement: "Résoudre l'équation différentielle : y'' - 3y' + 2y = 0.",
+                solution: "L'équation caractéristique est r² - 3r + 2 = 0 de solutions r₁ = 1 et r₂ = 2.<br>La solution générale est : <strong>y(x) = A eˣ + B e²ˣ</strong> (avec A et B réels)."
+            }
+        ],
+        exams: [
+            { title: "Examen National 2023 - Session Ordinaire", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "math-geometrie-espace",
+        title: "Géométrie dans l'espace",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Produit scalaire et vectoriel dans l'espace, équations de plans et sphères, représentations de droites.",
+        courseContent: `
+            <h4>1. Équation cartésienne d'un plan</h4>
+            <p>Un plan passant par $A(x_0, y_0, z_0)$ et de vecteur normal $\\vec{n}(a, b, c)$ a pour équation :</p>
+            <div class="math-formula">a(x - x₀) + b(y - y₀) + c(z - z₀) = 0</div>
+
+            <h4>2. Produit Vectoriel</h4>
+            <p>Le produit vectoriel $\\vec{u} \\wedge \\vec{v}$ est un vecteur orthogonal à $\\vec{u}$ et $\\vec{v}$ dont la norme est $|\\vec{u} \\wedge \\vec{v}| = |\\vec{u}| \\cdot |\\vec{v}| \\cdot sin(\\theta)$.</p>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Distance d'un point à un plan",
+                statement: "Calculer la distance du point A(1, 2, 3) au plan (P) : 2x - y + 2z - 3 = 0.",
+                solution: "d(A, P) = |2(1) - 2 + 2(3) - 3| / \\sqrt{2² + (-1)² + 2²} = |2 - 2 + 6 - 3| / \\sqrt{9} = 3 / 3 = 1."
+            }
+        ],
+        exams: [
+            { title: "Examen National 2024 - Géométrie dans l'espace", type: "National", year: 2024 }
+        ]
+    },
+    {
+        id: "math-probabilites",
+        title: "Dénombrement et probabilités",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Analyse combinatoire, probabilités conditionnelles, variables aléatoires et loi binomiale.",
+        courseContent: `
+            <h4>1. Dénombrement fondamental</h4>
+            <ul>
+                <li><strong>Arrangements :</strong> A(n, p) = n! / (n - p)! (ordre important)</li>
+                <li><strong>Combinaisons :</strong> C(n, p) = n! / (p!(n - p)!) (ordre non important)</li>
+            </ul>
+
+            <h4>2. Probabilités conditionnelles</h4>
+            <p>La probabilité de l'événement $A$ sachant $B$ ($P(B) \neq 0$) :</p>
+            <div class="math-formula">P_B(A) = P(A ∩ B) / P(B)</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Variable aléatoire",
+                statement: "Une urne contient 3 boules blanches et 2 noires. On tire 2 boules simultanément. Soit X le nombre de boules blanches tirées. Établir la loi de probabilité de X.",
+                solution: "Nombre total de tirages : C(5, 2) = 10.<br>- P(X=0) (0 blanches) = C(2, 2)/10 = 1/10.<br>- P(X=1) (1 blanche, 1 noire) = C(3, 1)×C(2, 1)/10 = 6/10.<br>- P(X=2) (2 blanches) = C(3, 2)/10 = 3/10."
+            }
+        ],
+        exams: [
+            { title: "Examen National 2024 - Session de Rattrapage", type: "National", year: 2024 }
+        ]
+    },
+    {
+        id: "math-devoirs-sem2",
+        title: "Devoirs 2nd Semestre",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Recueil de devoirs surveillés du second semestre couvrant l'intégration, les probabilités et la géométrie.",
+        courseContent: `
+            <h4>Préparation au Baccalauréat National</h4>
+            <p>Entraînez-vous avec les devoirs de fin d'année pour aborder l'examen national en toute sérénité.</p>
+        `,
+        exercises: [
+            {
+                title: "Contrôle Blanc Bac",
+                statement: "Examen blanc reprenant les 4 thèmes majeurs du second semestre (Calcul intégral, Équations diff, Géométrie Espace, Probabilités).",
+                solution: "Les corrigés détaillés sont accessibles en téléchargement libre sur l'intranet."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°4", type: "Devoir", year: 2026 },
+            { title: "Devoir Surveillé N°5", type: "Devoir", year: 2026 }
         ]
     },
     {
@@ -165,7 +516,7 @@ const chaptersData = [
         description: "Comportement du condensateur, réponse d'un dipôle RC à un échelon de tension, équation différentielle et constante de temps.",
         courseContent: `
             <h4>1. Le Condensateur</h4>
-            <p>Un condensateur accumule des charges électriques. La relation entre sa charge q, sa capacité C et sa tension u_c est :</p>
+            <p>Un condensateur accumule des charges électriques. La relation entre sa charge q, sa capacité C et sa tension u_c is :</p>
             <div class="math-formula">q = C × u_c</div>
             <p>L'intensité du courant i traversant le condensateur est liée à la tension par :</p>
             <div class="math-formula">i = dq/dt = C × du_c/dt</div>
@@ -218,7 +569,6 @@ const chaptersData = [
         ],
         exams: [
             { title: "Examen Normalisé Local - Tronc Commun", type: "Régional", year: 2023 }
-        ]
     }
 ];
 
