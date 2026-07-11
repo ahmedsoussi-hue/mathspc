@@ -1108,8 +1108,7 @@ function setupModals() {
         );
     });
 
-    // Mock PDF download
-    document.getElementById("pdfDownloadBtn").addEventListener("click", simulateDownload);
+
 }
 
 window.openChapterModal = function(chapterId) {
