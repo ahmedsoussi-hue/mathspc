@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.0.4">
 </head>
 <body>
     <!-- Background Glow Effects -->
@@ -31,20 +31,33 @@
             </div>
             <nav class="nav-links">
                 <a href="#home" class="nav-link active" data-tab="home"><i data-lucide="home"></i> Accueil</a>
-                <a href="#courses" class="nav-link" data-tab="courses"><i data-lucide="book-open"></i> Cours & Exercices</a>
+                
+                <!-- Dropdown Lycée -->
+                <div class="nav-dropdown" id="navLycéeDropdown">
+                    <button class="nav-link dropdown-toggle" id="navLycéeToggle" data-tab="courses"><i data-lucide="graduation-cap"></i> Lycée <i data-lucide="chevron-down" class="chevron-icon"></i></button>
+                    <div class="dropdown-menu">
+                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-sm">2ème Bac Sciences Math</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-pc">2ème Bac Sciences Physiques</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-svt">2ème Bac SVT</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="1bac">1ère Année Bac</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="tc">Tronc Commun</a>
+                    </div>
+                </div>
+
+                <!-- Dropdown Collège -->
+                <div class="nav-dropdown" id="navCollègeDropdown">
+                    <button class="nav-link dropdown-toggle" id="navCollègeToggle" data-tab="courses"><i data-lucide="school"></i> Collège <i data-lucide="chevron-down" class="chevron-icon"></i></button>
+                    <div class="dropdown-menu">
+                        <a href="#courses" class="dropdown-item" data-level-nav="3ac">3ème Année Collège (3AC)</a>
+                    </div>
+                </div>
+
                 <a href="#quiz" class="nav-link" data-tab="quiz"><i data-lucide="award"></i> Quizz Interactifs</a>
-                <a href="#premium" class="nav-link premium-btn" data-tab="premium"><i data-lucide="sparkles"></i> Premium</a>
             </nav>
             <div class="header-actions">
-                <button class="theme-toggle" id="themeToggle" title="Changer de thème">
-                    <i data-lucide="moon" class="dark-icon"></i>
-                    <i data-lucide="sun" class="light-icon" style="display: none;"></i>
-                </button>
                 <div class="user-profile" id="userProfileBtn">
-                    <div class="avatar">
-                        <img src="profile.jpg" alt="Dr. Soussi" id="userAvatarImg">
-                    </div>
-                    <span class="user-name">Dr. Soussi</span>
+                    <i data-lucide="mail" class="mail-icon"></i>
+                    <span class="user-name">Contactez-nous</span>
                 </div>
             </div>
         </div>
@@ -158,9 +171,12 @@
                     </p>
 
                     <!-- Interactive Tool: Delta Calculator -->
-                    <div class="interactive-tool-box">
-                        <div class="tool-header">
-                            <h4><i data-lucide="calculator"></i> Outil : Calculateur de Discriminant</h4>
+                    <div class="interactive-tool-box collapsed">
+                        <div class="tool-header" onclick="toggleTool(this)">
+                            <h4>
+                                <span><i data-lucide="calculator"></i> Outil : Calculateur de Discriminant</span>
+                                <i data-lucide="chevron-down" class="tool-chevron"></i>
+                            </h4>
                             <p>Calculez le discriminant Δ et déterminez les racines de ax² + bx + c = 0.</p>
                         </div>
                         <div class="tool-body delta-calc">
@@ -212,9 +228,12 @@
                     </p>
 
                     <!-- Interactive Tool: Wave / Delay Calculator -->
-                    <div class="interactive-tool-box">
-                        <div class="tool-header">
-                            <h4><i data-lucide="zap"></i> Outil : Vitesse d'Onde & Retard</h4>
+                    <div class="interactive-tool-box collapsed">
+                        <div class="tool-header" onclick="toggleTool(this)">
+                            <h4>
+                                <span><i data-lucide="zap"></i> Outil : Vitesse d'Onde & Retard</span>
+                                <i data-lucide="chevron-down" class="tool-chevron"></i>
+                            </h4>
                             <p>Calculez la célérité v = d / Δt ou le retard temporel τ = d / v.</p>
                         </div>
                         <div class="tool-body wave-calc">
@@ -477,140 +496,6 @@
             </div>
         </section>
 
-        <!-- SECTION 4: PREMIUM & PRICING -->
-        <section id="premium-section" class="tab-content">
-            <div class="premium-hero">
-                <div class="premium-badge-lg"><i data-lucide="sparkles"></i> ACCÈS PREMIUM</div>
-                <h2>Boostez votre préparation aux examens</h2>
-                <p>Débloquez des centaines d'heures de vidéos explicatives, de corrigés détaillés d'examens nationaux et de séances de révision en direct avec des professeurs qualifiés.</p>
-            </div>
-
-            <!-- Features Grid -->
-            <div class="premium-features-grid">
-                <div class="p-feat-card">
-                    <div class="p-feat-icon video-color"><i data-lucide="play-circle"></i></div>
-                    <h3>Vidéos de cours premium</h3>
-                    <p>Des résumés concis en vidéo pour chaque chapitre, expliquant les astuces méthodologiques les plus courantes.</p>
-                </div>
-                <div class="p-feat-card">
-                    <div class="p-feat-icon pdf-color"><i data-lucide="file-check"></i></div>
-                    <h3>Examens nationaux résolus</h3>
-                    <p>Correction pas à pas en vidéo et PDF de toutes les sessions d'examens nationaux (2015 à 2025).</p>
-                </div>
-                <div class="p-feat-card">
-                    <div class="p-feat-icon ask-color"><i data-lucide="help-circle"></i></div>
-                    <h3>Posez des questions</h3>
-                    <p>Un espace de discussion dédié pour poser vos questions à notre équipe pédagogique 7j/7.</p>
-                </div>
-                <div class="p-feat-card">
-                    <div class="p-feat-icon live-color"><i data-lucide="tv"></i></div>
-                    <h3>Live de révision</h3>
-                    <p>Rejoignez les sessions interactives en direct la veille des examens régionaux et nationaux.</p>
-                </div>
-            </div>
-
-            <!-- Pricing Section -->
-            <div class="pricing-container">
-                <div class="pricing-card">
-                    <div class="pricing-badge">Populaire</div>
-                    <h3>Abonnement Semestriel</h3>
-                    <div class="price">
-                        <span class="currency">DH</span>
-                        <span class="amount">149</span>
-                        <span class="duration">/ 6 mois</span>
-                    </div>
-                    <p class="price-subtitle">Parfait pour préparer le Baccalauréat en toute sérénité.</p>
-                    <ul class="pricing-list">
-                        <li><i data-lucide="check" class="success-icon"></i> Accès illimité à tous les chapitres</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Vidéos explicatives exclusives</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Sujets corrigés des examens 2015-2025</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Support WhatsApp dédié</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Sans engagement</li>
-                    </ul>
-                    <button class="btn btn-primary btn-block" id="subSemestrielBtn">Souscrire maintenant <i data-lucide="arrow-right"></i></button>
-                </div>
-
-                <div class="pricing-card premium-card-glow">
-                    <div class="pricing-badge badge-annual">Meilleure offre</div>
-                    <h3>Abonnement Annuel</h3>
-                    <div class="price">
-                        <span class="currency">DH</span>
-                        <span class="amount">249</span>
-                        <span class="duration">/ 12 mois</span>
-                    </div>
-                    <p class="price-subtitle">La préparation ultime pour toute l'année scolaire.</p>
-                    <ul class="pricing-list">
-                        <li><i data-lucide="check" class="success-icon"></i> Tout le contenu de l'offre semestrielle</li>
-                        <li><i data-lucide="check" class="success-icon"></i> <strong>Économisez plus de 15%</strong> par rapport à l'offre 6 mois</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Accès aux concours des grandes écoles post-bac (FMP, ENSA, APESA...)</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Fiches de synthèse imprimables livrées par mail</li>
-                        <li><i data-lucide="check" class="success-icon"></i> Garantie de réussite ou remboursé</li>
-                    </ul>
-                    <button class="btn btn-accent btn-block" id="subAnnuelBtn">Devenir Premium <i data-lucide="sparkles"></i></button>
-                </div>
-            </div>
-
-            <!-- Interactive Checkout Modal Simulation -->
-            <div class="lesson-modal" id="checkoutModal">
-                <div class="modal-backdrop" id="checkoutModalBackdrop"></div>
-                <div class="modal-card checkout-modal-card">
-                    <div class="modal-header">
-                        <div class="modal-title-wrapper">
-                            <span class="modal-badge"><i data-lucide="sparkles"></i> Paiement Sécurisé</span>
-                            <h3>Abonnement Premium <span id="checkoutPlanName">Annuel</span></h3>
-                        </div>
-                        <button class="modal-close" id="checkoutCloseBtn"><i data-lucide="x"></i></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="payment-summary">
-                            <span>Total à payer :</span>
-                            <strong id="checkoutPlanPrice">249 DH</strong>
-                        </div>
-                        <form id="paymentForm">
-                            <div class="form-group">
-                                <label for="cardName">Nom complet de l'étudiant / parent</label>
-                                <input type="text" id="cardName" placeholder="Mohamed El Alami" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="emailAddress">Adresse E-mail pour recevoir les accès</label>
-                                <input type="email" id="emailAddress" placeholder="contact@exemple.ma" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phoneNumber">Numéro de Téléphone (WhatsApp)</label>
-                                <input type="tel" id="phoneNumber" placeholder="06 12 34 56 78" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-8">
-                                    <label for="cardNumber">Numéro de carte bancaire</label>
-                                    <div class="input-icon-wrapper">
-                                        <i data-lucide="credit-card"></i>
-                                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" pattern="\d{16}|\d{4}\s\d{4}\s\d{4}\s\d{4}" maxlength="19" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-4">
-                                    <label for="cardExpiry">Expiration</label>
-                                    <input type="text" id="cardExpiry" placeholder="MM/AA" pattern="\d{2}/\d{2}" maxlength="5" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Méthode de paiement alternative</label>
-                                <div class="payment-methods-grid">
-                                    <label class="pm-option active">
-                                        <input type="radio" name="payOpt" value="cc" checked>
-                                        <i data-lucide="credit-card"></i> Carte Bancaire
-                                    </label>
-                                    <label class="pm-option">
-                                        <input type="radio" name="payOpt" value="cash">
-                                        <i data-lucide="wallet"></i> Wafacash / CashPlus
-                                    </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-accent btn-block" id="paySubmitBtn">Confirmer le paiement sécurisé <i data-lucide="lock"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
 
     </main>
 
@@ -646,56 +531,50 @@
         </div>
     </footer>
 
-    <!-- User Profile Modal (Instagram Style) -->
+    <!-- Contact Us Modal -->
     <div class="lesson-modal" id="profileModal">
         <div class="modal-backdrop" id="profileModalBackdrop"></div>
         <div class="modal-card profile-modal-card">
             <div class="modal-header">
                 <div class="modal-title-wrapper">
-                    <span class="modal-badge"><i data-lucide="user"></i> Profil Enseignant</span>
-                    <h3>Mon Compte</h3>
+                    <span class="modal-badge" style="background-color: var(--primary-glow); color: var(--primary);"><i data-lucide="mail"></i> Support & Contact</span>
+                    <h3>Contactez-nous</h3>
                 </div>
                 <button class="modal-close" id="profileCloseBtn"><i data-lucide="x"></i></button>
             </div>
-            <div class="modal-body profile-modal-body">
-                <div class="instagram-profile-header">
-                    <div class="instagram-avatar-wrapper">
-                        <img src="profile.jpg" alt="Dr. Soussi" class="instagram-avatar">
-                        <div class="instagram-badge"><i data-lucide="instagram"></i></div>
-                    </div>
-                    <div class="instagram-meta">
-                        <h3 class="instagram-username">@mathsbysoussi</h3>
-                        <a href="https://www.instagram.com/mathsbysoussi/" target="_blank" class="instagram-link-btn">
-                            Voir sur Instagram <i data-lucide="external-link"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="modal-body profile-modal-body" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin: 0 0 10px 0;">
+                    Une question, une remarque ou besoin d'assistance ? Notre équipe est à votre écoute pour vous accompagner dans votre réussite.
+                </p>
                 
-                <div class="instagram-stats">
-                    <div class="stat-box">
-                        <span class="stat-val">1</span>
-                        <span class="stat-lbl">Publication</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-val">108</span>
-                        <span class="stat-lbl">Abonnés</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-val">129</span>
-                        <span class="stat-lbl">Abonnements</span>
-                    </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="mailto:mathspc@gmail.com" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
+                        <i data-lucide="mail" style="color: var(--primary); width: 20px; height: 20px;"></i>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2px;">Par Email</div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem;">mathspc@gmail.com</strong>
+                        </div>
+                    </a>
+                    
+                    <a href="https://wa.me/212613044172" target="_blank" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
+                        <i data-lucide="message-square" style="color: #25d366; width: 20px; height: 20px;"></i>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2px;">WhatsApp</div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem;">+212 613-044172</strong>
+                        </div>
+                    </a>
+
+                    <a href="tel:+212613044172" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
+                        <i data-lucide="phone" style="color: var(--secondary); width: 20px; height: 20px;"></i>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2px;">Par Téléphone</div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem;">+212 613-044172</strong>
+                        </div>
+                    </a>
                 </div>
 
-                <div class="instagram-bio">
-                    <h4 class="bio-display-name">maths by soussi</h4>
-                    <p class="bio-tagline">🎓 Professeur de maths | Dr. Soussi</p>
-                    <p class="bio-detail">✨ Beyond Numbers - Enseigner les maths avec élégance.</p>
-                    <p class="bio-inspiration">💡 Entre science et inspiration ✨</p>
-                </div>
-
-                <div class="profile-actions">
-                    <button class="btn btn-outline" id="profileEditBtn"><i data-lucide="edit-3"></i> Modifier le profil</button>
-                    <button class="btn btn-danger" id="resetProfileStateBtn"><i data-lucide="refresh-cw"></i> Réinitialiser les données</button>
+                <div style="margin-top: 10px;">
+                    <button class="btn btn-danger btn-block" id="resetProfileStateBtn" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; width: 100%; border-radius: 8px;"><i data-lucide="refresh-cw"></i> Réinitialiser mes statistiques</button>
                 </div>
             </div>
         </div>
@@ -708,6 +587,6 @@
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js"></script>
+    <script src="app.js?v=1.0.7"></script>
 </body>
 </html>

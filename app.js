@@ -20,7 +20,7 @@ const chaptersData = [
             <h4>2. Théorème des Valeurs Intermédiaires (TVI)</h4>
             <p>Si $f$ est une fonction continue sur un intervalle $[a, b]$ et si $y$ est un réel compris entre $f(a)$ et $f(b)$, alors il existe au moins un réel $c \in [a, b]$ tel que :</p>
             <div class="math-formula">f(c) = y</div>
-            <p>Si de plus la fonction $f$ est strictement monotone (strictement croissante ou strictement décroissante), la solution $c$ est unique.</p>
+            <p>Si de plus la fonction $f$ est strictement monotone (strictement croissante ou strictement décroissante), la solution $c$ is unique.</p>
             
             <h4>3. Limites de référence</h4>
             <ul>
@@ -28,6 +28,24 @@ const chaptersData = [
                 <li>lim (x → 0) ((1 - cos x) / x²) = 1/2</li>
                 <li>lim (x → +∞) (e\u02e3 / x) = +\u221e</li>
             </ul>
+
+            <div class="pdf-mock-downloader" style="margin-top: 30px;">
+                <div class="pdf-info">
+                    <i data-lucide="file-text" class="pdf-icon"></i>
+                    <div>
+                        <h5>Cours 1 : Continuité complète (BIOF)</h5>
+                        <p>Télécharger le cours officiel complet pour réviser hors-ligne.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="downloadRealFile('pdf/Cours1-Continuité-2bac-BIOF-2025.pdf', 'Cours 1 : Continuité (PDF)')">
+                        <i data-lucide="download"></i> Télécharger PDF (537 Ko)
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadRealFile('pdf/Cours1-Continuité-2bac-BIOF-2025.docx', 'Cours 1 : Continuité (Word)')">
+                        <i data-lucide="download"></i> Télécharger Word (855 Ko)
+                    </button>
+                </div>
+            </div>
         `,
         exercises: [
             {
@@ -47,9 +65,12 @@ const chaptersData = [
             }
         ],
         exams: [
-            { title: "Cours 1 : Continuité (BIOF)", type: "Cours", year: 2025, description: "Cours complet sur les limites, la continuité d'une fonction numérique et le TVI.", file: "pdf/Cours1-Continuité-2bac-BIOF-2025.pdf" },
-            { title: "Résumé de cours : Continuité (BIOF)", type: "Résumé", year: 2025, description: "Fiche de synthèse des formules et concepts clés sur les limites et la continuité.", file: "pdf/Résumé-Continuité-2bac-BIOF.pdf" },
-            { title: "Série d'exercices 1 : Continuité (BIOF)", type: "Série", year: 2025, description: "Sujets d'exercices corrigés sur les limites et la continuité.", file: "pdf/Série1-Continuité-2bac-BIOF 2025.pdf" }
+            { title: "Cours 1 : Continuité (BIOF) - PDF", type: "Cours", year: 2025, description: "Cours complet sur les limites, la continuité et le TVI.", file: "pdf/Cours1-Continuité-2bac-BIOF-2025.pdf" },
+            { title: "Cours 1 : Continuité (BIOF) - Word", type: "Cours", year: 2025, description: "Version modifiable (.docx) du cours.", file: "pdf/Cours1-Continuité-2bac-BIOF-2025.docx" },
+            { title: "Résumé de cours : Continuité (BIOF) - PDF", type: "Résumé", year: 2025, description: "Fiche de synthèse des formules et concepts clés.", file: "pdf/Résumé-Continuité-2bac-BIOF.pdf" },
+            { title: "Résumé de cours : Continuité (BIOF) - Word", type: "Résumé", year: 2025, description: "Version modifiable (.docx) de la fiche de synthèse.", file: "pdf/Résumé-Continuité-2bac-BIOF.docx" },
+            { title: "Série d'exercices 1 : Continuité (BIOF) - PDF", type: "Série", year: 2025, description: "Sujets d'exercices corrigés.", file: "pdf/Série1-Continuité-2bac-BIOF 2025.pdf" },
+            { title: "Série d'exercices 1 : Continuité (BIOF) - Word", type: "Série", year: 2025, description: "Version modifiable (.docx) de la série d'exercices.", file: "pdf/Série1-Continuité-2bac-BIOF 2025.docx" }
         ]
     },
     {
@@ -656,7 +677,7 @@ let userState = {
     completedChapters: [], // IDs of mastered chapters
     completedQuizzes: {}, // { quizId: score }
     premiumUser: false,
-    userName: "Dr. Soussi",
+    userName: "Contactez-nous",
     currentTab: "home"
 };
 
@@ -677,7 +698,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFilters();
     setupModals();
     setupQuizEngine();
-    setupPremiumCheckout();
     setupInteractiveTools();
     setupProfileModal();
 });
@@ -688,18 +708,12 @@ function loadStateFromStorage() {
     if (saved) {
         try {
             userState = { ...userState, ...JSON.parse(saved) };
-            if (!userState.userName || userState.userName === "Élève") {
-                userState.userName = "Dr. Soussi";
+            if (!userState.userName || userState.userName === "Élève" || userState.userName === "Dr. Soussi") {
+                userState.userName = "Contactez-nous";
             }
             
             const userNameEl = document.querySelector(".user-name");
-            if (userState.premiumUser) {
-                document.querySelector(".user-profile").classList.add("premium-active");
-                userNameEl.innerHTML = `${userState.userName} <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
-                lucide.createIcons();
-            } else {
-                userNameEl.textContent = userState.userName;
-            }
+            userNameEl.textContent = userState.userName;
             
             const bioNameEl = document.querySelector(".bio-display-name");
             if (bioNameEl) bioNameEl.textContent = userState.userName;
@@ -759,13 +773,7 @@ function updateDashboardUI() {
         }
     });
     
-    if (userState.premiumUser) {
-        activities.push({
-            type: "premium",
-            text: "<strong>Accès Premium activé !</strong> Bienvenue dans l'espace VIP.",
-            icon: "sparkles"
-        });
-    }
+
 
     if (activities.length === 0) {
         activityList.innerHTML = `<li class="empty-activity">Aucune activité pour le moment. Commencez à lire un cours ou faites un quizz !</li>`;
@@ -785,10 +793,9 @@ document.getElementById("resetProgressBtn").addEventListener("click", () => {
     userState.completedChapters = [];
     userState.completedQuizzes = {};
     userState.premiumUser = false;
-    userState.userName = "Dr. Soussi";
+    userState.userName = "Contactez-nous";
     
     // Reset User name representation
-    document.querySelector(".user-profile").classList.remove("premium-active");
     document.querySelector(".user-name").textContent = userState.userName;
     
     const bioNameEl = document.querySelector(".bio-display-name");
@@ -825,32 +832,8 @@ function showToast(message, isSuccess = true) {
 
 // --- THEME TOGGLING ---
 function initTheme() {
-    const themeBtn = document.getElementById("themeToggle");
-    const darkIcon = themeBtn.querySelector(".dark-icon");
-    const lightIcon = themeBtn.querySelector(".light-icon");
-    
-    // Check local storage or system preference
-    const savedTheme = localStorage.getItem("maths_physiques_theme") || "dark";
-    if (savedTheme === "light") {
-        document.body.classList.add("light-theme");
-        darkIcon.style.display = "none";
-        lightIcon.style.display = "block";
-    }
-
-    themeBtn.addEventListener("click", () => {
-        const isLight = document.body.classList.toggle("light-theme");
-        if (isLight) {
-            localStorage.setItem("maths_physiques_theme", "light");
-            darkIcon.style.display = "none";
-            lightIcon.style.display = "block";
-            showToast("Thème clair activé.", false);
-        } else {
-            localStorage.setItem("maths_physiques_theme", "dark");
-            darkIcon.style.display = "block";
-            lightIcon.style.display = "none";
-            showToast("Thème sombre activé.", false);
-        }
-    });
+    // Theme toggle button has been removed in favor of a consistent light brand color palette.
+    // The design is clean, professional, and accessible with high-contrast elements.
 }
 
 // --- TAB NAVIGATION ---
@@ -859,9 +842,52 @@ function setupNavigation() {
     
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
+            if (link.classList.contains("dropdown-toggle")) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const parent = link.closest(".nav-dropdown");
+                const wasActive = parent.classList.contains("active");
+                
+                // Close other dropdowns
+                document.querySelectorAll(".nav-dropdown").forEach(d => d.classList.remove("active"));
+                
+                if (!wasActive) {
+                    parent.classList.add("active");
+                }
+                return;
+            }
+            
             e.preventDefault();
             const targetTab = link.getAttribute("data-tab");
             switchTab(targetTab);
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".nav-dropdown").forEach(d => {
+            d.classList.remove("active");
+        });
+    });
+
+    // Handle dropdown level selection
+    document.querySelectorAll("[data-level-nav]").forEach(item => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            const level = item.getAttribute("data-level-nav");
+            
+            const levelFilter = document.getElementById("levelFilter");
+            if (levelFilter) {
+                levelFilter.value = level;
+                levelFilter.dispatchEvent(new Event("change"));
+            }
+            
+            switchTab("courses");
+            
+            // Close containing dropdown
+            const parent = item.closest(".nav-dropdown");
+            if (parent) parent.classList.remove("active");
         });
     });
 
@@ -913,7 +939,22 @@ function switchTab(tabId) {
     // Update menu buttons active state
     document.querySelectorAll(".nav-link").forEach(btn => {
         if (btn.getAttribute("data-tab") === tabId) {
-            btn.classList.add("active");
+            if (tabId === "courses") {
+                const currentLevel = document.getElementById("levelFilter").value;
+                if (btn.id === "navLycéeToggle") {
+                    const isLycée = ["2bac-sm", "2bac-pc", "2bac-svt", "1bac", "tc"].includes(currentLevel);
+                    if (isLycée) btn.classList.add("active");
+                    else btn.classList.remove("active");
+                } else if (btn.id === "navCollègeToggle") {
+                    const isCollège = ["3ac"].includes(currentLevel);
+                    if (isCollège) btn.classList.add("active");
+                    else btn.classList.remove("active");
+                } else {
+                    btn.classList.add("active");
+                }
+            } else {
+                btn.classList.add("active");
+            }
         } else {
             btn.classList.remove("active");
         }
@@ -1460,88 +1501,6 @@ function quitQuiz() {
     renderQuizWelcomeSelector();
 }
 
-// --- PREMIUM CHECKOUT SYSTEM ---
-function setupPremiumCheckout() {
-    const modal = document.getElementById("checkoutModal");
-    const backdrop = document.getElementById("checkoutModalBackdrop");
-    const closeBtn = document.getElementById("checkoutCloseBtn");
-    
-    // Attach buttons
-    document.getElementById("subSemestrielBtn").addEventListener("click", () => {
-        openCheckoutModal("Semestriel", "149 DH");
-    });
-    
-    document.getElementById("subAnnuelBtn").addEventListener("click", () => {
-        openCheckoutModal("Annuel", "249 DH");
-    });
-
-    closeBtn.addEventListener("click", closeCheckoutModal);
-    backdrop.addEventListener("click", closeCheckoutModal);
-
-    // Payment methods toggling
-    const pmOptions = document.querySelectorAll(".pm-option");
-    pmOptions.forEach(opt => {
-        opt.addEventListener("click", () => {
-            pmOptions.forEach(o => o.classList.remove("active"));
-            opt.classList.add("active");
-            
-            // Check radio button
-            const radio = opt.querySelector('input[type="radio"]');
-            radio.checked = true;
-        });
-    });
-
-    // Form submission
-    const form = document.getElementById("paymentForm");
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        
-        const submitBtn = document.getElementById("paySubmitBtn");
-        const originalText = submitBtn.innerHTML;
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<i data-lucide="loader" class="spin-animation"></i> Traitement sécurisé en cours...`;
-        lucide.createIcons();
-
-        setTimeout(() => {
-            // Success State
-            userState.premiumUser = true;
-            saveStateToStorage();
-            updateDashboardUI();
-            
-            // UI representation header
-            document.querySelector(".user-profile").classList.add("premium-active");
-            document.querySelector(".user-name").innerHTML = `${userState.userName} <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
-            lucide.createIcons();
-
-            closeCheckoutModal();
-            showToast("Félicitations ! Votre accès Premium est maintenant actif !", true);
-
-            // Re-render tabs to show premium activation effects if any
-            switchTab("home");
-
-            // Reset Form
-            form.reset();
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
-        }, 2500);
-    });
-}
-
-function openCheckoutModal(planName, priceText) {
-    document.getElementById("checkoutPlanName").textContent = planName;
-    document.getElementById("checkoutPlanPrice").textContent = priceText;
-    
-    document.getElementById("checkoutModal").classList.add("active");
-    document.body.style.overflow = "hidden";
-    lucide.createIcons();
-}
-
-function closeCheckoutModal() {
-    document.getElementById("checkoutModal").classList.remove("active");
-    document.body.style.overflow = "";
-}
 
 // Add CSS keyframes for rotation in CSS dynamically if not present
 const styleSheet = document.styleSheets[0];
@@ -1573,7 +1532,7 @@ function setupInteractiveTools() {
             const resultDiv = document.getElementById("delta-result");
 
             if (isNaN(a) || isNaN(b) || isNaN(c)) {
-                resultDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer des coefficients valides.</p>`;
+                resultDiv.innerHTML = `<p style="color: var(--danger);">Veuillez entrer des coefficients valides.</p>`;
                 resultDiv.style.display = "block";
                 return;
             }
@@ -1616,8 +1575,8 @@ function setupInteractiveTools() {
                     const realPart = (-b / (2 * a)).toFixed(3);
                     const imagPart = (Math.sqrt(-delta) / (2 * a)).toFixed(3);
                     html += `
-                        <div class="result-explanation">
-                            <span style="color: var(--accent); font-weight: 600;">Δ < 0 : Pas de solution réelle</span> (Deux solutions complexes conjuguées)<br>
+                         <div class="result-explanation">
+                            <span style="color: var(--danger); font-weight: 600;">Δ < 0 : Pas de solution réelle</span> (Deux solutions complexes conjuguées)<br>
                             z₁ = <strong>${realPart} - i${Math.abs(imagPart)}</strong><br>
                             z₂ = <strong>${realPart} + i${Math.abs(imagPart)}</strong>
                         </div>
@@ -1664,7 +1623,7 @@ function setupInteractiveTools() {
             const d = parseFloat(document.getElementById("wave-d").value);
             
             if (isNaN(d) || d <= 0) {
-                resultWaveDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer une distance d > 0.</p>`;
+                resultWaveDiv.innerHTML = `<p style="color: var(--danger);">Veuillez entrer une distance d > 0.</p>`;
                 resultWaveDiv.style.display = "block";
                 return;
             }
@@ -1672,7 +1631,7 @@ function setupInteractiveTools() {
             if (currentMode === "v") {
                 const t = parseFloat(document.getElementById("wave-t").value);
                 if (isNaN(t) || t <= 0) {
-                    resultWaveDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer une durée Δt > 0.</p>`;
+                    resultWaveDiv.innerHTML = `<p style="color: var(--danger);">Veuillez entrer une durée Δt > 0.</p>`;
                     resultWaveDiv.style.display = "block";
                     return;
                 }
@@ -1685,7 +1644,7 @@ function setupInteractiveTools() {
             } else {
                 const v = parseFloat(document.getElementById("wave-v").value);
                 if (isNaN(v) || v <= 0) {
-                    resultWaveDiv.innerHTML = `<p style="color: var(--accent);">Veuillez entrer une célérité v > 0.</p>`;
+                    resultWaveDiv.innerHTML = `<p style="color: var(--danger);">Veuillez entrer une célérité v > 0.</p>`;
                     resultWaveDiv.style.display = "block";
                     return;
                 }
@@ -1730,9 +1689,8 @@ function setupProfileModal() {
                 userState.completedChapters = [];
                 userState.completedQuizzes = {};
                 userState.premiumUser = false;
-                userState.userName = "Dr. Soussi";
+                userState.userName = "Contactez-nous";
                 
-                document.querySelector(".user-profile").classList.remove("premium-active");
                 document.querySelector(".user-name").textContent = userState.userName;
                 
                 const bioNameEl = document.querySelector(".bio-display-name");
@@ -1754,14 +1712,9 @@ function setupProfileModal() {
             if (newName && newName.trim() !== "") {
                 userState.userName = newName.trim();
                 
-                // Update username in header (considering premium status)
+                // Update username in header
                 const userNameEl = document.querySelector(".user-name");
-                if (userState.premiumUser) {
-                    userNameEl.innerHTML = `${userState.userName} <i data-lucide="sparkles" style="width:12px;height:12px;color:#f43f5e;display:inline-block;vertical-align:middle;"></i>`;
-                    lucide.createIcons();
-                } else {
-                    userNameEl.textContent = userState.userName;
-                }
+                userNameEl.textContent = userState.userName;
                 
                 // Update username display in bio
                 const bioNameEl = document.querySelector(".bio-display-name");
@@ -1773,3 +1726,10 @@ function setupProfileModal() {
         });
     }
 }
+
+// Toggle interactive tools
+window.toggleTool = function(headerElement) {
+    const box = headerElement.closest('.interactive-tool-box');
+    box.classList.toggle('collapsed');
+};
+
