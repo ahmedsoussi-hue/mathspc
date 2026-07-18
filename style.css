@@ -31,9 +31,9 @@
     --accent-glow: rgba(198, 229, 51, 0.15);
     --accent-hover: #b2cf2e;            /* Darker lime for active hover */
     
-    --text-primary: #000000;            /* Primary Text */
-    --text-secondary: #000000;          /* Secondary Text */
-    --text-muted: #000000;              /* Muted Text */
+    --text-primary: #1e293b;            /* Primary Text: Slate 800 */
+    --text-secondary: #475569;          /* Secondary Text: Slate 600 */
+    --text-muted: #64748b;              /* Muted Text: Slate 500 */
     
     --success: #065F46;                 /* Secondary Green for success/verification states */
     --success-glow: rgba(6, 95, 70, 0.08);
@@ -157,20 +157,20 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     background: var(--primary-glow);
     border: 1px solid rgba(6, 78, 59, 0.18);
-    color: #000000;
+    color: var(--primary);
     width: fit-content;
 }
 
 .badge-accent {
     background: var(--accent-glow);
     border-color: rgba(6, 78, 59, 0.15);
-    color: #000000;
+    color: var(--primary);
 }
 
-.success-color { color: #000000; }
-.xp-color { color: #000000; }
-.math-color { background-color: rgba(6, 78, 59, 0.1); color: #000000; }
-.physics-color { background-color: rgba(6, 95, 70, 0.1); color: #000000; }
+.success-color { color: var(--success); }
+.xp-color { color: #d97706; }
+.math-color { background-color: rgba(6, 78, 59, 0.1); color: var(--primary); }
+.physics-color { background-color: rgba(6, 95, 70, 0.1); color: var(--secondary); }
 
 /* ==========================================================================
    BUTTONS
@@ -203,7 +203,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-secondary {
     background-color: transparent;
     border: 1px solid var(--secondary);
-    color: #000000;
+    color: var(--secondary);
 }
 .btn-secondary:hover {
     background-color: var(--secondary);
@@ -214,7 +214,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-accent {
     background: var(--accent);
-    color: #000000;
+    color: var(--primary);
     border: 1px solid rgba(6, 78, 59, 0.1);
 }
 .btn-accent:hover {
@@ -904,19 +904,19 @@ h1, h2, h3, h4, h5, h6 {
 .activity-list li i {
     width: 14px;
     height: 14px;
-    color: #000000;
+    color: var(--text-secondary);
 }
 
 .activity-list li i[data-lucide="check"] {
-    color: #000000;
+    color: var(--success);
 }
 
 .activity-list li i[data-lucide="award"] {
-    color: #000000;
+    color: #d97706;
 }
 
 .activity-list li i[data-lucide="sparkles"] {
-    color: #000000;
+    color: var(--primary);
 }
 
 .empty-activity {
@@ -1071,12 +1071,12 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
-.math-badge { background-color: rgba(6, 78, 59, 0.1); color: #000000; }
-.pc-badge { background-color: rgba(6, 95, 70, 0.1); color: #000000; }
+.math-badge { background-color: rgba(6, 78, 59, 0.1); color: var(--primary); }
+.pc-badge { background-color: rgba(6, 95, 70, 0.1); color: var(--secondary); }
 
 .mastered-badge {
     background-color: rgba(6, 95, 70, 0.1);
-    color: #000000;
+    color: var(--success);
     font-size: 0.75rem;
     font-weight: 600;
     padding: 4px 8px;
@@ -1203,7 +1203,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .modal-badge {
     background-color: var(--primary-glow);
-    color: #000000;
+    color: var(--primary);
     padding: 4px 10px;
     border-radius: 6px;
     font-size: 0.75rem;
@@ -1413,7 +1413,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ex-solution h5 {
-    color: #000000;
+    color: var(--primary);
     margin-bottom: 8px;
 }
 
@@ -1720,8 +1720,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 6px;
 }
 
-.correct-box .feedback-title { color: #000000; }
-.incorrect-box .feedback-title { color: #000000; }
+.correct-box .feedback-title { color: var(--primary); }
+.incorrect-box .feedback-title { color: var(--danger); }
 
 #feedbackExplanationText {
     font-size: 0.85rem;
@@ -2767,7 +2767,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-danger {
     background-color: rgba(239, 68, 68, 0.1);
-    color: #000000;
+    color: var(--danger);
     border: 1px solid rgba(239, 68, 68, 0.2);
 }
 

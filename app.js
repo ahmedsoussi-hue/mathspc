@@ -3050,9 +3050,41 @@ const chaptersData = [
 
             <h4>3. Célérité et Retard temporel</h4>
             <p>La vitesse de propagation (célérité) d'une onde est donnée par :</p>
-            <div class="math-formula">v = d / Δt</div>
-            <p>Le retard temporel τ du passage de l'onde au point M₂ par rapport à son passage au point M₁ est :</p>
-            <div class="math-formula">τ = M₁M₂ / v</div>
+            <div class="math-formula">v = \\frac{d}{\\Delta t}</div>
+            <p>Le retard temporel \\tau du passage de l'onde au point M_2 par rapport à son passage au point M_1 est :</p>
+            <div class="math-formula">\\tau = \\frac{d}{v}</div>
+
+            <div class="interactive-tool-box collapsed" style="margin-top: 24px;">
+                <div class="tool-header" onclick="toggleTool(this)">
+                    <h4>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="10" y2="18"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M12 18h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/><path d="M8 18h.01"/></svg> Calculateur d'Ondes & Retards</span>
+                        <i data-lucide="chevron-down" class="tool-chevron"></i>
+                    </h4>
+                    <p>Calculez facilement la célérité v, la distance d ou le retard temporel \\tau.</p>
+                </div>
+                <div class="tool-body">
+                    <div class="modal-tabs" style="background: rgba(255,255,255,0.05); padding: 4px; border-radius: 8px; margin-bottom: 10px; display:flex;">
+                        <button class="modal-tab-btn active" id="tab-calc-v" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 6px; border:none;"><i data-lucide="activity"></i> Célérité (v)</button>
+                        <button class="modal-tab-btn" id="tab-calc-tau" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 6px; border:none;"><i data-lucide="timer"></i> Retard (\\tau)</button>
+                    </div>
+                    <div class="calc-inputs" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="input-field">
+                            <label for="wave-d">Distance d (m)</label>
+                            <input type="number" id="wave-d" value="300">
+                        </div>
+                        <div class="input-field" id="field-t">
+                            <label for="wave-t">Durée \\Delta t (s)</label>
+                            <input type="number" id="wave-t" value="0.2">
+                        </div>
+                        <div class="input-field" id="field-v" style="display: none;">
+                            <label for="wave-v">Célérité v (m/s)</label>
+                            <input type="number" id="wave-v" value="1500">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary calc-btn" id="btn-calc-wave" style="margin-top: 10px;">Calculer</button>
+                    <div class="calc-result" id="wave-result" style="display: none; color: var(--text-primary);"></div>
+                </div>
+            </div>
         `,
         exercises: [
             {
@@ -3177,17 +3209,45 @@ const chaptersData = [
         courseContent: `
             <h4>1. Discriminant</h4>
             <p>Pour résoudre ax² + bx + c = 0 (avec a ≠ 0), on calcule le discriminant :</p>
-            <div class="math-formula">Δ = b² - 4ac</div>
+            <div class="math-formula">\\Delta = b^2 - 4ac</div>
 
             <h4>2. Solutions dans R</h4>
             <ul>
-                <li><strong>Si Δ > 0 :</strong> Deux solutions réelles :<br>x₁ = (-b - √Δ)/2a  et  x₂ = (-b + √Δ)/2a</li>
-                <li><strong>Si Δ = 0 :</strong> Une solution double :<br>x₀ = -b/2a</li>
-                <li><strong>Si Δ < 0 :</strong> Pas de solution réelle.</li>
+                <li><strong>Si \\Delta > 0 :</strong> Deux solutions réelles :<br>x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a}  et  x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a}</li>
+                <li><strong>Si \\Delta = 0 :</strong> Une solution double :<br>x_0 = \\frac{-b}{2a}</li>
+                <li><strong>Si \\Delta < 0 :</strong> Pas de solution réelle.</li>
             </ul>
 
             <h4>3. Signe du trinôme</h4>
             <p>Le trinôme ax² + bx + c est toujours du signe de <strong>a</strong> à l'extérieur des racines (si elles existent) et du signe opposé de <strong>a</strong> entre les racines.</p>
+
+            <div class="interactive-tool-box collapsed" style="margin-top: 24px;">
+                <div class="tool-header" onclick="toggleTool(this)">
+                    <h4>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="10" y2="18"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M12 18h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/><path d="M8 18h.01"/></svg> Calculateur de Discriminant \\Delta</span>
+                        <i data-lucide="chevron-down" class="tool-chevron"></i>
+                    </h4>
+                    <p>Résolvez instantanément n'importe quel trinôme ax² + bx + c = 0.</p>
+                </div>
+                <div class="tool-body">
+                    <div class="calc-inputs">
+                        <div class="input-field">
+                            <label for="calc-a">Coeff a</label>
+                            <input type="number" id="calc-a" value="2">
+                        </div>
+                        <div class="input-field">
+                            <label for="calc-b">Coeff b</label>
+                            <input type="number" id="calc-b" value="-5">
+                        </div>
+                        <div class="input-field">
+                            <label for="calc-c">Coeff c</label>
+                            <input type="number" id="calc-c" value="2">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary calc-btn" id="btn-calc-delta">Calculer les Solutions</button>
+                    <div class="calc-result" id="delta-result" style="display: none;"></div>
+                </div>
+            </div>
         `,
         exercises: [
             {
@@ -3443,6 +3503,9 @@ function loadStateFromStorage() {
                 userState.userName = "Contactez-nous";
             }
             
+            document.querySelectorAll(".user-name").forEach(el => {
+                el.textContent = userState.userName;
+            });
             const bioNameEl = document.querySelector(".bio-display-name");
             if (bioNameEl) bioNameEl.textContent = userState.userName;
         } catch (e) {
@@ -3469,14 +3532,28 @@ function updateDashboardUI() {
     }
     
     const averageScoreTextEl = document.getElementById("averageScoreText");
+    let avgScore = 0;
+    if (quizzesTaken > 0) {
+        const totalScore = Object.values(userState.completedQuizzes).reduce((sum, score) => sum + score, 0);
+        avgScore = Math.round(totalScore / quizzesTaken);
+    }
+    
     if (averageScoreTextEl) {
-        if (quizzesTaken > 0) {
-            const totalScore = Object.values(userState.completedQuizzes).reduce((sum, score) => sum + score, 0);
-            const avg = Math.round(totalScore / quizzesTaken);
-            averageScoreTextEl.textContent = `${avg}%`;
-        } else {
-            averageScoreTextEl.textContent = "0%";
-        }
+        averageScoreTextEl.textContent = `${avgScore}%`;
+    }
+
+    // Update Profile modal stats too
+    const profileLessonsVal = document.getElementById("profileLessonsVal");
+    if (profileLessonsVal) {
+        profileLessonsVal.textContent = userState.completedChapters.length;
+    }
+    const profileQuizzesVal = document.getElementById("profileQuizzesVal");
+    if (profileQuizzesVal) {
+        profileQuizzesVal.textContent = quizzesTaken;
+    }
+    const profileScoreVal = document.getElementById("profileScoreVal");
+    if (profileScoreVal) {
+        profileScoreVal.textContent = `${avgScore}%`;
     }
 
     // Activity List
@@ -4054,7 +4131,7 @@ window.openChapterModal = function(chapterId) {
             exDiv.innerHTML = `
                 <div class="ex-header" onclick="toggleExerciseAccordion(${index})">
                     <span class="ex-title">${ex.title}</span>
-                    <button class="ex-toggle-btn"><i data-lucide="chevron-down" id="ex-arrow-${index}"></i></button>
+                    <button class="ex-toggle-btn"><i data-lucide="chevron-down" id="ex-arrow-${index}" style="transition: transform var(--transition-fast, 0.2s);"></i></button>
                 </div>
                 <div class="ex-body" id="ex-body-${index}" style="display: none;">
                     <p class="ex-statement">${ex.statement}</p>
@@ -4105,6 +4182,7 @@ window.openChapterModal = function(chapterId) {
     document.body.style.overflow = "hidden"; // Prevent background scroll
     
     lucide.createIcons();
+    setupInteractiveTools();
 
     // Trigger MathJax Typesetting for math equations inside the course summary
     setTimeout(() => {
@@ -4126,12 +4204,11 @@ window.toggleExerciseAccordion = function(index) {
     
     if (body.style.display === "none") {
         body.style.display = "block";
-        arrow.setAttribute("data-lucide", "chevron-up");
+        if (arrow) arrow.style.transform = "rotate(180deg)";
     } else {
         body.style.display = "none";
-        arrow.setAttribute("data-lucide", "chevron-down");
+        if (arrow) arrow.style.transform = "rotate(0deg)";
     }
-    lucide.createIcons();
 };
 
 window.simulateDownload = function() {
@@ -5086,6 +5163,8 @@ function setupEquilibriumSimulator() {
     if (eqInterval) clearInterval(eqInterval);
     eqInterval = setInterval(draw, 30);
     resetEquilibrium();
+}
+
 // 6. Function Plotter Simulator
 let plotterInterval = null;
 let plotterXProgress = -10;
@@ -5111,7 +5190,61 @@ function setupPlotterSimulator() {
     const newClear = btnClear.cloneNode(true);
     btnClear.parentNode.replaceChild(newClear, btnClear);
 
-    newFunc.addEventListener("change", resetPlotter);
+    let cachedCustomFn = null;
+
+    function updateCustomFunc() {
+        const expr = document.getElementById("plotter-custom-val").value;
+        if (!expr || expr.trim() === "") {
+            cachedCustomFn = null;
+            return;
+        }
+        
+        let processed = expr.replace(/\^/g, "**");
+        processed = processed.replace(/\bpi\b/gi, "Math.PI");
+        processed = processed.replace(/\be\b/gi, "Math.E");
+        processed = processed.replace(/\bsin\b/g, "Math.sin");
+        processed = processed.replace(/\bcos\b/g, "Math.cos");
+        processed = processed.replace(/\btan\b/g, "Math.tan");
+        processed = processed.replace(/\bexp\b/g, "Math.exp");
+        processed = processed.replace(/\bln\b/g, "Math.log");
+        processed = processed.replace(/\blog\b/g, "Math.log");
+        processed = processed.replace(/\bsqrt\b/g, "Math.sqrt");
+        processed = processed.replace(/\babs\b/g, "Math.abs");
+        
+        try {
+            cachedCustomFn = new Function("x", "a", `
+                try {
+                    with (Math) {
+                        return (${processed});
+                    }
+                } catch(e) {
+                    return null;
+                }
+            `);
+            cachedCustomFn(1, 1);
+        } catch (e) {
+            cachedCustomFn = null;
+        }
+    }
+
+    newFunc.addEventListener("change", () => {
+        const customContainer = document.getElementById("custom-func-container");
+        if (newFunc.value === "custom") {
+            if (customContainer) customContainer.style.display = "block";
+            updateCustomFunc();
+        } else {
+            if (customContainer) customContainer.style.display = "none";
+        }
+        resetPlotter();
+    });
+
+    const customInput = document.getElementById("plotter-custom-val");
+    if (customInput) {
+        customInput.addEventListener("input", () => {
+            updateCustomFunc();
+            resetPlotter();
+        });
+    }
     newCoeff.addEventListener("input", (e) => {
         document.getElementById("val-plotter-coeff").textContent = e.target.value;
         resetPlotter();
@@ -5175,6 +5308,22 @@ function setupPlotterSimulator() {
             case "inverse":
                 if (Math.abs(x) < 0.08) return null;
                 return { y: a / x, dy: -a / (x * x) };
+            case "custom":
+                if (!cachedCustomFn) return null;
+                const yVal = cachedCustomFn(x, a);
+                if (yVal === null || typeof yVal !== "number" || isNaN(yVal) || !isFinite(yVal)) return null;
+                
+                // Calculate derivative numerically
+                const h = 0.0001;
+                const y1 = cachedCustomFn(x + h, a);
+                const y2 = cachedCustomFn(x - h, a);
+                
+                if (y1 === null || y2 === null || typeof y1 !== "number" || typeof y2 !== "number" || isNaN(y1) || isNaN(y2)) {
+                    return null;
+                }
+                
+                const dyVal = (y1 - y2) / (2 * h);
+                return { y: yVal, dy: dyVal };
             default:
                 return null;
         }
@@ -5743,9 +5892,10 @@ function setupProfileModal() {
             if (newName && newName.trim() !== "") {
                 userState.userName = newName.trim();
                 
-                // Update username in header
-                const userNameEl = document.querySelector(".user-name");
-                userNameEl.textContent = userState.userName;
+                // Update username in header and modal
+                document.querySelectorAll(".user-name").forEach(el => {
+                    el.textContent = userState.userName;
+                });
                 
                 // Update username display in bio
                 const bioNameEl = document.querySelector(".bio-display-name");

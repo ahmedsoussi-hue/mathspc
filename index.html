@@ -68,7 +68,9 @@
             </nav>
             <div class="header-actions">
                 <div class="user-profile" id="userProfileBtn">
-                    <i data-lucide="mail" class="mail-icon"></i>
+                    <div class="avatar" style="width: 26px; height: 26px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <img src="profile.jpg" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <span class="user-name">Contactez-nous</span>
                 </div>
             </div>
@@ -117,7 +119,8 @@
                 </div>
             </div>
 
-            <!-- Fast Level Selector -->
+            
+<!-- Fast Level Selector -->
             <div class="section-title">
                 <h2><i data-lucide="layers"></i> Choisissez votre Niveau Scolaire</h2>
                 <p>Sélectionnez votre classe pour filtrer instantanément les cours officiels.</p>
@@ -467,16 +470,20 @@
                             <canvas id="canvas-plotter" width="800" height="250"></canvas>
                         </div>
                         <div class="workspace-controls">
-                            <div class="control-group">
+                            <div class="control-group" style="min-width: 220px;">
                                 <label for="plotter-func">Fonction \(f(x)\) :</label>
-                                <select id="plotter-func">
+                                <select id="plotter-func" style="width: 100%;">
                                     <option value="square">f(x) = a x²</option>
                                     <option value="exp">f(x) = e^(a x)</option>
                                     <option value="ln">f(x) = ln(x + a)</option>
                                     <option value="sin">f(x) = sin(a x)</option>
                                     <option value="inverse">f(x) = a / x</option>
+                                    <option value="custom">Personnalisée (saisir...)</option>
                                 </select>
-                            </div>
+                                <div id="custom-func-container" style="display: none; margin-top: 8px;">
+                                    <input type="text" id="plotter-custom-val" placeholder="Ex: x^3 - 3*x" style="width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(17, 24, 39, 0.03); color: var(--text-primary); outline: none; font-family: var(--font-body); font-size: 0.9rem;">
+                                    <span style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; display: block; line-height: 1.3;">Variables : x, a. Fonctions : cos, sin, exp, ln, sqrt. Exemple : x^3 - 3*x</span>
+                                </div></div>
                             <div class="control-group">
                                 <label for="plotter-coeff">Paramètre \(a\) : <span id="val-plotter-coeff">1.0</span></label>
                                 <input type="range" id="plotter-coeff" min="-2.0" max="3.0" step="0.1" value="1.0">
@@ -623,22 +630,56 @@
         </div>
     </footer>
 
-    <!-- Contact Us Modal -->
+    <!-- User Profile Modal (Instagram Style) -->
     <div class="lesson-modal" id="profileModal">
         <div class="modal-backdrop" id="profileModalBackdrop"></div>
         <div class="modal-card profile-modal-card">
             <div class="modal-header">
                 <div class="modal-title-wrapper">
-                    <span class="modal-badge" style="background-color: var(--primary-glow); color: var(--primary);"><i data-lucide="mail"></i> Support & Contact</span>
-                    <h3>Contactez-nous</h3>
+                    <span class="modal-badge" style="background-color: var(--primary-glow); color: var(--primary);"><i data-lucide="user"></i> Mon Compte</span>
+                    <h3>Profil de l'Élève</h3>
                 </div>
                 <button class="modal-close" id="profileCloseBtn"><i data-lucide="x"></i></button>
             </div>
-            <div class="modal-body profile-modal-body" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
-                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin: 0 0 10px 0;">
-                    Une question, une remarque ou besoin d'assistance ? Notre équipe est à votre écoute pour vous accompagner dans votre réussite.
-                </p>
-                
+            <div class="modal-body profile-modal-body">
+                <!-- Instagram profile header -->
+                <div class="instagram-profile-header">
+                    <div class="instagram-avatar-wrapper">
+                        <img src="profile.jpg" alt="Avatar" class="instagram-avatar">
+                        <div class="instagram-badge">
+                            <i data-lucide="award"></i>
+                        </div>
+                    </div>
+                    <div class="instagram-meta">
+                        <h3 class="instagram-username user-name">Contactez-nous</h3>
+                        <button class="instagram-link-btn" id="profileEditBtn">
+                            <i data-lucide="edit-3"></i> Modifier le nom
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Instagram Stats -->
+                <div class="instagram-stats">
+                    <div class="stat-box">
+                        <span class="stat-val" id="profileLessonsVal">0</span>
+                        <span class="stat-lbl">Cours</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val" id="profileQuizzesVal">0</span>
+                        <span class="stat-lbl">Quizz</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val" id="profileScoreVal">0%</span>
+                        <span class="stat-lbl">Moyenne</span>
+                    </div>
+                </div>
+
+                <!-- Instagram Bio + Contact Info -->
+                <div class="instagram-bio">
+                    <h4 class="bio-display-name">Contactez-nous</h4>
+                    <p>Une question, une remarque ou besoin d'assistance ? Notre équipe est à votre écoute pour vous accompagner dans votre réussite.</p>
+                </div>
+
                 <div style="display: flex; flex-direction: column; gap: 12px;">
                     <a href="mailto:mathspc@gmail.com" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
                         <i data-lucide="mail" style="color: var(--primary); width: 20px; height: 20px;"></i>
