@@ -4202,6 +4202,8 @@ function initCanvasFor(type) {
         setupRcSimulator();
     } else if (type === "equilibrium") {
         setupEquilibriumSimulator();
+    } else if (type === "plotter") {
+        setupPlotterSimulator();
     }
 }
 
@@ -5084,7 +5086,257 @@ function setupEquilibriumSimulator() {
     if (eqInterval) clearInterval(eqInterval);
     eqInterval = setInterval(draw, 30);
     resetEquilibrium();
+// 6. Function Plotter Simulator
+let plotterInterval = null;
+let plotterXProgress = -10;
+let plotterDrawing = false;
+let plotterMouseX = null;
+let plotterMouseY = null;
+
+function setupPlotterSimulator() {
+    const canvas = document.getElementById("canvas-plotter");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const funcSelect = document.getElementById("plotter-func");
+    const coeffSlider = document.getElementById("plotter-coeff");
+    const btnDraw = document.getElementById("btn-plotter-draw");
+    const btnClear = document.getElementById("btn-plotter-clear");
+
+    const newFunc = funcSelect.cloneNode(true);
+    funcSelect.parentNode.replaceChild(newFunc, funcSelect);
+    const newCoeff = coeffSlider.cloneNode(true);
+    coeffSlider.parentNode.replaceChild(newCoeff, coeffSlider);
+    const newDraw = btnDraw.cloneNode(true);
+    btnDraw.parentNode.replaceChild(newDraw, btnDraw);
+    const newClear = btnClear.cloneNode(true);
+    btnClear.parentNode.replaceChild(newClear, btnClear);
+
+    newFunc.addEventListener("change", resetPlotter);
+    newCoeff.addEventListener("input", (e) => {
+        document.getElementById("val-plotter-coeff").textContent = e.target.value;
+        resetPlotter();
+    });
+
+    newDraw.addEventListener("click", () => {
+        plotterXProgress = -10;
+        plotterDrawing = true;
+    });
+
+    newClear.addEventListener("click", () => {
+        resetPlotter();
+    });
+
+    const rectOffset = () => canvas.getBoundingClientRect();
+    canvas.addEventListener("mousemove", (e) => {
+        const rect = rectOffset();
+        plotterMouseX = e.clientX - rect.left;
+        plotterMouseY = e.clientY - rect.top;
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+        plotterMouseX = null;
+        plotterMouseY = null;
+    });
+
+    function resetPlotter() {
+        plotterXProgress = -10;
+        plotterDrawing = false;
+    }
+
+    const scaleX = 40;
+    const scaleY = 40;
+    const originX = 400; 
+    const originY = 125; 
+
+    function toPixels(x, y) {
+        return {
+            x: originX + x * scaleX,
+            y: originY - y * scaleY
+        };
+    }
+
+    function toMathX(pixelX) {
+        return (pixelX - originX) / scaleX;
+    }
+
+    function evalFunc(name, x, a) {
+        switch (name) {
+            case "square":
+                return { y: a * x * x, dy: 2 * a * x };
+            case "exp":
+                const valExp = a * x;
+                if (valExp > 5 || valExp < -5) return null;
+                return { y: Math.exp(valExp), dy: a * Math.exp(valExp) };
+            case "ln":
+                if (x + a <= 0.01) return null;
+                return { y: Math.log(x + a), dy: 1 / (x + a) };
+            case "sin":
+                return { y: Math.sin(a * x), dy: a * Math.cos(a * x) };
+            case "inverse":
+                if (Math.abs(x) < 0.08) return null;
+                return { y: a / x, dy: -a / (x * x) };
+            default:
+                return null;
+        }
+    }
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const fName = newFunc.value;
+        const a = parseFloat(newCoeff.value);
+
+        // Coordinate grid
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += scaleX) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += scaleY) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, originY);
+        ctx.lineTo(canvas.width, originY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(originX, 0);
+        ctx.lineTo(originX, canvas.height);
+        ctx.stroke();
+
+        // Axis ticks & labels
+        ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
+        ctx.font = "9px sans-serif";
+        for (let x = -10; x <= 10; x++) {
+            if (x === 0) continue;
+            const px = toPixels(x, 0);
+            ctx.fillRect(px.x - 1, originY - 4, 2, 8);
+            ctx.fillText(x, px.x - 4, originY + 16);
+        }
+        for (let y = -3; y <= 3; y++) {
+            if (y === 0) continue;
+            const px = toPixels(0, y);
+            ctx.fillRect(originX - 4, px.y - 1, 8, 2);
+            ctx.fillText(y, originX + 8, px.y + 3);
+        }
+
+        // Draw animation
+        if (plotterDrawing) {
+            plotterXProgress += 0.25;
+            if (plotterXProgress > 10) {
+                plotterXProgress = 10;
+                plotterDrawing = false;
+            }
+        }
+
+        // Draw curve
+        ctx.strokeStyle = "var(--primary, #0d7377)";
+        ctx.lineWidth = 3;
+        ctx.shadowColor = "rgba(13, 115, 119, 0.3)";
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+
+        let firstPoint = true;
+        const limitX = plotterDrawing ? plotterXProgress : 10;
+
+        for (let pxX = 0; pxX < canvas.width; pxX += 2) {
+            const mathX = toMathX(pxX);
+            if (mathX > limitX) break;
+
+            const res = evalFunc(fName, mathX, a);
+            if (res) {
+                const pxPt = toPixels(mathX, res.y);
+                if (pxPt.y >= 0 && pxPt.y <= canvas.height) {
+                    if (firstPoint) {
+                        ctx.moveTo(pxPt.x, pxPt.y);
+                        firstPoint = false;
+                    } else {
+                        ctx.lineTo(pxPt.x, pxPt.y);
+                    }
+                } else {
+                    firstPoint = true; 
+                }
+            } else {
+                firstPoint = true; 
+            }
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Tangent
+        if (!plotterDrawing && plotterMouseX !== null) {
+            const hoverMathX = toMathX(plotterMouseX);
+            const res = evalFunc(fName, hoverMathX, a);
+
+            if (res) {
+                const pxPt = toPixels(hoverMathX, res.y);
+
+                ctx.strokeStyle = "var(--secondary, #c87f0a)";
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([5, 3]);
+                ctx.beginPath();
+
+                const tStartX = hoverMathX - 3;
+                const tEndX = hoverMathX + 3;
+                const tStartY = res.dy * (tStartX - hoverMathX) + res.y;
+                const tEndY = res.dy * (tEndX - hoverMathX) + res.y;
+
+                const pxStart = toPixels(tStartX, tStartY);
+                const pxEnd = toPixels(tEndX, tEndY);
+
+                ctx.moveTo(pxStart.x, pxStart.y);
+                ctx.lineTo(pxEnd.x, pxEnd.y);
+                ctx.stroke();
+                ctx.setLineDash([]); 
+
+                ctx.fillStyle = "var(--secondary, #c87f0a)";
+                ctx.beginPath();
+                ctx.arc(pxPt.x, pxPt.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#ffffff";
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+                ctx.lineWidth = 1;
+                const boxW = 160;
+                const boxH = 50;
+                let boxX = pxPt.x + 15;
+                let boxY = pxPt.y - 60;
+                
+                if (boxX + boxW > canvas.width) boxX = pxPt.x - boxW - 15;
+                if (boxY < 10) boxY = pxPt.y + 15;
+
+                ctx.fillRect(boxX, boxY, boxW, boxH);
+                ctx.strokeRect(boxX, boxY, boxW, boxH);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 10px sans-serif";
+                ctx.fillText(`Point M(${hoverMathX.toFixed(2)}, ${res.y.toFixed(2)})`, boxX + 10, boxY + 18);
+                ctx.fillStyle = "var(--secondary, #c87f0a)";
+                ctx.fillText(`Nombre dérivé f'(x₀) = ${res.dy.toFixed(2)}`, boxX + 10, boxY + 36);
+            }
+        }
+    }
+
+    if (plotterInterval) clearInterval(plotterInterval);
+    plotterInterval = setInterval(draw, 30);
+    resetPlotter();
 }
+
+
 
 
 // Add CSS keyframes for rotation in CSS dynamically if not present

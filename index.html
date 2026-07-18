@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=1.0.7">
+    <link rel="stylesheet" href="style.css?v=1.0.8">
     <!-- MathJax for rendering Equations -->
     <script>
         window.MathJax = {
@@ -304,6 +304,13 @@
                                 <span>Tableau d'avancement dynamique</span>
                             </div>
                         </button>
+                        <button class="anim-select-btn" data-anim="plotter">
+                            <div class="btn-icon-wrapper"><i data-lucide="line-chart"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>Traceur de Courbes</strong>
+                                <span>Construction de graphes de fonctions</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
 
@@ -447,6 +454,40 @@
                         </div>
                         <div class="workspace-theory">
                             <p><strong>Avancement chimique :</strong> À l'équilibre, \(K = \frac{x_f^2}{(C_0 - x_f)^2}\), soit \(x_f = C_0 \frac{\sqrt{K}}{1 + \sqrt{K}} = \) <span id="eq-xf-calc" style="font-weight:700; color:var(--primary);">0.67</span> mol/L. Le taux d'avancement final est \(\tau = \) <span id="eq-tau-calc" style="font-weight:700; color:var(--primary);">67</span>%.</p>
+                        </div>
+                    </div>
+
+                    <!-- Function Plotter Simulation -->
+                    <div class="anim-workspace" id="anim-plotter" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>Tracé & Analyse de Fonctions</h3>
+                            <p>Visualisez la construction point par point de la courbe d'une fonction et observez sa tangente dynamique.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-plotter" width="800" height="250"></canvas>
+                        </div>
+                        <div class="workspace-controls">
+                            <div class="control-group">
+                                <label for="plotter-func">Fonction \(f(x)\) :</label>
+                                <select id="plotter-func">
+                                    <option value="square">f(x) = a x²</option>
+                                    <option value="exp">f(x) = e^(a x)</option>
+                                    <option value="ln">f(x) = ln(x + a)</option>
+                                    <option value="sin">f(x) = sin(a x)</option>
+                                    <option value="inverse">f(x) = a / x</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="plotter-coeff">Paramètre \(a\) : <span id="val-plotter-coeff">1.0</span></label>
+                                <input type="range" id="plotter-coeff" min="-2.0" max="3.0" step="0.1" value="1.0">
+                            </div>
+                            <div class="control-group buttons-group">
+                                <button class="btn btn-primary" id="btn-plotter-draw"><i data-lucide="play"></i> Lancer le tracé</button>
+                                <button class="btn btn-secondary" id="btn-plotter-clear"><i data-lucide="trash-2"></i> Effacer</button>
+                            </div>
+                        </div>
+                        <div class="workspace-theory">
+                            <p><strong>Analyse :</strong> Survolez le graphe pour afficher la <strong>tangente dynamique</strong> à la courbe au point \(x_0\). L'équation de la tangente est \(y = f'(x_0)(x - x_0) + f(x_0)\). Observez comment la pente de la tangente correspond au nombre dérivé \(f'(x_0)\).</p>
                         </div>
                     </div>
 
@@ -638,6 +679,6 @@
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js?v=1.1.0"></script>
+    <script src="app.js?v=1.1.1"></script>
 </body>
 </html>
