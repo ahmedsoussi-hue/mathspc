@@ -3421,11 +3421,13 @@ document.addEventListener("DOMContentLoaded", () => {
     renderChapters();
     renderHomeChapters();
     renderHomePhysicsChapters();
+    renderQuizWelcomeSelector();
     // Register Event Listeners
     setupNavigation();
     setupFilters();
     setupModals();
     setupAnimations();
+    setupQuizEngine();
     setupInteractiveTools();
     setupProfileModal();
 });
@@ -5230,6 +5232,202 @@ function setupInteractiveTools() {
             resultWaveDiv.style.display = "block";
         });
     }
+}
+
+// --- INTERACTIVE QUIZ ENGINE ---
+let activeQuiz = null;
+let currentQuestionIndex = 0;
+let quizScore = 0;
+let selectedOptionIndex = null;
+
+function renderQuizWelcomeSelector() {
+    const grid = document.getElementById("quizSelectorGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    quizzesData.forEach(quiz => {
+        const completedScore = userState.completedQuizzes[quiz.id];
+        const card = document.createElement("div");
+        card.className = "quiz-card";
+        card.addEventListener("click", () => startQuiz(quiz.id));
+
+        card.innerHTML = `
+            <div>
+                <h3>${quiz.title}</h3>
+                <p>${quiz.description}</p>
+            </div>
+            <div class="quiz-meta">
+                <div class="quiz-meta-info">
+                    <span><i data-lucide="help-circle"></i> ${quiz.questions.length} Questions</span>
+                    <span><i data-lucide="zap"></i> +${quiz.xp} XP</span>
+                </div>
+                <div class="quiz-action-link">
+                    ${completedScore !== undefined ? `Fait (${completedScore}%)` : 'Lancer <i data-lucide="chevron-right"></i>'}
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    lucide.createIcons();
+}
+
+function setupQuizEngine() {
+    const backBtn = document.getElementById("backToQuizzesBtn");
+    const skipBtn = document.getElementById("quizSkipBtn");
+    const nextBtn = document.getElementById("quizNextBtn");
+    const retryBtn = document.getElementById("retryQuizBtn");
+    const finishBtn = document.getElementById("finishQuizBtn");
+
+    if (backBtn) backBtn.addEventListener("click", quitQuiz);
+    if (skipBtn) skipBtn.addEventListener("click", () => showFeedback(false));
+    if (nextBtn) nextBtn.addEventListener("click", () => {
+        if (currentQuestionIndex < activeQuiz.questions.length - 1) {
+            currentQuestionIndex++;
+            showQuestion();
+        } else {
+            showQuizResults();
+        }
+    });
+    if (retryBtn) retryBtn.addEventListener("click", () => startQuiz(activeQuiz.id));
+    if (finishBtn) finishBtn.addEventListener("click", quitQuiz);
+}
+
+function startQuiz(quizId) {
+    const quiz = quizzesData.find(q => q.id === quizId);
+    if (!quiz) return;
+
+    activeQuiz = quiz;
+    currentQuestionIndex = 0;
+    quizScore = 0;
+    selectedOptionIndex = null;
+
+    document.getElementById("quizWelcomePanel").style.display = "none";
+    document.getElementById("quizResultPanel").style.display = "none";
+    document.getElementById("quizScreenPanel").style.display = "block";
+
+    showQuestion();
+}
+
+function showQuestion() {
+    const q = activeQuiz.questions[currentQuestionIndex];
+    selectedOptionIndex = null;
+
+    document.getElementById("quizNextBtn").disabled = true;
+    document.getElementById("quizSkipBtn").style.display = "inline-flex";
+    document.getElementById("quizFeedbackBox").style.display = "none";
+
+    const totalQ = activeQuiz.questions.length;
+    document.getElementById("quizCounterText").textContent = `Question ${currentQuestionIndex + 1}/${totalQ}`;
+    
+    const percentage = Math.round((currentQuestionIndex / totalQ) * 100);
+    document.getElementById("quizProgressBar").style.width = `${percentage}%`;
+
+    document.getElementById("quizQuestionText").textContent = q.question;
+    
+    const optionsList = document.getElementById("quizOptionsList");
+    optionsList.innerHTML = "";
+
+    q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = opt;
+        btn.addEventListener("click", () => selectOption(idx));
+        optionsList.appendChild(btn);
+    });
+}
+
+function selectOption(idx) {
+    if (selectedOptionIndex !== null) return;
+
+    selectedOptionIndex = idx;
+    const q = activeQuiz.questions[currentQuestionIndex];
+    const isCorrect = (idx === q.answer);
+
+    const optionBtns = document.querySelectorAll(".option-btn");
+    optionBtns.forEach((btn, index) => {
+        if (index === q.answer) {
+            btn.classList.add("correct");
+        } else if (index === idx) {
+            btn.classList.add("incorrect");
+        }
+    });
+
+    if (isCorrect) {
+        quizScore++;
+    }
+
+    showFeedback(isCorrect);
+}
+
+function showFeedback(isCorrect) {
+    const q = activeQuiz.questions[currentQuestionIndex];
+    const fbBox = document.getElementById("quizFeedbackBox");
+    const fbTitle = document.getElementById("feedbackTitleText");
+    const fbIcon = document.getElementById("feedbackIcon");
+    const fbDesc = document.getElementById("feedbackExplanationText");
+
+    if (isCorrect) {
+        fbBox.className = "quiz-feedback-box correct-box";
+        fbTitle.textContent = "Correct !";
+        fbIcon.setAttribute("data-lucide", "check-circle-2");
+    } else {
+        fbBox.className = "quiz-feedback-box incorrect-box";
+        fbTitle.textContent = "Explication :";
+        fbIcon.setAttribute("data-lucide", "help-circle");
+    }
+
+    fbDesc.innerHTML = q.explanation;
+    fbBox.style.display = "block";
+    lucide.createIcons();
+
+    document.getElementById("quizSkipBtn").style.display = "none";
+    document.getElementById("quizNextBtn").disabled = false;
+}
+
+function showQuizResults() {
+    document.getElementById("quizScreenPanel").style.display = "none";
+    
+    const resultPanel = document.getElementById("quizResultPanel");
+    const total = activeQuiz.questions.length;
+    const scorePercent = Math.round((quizScore / total) * 100);
+
+    const prevScore = userState.completedQuizzes[activeQuiz.id] || 0;
+    if (scorePercent > prevScore) {
+        userState.completedQuizzes[activeQuiz.id] = scorePercent;
+        saveStateToStorage();
+        updateDashboardUI();
+    }
+
+    document.getElementById("resultScorePercentage").textContent = `${scorePercent}%`;
+    const circle = document.getElementById("resultCircleStroke");
+    const strokeDash = `${scorePercent}, 100`;
+    circle.setAttribute("stroke-dasharray", strokeDash);
+    
+    document.getElementById("resultCorrectCount").textContent = `${quizScore}/${total}`;
+    document.getElementById("resultXpText").textContent = `+${Math.round(activeQuiz.xp * (quizScore/total))} XP`;
+
+    const resultTitle = document.getElementById("resultTitle");
+    if (scorePercent === 100) {
+        resultTitle.textContent = "Excellent ! Score Parfait.";
+    } else if (scorePercent >= 70) {
+        resultTitle.textContent = "Très Bien ! Objectif atteint.";
+    } else if (scorePercent >= 50) {
+        resultTitle.textContent = "Pas mal, continuez vos efforts !";
+    } else {
+        resultTitle.textContent = "À revoir. Relisez le cours.";
+    }
+
+    resultPanel.style.display = "block";
+    showToast(`Quizz terminé ! Score : ${scorePercent}%`, true);
+}
+
+function quitQuiz() {
+    activeQuiz = null;
+    document.getElementById("quizScreenPanel").style.display = "none";
+    document.getElementById("quizResultPanel").style.display = "none";
+    document.getElementById("quizWelcomePanel").style.display = "block";
+    renderQuizWelcomeSelector();
 }
 
 // --- USER PROFILE MODAL ENGINE ---

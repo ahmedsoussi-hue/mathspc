@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=1.0.5">
+    <link rel="stylesheet" href="style.css?v=1.0.6">
     <!-- MathJax for rendering Equations -->
     <script>
         window.MathJax = {
@@ -64,6 +64,7 @@
                 </div>
 
                 <a href="#animations" class="nav-link" data-tab="animations"><i data-lucide="play"></i> Animations</a>
+                <a href="#quiz" class="nav-link" data-tab="quiz"><i data-lucide="award"></i> Quizz</a>
             </nav>
             <div class="header-actions">
                 <div class="user-profile" id="userProfileBtn">
@@ -453,6 +454,99 @@
             </div>
         </section>
 
+        <!-- SECTION 4: INTERACTIVE QUIZZES -->
+        <section id="quiz-section" class="tab-content">
+            <div class="quiz-welcome-panel" id="quizWelcomePanel">
+                <div class="quiz-welcome-info">
+                    <span class="badge badge-accent"><i data-lucide="play-circle"></i> Testez vos connaissances</span>
+                    <h2>Quizz Interactifs de Mathématiques et Physique-Chimie</h2>
+                    <p>Validez votre compréhension immédiate des chapitres clés avec des explications instantanées pour chaque question.</p>
+                </div>
+                <div class="quiz-selector-grid" id="quizSelectorGrid">
+                    <!-- Quiz options rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div class="quiz-screen-panel" id="quizScreenPanel" style="display: none;">
+                <div class="quiz-screen-header">
+                    <button class="back-to-quizzes-btn" id="backToQuizzesBtn"><i data-lucide="arrow-left"></i> Retour</button>
+                    <div class="quiz-progress-bar-container">
+                        <div class="quiz-progress-bar" id="quizProgressBar" style="width: 0%;"></div>
+                    </div>
+                    <span class="quiz-counter" id="quizCounterText">Question 1/5</span>
+                </div>
+
+                <div class="quiz-question-container">
+                    <h3 id="quizQuestionText">Chargement de la question...</h3>
+                    
+                    <!-- Code block / Math formula area if needed -->
+                    <div class="quiz-formula-box" id="quizFormulaBox" style="display: none;">
+                        <code id="quizFormulaText">f'(x) = ...</code>
+                    </div>
+
+                    <div class="quiz-options-list" id="quizOptionsList">
+                        <!-- Options buttons injected here -->
+                    </div>
+                </div>
+
+                <!-- Instant Explanation / Answer feedback (hidden by default) -->
+                <div class="quiz-feedback-box" id="quizFeedbackBox" style="display: none;">
+                    <div class="feedback-title">
+                        <i id="feedbackIcon" data-lucide="check-circle-2"></i>
+                        <span id="feedbackTitleText">Correct !</span>
+                    </div>
+                    <p id="feedbackExplanationText">Explication détaillée de la correction...</p>
+                </div>
+
+                <div class="quiz-screen-footer">
+                    <button class="btn btn-secondary" id="quizSkipBtn">Passer</button>
+                    <button class="btn btn-primary" id="quizNextBtn" disabled>Suivant <i data-lucide="arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Quiz Result Screen -->
+            <div class="quiz-result-panel" id="quizResultPanel" style="display: none;">
+                <div class="result-score-circle">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                        <path class="circle-bg"
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <path class="circle"
+                          id="resultCircleStroke"
+                          stroke-dasharray="0, 100"
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                        />
+                        <text x="18" y="20.35" class="percentage" id="resultScorePercentage">0%</text>
+                    </svg>
+                </div>
+                <h2 id="resultTitle">Félicitations !</h2>
+                <p id="resultSubtitle">Vous avez complété le quizz avec succès.</p>
+                <div class="result-breakdown">
+                    <div class="breakdown-item">
+                        <span class="label">Bonnes réponses</span>
+                        <span class="value success-color" id="resultCorrectCount">0</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="label">Temps estimé</span>
+                        <span class="value" id="resultTimeText">2m 15s</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="label">Expérience gagnée</span>
+                        <span class="value xp-color" id="resultXpText">+50 XP</span>
+                    </div>
+                </div>
+                <div class="result-actions">
+                    <button class="btn btn-secondary" id="retryQuizBtn"><i data-lucide="rotate-ccw"></i> Recommencer</button>
+                    <button class="btn btn-primary" id="finishQuizBtn"><i data-lucide="check"></i> Terminer</button>
+                </div>
+            </div>
+        </section>
+
 
     </main>
 
@@ -544,6 +638,6 @@
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js?v=1.0.8"></script>
+    <script src="app.js?v=1.0.9"></script>
 </body>
 </html>
