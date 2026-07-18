@@ -11,6 +11,15 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css?v=1.0.4">
+    <!-- MathJax for rendering Equations -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
+            options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+            startup: { typeset: false }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 </head>
 <body>
     <!-- Background Glow Effects -->
@@ -49,6 +58,8 @@
                     <button class="nav-link dropdown-toggle" id="navCollègeToggle" data-tab="courses"><i data-lucide="school"></i> Collège <i data-lucide="chevron-down" class="chevron-icon"></i></button>
                     <div class="dropdown-menu">
                         <a href="#courses" class="dropdown-item" data-level-nav="3ac">3ème Année Collège (3AC)</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="2ac">2ème Année Collège</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="1ac">1ère Année Collège</a>
                     </div>
                 </div>
 
@@ -81,14 +92,6 @@
                     </div>
                     <div class="quick-stats">
                         <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Chapitres</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">200+</span>
-                            <span class="stat-label">Exercices corrigés</span>
-                        </div>
-                        <div class="stat-item">
                             <span class="stat-number">100%</span>
                             <span class="stat-label">Conforme MEN</span>
                         </div>
@@ -109,12 +112,7 @@
                             <p>Ondes, Mécanique, Électricité, Chimie</p>
                         </div>
                     </div>
-                    <div class="interactive-glow-card">
-                        <div class="glow-inner">
-                            <i data-lucide="trending-up" class="glow-icon"></i>
-                            <span>Taux de réussite +35%</span>
-                        </div>
-                    </div>
+                    <!-- Removed for quick-stats integration -->
                 </div>
             </div>
 
@@ -147,170 +145,24 @@
                 </div>
             </div>
 
-            <!-- Interactive Subjects Sections -->
-            <div class="section-title" style="margin-top: 50px;">
-                <h2><i data-lucide="compass"></i> Explorez nos Disciplines</h2>
-                <p>Découvrez des modules interactifs, outils rapides et résumés clés pour chaque matière.</p>
+            <!-- Math2Bac Chapters Section -->
+            <div class="section-title" style="margin-top: 48px;">
+                <h2><i data-lucide="book-open"></i> Chapitres de Mathématiques — 2ème Bac Sciences Physiques</h2>
+                <p>Retrouvez tous les chapitres conformes au programme officiel du Baccalauréat marocain (Sciences Physiques), avec résumés de cours, exercices corrigés et examens nationaux.</p>
             </div>
 
-            <div class="subjects-grid">
-                <!-- Maths Section -->
-                <div class="subject-section-card math-section">
-                    <div class="subject-section-header">
-                        <div class="subject-icon math-icon-bg">
-                            <i data-lucide="binary"></i>
-                        </div>
-                        <div class="subject-title-area">
-                            <h3>Mathématiques</h3>
-                            <span class="subject-subtitle">Algèbre, Analyse, Géométrie</span>
-                        </div>
-                    </div>
-                    
-                    <p class="subject-section-desc">
-                        Développez votre rigueur mathématique avec des résumés de cours structurés, des démonstrations et des exercices corrigés.
-                    </p>
-
-                    <!-- Interactive Tool: Delta Calculator -->
-                    <div class="interactive-tool-box collapsed">
-                        <div class="tool-header" onclick="toggleTool(this)">
-                            <h4>
-                                <span><i data-lucide="calculator"></i> Outil : Calculateur de Discriminant</span>
-                                <i data-lucide="chevron-down" class="tool-chevron"></i>
-                            </h4>
-                            <p>Calculez le discriminant Δ et déterminez les racines de ax² + bx + c = 0.</p>
-                        </div>
-                        <div class="tool-body delta-calc">
-                            <div class="calc-inputs">
-                                <div class="input-field">
-                                    <label>a</label>
-                                    <input type="number" id="calc-a" placeholder="1" value="1">
-                                </div>
-                                <div class="input-field">
-                                    <label>b</label>
-                                    <input type="number" id="calc-b" placeholder="-5" value="-5">
-                                </div>
-                                <div class="input-field">
-                                    <label>c</label>
-                                    <input type="number" id="calc-c" placeholder="6" value="6">
-                                </div>
-                            </div>
-                            <button class="btn btn-primary btn-sm calc-btn" id="btn-calc-delta">Calculer</button>
-                            <div class="calc-result" id="delta-result" style="display: none;"></div>
-                        </div>
-                    </div>
-
-                    <div class="subject-key-concepts">
-                        <span class="concept-tag">Limites & Continuité</span>
-                        <span class="concept-tag">Dérivation</span>
-                        <span class="concept-tag">Nombres Complexes</span>
-                        <span class="concept-tag">Intégration</span>
-                    </div>
-
-                    <button class="btn btn-secondary subject-action-btn" onclick="switchSubject('math')">
-                        Voir les cours de Maths <i data-lucide="arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- Physics Section -->
-                <div class="subject-section-card physics-section">
-                    <div class="subject-section-header">
-                        <div class="subject-icon physics-icon-bg">
-                            <i data-lucide="atom"></i>
-                        </div>
-                        <div class="subject-title-area">
-                            <h3>Physique - Chimie</h3>
-                            <span class="subject-subtitle">Ondes, Nucléaire, Électricité, Mécanique</span>
-                        </div>
-                    </div>
-
-                    <p class="subject-section-desc">
-                        Explorez les lois physiques de notre univers et les réactions chimiques avec des explications concrètes et claires.
-                    </p>
-
-                    <!-- Interactive Tool: Wave / Delay Calculator -->
-                    <div class="interactive-tool-box collapsed">
-                        <div class="tool-header" onclick="toggleTool(this)">
-                            <h4>
-                                <span><i data-lucide="zap"></i> Outil : Vitesse d'Onde & Retard</span>
-                                <i data-lucide="chevron-down" class="tool-chevron"></i>
-                            </h4>
-                            <p>Calculez la célérité v = d / Δt ou le retard temporel τ = d / v.</p>
-                        </div>
-                        <div class="tool-body wave-calc">
-                            <div class="calc-tabs">
-                                <button class="calc-tab-btn active" id="tab-calc-v">Célérité (v)</button>
-                                <button class="calc-tab-btn" id="tab-calc-tau">Retard (τ)</button>
-                            </div>
-                            <div class="calc-inputs" id="wave-calc-inputs">
-                                <div class="input-field" id="field-d">
-                                    <label>d (m)</label>
-                                    <input type="number" id="wave-d" placeholder="10" value="10">
-                                </div>
-                                <div class="input-field" id="field-t">
-                                    <label>Δt (s)</label>
-                                    <input type="number" id="wave-t" placeholder="2" value="2">
-                                </div>
-                                <div class="input-field" id="field-v" style="display: none;">
-                                    <label>v (m/s)</label>
-                                    <input type="number" id="wave-v" placeholder="5" value="5">
-                                </div>
-                            </div>
-                            <button class="btn btn-secondary btn-sm calc-btn" id="btn-calc-wave">Calculer</button>
-                            <div class="calc-result" id="wave-result" style="display: none;"></div>
-                        </div>
-                    </div>
-
-                    <div class="subject-key-concepts">
-                        <span class="concept-tag">Ondes Progressives</span>
-                        <span class="concept-tag">Radioactivité</span>
-                        <span class="concept-tag">Dipôle RC/RL/RLC</span>
-                        <span class="concept-tag">Acide-Base</span>
-                    </div>
-
-                    <button class="btn btn-secondary subject-action-btn" onclick="switchSubject('pc')">
-                        Voir les cours de PC <i data-lucide="arrow-right"></i>
-                    </button>
-                </div>
+            <div class="chapters-container" id="homeChaptersContainer" style="margin-top: 24px;">
+                <!-- Chapters will be rendered dynamically by JavaScript -->
             </div>
 
-            <!-- Dynamic Learning Progress Tracker -->
-            <div class="progress-section">
-                <div class="progress-header">
-                    <div>
-                        <h3><i data-lucide="gauge"></i> Votre Tableau de Bord</h3>
-                        <p>Suivez votre progression et vos scores récents.</p>
-                    </div>
-                    <button class="reset-progress-btn" id="resetProgressBtn"><i data-lucide="refresh-cw"></i> Réinitialiser</button>
-                </div>
-                <div class="progress-stats-grid">
-                    <div class="prog-stat-card">
-                        <div class="prog-stat-icon"><i data-lucide="book-open"></i></div>
-                        <div class="prog-stat-detail">
-                            <span class="prog-num" id="completedLessonsCount">0</span>
-                            <span class="prog-lbl">Chapitres étudiés</span>
-                        </div>
-                    </div>
-                    <div class="prog-stat-card">
-                        <div class="prog-stat-icon"><i data-lucide="check-square"></i></div>
-                        <div class="prog-stat-detail">
-                            <span class="prog-num" id="quizzesTakenCount">0</span>
-                            <span class="prog-lbl">Quizz complétés</span>
-                        </div>
-                    </div>
-                    <div class="prog-stat-card">
-                        <div class="prog-stat-icon"><i data-lucide="trophy"></i></div>
-                        <div class="prog-stat-detail">
-                            <span class="prog-num" id="averageScoreText">0%</span>
-                            <span class="prog-lbl">Score moyen Quizz</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="recent-activity">
-                    <h4>Activité récente</h4>
-                    <ul class="activity-list" id="activityList">
-                        <li class="empty-activity">Aucune activité pour le moment. Commencez à lire un cours ou faites un quizz !</li>
-                    </ul>
-                </div>
+            <!-- PC2Bac Chapters Section -->
+            <div class="section-title" style="margin-top: 48px;">
+                <h2><i data-lucide="atom"></i> Chapitres de Physique-Chimie — 2ème Bac Sciences Physiques</h2>
+                <p>Retrouvez tous les chapitres de Physique-Chimie conformes au programme officiel du Baccalauréat marocain (Sciences Physiques), avec résumés de cours, exercices corrigés et examens nationaux.</p>
+            </div>
+
+            <div class="chapters-container" id="homePhysicsChaptersContainer" style="margin-top: 24px;">
+                <!-- Chapters will be rendered dynamically by JavaScript -->
             </div>
         </section>
 
@@ -327,6 +179,8 @@
                         <option value="1bac">1ère Année Bac</option>
                         <option value="tc">Tronc Commun</option>
                         <option value="3ac">3ème Année Collège (3AC)</option>
+                        <option value="2ac">2ème Année Collège</option>
+                        <option value="1ac">1ère Année Collège</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -582,7 +436,7 @@
 
     <!-- Notification Toast -->
     <div class="toast-notification" id="toastNotification">
-        <i data-lucide="info" id="toastIcon"></i>
+        <div id="toastIconContainer"><i data-lucide="info"></i></div>
         <span id="toastMessage">Notification message</span>
     </div>
 
