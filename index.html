@@ -315,6 +315,49 @@
                             </div>
                         </button>
                     </div>
+                    <!-- Options de personnalisation -->
+                    <div class="animations-settings">
+                        <div class="settings-header">
+                            <i data-lucide="sliders"></i>
+                            <span>Personnalisation</span>
+                        </div>
+                        
+                        <!-- Color Options -->
+                        <div class="settings-group">
+                            <label>Couleur Principale :</label>
+                            <div class="color-picker-grid">
+                                <button type="button" class="color-btn" data-color="#0d7377" style="background-color: #0d7377;"></button>
+                                <button type="button" class="color-btn" data-color="#3b82f6" style="background-color: #3b82f6;"></button>
+                                <button type="button" class="color-btn active" data-color="#10b981" style="background-color: #10b981;"></button>
+                                <button type="button" class="color-btn" data-color="#e11d48" style="background-color: #e11d48;"></button>
+                                <button type="button" class="color-btn" data-color="#8b5cf6" style="background-color: #8b5cf6;"></button>
+                                <button type="button" class="color-btn" data-color="#f59e0b" style="background-color: #f59e0b;"></button>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <label>Couleur Secondaire :</label>
+                            <div class="color-picker-grid">
+                                <button type="button" class="color-btn-sec" data-color="#cbd5e1" style="background-color: #cbd5e1;"></button>
+                                <button type="button" class="color-btn-sec" data-color="#ef4444" style="background-color: #ef4444;"></button>
+                                <button type="button" class="color-btn-sec active" data-color="#c87f0a" style="background-color: #c87f0a;"></button>
+                                <button type="button" class="color-btn-sec" data-color="#06b6d4" style="background-color: #06b6d4;"></button>
+                                <button type="button" class="color-btn-sec" data-color="#a855f7" style="background-color: #a855f7;"></button>
+                                <button type="button" class="color-btn-sec" data-color="#10b981" style="background-color: #10b981;"></button>
+                            </div>
+                        </div>
+                        
+                        <!-- Size Options -->
+                        <div class="settings-group">
+                            <label for="anim-zoom-slider">Zoom Éléments : <span id="val-anim-zoom">100</span>%</label>
+                            <input type="range" id="anim-zoom-slider" min="70" max="150" value="100">
+                        </div>
+
+                        <div class="settings-group">
+                            <label for="anim-height-slider">Hauteur Écran : <span id="val-anim-height">400</span>px</label>
+                            <input type="range" id="anim-height-slider" min="300" max="600" step="10" value="400">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Display panel for active animation -->
@@ -327,7 +370,7 @@
                             <p>Visualisez la propagation d'une onde mécanique transversale le long d'une corde tendue.</p>
                         </div>
                         <div class="canvas-container">
-                            <canvas id="canvas-wave" width="800" height="250"></canvas>
+                            <canvas id="canvas-wave" width="900" height="400"></canvas>
                         </div>
                         <div class="workspace-controls">
                             <div class="control-group">
@@ -358,7 +401,7 @@
                             <p>Simulez la détection d'une perturbation acoustique par deux microphones espacés d'une distance \(d\).</p>
                         </div>
                         <div class="canvas-container">
-                            <canvas id="canvas-delay" width="800" height="250"></canvas>
+                            <canvas id="canvas-delay" width="900" height="400"></canvas>
                         </div>
                         <div class="workspace-controls">
                             <div class="control-group">
@@ -385,7 +428,7 @@
                             <p>Étudiez les forces exercées sur un bloc glissant le long d'une pente inclinée d'un angle \(\theta\).</p>
                         </div>
                         <div class="canvas-container">
-                            <canvas id="canvas-newton" width="800" height="250"></canvas>
+                            <canvas id="canvas-newton" width="900" height="400"></canvas>
                         </div>
                         <div class="workspace-controls">
                             <div class="control-group">
@@ -413,7 +456,7 @@
                             <p>Modélisez la charge et la décharge d'un condensateur de capacité \(C\) à travers une résistance \(R\).</p>
                         </div>
                         <div class="canvas-container">
-                            <canvas id="canvas-rc" width="800" height="250"></canvas>
+                            <canvas id="canvas-rc" width="900" height="400"></canvas>
                         </div>
                         <div class="workspace-controls">
                             <div class="control-group">
@@ -440,7 +483,7 @@
                             <p>Simulez la cinétique chimique et l'établissement de l'équilibre avec une constante \(K\).</p>
                         </div>
                         <div class="canvas-container">
-                            <canvas id="canvas-equilibrium" width="800" height="250"></canvas>
+                            <canvas id="canvas-equilibrium" width="900" height="400"></canvas>
                         </div>
                         <div class="workspace-controls">
                             <div class="control-group">
@@ -467,7 +510,7 @@
                             <p>Visualisez la construction point par point de la courbe d'une fonction et observez sa tangente dynamique.</p>
                         </div>
                         <div class="canvas-container">
-                            <canvas id="canvas-plotter" width="800" height="250"></canvas>
+                            <canvas id="canvas-plotter" width="900" height="400"></canvas>
                         </div>
                         <div class="workspace-controls">
                             <div class="control-group" style="min-width: 220px;">

@@ -4226,8 +4226,66 @@ window.downloadRealFile = function(fileUrl, title) {
     }, 1500);
 };
 
+// --- GLOBAL ANIMATION SETTINGS ---
+let animPrimaryColor = "#10b981";
+let animSecondaryColor = "#c87f0a";
+let animScaleMultiplier = 1.0;
+let animCanvasHeight = 400;
+
 // --- INTERACTIVE ANIMATIONS ENGINE ---
 function setupAnimations() {
+    // 1. Color Picker Controls
+    const primaryColorBtns = document.querySelectorAll(".color-btn");
+    primaryColorBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            primaryColorBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            animPrimaryColor = btn.getAttribute("data-color");
+            document.documentElement.style.setProperty("--primary", animPrimaryColor);
+            document.documentElement.style.setProperty("--primary-hover", animPrimaryColor + "dd");
+        });
+    });
+
+    const secondaryColorBtns = document.querySelectorAll(".color-btn-sec");
+    secondaryColorBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            secondaryColorBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            animSecondaryColor = btn.getAttribute("data-color");
+            document.documentElement.style.setProperty("--secondary", animSecondaryColor);
+        });
+    });
+
+    // 2. Zoom & Height Sliders
+    const zoomSlider = document.getElementById("anim-zoom-slider");
+    const valZoom = document.getElementById("val-anim-zoom");
+    if (zoomSlider && valZoom) {
+        zoomSlider.addEventListener("input", (e) => {
+            const zoomVal = parseInt(e.target.value);
+            valZoom.textContent = zoomVal;
+            animScaleMultiplier = zoomVal / 100;
+        });
+    }
+
+    const heightSlider = document.getElementById("anim-height-slider");
+    const valHeight = document.getElementById("val-anim-height");
+    if (heightSlider && valHeight) {
+        heightSlider.addEventListener("input", (e) => {
+            const hVal = parseInt(e.target.value);
+            valHeight.textContent = hVal;
+            animCanvasHeight = hVal;
+            
+            // Resize all canvases dynamically
+            document.querySelectorAll(".canvas-container canvas").forEach(canvas => {
+                canvas.height = hVal;
+            });
+        });
+    }
+
     const animSelectBtns = document.querySelectorAll(".anim-select-btn");
     animSelectBtns.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -4242,6 +4300,11 @@ function setupAnimations() {
                 if (workspace.id === `anim-${targetAnim}`) {
                     workspace.style.display = "flex";
                     workspace.classList.add("active");
+                    
+                    // Set current height
+                    const canvas = workspace.querySelector("canvas");
+                    if (canvas) canvas.height = animCanvasHeight;
+                    
                     initCanvasFor(targetAnim);
                     triggerMathJax();
                 } else {
@@ -4252,7 +4315,14 @@ function setupAnimations() {
         });
     });
 
-    // Initialize the default one
+    // Initialize document root styles to match the default picker values
+    document.documentElement.style.setProperty("--primary", animPrimaryColor);
+    document.documentElement.style.setProperty("--primary-hover", animPrimaryColor + "dd");
+    document.documentElement.style.setProperty("--secondary", animSecondaryColor);
+
+    // Initialize the default one with correct initial height
+    const initialCanvas = document.getElementById("canvas-wave");
+    if (initialCanvas) initialCanvas.height = animCanvasHeight;
     initCanvasFor("wave");
 }
 
@@ -4325,7 +4395,7 @@ function setupWaveSimulator() {
         if (!canvas.offsetParent) return; // Stop drawing if workspace is hidden
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const A = parseFloat(newAmp.value);
+        const A = parseFloat(newAmp.value) * animScaleMultiplier;
         const f = parseFloat(newFreq.value);
         const v = parseFloat(newVel.value);
         
@@ -4334,7 +4404,7 @@ function setupWaveSimulator() {
         }
 
         // Draw grid
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
         ctx.lineWidth = 1;
         for (let x = 0; x < canvas.width; x += 40) {
             ctx.beginPath();
@@ -4350,17 +4420,17 @@ function setupWaveSimulator() {
         }
 
         // Draw center baseline
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.2)";
         ctx.beginPath();
         ctx.moveTo(0, canvas.height / 2);
         ctx.lineTo(canvas.width, canvas.height / 2);
         ctx.stroke();
 
         // Draw wave
-        ctx.strokeStyle = "var(--primary, #0d7377)";
-        ctx.lineWidth = 3;
-        ctx.shadowColor = "rgba(13, 115, 119, 0.4)";
-        ctx.shadowBlur = 8;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 3 * animScaleMultiplier;
+        ctx.shadowColor = animPrimaryColor + "66";
+        ctx.shadowBlur = 8 * animScaleMultiplier;
         ctx.beginPath();
         
         const startX = 50;
@@ -4380,16 +4450,16 @@ function setupWaveSimulator() {
         ctx.shadowBlur = 0;
 
         // Draw source shaker
-        ctx.fillStyle = "var(--secondary, #c87f0a)";
+        ctx.fillStyle = animSecondaryColor;
         ctx.beginPath();
         let sourceY = canvas.height / 2;
         if (waveTime > 0) {
             sourceY += A * Math.sin(2 * Math.PI * f * waveTime);
         }
-        ctx.arc(startX, sourceY, 8, 0, Math.PI * 2);
+        ctx.arc(startX, sourceY, 8 * animScaleMultiplier, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animSecondaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.stroke();
     }
 
@@ -4454,58 +4524,73 @@ function setupDelaySimulator() {
         const m1X = 300;
         const m2X = m1X + d;
 
+        const groundY = Math.round(canvas.height * 0.45);
+        const speakerY = groundY - 40 * animScaleMultiplier;
+        const microY = groundY - 40 * animScaleMultiplier;
+        const oscYStart = Math.round(canvas.height * 0.6);
+        const oscHeight = Math.round(canvas.height * 0.35);
+        const oscY = Math.round(oscYStart + oscHeight / 2);
+        const oscWidth = canvas.width - 80;
+
         // Ground line
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animPrimaryColor + "66"; // semi-transparent green
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
-        ctx.moveTo(0, 100);
-        ctx.lineTo(canvas.width, 100);
+        ctx.moveTo(0, groundY);
+        ctx.lineTo(canvas.width, groundY);
         ctx.stroke();
 
         // Speaker
-        ctx.fillStyle = "#334155";
-        ctx.fillRect(speakerX - 25, 60, 20, 35);
-        ctx.fillStyle = "#1e293b";
+        ctx.fillStyle = "#16231e"; // dark green tint
+        ctx.fillRect(speakerX - 25 * animScaleMultiplier, speakerY, 20 * animScaleMultiplier, 35 * animScaleMultiplier);
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
+        ctx.strokeRect(speakerX - 25 * animScaleMultiplier, speakerY, 20 * animScaleMultiplier, 35 * animScaleMultiplier);
+        
+        ctx.fillStyle = "#0c1512";
         ctx.beginPath();
-        ctx.moveTo(speakerX - 5, 55);
-        ctx.lineTo(speakerX + 15, 45);
-        ctx.lineTo(speakerX + 15, 110);
-        ctx.lineTo(speakerX - 5, 100);
+        ctx.moveTo(speakerX - 5 * animScaleMultiplier, speakerY - 5 * animScaleMultiplier);
+        ctx.lineTo(speakerX + 15 * animScaleMultiplier, speakerY - 15 * animScaleMultiplier);
+        ctx.lineTo(speakerX + 15 * animScaleMultiplier, speakerY + 50 * animScaleMultiplier);
+        ctx.lineTo(speakerX - 5 * animScaleMultiplier, speakerY + 40 * animScaleMultiplier);
         ctx.closePath();
         ctx.fill();
+        ctx.stroke();
 
         // Micro 1
-        ctx.fillStyle = "var(--primary, #0d7377)";
-        ctx.fillRect(m1X - 4, 65, 8, 30);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.fillRect(m1X - 4 * animScaleMultiplier, microY + 5 * animScaleMultiplier, 8 * animScaleMultiplier, 30 * animScaleMultiplier);
         ctx.beginPath();
-        ctx.arc(m1X, 60, 8, 0, Math.PI * 2);
+        ctx.arc(m1X, microY, 8 * animScaleMultiplier, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 10px sans-serif";
-        ctx.fillText("M1", m1X - 7, 46);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.font = `bold ${Math.round(12 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("M1", m1X - 7 * animScaleMultiplier, microY - 14 * animScaleMultiplier);
 
         // Micro 2
-        ctx.fillStyle = "var(--secondary, #c87f0a)";
-        ctx.fillRect(m2X - 4, 65, 8, 30);
+        ctx.fillStyle = animSecondaryColor;
+        ctx.fillRect(m2X - 4 * animScaleMultiplier, microY + 5 * animScaleMultiplier, 8 * animScaleMultiplier, 30 * animScaleMultiplier);
         ctx.beginPath();
-        ctx.arc(m2X, 60, 8, 0, Math.PI * 2);
+        ctx.arc(m2X, microY, 8 * animScaleMultiplier, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText("M2", m2X - 7, 46);
+        ctx.fillStyle = animSecondaryColor;
+        ctx.font = `bold ${Math.round(12 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("M2", m2X - 7 * animScaleMultiplier, microY - 14 * animScaleMultiplier);
 
         // Distance dimension
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.beginPath();
-        ctx.moveTo(m1X, 95);
-        ctx.lineTo(m1X, 120);
-        ctx.moveTo(m2X, 95);
-        ctx.lineTo(m2X, 120);
-        ctx.moveTo(m1X, 110);
-        ctx.lineTo(m2X, 110);
+        ctx.moveTo(m1X, groundY - 5);
+        ctx.lineTo(m1X, groundY + 20 * animScaleMultiplier);
+        ctx.moveTo(m2X, groundY - 5);
+        ctx.lineTo(m2X, groundY + 20 * animScaleMultiplier);
+        ctx.moveTo(m1X, groundY + 10 * animScaleMultiplier);
+        ctx.lineTo(m2X, groundY + 10 * animScaleMultiplier);
         ctx.stroke();
-        ctx.fillStyle = "#94a3b8";
-        ctx.fillText(`d = ${d} mm`, (m1X + m2X)/2 - 25, 125);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.font = `bold ${Math.round(12 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText(`d = ${d} mm`, (m1X + m2X)/2 - 30 * animScaleMultiplier, groundY + 25 * animScaleMultiplier);
 
         // Sound pulse
         if (delayPlaying) {
@@ -4513,9 +4598,9 @@ function setupDelaySimulator() {
             delaySoundPos += frameSpeed;
 
             ctx.strokeStyle = "rgba(148, 163, 184, 0.25)";
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 3 * animScaleMultiplier;
             ctx.beginPath();
-            ctx.arc(speakerX, 77, delaySoundPos - speakerX, -Math.PI/3, Math.PI/3);
+            ctx.arc(speakerX, speakerY + 17 * animScaleMultiplier, delaySoundPos - speakerX, -Math.PI/3, Math.PI/3);
             ctx.stroke();
 
             const distFromSpeaker = delaySoundPos - speakerX;
@@ -4523,16 +4608,16 @@ function setupDelaySimulator() {
             const distM2 = m2X - speakerX;
 
             let val1 = 0;
-            if (distFromSpeaker >= distM1 && distFromSpeaker < distM1 + 60) {
-                const phase = (distFromSpeaker - distM1) / 60 * Math.PI * 6;
-                val1 = Math.sin(phase) * Math.exp(-(distFromSpeaker - distM1)/18);
+            if (distFromSpeaker >= distM1 && distFromSpeaker < distM1 + 60 * animScaleMultiplier) {
+                const phase = (distFromSpeaker - distM1) / (60 * animScaleMultiplier) * Math.PI * 6;
+                val1 = Math.sin(phase) * Math.exp(-(distFromSpeaker - distM1)/(18 * animScaleMultiplier));
             }
             delayMicro1Data.push(val1);
 
             let val2 = 0;
-            if (distFromSpeaker >= distM2 && distFromSpeaker < distM2 + 60) {
-                const phase = (distFromSpeaker - distM2) / 60 * Math.PI * 6;
-                val2 = Math.sin(phase) * Math.exp(-(distFromSpeaker - distM2)/18);
+            if (distFromSpeaker >= distM2 && distFromSpeaker < distM2 + 60 * animScaleMultiplier) {
+                const phase = (distFromSpeaker - distM2) / (60 * animScaleMultiplier) * Math.PI * 6;
+                val2 = Math.sin(phase) * Math.exp(-(distFromSpeaker - distM2)/(18 * animScaleMultiplier));
             }
             delayMicro2Data.push(val2);
 
@@ -4544,55 +4629,53 @@ function setupDelaySimulator() {
             delayMicro2Data.push(0);
         }
 
-        if (delayMicro1Data.length > 500) delayMicro1Data.shift();
-        if (delayMicro2Data.length > 500) delayMicro2Data.shift();
+        if (delayMicro1Data.length > oscWidth) delayMicro1Data.shift();
+        if (delayMicro2Data.length > oscWidth) delayMicro2Data.shift();
 
         // Oscilloscope Graph
-        const oscY = 190;
-        const oscH = 100;
         ctx.fillStyle = "#020617";
-        ctx.fillRect(40, 140, 720, 100);
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.fillRect(40, oscYStart, oscWidth, oscHeight);
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.08)";
         ctx.lineWidth = 1;
         
-        for (let x = 40; x <= 760; x += 40) {
+        for (let x = 40; x <= canvas.width - 40; x += 40) {
             ctx.beginPath();
-            ctx.moveTo(x, 140);
-            ctx.lineTo(x, 240);
+            ctx.moveTo(x, oscYStart);
+            ctx.lineTo(x, oscYStart + oscHeight);
             ctx.stroke();
         }
-        for (let y = 140; y <= 240; y += 20) {
+        for (let y = oscYStart; y <= oscYStart + oscHeight; y += 20) {
             ctx.beginPath();
             ctx.moveTo(40, y);
-            ctx.lineTo(760, y);
+            ctx.lineTo(canvas.width - 40, y);
             ctx.stroke();
         }
 
         // Trace M1
-        ctx.strokeStyle = "var(--primary, #0d7377)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.beginPath();
-        const drawLen = Math.min(delayMicro1Data.length, 720);
-        const offset = Math.max(0, delayMicro1Data.length - 720);
+        const drawLen = Math.min(delayMicro1Data.length, oscWidth);
+        const offset = Math.max(0, delayMicro1Data.length - oscWidth);
         for (let i = 0; i < drawLen; i++) {
             const dataVal = delayMicro1Data[offset + i];
-            ctx.lineTo(40 + i, oscY - dataVal * 35);
+            ctx.lineTo(40 + i, oscY - dataVal * (oscHeight * 0.32));
         }
         ctx.stroke();
 
         // Trace M2
-        ctx.strokeStyle = "var(--secondary, #c87f0a)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animSecondaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.beginPath();
         for (let i = 0; i < drawLen; i++) {
             const dataVal = delayMicro2Data[offset + i];
-            ctx.lineTo(40 + i, oscY - dataVal * 35);
+            ctx.lineTo(40 + i, oscY - dataVal * (oscHeight * 0.32));
         }
         ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "11px sans-serif";
-        ctx.fillText("Oscilloscope Virtuel (CH1 = M1, CH2 = M2)", 50, 155);
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("Oscilloscope Virtuel (CH1 = M1, CH2 = M2)", 50, oscYStart + 15 * animScaleMultiplier);
     }
 
     if (delayInterval) clearInterval(delayInterval);
@@ -4662,12 +4745,19 @@ function setupNewtonSimulator() {
         let acceleration = g * (sinT - mu * cosT);
         if (acceleration < 0) acceleration = 0;
 
+        const startPlaneX = 80;
+        const startPlaneY = Math.round(canvas.height * 0.8);
+        const planeLength = Math.round(canvas.width * 0.8);
+        const endPlaneX = startPlaneX + planeLength * Math.cos(theta);
+        const endPlaneY = startPlaneY - planeLength * Math.sin(theta);
+
         if (newtonIsRunning) {
             const dt = 0.05;
             newtonV += acceleration * dt * 25;
             newtonX += newtonV * dt;
-            if (newtonX > 520) {
-                newtonX = 520;
+            const limitX = planeLength - 100;
+            if (newtonX > limitX) {
+                newtonX = limitX;
                 newtonV = 0;
                 newtonIsRunning = false;
                 newPlay.innerHTML = '<i data-lucide="play"></i> Lancer';
@@ -4675,51 +4765,45 @@ function setupNewtonSimulator() {
             }
         }
 
-        const startPlaneX = 80;
-        const startPlaneY = 200;
-        const planeLength = 620;
-        const endPlaneX = startPlaneX + planeLength * Math.cos(theta);
-        const endPlaneY = startPlaneY - planeLength * Math.sin(theta);
-
         // Ground line
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
-        ctx.lineWidth = 3;
+        ctx.strokeStyle = animPrimaryColor + "66";
+        ctx.lineWidth = 3 * animScaleMultiplier;
         ctx.beginPath();
         ctx.moveTo(startPlaneX - 50, startPlaneY);
         ctx.lineTo(startPlaneX + planeLength + 50, startPlaneY);
         ctx.stroke();
 
         // Plane line
-        ctx.strokeStyle = "#475569";
-        ctx.lineWidth = 6;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 6 * animScaleMultiplier;
         ctx.beginPath();
         ctx.moveTo(startPlaneX, startPlaneY);
         ctx.lineTo(endPlaneX, endPlaneY);
         ctx.stroke();
 
         // Angle Arc
-        ctx.strokeStyle = "var(--secondary, #c87f0a)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animSecondaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.beginPath();
-        ctx.arc(startPlaneX, startPlaneY, 40, -theta, 0);
+        ctx.arc(startPlaneX, startPlaneY, 40 * animScaleMultiplier, -theta, 0);
         ctx.stroke();
-        ctx.fillStyle = "var(--secondary, #c87f0a)";
-        ctx.font = "12px sans-serif";
-        ctx.fillText(`θ = ${angleDeg}°`, startPlaneX + 50, startPlaneY - 10);
+        ctx.fillStyle = animSecondaryColor;
+        ctx.font = `bold ${Math.round(12 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText(`θ = ${angleDeg}°`, startPlaneX + 50 * animScaleMultiplier, startPlaneY - 10 * animScaleMultiplier);
 
         // Block
         const blockX = startPlaneX + newtonX * Math.cos(theta);
         const blockY = startPlaneY - newtonX * Math.sin(theta);
-        const blockW = 50;
-        const blockH = 30;
+        const blockW = 50 * animScaleMultiplier;
+        const blockH = 30 * animScaleMultiplier;
 
         ctx.save();
         ctx.translate(blockX, blockY);
         ctx.rotate(-theta);
-        ctx.fillStyle = "rgba(13, 115, 119, 0.8)";
+        ctx.fillStyle = animPrimaryColor + "44"; // transparent green fill
         ctx.fillRect(-blockW/2, -blockH, blockW, blockH);
-        ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.strokeRect(-blockW/2, -blockH, blockW, blockH);
 
         const cmY = -blockH/2;
@@ -4727,53 +4811,57 @@ function setupNewtonSimulator() {
         // Vector P (Gravity)
         ctx.save();
         ctx.rotate(theta);
-        ctx.strokeStyle = "#ef4444";
-        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = "#f87171";
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
         ctx.moveTo(0, cmY);
-        ctx.lineTo(0, cmY + 55);
+        ctx.lineTo(0, cmY + 55 * animScaleMultiplier);
         ctx.stroke();
-        ctx.fillStyle = "#ef4444";
+        ctx.fillStyle = "#f87171";
         ctx.beginPath();
-        ctx.moveTo(-5, cmY + 50);
-        ctx.lineTo(5, cmY + 50);
-        ctx.lineTo(0, cmY + 57);
+        ctx.moveTo(-5 * animScaleMultiplier, cmY + 50 * animScaleMultiplier);
+        ctx.lineTo(5 * animScaleMultiplier, cmY + 50 * animScaleMultiplier);
+        ctx.lineTo(0, cmY + 57 * animScaleMultiplier);
         ctx.fill();
-        ctx.font = "bold 11px sans-serif";
-        ctx.fillText("P", 8, cmY + 50);
+        ctx.font = `bold ${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillStyle = "#f87171";
+        ctx.fillText("P", 8 * animScaleMultiplier, cmY + 50 * animScaleMultiplier);
         ctx.restore();
 
         // Vector RN (Normal Reaction)
-        ctx.strokeStyle = "#3b82f6";
-        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = "#60a5fa";
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
         ctx.moveTo(0, cmY);
-        ctx.lineTo(0, cmY - 45);
+        ctx.lineTo(0, cmY - 45 * animScaleMultiplier);
         ctx.stroke();
-        ctx.fillStyle = "#3b82f6";
+        ctx.fillStyle = "#60a5fa";
         ctx.beginPath();
-        ctx.moveTo(-5, cmY - 40);
-        ctx.lineTo(5, cmY - 40);
-        ctx.lineTo(0, cmY - 47);
+        ctx.moveTo(-5 * animScaleMultiplier, cmY - 40 * animScaleMultiplier);
+        ctx.lineTo(5 * animScaleMultiplier, cmY - 40 * animScaleMultiplier);
+        ctx.lineTo(0, cmY - 47 * animScaleMultiplier);
         ctx.fill();
-        ctx.fillText("RN", 8, cmY - 40);
+        ctx.fillStyle = "#60a5fa";
+        ctx.font = `bold ${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("RN", 8 * animScaleMultiplier, cmY - 40 * animScaleMultiplier);
 
         // Vector f (Friction force)
-        const fLength = mu * 45;
+        const fLength = mu * 45 * animScaleMultiplier;
         if (fLength > 0) {
-            ctx.strokeStyle = "var(--secondary, #c87f0a)";
-            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = animSecondaryColor;
+            ctx.lineWidth = 2.5 * animScaleMultiplier;
             ctx.beginPath();
             ctx.moveTo(0, cmY);
             ctx.lineTo(-fLength, cmY);
             ctx.stroke();
-            ctx.fillStyle = "var(--secondary, #c87f0a)";
+            ctx.fillStyle = animSecondaryColor;
             ctx.beginPath();
-            ctx.moveTo(-fLength + 5, cmY - 5);
-            ctx.lineTo(-fLength + 5, cmY + 5);
+            ctx.moveTo(-fLength + 5 * animScaleMultiplier, cmY - 5 * animScaleMultiplier);
+            ctx.lineTo(-fLength + 5 * animScaleMultiplier, cmY + 5 * animScaleMultiplier);
             ctx.lineTo(-fLength, cmY);
             ctx.fill();
-            ctx.fillText("f", -fLength - 12, cmY - 5);
+            ctx.fillStyle = animSecondaryColor;
+            ctx.fillText("f", -fLength - 12 * animScaleMultiplier, cmY - 5 * animScaleMultiplier);
         }
 
         ctx.restore();
@@ -4843,97 +4931,102 @@ function setupRcSimulator() {
             uc = E * Math.exp(-rcTime / tau);
         }
 
+        const diagX = 20;
+        const diagY = Math.round(canvas.height * 0.28);
+        const diagW = Math.round(canvas.width * 0.38);
+        const diagH = Math.round(canvas.height * 0.45);
+
+        const oscX = Math.round(canvas.width * 0.47);
+        const oscY = Math.round(canvas.height * 0.2);
+        const oscW = Math.round(canvas.width * 0.5);
+        const oscH = Math.round(canvas.height * 0.65);
+
         rcVoltsData.push(uc);
-        if (rcVoltsData.length > 340) {
+        if (rcVoltsData.length > oscW - 40) {
             rcVoltsData.shift();
         }
 
-        const diagX = 20;
-        const diagY = 50;
-        const diagW = 320;
-        const diagH = 150;
-
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.strokeRect(diagX, diagY, diagW, diagH);
 
         // Generator E
         ctx.fillStyle = "#0b0f19";
-        ctx.fillRect(diagX - 15, diagY + diagH/2 - 20, 30, 40);
+        ctx.fillRect(diagX - 15 * animScaleMultiplier, diagY + diagH/2 - 20 * animScaleMultiplier, 30 * animScaleMultiplier, 40 * animScaleMultiplier);
         ctx.fillStyle = "#1e293b";
         ctx.beginPath();
-        ctx.arc(diagX, diagY + diagH/2, 16, 0, Math.PI*2);
+        ctx.arc(diagX, diagY + diagH/2, 16 * animScaleMultiplier, 0, Math.PI*2);
         ctx.fill();
-        ctx.strokeStyle = "#ffffff";
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.stroke();
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "12px sans-serif";
-        ctx.fillText("E", diagX - 5, diagY + diagH/2 + 4);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.font = `bold ${Math.round(12 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("E", diagX - 5 * animScaleMultiplier, diagY + diagH/2 + 4 * animScaleMultiplier);
 
         // Switch K
         ctx.fillStyle = "#0b0f19";
-        ctx.fillRect(diagX + 50, diagY - 10, 40, 20);
-        ctx.strokeStyle = "#ffffff";
+        ctx.fillRect(diagX + 50 * animScaleMultiplier, diagY - 10 * animScaleMultiplier, 40 * animScaleMultiplier, 20 * animScaleMultiplier);
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
-        ctx.moveTo(diagX + 50, diagY);
-        ctx.lineTo(diagX + 65, diagY);
+        ctx.moveTo(diagX + 50 * animScaleMultiplier, diagY);
+        ctx.lineTo(diagX + 65 * animScaleMultiplier, diagY);
         if (rcChargeMode) {
-            ctx.lineTo(diagX + 85, diagY);
+            ctx.lineTo(diagX + 85 * animScaleMultiplier, diagY);
         } else {
-            ctx.lineTo(diagX + 80, diagY - 12);
+            ctx.lineTo(diagX + 80 * animScaleMultiplier, diagY - 12 * animScaleMultiplier);
         }
-        ctx.moveTo(diagX + 90, diagY);
-        ctx.lineTo(diagX + 90, diagY);
+        ctx.moveTo(diagX + 90 * animScaleMultiplier, diagY);
+        ctx.lineTo(diagX + 90 * animScaleMultiplier, diagY);
         ctx.stroke();
-        ctx.fillStyle = "#94a3b8";
-        ctx.fillText("K", diagX + 65, diagY - 18);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.font = `bold ${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("K", diagX + 65 * animScaleMultiplier, diagY - 18 * animScaleMultiplier);
 
         // Resistor R
         ctx.fillStyle = "#0b0f19";
-        ctx.fillRect(diagX + diagW/2 - 30, diagY - 15, 60, 30);
-        ctx.strokeStyle = "#ffffff";
-        ctx.strokeRect(diagX + diagW/2 - 30, diagY - 12, 60, 24);
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText(`R`, diagX + diagW/2 - 5, diagY + 4);
+        ctx.fillRect(diagX + diagW/2 - 30 * animScaleMultiplier, diagY - 15 * animScaleMultiplier, 60 * animScaleMultiplier, 30 * animScaleMultiplier);
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
+        ctx.strokeRect(diagX + diagW/2 - 30 * animScaleMultiplier, diagY - 12 * animScaleMultiplier, 60 * animScaleMultiplier, 24 * animScaleMultiplier);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.fillText(`R`, diagX + diagW/2 - 5 * animScaleMultiplier, diagY + 4 * animScaleMultiplier);
 
         // Capacitor C
         ctx.fillStyle = "#0b0f19";
-        ctx.fillRect(diagX + diagW - 10, diagY + diagH/2 - 25, 20, 50);
-        ctx.strokeStyle = "#ffffff";
+        ctx.fillRect(diagX + diagW - 10 * animScaleMultiplier, diagY + diagH/2 - 25 * animScaleMultiplier, 20 * animScaleMultiplier, 50 * animScaleMultiplier);
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
-        ctx.moveTo(diagX + diagW - 6, diagY + diagH/2 - 20);
-        ctx.lineTo(diagX + diagW - 6, diagY + diagH/2 + 20);
-        ctx.moveTo(diagX + diagW + 6, diagY + diagH/2 - 20);
-        ctx.lineTo(diagX + diagW + 6, diagY + diagH/2 + 20);
+        ctx.moveTo(diagX + diagW - 6 * animScaleMultiplier, diagY + diagH/2 - 20 * animScaleMultiplier);
+        ctx.lineTo(diagX + diagW - 6 * animScaleMultiplier, diagY + diagH/2 + 20 * animScaleMultiplier);
+        ctx.moveTo(diagX + diagW + 6 * animScaleMultiplier, diagY + diagH/2 - 20 * animScaleMultiplier);
+        ctx.lineTo(diagX + diagW + 6 * animScaleMultiplier, diagY + diagH/2 + 20 * animScaleMultiplier);
         ctx.stroke();
-        ctx.fillStyle = "#ffffff";
-        ctx.fillText(`C`, diagX + diagW - 5, diagY + diagH/2 + 35);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.fillText(`C`, diagX + diagW - 5 * animScaleMultiplier, diagY + diagH/2 + 35 * animScaleMultiplier);
 
         // Voltage Arrow uc
-        ctx.strokeStyle = "var(--primary, #0d7377)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.beginPath();
-        ctx.moveTo(diagX + diagW + 20, diagY + diagH/2 + 15);
-        ctx.lineTo(diagX + diagW + 20, diagY + diagH/2 - 15);
+        ctx.moveTo(diagX + diagW + 20 * animScaleMultiplier, diagY + diagH/2 + 15 * animScaleMultiplier);
+        ctx.lineTo(diagX + diagW + 20 * animScaleMultiplier, diagY + diagH/2 - 15 * animScaleMultiplier);
         ctx.stroke();
-        ctx.fillStyle = "var(--primary, #0d7377)";
+        ctx.fillStyle = animPrimaryColor;
         ctx.beginPath();
-        ctx.moveTo(diagX + diagW + 17, diagY + diagH/2 - 10);
-        ctx.lineTo(diagX + diagW + 23, diagY + diagH/2 - 10);
-        ctx.lineTo(diagX + diagW + 20, diagY + diagH/2 - 17);
+        ctx.moveTo(diagX + diagW + 17 * animScaleMultiplier, diagY + diagH/2 - 10 * animScaleMultiplier);
+        ctx.lineTo(diagX + diagW + 23 * animScaleMultiplier, diagY + diagH/2 - 10 * animScaleMultiplier);
+        ctx.lineTo(diagX + diagW + 20 * animScaleMultiplier, diagY + diagH/2 - 17 * animScaleMultiplier);
         ctx.fill();
-        ctx.fillText("uc", diagX + diagW + 26, diagY + diagH/2 + 4);
+        ctx.fillText("uc", diagX + diagW + 26 * animScaleMultiplier, diagY + diagH/2 + 4 * animScaleMultiplier);
 
         // Oscilloscope
-        const oscX = 390;
-        const oscY = 50;
-        const oscW = 380;
-        const oscH = 150;
-
         ctx.fillStyle = "#020617";
         ctx.fillRect(oscX, oscY, oscW, oscH);
         
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.08)";
         ctx.lineWidth = 1;
         for (let x = oscX; x <= oscX + oscW; x += 40) {
             ctx.beginPath();
@@ -4949,30 +5042,30 @@ function setupRcSimulator() {
         }
 
         // Trace
-        ctx.strokeStyle = "var(--primary, #0d7377)";
-        ctx.lineWidth = 3;
-        ctx.shadowColor = "rgba(13, 115, 119, 0.4)";
-        ctx.shadowBlur = 8;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 3 * animScaleMultiplier;
+        ctx.shadowColor = animPrimaryColor + "66";
+        ctx.shadowBlur = 8 * animScaleMultiplier;
         ctx.beginPath();
         
         const startTraceX = oscX + 20;
-        const baselineY = oscY + oscH - 15;
+        const baselineY = oscY + oscH - 25;
         
         for (let i = 0; i < rcVoltsData.length; i++) {
             const vVal = rcVoltsData[i];
             const traceX = startTraceX + i;
-            const traceY = baselineY - (vVal / E) * 110;
+            const traceY = baselineY - (vVal / E) * (oscH * 0.77);
             if (i === 0) ctx.moveTo(traceX, traceY);
             else ctx.lineTo(traceX, traceY);
         }
         ctx.stroke();
         ctx.shadowBlur = 0;
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 11px sans-serif";
-        ctx.fillText(rcChargeMode ? "Mode : Charge" : "Mode : Décharge", oscX + 15, oscY + 25);
-        ctx.fillStyle = "var(--primary, #0d7377)";
-        ctx.fillText(`uc(t) = ${uc.toFixed(2)} V`, oscX + 15, oscY + 45);
+        ctx.fillStyle = animSecondaryColor;
+        ctx.font = `bold ${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText(rcChargeMode ? "Mode : Charge" : "Mode : Décharge", oscX + 20 * animScaleMultiplier, oscY + 30 * animScaleMultiplier);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.fillText(`uc(t) = ${uc.toFixed(2)} V`, oscX + 20 * animScaleMultiplier, oscY + 50 * animScaleMultiplier);
     }
 
     if (rcInterval) clearInterval(rcInterval);
@@ -5059,51 +5152,52 @@ function setupEquilibriumSimulator() {
         }
 
         // Concentrations Bar Chart
-        const startChartX = 80;
-        const chartY = 190;
-        const barW = 50;
-        const maxBarH = 120;
+        const chartY = Math.round(canvas.height * 0.8);
+        const maxBarH = Math.round(canvas.height * 0.5);
+        const startChartX = Math.round(canvas.width * 0.08);
+        const barW = Math.round(50 * animScaleMultiplier);
+        const spacingX = Math.round(90 * animScaleMultiplier);
+
+        const gX = Math.round(canvas.width * 0.55);
+        const gY = Math.round(canvas.height * 0.2);
+        const gW = Math.round(canvas.width * 0.4);
+        const gH = Math.round(canvas.height * 0.6);
 
         const species = [
             { label: "A", val: concA, color: "#ef4444" },
             { label: "B", val: concB, color: "#f87171" },
-            { label: "C", val: concC, color: "var(--primary, #0d7377)" },
+            { label: "C", val: concC, color: animPrimaryColor },
             { label: "D", val: concD, color: "#38bdf8" }
         ];
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.55)";
+        ctx.lineWidth = 2 * animScaleMultiplier;
         ctx.beginPath();
         ctx.moveTo(40, chartY);
-        ctx.lineTo(440, chartY);
+        ctx.lineTo(gX - 20, chartY);
         ctx.stroke();
 
         species.forEach((sp, idx) => {
-            const barX = startChartX + idx * 90;
+            const barX = startChartX + idx * spacingX;
             const barH = (sp.val / 2.0) * maxBarH;
 
             ctx.fillStyle = sp.color;
             ctx.fillRect(barX, chartY - barH, barW, barH);
-            ctx.strokeStyle = "#ffffff";
+            ctx.strokeStyle = "#f8fafc";
             ctx.lineWidth = 1;
             ctx.strokeRect(barX, chartY - barH, barW, barH);
 
-            ctx.fillStyle = "#ffffff";
-            ctx.font = "bold 12px sans-serif";
-            ctx.fillText(sp.label, barX + 20, chartY + 18);
-            ctx.font = "11px sans-serif";
-            ctx.fillText(`${sp.val.toFixed(2)}`, barX + 12, chartY - barH - 8);
+            ctx.fillStyle = "#f8fafc";
+            ctx.font = `bold ${Math.round(12 * animScaleMultiplier)}px sans-serif`;
+            ctx.fillText(sp.label, barX + (barW/2) - 5, chartY + 18 * animScaleMultiplier);
+            ctx.font = `${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+            ctx.fillText(`${sp.val.toFixed(2)}`, barX + (barW/2) - 12, chartY - barH - 8 * animScaleMultiplier);
         });
 
         // Curve Graph (Right)
-        const gX = 480;
-        const gY = 60;
-        const gW = 280;
-        const gH = 130;
-
         ctx.fillStyle = "#020617";
         ctx.fillRect(gX, gY, gW, gH);
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.65)";
         ctx.strokeRect(gX, gY, gW, gH);
 
         // K line
@@ -5117,12 +5211,12 @@ function setupEquilibriumSimulator() {
         ctx.setLineDash([]);
 
         ctx.fillStyle = "#ef4444";
-        ctx.font = "10px sans-serif";
-        ctx.fillText(`K = ${K.toFixed(1)}`, gX + gW - 40, kY - 4);
+        ctx.font = `${Math.round(10 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText(`K = ${K.toFixed(1)}`, gX + gW - 50 * animScaleMultiplier, kY - 4 * animScaleMultiplier);
 
         // Qr Trace
-        ctx.strokeStyle = "var(--primary, #0d7377)";
-        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
         const steps = 60;
         for (let i = 0; i <= steps; i++) {
@@ -5141,11 +5235,11 @@ function setupEquilibriumSimulator() {
         }
         ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 11px sans-serif";
-        ctx.fillText("Quotient de Réaction Qr(t)", gX + 15, gY + 20);
-        ctx.fillStyle = "var(--primary, #0d7377)";
-        ctx.fillText(`Qr = ${Qr.toFixed(2)}`, gX + 15, gY + 38);
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `bold ${Math.round(11 * animScaleMultiplier)}px sans-serif`;
+        ctx.fillText("Quotient de Réaction Qr(t)", gX + 20 * animScaleMultiplier, gY + 30 * animScaleMultiplier);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.fillText(`Qr = ${Qr.toFixed(2)}`, gX + 20 * animScaleMultiplier, gY + 52 * animScaleMultiplier);
     }
 
     if (eqInterval) clearInterval(eqInterval);
@@ -5264,10 +5358,10 @@ function setupPlotterSimulator() {
         plotterDrawing = false;
     }
 
-    const scaleX = 40;
-    const scaleY = 40;
-    const originX = 400; 
-    const originY = 125; 
+    const scaleX = 50 * animScaleMultiplier;
+    const scaleY = 50 * animScaleMultiplier;
+    const originX = canvas.width / 2; 
+    const originY = canvas.height / 2; 
 
     function toPixels(x, y) {
         return {
@@ -5325,7 +5419,7 @@ function setupPlotterSimulator() {
         const a = parseFloat(newCoeff.value);
 
         // Coordinate grid
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
         ctx.lineWidth = 1;
         for (let x = 0; x < canvas.width; x += scaleX) {
             ctx.beginPath();
@@ -5341,8 +5435,8 @@ function setupPlotterSimulator() {
         }
 
         // Axes
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = animPrimaryColor + "99";
+        ctx.lineWidth = 2.5 * animScaleMultiplier;
         ctx.beginPath();
         ctx.moveTo(0, originY);
         ctx.lineTo(canvas.width, originY);
@@ -5353,19 +5447,24 @@ function setupPlotterSimulator() {
         ctx.stroke();
 
         // Axis ticks & labels
-        ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
-        ctx.font = "9px sans-serif";
-        for (let x = -10; x <= 10; x++) {
+        ctx.fillStyle = animPrimaryColor;
+        ctx.font = `bold ${Math.round(9 * animScaleMultiplier)}px sans-serif`;
+        const minTickX = -Math.floor(originX / scaleX);
+        const maxTickX = Math.ceil((canvas.width - originX) / scaleX);
+        for (let x = minTickX; x <= maxTickX; x++) {
             if (x === 0) continue;
             const px = toPixels(x, 0);
-            ctx.fillRect(px.x - 1, originY - 4, 2, 8);
-            ctx.fillText(x, px.x - 4, originY + 16);
+            ctx.fillRect(px.x - 1, originY - 4 * animScaleMultiplier, 2, 8 * animScaleMultiplier);
+            ctx.fillText(x, px.x - 4, originY + 16 * animScaleMultiplier);
         }
-        for (let y = -3; y <= 3; y++) {
+
+        const minTickY = -Math.floor((canvas.height - originY) / scaleY);
+        const maxTickY = Math.ceil(originY / scaleY);
+        for (let y = minTickY; y <= maxTickY; y++) {
             if (y === 0) continue;
             const px = toPixels(0, y);
-            ctx.fillRect(originX - 4, px.y - 1, 8, 2);
-            ctx.fillText(y, originX + 8, px.y + 3);
+            ctx.fillRect(originX - 4 * animScaleMultiplier, px.y - 1, 8 * animScaleMultiplier, 2);
+            ctx.fillText(y, originX + 8 * animScaleMultiplier, px.y + 3);
         }
 
         // Draw animation
@@ -5378,10 +5477,10 @@ function setupPlotterSimulator() {
         }
 
         // Draw curve
-        ctx.strokeStyle = "var(--primary, #0d7377)";
-        ctx.lineWidth = 3;
-        ctx.shadowColor = "rgba(13, 115, 119, 0.3)";
-        ctx.shadowBlur = 6;
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 3 * animScaleMultiplier;
+        ctx.shadowColor = animPrimaryColor + "4d";
+        ctx.shadowBlur = 6 * animScaleMultiplier;
         ctx.beginPath();
 
         let firstPoint = true;
@@ -5419,8 +5518,8 @@ function setupPlotterSimulator() {
             if (res) {
                 const pxPt = toPixels(hoverMathX, res.y);
 
-                ctx.strokeStyle = "var(--secondary, #c87f0a)";
-                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = animSecondaryColor;
+                ctx.lineWidth = 1.5 * animScaleMultiplier;
                 ctx.setLineDash([5, 3]);
                 ctx.beginPath();
 
@@ -5429,41 +5528,38 @@ function setupPlotterSimulator() {
                 const tStartY = res.dy * (tStartX - hoverMathX) + res.y;
                 const tEndY = res.dy * (tEndX - hoverMathX) + res.y;
 
-                const pxStart = toPixels(tStartX, tStartY);
-                const pxEnd = toPixels(tEndX, tEndY);
-
-                ctx.moveTo(pxStart.x, pxStart.y);
-                ctx.lineTo(pxEnd.x, pxEnd.y);
+                ctx.moveTo(originX + tStartX * scaleX, originY - tStartY * scaleY);
+                ctx.lineTo(originX + tEndX * scaleX, originY - tEndY * scaleY);
                 ctx.stroke();
                 ctx.setLineDash([]); 
 
-                ctx.fillStyle = "var(--secondary, #c87f0a)";
+                ctx.fillStyle = animSecondaryColor;
                 ctx.beginPath();
-                ctx.arc(pxPt.x, pxPt.y, 6, 0, Math.PI * 2);
+                ctx.arc(pxPt.x, pxPt.y, 6 * animScaleMultiplier, 0, Math.PI * 2);
                 ctx.fill();
-                ctx.strokeStyle = "#ffffff";
-                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = animPrimaryColor;
+                ctx.lineWidth = 1.5 * animScaleMultiplier;
                 ctx.stroke();
 
-                ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
-                ctx.lineWidth = 1;
-                const boxW = 160;
-                const boxH = 50;
-                let boxX = pxPt.x + 15;
-                let boxY = pxPt.y - 60;
+                ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+                ctx.strokeStyle = animPrimaryColor;
+                ctx.lineWidth = 1.5 * animScaleMultiplier;
+                const boxW = Math.round(160 * animScaleMultiplier);
+                const boxH = Math.round(50 * animScaleMultiplier);
+                let boxX = pxPt.x + 15 * animScaleMultiplier;
+                let boxY = pxPt.y - 60 * animScaleMultiplier;
                 
-                if (boxX + boxW > canvas.width) boxX = pxPt.x - boxW - 15;
-                if (boxY < 10) boxY = pxPt.y + 15;
+                if (boxX + boxW > canvas.width) boxX = pxPt.x - boxW - 15 * animScaleMultiplier;
+                if (boxY < 10) boxY = pxPt.y + 15 * animScaleMultiplier;
 
                 ctx.fillRect(boxX, boxY, boxW, boxH);
                 ctx.strokeRect(boxX, boxY, boxW, boxH);
 
-                ctx.fillStyle = "#ffffff";
-                ctx.font = "bold 10px sans-serif";
-                ctx.fillText(`Point M(${hoverMathX.toFixed(2)}, ${res.y.toFixed(2)})`, boxX + 10, boxY + 18);
-                ctx.fillStyle = "var(--secondary, #c87f0a)";
-                ctx.fillText(`Nombre dérivé f'(x₀) = ${res.dy.toFixed(2)}`, boxX + 10, boxY + 36);
+                ctx.fillStyle = animPrimaryColor;
+                ctx.font = `bold ${Math.round(10 * animScaleMultiplier)}px sans-serif`;
+                ctx.fillText(`Point M(${hoverMathX.toFixed(2)}, ${res.y.toFixed(2)})`, boxX + 10 * animScaleMultiplier, boxY + 18 * animScaleMultiplier);
+                ctx.fillStyle = animSecondaryColor;
+                ctx.fillText(`Nombre dérivé f'(x₀) = ${res.dy.toFixed(2)}`, boxX + 10 * animScaleMultiplier, boxY + 36 * animScaleMultiplier);
             }
         }
     }

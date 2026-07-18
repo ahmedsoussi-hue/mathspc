@@ -3244,6 +3244,69 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-primary, #ffffff);
 }
 
+/* Custom display settings */
+.animations-settings {
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--teal, #0d7377);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.settings-header i {
+    width: 18px;
+    height: 18px;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-group label {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-secondary, #94a3b8);
+}
+
+.color-picker-grid {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.color-btn, .color-btn-sec {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+    outline: none;
+}
+
+.color-btn:hover, .color-btn-sec:hover {
+    transform: scale(1.15);
+}
+
+.color-btn.active, .color-btn-sec.active {
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    transform: scale(1.15);
+}
+
 /* Responsive animations */
 @media (max-width: 992px) {
     .animations-container {
