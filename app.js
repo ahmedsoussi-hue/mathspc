@@ -3542,19 +3542,7 @@ function updateDashboardUI() {
         averageScoreTextEl.textContent = `${avgScore}%`;
     }
 
-    // Update Profile modal stats too
-    const profileLessonsVal = document.getElementById("profileLessonsVal");
-    if (profileLessonsVal) {
-        profileLessonsVal.textContent = userState.completedChapters.length;
-    }
-    const profileQuizzesVal = document.getElementById("profileQuizzesVal");
-    if (profileQuizzesVal) {
-        profileQuizzesVal.textContent = quizzesTaken;
-    }
-    const profileScoreVal = document.getElementById("profileScoreVal");
-    if (profileScoreVal) {
-        profileScoreVal.textContent = `${avgScore}%`;
-    }
+
 
     // Activity List
     const activityList = document.getElementById("activityList");
