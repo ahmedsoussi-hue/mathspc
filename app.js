@@ -3421,13 +3421,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderChapters();
     renderHomeChapters();
     renderHomePhysicsChapters();
-    renderQuizWelcomeSelector();
-    
     // Register Event Listeners
     setupNavigation();
     setupFilters();
     setupModals();
-    setupQuizEngine();
+    setupAnimations();
     setupInteractiveTools();
     setupProfileModal();
 });
@@ -4151,214 +4149,928 @@ window.downloadRealFile = function(fileUrl, title) {
     }, 1500);
 };
 
-// --- INTERACTIVE QUIZ ENGINE ---
-let activeQuiz = null;
-let currentQuestionIndex = 0;
-let quizScore = 0; // Number of correct answers
-let selectedOptionIndex = null;
-
-function renderQuizWelcomeSelector() {
-    const grid = document.getElementById("quizSelectorGrid");
-    grid.innerHTML = "";
-
-    quizzesData.forEach(quiz => {
-        const completedScore = userState.completedQuizzes[quiz.id];
-        const card = document.createElement("div");
-        card.className = "quiz-card";
-        card.addEventListener("click", () => startQuiz(quiz.id));
-
-        card.innerHTML = `
-            <div>
-                <h3>${quiz.title}</h3>
-                <p>${quiz.description}</p>
-            </div>
-            <div class="quiz-meta">
-                <div class="quiz-meta-info">
-                    <span><i data-lucide="help-circle"></i> ${quiz.questions.length} Questions</span>
-                    <span><i data-lucide="zap"></i> +${quiz.xp} XP</span>
-                </div>
-                <div class="quiz-action-link">
-                    ${completedScore !== undefined ? `Fait (${completedScore}%)` : 'Lancer <i data-lucide="chevron-right"></i>'}
-                </div>
-            </div>
-        `;
-        grid.appendChild(card);
+// --- INTERACTIVE ANIMATIONS ENGINE ---
+function setupAnimations() {
+    const animSelectBtns = document.querySelectorAll(".anim-select-btn");
+    animSelectBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const targetAnim = btn.getAttribute("data-anim");
+            
+            // Toggle active buttons
+            animSelectBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            
+            // Toggle active workspaces
+            document.querySelectorAll(".anim-workspace").forEach(workspace => {
+                if (workspace.id === `anim-${targetAnim}`) {
+                    workspace.style.display = "flex";
+                    workspace.classList.add("active");
+                    initCanvasFor(targetAnim);
+                } else {
+                    workspace.style.display = "none";
+                    workspace.classList.remove("active");
+                }
+            });
+        });
     });
 
-    lucide.createIcons();
+    // Initialize the default one
+    initCanvasFor("wave");
 }
 
-function setupQuizEngine() {
-    document.getElementById("backToQuizzesBtn").addEventListener("click", quitQuiz);
-    
-    document.getElementById("quizSkipBtn").addEventListener("click", () => {
-        // Skips question, counts as wrong
-        showFeedback(false);
+function initCanvasFor(type) {
+    if (type === "wave") {
+        setupWaveSimulator();
+    } else if (type === "delay") {
+        setupDelaySimulator();
+    } else if (type === "newton") {
+        setupNewtonSimulator();
+    } else if (type === "rc") {
+        setupRcSimulator();
+    } else if (type === "equilibrium") {
+        setupEquilibriumSimulator();
+    }
+}
+
+// 1. Wave Simulator
+let waveInterval = null;
+let waveTime = 0;
+let wavePlaying = true;
+function setupWaveSimulator() {
+    const canvas = document.getElementById("canvas-wave");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const amplitudeSlider = document.getElementById("wave-amplitude");
+    const frequencySlider = document.getElementById("wave-frequency");
+    const velocitySlider = document.getElementById("wave-velocity");
+    const btnPlay = document.getElementById("btn-wave-play");
+
+    // Remove existing event listeners by replacing nodes (to prevent duplicate events on re-init)
+    const newAmp = amplitudeSlider.cloneNode(true);
+    amplitudeSlider.parentNode.replaceChild(newAmp, amplitudeSlider);
+    const newFreq = frequencySlider.cloneNode(true);
+    frequencySlider.parentNode.replaceChild(newFreq, frequencySlider);
+    const newVel = velocitySlider.cloneNode(true);
+    velocitySlider.parentNode.replaceChild(newVel, velocitySlider);
+    const newPlay = btnPlay.cloneNode(true);
+    btnPlay.parentNode.replaceChild(newPlay, btnPlay);
+
+    newAmp.addEventListener("input", (e) => {
+        document.getElementById("val-wave-amplitude").textContent = e.target.value;
+        updateWaveCalculations();
+    });
+    newFreq.addEventListener("input", (e) => {
+        document.getElementById("val-wave-frequency").textContent = e.target.value;
+        updateWaveCalculations();
+    });
+    newVel.addEventListener("input", (e) => {
+        document.getElementById("val-wave-velocity").textContent = e.target.value;
+        updateWaveCalculations();
     });
 
-    document.getElementById("quizNextBtn").addEventListener("click", () => {
-        if (currentQuestionIndex < activeQuiz.questions.length - 1) {
-            currentQuestionIndex++;
-            showQuestion();
+    function updateWaveCalculations() {
+        const f = parseFloat(newFreq.value);
+        const v = parseFloat(newVel.value);
+        const lambda = Math.round(v / f);
+        document.getElementById("wave-lambda-calc").textContent = lambda;
+    }
+
+    newPlay.addEventListener("click", () => {
+        wavePlaying = !wavePlaying;
+        newPlay.innerHTML = wavePlaying ? '<i data-lucide="pause"></i> Pause' : '<i data-lucide="play"></i> Lancer';
+        lucide.createIcons();
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return; // Stop drawing if workspace is hidden
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const A = parseFloat(newAmp.value);
+        const f = parseFloat(newFreq.value);
+        const v = parseFloat(newVel.value);
+        
+        if (wavePlaying) {
+            waveTime += 0.03;
+        }
+
+        // Draw grid
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        // Draw center baseline
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+
+        // Draw wave
+        ctx.strokeStyle = "var(--primary, #0d7377)";
+        ctx.lineWidth = 3;
+        ctx.shadowColor = "rgba(13, 115, 119, 0.4)";
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        
+        const startX = 50;
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(startX, canvas.height / 2);
+
+        for (let x = startX; x < canvas.width; x++) {
+            const dx = x - startX;
+            const tPrime = waveTime - (dx / v);
+            let y = canvas.height / 2;
+            if (tPrime > 0) {
+                y += A * Math.sin(2 * Math.PI * f * tPrime);
+            }
+            ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Draw source shaker
+        ctx.fillStyle = "var(--secondary, #c87f0a)";
+        ctx.beginPath();
+        let sourceY = canvas.height / 2;
+        if (waveTime > 0) {
+            sourceY += A * Math.sin(2 * Math.PI * f * waveTime);
+        }
+        ctx.arc(startX, sourceY, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    if (waveInterval) clearInterval(waveInterval);
+    waveInterval = setInterval(draw, 30);
+    updateWaveCalculations();
+}
+
+// 2. Delay Simulator
+let delayInterval = null;
+let delaySoundPos = -50;
+let delayPlaying = false;
+let delayMicro1Data = [];
+let delayMicro2Data = [];
+function setupDelaySimulator() {
+    const canvas = document.getElementById("canvas-delay");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const distanceSlider = document.getElementById("delay-distance");
+    const speedSlider = document.getElementById("delay-speed");
+    const btnTrigger = document.getElementById("btn-delay-trigger");
+
+    const newDist = distanceSlider.cloneNode(true);
+    distanceSlider.parentNode.replaceChild(newDist, distanceSlider);
+    const newSpeed = speedSlider.cloneNode(true);
+    speedSlider.parentNode.replaceChild(newSpeed, speedSlider);
+    const newTrig = btnTrigger.cloneNode(true);
+    btnTrigger.parentNode.replaceChild(newTrig, btnTrigger);
+
+    newDist.addEventListener("input", (e) => {
+        document.getElementById("val-delay-distance").textContent = e.target.value;
+        updateDelayCalculations();
+    });
+    newSpeed.addEventListener("input", (e) => {
+        document.getElementById("val-delay-speed").textContent = e.target.value;
+        updateDelayCalculations();
+    });
+
+    function updateDelayCalculations() {
+        const d = parseFloat(newDist.value);
+        const v = parseFloat(newSpeed.value);
+        const d_m = d / 1000;
+        const tau = (d_m / v) * 1000;
+        document.getElementById("delay-tau-calc").textContent = tau.toFixed(3);
+    }
+
+    newTrig.addEventListener("click", () => {
+        delaySoundPos = 50;
+        delayPlaying = true;
+        delayMicro1Data = [];
+        delayMicro2Data = [];
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const d = parseFloat(newDist.value);
+        const v = parseFloat(newSpeed.value);
+
+        const speakerX = 100;
+        const m1X = 300;
+        const m2X = m1X + d;
+
+        // Ground line
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 100);
+        ctx.lineTo(canvas.width, 100);
+        ctx.stroke();
+
+        // Speaker
+        ctx.fillStyle = "#334155";
+        ctx.fillRect(speakerX - 25, 60, 20, 35);
+        ctx.fillStyle = "#1e293b";
+        ctx.beginPath();
+        ctx.moveTo(speakerX - 5, 55);
+        ctx.lineTo(speakerX + 15, 45);
+        ctx.lineTo(speakerX + 15, 110);
+        ctx.lineTo(speakerX - 5, 100);
+        ctx.closePath();
+        ctx.fill();
+
+        // Micro 1
+        ctx.fillStyle = "var(--primary, #0d7377)";
+        ctx.fillRect(m1X - 4, 65, 8, 30);
+        ctx.beginPath();
+        ctx.arc(m1X, 60, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 10px sans-serif";
+        ctx.fillText("M1", m1X - 7, 46);
+
+        // Micro 2
+        ctx.fillStyle = "var(--secondary, #c87f0a)";
+        ctx.fillRect(m2X - 4, 65, 8, 30);
+        ctx.beginPath();
+        ctx.arc(m2X, 60, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText("M2", m2X - 7, 46);
+
+        // Distance dimension
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(m1X, 95);
+        ctx.lineTo(m1X, 120);
+        ctx.moveTo(m2X, 95);
+        ctx.lineTo(m2X, 120);
+        ctx.moveTo(m1X, 110);
+        ctx.lineTo(m2X, 110);
+        ctx.stroke();
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillText(`d = ${d} mm`, (m1X + m2X)/2 - 25, 125);
+
+        // Sound pulse
+        if (delayPlaying) {
+            const frameSpeed = (v / 340) * 8;
+            delaySoundPos += frameSpeed;
+
+            ctx.strokeStyle = "rgba(148, 163, 184, 0.25)";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(speakerX, 77, delaySoundPos - speakerX, -Math.PI/3, Math.PI/3);
+            ctx.stroke();
+
+            const distFromSpeaker = delaySoundPos - speakerX;
+            const distM1 = m1X - speakerX;
+            const distM2 = m2X - speakerX;
+
+            let val1 = 0;
+            if (distFromSpeaker >= distM1 && distFromSpeaker < distM1 + 60) {
+                const phase = (distFromSpeaker - distM1) / 60 * Math.PI * 6;
+                val1 = Math.sin(phase) * Math.exp(-(distFromSpeaker - distM1)/18);
+            }
+            delayMicro1Data.push(val1);
+
+            let val2 = 0;
+            if (distFromSpeaker >= distM2 && distFromSpeaker < distM2 + 60) {
+                const phase = (distFromSpeaker - distM2) / 60 * Math.PI * 6;
+                val2 = Math.sin(phase) * Math.exp(-(distFromSpeaker - distM2)/18);
+            }
+            delayMicro2Data.push(val2);
+
+            if (delaySoundPos > canvas.width + 50) {
+                delayPlaying = false;
+            }
         } else {
-            showQuizResults();
+            delayMicro1Data.push(0);
+            delayMicro2Data.push(0);
         }
-    });
 
-    // Actions on results screen
-    document.getElementById("retryQuizBtn").addEventListener("click", () => {
-        startQuiz(activeQuiz.id);
-    });
-    
-    document.getElementById("finishQuizBtn").addEventListener("click", quitQuiz);
-}
+        if (delayMicro1Data.length > 500) delayMicro1Data.shift();
+        if (delayMicro2Data.length > 500) delayMicro2Data.shift();
 
-function startQuiz(quizId) {
-    const quiz = quizzesData.find(q => q.id === quizId);
-    if (!quiz) return;
-
-    activeQuiz = quiz;
-    currentQuestionIndex = 0;
-    quizScore = 0;
-    selectedOptionIndex = null;
-
-    // Switch views
-    document.getElementById("quizWelcomePanel").style.display = "none";
-    document.getElementById("quizResultPanel").style.display = "none";
-    document.getElementById("quizScreenPanel").style.display = "block";
-
-    showQuestion();
-}
-
-function showQuestion() {
-    const q = activeQuiz.questions[currentQuestionIndex];
-    selectedOptionIndex = null;
-
-    // Reset controls
-    document.getElementById("quizNextBtn").disabled = true;
-    document.getElementById("quizSkipBtn").style.display = "inline-flex";
-    document.getElementById("quizFeedbackBox").style.display = "none";
-
-    // Counter & Progress
-    const totalQ = activeQuiz.questions.length;
-    document.getElementById("quizCounterText").textContent = `Question ${currentQuestionIndex + 1}/${totalQ}`;
-    
-    const percentage = Math.round((currentQuestionIndex / totalQ) * 100);
-    document.getElementById("quizProgressBar").style.width = `${percentage}%`;
-
-    // Text & formulas
-    document.getElementById("quizQuestionText").textContent = q.question;
-    
-    // Options
-    const optionsList = document.getElementById("quizOptionsList");
-    optionsList.innerHTML = "";
-
-    q.options.forEach((opt, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.textContent = opt;
-        btn.addEventListener("click", () => selectOption(idx));
-        optionsList.appendChild(btn);
-    });
-}
-
-function selectOption(idx) {
-    if (selectedOptionIndex !== null) return; // Prevent clicking multiple options after selection
-
-    selectedOptionIndex = idx;
-    const q = activeQuiz.questions[currentQuestionIndex];
-    const isCorrect = (idx === q.answer);
-
-    // Color options
-    const optionBtns = document.querySelectorAll(".option-btn");
-    optionBtns.forEach((btn, index) => {
-        if (index === q.answer) {
-            btn.classList.add("correct");
-        } else if (index === idx) {
-            btn.classList.add("incorrect");
+        // Oscilloscope Graph
+        const oscY = 190;
+        const oscH = 100;
+        ctx.fillStyle = "#020617";
+        ctx.fillRect(40, 140, 720, 100);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.lineWidth = 1;
+        
+        for (let x = 40; x <= 760; x += 40) {
+            ctx.beginPath();
+            ctx.moveTo(x, 140);
+            ctx.lineTo(x, 240);
+            ctx.stroke();
         }
+        for (let y = 140; y <= 240; y += 20) {
+            ctx.beginPath();
+            ctx.moveTo(40, y);
+            ctx.lineTo(760, y);
+            ctx.stroke();
+        }
+
+        // Trace M1
+        ctx.strokeStyle = "var(--primary, #0d7377)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        const drawLen = Math.min(delayMicro1Data.length, 720);
+        const offset = Math.max(0, delayMicro1Data.length - 720);
+        for (let i = 0; i < drawLen; i++) {
+            const dataVal = delayMicro1Data[offset + i];
+            ctx.lineTo(40 + i, oscY - dataVal * 35);
+        }
+        ctx.stroke();
+
+        // Trace M2
+        ctx.strokeStyle = "var(--secondary, #c87f0a)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let i = 0; i < drawLen; i++) {
+            const dataVal = delayMicro2Data[offset + i];
+            ctx.lineTo(40 + i, oscY - dataVal * 35);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px sans-serif";
+        ctx.fillText("Oscilloscope Virtuel (CH1 = M1, CH2 = M2)", 50, 155);
+    }
+
+    if (delayInterval) clearInterval(delayInterval);
+    delayInterval = setInterval(draw, 30);
+    updateDelayCalculations();
+}
+
+// 3. Newton Simulator
+let newtonInterval = null;
+let newtonIsRunning = false;
+let newtonX = 100;
+let newtonV = 0;
+function setupNewtonSimulator() {
+    const canvas = document.getElementById("canvas-newton");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const angleSlider = document.getElementById("newton-angle");
+    const frictionSlider = document.getElementById("newton-friction");
+    const btnPlay = document.getElementById("btn-newton-play");
+    const btnReset = document.getElementById("btn-newton-reset");
+
+    const newAngle = angleSlider.cloneNode(true);
+    angleSlider.parentNode.replaceChild(newAngle, angleSlider);
+    const newFric = frictionSlider.cloneNode(true);
+    frictionSlider.parentNode.replaceChild(newFric, frictionSlider);
+    const newPlay = btnPlay.cloneNode(true);
+    btnPlay.parentNode.replaceChild(newPlay, btnPlay);
+    const newReset = btnReset.cloneNode(true);
+    btnReset.parentNode.replaceChild(newReset, btnReset);
+
+    newAngle.addEventListener("input", (e) => {
+        document.getElementById("val-newton-angle").textContent = e.target.value;
+        resetSim();
+    });
+    newFric.addEventListener("input", (e) => {
+        document.getElementById("val-newton-friction").textContent = e.target.value;
+        resetSim();
     });
 
-    if (isCorrect) {
-        quizScore++;
+    newPlay.addEventListener("click", () => {
+        newtonIsRunning = !newtonIsRunning;
+        newPlay.innerHTML = newtonIsRunning ? '<i data-lucide="pause"></i> Pause' : '<i data-lucide="play"></i> Lancer';
+        lucide.createIcons();
+    });
+
+    newReset.addEventListener("click", resetSim);
+
+    function resetSim() {
+        newtonIsRunning = false;
+        newtonX = 100;
+        newtonV = 0;
+        newPlay.innerHTML = '<i data-lucide="play"></i> Lancer';
+        lucide.createIcons();
     }
 
-    showFeedback(isCorrect);
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const angleDeg = parseFloat(newAngle.value);
+        const theta = angleDeg * Math.PI / 180;
+        const mu = parseFloat(newFric.value);
+        const g = 9.81;
+
+        const sinT = Math.sin(theta);
+        const cosT = Math.cos(theta);
+        let acceleration = g * (sinT - mu * cosT);
+        if (acceleration < 0) acceleration = 0;
+
+        if (newtonIsRunning) {
+            const dt = 0.05;
+            newtonV += acceleration * dt * 25;
+            newtonX += newtonV * dt;
+            if (newtonX > 520) {
+                newtonX = 520;
+                newtonV = 0;
+                newtonIsRunning = false;
+                newPlay.innerHTML = '<i data-lucide="play"></i> Lancer';
+                lucide.createIcons();
+            }
+        }
+
+        const startPlaneX = 80;
+        const startPlaneY = 200;
+        const planeLength = 620;
+        const endPlaneX = startPlaneX + planeLength * Math.cos(theta);
+        const endPlaneY = startPlaneY - planeLength * Math.sin(theta);
+
+        // Ground line
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(startPlaneX - 50, startPlaneY);
+        ctx.lineTo(startPlaneX + planeLength + 50, startPlaneY);
+        ctx.stroke();
+
+        // Plane line
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.moveTo(startPlaneX, startPlaneY);
+        ctx.lineTo(endPlaneX, endPlaneY);
+        ctx.stroke();
+
+        // Angle Arc
+        ctx.strokeStyle = "var(--secondary, #c87f0a)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(startPlaneX, startPlaneY, 40, -theta, 0);
+        ctx.stroke();
+        ctx.fillStyle = "var(--secondary, #c87f0a)";
+        ctx.font = "12px sans-serif";
+        ctx.fillText(`θ = ${angleDeg}°`, startPlaneX + 50, startPlaneY - 10);
+
+        // Block
+        const blockX = startPlaneX + newtonX * Math.cos(theta);
+        const blockY = startPlaneY - newtonX * Math.sin(theta);
+        const blockW = 50;
+        const blockH = 30;
+
+        ctx.save();
+        ctx.translate(blockX, blockY);
+        ctx.rotate(-theta);
+        ctx.fillStyle = "rgba(13, 115, 119, 0.8)";
+        ctx.fillRect(-blockW/2, -blockH, blockW, blockH);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(-blockW/2, -blockH, blockW, blockH);
+
+        const cmY = -blockH/2;
+        
+        // Vector P (Gravity)
+        ctx.save();
+        ctx.rotate(theta);
+        ctx.strokeStyle = "#ef4444";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(0, cmY);
+        ctx.lineTo(0, cmY + 55);
+        ctx.stroke();
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath();
+        ctx.moveTo(-5, cmY + 50);
+        ctx.lineTo(5, cmY + 50);
+        ctx.lineTo(0, cmY + 57);
+        ctx.fill();
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillText("P", 8, cmY + 50);
+        ctx.restore();
+
+        // Vector RN (Normal Reaction)
+        ctx.strokeStyle = "#3b82f6";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(0, cmY);
+        ctx.lineTo(0, cmY - 45);
+        ctx.stroke();
+        ctx.fillStyle = "#3b82f6";
+        ctx.beginPath();
+        ctx.moveTo(-5, cmY - 40);
+        ctx.lineTo(5, cmY - 40);
+        ctx.lineTo(0, cmY - 47);
+        ctx.fill();
+        ctx.fillText("RN", 8, cmY - 40);
+
+        // Vector f (Friction force)
+        const fLength = mu * 45;
+        if (fLength > 0) {
+            ctx.strokeStyle = "var(--secondary, #c87f0a)";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(0, cmY);
+            ctx.lineTo(-fLength, cmY);
+            ctx.stroke();
+            ctx.fillStyle = "var(--secondary, #c87f0a)";
+            ctx.beginPath();
+            ctx.moveTo(-fLength + 5, cmY - 5);
+            ctx.lineTo(-fLength + 5, cmY + 5);
+            ctx.lineTo(-fLength, cmY);
+            ctx.fill();
+            ctx.fillText("f", -fLength - 12, cmY - 5);
+        }
+
+        ctx.restore();
+    }
+
+    if (newtonInterval) clearInterval(newtonInterval);
+    newtonInterval = setInterval(draw, 30);
+    resetSim();
 }
 
-function showFeedback(isCorrect) {
-    const q = activeQuiz.questions[currentQuestionIndex];
-    const fbBox = document.getElementById("quizFeedbackBox");
-    const fbTitle = document.getElementById("feedbackTitleText");
-    const fbIcon = document.getElementById("feedbackIcon");
-    const fbDesc = document.getElementById("feedbackExplanationText");
+// 4. RC Circuit Simulator
+let rcInterval = null;
+let rcTime = 0;
+let rcChargeMode = true;
+let rcVoltsData = [];
+function setupRcSimulator() {
+    const canvas = document.getElementById("canvas-rc");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const rSlider = document.getElementById("rc-r");
+    const cSlider = document.getElementById("rc-c");
+    const btnSwitch = document.getElementById("btn-rc-charge");
 
-    if (isCorrect) {
-        fbBox.className = "quiz-feedback-box correct-box";
-        fbTitle.textContent = "Correct !";
-        fbIcon.setAttribute("data-lucide", "check-circle-2");
-    } else {
-        fbBox.className = "quiz-feedback-box incorrect-box";
-        fbTitle.textContent = "Explication :";
-        fbIcon.setAttribute("data-lucide", "help-circle");
+    const newR = rSlider.cloneNode(true);
+    rSlider.parentNode.replaceChild(newR, rSlider);
+    const newC = cSlider.cloneNode(true);
+    cSlider.parentNode.replaceChild(newC, cSlider);
+    const newSwitch = btnSwitch.cloneNode(true);
+    btnSwitch.parentNode.replaceChild(newSwitch, btnSwitch);
+
+    newR.addEventListener("input", (e) => {
+        document.getElementById("val-rc-r").textContent = e.target.value;
+        updateRcCalculations();
+    });
+    newC.addEventListener("input", (e) => {
+        document.getElementById("val-rc-c").textContent = e.target.value;
+        updateRcCalculations();
+    });
+
+    newSwitch.addEventListener("click", () => {
+        rcChargeMode = !rcChargeMode;
+        rcTime = 0;
+        rcVoltsData = [];
+    });
+
+    function updateRcCalculations() {
+        const R = parseFloat(newR.value);
+        const C = parseFloat(newC.value);
+        const tau = (R * 1000) * (C / 1000000);
+        document.getElementById("rc-tau-calc").textContent = tau.toFixed(3);
     }
 
-    fbDesc.innerHTML = q.explanation;
-    fbBox.style.display = "block";
-    lucide.createIcons();
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Toggle navigation
-    document.getElementById("quizSkipBtn").style.display = "none";
-    document.getElementById("quizNextBtn").disabled = false;
+        const R = parseFloat(newR.value);
+        const C = parseFloat(newC.value);
+        const tau = (R * 1000) * (C / 1000000);
+        const E = 5.0;
+
+        rcTime += 0.05;
+        let uc = 0;
+        if (rcChargeMode) {
+            uc = E * (1 - Math.exp(-rcTime / tau));
+        } else {
+            uc = E * Math.exp(-rcTime / tau);
+        }
+
+        rcVoltsData.push(uc);
+        if (rcVoltsData.length > 340) {
+            rcVoltsData.shift();
+        }
+
+        const diagX = 20;
+        const diagY = 50;
+        const diagW = 320;
+        const diagH = 150;
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(diagX, diagY, diagW, diagH);
+
+        // Generator E
+        ctx.fillStyle = "#0b0f19";
+        ctx.fillRect(diagX - 15, diagY + diagH/2 - 20, 30, 40);
+        ctx.fillStyle = "#1e293b";
+        ctx.beginPath();
+        ctx.arc(diagX, diagY + diagH/2, 16, 0, Math.PI*2);
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.stroke();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "12px sans-serif";
+        ctx.fillText("E", diagX - 5, diagY + diagH/2 + 4);
+
+        // Switch K
+        ctx.fillStyle = "#0b0f19";
+        ctx.fillRect(diagX + 50, diagY - 10, 40, 20);
+        ctx.strokeStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.moveTo(diagX + 50, diagY);
+        ctx.lineTo(diagX + 65, diagY);
+        if (rcChargeMode) {
+            ctx.lineTo(diagX + 85, diagY);
+        } else {
+            ctx.lineTo(diagX + 80, diagY - 12);
+        }
+        ctx.moveTo(diagX + 90, diagY);
+        ctx.lineTo(diagX + 90, diagY);
+        ctx.stroke();
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillText("K", diagX + 65, diagY - 18);
+
+        // Resistor R
+        ctx.fillStyle = "#0b0f19";
+        ctx.fillRect(diagX + diagW/2 - 30, diagY - 15, 60, 30);
+        ctx.strokeStyle = "#ffffff";
+        ctx.strokeRect(diagX + diagW/2 - 30, diagY - 12, 60, 24);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(`R`, diagX + diagW/2 - 5, diagY + 4);
+
+        // Capacitor C
+        ctx.fillStyle = "#0b0f19";
+        ctx.fillRect(diagX + diagW - 10, diagY + diagH/2 - 25, 20, 50);
+        ctx.strokeStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.moveTo(diagX + diagW - 6, diagY + diagH/2 - 20);
+        ctx.lineTo(diagX + diagW - 6, diagY + diagH/2 + 20);
+        ctx.moveTo(diagX + diagW + 6, diagY + diagH/2 - 20);
+        ctx.lineTo(diagX + diagW + 6, diagY + diagH/2 + 20);
+        ctx.stroke();
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(`C`, diagX + diagW - 5, diagY + diagH/2 + 35);
+
+        // Voltage Arrow uc
+        ctx.strokeStyle = "var(--primary, #0d7377)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(diagX + diagW + 20, diagY + diagH/2 + 15);
+        ctx.lineTo(diagX + diagW + 20, diagY + diagH/2 - 15);
+        ctx.stroke();
+        ctx.fillStyle = "var(--primary, #0d7377)";
+        ctx.beginPath();
+        ctx.moveTo(diagX + diagW + 17, diagY + diagH/2 - 10);
+        ctx.lineTo(diagX + diagW + 23, diagY + diagH/2 - 10);
+        ctx.lineTo(diagX + diagW + 20, diagY + diagH/2 - 17);
+        ctx.fill();
+        ctx.fillText("uc", diagX + diagW + 26, diagY + diagH/2 + 4);
+
+        // Oscilloscope
+        const oscX = 390;
+        const oscY = 50;
+        const oscW = 380;
+        const oscH = 150;
+
+        ctx.fillStyle = "#020617";
+        ctx.fillRect(oscX, oscY, oscW, oscH);
+        
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.lineWidth = 1;
+        for (let x = oscX; x <= oscX + oscW; x += 40) {
+            ctx.beginPath();
+            ctx.moveTo(x, oscY);
+            ctx.lineTo(x, oscY + oscH);
+            ctx.stroke();
+        }
+        for (let y = oscY; y <= oscY + oscH; y += 30) {
+            ctx.beginPath();
+            ctx.moveTo(oscX, y);
+            ctx.lineTo(oscX + oscW, y);
+            ctx.stroke();
+        }
+
+        // Trace
+        ctx.strokeStyle = "var(--primary, #0d7377)";
+        ctx.lineWidth = 3;
+        ctx.shadowColor = "rgba(13, 115, 119, 0.4)";
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        
+        const startTraceX = oscX + 20;
+        const baselineY = oscY + oscH - 15;
+        
+        for (let i = 0; i < rcVoltsData.length; i++) {
+            const vVal = rcVoltsData[i];
+            const traceX = startTraceX + i;
+            const traceY = baselineY - (vVal / E) * 110;
+            if (i === 0) ctx.moveTo(traceX, traceY);
+            else ctx.lineTo(traceX, traceY);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillText(rcChargeMode ? "Mode : Charge" : "Mode : Décharge", oscX + 15, oscY + 25);
+        ctx.fillStyle = "var(--primary, #0d7377)";
+        ctx.fillText(`uc(t) = ${uc.toFixed(2)} V`, oscX + 15, oscY + 45);
+    }
+
+    if (rcInterval) clearInterval(rcInterval);
+    rcInterval = setInterval(draw, 30);
+    updateRcCalculations();
 }
 
-function showQuizResults() {
-    document.getElementById("quizScreenPanel").style.display = "none";
-    
-    const resultPanel = document.getElementById("quizResultPanel");
-    const total = activeQuiz.questions.length;
-    const scorePercent = Math.round((quizScore / total) * 100);
+// 5. Chemical Equilibrium Simulator
+let eqInterval = null;
+let eqReactionProgress = 0.0;
+let eqRunning = false;
+function setupEquilibriumSimulator() {
+    const canvas = document.getElementById("canvas-equilibrium");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const kSlider = document.getElementById("eq-k");
+    const cSlider = document.getElementById("eq-c0");
+    const btnRun = document.getElementById("btn-eq-run");
 
-    // Save score if better or new
-    const prevScore = userState.completedQuizzes[activeQuiz.id] || 0;
-    if (scorePercent > prevScore) {
-        userState.completedQuizzes[activeQuiz.id] = scorePercent;
-        saveStateToStorage();
-        updateDashboardUI();
+    const newK = kSlider.cloneNode(true);
+    kSlider.parentNode.replaceChild(newK, kSlider);
+    const newC = cSlider.cloneNode(true);
+    cSlider.parentNode.replaceChild(newC, cSlider);
+    const newRun = btnRun.cloneNode(true);
+    btnRun.parentNode.replaceChild(newRun, btnRun);
+
+    newK.addEventListener("input", (e) => {
+        document.getElementById("val-eq-k").textContent = e.target.value;
+        resetEquilibrium();
+    });
+    newC.addEventListener("input", (e) => {
+        document.getElementById("val-eq-c0").textContent = e.target.value;
+        resetEquilibrium();
+    });
+
+    newRun.addEventListener("click", () => {
+        eqRunning = true;
+        eqReactionProgress = 0.0;
+    });
+
+    function resetEquilibrium() {
+        eqRunning = false;
+        eqReactionProgress = 0.0;
+        updateEquilibriumCalculations();
     }
 
-    // Set Circle Gauge
-    document.getElementById("resultScorePercentage").textContent = `${scorePercent}%`;
-    const circle = document.getElementById("resultCircleStroke");
-    const strokeDash = `${scorePercent}, 100`;
-    circle.setAttribute("stroke-dasharray", strokeDash);
-    
-    // Set Breakdown
-    document.getElementById("resultCorrectCount").textContent = `${quizScore}/${total}`;
-    document.getElementById("resultXpText").textContent = `+${Math.round(activeQuiz.xp * (quizScore/total))} XP`;
-
-    // Title custom evaluation
-    const resultTitle = document.getElementById("resultTitle");
-    if (scorePercent === 100) {
-        resultTitle.textContent = "Excellent ! Score Parfait.";
-    } else if (scorePercent >= 70) {
-        resultTitle.textContent = "Très Bien ! Objectif atteint.";
-    } else if (scorePercent >= 50) {
-        resultTitle.textContent = "Pas mal, continuez vos efforts !";
-    } else {
-        resultTitle.textContent = "À revoir. Relisez le cours.";
+    function updateEquilibriumCalculations() {
+        const K = parseFloat(newK.value);
+        const C0 = parseFloat(newC.value);
+        const sqrtK = Math.sqrt(K);
+        const xf = C0 * sqrtK / (1 + sqrtK);
+        const tau = (xf / C0) * 100;
+        
+        document.getElementById("eq-xf-calc").textContent = xf.toFixed(2);
+        document.getElementById("eq-tau-calc").textContent = Math.round(tau);
     }
 
-    resultPanel.style.display = "block";
-    showToast(`Quizz terminé ! Score : ${scorePercent}%`, true);
-}
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-function quitQuiz() {
-    activeQuiz = null;
-    document.getElementById("quizScreenPanel").style.display = "none";
-    document.getElementById("quizResultPanel").style.display = "none";
-    document.getElementById("quizWelcomePanel").style.display = "block";
-    renderQuizWelcomeSelector();
+        const K = parseFloat(newK.value);
+        const C0 = parseFloat(newC.value);
+        const sqrtK = Math.sqrt(K);
+        const xf = C0 * sqrtK / (1 + sqrtK);
+
+        if (eqRunning) {
+            eqReactionProgress += 0.015;
+            if (eqReactionProgress > 1.0) {
+                eqReactionProgress = 1.0;
+                eqRunning = false;
+            }
+        }
+
+        const currentX = xf * eqReactionProgress;
+        const concA = C0 - currentX;
+        const concB = C0 - currentX;
+        const concC = currentX;
+        const concD = currentX;
+
+        let Qr = 0;
+        if (concA > 0) {
+            Qr = (concC * concD) / (concA * concB);
+        }
+
+        // Concentrations Bar Chart
+        const startChartX = 80;
+        const chartY = 190;
+        const barW = 50;
+        const maxBarH = 120;
+
+        const species = [
+            { label: "A", val: concA, color: "#ef4444" },
+            { label: "B", val: concB, color: "#f87171" },
+            { label: "C", val: concC, color: "var(--primary, #0d7377)" },
+            { label: "D", val: concD, color: "#38bdf8" }
+        ];
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, chartY);
+        ctx.lineTo(440, chartY);
+        ctx.stroke();
+
+        species.forEach((sp, idx) => {
+            const barX = startChartX + idx * 90;
+            const barH = (sp.val / 2.0) * maxBarH;
+
+            ctx.fillStyle = sp.color;
+            ctx.fillRect(barX, chartY - barH, barW, barH);
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(barX, chartY - barH, barW, barH);
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 12px sans-serif";
+            ctx.fillText(sp.label, barX + 20, chartY + 18);
+            ctx.font = "11px sans-serif";
+            ctx.fillText(`${sp.val.toFixed(2)}`, barX + 12, chartY - barH - 8);
+        });
+
+        // Curve Graph (Right)
+        const gX = 480;
+        const gY = 60;
+        const gW = 280;
+        const gH = 130;
+
+        ctx.fillStyle = "#020617";
+        ctx.fillRect(gX, gY, gW, gH);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.strokeRect(gX, gY, gW, gH);
+
+        // K line
+        const kY = gY + gH - (K / 25) * gH;
+        ctx.strokeStyle = "#ef4444";
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(gX, kY);
+        ctx.lineTo(gX + gW, kY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#ef4444";
+        ctx.font = "10px sans-serif";
+        ctx.fillText(`K = ${K.toFixed(1)}`, gX + gW - 40, kY - 4);
+
+        // Qr Trace
+        ctx.strokeStyle = "var(--primary, #0d7377)";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        const steps = 60;
+        for (let i = 0; i <= steps; i++) {
+            const stepProgress = (i / steps) * eqReactionProgress;
+            const sX = xf * stepProgress;
+            const sA = C0 - sX;
+            const sC = sX;
+            let sQr = 0;
+            if (sA > 0) sQr = (sC * sC) / (sA * sA);
+            
+            const ptX = gX + (i / steps) * gW * eqReactionProgress;
+            const ptY = gY + gH - (sQr / 25) * gH;
+            
+            if (i === 0) ctx.moveTo(ptX, ptY);
+            else ctx.lineTo(ptX, ptY);
+        }
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 11px sans-serif";
+        ctx.fillText("Quotient de Réaction Qr(t)", gX + 15, gY + 20);
+        ctx.fillStyle = "var(--primary, #0d7377)";
+        ctx.fillText(`Qr = ${Qr.toFixed(2)}`, gX + 15, gY + 38);
+    }
+
+    if (eqInterval) clearInterval(eqInterval);
+    eqInterval = setInterval(draw, 30);
+    resetEquilibrium();
 }
 
 
