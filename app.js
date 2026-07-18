@@ -3430,6 +3430,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupQuizEngine();
     setupInteractiveTools();
     setupProfileModal();
+    triggerMathJax();
 });
 
 // --- STATE STORAGE ---
@@ -3706,6 +3707,15 @@ function switchTab(tabId) {
 
     // Smooth scroll back to top of main view
     window.scrollTo({ top: 0, behavior: "smooth" });
+    triggerMathJax();
+}
+
+function triggerMathJax() {
+    setTimeout(() => {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise().catch(err => console.warn(err));
+        }
+    }, 100);
 }
 
 // Global functions for inline links in footer / home
@@ -4168,6 +4178,7 @@ function setupAnimations() {
                     workspace.style.display = "flex";
                     workspace.classList.add("active");
                     initCanvasFor(targetAnim);
+                    triggerMathJax();
                 } else {
                     workspace.style.display = "none";
                     workspace.classList.remove("active");
