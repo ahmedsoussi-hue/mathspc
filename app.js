@@ -11359,28 +11359,34 @@ function setupMoteurCcSimulator() {
         ctx.fillRect(0, 0, W, H);
 
         if (view === "rotor") {
-            const cx = W / 2;
+            // LEFT SIDE: ROTOR ANIMATION & POLES
+            const cx = 310 * scale;
             const cy = H / 2 - 10 * scale;
-            const rRadius = 90 * scale;
+            const rRadius = 75 * scale;
 
-            const poleW = 120 * scale;
-            const poleH = 160 * scale;
+            // Stator Poles N (Red) and S (Blue)
+            const poleW = 100 * scale;
+            const poleH = 140 * scale;
 
+            // North Pole (Left - Red)
             ctx.fillStyle = "#ef4444"; ctx.fillRect(cx - rRadius - poleW, cy - poleH / 2, poleW, poleH);
-            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(24 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(22 * scale)}px sans-serif`; ctx.textAlign = "center";
             ctx.fillText("N", cx - rRadius - poleW / 2, cy + 8 * scale);
 
+            // South Pole (Right - Blue)
             ctx.fillStyle = "#3b82f6"; ctx.fillRect(cx + rRadius, cy - poleH / 2, poleW, poleH);
-            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(24 * scale)}px sans-serif`;
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(22 * scale)}px sans-serif`;
             ctx.fillText("S", cx + rRadius + poleW / 2, cy + 8 * scale);
 
+            // Magnetic Field Lines B (Green Arrows)
             ctx.strokeStyle = "rgba(16, 185, 129, 0.4)"; ctx.lineWidth = 2 * scale;
             ctx.setLineDash([6, 6]);
-            for (let y = cy - 60 * scale; y <= cy + 60 * scale; y += 30 * scale) {
+            for (let y = cy - 50 * scale; y <= cy + 50 * scale; y += 25 * scale) {
                 ctx.beginPath(); ctx.moveTo(cx - rRadius, y); ctx.lineTo(cx + rRadius, y); ctx.stroke();
             }
             ctx.setLineDash([]);
 
+            // Rotating Armature Rotor
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(rotorAngle);
@@ -11388,36 +11394,131 @@ function setupMoteurCcSimulator() {
             ctx.fillStyle = "#334155"; ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 3 * scale;
             ctx.beginPath(); ctx.arc(0, 0, rRadius, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
 
+            // Armature Winding
             const numCoils = 8;
             for (let i = 0; i < numCoils; i++) {
                 const a = (i * 2 * Math.PI) / numCoils;
-                const wx = (rRadius - 18 * scale) * Math.cos(a);
-                const wy = (rRadius - 18 * scale) * Math.sin(a);
+                const wx = (rRadius - 16 * scale) * Math.cos(a);
+                const wy = (rRadius - 16 * scale) * Math.sin(a);
                 ctx.fillStyle = "#f59e0b";
-                ctx.beginPath(); ctx.arc(wx, wy, 10 * scale, 0, 2 * Math.PI); ctx.fill();
+                ctx.beginPath(); ctx.arc(wx, wy, 8 * scale, 0, 2 * Math.PI); ctx.fill();
             }
 
-            ctx.fillStyle = "#d97706"; ctx.beginPath(); ctx.arc(0, 0, 32 * scale, 0, 2 * Math.PI); ctx.fill();
-            ctx.strokeStyle = "#090d16"; ctx.lineWidth = 4 * scale;
-            ctx.beginPath(); ctx.moveTo(-32 * scale, 0); ctx.lineTo(32 * scale, 0); ctx.stroke();
+            // Commutator Ring
+            ctx.fillStyle = "#d97706"; ctx.beginPath(); ctx.arc(0, 0, 26 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = "#090d16"; ctx.lineWidth = 3 * scale;
+            ctx.beginPath(); ctx.moveTo(-26 * scale, 0); ctx.lineTo(26 * scale, 0); ctx.stroke();
             ctx.restore();
 
+            // Carbon Brushes
             ctx.fillStyle = "#1e293b"; ctx.strokeStyle = "#facc15"; ctx.lineWidth = 2 * scale;
-            ctx.fillRect(cx - 14 * scale, cy - 32 * scale - 25 * scale, 28 * scale, 25 * scale);
-            ctx.fillRect(cx - 14 * scale, cy + 32 * scale, 28 * scale, 25 * scale);
+            ctx.fillRect(cx - 12 * scale, cy - 26 * scale - 20 * scale, 24 * scale, 20 * scale);
+            ctx.fillRect(cx - 12 * scale, cy + 26 * scale, 24 * scale, 20 * scale);
 
+            // Sparks
             if (state.Omega > 0 && Math.random() < 0.6) {
                 ctx.fillStyle = "#00ffff";
-                ctx.beginPath(); ctx.arc(cx + (Math.random() * 16 - 8), cy - 32 * scale, 3 * scale, 0, 2 * Math.PI); ctx.fill();
-                ctx.beginPath(); ctx.arc(cx + (Math.random() * 16 - 8), cy + 32 * scale, 3 * scale, 0, 2 * Math.PI); ctx.fill();
+                ctx.beginPath(); ctx.arc(cx + (Math.random() * 14 - 7), cy - 26 * scale, 2.5 * scale, 0, 2 * Math.PI); ctx.fill();
+                ctx.beginPath(); ctx.arc(cx + (Math.random() * 14 - 7), cy + 26 * scale, 2.5 * scale, 0, 2 * Math.PI); ctx.fill();
             }
 
-            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(18 * scale)}px 'Outfit', sans-serif`;
+            // Gauges Text under Rotor
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(15 * scale)}px 'Outfit', sans-serif`;
             ctx.textAlign = "center";
-            ctx.fillText(`Vitesse : N = ${state.RPM.toFixed(0)} tr/min (${state.Omega.toFixed(1)} rad/s)`, cx, H - 30 * scale);
-            ctx.fillStyle = "#f59e0b";
-            ctx.fillText(`Courant Induit : I = ${state.I.toFixed(2)} A  |  Couple Tem = ${state.Tem.toFixed(2)} N·m`, cx, H - 8 * scale);
+            ctx.fillText(`Vitesse : N = ${state.RPM.toFixed(0)} tr/min (${state.Omega.toFixed(1)} rad/s)`, cx, H - 28 * scale);
+            ctx.fillStyle = "#f59e0b"; ctx.font = `bold ${Math.round(13 * scale)}px sans-serif`;
+            ctx.fillText(`Courant : I = ${state.I.toFixed(2)} A  |  Couple : Tem = ${state.Tem.toFixed(2)} N·m`, cx, H - 8 * scale);
 
+            // RIGHT SIDE PANEL: SCHÉMA ÉLECTRIQUE MONTAGE DE L'INDUIT
+            const schemX = 570 * scale;
+            const schemY = 25 * scale;
+            const schemW = 300 * scale;
+            const schemH = 350 * scale;
+
+            ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+            ctx.lineWidth = 1.5 * scale;
+            ctx.fillRect(schemX, schemY, schemW, schemH);
+            ctx.strokeRect(schemX, schemY, schemW, schemH);
+
+            // Title
+            ctx.fillStyle = "#ffffff";
+            ctx.font = `bold ${Math.round(13 * scale)}px 'Outfit', sans-serif`;
+            ctx.textAlign = "center";
+            ctx.fillText("Schéma Électrique de l'Induit (MCC)", schemX + schemW / 2, schemY + 24 * scale);
+
+            // Loop Coordinates
+            const cX1 = schemX + 45 * scale;
+            const cX2 = schemX + schemW - 45 * scale;
+            const cY1 = schemY + 70 * scale;
+            const cY2 = schemY + 220 * scale;
+
+            // Circuit Wire Lines
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2.5 * scale;
+            ctx.beginPath();
+            ctx.moveTo(cX1, cY1); ctx.lineTo(cX2, cY1); ctx.lineTo(cX2, cY2); ctx.lineTo(cX1, cY2); ctx.closePath();
+            ctx.stroke();
+
+            // Generator U on Left Branch (DC Source)
+            ctx.fillStyle = "#090d16"; ctx.fillRect(cX1 - 20 * scale, cY1 + 45 * scale, 40 * scale, 60 * scale);
+            ctx.strokeStyle = "#facc15"; ctx.lineWidth = 2 * scale;
+            ctx.strokeRect(cX1 - 20 * scale, cY1 + 45 * scale, 40 * scale, 60 * scale);
+            ctx.fillStyle = "#facc15"; ctx.font = `bold ${Math.round(14 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText("G", cX1, cY1 + 80 * scale);
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.fillText(`U = ${U.toFixed(1)}V`, cX1 - 35 * scale, cY1 + 80 * scale);
+
+            // Resistor R on Top Wire (Armature Resistance)
+            ctx.fillStyle = "#090d16"; ctx.fillRect(schemX + 115 * scale, cY1 - 12 * scale, 70 * scale, 24 * scale);
+            ctx.strokeStyle = "#f59e0b"; ctx.lineWidth = 2 * scale;
+            ctx.strokeRect(schemX + 115 * scale, cY1 - 12 * scale, 70 * scale, 24 * scale);
+            ctx.fillStyle = "#f59e0b"; ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText(`R = ${R.toFixed(1)} Ω`, schemX + 150 * scale, cY1 + 4 * scale);
+
+            // Motor Symbol M on Right Branch (Armature + Brushes + f.e.m E)
+            ctx.fillStyle = "#090d16"; ctx.beginPath(); ctx.arc(cX2, cY1 + 75 * scale, 26 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = "#10b981"; ctx.lineWidth = 2.5 * scale; ctx.stroke();
+            ctx.fillStyle = "#10b981"; ctx.font = `bold ${Math.round(15 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText("M", cX2, cY1 + 75 * scale);
+
+            // Motor Brushes
+            ctx.fillStyle = "#e2e8f0";
+            ctx.fillRect(cX2 - 6 * scale, cY1 + 44 * scale, 12 * scale, 6 * scale);
+            ctx.fillRect(cX2 - 6 * scale, cY1 + 100 * scale, 12 * scale, 6 * scale);
+
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.fillText(`E = ${state.E.toFixed(1)}V`, cX2 + 38 * scale, cY1 + 80 * scale);
+
+            // Current Arrow I (Orange)
+            ctx.fillStyle = "#f59e0b"; ctx.strokeStyle = "#f59e0b"; ctx.lineWidth = 2 * scale;
+            ctx.beginPath();
+            ctx.moveTo(schemX + 70 * scale, cY1 - 10 * scale);
+            ctx.lineTo(schemX + 90 * scale, cY1 - 10 * scale);
+            ctx.lineTo(schemX + 85 * scale, cY1 - 14 * scale);
+            ctx.stroke();
+            ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`; ctx.textAlign = "left";
+            ctx.fillText(`I = ${state.I.toFixed(2)} A`, schemX + 65 * scale, cY1 - 20 * scale);
+
+            // Equations Summary Box inside Schematic Panel
+            const pBoxY = schemY + 235 * scale;
+            ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+            ctx.lineWidth = 1;
+            ctx.fillRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 105 * scale);
+            ctx.strokeRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 105 * scale);
+
+            ctx.textAlign = "left";
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText(`Loi d'Ohm : U = E + R·I`, schemX + 20 * scale, pBoxY + 18 * scale);
+            ctx.fillStyle = "#facc15";
+            ctx.fillText(`• ${U.toFixed(1)}V = ${state.E.toFixed(1)}V + ${(state.I * R).toFixed(1)}V`, schemX + 20 * scale, pBoxY + 36 * scale);
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillText(`• f.é.m. E = K·Ω = ${state.E.toFixed(1)} V`, schemX + 20 * scale, pBoxY + 54 * scale);
+            ctx.fillStyle = "#f59e0b";
+            ctx.fillText(`• Couple Tem = K·I = ${state.Tem.toFixed(2)} N·m`, schemX + 20 * scale, pBoxY + 72 * scale);
+            ctx.fillStyle = "#10b981";
+            ctx.fillText(`• Puissance Pa = U·I = ${state.Pa.toFixed(1)} W`, schemX + 20 * scale, pBoxY + 90 * scale);
         } else if (view === "speed") {
             const gX = 80 * scale; const gY = 40 * scale; const gW = 740 * scale; const gH = 300 * scale;
             ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; ctx.lineWidth = 1;
