@@ -11885,6 +11885,32 @@ function openMethodPage(title, category, desc) {
         pageCategory.textContent = category;
         pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
         
+        const placeholder = pagePanel.querySelector(".sol-gel-workspace, div[style*='dashed']");
+        
+        if (title.toLowerCase().includes("sol-gel")) {
+            if (placeholder) {
+                placeholder.outerHTML = renderSolGelCustomPage();
+            }
+            setTimeout(() => {
+                initSolGelAnimation();
+            }, 100);
+        } else {
+            if (placeholder && !placeholder.querySelector("h3")?.textContent.includes("Page dédiée prête")) {
+                placeholder.outerHTML = `
+                <div style="background: rgba(255, 255, 255, 0.02); border: 2px dashed rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 36px 24px; text-align: center;">
+                    <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(56, 189, 248, 0.1); color: var(--primary, #10b981); display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 14px;">
+                        <i data-lucide="file-text"></i>
+                    </div>
+                    <h3 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 8px;">Page dédiée prête pour le contenu</h3>
+                    <p style="color: #94a3b8; font-size: 0.88rem; max-width: 650px; margin: 0 auto 16px auto; line-height: 1.6;">
+                        Cet espace est structuré et réservé pour accueillir votre contenu détaillé (principes théoriques, schémas de montage, équations, protocoles expérimentaux ou fichiers de configuration DFT).
+                    </p>
+                    <span class="badge badge-outline" style="border-color: rgba(16, 185, 129, 0.4); color: #10b981; font-weight: 600;">Statut : Prêt à recevoir le contenu détaillé</span>
+                </div>
+                `;
+            }
+        }
+
         pagePanel.style.display = "block";
         pagePanel.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -11893,6 +11919,430 @@ function openMethodPage(title, category, desc) {
         }
     }
 }
+
+let solGelStep = 1;
+let solGelCycle = 1;
+let solGelIsPlaying = false;
+let solGelTimer = null;
+let solGelAnimFrame = 0;
+let solGelCanvasAnimId = null;
+
+function renderSolGelCustomPage() {
+    return `
+    <div class="sol-gel-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
+        
+        <!-- Top Banner: Sol-Gel Method Overview -->
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="layers"></i> Protocol Officiel LMER</span>
+                <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">Élaboration de Couches Minces LZO & ZnO par Voie Sol-Gel</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Procédé multi-étapes : Préparation du sol &rightarrow; Dépôt par Spin-Coating (5 cycles) &rightarrow; Recuit sous air à 450°C (1h).</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" id="btn-start-solgel-anim" onclick="toggleSolGelPlay()" style="padding: 10px 20px; font-weight: 700;">
+                    <i data-lucide="play-circle"></i> Lancer l'Animation Interactive
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Layout: Interactive Canvas Animation (Left) + Original LMER Schematic (Right) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+            
+            <!-- Left Column: Interactive Process Animation Canvas -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="activity"></i> Simulation Interactive du Procédé
+                    </h4>
+                    <span id="solgel-step-badge" class="badge badge-outline" style="border-color: #38bdf8; color: #38bdf8; font-weight: 600;">Étape 1 : Préparation du Sol</span>
+                </div>
+
+                <!-- Canvas Container -->
+                <div style="position: relative; width: 100%; height: 320px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="solgel-canvas" width="600" height="320" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+
+                <!-- Animation Controls -->
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 10px;">
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-secondary" onclick="prevSolGelStep()" style="padding: 6px 14px; font-size: 0.82rem;"><i data-lucide="skip-back"></i> Précédent</button>
+                        <button class="btn btn-primary" id="solgel-play-btn" onclick="toggleSolGelPlay()" style="padding: 6px 16px; font-size: 0.82rem;"><i data-lucide="play"></i> Lecture</button>
+                        <button class="btn btn-secondary" onclick="nextSolGelStep()" style="padding: 6px 14px; font-size: 0.82rem;">Suivant <i data-lucide="skip-forward"></i></button>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">Cycles Spin-Coating :</span>
+                        <span id="solgel-cycle-counter" style="color: #facc15; font-weight: 800; font-size: 0.95rem;">1 / 5</span>
+                    </div>
+                </div>
+
+                <!-- Step Description Box -->
+                <div id="solgel-step-info" style="background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 6px;">
+                    <h5 id="solgel-step-title" style="margin: 0 0 4px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">1. Préparation du Sol (ZnO / LZO)</h5>
+                    <p id="solgel-step-desc" style="margin: 0; color: #cbd5e1; font-size: 0.82rem; line-height: 1.4;">Dissolution des sels précurseurs sous agitation magnétique chauffante pour former un sol organométallique limpide et stable.</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Original LMER Method Schematic (4548.PNG) -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="image"></i> Schéma Général du Procédé LMER
+                    </h4>
+                    <a href="assets/images/sol_gel_scheme.png" target="_blank" class="badge badge-outline" style="border-color: rgba(255,255,255,0.2); color: #cbd5e1; text-decoration: none;">
+                        <i data-lucide="external-link"></i> Voir Plein Écran
+                    </a>
+                </div>
+
+                <!-- Image Container -->
+                <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); background: #ffffff; padding: 6px;">
+                    <img src="assets/images/sol_gel_scheme.png" alt="Méthode d'élaboration Sol-Gel LMER" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                </div>
+
+                <!-- Protocol Specifications Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px; font-size: 0.82rem; color: #cbd5e1;">
+                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-weight: 700; font-size: 0.88rem;">📋 Paramètres du Procédé d'Élaboration :</h5>
+                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.4;">
+                        <li><strong>Solution Sol :</strong> Précurseurs de Zinc et Lanthane/Zirconium (ZnO & LZO sol).</li>
+                        <li><strong>Dépôt :</strong> Goutte à goutte par micropipette sur substrat en verre.</li>
+                        <li><strong>Spin-Coating :</strong> Rotation, accélération progressive puis vitesse constante.</li>
+                        <li><strong>Traitement Thermique :</strong> Évaporation du solvant (séchage intermédiaire).</li>
+                        <li><strong>Nombre de Couches :</strong> <span style="color: #facc15; font-weight: 700;">5 Répétitions au total</span>.</li>
+                        <li><strong>Recuit Final :</strong> Recuit sous air à <span style="color: #ef4444; font-weight: 700;">450°C pendant 1 heure</span> en four à tube.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    `;
+}
+
+function initSolGelAnimation() {
+    solGelStep = 1;
+    solGelCycle = 1;
+    solGelIsPlaying = false;
+    updateSolGelStepUI();
+    startSolGelCanvasLoop();
+}
+
+function toggleSolGelPlay() {
+    solGelIsPlaying = !solGelIsPlaying;
+    const playBtn = document.getElementById("solgel-play-btn");
+    if (playBtn) {
+        playBtn.innerHTML = solGelIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lecture`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+    if (solGelIsPlaying) {
+        runSolGelAutoPlay();
+    } else if (solGelTimer) {
+        clearInterval(solGelTimer);
+    }
+}
+
+function runSolGelAutoPlay() {
+    if (solGelTimer) clearInterval(solGelTimer);
+    solGelTimer = setInterval(() => {
+        if (!solGelIsPlaying) return;
+        solGelStep++;
+        if (solGelStep > 5) {
+            solGelStep = 2; // Loop back to Spin-coating deposition for next layer cycle
+            solGelCycle++;
+            if (solGelCycle > 5) {
+                solGelCycle = 5;
+                solGelStep = 5; // Final annealing step
+                solGelIsPlaying = false;
+                toggleSolGelPlay();
+            }
+        }
+        updateSolGelStepUI();
+    }, 2800);
+}
+
+function nextSolGelStep() {
+    solGelStep++;
+    if (solGelStep > 5) {
+        solGelStep = 1;
+        solGelCycle = (solGelCycle % 5) + 1;
+    }
+    updateSolGelStepUI();
+}
+
+function prevSolGelStep() {
+    solGelStep--;
+    if (solGelStep < 1) solGelStep = 5;
+    updateSolGelStepUI();
+}
+
+function updateSolGelStepUI() {
+    const badge = document.getElementById("solgel-step-badge");
+    const counter = document.getElementById("solgel-cycle-counter");
+    const title = document.getElementById("solgel-step-title");
+    const desc = document.getElementById("solgel-step-desc");
+
+    if (counter) counter.textContent = `${solGelCycle} / 5`;
+
+    const stepInfo = [
+        {
+            badge: "Étape 1 : Préparation du Sol",
+            title: "1. Préparation du Sol (ZnO / LZO)",
+            desc: "Mélange des sels précurseurs (Zinc / Lanthane) sous agitation magnétique chauffante. Formation d'un sol organométallique homogène."
+        },
+        {
+            badge: "Étape 2 : Dépôt de la Solution",
+            title: "2. Dépôt de la Solution (Micropipette)",
+            desc: "Injection goutte à goutte du sol précurseur sur le substrat en verre propre fixé sur le plateau du Spin-Coater."
+        },
+        {
+            badge: "Étape 3 : Spin Coating (Centrifugation)",
+            title: "3. Étalement par Rotation (Spin-Coating)",
+            desc: "Rotation, accélération puis vitesse constante. La force centrifuge étale la goutte en un film liquide ultrafin et uniforme."
+        },
+        {
+            badge: "Étape 4 : Évaporation du Solvant",
+            title: "4. Évaporation du Solvant (Séchage)",
+            desc: "Chauffage intermédiaire pour évaporer le solvant volatile. Opération répétée 5 fois pour empiler 5 couches successives."
+        },
+        {
+            badge: "Étape 5 : Recuit Thermique (Four à Tube)",
+            title: "5. Recuit sous Air à 450°C (1 Heure)",
+            desc: "Traitement thermique dans un four à tube sous air atmosphérique à 450°C pendant 1h pour cristalliser la couche mince LZO."
+        }
+    ];
+
+    const current = stepInfo[solGelStep - 1];
+    if (badge) badge.textContent = current.badge;
+    if (title) title.textContent = current.title;
+    if (desc) desc.textContent = current.desc;
+}
+
+function startSolGelCanvasLoop() {
+    if (solGelCanvasAnimId) cancelAnimationFrame(solGelCanvasAnimId);
+    
+    function loop() {
+        solGelAnimFrame++;
+        drawSolGelCanvas();
+        solGelCanvasAnimId = requestAnimationFrame(loop);
+    }
+    loop();
+}
+
+function drawSolGelCanvas() {
+    const canvas = document.getElementById("solgel-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Background Grid
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.05)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < w; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    for (let y = 0; y < h; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
+    if (solGelStep === 1) {
+        // --- STEP 1: HOTPLATE MAGNETIC STIRRER ---
+        // Base
+        ctx.fillStyle = "#1e293b";
+        ctx.fillRect(200, 220, 200, 50);
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(200, 220, 200, 50);
+
+        // Control Knobs
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath(); ctx.arc(240, 245, 8, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(270, 245, 8, 0, Math.PI * 2); ctx.fill();
+
+        // Hotplate Top
+        ctx.fillStyle = "#475569";
+        ctx.fillRect(190, 210, 220, 10);
+
+        // Beaker
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(230, 90);
+        ctx.lineTo(230, 210);
+        ctx.lineTo(370, 210);
+        ctx.lineTo(370, 90);
+        ctx.stroke();
+
+        // Liquid inside beaker
+        ctx.fillStyle = "rgba(56, 189, 248, 0.4)";
+        ctx.fillRect(233, 130, 134, 78);
+
+        // Rotating Stirrer Bar
+        const angle = (solGelAnimFrame * 0.15) % (Math.PI * 2);
+        ctx.save();
+        ctx.translate(300, 200);
+        ctx.rotate(angle);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(-15, -4, 30, 8);
+        ctx.restore();
+
+        // Swirling particles
+        for (let i = 0; i < 8; i++) {
+            const px = 300 + Math.cos(angle + i) * (20 + (i * 6));
+            const py = 165 + Math.sin(angle + i) * 15;
+            ctx.fillStyle = "#facc15";
+            ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
+        }
+
+        // Pouring Beakers top left
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "bold 13px Inter, sans-serif";
+        ctx.fillText("Mélange: ZnO + LZO Sol", 220, 75);
+
+    } else if (solGelStep === 2) {
+        // --- STEP 2: PIPETTE DEPOSITION ---
+        // Spin Coater Base
+        ctx.fillStyle = "#1e293b";
+        ctx.fillRect(210, 220, 180, 60);
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(210, 220, 180, 60);
+
+        // Chuck & Substrate
+        ctx.fillStyle = "#64748b";
+        ctx.fillRect(285, 180, 30, 40);
+        ctx.fillStyle = "#e2e8f0"; // Glass Substrate
+        ctx.fillRect(230, 172, 140, 8);
+
+        // Micropipette
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillRect(295, 30, 10, 80);
+        ctx.beginPath();
+        ctx.moveTo(295, 110);
+        ctx.lineTo(305, 110);
+        ctx.lineTo(301, 130);
+        ctx.lineTo(299, 130);
+        ctx.closePath();
+        ctx.fill();
+
+        // Droplet Animation
+        const dropY = 130 + ((solGelAnimFrame * 4) % 40);
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath(); ctx.arc(300, dropY, 5, 0, Math.PI * 2); ctx.fill();
+
+        // Liquid Pool on Substrate
+        ctx.fillStyle = "rgba(56, 189, 248, 0.8)";
+        ctx.beginPath(); ctx.ellipse(300, 172, 25, 4, 0, 0, Math.PI * 2); ctx.fill();
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "bold 13px Inter, sans-serif";
+        ctx.fillText("Dépôt Goutte à Goutte", 230, 20);
+
+    } else if (solGelStep === 3) {
+        // --- STEP 3: SPIN COATING ROTATION ---
+        ctx.fillStyle = "#1e293b";
+        ctx.fillRect(210, 220, 180, 60);
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(210, 220, 180, 60);
+
+        ctx.fillStyle = "#64748b";
+        ctx.fillRect(285, 180, 30, 40);
+
+        // Rotating Substrate with thin film
+        const spinW = 140 + Math.sin(solGelAnimFrame * 0.3) * 10;
+        ctx.fillStyle = "#e2e8f0";
+        ctx.fillRect(300 - spinW/2, 172, spinW, 8);
+
+        // Thin Film Layer
+        ctx.fillStyle = "#38bdf8";
+        ctx.fillRect(300 - spinW/2, 168, spinW, 4);
+
+        // Rotation Arrows / Motion Lines
+        const rAngle = solGelAnimFrame * 0.2;
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(300, 172, 85, rAngle, rAngle + Math.PI * 0.8);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(300, 172, 85, rAngle + Math.PI, rAngle + Math.PI * 1.8);
+        ctx.stroke();
+
+        ctx.fillStyle = "#facc15";
+        ctx.font = "bold 14px Inter, sans-serif";
+        ctx.fillText("ω = 3000 RPM (Centrifugation)", 200, 120);
+
+    } else if (solGelStep === 4) {
+        // --- STEP 4: SOLVENT EVAPORATION ---
+        ctx.fillStyle = "#475569";
+        ctx.fillRect(200, 220, 200, 20);
+
+        // Glass Substrate
+        ctx.fillStyle = "#e2e8f0";
+        ctx.fillRect(230, 210, 140, 10);
+
+        // Multilayer Film based on cycle
+        for (let c = 0; c < solGelCycle; c++) {
+            ctx.fillStyle = `rgba(56, 189, 248, ${0.4 + c * 0.12})`;
+            ctx.fillRect(230, 206 - (c * 3), 140, 3);
+        }
+
+        // Steam Vapor Arrows Rising
+        for (let i = 0; i < 5; i++) {
+            const vy = 190 - ((solGelAnimFrame * 2 + i * 20) % 80);
+            const vx = 240 + (i * 30);
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.6)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(vx, vy);
+            ctx.lineTo(vx, vy - 15);
+            ctx.stroke();
+        }
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 13px Inter, sans-serif";
+        ctx.fillText(`Évaporation du Solvant (Couche ${solGelCycle} / 5)`, 200, 60);
+
+    } else if (solGelStep === 5) {
+        // --- STEP 5: TUBE FURNACE ANNEALING AT 450°C ---
+        // Tube Furnace Body
+        const furnaceGlow = Math.abs(Math.sin(solGelAnimFrame * 0.05));
+        ctx.fillStyle = "#334155";
+        ctx.fillRect(150, 110, 300, 130);
+        ctx.strokeStyle = `rgba(239, 68, 68, ${0.5 + furnaceGlow * 0.5})`;
+        ctx.lineWidth = 4;
+        ctx.strokeRect(150, 110, 300, 130);
+
+        // Inner Quartz Tube Glowing Red Hot
+        ctx.fillStyle = `rgba(239, 68, 68, ${0.2 + furnaceGlow * 0.3})`;
+        ctx.fillRect(120, 150, 360, 50);
+
+        // Substrate inside tube with crystalline LZO layer
+        ctx.fillStyle = "#cbd5e1";
+        ctx.fillRect(230, 175, 140, 8);
+        ctx.fillStyle = "#10b981"; // Crystalline Layer
+        ctx.fillRect(230, 170, 140, 5);
+
+        // Heat Waves
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 2;
+        for (let w = 0; w < 3; w++) {
+            const wx = 180 + (w * 80);
+            ctx.beginPath();
+            ctx.arc(wx, 135, 15, Math.PI, 0);
+            ctx.stroke();
+        }
+
+        ctx.fillStyle = "#ef4444";
+        ctx.font = "bold 15px Inter, sans-serif";
+        ctx.fillText("Recuit Thermique: 450°C sous Air (1 Heure)", 140, 80);
+        ctx.fillStyle = "#10b981";
+        ctx.font = "bold 13px Inter, sans-serif";
+        ctx.fillText("✔ Couche Mince LZO Cristallisée", 210, 275);
+    }
+}
+
 
 function closeMethodPage() {
     const pagePanel = document.getElementById("method-page-panel");
