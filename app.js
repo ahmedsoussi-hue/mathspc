@@ -4766,30 +4766,125 @@ function setupAnimations() {
         });
     }
 
-    const animSelectBtns = document.querySelectorAll(".anim-select-btn");
-    animSelectBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const targetAnim = btn.getAttribute("data-anim");
-            
-            // Toggle active buttons
-            animSelectBtns.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            
-            // Toggle active workspaces
-            document.querySelectorAll(".anim-workspace").forEach(workspace => {
-                if (workspace.id === `anim-${targetAnim}`) {
-                    workspace.style.display = "flex";
-                    workspace.classList.add("active");
-                    
-                    // Set current height
-                    const canvas = workspace.querySelector("canvas");
-                    if (canvas) canvas.height = animCanvasHeight;
-                    
-                    initCanvasFor(targetAnim);
-                    triggerMathJax();
+    // 3. Visual Gallery Cards & Player View Engine
+    const galleryView = document.getElementById("anim-gallery-view");
+    const playerView = document.getElementById("anim-player-view");
+    const btnBackToGallery = document.getElementById("btn-back-to-gallery");
+    const activeTitleSpan = document.getElementById("anim-active-title");
+    const searchInput = document.getElementById("anim-search-input");
+    const filterBtns = document.querySelectorAll(".anim-filter-btn");
+    const animCards = document.querySelectorAll(".anim-card");
+
+    function openAnimPlayer(targetAnim, cardTitle) {
+        if (!galleryView || !playerView) return;
+
+        galleryView.style.display = "none";
+        playerView.style.display = "block";
+
+        if (activeTitleSpan && cardTitle) {
+            activeTitleSpan.textContent = cardTitle;
+        }
+
+        // Toggle active workspace
+        document.querySelectorAll(".anim-workspace").forEach(workspace => {
+            if (workspace.id === `anim-${targetAnim}`) {
+                workspace.style.display = "flex";
+                workspace.classList.add("active");
+
+                const canvas = workspace.querySelector("canvas");
+                if (canvas) canvas.height = animCanvasHeight;
+
+                initCanvasFor(targetAnim);
+                triggerMathJax();
+            } else {
+                workspace.style.display = "none";
+                workspace.classList.remove("active");
+            }
+        });
+
+        window.scrollTo({ top: playerView.offsetTop - 80, behavior: "smooth" });
+    }
+
+    function showGallery() {
+        if (!galleryView || !playerView) return;
+        playerView.style.display = "none";
+        galleryView.style.display = "block";
+        window.scrollTo({ top: galleryView.offsetTop - 80, behavior: "smooth" });
+    }
+
+    // Attach click listeners to cards
+    animCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const targetAnim = card.getAttribute("data-anim");
+            const cardTitle = card.querySelector("h3") ? card.querySelector("h3").textContent : "Laboratoire Virtuel";
+            openAnimPlayer(targetAnim, cardTitle);
+        });
+    });
+
+    // Back to gallery button
+    if (btnBackToGallery) {
+        btnBackToGallery.addEventListener("click", () => {
+            showGallery();
+        });
+    }
+
+    // Global navigation function
+    window.navigateToAnim = function(animId) {
+        // Switch main tab to animations
+        const animTabBtn = document.querySelector('.nav-links button[data-tab="animations-section"]');
+        if (animTabBtn) animTabBtn.click();
+
+        const card = document.querySelector(`.anim-card[data-anim="${animId}"]`);
+        const cardTitle = card ? card.querySelector("h3").textContent : "Laboratoire Virtuel";
+        openAnimPlayer(animId, cardTitle);
+    };
+
+    // 4. Search Filter Logic
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const activeFilter = document.querySelector(".anim-filter-btn.active") ? document.querySelector(".anim-filter-btn.active").getAttribute("data-filter") : "all";
+
+            animCards.forEach(card => {
+                const title = card.querySelector("h3") ? card.querySelector("h3").textContent.toLowerCase() : "";
+                const desc = card.querySelector("p") ? card.querySelector("p").textContent.toLowerCase() : "";
+                const keywords = card.getAttribute("data-keywords") ? card.getAttribute("data-keywords").toLowerCase() : "";
+                const cat = card.getAttribute("data-category");
+
+                const matchesQuery = query === "" || title.includes(query) || desc.includes(query) || keywords.includes(query);
+                const matchesCat = activeFilter === "all" || cat === activeFilter;
+
+                if (matchesQuery && matchesCat) {
+                    card.style.display = "flex";
                 } else {
-                    workspace.style.display = "none";
-                    workspace.classList.remove("active");
+                    card.style.display = "none";
+                }
+            });
+        });
+    }
+
+    // 5. Category Filter Buttons
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            filterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filterCat = btn.getAttribute("data-filter");
+            const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
+            animCards.forEach(card => {
+                const title = card.querySelector("h3") ? card.querySelector("h3").textContent.toLowerCase() : "";
+                const desc = card.querySelector("p") ? card.querySelector("p").textContent.toLowerCase() : "";
+                const keywords = card.getAttribute("data-keywords") ? card.getAttribute("data-keywords").toLowerCase() : "";
+                const cat = card.getAttribute("data-category");
+
+                const matchesQuery = query === "" || title.includes(query) || desc.includes(query) || keywords.includes(query);
+                const matchesCat = filterCat === "all" || cat === filterCat;
+
+                if (matchesQuery && matchesCat) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
                 }
             });
         });
@@ -4799,11 +4894,6 @@ function setupAnimations() {
     document.documentElement.style.setProperty("--primary", animPrimaryColor);
     document.documentElement.style.setProperty("--primary-hover", animPrimaryColor + "dd");
     document.documentElement.style.setProperty("--secondary", animSecondaryColor);
-
-    // Initialize the default one with correct initial height
-    const initialCanvas = document.getElementById("canvas-wave");
-    if (initialCanvas) initialCanvas.height = animCanvasHeight;
-    initCanvasFor("wave");
 }
 
 function initCanvasFor(type) {

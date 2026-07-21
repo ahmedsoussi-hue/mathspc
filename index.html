@@ -262,172 +262,232 @@
         </section>
 
         <!-- SECTION 3: ANIMATIONS INTERACTIVES -->
+        <!-- SECTION 3: ANIMATIONS INTERACTIVES -->
         <section id="animations-section" class="tab-content">
-            <div class="animations-container">
-                <!-- Sidebar for animation selector -->
-                <div class="animations-sidebar">
-                    <div class="animations-sidebar-header">
-                        <span class="badge badge-accent"><i data-lucide="sparkles"></i> Labo Virtuel</span>
-                        <h2>Animations Interactives</h2>
-                        <p>Visualisez les concepts de Mathématiques et de Physique-Chimie en temps réel.</p>
-                    </div>
-                    <div class="animation-selector-list">
-                        <button class="anim-select-btn active" data-anim="wave">
-                            <div class="btn-icon-wrapper"><i data-lucide="activity"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Ondes Progressives</strong>
-                                <span>Corde vibrante sinusoïdale</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="delay">
-                            <div class="btn-icon-wrapper"><i data-lucide="timer"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Retard Temporel</strong>
-                                <span>Double capteur sonore</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="newton">
-                            <div class="btn-icon-wrapper"><i data-lucide="box"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Lois de Newton</strong>
-                                <span>Plan incliné & frottements</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="rc">
-                            <div class="btn-icon-wrapper"><i data-lucide="zap"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Circuit RC</strong>
-                                <span>Charge & décharge de condensateur</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="equilibrium">
-                            <div class="btn-icon-wrapper"><i data-lucide="flask-conical"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Équilibre Chimique</strong>
-                                <span>Tableau d'avancement dynamique</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="plotter">
-                            <div class="btn-icon-wrapper"><i data-lucide="line-chart"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Traceur de Courbes</strong>
-                                <span>Construction de graphes de fonctions</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="focometrie">
-                            <div class="btn-icon-wrapper"><i data-lucide="eye"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Focométrie (Optique)</strong>
-                                <span>Bessel, Silbermann, Autocollimation, Badal</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="photovoltaique">
-                            <div class="btn-icon-wrapper"><i data-lucide="sun"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Cellule Photovoltaïque</strong>
-                                <span>Caractéristique I-U, P-U & Rendement</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="charge-electron">
-                            <div class="btn-icon-wrapper"><i data-lucide="magnet"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Charge spécifique e/m</strong>
-                                <span>Expérience de J.J. Thomson & Helmholtz</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="diodes-redressement">
-                            <div class="btn-icon-wrapper"><i data-lucide="zap"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Diodes & Applications</strong>
-                                <span>Redressement (mono/double) & Filtrage</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="transistor-bipolaire">
-                            <div class="btn-icon-wrapper"><i data-lucide="cpu"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Transistor Bipolaire</strong>
-                                <span>Caractéristiques \(I_B(V_{BE})\) & \(I_C(V_{CE})\)</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="aop-amplificateur">
-                            <div class="btn-icon-wrapper"><i data-lucide="activity"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Amplificateur Opérationnel</strong>
-                                <span>Tensions d'entrée \(V_{in}\) & de sortie \(V_{out}\)</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="mesure-resistances">
-                            <div class="btn-icon-wrapper"><i data-lucide="calculator"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Mesure de Résistances</strong>
-                                <span>Code des couleurs, Amont/Aval & Wheatstone</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="charge-decharge-rc">
-                            <div class="btn-icon-wrapper"><i data-lucide="battery-charging"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Charge & Décharge Condensateur</strong>
-                                <span>Dipôle RC, constante \(\tau = RC\) & Tangente</span>
-                            </div>
-                        </button>
-                        <button class="anim-select-btn" data-anim="moteur-cc">
-                            <div class="btn-icon-wrapper"><i data-lucide="disc"></i></div>
-                            <div class="btn-text-wrapper">
-                                <strong>Moteur à Courant Continu</strong>
-                                <span>Caractéristiques \(N(U)\), \(T(I)\) & Rendement \(\eta\)</span>
-                            </div>
-                        </button>
-                    </div>
-                    <!-- Options de personnalisation -->
-                    <div class="animations-settings">
-                        <div class="settings-header">
-                            <i data-lucide="sliders"></i>
-                            <span>Personnalisation</span>
-                        </div>
-                        
-                        <!-- Color Options -->
-                        <div class="settings-group">
-                            <label>Couleur Principale :</label>
-                            <div class="color-picker-grid">
-                                <button type="button" class="color-btn" data-color="#0d7377" style="background-color: #0d7377;"></button>
-                                <button type="button" class="color-btn" data-color="#3b82f6" style="background-color: #3b82f6;"></button>
-                                <button type="button" class="color-btn active" data-color="#10b981" style="background-color: #10b981;"></button>
-                                <button type="button" class="color-btn" data-color="#e11d48" style="background-color: #e11d48;"></button>
-                                <button type="button" class="color-btn" data-color="#8b5cf6" style="background-color: #8b5cf6;"></button>
-                                <button type="button" class="color-btn" data-color="#f59e0b" style="background-color: #f59e0b;"></button>
-                            </div>
-                        </div>
+            <!-- 1. GALERIE VISUELLE D'ACCUEIL DES ANIMATIONS -->
+            <div id="anim-gallery-view" class="anim-gallery-container">
+                <div class="anim-gallery-header">
+                    <span class="badge badge-accent"><i data-lucide="sparkles"></i> Laboratoire Virtuel & Simulations 3D</span>
+                    <h2>Galerie des Animations & TP Virtuels</h2>
+                    <p>Explorez les principes fondamentaux de la Physique-Chimie et des Sciences de l'Ingénieur à travers nos simulations interactives.</p>
+                </div>
 
-                        <div class="settings-group">
-                            <label>Couleur Secondaire :</label>
-                            <div class="color-picker-grid">
-                                <button type="button" class="color-btn-sec" data-color="#cbd5e1" style="background-color: #cbd5e1;"></button>
-                                <button type="button" class="color-btn-sec" data-color="#ef4444" style="background-color: #ef4444;"></button>
-                                <button type="button" class="color-btn-sec active" data-color="#c87f0a" style="background-color: #c87f0a;"></button>
-                                <button type="button" class="color-btn-sec" data-color="#06b6d4" style="background-color: #06b6d4;"></button>
-                                <button type="button" class="color-btn-sec" data-color="#a855f7" style="background-color: #a855f7;"></button>
-                                <button type="button" class="color-btn-sec" data-color="#10b981" style="background-color: #10b981;"></button>
-                            </div>
-                        </div>
-                        
-                        <!-- Size Options -->
-                        <div class="settings-group">
-                            <label for="anim-zoom-slider">Zoom Éléments : <span id="val-anim-zoom">100</span>%</label>
-                            <input type="range" id="anim-zoom-slider" min="70" max="150" value="100">
-                        </div>
-
-                        <div class="settings-group">
-                            <label for="anim-height-slider">Hauteur Écran : <span id="val-anim-height">400</span>px</label>
-                            <input type="range" id="anim-height-slider" min="300" max="600" step="10" value="400">
-                        </div>
+                <!-- Search and Category Filters Toolbar -->
+                <div class="anim-gallery-toolbar">
+                    <div class="anim-search-wrapper">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" id="anim-search-input" placeholder="Rechercher une animation (ex: Lentilles, Diodes, RLC, Moteur, Ondes...)" autocomplete="off">
+                    </div>
+                    <div class="anim-category-filters" id="anim-category-filters">
+                        <button class="anim-filter-btn active" data-filter="all">Toutes</button>
+                        <button class="anim-filter-btn" data-filter="optique">Optique & Ondes</button>
+                        <button class="anim-filter-btn" data-filter="electricite">Électricité & RLC</button>
+                        <button class="anim-filter-btn" data-filter="electronique">Électronique</button>
+                        <button class="anim-filter-btn" data-filter="electrotechnique">Électrotechnique</button>
+                        <button class="anim-filter-btn" data-filter="mecanique">Physique & Mécanique</button>
                     </div>
                 </div>
 
-                <!-- Display panel for active animation -->
-                <div class="animation-display-panel">
-                    
-                    <!-- Wave Simulation -->
-                    <div class="anim-workspace active" id="anim-wave">
+                <!-- Interactive Responsive Card Grid -->
+                <div class="anim-card-grid" id="anim-card-grid">
+                    <!-- 1. Ondes Progressives & Diffraction -->
+                    <div class="anim-card" data-anim="wave" data-category="optique" data-keywords="ondes diffraction corde progressive frequence amplitude">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Ondes Progressives & Diffraction" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="waves"></i> Optique & Ondes</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Ondes Progressives & Diffraction</h3>
+                            <p>Étudiez la propagation d'une onde sinusoïdale sur une corde vibrante et le phénomène de diffraction à travers une fente.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Retard Temporel -->
+                    <div class="anim-card" data-anim="delay" data-category="optique" data-keywords="retard temporel onde sonore vitesse propagation corde">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_delay.jpg" alt="Retard Temporel" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="timer"></i> Optique & Ondes</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Retard Temporel & Corde</h3>
+                            <p>Mesurez le retard temporel \(\tau\) lors de la propagation d'une onde mécanique entre deux capteurs.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Focométrie & Lentilles -->
+                    <div class="anim-card" data-anim="focometrie" data-category="optique" data-keywords="focometrie lentille convergente bessel silbermann autocollimation optique">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/optics_lens.jpg" alt="Focométrie & Lentilles" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="eye"></i> Optique & Ondes</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Focométrie & Lentilles Minces</h3>
+                            <p>Déterminez la distance focale \(f'\) par les méthodes de Bessel, Silbermann, Autocollimation et Badal.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Charge & Décharge Condensateur RC -->
+                    <div class="anim-card" data-anim="charge-decharge-rc" data-category="electricite" data-keywords="charge decharge condensateur rc constante de temps tau oscillogramme rlc">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/rc_circuit.jpg" alt="Charge & Décharge Condensateur" loading="lazy">
+                            <span class="anim-card-badge badge-electricite"><i data-lucide="battery-charging"></i> Électricité & RLC</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Charge & Décharge Condensateur (Dipôle RC)</h3>
+                            <p>Observez la courbe transitoire \(u_C(t)\) sur oscilloscope et déterminez la constante de temps \(\tau = R \cdot C\).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Mesure de Résistances -->
+                    <div class="anim-card" data-anim="mesure-resistances" data-category="electricite" data-keywords="mesure resistances code des couleurs amont aval wheatstone ohmere">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/resistor_color.jpg" alt="Mesure de Résistances" loading="lazy">
+                            <span class="anim-card-badge badge-electricite"><i data-lucide="calculator"></i> Électricité</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Mesure de Résistances & Wheatstone</h3>
+                            <p>Déterminez la résistance par le code des anneaux de couleurs, comparez les montages Amont/Aval et équilibrez le Pont de Wheatstone.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Moteur à Courant Continu -->
+                    <div class="anim-card" data-anim="moteur-cc" data-category="electrotechnique" data-keywords="moteur courant continu mcc laplace inducteur induit vitesse couple rendement">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/dc_motor.jpg" alt="Moteur à Courant Continu" loading="lazy">
+                            <span class="anim-card-badge badge-electrotechnique"><i data-lucide="disc"></i> Électrotechnique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Moteur à Courant Continu (MCC)</h3>
+                            <p>Visualisez la rotation 2D du rotor, les forces de Laplace \(F = I \cdot L \times B\), et tracez les caractéristiques \(N(U)\), \(T(I)\) et \(\eta\).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Amplificateur Opérationnel AOP -->
+                    <div class="anim-card" data-anim="aop-amplificateur" data-category="electronique" data-keywords="aop amplificateur operationnel suiveur inverseur sommateur soustracteur oscilloscope">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/opamp_scope.jpg" alt="Amplificateur Opérationnel" loading="lazy">
+                            <span class="anim-card-badge badge-electronique"><i data-lucide="activity"></i> Électronique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Amplificateur Opérationnel (AOP)</h3>
+                            <p>Visualisez simultanément \(V_{in}(t)\) et \(V_{out}(t)\) sur oscilloscope parmi 8 montages (Inverseur, Suiveur, Sommateur, Comparateur...).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Transistor Bipolaire -->
+                    <div class="anim-card" data-anim="transistor-bipolaire" data-category="electronique" data-keywords="transistor bipolaire npn base collecteur emetteur droite de charge">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/transistor_chip.jpg" alt="Transistor Bipolaire" loading="lazy">
+                            <span class="anim-card-badge badge-electronique"><i data-lucide="cpu"></i> Électronique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Transistor Bipolaire (NPN)</h3>
+                            <p>Tracez les caractéristiques d'entrée \(I_B = f(V_{BE})\) et de sortie \(I_C = f(V_{CE})\) ainsi que la droite de charge statique.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Diodes & Redressement -->
+                    <div class="anim-card" data-anim="diodes-redressement" data-category="electronique" data-keywords="diode redressement mono double alternance filtrage condensateur">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/diode_circuit.jpg" alt="Diodes & Redressement" loading="lazy">
+                            <span class="anim-card-badge badge-electronique"><i data-lucide="zap"></i> Électronique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Diodes & Redressement de Tension</h3>
+                            <p>Étudiez le redressement simple et double alternance (pont de Graetz) avec filtrage capacitif et mesure de la tension d'ondulation.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. Photovoltaïque -->
+                    <div class="anim-card" data-anim="photovoltaique" data-category="mecanique" data-keywords="cellule photovoltaique panneau solaire effet photoelectrique rendement">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/solar_cell.jpg" alt="Cellule Photovoltaïque" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="sun"></i> Physique Moderne</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Cellule Photovoltaïque & Effet Photoélectrique</h3>
+                            <p>Tracez les caractéristiques courant-tension \(I(U)\) et puissance \(P(U)\) d'un panneau solaire sous éclairement variable.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. Charge de l'Électron -->
+                    <div class="anim-card" data-anim="charge-electron" data-category="mecanique" data-keywords="charge electron thomson helmholtz champ electrique magnetique">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/electron_field.jpg" alt="Charge Spécifique e/m" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="magnet"></i> Physique Moderne</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Charge Spécifique de l'Électron \(e/m\)</h3>
+                            <p>Simulez la déviation des électrons dans des bobines de Helmholtz et mesurez le rapport charge/masse \(e/m\).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. Traceur de Fonctions & Mouvement -->
+                    <div class="anim-card" data-anim="plotter" data-category="mecanique" data-keywords="traceur courbes grapheur vitesse acceleration mouvement chute libre">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/motion_plotter.jpg" alt="Traceur de Courbes" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="line-chart"></i> Mécanique & Math</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Traceur de Courbes & Mécanique</h3>
+                            <p>Tracez les fonctions mathématiques et les équations horaires du mouvement (position, vitesse, accélération).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 2. ESPACE DE LECTURE DE L'ANIMATION SELECTIONNEE -->
+            <div id="anim-player-view" style="display: none;">
+                <div class="anim-player-top-bar">
+                    <button class="btn btn-secondary" id="btn-back-to-gallery" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        <i data-lucide="arrow-left"></i> <span>← Retour à la Galerie des Animations</span>
+                    </button>
+                    <span class="anim-active-title" id="anim-active-title" style="font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--primary, #10b981);">Laboratoire Virtuel</span>
+                </div>
+                
+                <div class="animations-container">
+                    <!-- Display panel for active animation -->
+                    <div class="animation-display-panel" style="width: 100%;">
+                        
+                        <!-- Wave Simulation -->
+                        <div class="anim-workspace active" id="anim-wave">
                         <div class="workspace-header">
                             <h3>Ondes Progressives Sinusoïdales</h3>
                             <p>Visualisez la propagation d'une onde mécanique transversale le long d'une corde tendue.</p>
