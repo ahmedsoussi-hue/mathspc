@@ -12281,7 +12281,7 @@ function openMethodPage(title, category, desc, options = {}) {
         pageCategory.textContent = category;
         pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
         
-        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, div[style*='dashed']");
+        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, .silar-workspace, div[style*='dashed']");
         
         if (title.toLowerCase().includes("sol-gel") || title.toLowerCase().includes("spin coating")) {
             if (placeholder) {
@@ -12303,6 +12303,13 @@ function openMethodPage(title, category, desc, options = {}) {
             }
             setTimeout(() => {
                 initElectrochemicalAnimation();
+            }, 100);
+        } else if (title.toLowerCase().includes("silar")) {
+            if (placeholder) {
+                placeholder.outerHTML = renderSilarCustomPage();
+            }
+            setTimeout(() => {
+                initSilarAnimation();
             }, 100);
         } else {
             if (placeholder && !placeholder.querySelector("h3")?.textContent.includes("Page dédiée prête")) {
@@ -13526,6 +13533,327 @@ function drawElectrochemicalCanvas() {
         badge.textContent = `Épaisseur : ${filmThicknessNm} nm`;
     }
 }
+
+// --- SILAR (SUCCESSIVE IONIC LAYER ADSORPTION AND REACTION) ANIMATION ENGINE ---
+let silarStep = 1;
+let silarCycle = 1;
+let silarMaxCycles = 20;
+let silarDipTime = 15;
+let silarIsPlaying = false;
+let silarTimer = null;
+let silarCanvasAnimId = null;
+let silarAnimFrame = 0;
+let silarSubstrateX = 100;
+let silarSubstrateY = 60;
+
+function renderSilarCustomPage() {
+    return `
+    <div class="silar-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
+        
+        <!-- Top Banner: SILAR Overview -->
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="layers"></i> Protocol Expérimental Officiel LMER</span>
+                <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">SILAR (Successive Ionic Layer Adsorption and Reaction)</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Dépôt de couches atomiques par cycles d'adsorption cationique, rinçage, réaction anionique et rinçage.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" id="btn-start-silar-anim" onclick="toggleSilarPlay()" style="padding: 10px 20px; font-weight: 700;">
+                    <i data-lucide="play-circle"></i> Lancer l'Animation du Cycle SILAR
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Layout: Interactive Canvas Animation (Left) + Original LMER Schematic (Right) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+            
+            <!-- Left Column: Interactive SILAR Setup & Step Animation Canvas -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="activity"></i> Simulation du Cycle SILAR
+                    </h4>
+                    <span id="silar-step-badge" class="badge badge-outline" style="border-color: #38bdf8; color: #38bdf8; font-weight: 600;">Étape 1 : Adsorption Cationique</span>
+                </div>
+
+                <!-- Canvas Container -->
+                <div style="position: relative; width: 100%; height: 340px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="silar-canvas" width="620" height="340" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+
+                <!-- Animation Controls -->
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 10px;">
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-secondary" onclick="prevSilarStep()" style="padding: 6px 14px; font-size: 0.82rem;"><i data-lucide="skip-back"></i> Précédent</button>
+                        <button class="btn btn-primary" id="silar-play-btn" onclick="toggleSilarPlay()" style="padding: 6px 16px; font-size: 0.82rem;"><i data-lucide="play"></i> Lecture</button>
+                        <button class="btn btn-secondary" onclick="nextSilarStep()" style="padding: 6px 14px; font-size: 0.82rem;">Suivant <i data-lucide="skip-forward"></i></button>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.8rem; color: #94a3b8;">Cycles SILAR :</span>
+                        <span id="silar-cycle-counter" style="color: #facc15; font-weight: 800; font-size: 0.95rem;">1 / 20</span>
+                    </div>
+                </div>
+
+                <!-- Step Description Box -->
+                <div id="silar-step-info" style="background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 6px;">
+                    <h5 id="silar-step-title" style="margin: 0 0 4px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">1. Adsorption Cationique (Cationic Solution)</h5>
+                    <p id="silar-step-desc" style="margin: 0; color: #cbd5e1; font-size: 0.82rem; line-height: 1.4;">Immersion du substrat en verre dans le bêcher de solution cationique. Les cations (◯) s'adsorbent à la surface du substrat.</p>
+                </div>
+            </div>
+
+            <!-- Right Column: Original Experimental Setup Schematic (58.png) -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="image"></i> Schéma Général du Cycle SILAR
+                    </h4>
+                    <a href="assets/images/silar_scheme.png" target="_blank" class="badge badge-outline" style="border-color: rgba(255,255,255,0.2); color: #cbd5e1; text-decoration: none;">
+                        <i data-lucide="external-link"></i> Voir Plein Écran
+                    </a>
+                </div>
+
+                <!-- Image Container -->
+                <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); background: #ffffff; padding: 6px;">
+                    <img src="assets/images/silar_scheme.png" alt="Procédé expérimental SILAR Cycle" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                </div>
+
+                <!-- Protocol Specifications Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px; font-size: 0.82rem; color: #cbd5e1;">
+                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-weight: 700; font-size: 0.88rem;">📋 Les 4 Étapes du Cycle SILAR :</h5>
+                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.4;">
+                        <li><strong>Étape 1 - Adsorption :</strong> Immersion dans la solution cationique (Cations ◯).</li>
+                        <li><strong>Étape 2 - Rinçage :</strong> Rinçage à l'eau distillée pour éliminer l'excès de cations.</li>
+                        <li><strong>Étape 3 - Réaction :</strong> Immersion dans la solution anionique (Anions ●).</li>
+                        <li><strong>Étape 4 - Rinçage :</strong> Rinçage final à l'eau distillée pour évacuer les réactifs non fixés.</li>
+                        <li><strong>Répétition :</strong> Le cycle complet est répété N fois pour former le film mince.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    `;
+}
+
+function initSilarAnimation() {
+    silarStep = 1;
+    silarCycle = 1;
+    silarIsPlaying = false;
+    updateSilarStepUI();
+    startSilarCanvasLoop();
+}
+
+function toggleSilarPlay() {
+    silarIsPlaying = !silarIsPlaying;
+    const playBtn = document.getElementById("silar-play-btn");
+    const topBtn = document.getElementById("btn-start-silar-anim");
+    if (playBtn) {
+        playBtn.innerHTML = silarIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lecture`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+    if (topBtn) {
+        topBtn.innerHTML = silarIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer l'Animation du Cycle SILAR`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+    if (silarIsPlaying) {
+        runSilarAutoPlay();
+    } else if (silarTimer) {
+        clearInterval(silarTimer);
+    }
+}
+
+function runSilarAutoPlay() {
+    if (silarTimer) clearInterval(silarTimer);
+    silarTimer = setInterval(() => {
+        if (!silarIsPlaying) return;
+        silarStep++;
+        if (silarStep > 4) {
+            silarStep = 1;
+            silarCycle++;
+            if (silarCycle > silarMaxCycles) {
+                silarCycle = silarMaxCycles;
+                silarStep = 4;
+                silarIsPlaying = false;
+                toggleSilarPlay();
+            }
+        }
+        updateSilarStepUI();
+    }, 2800);
+}
+
+function nextSilarStep() {
+    silarStep++;
+    if (silarStep > 4) {
+        silarStep = 1;
+        silarCycle = (silarCycle % silarMaxCycles) + 1;
+    }
+    updateSilarStepUI();
+}
+
+function prevSilarStep() {
+    silarStep--;
+    if (silarStep < 1) silarStep = 4;
+    updateSilarStepUI();
+}
+
+function updateSilarStepUI() {
+    const badge = document.getElementById("silar-step-badge");
+    const counter = document.getElementById("silar-cycle-counter");
+    const title = document.getElementById("silar-step-title");
+    const desc = document.getElementById("silar-step-desc");
+
+    if (counter) counter.textContent = `${silarCycle} / ${silarMaxCycles}`;
+
+    const stepInfo = [
+        {
+            badge: "Étape 1 : Adsorption Cationique",
+            title: "1. Adsorption (Cationic Solution)",
+            desc: "Immersion du substrat en verre dans la solution cationique. Les cations (◯) fixent une couche d'adsorption uniforme à la surface."
+        },
+        {
+            badge: "Étape 2 : Premier Rinçage",
+            title: "2. Rinçage (Distilled Water)",
+            desc: "Immersion dans l'eau distillée pour éliminer les cations en excès et ne conserver que la monocouche adsorbée."
+        },
+        {
+            badge: "Étape 3 : Réaction Anionique",
+            title: "3. Réaction (Anionic Solution)",
+            desc: "Immersion dans la solution anionique. Les anions (●) réagissent avec les cations (◯) adsorbés pour former une monocouche solide."
+        },
+        {
+            badge: "Étape 4 : Rinçage Final",
+            title: "4. Rinçage Final (Distilled Water)",
+            desc: "Immersion dans l'eau distillée pour éliminer les sous-produits non réagis avant d'entamer le cycle suivant."
+        }
+    ];
+
+    const current = stepInfo[silarStep - 1];
+    if (badge) badge.textContent = current.badge;
+    if (title) title.textContent = current.title;
+    if (desc) desc.textContent = current.desc;
+}
+
+function startSilarCanvasLoop() {
+    if (silarCanvasAnimId) cancelAnimationFrame(silarCanvasAnimId);
+    function loop() {
+        silarAnimFrame++;
+        drawSilarCanvas();
+        silarCanvasAnimId = requestAnimationFrame(loop);
+    }
+    loop();
+}
+
+function drawSilarCanvas() {
+    const canvas = document.getElementById("silar-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Background Grid
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.05)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < w; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    for (let y = 0; y < h; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
+    // Positions of 4 Beakers
+    const beakerW = 90;
+    const beakerH = 110;
+    const beakerY = 190;
+    const beakerXs = [60, 200, 340, 480];
+
+    const beakerColors = [
+        "rgba(132, 204, 22, 0.45)", // 1. Cationic Solution (Green)
+        "rgba(56, 189, 248, 0.25)", // 2. Distilled Water (Light Blue)
+        "rgba(245, 158, 11, 0.45)", // 3. Anionic Solution (Yellow)
+        "rgba(56, 189, 248, 0.25)"  // 4. Distilled Water (Light Blue)
+    ];
+
+    const beakerLabels = [
+        "Cationic Sol.",
+        "Distilled Water",
+        "Anionic Sol.",
+        "Distilled Water"
+    ];
+
+    // Draw 4 Beakers
+    for (let i = 0; i < 4; i++) {
+        const bx = beakerXs[i];
+        
+        // Highlight active beaker for current step
+        if (silarStep === (i + 1)) {
+            ctx.fillStyle = "rgba(56, 189, 248, 0.12)";
+            ctx.fillRect(bx - 12, beakerY - 30, beakerW + 24, beakerH + 40);
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 1.5;
+            ctx.strokeRect(bx - 12, beakerY - 30, beakerW + 24, beakerH + 40);
+        }
+
+        // Liquid inside beaker
+        ctx.fillStyle = beakerColors[i];
+        ctx.fillRect(bx, beakerY + 20, beakerW, beakerH - 20);
+
+        // Glass Outline
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.8)"; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(bx, beakerY); ctx.lineTo(bx, beakerY + beakerH); ctx.lineTo(bx + beakerW, beakerY + beakerH); ctx.lineTo(bx + beakerW, beakerY); ctx.stroke();
+
+        // Label
+        ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+        ctx.fillText(beakerLabels[i], bx + beakerW / 2, beakerY + beakerH + 16);
+    }
+
+    // Calculate Target Substrate position based on current silarStep
+    const targetX = beakerXs[silarStep - 1] + beakerW / 2;
+    const isDipped = silarIsPlaying || (silarAnimFrame % 60 > 20);
+    const targetY = isDipped ? (beakerY + 30) : 70;
+
+    // Smooth movement towards target position
+    silarSubstrateX += (targetX - silarSubstrateX) * 0.12;
+    silarSubstrateY += (targetY - silarSubstrateY) * 0.12;
+
+    // Robot Arm Holding Substrate
+    ctx.strokeStyle = "#64748b"; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(silarSubstrateX, 0); ctx.lineTo(silarSubstrateX, silarSubstrateY - 20); ctx.stroke();
+    // Clamp
+    ctx.fillStyle = "#38bdf8"; ctx.fillRect(silarSubstrateX - 16, silarSubstrateY - 20, 32, 8);
+
+    // Glass Substrate Plate
+    const subW = 28;
+    const subH = 65;
+    const subX = silarSubstrateX - subW / 2;
+    const subY = silarSubstrateY;
+
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.fillRect(subX, subY, subW, subH);
+    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.5;
+    ctx.strokeRect(subX, subY, subW, subH);
+
+    // Accumulated SILAR Thin Film Layer (Cations ◯ and Anions ●) on substrate
+    const numIons = Math.min(18, silarCycle * 2);
+    for (let ion = 0; ion < numIons; ion++) {
+        const ix = subX + 6 + (ion % 3) * 8;
+        const iy = subY + 10 + Math.floor(ion / 3) * 9;
+
+        // Cation (White circle)
+        ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.arc(ix, iy, 2.5, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#0f172a"; ctx.lineWidth = 0.8; ctx.stroke();
+
+        // Anion (Black circle next to it if step >= 3)
+        if (silarStep >= 3 || ion < (numIons - 2)) {
+            ctx.fillStyle = "#0f172a"; ctx.beginPath(); ctx.arc(ix + 3, iy, 2.5, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
+    // Substrate Label
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 9px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("Glass Substrate", silarSubstrateX, subY + subH / 2);
+}
+
 
 
 
