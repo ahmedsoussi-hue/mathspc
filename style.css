@@ -3509,6 +3509,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
+.badge-maths { background: rgba(99, 102, 241, 0.9); }
 .badge-optique { background: rgba(56, 189, 248, 0.9); }
 .badge-electricite { background: rgba(245, 158, 11, 0.9); }
 .badge-electronique { background: rgba(168, 85, 247, 0.9); }
