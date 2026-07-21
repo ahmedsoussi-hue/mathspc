@@ -4250,6 +4250,10 @@ function switchTab(tabId) {
         }
     });
 
+    if (tabId === "recherche") {
+        setupRechercheSection();
+    }
+
     // Smooth scroll back to top of main view
     window.scrollTo({ top: 0, behavior: "smooth" });
     triggerMathJax();
@@ -11804,5 +11808,69 @@ function setupMoteurCcSimulator() {
     updateCalculations();
     updatePointsTable();
 }
+
+// --- RECHERCHE SCIENTIFIQUE ENGINE ---
+function setupRechercheSection() {
+    const searchInput = document.getElementById("recherche-search-input");
+    const filterBtns = document.querySelectorAll(".recherche-filter-btn");
+    const rCards = document.querySelectorAll(".recherche-card");
+
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const activeFilter = document.querySelector(".recherche-filter-btn.active") ? document.querySelector(".recherche-filter-btn.active").getAttribute("data-rfilter") : "all";
+
+            rCards.forEach(card => {
+                const title = card.querySelector("h3") ? card.querySelector("h3").textContent.toLowerCase() : "";
+                const desc = card.querySelector("p") ? card.querySelector("p").textContent.toLowerCase() : "";
+                const keywords = card.getAttribute("data-rkeywords") ? card.getAttribute("data-rkeywords").toLowerCase() : "";
+                const cat = card.getAttribute("data-rcat");
+
+                const matchesQuery = query === "" || title.includes(query) || desc.includes(query) || keywords.includes(query);
+                const matchesCat = activeFilter === "all" || cat === activeFilter;
+
+                if (matchesQuery && matchesCat) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            filterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filterCat = btn.getAttribute("data-rfilter");
+            const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
+            rCards.forEach(card => {
+                const title = card.querySelector("h3") ? card.querySelector("h3").textContent.toLowerCase() : "";
+                const desc = card.querySelector("p") ? card.querySelector("p").textContent.toLowerCase() : "";
+                const keywords = card.getAttribute("data-rkeywords") ? card.getAttribute("data-rkeywords").toLowerCase() : "";
+                const cat = card.getAttribute("data-rcat");
+
+                const matchesQuery = query === "" || title.includes(query) || desc.includes(query) || keywords.includes(query);
+                const matchesCat = filterCat === "all" || cat === filterCat;
+
+                if (matchesQuery && matchesCat) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+
+    rCards.forEach(card => {
+        card.addEventListener("click", () => {
+            const title = card.querySelector("h3") ? card.querySelector("h3").textContent : "Article Scientifique";
+            showToast(`Consultation de : ${title}`, true);
+        });
+    });
+}
+
 
 
