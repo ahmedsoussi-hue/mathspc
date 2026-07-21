@@ -2426,43 +2426,46 @@
         </div>
     </footer>
 
-    <!-- User Profile Modal (Instagram Style) -->
+    <!-- User Profile Modal (Instagram / Contact Style) -->
     <div class="lesson-modal" id="profileModal">
         <div class="modal-backdrop" id="profileModalBackdrop"></div>
         <div class="modal-card profile-modal-card">
             <div class="modal-header">
                 <div class="modal-title-wrapper">
-                    <span class="modal-badge" style="background-color: var(--primary-glow); color: var(--primary);"><i data-lucide="user"></i> Mon Compte</span>
-                    <h3>Profil de l'Élève</h3>
+                    <span class="modal-badge" style="background-color: var(--primary-glow); color: var(--primary);"><i data-lucide="user"></i> Contact & Profil</span>
+                    <h3>Dr. Ahmed Soussi</h3>
                 </div>
                 <button class="modal-close" id="profileCloseBtn"><i data-lucide="x"></i></button>
             </div>
             <div class="modal-body profile-modal-body">
-                <!-- Instagram profile header -->
-                <div class="instagram-profile-header">
-                    <div class="instagram-avatar-wrapper">
-                        <img src="profile.jpg" alt="Avatar" class="instagram-avatar">
-                        <div class="instagram-badge">
-                            <i data-lucide="award"></i>
-                        </div>
+                <!-- Profile Header -->
+                <div class="instagram-profile-header" style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                    <div class="instagram-avatar-wrapper" style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #3b82f6); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #ffffff; font-weight: 700; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); flex-shrink: 0;">
+                        <i data-lucide="award"></i>
                     </div>
                     <div class="instagram-meta">
-                        <h3 class="instagram-username user-name">Contactez-nous</h3>
-                        <button class="instagram-link-btn" id="profileEditBtn">
-                            <i data-lucide="edit-3"></i> Modifier le nom
-                        </button>
+                        <h3 class="instagram-username" style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin: 0;">Dr. Ahmed Soussi</h3>
+                        <div style="font-size: 0.82rem; color: #38bdf8; font-weight: 700; margin-top: 3px;">Mathematics, Physics & Materials Science</div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 2px;"><i data-lucide="building"></i> LMER - FSA Agadir, Université Ibn Zohr</div>
                     </div>
                 </div>
 
-
-                <!-- Instagram Bio + Contact Info -->
-                <div class="instagram-bio">
-                    <h4 class="bio-display-name">Contactez-nous</h4>
-                    <p>Une question, une remarque ou besoin d'assistance ? Notre équipe est à votre écoute pour vous accompagner dans votre réussite.</p>
+                <!-- Bio + Contact Description -->
+                <div class="instagram-bio" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 14px; margin-bottom: 18px;">
+                    <p style="margin: 0; font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">Enseignant-Chercheur spécialisé en Mathématiques, Physique et Science des Matériaux (Couches Minces, Photovoltaïque & Calculs DFT). N'hésitez pas à nous contacter pour toute question académique ou scientifique.</p>
                 </div>
 
+                <!-- Direct Contact Buttons -->
                 <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <a href="mailto:mathspc@gmail.com" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
+                    <a href="https://scholar.google.com/citations?user=BjIusZIAAAAJ&hl=fr" target="_blank" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.3); background: rgba(56, 189, 248, 0.08); transition: all 0.25s ease;">
+                        <i data-lucide="external-link" style="color: #38bdf8; width: 20px; height: 20px;"></i>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 2px;">Profil Google Scholar</div>
+                            <strong style="color: #ffffff; font-size: 0.95rem;">36+ Publications Indexées (579+ Citations)</strong>
+                        </div>
+                    </a>
+
+                    <a href="mailto:mathspc@gmail.com" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); transition: all 0.25s ease;">
                         <i data-lucide="mail" style="color: var(--primary); width: 20px; height: 20px;"></i>
                         <div style="text-align: left;">
                             <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2px;">Par Email</div>
@@ -2470,7 +2473,7 @@
                         </div>
                     </a>
                     
-                    <a href="https://wa.me/212613044172" target="_blank" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
+                    <a href="https://wa.me/212613044172" target="_blank" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); transition: all 0.25s ease;">
                         <i data-lucide="message-square" style="color: #25d366; width: 20px; height: 20px;"></i>
                         <div style="text-align: left;">
                             <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2px;">WhatsApp</div>
@@ -2478,17 +2481,13 @@
                         </div>
                     </a>
 
-                    <a href="tel:+212613044172" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); transition: all var(--transition-fast);">
+                    <a href="tel:+212613044172" class="btn btn-outline" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; padding: 12px 16px; width: 100%; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); transition: all 0.25s ease;">
                         <i data-lucide="phone" style="color: var(--secondary); width: 20px; height: 20px;"></i>
                         <div style="text-align: left;">
                             <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 2px;">Par Téléphone</div>
                             <strong style="color: var(--text-primary); font-size: 0.95rem;">+212 613-044172</strong>
                         </div>
                     </a>
-                </div>
-
-                <div style="margin-top: 10px;">
-                    <button class="btn btn-danger btn-block" id="resetProfileStateBtn" style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; width: 100%; border-radius: 8px;"><i data-lucide="refresh-cw"></i> Réinitialiser mes statistiques</button>
                 </div>
             </div>
         </div>
