@@ -3949,6 +3949,329 @@ let userState = {
     currentTab: "home"
 };
 
+
+// --- METHOD SUBCARDS ROUTING MAP ---
+const METHOD_SUBCARDS_MAP = {
+    "sol-gel": { title: "Sol-Gel", category: "Experimental Methods", desc: "Dépôt de couches minces par voie sol-gel organométallique." },
+    "spin-coating": { title: "Spin Coating", category: "Experimental Methods", desc: "Étalement centrifuge pour l'obtention de films homogènes." },
+    "cbd": { title: "Chemical Bath Deposition (CBD)", category: "Experimental Methods", desc: "Dépôt par bain chimique en milieu aqueux." },
+    "electrochemical-deposition": { title: "Electrochemical Deposition", category: "Experimental Methods", desc: "Électrodéposition et réduction électrochimique sur substrat conducteur." },
+    "silar": { title: "SILAR", category: "Experimental Methods", desc: "Adsorption et réaction successives d'ions en couches atomiques." },
+    "sputtering": { title: "Sputtering", category: "Experimental Methods", desc: "Pulvérisation cathodique radiofréquence (RF) / magnetron." },
+    "thermal-evaporation": { title: "Thermal Evaporation", category: "Experimental Methods", desc: "Évaporation thermique sous vide poussé." },
+    "cvd-mocvd": { title: "CVD / MOCVD", category: "Experimental Methods", desc: "Dépôt chimique en phase vapeur à précurseurs organométalliques." },
+    "pld": { title: "Pulsed Laser Deposition (PLD)", category: "Experimental Methods", desc: "Ablation et dépôt par laser pulsé UV." },
+    "other-deposition": { title: "Other Thin-Film Deposition Techniques", category: "Experimental Methods", desc: "Autres méthodes d'élaboration et de croissance de films minces." },
+    "xrd": { title: "XRD (X-Ray Diffraction)", category: "Thin-Film Characterization", desc: "Diffraction des Rayons X pour l'analyse de la structure cristalline." },
+    "sem": { title: "SEM (Scanning Electron Microscopy)", category: "Thin-Film Characterization", desc: "Microscopie électronique à balayage (MEB) pour la morphologie de surface." },
+    "tem": { title: "TEM (Transmission Electron Microscopy)", category: "Thin-Film Characterization", desc: "Microscopie électronique en transmission haute résolution." },
+    "afm": { title: "AFM (Atomic Force Microscopy)", category: "Thin-Film Characterization", desc: "Microscopie à force atomique et rugométrie nanométrique." },
+    "uv-vis": { title: "UV-Vis Spectroscopy", category: "Thin-Film Characterization", desc: "Spectroscopie d'absorption et de transmittance UV-Visible." },
+    "photoluminescence": { title: "Photoluminescence (PL)", category: "Thin-Film Characterization", desc: "Émission photoluminescente et recombinaison radiative." },
+    "raman": { title: "Raman Spectroscopy", category: "Thin-Film Characterization", desc: "Spectroscopie Raman et modes de vibration de réseau (phonons)." },
+    "ftir": { title: "FTIR (Fourier Transform Infrared)", category: "Thin-Film Characterization", desc: "Spectroscopie infrarouge à transformée de Fourier." },
+    "xps": { title: "XPS (X-Ray Photoelectron Spectroscopy)", category: "Thin-Film Characterization", desc: "Analyse chimique de surface et états d'oxydation des éléments." },
+    "eds-edx": { title: "EDS / EDX", category: "Thin-Film Characterization", desc: "Microanalyse élémentaire par dispersion d'énergie X." },
+    "hall-effect": { title: "Hall Effect", category: "Thin-Film Characterization", desc: "Mesures d'effet Hall : concentration et mobilité des porteurs." },
+    "four-point-probe": { title: "Four-Point Probe", category: "Thin-Film Characterization", desc: "Mesure de la résistance carrée (Sheet Resistance)." },
+    "iv-cv-measurements": { title: "I-V and C-V Measurements", category: "Thin-Film Characterization", desc: "Caractérisation courant-tension et capacité-tension." },
+    "vsm": { title: "VSM (Vibrating Sample Magnetometer)", category: "Thin-Film Characterization", desc: "Magnétométrie à échantillon vibrant pour cycles d'hystérésis." },
+    "squid": { title: "SQUID Magnetometry", category: "Thin-Film Characterization", desc: "Mesure magnétique ultra-sensible à dispositif supraconducteur." },
+    "other-characterization": { title: "Other Characterization Techniques", category: "Thin-Film Characterization", desc: "Autres méthodes de caractérisation physique et chimique." },
+    "wien2k": { title: "WIEN2k", category: "Numerical Approaches (DFT)", desc: "Code DFT full-potential (L)APW + local orbitals pour les solides." },
+    "quantum-espresso": { title: "Quantum ESPRESSO", category: "Numerical Approaches (DFT)", desc: "Suite open-source DFT en ondes planes et pseudopotentiels." },
+    "spr-kkr": { title: "SPR-KKR", category: "Numerical Approaches (DFT)", desc: "Calculs de structure électronique Korringa-Kohn-Rostoker avec désordre." },
+    "vasp": { title: "VASP", category: "Numerical Approaches (DFT)", desc: "Vienna Ab initio Simulation Package pour calculs de dynamique moléculaire et DFT." },
+    "siesta": { title: "SIESTA", category: "Numerical Approaches (DFT)", desc: "Calculs DFT ab-initio rapides à bases d'orbitales atomiques strictly localisées." },
+    "boltztrap": { title: "BoltzTraP", category: "Numerical Approaches (DFT)", desc: "Calculs des propriétés de transport semi-classiques (Seebeck, conductivité)." },
+    "phonopy": { title: "Phonopy", category: "Numerical Approaches (DFT)", desc: "Calculs des spectres de phonons et stabilité thermodynamique." },
+    "visualization-tools": { title: "Visualization Tools (VESTA, XCrySDen, Avogadro)", category: "Numerical Approaches (DFT)", desc: "Logiciels de visualisation 3D des structures cristallines et densités électroniques." }
+};
+
+// --- ROUTER ENGINE ---
+let isNavigatingFromRouter = false;
+
+function buildCoursesURL(level = "all", subject = "all", search = "") {
+    let params = [];
+    if (level && level !== "all") params.push(`level=${encodeURIComponent(level)}`);
+    if (subject && subject !== "all") params.push(`subject=${encodeURIComponent(subject)}`);
+    if (search && search.trim() !== "") params.push(`search=${encodeURIComponent(search.trim())}`);
+    let q = params.length > 0 ? "?" + params.join("&") : "";
+    return "/#courses" + q;
+}
+
+function syncURL(targetUrl, replace = false) {
+    if (!targetUrl) return;
+    const currentFull = window.location.pathname + window.location.search + window.location.hash;
+    if (currentFull === targetUrl || window.location.hash === targetUrl) return;
+
+    try {
+        if (replace) {
+            history.replaceState(null, "", targetUrl);
+        } else {
+            history.pushState(null, "", targetUrl);
+        }
+    } catch (e) {
+        console.warn("History pushState failed, fallback to location.hash", e);
+        if (targetUrl.includes("#")) {
+            window.location.hash = targetUrl.substring(targetUrl.indexOf("#"));
+        }
+    }
+}
+
+function updateSEO({ title, description, url }) {
+    if (title) {
+        document.title = title;
+        let ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', title);
+        let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twitterTitle) twitterTitle.setAttribute('content', title);
+    }
+    if (description) {
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', description);
+        let ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute('content', description);
+    }
+    if (url) {
+        let canonical = document.querySelector('link[rel="canonical"]');
+        let fullUrl = window.location.origin + (url.startsWith('/') ? url : '/' + url);
+        if (canonical) {
+            canonical.setAttribute('href', fullUrl);
+        } else {
+            canonical = document.createElement('link');
+            canonical.setAttribute('rel', 'canonical');
+            canonical.setAttribute('href', fullUrl);
+            document.head.appendChild(canonical);
+        }
+        let ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) ogUrl.setAttribute('content', fullUrl);
+    }
+}
+
+function parseLocation() {
+    let hash = window.location.hash.replace(/^#\/?/, "");
+    let pathname = window.location.pathname;
+    
+    let path = hash;
+    if (!path && pathname && pathname !== "/" && !pathname.endsWith("index.html")) {
+        path = pathname.replace(/^\/+|\/+$/g, "");
+    }
+
+    let searchStr = window.location.search;
+    if (hash.includes("?")) {
+        searchStr = "?" + hash.split("?")[1];
+        path = path.split("?")[0];
+    }
+    const queryParams = new URLSearchParams(searchStr);
+
+    if (!path || path === "home") {
+        return { type: "home", params: queryParams };
+    }
+
+    const parts = path.split("/").filter(Boolean);
+    const main = parts[0] ? parts[0].toLowerCase() : "home";
+
+    if (main === "home") {
+        return { type: "home", params: queryParams };
+    }
+
+    if (main === "courses" || main === "cours") {
+        const level = parts[1] || queryParams.get("level") || "all";
+        const subject = parts[2] || queryParams.get("subject") || "all";
+        const search = queryParams.get("search") || "";
+        return { type: "courses", level, subject, search, params: queryParams };
+    }
+
+    if (main === "course" || main === "chapter" || main === "chapitre") {
+        const chapterId = parts[1] || queryParams.get("id");
+        return { type: "course", chapterId, params: queryParams };
+    }
+
+    if (main === "animations" || main === "simulations") {
+        if (parts[1]) {
+            return { type: "simulation", animId: parts[1], params: queryParams };
+        }
+        return { type: "animations", params: queryParams };
+    }
+
+    if (main === "simulation" || main === "anim") {
+        const animId = parts[1] || queryParams.get("id");
+        return { type: "simulation", animId, params: queryParams };
+    }
+
+    if (main === "recherche" || main === "research") {
+        if (parts[1]) {
+            return { type: "recherche-method", subId: parts[1], params: queryParams };
+        }
+        const method = queryParams.get("method") || queryParams.get("subId");
+        if (method) {
+            return { type: "recherche-method", subId: method, params: queryParams };
+        }
+        return { type: "recherche", params: queryParams };
+    }
+
+    if (main === "method") {
+        const subId = parts[1] || queryParams.get("id");
+        return { type: "recherche-method", subId, params: queryParams };
+    }
+
+    // Direct ID checks
+    if (typeof chaptersData !== "undefined" && chaptersData.some(c => c.id === main)) {
+        return { type: "course", chapterId: main, params: queryParams };
+    }
+
+    const animCardMatches = document.querySelector(`.anim-card[data-anim="${main}"]`);
+    if (animCardMatches) {
+        return { type: "simulation", animId: main, params: queryParams };
+    }
+
+    if (METHOD_SUBCARDS_MAP[main]) {
+        return { type: "recherche-method", subId: main, params: queryParams };
+    }
+
+    return { type: "home", params: queryParams };
+}
+
+function renderRoute(route, options = {}) {
+    isNavigatingFromRouter = true;
+    try {
+        const { type } = route;
+
+        if (type === "home") {
+            switchTab("home", { skipUrlUpdate: true });
+            closeChapterModal({ skipUrlUpdate: true });
+            closeMethodPage({ skipUrlUpdate: true });
+            showGallery({ skipUrlUpdate: true });
+            updateSEO({
+                title: "Maths et Physiques | Plateforme Éducative Moderne",
+                description: "Plateforme éducative et scientifique d'excellence pour les Mathématiques, la Physique-Chimie et la Recherche Scientifique (DFT, Films minces).",
+                url: "/"
+            });
+            if (options.updateUrl) syncURL("/", options.replaceUrl);
+        } else if (type === "courses") {
+            switchTab("courses", { skipUrlUpdate: true });
+            closeChapterModal({ skipUrlUpdate: true });
+            closeMethodPage({ skipUrlUpdate: true });
+
+            const levelFilter = document.getElementById("levelFilter");
+            const subjectFilter = document.getElementById("subjectFilter");
+            const courseSearchInput = document.getElementById("courseSearchInput");
+
+            if (levelFilter && route.level) levelFilter.value = route.level;
+            if (subjectFilter && route.subject) subjectFilter.value = route.subject;
+            if (courseSearchInput && route.search !== undefined) courseSearchInput.value = route.search;
+
+            const lvlVal = levelFilter ? levelFilter.value : "all";
+            const subjVal = subjectFilter ? subjectFilter.value : "all";
+            const searchVal = courseSearchInput ? courseSearchInput.value.toLowerCase().trim() : "";
+
+            if (document.getElementById("activeLevelLabel") && levelFilter) {
+                document.getElementById("activeLevelLabel").textContent = levelFilter.options[levelFilter.selectedIndex].text;
+            }
+            if (document.getElementById("activeSubjectLabel") && subjectFilter) {
+                document.getElementById("activeSubjectLabel").textContent = subjectFilter.options[subjectFilter.selectedIndex].text;
+            }
+
+            renderChapters(lvlVal, subjVal, searchVal);
+
+            let url = buildCoursesURL(lvlVal, subjVal, searchVal);
+            updateSEO({
+                title: "Cours & Exercices - Mathématiques et Physique-Chimie | MATHS & PC",
+                description: "Accédez à tous les cours, résumés, exercices corrigés et devoirs de Mathématiques et Physique-Chimie.",
+                url: url
+            });
+            if (options.updateUrl) syncURL(url, options.replaceUrl);
+        } else if (type === "course") {
+            switchTab("courses", { skipUrlUpdate: true });
+            closeMethodPage({ skipUrlUpdate: true });
+            const chap = chaptersData.find(c => c.id === route.chapterId);
+            if (chap) {
+                openChapterModal(route.chapterId, { skipUrlUpdate: true });
+                let url = `/#course/${route.chapterId}`;
+                updateSEO({
+                    title: `${chap.title} - ${chap.subject === "math" ? "Mathématiques" : "Physique-Chimie"} | MATHS & PC`,
+                    description: `Cours, résumés, exercices corrigés et devoirs pour le chapitre ${chap.title}.`,
+                    url: url
+                });
+                if (options.updateUrl) syncURL(url, options.replaceUrl);
+            } else {
+                renderRoute({ type: "courses" }, options);
+            }
+        } else if (type === "animations") {
+            switchTab("animations", { skipUrlUpdate: true });
+            showGallery({ skipUrlUpdate: true });
+            closeChapterModal({ skipUrlUpdate: true });
+            closeMethodPage({ skipUrlUpdate: true });
+            let url = "/#animations";
+            updateSEO({
+                title: "Simulations & Laboratoires Virtuels - Physique & Maths | MATHS & PC",
+                description: "Explorez des animations interactives 2D/3D et laboratoires virtuels pour la physique et les mathématiques.",
+                url: url
+            });
+            if (options.updateUrl) syncURL(url, options.replaceUrl);
+        } else if (type === "simulation") {
+            switchTab("animations", { skipUrlUpdate: true });
+            closeChapterModal({ skipUrlUpdate: true });
+            closeMethodPage({ skipUrlUpdate: true });
+            const animId = route.animId;
+            const card = document.querySelector(`.anim-card[data-anim="${animId}"]`);
+            const cardTitle = card ? card.querySelector("h3")?.textContent : animId;
+            openAnimPlayer(animId, cardTitle, { skipUrlUpdate: true });
+            let url = `/#simulation/${animId}`;
+            updateSEO({
+                title: `${cardTitle || "Simulation"} - Laboratoire Virtuel | MATHS & PC`,
+                description: `Simulation interactive et expérience virtuelle de physique-chimie : ${cardTitle}.`,
+                url: url
+            });
+            if (options.updateUrl) syncURL(url, options.replaceUrl);
+        } else if (type === "recherche") {
+            switchTab("recherche", { skipUrlUpdate: true });
+            closeMethodPage({ skipUrlUpdate: true });
+            closeChapterModal({ skipUrlUpdate: true });
+            let url = "/#recherche";
+            updateSEO({
+                title: "Recherche Scientifique & DFT - Films Minces | MATHS & PC",
+                description: "Méthodes expérimentales de dépôt de films minces, caractérisation et calculs ab-initio DFT.",
+                url: url
+            });
+            if (options.updateUrl) syncURL(url, options.replaceUrl);
+        } else if (type === "recherche-method") {
+            switchTab("recherche", { skipUrlUpdate: true });
+            closeChapterModal({ skipUrlUpdate: true });
+            const subId = route.subId;
+            const methodData = METHOD_SUBCARDS_MAP[subId];
+            if (methodData) {
+                openMethodPage(methodData.title, methodData.category, methodData.desc, { subId, skipUrlUpdate: true });
+                let url = `/#recherche/${subId}`;
+                updateSEO({
+                    title: `${methodData.title} - Recherche Scientifique | MATHS & PC`,
+                    description: methodData.desc || `Principes, protocoles et résultats pour ${methodData.title}.`,
+                    url: url
+                });
+                if (options.updateUrl) syncURL(url, options.replaceUrl);
+            } else {
+                renderRoute({ type: "recherche" }, options);
+            }
+        }
+    } finally {
+        isNavigatingFromRouter = false;
+    }
+}
+
+function setupRouterEvents() {
+    window.addEventListener("popstate", () => {
+        const route = parseLocation();
+        renderRoute(route, { updateUrl: false });
+    });
+
+    window.addEventListener("hashchange", () => {
+        const route = parseLocation();
+        renderRoute(route, { updateUrl: false });
+    });
+}
+
+
 // --- INITIALIZE APPLICATION ---
 document.addEventListener("DOMContentLoaded", () => {
     // Load state from LocalStorage
@@ -3970,7 +4293,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setupQuizEngine();
     setupInteractiveTools();
     setupProfileModal();
+    setupRouterEvents();
     triggerMathJax();
+
+    // Initial Routing Resolution
+    const initialRoute = parseLocation();
+    renderRoute(initialRoute, { updateUrl: true, replaceUrl: true });
 });
 
 // --- STATE STORAGE ---
@@ -4214,7 +4542,7 @@ function setupNavigation() {
     });
 }
 
-function switchTab(tabId) {
+function switchTab(tabId, options = {}) {
     userState.currentTab = tabId;
     
     // Update menu buttons active state
@@ -4257,6 +4585,22 @@ function switchTab(tabId) {
     // Smooth scroll back to top of main view
     window.scrollTo({ top: 0, behavior: "smooth" });
     triggerMathJax();
+
+    if (!options.skipUrlUpdate && !isNavigatingFromRouter) {
+        let url = `/#${tabId}`;
+        if (tabId === "home") url = "/";
+        else if (tabId === "courses") {
+            const levelFilter = document.getElementById("levelFilter");
+            const subjectFilter = document.getElementById("subjectFilter");
+            const courseSearchInput = document.getElementById("courseSearchInput");
+            url = buildCoursesURL(
+                levelFilter ? levelFilter.value : "all",
+                subjectFilter ? subjectFilter.value : "all",
+                courseSearchInput ? courseSearchInput.value : ""
+            );
+        }
+        syncURL(url);
+    }
 }
 
 function triggerMathJax() {
@@ -4318,6 +4662,11 @@ function setupFilters() {
         document.getElementById("activeSubjectLabel").textContent = subjectFilter.options[subjectFilter.selectedIndex].text;
 
         renderChapters(activeLevel, activeSubject, searchQuery);
+
+        if (!isNavigatingFromRouter) {
+            let targetUrl = buildCoursesURL(activeLevel, activeSubject, searchQuery);
+            syncURL(targetUrl, true);
+        }
     };
 
     levelFilter.addEventListener("change", applyFilters);
@@ -4569,7 +4918,7 @@ function setupModals() {
 
 }
 
-window.openChapterModal = function(chapterId) {
+window.openChapterModal = function(chapterId, options = {}) {
     const chap = chaptersData.find(c => c.id === chapterId);
     if (!chap) return;
 
@@ -4664,10 +5013,23 @@ window.openChapterModal = function(chapterId) {
     }, 100);
 };
 
-function closeChapterModal() {
-    document.getElementById("lessonModal").classList.remove("active");
+function closeChapterModal(options = {}) {
+    const modal = document.getElementById("lessonModal");
+    if (modal) modal.classList.remove("active");
     document.body.style.overflow = ""; // Re-enable background scroll
     currentOpenChapterId = null;
+
+    if (!options.skipUrlUpdate && !isNavigatingFromRouter) {
+        const levelFilter = document.getElementById("levelFilter");
+        const subjectFilter = document.getElementById("subjectFilter");
+        const courseSearchInput = document.getElementById("courseSearchInput");
+        let targetUrl = buildCoursesURL(
+            levelFilter ? levelFilter.value : "all",
+            subjectFilter ? subjectFilter.value : "all",
+            courseSearchInput ? courseSearchInput.value : ""
+        );
+        syncURL(targetUrl);
+    }
 }
 
 window.toggleExerciseAccordion = function(index) {
@@ -4779,7 +5141,7 @@ function setupAnimations() {
     const filterBtns = document.querySelectorAll(".anim-filter-btn");
     const animCards = document.querySelectorAll(".anim-card");
 
-    function openAnimPlayer(targetAnim, cardTitle) {
+    function openAnimPlayer(targetAnim, cardTitle, options = {}) {
         if (!galleryView || !playerView) return;
 
         galleryView.style.display = "none";
@@ -4807,13 +5169,31 @@ function setupAnimations() {
         });
 
         window.scrollTo({ top: playerView.offsetTop - 80, behavior: "smooth" });
+
+        if (!options.skipUrlUpdate && !isNavigatingFromRouter) {
+            syncURL(`/#simulation/${targetAnim}`);
+            updateSEO({
+                title: `${cardTitle || "Simulation"} - Laboratoire Virtuel | MATHS & PC`,
+                description: `Simulation interactive et expérience virtuelle de physique-chimie : ${cardTitle}.`,
+                url: `/#simulation/${targetAnim}`
+            });
+        }
     }
 
-    function showGallery() {
+    function showGallery(options = {}) {
         if (!galleryView || !playerView) return;
         playerView.style.display = "none";
         galleryView.style.display = "block";
         window.scrollTo({ top: galleryView.offsetTop - 80, behavior: "smooth" });
+
+        if (!options.skipUrlUpdate && !isNavigatingFromRouter) {
+            syncURL("/#animations");
+            updateSEO({
+                title: "Simulations & Laboratoires Virtuels - Physique & Maths | MATHS & PC",
+                description: "Explorez des animations interactives 2D/3D et laboratoires virtuels pour la physique et les mathématiques.",
+                url: "/#animations"
+            });
+        }
     }
 
     // Attach click listeners to cards
@@ -4834,13 +5214,7 @@ function setupAnimations() {
 
     // Global navigation function
     window.navigateToAnim = function(animId) {
-        // Switch main tab to animations
-        const animTabBtn = document.querySelector('.nav-links button[data-tab="animations-section"]');
-        if (animTabBtn) animTabBtn.click();
-
-        const card = document.querySelector(`.anim-card[data-anim="${animId}"]`);
-        const cardTitle = card ? card.querySelector("h3").textContent : "Laboratoire Virtuel";
-        openAnimPlayer(animId, cardTitle);
+        renderRoute({ type: "simulation", animId: animId });
     };
 
     // 4. Search Filter Logic
@@ -8731,15 +9105,10 @@ window.toggleTool = function(headerElement) {
     box.classList.toggle('collapsed');
 };
 
-// Global navigation helper to switch directly to an animation simulator
-window.navigateToAnim = function(animId) {
-    const animNavBtn = document.querySelector('.nav-link[data-tab="animations"]');
-    if (animNavBtn) animNavBtn.click();
-    setTimeout(() => {
-        const targetBtn = document.querySelector(`.anim-select-btn[data-anim="${animId}"]`);
-        if (targetBtn) targetBtn.click();
-    }, 100);
-};
+    // Global navigation function
+    window.navigateToAnim = function(animId) {
+        renderRoute({ type: "simulation", animId: animId });
+    };
 
 // 10. Diodes et Applications (Redressement & Filtrage) Simulator
 let diodesRedressementInterval = null;
@@ -11874,7 +12243,7 @@ function setupRechercheSection() {
     setupExperimentalDftNavigation();
 }
 
-function openMethodPage(title, category, desc) {
+function openMethodPage(title, category, desc, options = {}) {
     const pagePanel = document.getElementById("method-page-panel");
     const pageTitle = document.getElementById("method-page-title");
     const pageCategory = document.getElementById("method-page-category-badge");
@@ -11916,6 +12285,26 @@ function openMethodPage(title, category, desc) {
 
         if (window.lucide) {
             window.lucide.createIcons();
+        }
+
+        let subId = options.subId;
+        if (!subId) {
+            for (let [k, v] of Object.entries(METHOD_SUBCARDS_MAP)) {
+                if (v.title.toLowerCase() === title.toLowerCase()) {
+                    subId = k;
+                    break;
+                }
+            }
+        }
+
+        if (!options.skipUrlUpdate && !isNavigatingFromRouter) {
+            let targetUrl = subId ? `/#recherche/${subId}` : `/#recherche`;
+            syncURL(targetUrl);
+            updateSEO({
+                title: `${title} - Recherche Scientifique | MATHS & PC`,
+                description: desc || `Principes, protocoles et résultats pour : ${title}`,
+                url: targetUrl
+            });
         }
     }
 }
@@ -12344,7 +12733,7 @@ function drawSolGelCanvas() {
 }
 
 
-function closeMethodPage() {
+function closeMethodPage(options = {}) {
     const pagePanel = document.getElementById("method-page-panel");
     if (pagePanel) {
         pagePanel.style.display = "none";
@@ -12352,6 +12741,14 @@ function closeMethodPage() {
         if (section) {
             section.scrollIntoView({ behavior: "smooth", block: "start" });
         }
+    }
+    if (!options.skipUrlUpdate && !isNavigatingFromRouter) {
+        syncURL("/#recherche");
+        updateSEO({
+            title: "Recherche Scientifique & DFT - Films Minces | MATHS & PC",
+            description: "Méthodes expérimentales de dépôt de films minces, caractérisation et calculs ab-initio DFT.",
+            url: "/#recherche"
+        });
     }
 }
 

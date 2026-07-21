@@ -1,0 +1,23 @@
+# MATHS & PC - SPA Routing & Fallback Configuration
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # If requested resource is a real file or directory, serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Otherwise, route all requests to index.html with query string preserved
+  RewriteRule ^ index.html [L,QSA]
+</IfModule>
+
+# Cache-Control headers for performance
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js|jpg|jpeg|png|gif|ico|svg|pdf)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+</IfModule>
