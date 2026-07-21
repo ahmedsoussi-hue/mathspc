@@ -12281,9 +12281,9 @@ function openMethodPage(title, category, desc, options = {}) {
         pageCategory.textContent = category;
         pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
         
-        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, div[style*='dashed']");
+        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, div[style*='dashed']");
         
-        if (title.toLowerCase().includes("sol-gel")) {
+        if (title.toLowerCase().includes("sol-gel") || title.toLowerCase().includes("spin coating")) {
             if (placeholder) {
                 placeholder.outerHTML = renderSolGelCustomPage();
             }
@@ -12296,6 +12296,13 @@ function openMethodPage(title, category, desc, options = {}) {
             }
             setTimeout(() => {
                 initCBDAnimation();
+            }, 100);
+        } else if (title.toLowerCase().includes("electrochemical") || title.toLowerCase().includes("électrodéposition")) {
+            if (placeholder) {
+                placeholder.outerHTML = renderElectrochemicalCustomPage();
+            }
+            setTimeout(() => {
+                initElectrochemicalAnimation();
             }, 100);
         } else {
             if (placeholder && !placeholder.querySelector("h3")?.textContent.includes("Page dédiée prête")) {
@@ -13161,6 +13168,365 @@ function drawCBDCanvas() {
         badge.textContent = `Épaisseur : ${filmThicknessNm} nm`;
     }
 }
+
+// --- ELECTROCHEMICAL DEPOSITION ANIMATION ENGINE ---
+let electroVoltage = 2.5;
+let electroStirSpeed = 250;
+let electroTemp = 25;
+let electroElapsed = 0;
+let electroIsPlaying = false;
+let electroTimer = null;
+let electroCanvasAnimId = null;
+let electroAnimFrame = 0;
+
+function renderElectrochemicalCustomPage() {
+    return `
+    <div class="electro-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
+        
+        <!-- Top Banner: Electrochemical Deposition Overview -->
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="zap"></i> Protocol Expérimental Officiel LMER</span>
+                <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">Electrochemical Deposition (Électrodéposition)</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Réduction électrochimique contrôlée par potentiostat sur substrat conducteur immergé dans l'électrolyte.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" id="btn-start-electro-anim" onclick="toggleElectroPlay()" style="padding: 10px 20px; font-weight: 700;">
+                    <i data-lucide="play-circle"></i> Lancer la Simulation Interactive
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Layout: Interactive Canvas Animation (Left) + Original LMER Schematic (Right) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+            
+            <!-- Left Column: Interactive Setup & Cell Growth Animation Canvas -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="activity"></i> Cellule Électrochimique & Potentiostat
+                    </h4>
+                    <span id="electro-thickness-badge" class="badge badge-outline" style="border-color: #38bdf8; color: #38bdf8; font-weight: 600;">Épaisseur : 0.0 nm</span>
+                </div>
+
+                <!-- Canvas Container -->
+                <div style="position: relative; width: 100%; height: 340px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="electro-canvas" width="620" height="340" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+
+                <!-- Animation Controls -->
+                <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.03); padding: 14px; border-radius: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Potentiel (U) : <strong id="electro-volt-val" style="color: #facc15;">2.5 V</strong></label>
+                            <input type="range" id="electro-volt-slider" min="0.5" max="5.0" step="0.1" value="2.5" oninput="onElectroParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Agitation : <strong id="electro-stir-val" style="color: #38bdf8;">250 RPM</strong></label>
+                            <input type="range" id="electro-stir-slider" min="50" max="600" step="25" value="250" oninput="onElectroParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Température : <strong id="electro-temp-val" style="color: #ef4444;">25 °C</strong></label>
+                            <input type="range" id="electro-temp-slider" min="15" max="75" step="5" value="25" oninput="onElectroParamChange()" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                        <button class="btn btn-primary" id="electro-play-btn" onclick="toggleElectroPlay()" style="padding: 8px 18px; font-size: 0.85rem;">
+                            <i data-lucide="play"></i> Lancer la Déposition
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetElectroAnim()" style="padding: 8px 14px; font-size: 0.85rem;">
+                            <i data-lucide="rotate-ccw"></i> Réinitialiser
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step Description Box -->
+                <div style="background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 6px;">
+                    <h5 style="margin: 0 0 4px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">Loi de Faraday & Électrodéposition</h5>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 0.82rem; line-height: 1.4;">
+                        Sous l'action du potentiel imposé par le potentiostat, les cations de la solution migrent vers la Cathode (-) où ils captent des électrons (réduction M<sup>z+</sup> + z e<sup>-</sup> &rightarrow; M<sub>solide</sub>) pour former une couche mince métallique ou d'oxyde adhérente.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Column: Original Experimental Setup Schematic (122.jpg) -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="image"></i> Schéma Général de l'Électrodéposition
+                    </h4>
+                    <a href="assets/images/electrochemical_setup.jpg" target="_blank" class="badge badge-outline" style="border-color: rgba(255,255,255,0.2); color: #cbd5e1; text-decoration: none;">
+                        <i data-lucide="external-link"></i> Voir Plein Écran
+                    </a>
+                </div>
+
+                <!-- Image Container -->
+                <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); background: #ffffff; padding: 6px;">
+                    <img src="assets/images/electrochemical_setup.jpg" alt="Dispositif expérimental Electrochemical Deposition Potentiostat" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                </div>
+
+                <!-- Protocol Specifications Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px; font-size: 0.82rem; color: #cbd5e1;">
+                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-weight: 700; font-size: 0.88rem;">📋 Composants du Montage Expérimental :</h5>
+                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.4;">
+                        <li><strong>Potentiostat / Electrochemical Analyzer :</strong> Générateur de potentiel stabilisé alimentant la cellule.</li>
+                        <li><strong>Anode (+) :</strong> Électrode de contre-réaction (Anode d'oxydation connectée à la borne rouge +).</li>
+                        <li><strong>Cathode (- / Substrat) :</strong> Substrat conducteur où s'effectue la réduction et la croissance du film.</li>
+                        <li><strong>Électrolyte :</strong> Solution aqueuse précurseur maintenue sous agitation magnétique (250 rpm).</li>
+                        <li><strong>Interface PC :</strong> Monitoring en temps réel de la densité de courant j(mA) et du temps de dépôt t(s).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    `;
+}
+
+function initElectrochemicalAnimation() {
+    electroElapsed = 0;
+    electroIsPlaying = false;
+    onElectroParamChange();
+    startElectroCanvasLoop();
+}
+
+function onElectroParamChange() {
+    const voltSlider = document.getElementById("electro-volt-slider");
+    const stirSlider = document.getElementById("electro-stir-slider");
+    const tempSlider = document.getElementById("electro-temp-slider");
+
+    if (voltSlider) electroVoltage = parseFloat(voltSlider.value);
+    if (stirSlider) electroStirSpeed = parseInt(stirSlider.value);
+    if (tempSlider) electroTemp = parseInt(tempSlider.value);
+
+    const voltVal = document.getElementById("electro-volt-val");
+    const stirVal = document.getElementById("electro-stir-val");
+    const tempVal = document.getElementById("electro-temp-val");
+
+    if (voltVal) voltVal.textContent = `${electroVoltage.toFixed(1)} V`;
+    if (stirVal) stirVal.textContent = `${electroStirSpeed} RPM`;
+    if (tempVal) tempVal.textContent = `${electroTemp} °C`;
+}
+
+function toggleElectroPlay() {
+    electroIsPlaying = !electroIsPlaying;
+    const playBtn = document.getElementById("electro-play-btn");
+    const topBtn = document.getElementById("btn-start-electro-anim");
+    if (playBtn) {
+        playBtn.innerHTML = electroIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lancer la Déposition`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+    if (topBtn) {
+        topBtn.innerHTML = electroIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer la Simulation Interactive`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+}
+
+function resetElectroAnim() {
+    electroElapsed = 0;
+    electroIsPlaying = false;
+    const playBtn = document.getElementById("electro-play-btn");
+    if (playBtn) {
+        playBtn.innerHTML = `<i data-lucide="play"></i> Lancer la Déposition`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+}
+
+function startElectroCanvasLoop() {
+    if (electroCanvasAnimId) cancelAnimationFrame(electroCanvasAnimId);
+    function loop() {
+        electroAnimFrame++;
+        if (electroIsPlaying) {
+            electroElapsed += 0.05;
+        }
+        drawElectrochemicalCanvas();
+        electroCanvasAnimId = requestAnimationFrame(loop);
+    }
+    loop();
+}
+
+function drawElectrochemicalCanvas() {
+    const canvas = document.getElementById("electro-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Background Grid
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.05)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < w; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    for (let y = 0; y < h; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
+    // 1. Hot Plate / Magnetic Stirrer Base (Bottom)
+    ctx.fillStyle = "#f8fafc";
+    ctx.fillRect(140, 240, 240, 55);
+    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2;
+    ctx.strokeRect(140, 240, 240, 55);
+    
+    // Front Control Panel
+    ctx.fillStyle = "#0f172a";
+    ctx.fillRect(155, 275, 210, 16);
+    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 9px monospace"; ctx.textAlign = "left";
+    ctx.fillText(`${electroTemp} °C`, 165, 287);
+    ctx.fillText(`${electroStirSpeed} rpm`, 315, 287);
+
+    // Control Knobs
+    ctx.fillStyle = "#475569";
+    ctx.beginPath(); ctx.arc(200, 260, 10, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(320, 260, 10, 0, Math.PI * 2); ctx.fill();
+
+    // Hot Plate Surface
+    ctx.fillStyle = "#334155";
+    ctx.fillRect(130, 232, 260, 8);
+
+    // 2. Beaker & Electrolyte Solution
+    ctx.fillStyle = "rgba(56, 189, 248, 0.25)";
+    ctx.fillRect(160, 110, 200, 122);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.85)"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(155, 90); ctx.lineTo(155, 232); ctx.lineTo(365, 232); ctx.lineTo(365, 90); ctx.stroke();
+    // Solution label
+    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("Electrolyte Solution", 260, 130);
+
+    // Magnetic Stirrer capsule at bottom
+    const stirAngle = (electroAnimFrame * (electroStirSpeed / 400)) % (Math.PI * 2);
+    ctx.save();
+    ctx.translate(260, 218);
+    ctx.rotate(stirAngle);
+    ctx.fillStyle = "#475569";
+    ctx.fillRect(-14, -4, 28, 8);
+    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1;
+    ctx.strokeRect(-14, -4, 28, 8);
+    ctx.restore();
+
+    // 3. Stand & Electrode Holder (Left Stand)
+    ctx.fillStyle = "#64748b";
+    ctx.fillRect(45, 40, 10, 260);
+    ctx.beginPath(); ctx.arc(50, 290, 16, 0, Math.PI * 2); ctx.fill(); // base
+    // Cross Arm holding electrodes
+    ctx.fillRect(40, 60, 330, 8);
+    ctx.fillStyle = "#38bdf8";
+    ctx.fillRect(205, 54, 10, 20); // Clamp 1
+    ctx.fillRect(305, 54, 10, 20); // Clamp 2
+
+    // 4. Electrodes in Solution
+    // ANODE (+) (Orange plate on left)
+    ctx.fillStyle = "#fb923c";
+    ctx.fillRect(195, 125, 30, 75);
+    ctx.strokeStyle = "#ea580c"; ctx.lineWidth = 1.5;
+    ctx.strokeRect(195, 125, 30, 75);
+    ctx.fillStyle = "#000000"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("Anode (+)", 210, 165);
+
+    // CATHODE (-) (Substrate plate on right)
+    // Film thickness growth calculation by Faraday's law approximation
+    const currentDensityMa = electroVoltage * 8.5; // mA/cm2
+    const growthRateNmPerSec = (currentDensityMa * 0.15); // nm/sec
+    const filmThicknessNm = (electroElapsed * growthRateNmPerSec).toFixed(1);
+
+    ctx.fillStyle = "#e2e8f0"; // Metal/glass base substrate
+    ctx.fillRect(295, 125, 30, 75);
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1.5;
+    ctx.strokeRect(295, 125, 30, 75);
+
+    // Electrodeposited Film Layer on Cathode surfaces
+    if (parseFloat(filmThicknessNm) > 0) {
+        const filmAlpha = Math.min(0.95, 0.2 + parseFloat(filmThicknessNm) / 100);
+        ctx.fillStyle = `rgba(16, 185, 129, ${filmAlpha})`;
+        ctx.fillRect(291, 125, 4, 75); // Left face towards anode
+        ctx.fillRect(325, 125, 4, 75); // Right face
+    }
+    ctx.fillStyle = "#000000"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("Cathode (-)", 310, 165);
+
+    // 5. Potentiostat / Electrochemical Analyzer (Top Right Box)
+    const potX = 430; const potY = 15; const potW = 175; const potH = 100;
+    ctx.fillStyle = "#1e293b"; ctx.fillRect(potX, potY, potW, potH);
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2; ctx.strokeRect(potX, potY, potW, potH);
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText("Potentiostat Analyzer", potX + 12, potY + 20);
+
+    // Output Terminals (+) Red and (-) Black
+    ctx.fillStyle = "#ef4444"; ctx.beginPath(); ctx.arc(potX + 30, potY + 45, 9, 0, Math.PI * 2); ctx.fill(); // (+) Red
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center"; ctx.fillText("+", potX + 30, potY + 48);
+
+    ctx.fillStyle = "#334155"; ctx.beginPath(); ctx.arc(potX + 30, potY + 75, 9, 0, Math.PI * 2); ctx.fill(); // (-) Black
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center"; ctx.fillText("-", potX + 30, potY + 78);
+
+    // Potentiostat Screen Display
+    ctx.fillStyle = "#0f172a"; ctx.fillRect(potX + 60, potY + 35, 100, 50);
+    ctx.fillStyle = "#a3e635"; ctx.font = "bold 10px monospace"; ctx.textAlign = "left";
+    ctx.fillText(`U = ${electroVoltage.toFixed(1)}V`, potX + 68, potY + 52);
+    ctx.fillText(`J = ${currentDensityMa.toFixed(1)}mA`, potX + 68, potY + 70);
+
+    // Wires from Potentiostat to Electrodes
+    // Red wire from (+) terminal to Anode (210, 125)
+    ctx.strokeStyle = "#ef4444"; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(potX + 30, potY + 45);
+    ctx.lineTo(210, potY + 45);
+    ctx.lineTo(210, 125);
+    ctx.stroke();
+
+    // Dark wire from (-) terminal to Cathode (310, 125)
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(potX + 30, potY + 75);
+    ctx.lineTo(310, potY + 75);
+    ctx.lineTo(310, 125);
+    ctx.stroke();
+
+    // 6. PC Interface Monitor (Middle Right Box)
+    const pcX = 430; const pcY = 145; const pcW = 175; const pcH = 110;
+    ctx.fillStyle = "#0f172a"; ctx.fillRect(pcX, pcY, pcW, pcH);
+    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2.5; ctx.strokeRect(pcX, pcY, pcW, pcH);
+    // Monitor Stand
+    ctx.fillStyle = "#64748b"; ctx.fillRect(pcX + 70, pcY + pcH, 35, 15); ctx.fillRect(pcX + 50, pcY + pcH + 15, 75, 6);
+
+    // PC Monitor content
+    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("PC Interface (Live)", pcX + pcW / 2, pcY + 22);
+
+    ctx.fillStyle = "#cbd5e1"; ctx.font = "10px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText(`Densité : ${currentDensityMa.toFixed(1)} mA/cm²`, pcX + 12, pcY + 46);
+    ctx.fillText(`Temps t : ${electroElapsed.toFixed(1)} s`, pcX + 12, pcY + 66);
+    ctx.fillStyle = "#10b981"; ctx.font = "bold 11px sans-serif";
+    ctx.fillText(`Épaisseur : ${filmThicknessNm} nm`, pcX + 12, pcY + 90);
+
+    // Communication dashed line between Potentiostat & PC
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.4)"; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(potX + potW, potY + 50); ctx.lineTo(pcX + pcW + 8, potY + 50); ctx.lineTo(pcX + pcW + 8, pcY + 50); ctx.lineTo(pcX + pcW, pcY + 50); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 7. Animated Ion Migration (Cations M+ moving to Cathode) when playing
+    if (electroIsPlaying) {
+        ctx.fillStyle = "#a3e635";
+        for (let i = 0; i < 7; i++) {
+            const ionProgress = ((electroAnimFrame * 2 + i * 25) % 100) / 100.0;
+            const ix = 225 + ionProgress * (290 - 225);
+            const iy = 135 + (i * 9);
+            ctx.beginPath(); ctx.arc(ix, iy, 3, 0, Math.PI * 2); ctx.fill();
+            // ion text
+            ctx.fillStyle = "#ffffff"; ctx.font = "7px sans-serif";
+            ctx.fillText("+", ix + 4, iy + 2);
+            ctx.fillStyle = "#a3e635";
+        }
+    }
+
+    // Update thickness badge UI
+    const badge = document.getElementById("electro-thickness-badge");
+    if (badge) {
+        badge.textContent = `Épaisseur : ${filmThicknessNm} nm`;
+    }
+}
+
 
 
 
