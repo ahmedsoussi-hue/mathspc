@@ -3379,6 +3379,486 @@ const chaptersData = [
         exams: [
             { title: "Session Ordinaire 2023 - Chimie Organique & Acides", type: "National", year: 2023 }
         ]
+    },
+    {
+        id: "pc-tp-diodes-redressement",
+        title: "TP : Diodes et Applications (Redressement & Filtrage)",
+        level: "1bac",
+        subject: "pc",
+        description: "Utiliser une diode de redressement pour générer des signaux redressés (simple et double alternance) et filtrés par condensateur C.",
+        courseContent: `
+            <div class="toc reveal">
+                <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire du TP</div>
+                <ol class="toc-list">
+                    <li><a href="#tp-s1"><span class="toc-num">I</span> Caractéristiques de la Diode de Redressement</a></li>
+                    <li><a href="#tp-s2"><span class="toc-num">II</span> Redressement Simple Alternance</a></li>
+                    <li><a href="#tp-s3"><span class="toc-num">III</span> Redressement Double Alternance (Pont de Graetz)</a></li>
+                    <li><a href="#tp-s4"><span class="toc-num">IV</span> Filtrage par Condensateur & Ondulation</a></li>
+                    <li><a href="#tp-s5"><span class="toc-num">V</span> TP Virtuel Interactif</a></li>
+                </ol>
+            </div>
+
+            <div class="cours-section reveal" id="tp-s1">
+                <span class="section-label">Section I</span>
+                <h2 class="section-heading">Caractéristiques de la Diode de Redressement</h2>
+                <p>La diode à jonction $PN$ est un composant semi-conducteur dipolaire asymétrique :</p>
+                <ul>
+                    <li><strong>Polarisation directe ($e(t) > V_0$) :</strong> La diode conduit le courant avec une tension de seuil $V_0$ ($\approx 0,7\text{ V}$ silicium).</li>
+                    <li><strong>Polarisation inverse ($e(t) < V_0$) :</strong> La diode est bloquée ($i = 0\text{ A}$).</li>
+                </ul>
+            </div>
+
+            <div class="cours-section reveal" id="tp-s2">
+                <span class="section-label">Section II</span>
+                <h2 class="section-heading">Redressement Simple Alternance</h2>
+                <p>Pour $e(t) = E_{max} \cdot \sin(\omega t)$, la tension redressée en sortie s'écrit :</p>
+                <div class="math-formula">u_s(t) = \\max(0, e(t) - V_0)</div>
+                <p>Tension moyenne :</p>
+                <div class="math-formula">V_{dc} = \\frac{E_{max} - V_0}{\\pi}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-s3">
+                <span class="section-label">Section III</span>
+                <h2 class="section-heading">Redressement Double Alternance (Pont de Graetz)</h2>
+                <p>Utilise un pont de 4 diodes pour redresser les deux alternances :</p>
+                <div class="math-formula">u_s(t) = \\max(0, |e(t)| - 2 V_0)</div>
+                <p>Tension moyenne :</p>
+                <div class="math-formula">V_{dc} = \\frac{2(E_{max} - 2 V_0)}{\\pi}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-s4">
+                <span class="section-label">Section IV</span>
+                <h2 class="section-heading">Filtrage par Condensateur & Ondulation</h2>
+                <p>Un condensateur $C$ placé en parallèle sur la charge $R$ lisse la tension en se déchargeant dans $R$ pendant la phase de blocage des diodes.</p>
+                <p>L'ondulation de tension (ronflement) est donnée par :</p>
+                <div class="math-formula">\\Delta U \\approx \\frac{V_{dc}}{f_{red} \\cdot R \\cdot C}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-s5" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h3 style="color: var(--primary); font-family: 'Outfit', sans-serif;">Simulateur Virtuel Interactif</h3>
+                <p>Visualisez les signaux redressés et filtrés en temps réel sur l'oscilloscope virtuel.</p>
+                <button class="btn btn-primary" onclick="navigateToAnim('diodes-redressement')" style="margin-top: 10px; cursor: pointer;">
+                    Lancer l'Animation Interactive dans le Labo Virtuel ⚡
+                </button>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul du filtrage et de la tension de ronflement",
+                statement: "Un pont de Graetz alimenté sous f = 50 Hz avec C = 220 µF et R = 1 kΩ fournit une tension moyenne Vdc = 12 V. Calculer la tension d'ondulation ΔU.",
+                solution: "Double alternance => f_red = 2 × 50 = 100 Hz.<br>ΔU ≈ Vdc / (f_red × R × C) = 12 / (100 × 1000 × 220 × 10⁻⁶) = 12 / 22 = <strong>0.545 V</strong>."
+            }
+        ],
+        exams: [
+            { title: "TP d'Électronique et Redressement", type: "Pratique", year: 2024 }
+        ]
+    },
+    {
+        id: "pc-tp-transistor-bipolaire",
+        title: "TP : Transistors Bipolaires (Caractéristiques & Régimes)",
+        level: "1bac",
+        subject: "pc",
+        description: "Faire connaissance avec le transistor bipolaire NPN. Tracé des caractéristiques d'entrée I_B(V_BE), de sortie I_C(V_CE) et étude des régimes bloqué, linéaire et saturé.",
+        courseContent: `
+            <div class="toc reveal">
+                <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire du TP</div>
+                <ol class="toc-list">
+                    <li><a href="#tp-tb-s1"><span class="toc-num">I</span> Constitution et Principe du Transistor Bipolaire</a></li>
+                    <li><a href="#tp-tb-s2"><span class="toc-num">II</span> Caractéristique d'Entrée \(I_B = f(V_{BE})\)</a></li>
+                    <li><a href="#tp-tb-s3"><span class="toc-num">III</span> Réseau de Caractéristiques de Sortie \(I_C = f(V_{CE})\)</a></li>
+                    <li><a href="#tp-tb-s4"><span class="toc-num">IV</span> Les Trois Régimes de Fonctionnement</a></li>
+                    <li><a href="#tp-tb-s5"><span class="toc-num">V</span> Droite de Charge Statique & Point Q</a></li>
+                    <li><a href="#tp-tb-s6"><span class="toc-num">VI</span> TP Virtuel Interactif</a></li>
+                </ol>
+            </div>
+
+            <div class="cours-section reveal" id="tp-tb-s1">
+                <span class="section-label">Section I</span>
+                <h2 class="section-heading">Constitution et Principe du Transistor Bipolaire</h2>
+                <p>Le transistor bipolaire (NPN ou PNP) est un composant à semi-conducteurs à 3 électrodes :</p>
+                <ul>
+                    <li><strong>La Base (B) :</strong> Électrode de commande (courant d'entrée \(I_B\)).</li>
+                    <li><strong>Le Collecteur (C) :</strong> Électrode de sortie (courant \(I_C\)).</li>
+                    <li><strong>L'Émetteur (E) :</strong> Électrode commune (courant \(I_E = I_B + I_C\)).</li>
+                </ul>
+                <p>La relation fondamentale des courants est :</p>
+                <div class="math-formula">I_E = I_B + I_C</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-tb-s2">
+                <span class="section-label">Section II</span>
+                <h2 class="section-heading">Caractéristique d'Entrée \(I_B = f(V_{BE})\)</h2>
+                <p>La jonction Base-Émetteur se comporte comme une diode à jonction PN polarisée en direct :</p>
+                <ul>
+                    <li>Pour \(V_{BE} < V_{BE0} \approx 0,6\text{ V}\) à \(0,7\text{ V}\), le courant de base est nul (\(I_B = 0\)).</li>
+                    <li>Pour \(V_{BE} \ge V_{BE0}\), le courant \(I_B\) croît très rapidement de manière exponentielle.</li>
+                </ul>
+            </div>
+
+            <div class="cours-section reveal" id="tp-tb-s3">
+                <span class="section-label">Section III</span>
+                <h2 class="section-heading">Réseau de Caractéristiques de Sortie \(I_C = f(V_{CE})\)</h2>
+                <p>La courbe de sortie représente l'évolution du courant collecteur \(I_C\) en fonction de la tension collecteur-émetteur \(V_{CE}\) pour différentes valeurs fixées du courant de base \(I_B\) :</p>
+                <div class="math-formula">I_C = \beta \cdot I_B \quad \text{(en régime linéaire)}</div>
+                <p>où \(\beta = h_{fe}\) est le gain en courant statique du transistor (généralement compris entre 50 et 400).</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-tb-s4">
+                <span class="section-label">Section IV</span>
+                <h2 class="section-heading">Les Trois Régimes de Fonctionnement</h2>
+                <ul>
+                    <li><strong>1. Régime Bloqué (Interrupteur Ouvert) :</strong> \(I_B = 0 \implies I_C = 0\) et \(V_{CE} = V_{CC}\). Le transistor est bloqué.</li>
+                    <li><strong>2. Régime Linéaire (Amplificateur) :</strong> \(V_{CE} > V_{CE,sat}\) et \(I_C = \beta \cdot I_B\). Le courant de sortie est proportionnel au courant d'entrée.</li>
+                    <li><strong>3. Régime Saturé (Interrupteur Fermé) :</strong> \(V_{CE} = V_{CE,sat} \approx 0,2\text{ V}\) et \(I_C < \beta \cdot I_B\). Le courant \(I_C\) atteint sa valeur maximale \(I_{C,sat} = \frac{V_{CC} - V_{CE,sat}}{R_C}\).</li>
+                </ul>
+            </div>
+
+            <div class="cours-section reveal" id="tp-tb-s5">
+                <span class="section-label">Section V</span>
+                <h2 class="section-heading">Droite de Charge Statique & Point Q</h2>
+                <p>La loi des mailles au niveau du circuit de sortie donne :</p>
+                <div class="math-formula">V_{CC} = V_{CE} + R_C \cdot I_C \implies I_C = \frac{V_{CC} - V_{CE}}{R_C}</div>
+                <p>L'intersection de cette droite avec la caractéristique \(I_C = f(V_{CE})\) détermine le <strong>Point de Fonctionnement Statique \(Q(V_{CEQ}, I_{CQ})\)</strong>.</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-tb-s6" style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h3 style="color: #38bdf8; font-family: 'Outfit', sans-serif;">Simulateur Virtuel du Transistor Bipolaire</h3>
+                <p>Visualisez en direct les caractéristiques d'entrée, de sortie, le réseau de courbes \(I_C(V_{CE})\) et la droite de charge sur notre outil interactif.</p>
+                <button class="btn btn-primary" onclick="navigateToAnim('transistor-bipolaire')" style="margin-top: 10px; cursor: pointer;">
+                    Lancer l'Animation Interactive dans le Labo Virtuel ⚡
+                </button>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Détermination du régime de fonctionnement",
+                statement: "Un transistor NPN a un gain β = 150. On applique VCC = 12 V, RC = 1 kΩ et IB = 40 µA. Déterminer si le transistor est en régime linéaire ou saturé, et calculer IC et VCE.",
+                solution: "En régime linéaire supposé : IC = β × IB = 150 × 40 × 10⁻⁶ A = 6 mA.<br>VCE = VCC - RC × IC = 12 - (1000 × 6 × 10⁻³) = 12 - 6 = 6 V.<br>Puisque VCE = 6 V > VCE,sat (0.2 V), le transistor est bien en <strong>Régime Linéaire (Amplificateur)</strong> avec <strong>IC = 6 mA</strong> et <strong>VCE = 6 V</strong>."
+            }
+        ],
+        exams: [
+            { title: "TP d'Électronique - Transistor Bipolaire en Commutation et Amplification", type: "Pratique", year: 2024 }
+        ]
+    },
+    {
+        id: "pc-tp-aop-amplificateur",
+        title: "TP : Amplificateur Opérationnel (AOP) — Visualisation des Tensions",
+        level: "1bac",
+        subject: "pc",
+        description: "Visualiser la tension d'entrée V_in(t) et de sortie V_out(t) sur un oscilloscope bicanal. Étude des montages inverseur, non-inverseur, suiveur et du régime de saturation.",
+        courseContent: `
+            <div class="toc reveal">
+                <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire du TP</div>
+                <ol class="toc-list">
+                    <li><a href="#tp-aop-s1"><span class="toc-num">I</span> Présentation & Modèle de l'AOP Idéal</a></li>
+                    <li><a href="#tp-aop-s2"><span class="toc-num">II</span> Le Régime Linéaire (\(V^+ = V^-\)) & Contre-Réaction</a></li>
+                    <li><a href="#tp-aop-s3"><span class="toc-num">III</span> Montages de Base (Inverseur, Non-Inverseur, Suiveur)</a></li>
+                    <li><a href="#tp-aop-s4"><span class="toc-num">IV</span> Montages Avancés (Sommateur & Soustracteur Différentiel)</a></li>
+                    <li><a href="#tp-aop-s5"><span class="toc-num">V</span> Montages à Capacités (Intégrateur & Dérivateur)</a></li>
+                    <li><a href="#tp-aop-s6"><span class="toc-num">VI</span> Régime Non-Linéaire & Saturation (\(\pm V_{sat}\))</a></li>
+                    <li><a href="#tp-aop-s7"><span class="toc-num">VII</span> TP Virtuel Interactif</a></li>
+                </ol>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s1">
+                <span class="section-label">Section I</span>
+                <h2 class="section-heading">Présentation & Modèle de l'AOP Idéal</h2>
+                <p>L'Amplificateur Opérationnel (AOP / AO) est un composant électronique intégré actif comportant :</p>
+                <ul>
+                    <li><strong>L'entrée non-inverseuse (\(V^+\)) :</strong> Borne de commande positive.</li>
+                    <li><strong>L'entrée inverseuse (\(V^-\)) :</strong> Borne de commande négative.</li>
+                    <li><strong>La sortie (\(V_{out}\)) :</strong> Tension amplifiée ou limitée.</li>
+                    <li><strong>Alimentation symétrique (\(\pm V_{CC}\)) :</strong> Généralement \(\pm 12\text{V}\) ou \(\pm 15\text{V}\).</li>
+                </ul>
+                <p>Pour un AOP parfait / idéal en régime linéaire :</p>
+                <div class="math-formula">i^+ = i^- = 0 \quad \text{et} \quad V^+ = V^- \implies \varepsilon = V^+ - V^- = 0</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s2">
+                <span class="section-label">Section II</span>
+                <h2 class="section-heading">Le Régime Linéaire & La Boucle de Contre-Réaction</h2>
+                <p>Pour fonctionner en régime linéaire, la sortie de l'AOP doit obligatoirement être reliée à son entrée inverseuse (\(V^-\)) par un réseau de contre-réaction (résistance ou condensateur). La tension de sortie varie sans dépasser \(\pm V_{sat}\).</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s3">
+                <span class="section-label">Section III</span>
+                <h2 class="section-heading">Montages Amplificateurs de Base</h2>
+                <p><strong>1. Amplificateur Inverseur :</strong> \(V_1(t)\) appliqué sur \(V^-\) via \(R_1\), avec \(V^+\) à la masse (\(0\text{V}\)).</p>
+                <div class="math-formula">V_{out}(t) = -\frac{R_2}{R_1} \cdot V_1(t) \implies A_v = -\frac{R_2}{R_1} \quad (\text{Déphasage de } 180^\circ / \pi \text{ rad})</div>
+
+                <p><strong>2. Amplificateur Non-Inverseur :</strong> \(V_1(t)\) appliqué sur \(V^+\), avec \(V^-\) relié à la masse via \(R_1\).</p>
+                <div class="math-formula">V_{out}(t) = \left(1 + \frac{R_2}{R_1}\right) \cdot V_1(t) \implies A_v = 1 + \frac{R_2}{R_1} \quad (\text{En phase } 0^\circ)</div>
+
+                <p><strong>3. Suiveur de Tension (Buffer) :</strong> Relie directement la sortie à \(V^-\) (\(R_2 = 0\)).</p>
+                <div class="math-formula">V_{out}(t) = V_1(t) \implies A_v = 1 \quad (\text{Adaptateur d'impédance idéal})</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s4">
+                <span class="section-label">Section IV</span>
+                <h2 class="section-heading">Montages Avancés : Sommateur & Soustracteur Différentiel</h2>
+                <p><strong>1. Amplificateur Sommateur Inverseur :</strong> Additionne algébriquement deux tensions \(V_1(t)\) et \(V_2\) sur l'entrée inverseuse.</p>
+                <div class="math-formula">V_{out}(t) = -\frac{R_2}{R_1} \left(V_1(t) + V_2\right)</div>
+
+                <p><strong>2. Amplificateur Soustracteur / Différentiel :</strong> Amplifie la différence entre deux tensions \(V_2\) et \(V_1(t)\).</p>
+                <div class="math-formula">V_{out}(t) = \frac{R_2}{R_1} \left(V_2 - V_1(t)\right) \quad (\text{Élimine les bruits parasites communs})</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s5">
+                <span class="section-label">Section V</span>
+                <h2 class="section-heading">Montages à Capacités : Intégrateur & Dérivateur</h2>
+                <p><strong>1. Amplificateur Intégrateur :</strong> Remplace la résistance de contre-réaction par un condensateur \(C\). La sortie est l'intégrale du signal d'entrée :</p>
+                <div class="math-formula">V_{out}(t) = -\frac{1}{R_1 C} \int V_1(t) \, dt \quad (\text{Transforme un signal carré en triangulaire})</div>
+
+                <p><strong>2. Amplificateur Dérivateur :</strong> Remplace la résistance d'entrée par un condensateur \(C\). La sortie est la dérivée du signal d'entrée :</p>
+                <div class="math-formula">V_{out}(t) = -R_2 C \frac{d V_1(t)}{dt} \quad (\text{Transforme un signal triangulaire en carré})</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s6">
+                <span class="section-label">Section VI</span>
+                <h2 class="section-heading">Régime Non-Linéaire & Saturation (\(\pm V_{sat}\))</h2>
+                <p><strong>1. Comparateur de Tension (Boucle ouverte) :</strong> Pas de contre-réaction. Compare \(V_1(t)\) à une référence \(V_{ref} = V_2\) :</p>
+                <div class="math-formula">V_{out} = \begin{cases} +V_{sat} & \text{si } V_1 > V_2 \\ -V_{sat} & \text{si } V_1 < V_2 \end{cases}</div>
+                <p><strong>2. Écrêtage en Régime Linéaire :</strong> Si le produit théorique \(A_v \cdot V_{1,max} > V_{sat}\), la sortie est plafonnée à \(\pm V_{sat}\).</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-aop-s7" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h3 style="color: #10b981; font-family: 'Outfit', sans-serif;">Simulateur Virtuel AOP & Oscilloscope</h3>
+                <p>Visualisez simultanément \(V_{in}(t)\) et \(V_{out}(t)\), choisissez parmi les 8 montages, observez l'intégration, la dérivation, le déphasage et l'écrêtage sur l'oscilloscope virtuel.</p>
+                <button class="btn btn-primary" onclick="navigateToAnim('aop-amplificateur')" style="margin-top: 10px; cursor: pointer;">
+                    Lancer l'Animation Interactive dans le Labo Virtuel ⚡
+                </button>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul de gain et vérification de la saturation",
+                statement: "Un montage inverseur comporte R1 = 10 kΩ et R2 = 50 kΩ. L'AOP a une saturation Vsat = 12 V. On applique Vin(t) = 2.0 sin(wt). Déterminer le gain Av, la tension théorique Vout,max et indiquer si le signal est écrêté.",
+                solution: "Gain théorique : Av = -R2 / R1 = -50 / 10 = -5.<br>Tension de sortie théorique crête : |Vout,max,th| = |Av| × Vin,max = 5 × 2.0 V = 10 V.<br>Puisque 10 V < Vsat (12 V), le signal reste en <strong>Régime Linéaire sans écrêtage</strong> avec <strong>Vout,max = 10 V</strong> et un déphasage de 180°."
+            }
+        ],
+        exams: [
+            { title: "TP d'Électronique - Amplificateur Opérationnel et Montages Linéaires", type: "Pratique", year: 2024 }
+        ]
+    },
+    {
+        id: "pc-tp-mesure-resistances",
+        title: "TP : Mesure de Résistances (Code Couleurs, Volt-Ampèremètre & Wheatstone)",
+        level: "1bac",
+        subject: "pc",
+        description: "Mesure directe par le code des couleurs à anneaux, étude de la méthode Volt-Ampèremétrique (Montages Amont/Aval et erreurs systématiques) et équilibre du Pont de Wheatstone.",
+        courseContent: `
+            <div class="toc reveal">
+                <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire du TP</div>
+                <ol class="toc-list">
+                    <li><a href="#tp-res-s1"><span class="toc-num">I</span> Code des Couleurs des Résistances (4 & 5 Anneaux)</a></li>
+                    <li><a href="#tp-res-s2"><span class="toc-num">II</span> Méthode Volt-Ampèremétrique (Montage Aval vs Amont)</a></li>
+                    <li><a href="#tp-res-s3"><span class="toc-num">III</span> Pont de Wheatstone à l'Équilibre</a></li>
+                    <li><a href="#tp-res-s4"><span class="toc-num">IV</span> TP Virtuel Interactif</a></li>
+                </ol>
+            </div>
+
+            <div class="cours-section reveal" id="tp-res-s1">
+                <span class="section-label">Section I</span>
+                <h2 class="section-heading">Code des Couleurs des Résistances</h2>
+                <p>La valeur de la résistance $R$ et sa tolérance sont codées par des anneaux de couleurs :</p>
+                <div class="math-formula">R = (10 \cdot A + B) \times 10^C \ \Omega \quad \pm T\%</div>
+                <ul>
+                    <li><strong>Moyen mnémotechnique :</strong> "Ne Manger Rien D'Important Ou Je Vous Bats Très Volontiers" (Noir=0, Marron=1, Rouge=2, Orange=3, Jaune=4, Vert=5, Bleu=6, Violet=7, Gris=8, Blanc=9).</li>
+                    <li><strong>Tolérance :</strong> Or ($\pm 5\%$), Argent ($\pm 10\%$), Marron ($\pm 1\%$).</li>
+                </ul>
+            </div>
+
+            <div class="cours-section reveal" id="tp-res-s2">
+                <span class="section-label">Section II</span>
+                <h2 class="section-heading">Méthode Volt-Ampèremétrique (Montage Amont / Aval)</h2>
+                <p>Mesure indirecte en appliquant la loi d'Ohm $R_{mes} = U / I$.</p>
+                <p><strong>1. Montage Aval (Voltmètre aux bornes de R) :</strong> Recommandé pour les <strong>résistances de faible valeur ($R \ll R_V$)</strong>. L'erreur est due au courant dérivé par le voltmètre ($I_V = U / R_V$).</p>
+                <p><strong>2. Montage Amont (Voltmètre en amont de l'ampèremètre) :</strong> Recommandé pour les <strong>résistances de forte valeur ($R \gg R_A$)</strong>. L'erreur est due à la chute de tension interne de l'ampèremètre ($U_A = R_A \cdot I$).</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-res-s3">
+                <span class="section-label">Section III</span>
+                <h2 class="section-heading">Pont de Wheatstone à l'Équilibre</h2>
+                <p>Le pont de Wheatstone est constitué de 4 résistances $R_1, R_2, R_3, R_x$ et d'un détecteur de zéro (galvanomètre) :</p>
+                <div class="math-formula">I_G = 0 \iff \frac{R_1}{R_2} = \frac{R_3}{R_x} \implies R_x = \frac{R_2 \cdot R_3}{R_1}</div>
+                <p>Méthode très précise car elle affranchit des erreurs de déviation des appareils de mesure.</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-res-s4" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h3 style="color: #10b981; font-family: 'Outfit', sans-serif;">Simulateur Virtuel Mesure de Résistances</h3>
+                <p>Manipulez le code des couleurs, comparez l'erreur des montages Amont/Aval et équilibrez le pont de Wheatstone.</p>
+                <button class="btn btn-primary" onclick="navigateToAnim('mesure-resistances')" style="margin-top: 10px; cursor: pointer;">
+                    Lancer l'Animation Interactive dans le Labo Virtuel ⚡
+                </button>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Choix entre montage amont et aval",
+                statement: "On dispose d'un ampèremètre de résistance interne RA = 2 Ω et d'un voltmètre de résistance RV = 100 kΩ. On veut mesurer R = 10 Ω, puis RX = 50 kΩ. Quel montage choisir dans chaque cas ?",
+                solution: "Pour R = 10 Ω : R < sqrt(RA × RV) = sqrt(200 000) = 447 Ω. Il faut choisir le <strong>Montage Aval</strong>.<br>Pour RX = 50 kΩ : RX > 447 Ω. Il faut choisir le <strong>Montage Amont</strong>."
+            }
+        ],
+        exams: [
+            { title: "TP Mesures Électriques et Métrologie", type: "Pratique", year: 2024 }
+        ]
+    },
+    {
+        id: "pc-tp-charge-decharge-rc",
+        title: "TP : Charge et Décharge d'un Condensateur (Dipôle RC)",
+        level: "1bac",
+        subject: "pc",
+        description: "Étude expérimentale de la réponse d'un circuit RC à un échelon de tension E. Détermination de la constante de temps tau = R*C par la tangente à l'origine.",
+        courseContent: `
+            <div class="toc reveal">
+                <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire du TP</div>
+                <ol class="toc-list">
+                    <li><a href="#tp-rc-s1"><span class="toc-num">I</span> Équation Différentielle de la Charge du Condensateur</a></li>
+                    <li><a href="#tp-rc-s2"><span class="toc-num">II</span> Équation Différentielle de la Décharge du Condensateur</a></li>
+                    <li><a href="#tp-rc-s3"><span class="toc-num">III</span> Constante de Temps \(\\tau = R \\cdot C\) & Méthodes de Mesure</a></li>
+                    <li><a href="#tp-rc-s4"><span class="toc-num">IV</span> Énergie Électrique Emmagasinée dans un Condensateur</a></li>
+                    <li><a href="#tp-rc-s5"><span class="toc-num">V</span> TP Virtuel Interactif</a></li>
+                </ol>
+            </div>
+
+            <div class="cours-section reveal" id="tp-rc-s1">
+                <span class="section-label">Section I</span>
+                <h2 class="section-heading">Équation Différentielle de la Charge</h2>
+                <p>En appliquant la loi d'additivité des tensions $E = u_R(t) + u_C(t)$ avec $u_R = R \cdot i = R C \frac{du_C}{dt}$ :</p>
+                <div class="math-formula">u_C(t) + R C \frac{du_C}{dt} = E \implies u_C(t) = E \left(1 - e^{-t/\tau}\right)</div>
+                <p>Avec la constante de temps <strong>\(\tau = R \cdot C\)</strong> (exprimée en secondes).</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-rc-s2">
+                <span class="section-label">Section II</span>
+                <h2 class="section-heading">Équation Différentielle de la Décharge</h2>
+                <p>Lors de la décharge à travers la résistance $R$ ($E = 0$) :</p>
+                <div class="math-formula">u_C(t) + R C \frac{du_C}{dt} = 0 \implies u_C(t) = E \cdot e^{-t/\tau}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-rc-s3">
+                <span class="section-label">Section III</span>
+                <h2 class="section-heading">Constante de Temps \(\tau = R \cdot C\) & Méthodes de Mesure</h2>
+                <p><strong>1. Méthode de la Tangente à l'origine ($t=0$) :</strong> La tangente à l'origine croise l'asymptote $u_C = E$ (en charge) ou l'axe des temps $u_C = 0$ (en décharge) exactement à l'instant $t = \tau$.</p>
+                <p><strong>2. Méthode des $63\%$ / $37\%$ :</strong> À l'instant $t = \tau$ :</p>
+                <ul>
+                    <li>En charge : $u_C(\tau) = E (1 - e^{-1}) \approx 0{,}63 \cdot E$ ($63\%$ de la tension finale).</li>
+                    <li>En décharge : $u_C(\tau) = E e^{-1} \approx 0{,}37 \cdot E$ ($37\%$ de la tension initiale).</li>
+                </ul>
+            </div>
+
+            <div class="cours-section reveal" id="tp-rc-s4">
+                <span class="section-label">Section IV</span>
+                <h2 class="section-heading">Énergie Électrique Emmagasinée</h2>
+                <div class="math-formula">E_e = \frac{1}{2} C \cdot u_C^2</div>
+                <p>L'énergie accumulée dans le condensateur en régime permanent ($u_C = E$) vaut $E_e = \frac{1}{2} C E^2$.</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-rc-s5" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h3 style="color: #10b981; font-family: 'Outfit', sans-serif;">Simulateur Virtuel Charge & Décharge Condensateur</h3>
+                <p>Commutez l'interrupteur K, observez la courbe transitoire $u_C(t)$ et déterminez $\tau$ grâce à la tangente à l'origine tracée en temps réel.</p>
+                <button class="btn btn-primary" onclick="navigateToAnim('charge-decharge-rc')" style="margin-top: 10px; cursor: pointer;">
+                    Lancer l'Animation Interactive dans le Labo Virtuel ⚡
+                </button>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul de la constante de temps et capacité",
+                statement: "Un circuit RC comporte R = 10 kΩ. Sur l'oscilloscope, on mesure tau = 0.47 ms. Calculer la capacité C du condensateur et la tension uC à t = tau pour E = 10 V.",
+                solution: "C = tau / R = (0.47 × 10⁻³ s) / (10 × 10³ Ω) = 0.047 × 10⁻⁶ F = 47 nF.<br>À t = tau en charge : uC(tau) = 0.63 × 10 V = <strong>6.3 V</strong>."
+            }
+        ],
+        exams: [
+            { title: "TP Dipôle RC - Échelon de Tension et Régime Transitoire", type: "Pratique", year: 2024 }
+        ]
+    },
+    {
+        id: "pc-tp-moteur-cc",
+        title: "TP : Moteur à Courant Continu (MCC) — Caractéristiques & Rendement",
+        level: "1bac",
+        subject: "pc",
+        description: "Étude théorique et expérimentale du moteur à courant continu : équations E = K*Omega, U = E + R*I, couple Tem = K*I, étude des caractéristiques N(U), Tem(I) et bilan de puissance.",
+        courseContent: `
+            <div class="toc reveal">
+                <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire du TP</div>
+                <ol class="toc-list">
+                    <li><a href="#tp-mcc-s1"><span class="toc-num">I</span> Constitution & Principe de Fonctionnement du Moteur CC</a></li>
+                    <li><a href="#tp-mcc-s2"><span class="toc-num">II</span> Équation Électrique (\(U = E + R \cdot I\)) & Force Électromotrice (\(E = K \cdot \Omega\))</a></li>
+                    <li><a href="#tp-mcc-s3"><span class="toc-num">III</span> Couple Électromagnétique (\(T_{em} = K \cdot I\)) & Caractéristique Mécanique</a></li>
+                    <li><a href="#tp-mcc-s4"><span class="toc-num">IV</span> Réglage de la Vitesse de Rotation (Variation de \(U\))</a></li>
+                    <li><a href="#tp-mcc-s5"><span class="toc-num">V</span> Bilan de Puissance & Rendement (\(\eta = P_u / P_a\))</a></li>
+                    <li><a href="#tp-mcc-s6"><span class="toc-num">VI</span> TP Virtuel Interactif</a></li>
+                </ol>
+            </div>
+
+            <div class="cours-section reveal" id="tp-mcc-s1">
+                <span class="section-label">Section I</span>
+                <h2 class="section-heading">Constitution & Principe de Fonctionnement</h2>
+                <p>Le Moteur à Courant Continu (MCC) est une machine électrique tournante réversible composée de :</p>
+                <ul>
+                    <li><strong>Stator (Inducteur) :</strong> Aimants permanents ou électroaimants produisant un champ magnétique fixe $\vec{B}$.</li>
+                    <li><strong>Rotor (Induit) :</strong> Bobinage conducteur en rotation parcouru par le courant $I$.</li>
+                    <li><strong>Collecteur & Balais en carbone :</strong> Assurent la commutation du courant pour maintenir le couple électromagnétique toujours dans le même sens.</li>
+                </ul>
+            </div>
+
+            <div class="cours-section reveal" id="tp-mcc-s2">
+                <span class="section-label">Section II</span>
+                <h2 class="section-heading">Équation Électrique & Force Électromotrice</h2>
+                <p>En régime permanent, la tension appliquée à l'induit $U$ s'équilibre avec la force contre-électromotrice $E$ et la chute de tension dans la résistance interne $R$ :</p>
+                <div class="math-formula">U = E + R \cdot I \implies E = U - R \cdot I</div>
+                <p>La f.é.m. d'induction $E$ est proportionnelle à la vitesse angulaire de rotation $\Omega$ (en rad/s) :</p>
+                <div class="math-formula">E = K \cdot \Omega = K \cdot \frac{2 \pi N}{60}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-mcc-s3">
+                <span class="section-label">Section III</span>
+                <h2 class="section-heading">Couple Électromagnétique & Caractéristique Mécanique</h2>
+                <p>Le couple électromagnétique $T_{em}$ généré par les forces de Laplace est directement proportionnel au courant d'induit $I$ :</p>
+                <div class="math-formula">T_{em} = K \cdot I</div>
+                <p>En exprimant la vitesse angulaire $\Omega$ en fonction de la tension $U$ et du couple $T_{em}$ :</p>
+                <div class="math-formula">\Omega = \frac{U - R \cdot I}{K} = \frac{U}{K} - \frac{R}{K^2} T_{em}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-mcc-s4">
+                <span class="section-label">Section IV</span>
+                <h2 class="section-heading">Réglage de la Vitesse de Rotation</h2>
+                <p>À vide ($I \approx 0$), la vitesse de rotation $N_0$ varie de manière parfaitement linéaire avec la tension d'alimentation $U$ :</p>
+                <div class="math-formula">N_0 \approx \frac{60}{2 \pi K} \cdot U</div>
+                <p>C'est ce principe qui est utilisé dans les hacheurs (PWM) et variateurs de vitesse électroniques.</p>
+            </div>
+
+            <div class="cours-section reveal" id="tp-mcc-s5">
+                <span class="section-label">Section V</span>
+                <h2 class="section-heading">Bilan de Puissance & Rendement</h2>
+                <ul>
+                    <li><strong>Puissance absorbée (électrique) :</strong> $P_a = U \cdot I$</li>
+                    <li><strong>Pertes par effet Joule (induit) :</strong> $P_j = R \cdot I^2$</li>
+                    <li><strong>Puissance électromagnétique :</strong> $P_{em} = E \cdot I = T_{em} \cdot \Omega$</li>
+                    <li><strong>Puissance utile (mécanique) :</strong> $P_u = T_u \cdot \Omega$</li>
+                </ul>
+                <div class="math-formula">\eta = \frac{P_u}{P_a} = \frac{T_u \cdot \Omega}{U \cdot I}</div>
+            </div>
+
+            <div class="cours-section reveal" id="tp-mcc-s6" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 20px; border-radius: 12px; margin-top: 20px;">
+                <h3 style="color: #10b981; font-family: 'Outfit', sans-serif;">Simulateur Virtuel Moteur à Courant Continu</h3>
+                <p>Faites tourner le rotor en temps réel, ajustez $U$ et le couple de charge $T_L$, et analysez les courbes de vitesse $N(U)$ et de rendement $\eta(I)$.</p>
+                <button class="btn btn-primary" onclick="navigateToAnim('moteur-cc')" style="margin-top: 10px; cursor: pointer;">
+                    Lancer l'Animation Interactive dans le Labo Virtuel ⚡
+                </button>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul du rendement et de la f.é.m. d'un moteur CC",
+                statement: "Un moteur à courant continu alimenté sous U = 24 V absorbe un courant I = 5 A. Sa résistance d'induit est R = 0.8 Ω. La vitesse de rotation est N = 1500 tr/min. Calculer la f.é.m. E, la constante K, la puissance utile Pu et le rendement (on néglige les pertes mécaniques).",
+                solution: "1. f.é.m. E = U - R × I = 24 - (0.8 × 5) = 24 - 4 = <strong>20 V</strong>.<br>2. Vitesse angulaire : Ω = (2π × 1500) / 60 = 157.08 rad/s.<br>3. Constante K = E / Ω = 20 / 157.08 = <strong>0.127 V·s/rad</strong>.<br>4. Puissance absorbée : Pa = U × I = 24 × 5 = 120 W.<br>5. Puissance utile : Pu = E × I = 20 × 5 = 100 W.<br>6. Rendement : η = Pu / Pa = 100 / 120 = <strong>83.3 %</strong>."
+            }
+        ],
+        exams: [
+            { title: "TP Électrotechnique - Machine à Courant Continu et Variateur de Vitesse", type: "Pratique", year: 2024 }
+        ]
     }
 ];
 
@@ -4339,6 +4819,24 @@ function initCanvasFor(type) {
         setupEquilibriumSimulator();
     } else if (type === "plotter") {
         setupPlotterSimulator();
+    } else if (type === "focometrie") {
+        setupFocometrieSimulator();
+    } else if (type === "photovoltaique") {
+        setupPhotovoltaiqueSimulator();
+    } else if (type === "charge-electron") {
+        setupChargeElectronSimulator();
+    } else if (type === "diodes-redressement") {
+        setupDiodesRedressementSimulator();
+    } else if (type === "transistor-bipolaire") {
+        setupTransistorBipolaireSimulator();
+    } else if (type === "aop-amplificateur") {
+        setupAopAmplificateurSimulator();
+    } else if (type === "mesure-resistances") {
+        setupMesureResistancesSimulator();
+    } else if (type === "charge-decharge-rc") {
+        setupChargeDechargeRcSimulator();
+    } else if (type === "moteur-cc") {
+        setupMoteurCcSimulator();
     }
 }
 
@@ -5590,6 +6088,2147 @@ try {
     console.log("Dynamically added CSS rule error: " + e);
 }
 
+// 7. Focometrie Simulator
+let focometrieInterval = null;
+function setupFocometrieSimulator() {
+    const canvas = document.getElementById("canvas-focometrie");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const methodSelect = document.getElementById("focometrie-method");
+    const fSlider = document.getElementById("focometrie-f");
+    const f2Slider = document.getElementById("focometrie-f2");
+    const DSlider = document.getElementById("focometrie-D");
+    const xLSlider = document.getElementById("focometrie-xL");
+    const xOSlider = document.getElementById("focometrie-xO");
+    const xSSlider = document.getElementById("focometrie-xS");
+    const btnAuto = document.getElementById("btn-focometrie-auto");
+
+    // Clean up event listeners by cloning nodes
+    const newMethod = methodSelect.cloneNode(true);
+    methodSelect.parentNode.replaceChild(newMethod, methodSelect);
+    
+    const newF = fSlider.cloneNode(true);
+    fSlider.parentNode.replaceChild(newF, fSlider);
+    
+    const newF2 = f2Slider.cloneNode(true);
+    f2Slider.parentNode.replaceChild(newF2, f2Slider);
+    
+    const newD = DSlider.cloneNode(true);
+    DSlider.parentNode.replaceChild(newD, DSlider);
+    
+    const newXL = xLSlider.cloneNode(true);
+    xLSlider.parentNode.replaceChild(newXL, xLSlider);
+    
+    const newXO = xOSlider.cloneNode(true);
+    xOSlider.parentNode.replaceChild(newXO, xOSlider);
+    
+    const newXS = xSSlider.cloneNode(true);
+    xSSlider.parentNode.replaceChild(newXS, xSSlider);
+    
+    const newAuto = btnAuto.cloneNode(true);
+    btnAuto.parentNode.replaceChild(newAuto, btnAuto);
+
+    // Initial variables
+    let method = newMethod.value;
+    let f1 = parseFloat(newF.value);
+    let f2 = parseFloat(newF2.value);
+    let D = parseFloat(newD.value);
+    let xL = parseFloat(newXL.value);
+    let xO = parseFloat(newXO.value);
+    let xS = parseFloat(newXS.value);
+
+    // Dragging state
+    let dragElement = null; // 'lens1', 'screen', 'object'
+
+    function getCoords() {
+        const coords = {};
+        coords.yAxis = 180;
+        coords.yBench = 280;
+        coords.xO = (method === "badal") ? xO : 100;
+        coords.f1 = f1;
+        coords.f2 = f2;
+        
+        if (method === "badal") {
+            coords.xL1 = 250;
+            coords.xL2 = coords.xL1 + f1;
+            coords.xS = xS;
+        } else {
+            coords.xL1 = xL;
+            coords.xL2 = null;
+            if (method === "autocollimation") {
+                coords.xS = coords.xO; // formed on the same plane
+                coords.xM = xL + 40;
+            } else {
+                coords.xS = coords.xO + D;
+            }
+        }
+        return coords;
+    }
+
+    function updateInputsVisibility() {
+        method = newMethod.value;
+        const gF = document.getElementById("group-focometrie-f");
+        const gF2 = document.getElementById("group-focometrie-f2");
+        const gD = document.getElementById("group-focometrie-D");
+        const gXL = document.getElementById("group-focometrie-xL");
+        const gXO = document.getElementById("group-focometrie-xO");
+        const gXS = document.getElementById("group-focometrie-xS");
+        
+        // Default hide
+        gF.style.display = "flex";
+        gF2.style.display = "none";
+        gD.style.display = "none";
+        gXL.style.display = "none";
+        gXO.style.display = "none";
+        gXS.style.display = "none";
+        
+        // Show contextually
+        if (method === "bessel") {
+            gD.style.display = "flex";
+            gXL.style.display = "flex";
+            document.getElementById("label-focometrie-f").innerHTML = `Focale L (f) : <span id="val-focometrie-f">${f1}</span> mm`;
+            document.getElementById("label-focometrie-D").innerHTML = `Distance D (Obj-Écran) : <span id="val-focometrie-D">${D}</span> mm`;
+            document.getElementById("label-focometrie-xL").innerHTML = `Pos. Lentille L (x) : <span id="val-focometrie-xL">${xL}</span> mm`;
+            newXL.min = 110;
+            newXL.max = 100 + D - 10;
+            newD.disabled = false;
+            newXL.disabled = false;
+        } else if (method === "silbermann") {
+            gXL.style.display = "flex";
+            document.getElementById("label-focometrie-f").innerHTML = `Focale L (f) : <span id="val-focometrie-f">${f1}</span> mm`;
+            document.getElementById("label-focometrie-xL").innerHTML = `Pos. Lentille L (x) : <span id="val-focometrie-xL">${xL}</span> mm`;
+            D = 4 * f1;
+            newD.value = D;
+            document.getElementById("val-focometrie-D").textContent = D;
+            newXL.min = 110;
+            newXL.max = 100 + D - 10;
+            newXL.disabled = true; // locked at midpoint
+            xL = 100 + D/2;
+            newXL.value = xL;
+            document.getElementById("val-focometrie-xL").textContent = xL;
+        } else if (method === "autocollimation") {
+            gXL.style.display = "flex";
+            document.getElementById("label-focometrie-f").innerHTML = `Focale L (f) : <span id="val-focometrie-f">${f1}</span> mm`;
+            document.getElementById("label-focometrie-xL").innerHTML = `Pos. Lentille L (x) : <span id="val-focometrie-xL">${xL}</span> mm`;
+            newXL.min = 120;
+            newXL.max = 350;
+            newXL.disabled = false;
+        } else if (method === "badal") {
+            gF2.style.display = "flex";
+            gXO.style.display = "flex";
+            gXS.style.display = "flex";
+            document.getElementById("label-focometrie-f").innerHTML = `Focale L1 (f1) : <span id="val-focometrie-f">${f1}</span> mm`;
+        }
+        
+        updateCalculations();
+        triggerMathJaxOnce();
+    }
+
+    let mathjaxTimeout = null;
+    function triggerMathJaxOnce() {
+        if (mathjaxTimeout) clearTimeout(mathjaxTimeout);
+        mathjaxTimeout = setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 300);
+    }
+
+    function updateCalculations() {
+        const c = getCoords();
+        const theoryDiv = document.getElementById("focometrie-theory");
+        if (!theoryDiv) return;
+
+        if (method === "bessel") {
+            const dSquare = D * D - 4 * f1 * D;
+            let dText = "N/A";
+            let fCalcText = "Distance D trop petite (D < 4f)";
+            let dVal = 0;
+            if (dSquare >= 0) {
+                dVal = Math.sqrt(dSquare);
+                dText = dVal.toFixed(1) + " mm";
+                const fCalc = (D*D - dVal*dVal)/(4*D);
+                fCalcText = fCalc.toFixed(1) + " mm";
+            }
+            theoryDiv.innerHTML = `
+                <div class="theory-title" style="font-weight:700; font-size:1.1rem; margin-bottom:8px; color:var(--primary);"><i data-lucide="eye"></i> Méthode de Bessel</div>
+                <p style="margin-bottom:8px;">Cette méthode permet de déterminer la focale d'une lentille convergente $L$ de focale $f$. 
+                On fixe la distance $D$ entre l'objet $AB$ et l'écran de sorte que $D > 4f$. 
+                En déplaçant la lentille, on trouve <strong>deux positions</strong> $x_1$ et $x_2$ pour lesquelles l'image sur l'écran est nette. 
+                Si $d = |x_2 - x_1|$ est la distance entre ces deux positions :</p>
+                <div class="equation-box" style="background:rgba(255,255,255,0.02); padding:10px; border-radius:8px; text-align:center; font-size:1.2rem; margin:10px 0; border:1px solid rgba(255,255,255,0.05);">$$f = \\frac{D^2 - d^2}{4D}$$</div>
+                <p><strong>Mesures en direct :</strong><br>
+                • Distance Objet-Écran $D = $ <strong style="color:var(--secondary);">${D}</strong> mm<br>
+                • Distance entre les deux positions $d = $ <strong style="color:var(--secondary);">${dText}</strong><br>
+                • Focale déduite $f_{calc} = $ <strong style="color:var(--primary); font-size:1.05rem;">${fCalcText}</strong></p>
+            `;
+        } else if (method === "silbermann") {
+            const fCalc = D / 4;
+            theoryDiv.innerHTML = `
+                <div class="theory-title" style="font-weight:700; font-size:1.1rem; margin-bottom:8px; color:var(--primary);"><i data-lucide="eye"></i> Méthode de Silbermann</div>
+                <p style="margin-bottom:8px;">Cas particulier de Bessel où l'objet et l'écran sont éloignés d'exactement $D = 4f$. 
+                Les deux positions de la lentille se confondent alors au milieu ($d = 0$, soit $x_L = D/2 = 2f$). 
+                L'image est nette, inversée et possède la même taille que l'objet (grandissement $\\gamma = -1$).</p>
+                <div class="equation-box" style="background:rgba(255,255,255,0.02); padding:10px; border-radius:8px; text-align:center; font-size:1.2rem; margin:10px 0; border:1px solid rgba(255,255,255,0.05);">$$f = \\frac{D}{4} \\quad \\text{et} \\quad \\gamma = -1$$</div>
+                <p><strong>Mesures en direct :</strong><br>
+                • Distance Objet-Écran $D = $ <strong style="color:var(--secondary);">${D}</strong> mm (fixée à $4f$)<br>
+                • Position idéale de la lentille $x_{milieu} = $ <strong style="color:var(--secondary);">${100 + D/2}</strong> mm<br>
+                • Focale déduite $f_{calc} = $ <strong style="color:var(--primary); font-size:1.05rem;">${fCalc.toFixed(1)}</strong> mm</p>
+            `;
+        } else if (method === "autocollimation") {
+            const dOL = xL - 100;
+            theoryDiv.innerHTML = `
+                <div class="theory-title" style="font-weight:700; font-size:1.1rem; margin-bottom:8px; color:var(--primary);"><i data-lucide="eye"></i> Méthode d'autocollimation</div>
+                <p style="margin-bottom:8px;">On place un miroir plan juste derrière la lentille. Les rayons issus de l'objet traversent la lentille, se réfléchissent sur le miroir, et retraversent la lentille. 
+                Lorsque l'objet est dans le plan focal de la lentille ($d_{OL} = f$), les rayons émergent parallèles, se réfléchissent normalement et reforment une image nette de même taille et inversée sur le plan de l'objet lui-même.</p>
+                <div class="equation-box" style="background:rgba(255,255,255,0.02); padding:10px; border-radius:8px; text-align:center; font-size:1.2rem; margin:10px 0; border:1px solid rgba(255,255,255,0.05);">$$d_{OL} = f$$</div>
+                <p><strong>Mesures en direct :</strong><br>
+                • Distance Objet-Lentille $d_{OL} = $ <strong style="color:var(--secondary);">${dOL}</strong> mm (ajustez pour rendre l'image nette au plan de l'objet)<br>
+                • Focale de la lentille réglée $f = $ <strong style="color:var(--primary); font-size:1.05rem;">${f1}</strong> mm</p>
+            `;
+        } else if (method === "badal") {
+            const u1 = 250 - xO;
+            const x = u1 - f1; // displacement relative to F1
+            const v2 = xS - c.xL2;
+            const f2calc = 1.0 / (1.0/v2 + x/(f1*f1));
+            const f2calcText = v2 > 0 ? (-Math.abs(f2calc)).toFixed(1) + " mm" : "N/A (Pas d'image réelle)";
+            theoryDiv.innerHTML = `
+                <div class="theory-title" style="font-weight:700; font-size:1.1rem; margin-bottom:8px; color:var(--primary);"><i data-lucide="eye"></i> Méthode de Badal</div>
+                <p style="margin-bottom:8px;">Cette méthode permet de mesurer la focale d'une lentille divergente $L_2$ ($f_2 < 0$). 
+                $L_2$ est placée exactement au foyer image $F'_1$ de la lentille convergente auxiliaire $L_1$. 
+                La position $v_2$ de l'image finale sur l'écran dépend de la position de l'objet par rapport au foyer objet $F_1$ de $L_1$ :</p>
+                <div class="equation-box" style="background:rgba(255,255,255,0.02); padding:10px; border-radius:8px; text-align:center; font-size:1.2rem; margin:10px 0; border:1px solid rgba(255,255,255,0.05);">$$\\frac{1}{v_2} = \\frac{1}{|f_2|} - \\frac{x}{f_1^2}$$</div>
+                <p style="margin-bottom:8px;">où $x = d(O, F_1) = x_{L1} - x_O - f_1$.</p>
+                <p><strong>Mesures en direct :</strong><br>
+                • Déplacement de l'objet par rapport à $F_1$ : $x = $ <strong style="color:var(--secondary);">${x}</strong> mm<br>
+                • Distance Écran-Lentille L2 $v_2 = $ <strong style="color:var(--secondary);">${v2}</strong> mm<br>
+                • Focale divergente déduite $f_{2, calc} = $ <strong style="color:var(--primary); font-size:1.05rem;">${f2calcText}</strong> (théorique)</p>
+            `;
+        }
+        lucide.createIcons();
+    }
+
+    newMethod.addEventListener("change", () => {
+        method = newMethod.value;
+        if (method === "bessel") {
+            D = 500;
+            newD.value = D;
+            xL = 220;
+            newXL.value = xL;
+        } else if (method === "silbermann") {
+            D = 4 * f1;
+            xL = 100 + D/2;
+            newXL.value = xL;
+        } else if (method === "autocollimation") {
+            xL = 200;
+            newXL.value = xL;
+        } else if (method === "badal") {
+            xO = 80;
+            newXO.value = xO;
+            xS = 650;
+            newXS.value = xS;
+        }
+        updateInputsVisibility();
+    });
+
+    newF.addEventListener("input", (e) => {
+        f1 = parseFloat(e.target.value);
+        const valSpan = document.getElementById("val-focometrie-f");
+        if (valSpan) valSpan.textContent = f1;
+        if (method === "silbermann") {
+            D = 4 * f1;
+            newD.value = D;
+            document.getElementById("val-focometrie-D").textContent = D;
+            xL = 100 + D/2;
+            newXL.value = xL;
+            document.getElementById("val-focometrie-xL").textContent = xL;
+        }
+        updateCalculations();
+    });
+
+    newF2.addEventListener("input", (e) => {
+        f2 = parseFloat(e.target.value);
+        document.getElementById("val-focometrie-f2").textContent = f2;
+        updateCalculations();
+    });
+
+    newD.addEventListener("input", (e) => {
+        D = parseFloat(e.target.value);
+        document.getElementById("val-focometrie-D").textContent = D;
+        newXL.max = 100 + D - 10;
+        if (xL > newXL.max) {
+            xL = parseFloat(newXL.max);
+            newXL.value = xL;
+            document.getElementById("val-focometrie-xL").textContent = xL;
+        }
+        updateCalculations();
+    });
+
+    newXL.addEventListener("input", (e) => {
+        xL = parseFloat(e.target.value);
+        document.getElementById("val-focometrie-xL").textContent = xL;
+        updateCalculations();
+    });
+
+    newXO.addEventListener("input", (e) => {
+        xO = parseFloat(e.target.value);
+        document.getElementById("val-focometrie-xO").textContent = xO;
+        updateCalculations();
+    });
+
+    newXS.addEventListener("input", (e) => {
+        xS = parseFloat(e.target.value);
+        document.getElementById("val-focometrie-xS").textContent = xS;
+        updateCalculations();
+    });
+
+    // Auto adjust button action
+    newAuto.addEventListener("click", () => {
+        if (method === "bessel") {
+            const dSquare = D * D - 4 * f1 * D;
+            if (dSquare >= 0) {
+                const dVal = Math.sqrt(dSquare);
+                const u1 = (D - dVal)/2;
+                const u2 = (D + dVal)/2;
+                const pos1 = Math.round(100 + u1);
+                const pos2 = Math.round(100 + u2);
+                
+                // Toggle between pos1 and pos2
+                if (Math.abs(xL - pos1) < 5) {
+                    xL = pos2;
+                } else {
+                    xL = pos1;
+                }
+                newXL.value = xL;
+                document.getElementById("val-focometrie-xL").textContent = xL;
+            } else {
+                D = Math.round(4.5 * f1);
+                newD.value = D;
+                document.getElementById("val-focometrie-D").textContent = D;
+                const dVal = Math.sqrt(D*D - 4*f1*D);
+                xL = Math.round(100 + (D - dVal)/2);
+                newXL.value = xL;
+                document.getElementById("val-focometrie-xL").textContent = xL;
+            }
+        } else if (method === "silbermann") {
+            D = 4 * f1;
+            newD.value = D;
+            document.getElementById("val-focometrie-D").textContent = D;
+            xL = 100 + D/2;
+            newXL.value = xL;
+            document.getElementById("val-focometrie-xL").textContent = xL;
+        } else if (method === "autocollimation") {
+            xL = 100 + f1;
+            newXL.value = xL;
+            document.getElementById("val-focometrie-xL").textContent = xL;
+        } else if (method === "badal") {
+            const u1 = 250 - xO;
+            const xL2 = 250 + f1;
+            if (u1 > f1) {
+                const xI1 = 250 + (u1 * f1)/(u1 - f1);
+                const u2 = xI1 - xL2;
+                if (u2 < Math.abs(f2)) {
+                    const v2 = (u2 * f2)/(f2 + u2);
+                    xS = Math.round(xL2 + v2);
+                    if (xS >= 300 && xS <= 800) {
+                        newXS.value = xS;
+                        document.getElementById("val-focometrie-xS").textContent = xS;
+                    } else {
+                        showToast("Position hors limites du banc !", false);
+                    }
+                } else {
+                    showToast("Impossible d'obtenir une image réelle. Rapprochez l'objet.", false);
+                }
+            }
+        }
+        updateCalculations();
+    });
+
+    // Drag-and-drop mouse handling
+    function getMousePos(e) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+            x: (e.clientX - rect.left) * (canvas.width / rect.width),
+            y: (e.clientY - rect.top) * (canvas.height / rect.height)
+        };
+    }
+
+    function checkDraggables(mouseX, mouseY) {
+        const c = getCoords();
+        const yAxis = c.yAxis;
+        const tolX = 15;
+        const tolY = 80;
+        
+        if (mouseY > yAxis - tolY && mouseY < yAxis + 100) {
+            if (method === "badal") {
+                if (Math.abs(mouseX - c.xO) < tolX) return "object";
+                if (Math.abs(mouseX - c.xS) < tolX) return "screen";
+            } else {
+                if (Math.abs(mouseX - c.xL1) < tolX) {
+                    if (method === "silbermann") return null;
+                    return "lens1";
+                }
+                if (method !== "autocollimation" && Math.abs(mouseX - c.xS) < tolX) return "screen";
+            }
+        }
+        return null;
+    }
+
+    canvas.addEventListener("mousedown", (e) => {
+        const pos = getMousePos(e);
+        dragElement = checkDraggables(pos.x, pos.y);
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+        const pos = getMousePos(e);
+        
+        if (!dragElement) {
+            const hovered = checkDraggables(pos.x, pos.y);
+            canvas.style.cursor = hovered ? "ew-resize" : "default";
+        } else {
+            canvas.style.cursor = "ew-resize";
+            const newX = Math.round(pos.x);
+            
+            if (dragElement === "lens1") {
+                if (method === "bessel") {
+                    xL = Math.max(110, Math.min(newX, 100 + D - 10));
+                    newXL.value = xL;
+                    document.getElementById("val-focometrie-xL").textContent = xL;
+                } else if (method === "autocollimation") {
+                    xL = Math.max(120, Math.min(newX, 350));
+                    newXL.value = xL;
+                    document.getElementById("val-focometrie-xL").textContent = xL;
+                }
+            } else if (dragElement === "screen") {
+                if (method === "bessel") {
+                    D = Math.max(300, Math.min(newX - 100, 800));
+                    newD.value = D;
+                    document.getElementById("val-focometrie-D").textContent = D;
+                    newXL.max = 100 + D - 10;
+                    if (xL > newXL.max) {
+                        xL = parseFloat(newXL.max);
+                        newXL.value = xL;
+                        document.getElementById("val-focometrie-xL").textContent = xL;
+                    }
+                } else if (method === "badal") {
+                    xS = Math.max(400, Math.min(newX, 850));
+                    newXS.value = xS;
+                    document.getElementById("val-focometrie-xS").textContent = xS;
+                }
+            } else if (dragElement === "object") {
+                if (method === "badal") {
+                    xO = Math.max(20, Math.min(newX, 180));
+                    newXO.value = xO;
+                    document.getElementById("val-focometrie-xO").textContent = xO;
+                }
+            }
+            updateCalculations();
+        }
+    });
+
+    const stopDrag = () => { dragElement = null; };
+    canvas.addEventListener("mouseup", stopDrag);
+    canvas.addEventListener("mouseleave", stopDrag);
+
+    canvas.addEventListener("touchstart", (e) => {
+        if (e.touches.length > 0) {
+            const touch = e.touches[0];
+            const pos = getMousePos(touch);
+            dragElement = checkDraggables(pos.x, pos.y);
+        }
+    }, {passive: true});
+
+    canvas.addEventListener("touchmove", (e) => {
+        if (dragElement && e.touches.length > 0) {
+            const touch = e.touches[0];
+            const pos = getMousePos(touch);
+            const newX = Math.round(pos.x);
+            
+            if (dragElement === "lens1") {
+                if (method === "bessel") {
+                    xL = Math.max(110, Math.min(newX, 100 + D - 10));
+                    newXL.value = xL;
+                    document.getElementById("val-focometrie-xL").textContent = xL;
+                } else if (method === "autocollimation") {
+                    xL = Math.max(120, Math.min(newX, 350));
+                    newXL.value = xL;
+                    document.getElementById("val-focometrie-xL").textContent = xL;
+                }
+            } else if (dragElement === "screen") {
+                if (method === "bessel") {
+                    D = Math.max(300, Math.min(newX - 100, 800));
+                    newD.value = D;
+                    document.getElementById("val-focometrie-D").textContent = D;
+                    newXL.max = 100 + D - 10;
+                } else if (method === "badal") {
+                    xS = Math.max(400, Math.min(newX, 850));
+                    newXS.value = xS;
+                    document.getElementById("val-focometrie-xS").textContent = xS;
+                }
+            } else if (dragElement === "object") {
+                if (method === "badal") {
+                    xO = Math.max(20, Math.min(newX, 180));
+                    newXO.value = xO;
+                    document.getElementById("val-focometrie-xO").textContent = xO;
+                }
+            }
+            updateCalculations();
+        }
+    }, {passive: true});
+
+    canvas.addEventListener("touchend", stopDrag);
+
+    // DRAW ENGINE
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const c = getCoords();
+        const yAxis = c.yAxis;
+        const yBench = c.yBench;
+        const scale = animScaleMultiplier;
+
+        // 1. Draw grid
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        // 2. Draw Optical axis
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.3)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 4]);
+        ctx.beginPath();
+        ctx.moveTo(30, yAxis);
+        ctx.lineTo(canvas.width - 30, yAxis);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "rgba(148, 163, 184, 0.5)";
+        ctx.beginPath();
+        ctx.moveTo(canvas.width - 30, yAxis - 5);
+        ctx.lineTo(canvas.width - 20, yAxis);
+        ctx.lineTo(canvas.width - 30, yAxis + 5);
+        ctx.fill();
+
+        // 3. Draw Optical Bench
+        const gradRail = ctx.createLinearGradient(0, yBench - 5, 0, yBench + 15);
+        gradRail.addColorStop(0, "#334155");
+        gradRail.addColorStop(0.5, "#475569");
+        gradRail.addColorStop(1, "#1e293b");
+        ctx.fillStyle = gradRail;
+        ctx.fillRect(40, yBench - 5, canvas.width - 80, 20);
+        ctx.strokeStyle = "#64748b";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(40, yBench - 5, canvas.width - 80, 20);
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(9 * scale)}px monospace`;
+        ctx.textAlign = "center";
+        
+        const tickStep = 10;
+        for (let xVal = 0; xVal <= 800; xVal += tickStep) {
+            const canvasX = 50 + xVal;
+            if (canvasX >= 50 && canvasX <= canvas.width - 50) {
+                ctx.beginPath();
+                ctx.moveTo(canvasX, yBench - 5);
+                if (xVal % 100 === 0) {
+                    ctx.lineTo(canvasX, yBench + 8);
+                    ctx.fillText(xVal, canvasX, yBench + 25);
+                } else if (xVal % 50 === 0) {
+                    ctx.lineTo(canvasX, yBench + 4);
+                } else {
+                    ctx.lineTo(canvasX, yBench + 1);
+                }
+                ctx.stroke();
+            }
+        }
+
+        function drawStand(x, label) {
+            ctx.strokeStyle = "#475569";
+            ctx.lineWidth = 4 * scale;
+            ctx.beginPath();
+            ctx.moveTo(x, yAxis + 10);
+            ctx.lineTo(x, yBench - 5);
+            ctx.stroke();
+
+            ctx.fillStyle = "#1e293b";
+            ctx.strokeStyle = "#94a3b8";
+            ctx.lineWidth = 1.5;
+            ctx.fillRect(x - 12 * scale, yBench - 10, 24 * scale, 12);
+            ctx.strokeRect(x - 12 * scale, yBench - 10, 24 * scale, 12);
+
+            if (label) {
+                ctx.fillStyle = "#cbd5e1";
+                ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+                ctx.fillText(label, x, yBench + 5);
+            }
+        }
+
+        function drawLensSymbol(x, f, isDiverging, label) {
+            drawStand(x, label);
+
+            const h = 50 * scale;
+            ctx.strokeStyle = animPrimaryColor;
+            ctx.lineWidth = 3 * scale;
+            ctx.beginPath();
+            ctx.moveTo(x, yAxis - h);
+            ctx.lineTo(x, yAxis + h);
+            ctx.stroke();
+
+            ctx.fillStyle = animPrimaryColor;
+            if (!isDiverging) {
+                ctx.beginPath();
+                ctx.moveTo(x - 5 * scale, yAxis - h + 8 * scale);
+                ctx.lineTo(x, yAxis - h);
+                ctx.lineTo(x + 5 * scale, yAxis - h + 8 * scale);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(x - 5 * scale, yAxis + h - 8 * scale);
+                ctx.lineTo(x, yAxis + h);
+                ctx.lineTo(x + 5 * scale, yAxis + h - 8 * scale);
+                ctx.stroke();
+            } else {
+                ctx.beginPath();
+                ctx.moveTo(x - 5 * scale, yAxis - h);
+                ctx.lineTo(x, yAxis - h + 8 * scale);
+                ctx.lineTo(x + 5 * scale, yAxis - h);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(x - 5 * scale, yAxis + h);
+                ctx.lineTo(x, yAxis + h - 8 * scale);
+                ctx.lineTo(x + 5 * scale, yAxis + h);
+                ctx.stroke();
+            }
+
+            ctx.fillStyle = "rgba(56, 189, 248, 0.08)";
+            ctx.beginPath();
+            ctx.ellipse(x, yAxis, 12 * scale, h, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.2)";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.fillStyle = animPrimaryColor;
+            ctx.beginPath();
+            ctx.arc(x, yAxis, 3 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.font = `italic ${Math.round(11 * scale)}px sans-serif`;
+            ctx.fillText("O", x - 8 * scale, yAxis - 8 * scale);
+
+            const absF = Math.abs(f);
+            const xF = x - absF;
+            const xFPrime = x + absF;
+
+            ctx.fillStyle = isDiverging ? animSecondaryColor : "#ef4444";
+            ctx.beginPath();
+            ctx.arc(xF, yAxis, 3 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#cbd5e1";
+            ctx.font = `italic bold ${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText(isDiverging ? "F'" : "F", xF, yAxis + 14 * scale);
+
+            ctx.fillStyle = isDiverging ? animSecondaryColor : "#ef4444";
+            ctx.beginPath();
+            ctx.arc(xFPrime, yAxis, 3 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#cbd5e1";
+            ctx.fillText(isDiverging ? "F" : "F'", xFPrime, yAxis + 14 * scale);
+        }
+
+        // Draw Object
+        drawStand(c.xO, "Obj.");
+        const objHeight = 40 * scale;
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 3.5 * scale;
+        ctx.beginPath();
+        ctx.moveTo(c.xO, yAxis);
+        ctx.lineTo(c.xO, yAxis - objHeight);
+        ctx.stroke();
+        
+        ctx.fillStyle = "#f59e0b";
+        ctx.beginPath();
+        ctx.moveTo(c.xO - 5 * scale, yAxis - objHeight + 6 * scale);
+        ctx.lineTo(c.xO, yAxis - objHeight);
+        ctx.lineTo(c.xO + 5 * scale, yAxis - objHeight + 6 * scale);
+        ctx.fill();
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("A", c.xO - 10 * scale, yAxis + 12 * scale);
+        ctx.fillText("B", c.xO - 10 * scale, yAxis - objHeight - 4 * scale);
+
+        let finalImageX = null;
+        let finalImageH = null;
+        let isRealImage = false;
+        let rays = [];
+
+        const sampleYs = [yAxis - 30 * scale, yAxis - 15 * scale, yAxis, yAxis + 15 * scale, yAxis + 30 * scale];
+
+        if (method === "bessel" || method === "silbermann") {
+            const u = c.xL1 - c.xO;
+            const f = c.f1;
+            drawLensSymbol(c.xL1, f, false, method === "silbermann" ? "L (milieu)" : "L");
+            
+            drawStand(c.xS, "Écran");
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(c.xS - 4 * scale, yAxis - 60 * scale, 8 * scale, 120 * scale);
+            ctx.fillStyle = "#e2e8f0";
+            ctx.fillRect(c.xS - 2 * scale, yAxis - 58 * scale, 4 * scale, 116 * scale);
+
+            if (u > f) {
+                const v = (u * f) / (u - f);
+                finalImageX = c.xL1 + v;
+                const gamma = -v / u;
+                finalImageH = objHeight * gamma;
+                isRealImage = true;
+            }
+
+            sampleYs.forEach(yL => {
+                const s0 = (yL - (yAxis - objHeight)) / (c.xL1 - c.xO);
+                const s1 = s0 - (yL - yAxis) / f;
+                const yS = yL + s1 * (c.xS - c.xL1);
+                
+                rays.push([
+                    { x1: c.xO, y1: yAxis - objHeight },
+                    { x2: c.xL1, y2: yL },
+                    { x2: c.xS, y2: yS }
+                ]);
+            });
+
+        } else if (method === "autocollimation") {
+            const u = c.xL1 - c.xO;
+            const f = c.f1;
+            drawLensSymbol(c.xL1, f, false, "L");
+
+            drawStand(c.xM, "Miroir");
+            ctx.fillStyle = "#475569";
+            ctx.fillRect(c.xM - 4 * scale, yAxis - 50 * scale, 8 * scale, 100 * scale);
+            ctx.strokeStyle = "#94a3b8";
+            ctx.strokeRect(c.xM - 4 * scale, yAxis - 50 * scale, 8 * scale, 100 * scale);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+            for (let y = yAxis - 46 * scale; y < yAxis + 50 * scale; y += 8 * scale) {
+                ctx.beginPath();
+                ctx.moveTo(c.xM + 4 * scale, y);
+                ctx.lineTo(c.xM - 2 * scale, y + 6 * scale);
+                ctx.stroke();
+            }
+
+            sampleYs.forEach(yL1 => {
+                const s0 = (yL1 - (yAxis - objHeight)) / (c.xL1 - c.xO);
+                const s1 = s0 - (yL1 - yAxis) / f;
+                
+                const yM = yL1 + s1 * (c.xM - c.xL1);
+                const s2 = -s1;
+                const yL1_back = yM + s2 * (c.xL1 - c.xM);
+                const s3 = s2 + (yL1_back - yAxis) / f;
+                const yReturn = yL1_back + s3 * (c.xO - c.xL1);
+
+                rays.push([
+                    { x1: c.xO, y1: yAxis - objHeight },
+                    { x2: c.xL1, y2: yL1 },
+                    { x2: c.xM, y2: yM },
+                    { x2: c.xL1, y2: yL1_back },
+                    { x2: c.xO, y2: yReturn }
+                ]);
+            });
+
+            finalImageX = c.xO;
+            finalImageH = -objHeight * (f / u);
+            isRealImage = true;
+
+        } else if (method === "badal") {
+            const f1 = c.f1;
+            const f2 = c.f2;
+            
+            drawLensSymbol(c.xL1, f1, false, "L1 (Aux.)");
+            drawLensSymbol(c.xL2, f2, true, "L2 (Diverg.)");
+            
+            drawStand(c.xS, "Écran");
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(c.xS - 4 * scale, yAxis - 60 * scale, 8 * scale, 120 * scale);
+            ctx.fillStyle = "#e2e8f0";
+            ctx.fillRect(c.xS - 2 * scale, yAxis - 58 * scale, 4 * scale, 116 * scale);
+
+            const u1 = c.xL1 - c.xO;
+            if (u1 > f1) {
+                const xI1 = c.xL1 + (u1 * f1) / (u1 - f1);
+                const u2 = xI1 - c.xL2;
+                if (u2 < Math.abs(f2)) {
+                    const v2 = (u2 * f2) / (f2 + u2);
+                    finalImageX = c.xL2 + v2;
+                    
+                    const gamma1 = - (xI1 - c.xL1) / u1;
+                    const gamma2 = v2 / u2;
+                    finalImageH = objHeight * gamma1 * gamma2;
+                    isRealImage = true;
+                }
+            }
+
+            sampleYs.forEach(yL1 => {
+                const s0 = (yL1 - (yAxis - objHeight)) / (c.xL1 - c.xO);
+                const s1 = s0 - (yL1 - yAxis) / f1;
+                
+                const yL2 = yL1 + s1 * (c.xL2 - c.xL1);
+                const s2 = s1 - (yL2 - yAxis) / f2;
+                const yS = yL2 + s2 * (c.xS - c.xL2);
+                
+                rays.push([
+                    { x1: c.xO, y1: yAxis - objHeight },
+                    { x2: c.xL1, y2: yL1 },
+                    { x2: c.xL2, y2: yL2 },
+                    { x2: c.xS, y2: yS }
+                ]);
+            });
+        }
+
+        // Draw Rays
+        ctx.save();
+        ctx.shadowBlur = 0;
+        rays.forEach(ray => {
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.35)";
+            ctx.lineWidth = 1.8 * scale;
+            ctx.beginPath();
+            ctx.moveTo(ray[0].x1, ray[0].y1);
+            for (let i = 1; i < ray.length; i++) {
+                ctx.lineTo(ray[i].x2, ray[i].y2);
+            }
+            ctx.stroke();
+        });
+        ctx.restore();
+
+        // Draw Image on Screen or source plane
+        if (finalImageX !== null && finalImageH !== null) {
+            let blur = 0;
+            if (method === "autocollimation") {
+                blur = Math.abs(c.xL1 - c.xO - c.f1) * 0.2;
+            } else {
+                blur = Math.abs(c.xS - finalImageX);
+            }
+
+            ctx.save();
+            if (blur > 3) {
+                ctx.filter = `blur(${Math.min(8, blur * 0.15)}px)`;
+                ctx.strokeStyle = "rgba(239, 68, 68, 0.6)";
+                ctx.lineWidth = 3.5 * scale;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(c.xS, yAxis);
+                ctx.lineTo(c.xS, yAxis + finalImageH);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                ctx.fillStyle = "rgba(239, 68, 68, 0.6)";
+                ctx.beginPath();
+                const sign = finalImageH > 0 ? 1 : -1;
+                ctx.moveTo(c.xS - 5 * scale, yAxis + finalImageH - 6 * scale * sign);
+                ctx.lineTo(c.xS, yAxis + finalImageH);
+                ctx.lineTo(c.xS + 5 * scale, yAxis + finalImageH - 6 * scale * sign);
+                ctx.fill();
+            } else {
+                ctx.filter = "none";
+                ctx.strokeStyle = "#10b981";
+                ctx.lineWidth = 3.5 * scale;
+                ctx.shadowColor = "#10b981";
+                ctx.shadowBlur = 10;
+                
+                ctx.beginPath();
+                ctx.moveTo(c.xS, yAxis);
+                ctx.lineTo(c.xS, yAxis + finalImageH);
+                ctx.stroke();
+
+                ctx.fillStyle = "#10b981";
+                ctx.beginPath();
+                const sign = finalImageH > 0 ? 1 : -1;
+                ctx.moveTo(c.xS - 5 * scale, yAxis + finalImageH - 6 * scale * sign);
+                ctx.lineTo(c.xS, yAxis + finalImageH);
+                ctx.lineTo(c.xS + 5 * scale, yAxis + finalImageH - 6 * scale * sign);
+                ctx.fill();
+                
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = "#10b981";
+                ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+                ctx.fillText("✔ Nette", c.xS + 12 * scale, yAxis + finalImageH/2);
+            }
+            ctx.restore();
+
+            ctx.fillStyle = "#cbd5e1";
+            ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("A'", c.xS + 10 * scale, yAxis + 12 * scale);
+            ctx.fillText("B'", c.xS + 10 * scale, yAxis + finalImageH - 4 * scale * (finalImageH > 0 ? -1 : 1));
+        } else if (method === "badal") {
+            ctx.fillStyle = "#f87171";
+            ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+            ctx.fillText("⚠ Image virtuelle (hors écran)", c.xS - 50 * scale, yAxis - 75 * scale);
+        }
+    }
+
+    if (focometrieInterval) clearInterval(focometrieInterval);
+    focometrieInterval = setInterval(draw, 30);
+
+    updateInputsVisibility();
+}
+
+// 8. Photovoltaique Simulator
+let photovoltaiqueInterval = null;
+function setupPhotovoltaiqueSimulator() {
+    const canvas = document.getElementById("canvas-photovoltaique");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const irradianceSlider = document.getElementById("pv-irradiance");
+    const surfaceSlider = document.getElementById("pv-surface");
+    const resistanceSlider = document.getElementById("pv-resistance");
+    const btnRecord = document.getElementById("btn-pv-record");
+    const btnPlot = document.getElementById("btn-pv-plot");
+    const btnClear = document.getElementById("btn-pv-clear");
+
+    // Clean up event listeners by cloning
+    const newIrr = irradianceSlider.cloneNode(true);
+    irradianceSlider.parentNode.replaceChild(newIrr, irradianceSlider);
+
+    const newSurf = surfaceSlider.cloneNode(true);
+    surfaceSlider.parentNode.replaceChild(newSurf, surfaceSlider);
+
+    const newRes = resistanceSlider.cloneNode(true);
+    resistanceSlider.parentNode.replaceChild(newRes, resistanceSlider);
+
+    const newRec = btnRecord.cloneNode(true);
+    btnRecord.parentNode.replaceChild(newRec, btnRecord);
+
+    const newPlot = btnPlot.cloneNode(true);
+    btnPlot.parentNode.replaceChild(newPlot, btnPlot);
+
+    const newClr = btnClear.cloneNode(true);
+    btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    // Initial variables
+    let E = parseFloat(newIrr.value);
+    let S = parseFloat(newSurf.value);
+    let R = parseFloat(newRes.value);
+    let recordedPoints = [];
+
+    // Model parameters
+    const I0 = 1e-6; // Saturation current in mA
+    const Vc = 0.045; // Diode thermal voltage * ideality in V
+
+    function getIph(irradiance, surface) {
+        return 0.005 * irradiance * (surface / 50) * 100; // around 100-500 mA
+    }
+
+    // Solver for I and U
+    function solveI_U(R_val, Iph) {
+        if (R_val === 0) {
+            return { I: Iph, U: 0 };
+        }
+        if (R_val >= 500) {
+            // Treat max R as open circuit
+            const Uco = Vc * Math.log(Iph / I0 + 1);
+            return { I: 0, U: Uco };
+        }
+        
+        // Newton Solver
+        const R_k = R_val / 1000;
+        let I = Iph;
+        for (let i = 0; i < 30; i++) {
+            const expTerm = Math.exp((I * R_k) / Vc);
+            const f = I - Iph + I0 * (expTerm - 1);
+            const df = 1 + (I0 * R_k / Vc) * expTerm;
+            const nextI = I - f / df;
+            if (isNaN(nextI) || !isFinite(nextI)) {
+                // Fallback to binary search
+                return solveI_UBinary(R_k, Iph);
+            }
+            if (Math.abs(nextI - I) < 1e-5) {
+                I = nextI;
+                break;
+            }
+            I = nextI;
+        }
+        I = Math.max(0, Math.min(I, Iph));
+        return { I: I, U: I * R_k };
+    }
+
+    function solveI_UBinary(R_k, Iph) {
+        let low = 0;
+        let high = Iph;
+        let I = Iph / 2;
+        for (let i = 0; i < 40; i++) {
+            I = (low + high) / 2;
+            const U = I * R_k;
+            const diff = I - Iph + I0 * (Math.exp(U / Vc) - 1);
+            if (Math.abs(high - low) < 1e-5) break;
+            if (diff > 0) {
+                high = I;
+            } else {
+                low = I;
+            }
+        }
+        return { I: I, U: I * R_k };
+    }
+
+    function getPVState() {
+        const Iph = getIph(E, S);
+        const { I, U } = solveI_U(R, Iph);
+        const P = U * I; // Power in mW
+        
+        // Find theoretical maximum power point (MPP)
+        let Pmax = 0;
+        let Um = 0;
+        let Im = 0;
+        const steps = 100;
+        for (let i = 0; i <= steps; i++) {
+            const testR = (500 / steps) * i;
+            const res = solveI_U(testR, Iph);
+            const testP = res.U * res.I;
+            if (testP > Pmax) {
+                Pmax = testP;
+                Um = res.U;
+                Im = res.I;
+            }
+        }
+
+        const Icc = Iph;
+        const Uco = Vc * Math.log(Iph / I0 + 1);
+        const FF = Pmax / (Uco * Icc);
+        const Pin = E * S * 1e-4; // input light power in W
+        const Pmax_W = Pmax / 1000;
+        const eff = Pin > 0 ? (Pmax_W / Pin) * 100 : 0;
+
+        return {
+            I, U, P,
+            Icc, Uco,
+            Pmax, Um, Im,
+            FF, eff
+        };
+    }
+
+    function updateCalculations() {
+        const state = getPVState();
+        const theoryDiv = document.getElementById("photovoltaique-theory");
+        if (!theoryDiv) return;
+
+        theoryDiv.innerHTML = `
+            <div class="theory-title" style="font-weight:700; font-size:1.1rem; margin-bottom:8px; color:var(--primary);"><i data-lucide="sun"></i> Rendement & Caractéristiques</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div>
+                    <strong style="color:var(--secondary);">Grandeurs limites :</strong><br>
+                    • Courant de court-circuit $I_{cc} = $ <strong style="color:var(--text-primary);">${state.Icc.toFixed(1)}</strong> mA<br>
+                    • Tension de circuit ouvert $U_{co} = $ <strong style="color:var(--text-primary);">${state.Uco.toFixed(2)}</strong> V
+                </div>
+                <div>
+                    <strong style="color:var(--secondary);">Point de puissance maximale (MPP) :</strong><br>
+                    • Puissance max $P_{max} = $ <strong style="color:var(--primary);">${state.Pmax.toFixed(1)}</strong> mW<br>
+                    • Tension optimale $U_m = $ <strong style="color:var(--text-primary);">${state.Um.toFixed(2)}</strong> V<br>
+                    • Courant optimal $I_m = $ <strong style="color:var(--text-primary);">${state.Im.toFixed(1)}</strong> mA
+                </div>
+                <div>
+                    <strong style="color:var(--secondary);">Efficacité de la cellule :</strong><br>
+                    • Facteur de forme $FF = $ <strong style="color:var(--text-primary);">${(state.FF * 100).toFixed(1)}</strong> %<br>
+                    • Puissance lumineuse $P_{lum} = $ <strong style="color:var(--text-primary);">${(E * S * 1e-4).toFixed(3)}</strong> W<br>
+                    • Rendement maximum $\\eta = $ <strong style="color:var(--primary); font-size:1.1rem;">${state.eff.toFixed(2)}</strong> %
+                </div>
+            </div>
+        `;
+
+        // Render equations
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+        lucide.createIcons();
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("photovoltaique-points-body");
+        if (!body) return;
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `
+                <tr>
+                    <td colspan="4" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map((pt, idx) => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">#${idx + 1}</td>
+                <td style="padding: 4px;">${pt.U.toFixed(2)}</td>
+                <td style="padding: 4px;">${pt.I.toFixed(1)}</td>
+                <td style="padding: 4px;">${pt.P.toFixed(1)}</td>
+            </tr>
+        `).join("");
+    }
+
+    newIrr.addEventListener("input", (e) => {
+        E = parseFloat(e.target.value);
+        document.getElementById("val-pv-irradiance").textContent = E;
+        updateCalculations();
+    });
+
+    newSurf.addEventListener("input", (e) => {
+        S = parseFloat(e.target.value);
+        document.getElementById("val-pv-surface").textContent = S;
+        updateCalculations();
+    });
+
+    newRes.addEventListener("input", (e) => {
+        R = parseFloat(e.target.value);
+        document.getElementById("val-pv-resistance").textContent = R === 500 ? "∞" : R;
+        updateCalculations();
+    });
+
+    newRec.addEventListener("click", () => {
+        const state = getPVState();
+        // Check if point already exists
+        const exists = recordedPoints.some(pt => Math.abs(pt.U - state.U) < 0.01);
+        if (!exists) {
+            recordedPoints.push({ U: state.U, I: state.I, P: state.P });
+            // Sort by U
+            recordedPoints.sort((a, b) => a.U - b.U);
+            updatePointsTable();
+            showToast("Point de mesure enregistré !", true);
+        } else {
+            showToast("Ce point est déjà mesuré.", false);
+        }
+    });
+
+    newPlot.addEventListener("click", () => {
+        // Automatically plot a set of points to fill the curve
+        recordedPoints = [];
+        const Iph = getIph(E, S);
+        const resValues = [0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 150, 200, 300, 500];
+        resValues.forEach(testR => {
+            const res = solveI_U(testR, Iph);
+            recordedPoints.push({ U: res.U, I: res.I, P: res.U * res.I });
+        });
+        recordedPoints.sort((a, b) => a.U - b.U);
+        updatePointsTable();
+        showToast("Courbes caractéristiques tracées !", true);
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+        showToast("Table des points vidée.", false);
+    });
+
+    // Drawing loops
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const state = getPVState();
+        const scale = animScaleMultiplier;
+        const Iph = getIph(E, S);
+
+        // Draw grid
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        // Draw vertical separating line
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(450, 20);
+        ctx.lineTo(450, 380);
+        ctx.stroke();
+
+        // ==========================================
+        // LEFT HALF: CIRCUIT SCHEMATIC & ANIMATION
+        // ==========================================
+        
+        const lampX = 220;
+        const lampY = 60;
+        const cellX = 220;
+        const cellY = 170;
+
+        // Lamp background glow
+        ctx.fillStyle = "rgba(251, 191, 36, 0.1)";
+        ctx.beginPath();
+        ctx.arc(lampX, lampY, 30 * scale, 0, Math.PI, true);
+        ctx.fill();
+
+        // Rays (density depends on E)
+        const numRays = Math.round(E / 100);
+        ctx.strokeStyle = `rgba(251, 191, 36, ${0.1 + (E / 1000) * 0.5})`;
+        ctx.lineWidth = 2 * scale;
+        for (let i = 0; i < numRays; i++) {
+            const angle = Math.PI / 6 + (Math.PI * 2/3 / (numRays - 1)) * i;
+            const dx = Math.cos(angle) * 70 * scale;
+            const dy = Math.sin(angle) * 70 * scale;
+            ctx.beginPath();
+            ctx.moveTo(lampX, lampY);
+            ctx.lineTo(lampX + dx, lampY + dy);
+            ctx.stroke();
+        }
+
+        // Lamp bulb
+        ctx.fillStyle = E > 0 ? "rgba(251, 191, 36, 0.9)" : "#475569";
+        ctx.beginPath();
+        ctx.arc(lampX, lampY, 12 * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // PV Cell
+        ctx.fillStyle = "#1e1b4b";
+        ctx.fillRect(cellX - 40 * scale, cellY - 10 * scale, 80 * scale, 20 * scale);
+        ctx.strokeStyle = "#4338ca";
+        ctx.lineWidth = 2 * scale;
+        ctx.strokeRect(cellX - 40 * scale, cellY - 10 * scale, 80 * scale, 20 * scale);
+        
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.lineWidth = 1;
+        for (let gx = cellX - 30 * scale; gx <= cellX + 30 * scale; gx += 15 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(gx, cellY - 10 * scale);
+            ctx.lineTo(gx, cellY + 10 * scale);
+            ctx.stroke();
+        }
+
+        // Circuit Connections
+        ctx.strokeStyle = "#94a3b8";
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(cellX - 40 * scale, cellY);
+        ctx.lineTo(130 * scale, cellY);
+        ctx.lineTo(130 * scale, 320 * scale);
+        
+        // Ammeter
+        ctx.lineTo(180 * scale, 320 * scale);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(200 * scale, 320 * scale, 15 * scale, 0, Math.PI * 2);
+        ctx.fillStyle = "#1e293b";
+        ctx.fill();
+        ctx.stroke();
+        
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+        ctx.fillText("mA", 200 * scale, 323 * scale);
+
+        ctx.beginPath();
+        ctx.moveTo(215 * scale, 320 * scale);
+        ctx.lineTo(280 * scale, 320 * scale);
+        ctx.stroke();
+
+        // Rheostat box
+        ctx.fillStyle = "#334155";
+        ctx.fillRect(280 * scale, 310 * scale, 80 * scale, 20 * scale);
+        ctx.strokeRect(280 * scale, 310 * scale, 80 * scale, 20 * scale);
+
+        const rPercent = R / 500;
+        const sliderX = (280 + 80 * rPercent) * scale;
+        ctx.strokeStyle = "#ef4444";
+        ctx.fillStyle = "#ef4444";
+        ctx.lineWidth = 2.5 * scale;
+        ctx.beginPath();
+        ctx.moveTo(sliderX, 280 * scale);
+        ctx.lineTo(sliderX, 305 * scale);
+        ctx.moveTo(sliderX - 4 * scale, 300 * scale);
+        ctx.lineTo(sliderX, 307 * scale);
+        ctx.lineTo(sliderX + 4 * scale, 300 * scale);
+        ctx.stroke();
+
+        ctx.strokeStyle = "#94a3b8";
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(360 * scale, 320 * scale);
+        ctx.lineTo(410 * scale, 320 * scale);
+        ctx.lineTo(410 * scale, cellY);
+        ctx.lineTo(cellX + 40 * scale, cellY);
+        ctx.stroke();
+
+        // Voltmetre
+        ctx.beginPath();
+        ctx.moveTo(150 * scale, cellY);
+        ctx.lineTo(150 * scale, 230 * scale);
+        ctx.lineTo(180 * scale, 230 * scale);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.arc(200 * scale, 230 * scale, 15 * scale, 0, Math.PI*2);
+        ctx.fillStyle = "#1e293b";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `bold ${Math.round(12 * scale)}px sans-serif`;
+        ctx.fillText("V", 200 * scale, 234 * scale);
+
+        ctx.beginPath();
+        ctx.moveTo(215 * scale, 230 * scale);
+        ctx.lineTo(390 * scale, 230 * scale);
+        ctx.lineTo(390 * scale, cellY);
+        ctx.stroke();
+
+        // Voltmeter display
+        ctx.fillStyle = "#020617";
+        ctx.fillRect(130 * scale, 252 * scale, 100 * scale, 22 * scale);
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
+        ctx.strokeRect(130 * scale, 252 * scale, 100 * scale, 22 * scale);
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = `bold ${Math.round(11 * scale)}px monospace`;
+        ctx.fillText(`U = ${state.U.toFixed(3)} V`, 180 * scale, 267 * scale);
+
+        // Ammeter display
+        ctx.fillStyle = "#020617";
+        ctx.fillRect(230 * scale, 342 * scale, 110 * scale, 22 * scale);
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
+        ctx.strokeRect(230 * scale, 342 * scale, 110 * scale, 22 * scale);
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = `bold ${Math.round(11 * scale)}px monospace`;
+        ctx.fillText(`I = ${state.I.toFixed(1)} mA`, 285 * scale, 357 * scale);
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("Cellule PV", cellX, cellY - 18 * scale);
+        ctx.fillText("Voltmètre", 200 * scale, 208 * scale);
+        ctx.fillText("Ampèremètre", 200 * scale, 298 * scale);
+        ctx.fillText(`Rhéostat: ${R === 500 ? "∞" : R + " Ω"}`, 320 * scale, 295 * scale);
+
+        // ==========================================
+        // RIGHT HALF: CHART PLOTTING
+        // ==========================================
+        const gX = 500;
+        const gY = 50;
+        const gW = 310;
+        const gH = 260;
+
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(gX, gY);
+        ctx.lineTo(gX, gY + gH);
+        ctx.lineTo(gX + gW, gY + gH);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(gX + gW, gY);
+        ctx.lineTo(gX + gW, gY + gH);
+        ctx.stroke();
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+        ctx.textAlign = "center";
+        
+        for (let uVal = 0; uVal <= 1.2; uVal += 0.2) {
+            const pxX = gX + (uVal / 1.2) * gW;
+            ctx.beginPath();
+            ctx.moveTo(pxX, gY + gH);
+            ctx.lineTo(pxX, gY + gH + 4);
+            ctx.stroke();
+            ctx.fillText(uVal.toFixed(1), pxX, gY + gH + 15);
+        }
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("Tension U (V)", gX + gW/2, gY + gH + 30);
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.textAlign = "right";
+        ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+        for (let iVal = 0; iVal <= 600; iVal += 100) {
+            const pxY = gY + gH - (iVal / 600) * gH;
+            ctx.beginPath();
+            ctx.moveTo(gX - 4, pxY);
+            ctx.lineTo(gX, pxY);
+            ctx.stroke();
+            ctx.fillText(iVal, gX - 8, pxY + 3);
+        }
+        
+        ctx.save();
+        ctx.translate(gX - 40, gY + gH/2);
+        ctx.rotate(-Math.PI/2);
+        ctx.fillStyle = animPrimaryColor;
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("Courant I (mA)", 0, 0);
+        ctx.restore();
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.textAlign = "left";
+        ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+        for (let pVal = 0; pVal <= 400; pVal += 50) {
+            const pxY = gY + gH - (pVal / 400) * gH;
+            ctx.beginPath();
+            ctx.moveTo(gX + gW, pxY);
+            ctx.lineTo(gX + gW + 4, pxY);
+            ctx.stroke();
+            ctx.fillText(pVal, gX + gW + 8, pxY + 3);
+        }
+        
+        ctx.save();
+        ctx.translate(gX + gW + 42, gY + gH/2);
+        ctx.rotate(Math.PI/2);
+        ctx.fillStyle = animSecondaryColor;
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("Puissance P (mW)", 0, 0);
+        ctx.restore();
+
+        const steps = 100;
+        const ptsI = [];
+        const ptsP = [];
+        for (let j = 0; j <= steps; j++) {
+            const testU = (state.Uco / steps) * j;
+            let testI = Iph - I0 * (Math.exp(testU / Vc) - 1);
+            testI = Math.max(0, testI);
+            const testP = testU * testI;
+
+            const pxX = gX + (testU / 1.2) * gW;
+            const pxY_I = gY + gH - (testI / 600) * gH;
+            const pxY_P = gY + gH - (testP / 400) * gH;
+            
+            if (pxX >= gX && pxX <= gX + gW) {
+                ptsI.push({ x: pxX, y: pxY_I });
+                ptsP.push({ x: pxX, y: pxY_P });
+            }
+        }
+
+        ctx.strokeStyle = animPrimaryColor;
+        ctx.lineWidth = 2.5 * scale;
+        ctx.beginPath();
+        if (ptsI.length > 0) {
+            ctx.moveTo(ptsI[0].x, ptsI[0].y);
+            for (let k = 1; k < ptsI.length; k++) {
+                ctx.lineTo(ptsI[k].x, ptsI[k].y);
+            }
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle = animSecondaryColor;
+        ctx.lineWidth = 2.5 * scale;
+        ctx.beginPath();
+        if (ptsP.length > 0) {
+            ctx.moveTo(ptsP[0].x, ptsP[0].y);
+            for (let k = 1; k < ptsP.length; k++) {
+                ctx.lineTo(ptsP[k].x, ptsP[k].y);
+            }
+            ctx.stroke();
+        }
+
+        recordedPoints.forEach(pt => {
+            const pxX = gX + (pt.U / 1.2) * gW;
+            const pxY_I = gY + gH - (pt.I / 600) * gH;
+            const pxY_P = gY + gH - (pt.P / 400) * gH;
+
+            ctx.fillStyle = animPrimaryColor;
+            ctx.beginPath();
+            ctx.arc(pxX, pxY_I, 4 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.fillStyle = animSecondaryColor;
+            ctx.beginPath();
+            ctx.arc(pxX, pxY_P, 4 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+        });
+
+        const curX = gX + (state.U / 1.2) * gW;
+        const curY_I = gY + gH - (state.I / 600) * gH;
+        const curY_P = gY + gH - (state.P / 400) * gH;
+
+        if (curX >= gX && curX <= gX + gW) {
+            ctx.fillStyle = "#ef4444";
+            ctx.beginPath();
+            ctx.arc(curX, curY_I, 6 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.fillStyle = "#ef4444";
+            ctx.beginPath();
+            ctx.arc(curX, curY_P, 6 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+        }
+    }
+
+    if (photovoltaiqueInterval) clearInterval(photovoltaiqueInterval);
+    photovoltaiqueInterval = setInterval(draw, 30);
+    
+    updateCalculations();
+    updatePointsTable();
+}
+
+// 9. Charge Specifique de l'Electron Simulator
+let chargeElectronInterval = null;
+function setupChargeElectronSimulator() {
+    const canvas = document.getElementById("canvas-charge-electron");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const voltageSlider = document.getElementById("ce-voltage");
+    const currentSlider = document.getElementById("ce-current");
+    const reticuleSlider = document.getElementById("ce-reticule");
+    const btnRecord = document.getElementById("btn-ce-record");
+    const btnPlot = document.getElementById("btn-ce-plot");
+    const btnClear = document.getElementById("btn-ce-clear");
+    const checkVectors = document.getElementById("ce-show-vectors");
+    const checkCoils = document.getElementById("ce-show-coils");
+
+    // Clean up event listeners by cloning
+    const newVol = voltageSlider.cloneNode(true);
+    voltageSlider.parentNode.replaceChild(newVol, voltageSlider);
+
+    const newCur = currentSlider.cloneNode(true);
+    currentSlider.parentNode.replaceChild(newCur, currentSlider);
+
+    const newRet = reticuleSlider.cloneNode(true);
+    reticuleSlider.parentNode.replaceChild(newRet, reticuleSlider);
+
+    const newRec = btnRecord.cloneNode(true);
+    btnRecord.parentNode.replaceChild(newRec, btnRecord);
+
+    const newPlot = btnPlot.cloneNode(true);
+    btnPlot.parentNode.replaceChild(newPlot, btnPlot);
+
+    const newClr = btnClear.cloneNode(true);
+    btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    // Initial variables
+    let U = parseFloat(newVol.value);
+    let I = parseFloat(newCur.value);
+    let D_mes = parseFloat(newRet.value);
+    let showVectors = checkVectors.checked;
+    let showCoils = checkCoils.checked;
+    let recordedPoints = [];
+
+    // Physics constants
+    const emRatio = 1.7588e11; // C/kg
+    const kCoils = 7.79e-4; // T/A (Helmholtz constant B = k * I)
+
+    function getB() {
+        return kCoils * I;
+    }
+
+    function getV() {
+        return Math.sqrt(2 * emRatio * U);
+    }
+
+    function getDActual() {
+        const B = getB();
+        const v = getV();
+        const r = v / (B * emRatio); // in meters
+        return 2 * r * 100; // in cm
+    }
+
+    function getIndividualEM() {
+        const B = getB();
+        const D_meters = D_mes / 100;
+        return (8 * U) / (B * B * D_meters * D_meters);
+    }
+
+    function calculateRegressionFit() {
+        if (recordedPoints.length < 2) return null;
+        let sumXY = 0;
+        let sumXX = 0;
+        recordedPoints.forEach(pt => {
+            sumXY += pt.xVal * pt.yVal;
+            sumXX += pt.xVal * pt.xVal;
+        });
+        if (sumXX === 0) return null;
+        const slope = sumXY / sumXX; // cm^2 / (10^8 V/T^2)
+        const emFit = 8e12 / slope;
+        const errorPercent = Math.abs(emFit - emRatio) / emRatio * 100;
+        return { emFit, errorPercent, slope };
+    }
+
+    function updateCalculations() {
+        const B = getB();
+        const v = getV();
+        const D_actual = getDActual();
+        const em_exp = getIndividualEM();
+        const aligned = Math.abs(D_mes - D_actual) < 0.15;
+
+        const fit = calculateRegressionFit();
+        let fitText = "Insuffisant (min 2 points)";
+        let fitErrorText = "-";
+        if (fit) {
+            fitText = `${(fit.emFit / 1e11).toFixed(3)} \\times 10^{11} \\text{ C/kg}`;
+            fitErrorText = `${fit.errorPercent.toFixed(1)} %`;
+        }
+
+        const theoryDiv = document.getElementById("charge-electron-theory");
+        if (!theoryDiv) return;
+
+        theoryDiv.innerHTML = `
+            <div class="theory-title" style="font-weight:700; font-size:1.1rem; margin-bottom:8px; color:var(--primary);"><i data-lucide="magnet"></i> Physique de l'expérience & Modélisation</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                <div>
+                    <strong style="color:var(--secondary);">Paramètres physiques :</strong><br>
+                    • Champ magnétique $B = $ <strong style="color:var(--text-primary);">${(B * 1000).toFixed(3)}</strong> mT<br>
+                    • Vitesse des électrons $v = $ <strong style="color:var(--text-primary);">${(v / 1e6).toFixed(2)}</strong> $\\times 10^6$ m/s<br>
+                    • Diamètre théorique $D = $ <strong style="color:var(--primary);">${D_actual.toFixed(2)}</strong> cm
+                </div>
+                <div>
+                    <strong style="color:var(--secondary);">Mesure actuelle :</strong><br>
+                    • Réticule ajusté à $D_{mes} = $ <strong style="color:var(--text-primary);">${D_mes.toFixed(2)}</strong> cm<br>
+                    • Rapport $(e/m)_{mes} = $ <strong style="color:${aligned ? 'var(--primary)' : 'var(--secondary)'};">${(em_exp / 1e11).toFixed(3)}</strong> $\\times 10^{11}$ C/kg<br>
+                    • Écart relatif = <strong style="color:${aligned ? 'var(--primary)' : '#ef4444'};">${(Math.abs(em_exp - emRatio)/emRatio * 100).toFixed(1)}</strong> %
+                </div>
+                <div>
+                    <strong style="color:var(--secondary);">Analyse globale (Graphique) :</strong><br>
+                    • Points enregistrés : <strong style="color:var(--text-primary);">${recordedPoints.length}</strong><br>
+                    • Rapport $(e/m)_{fit} = $ <strong style="color:var(--primary);">${fitText}</strong><br>
+                    • Écart du fit = <strong style="color:var(--text-primary);">${fitErrorText}</strong>
+                </div>
+            </div>
+            <div style="margin-top: 12px; font-size: 0.85rem; color: var(--text-secondary); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
+                <strong>Principe :</strong> Les électrons de charge $-e$ et masse $m$ sont accélérés par la tension $U$ : $\\frac{1}{2}mv^2 = eU$. 
+                Ils entrent dans les bobines de Helmholtz créant un champ magnétique uniforme $B$. La force de Lorentz $\\vec{F} = -e(\\vec{v} \\times \\vec{B})$ 
+                les dévie sur un cercle de rayon $R = \\frac{mv}{eB}$. On en déduit : $\\frac{e}{m} = \\frac{2U}{B^2 R^2} = \\frac{8U}{B^2 D^2}$.
+            </div>
+        `;
+
+        // Render equations
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+        lucide.createIcons();
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("charge-electron-points-body");
+        if (!body) return;
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `
+                <tr>
+                    <td colspan="6" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Alignez le réticule et cliquez sur Mesurer.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map((pt, idx) => {
+            const emVal = (80000 * pt.U) / (pt.B * pt.B * 1e-6 * pt.D * pt.D);
+            return `
+                <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                    <td style="padding: 4px;">#${idx + 1}</td>
+                    <td style="padding: 4px;">${pt.U.toFixed(0)}</td>
+                    <td style="padding: 4px;">${pt.I.toFixed(2)}</td>
+                    <td style="padding: 4px;">${pt.B.toFixed(3)}</td>
+                    <td style="padding: 4px;">${pt.D.toFixed(2)}</td>
+                    <td style="padding: 4px;">${(emVal / 1e11).toFixed(3)}</td>
+                </tr>
+            `;
+        }).join("");
+    }
+
+    newVol.addEventListener("input", (e) => {
+        U = parseFloat(e.target.value);
+        document.getElementById("val-ce-voltage").textContent = U;
+        updateCalculations();
+    });
+
+    newCur.addEventListener("input", (e) => {
+        I = parseFloat(e.target.value);
+        document.getElementById("val-ce-current").textContent = I.toFixed(2);
+        updateCalculations();
+    });
+
+    newRet.addEventListener("input", (e) => {
+        D_mes = parseFloat(e.target.value);
+        document.getElementById("val-ce-reticule").textContent = D_mes.toFixed(2);
+        updateCalculations();
+    });
+
+    checkVectors.addEventListener("change", (e) => {
+        showVectors = e.target.checked;
+    });
+
+    checkCoils.addEventListener("change", (e) => {
+        showCoils = e.target.checked;
+    });
+
+    newRec.addEventListener("click", () => {
+        const D_actual = getDActual();
+        const aligned = Math.abs(D_mes - D_actual) < 0.15;
+        if (!aligned) {
+            showToast("Veuillez aligner précisément le réticule avec le bord du faisceau d'électrons !", false);
+            return;
+        }
+        
+        const B_val = getB();
+        const xVal = (U / (B_val * B_val)) * 1e-8;
+        const yVal = D_mes * D_mes;
+
+        // Check if point already exists
+        const exists = recordedPoints.some(pt => Math.abs(pt.xVal - xVal) < 0.05 && Math.abs(pt.yVal - yVal) < 0.5);
+        if (!exists) {
+            recordedPoints.push({
+                U: U,
+                I: I,
+                B: B_val * 1000, // mT
+                D: D_mes,
+                xVal: xVal,
+                yVal: yVal
+            });
+            // Sort by xVal
+            recordedPoints.sort((a, b) => a.xVal - b.xVal);
+            updatePointsTable();
+            updateCalculations();
+            showToast("Point de mesure enregistré !", true);
+        } else {
+            showToast("Ce point est déjà mesuré.", false);
+        }
+    });
+
+    newPlot.addEventListener("click", () => {
+        recordedPoints = [];
+        const currents = [1.2, 1.4, 1.6, 1.8, 2.0, 2.2];
+        currents.forEach(testI => {
+            const testB = kCoils * testI;
+            const testU = 150 + Math.random() * 100; // random U in range 150-250
+            const testR = (Math.sqrt(2 * emRatio * testU)) / (testB * emRatio);
+            const testD = 2 * testR * 100;
+            
+            const xVal = (testU / (testB * testB)) * 1e-8;
+            const yVal = testD * testD;
+            recordedPoints.push({
+                U: testU,
+                I: testI,
+                B: testB * 1000,
+                D: testD,
+                xVal: xVal,
+                yVal: yVal
+            });
+        });
+        recordedPoints.sort((a, b) => a.xVal - b.xVal);
+        updatePointsTable();
+        updateCalculations();
+        showToast("Courbes et points d'étalonnage tracés !", true);
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+        updateCalculations();
+        showToast("Table des points vidée.", false);
+    });
+
+    function drawArrow(fromX, fromY, toX, toY, color, label, scale) {
+        const headlen = 8 * scale;
+        const dx = toX - fromX;
+        const dy = toY - fromY;
+        const angle = Math.atan2(dy, dx);
+        
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2 * scale;
+        
+        ctx.beginPath();
+        ctx.moveTo(fromX, fromY);
+        ctx.lineTo(toX, toY);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(toX, toY);
+        ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+        ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+        ctx.closePath();
+        ctx.fill();
+        
+        if (label) {
+            ctx.fillStyle = color;
+            ctx.font = `italic bold ${Math.round(11 * scale)}px sans-serif`;
+            ctx.fillText(label, toX + 6 * Math.cos(angle), toY + 6 * Math.sin(angle));
+        }
+    }
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const D_actual = getDActual();
+        const scale = animScaleMultiplier;
+        const aligned = Math.abs(D_mes - D_actual) < 0.15;
+
+        // Draw grid
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40 * scale) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        // Draw vertical separating line
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(450, 20);
+        ctx.lineTo(450, 380);
+        ctx.stroke();
+
+        // ==========================================
+        // LEFT HALF: THE FINE BEAM TUBE & FIELD
+        // ==========================================
+
+        const cenX = 220 * scale;
+        const cenY = 200 * scale;
+        const bulbRad = 110 * scale;
+
+        // 1. Draw Coils behind bulb if checked
+        if (showCoils) {
+            ctx.strokeStyle = "rgba(180, 83, 9, 0.15)";
+            ctx.lineWidth = 12 * scale;
+            ctx.beginPath();
+            ctx.arc(cenX - 15 * scale, cenY, 130 * scale, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            ctx.strokeStyle = "rgba(180, 83, 9, 0.22)";
+            ctx.lineWidth = 12 * scale;
+            ctx.beginPath();
+            ctx.arc(cenX + 15 * scale, cenY, 130 * scale, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        // 2. Bulb glass background glow
+        const bulbGrad = ctx.createRadialGradient(cenX, cenY, 20 * scale, cenX, cenY, bulbRad);
+        bulbGrad.addColorStop(0, "rgba(22, 28, 45, 0.95)");
+        bulbGrad.addColorStop(1, "rgba(8, 10, 18, 0.98)");
+        ctx.fillStyle = bulbGrad;
+        ctx.beginPath();
+        ctx.arc(cenX, cenY, bulbRad, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 3. Draw magnetic field crosses (otimes) in the bulb
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.12)";
+        ctx.lineWidth = 1 * scale;
+        for (let gx = 130; gx <= 310; gx += 35) {
+            for (let gy = 110; gy <= 290; gy += 35) {
+                const dx = gx * scale - cenX;
+                const dy = gy * scale - cenY;
+                if (dx*dx + dy*dy < bulbRad*bulbRad - 15*scale) {
+                    const cx = gx * scale;
+                    const cy = gy * scale;
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, 5 * scale, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(cx - 3.5*scale, cy - 3.5*scale);
+                    ctx.lineTo(cx + 3.5*scale, cy + 3.5*scale);
+                    ctx.moveTo(cx + 3.5*scale, cy - 3.5*scale);
+                    ctx.lineTo(cx - 3.5*scale, cy + 3.5*scale);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // 4. Draw Ruler inside bulb
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.lineWidth = 1 * scale;
+        ctx.beginPath();
+        ctx.moveTo(cenX - 90 * scale, 305 * scale);
+        ctx.lineTo(cenX + 150 * scale, 305 * scale);
+        ctx.stroke();
+
+        for (let d = 0; d <= 12; d += 1) {
+            const tickX = cenX + d * 20 * scale;
+            const tickHeight = d % 2 === 0 ? 7 * scale : 4 * scale;
+            ctx.beginPath();
+            ctx.moveTo(tickX, 305 * scale);
+            ctx.lineTo(tickX, (305 + tickHeight) * scale);
+            ctx.stroke();
+            
+            if (d % 2 === 0 && d > 0) {
+                ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
+                ctx.font = `${Math.round(9 * scale)}px monospace`;
+                ctx.textAlign = "center";
+                ctx.fillText(d + "", tickX, 320 * scale);
+            }
+        }
+
+        // 5. Draw electron gun
+        ctx.fillStyle = "#475569";
+        ctx.fillRect(cenX - 6 * scale, 280 * scale, 12 * scale, 22 * scale);
+        ctx.strokeStyle = "#94a3b8";
+        ctx.lineWidth = 1 * scale;
+        ctx.strokeRect(cenX - 6 * scale, 280 * scale, 12 * scale, 22 * scale);
+        
+        ctx.fillStyle = "#f59e0b"; // filament glow
+        ctx.beginPath();
+        ctx.arc(cenX, 292 * scale, 2.5 * scale, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 6. Draw Electron circular beam
+        const R_pixels = (D_actual / 2) * 20 * scale;
+        const x_c = cenX + R_pixels;
+        const y_c = 280 * scale;
+
+        ctx.save();
+        ctx.shadowBlur = 12 * scale;
+        ctx.shadowColor = "rgba(56, 189, 248, 0.85)";
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+        ctx.lineWidth = 3.5 * scale;
+        ctx.beginPath();
+        ctx.arc(x_c, y_c, R_pixels, Math.PI, Math.PI * 3);
+        ctx.stroke();
+
+        ctx.strokeStyle = "#e0f2fe"; // bright core
+        ctx.lineWidth = 1 * scale;
+        ctx.stroke();
+        ctx.restore();
+
+        // 7. Draw Réticule (Crosshair)
+        const x_reticule = cenX + D_mes * 20 * scale;
+        ctx.strokeStyle = aligned ? "#10b981" : "#f59e0b";
+        ctx.lineWidth = 1.5 * scale;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(x_reticule, 90 * scale);
+        ctx.lineTo(x_reticule, 310 * scale);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.beginPath();
+        ctx.arc(x_reticule, 280 * scale, 8 * scale, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(x_reticule - 12 * scale, 280 * scale);
+        ctx.lineTo(x_reticule + 12 * scale, 280 * scale);
+        ctx.moveTo(x_reticule, 280 * scale - 12 * scale);
+        ctx.lineTo(x_reticule, 280 * scale + 12 * scale);
+        ctx.stroke();
+
+        if (aligned) {
+            ctx.fillStyle = "#10b981";
+            ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+            ctx.textAlign = "center";
+            ctx.fillText("ALIGNÉ", x_reticule, 266 * scale);
+        }
+
+        // 8. Draw Vectors if checked
+        if (showVectors) {
+            // Draw at angle 230 degrees
+            const theta = 1.25 * Math.PI;
+            const ptX = x_c + R_pixels * Math.cos(theta);
+            const ptY = y_c + R_pixels * Math.sin(theta);
+
+            // Velocity vector
+            const vx = -Math.sin(theta);
+            const vy = Math.cos(theta);
+            const vLength = 40 * scale;
+            drawArrow(ptX, ptY, ptX + vx * vLength, ptY + vy * vLength, "#3b82f6", "v", scale);
+
+            // Lorentz Force vector
+            const fx = -Math.cos(theta);
+            const fy = -Math.sin(theta);
+            const fLength = 35 * scale;
+            drawArrow(ptX, ptY, ptX + fx * fLength, ptY + fy * fLength, "#ef4444", "F_L", scale);
+
+            // Magnetic field symbol near the point
+            ctx.strokeStyle = "#10b981";
+            ctx.lineWidth = 1.5 * scale;
+            const bX = ptX - 15 * scale;
+            const bY = ptY - 15 * scale;
+            ctx.beginPath();
+            ctx.arc(bX, bY, 6 * scale, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(bX - 3.5*scale, bY - 3.5*scale);
+            ctx.lineTo(bX + 3.5*scale, bY + 3.5*scale);
+            ctx.moveTo(bX + 3.5*scale, bY - 3.5*scale);
+            ctx.lineTo(bX - 3.5*scale, bY + 3.5*scale);
+            ctx.stroke();
+            ctx.fillStyle = "#10b981";
+            ctx.font = `italic bold ${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("B", bX + 10 * scale, bY + 4 * scale);
+        }
+
+        // 9. Glass Bulb Outer Boundary
+        ctx.strokeStyle = "rgba(147, 197, 253, 0.25)";
+        ctx.lineWidth = 2.5 * scale;
+        ctx.beginPath();
+        ctx.arc(cenX, cenY, bulbRad, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.lineWidth = 1 * scale;
+        ctx.beginPath();
+        ctx.arc(cenX, cenY, bulbRad - 3 * scale, -Math.PI / 4, Math.PI / 4);
+        ctx.stroke();
+
+        // ==========================================
+        // RIGHT HALF: LINEAR REGRESSION PLOT
+        // ==========================================
+        drawGraph(recordedPoints, U, getB(), D_actual, scale);
+    }
+
+    function drawGraph(recordedPoints, U, B, D_actual, scale) {
+        const gX = 520;
+        const gY = 80;
+        const gW = 320;
+        const gH = 240;
+        
+        // Draw background grid
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
+        ctx.lineWidth = 1;
+        for (let gx = gX; gx <= gX + gW; gx += 40) {
+            ctx.beginPath();
+            ctx.moveTo(gx, gY);
+            ctx.lineTo(gx, gY + gH);
+            ctx.stroke();
+        }
+        for (let gy = gY; gy <= gY + gH; gy += 40) {
+            ctx.beginPath();
+            ctx.moveTo(gX, gy);
+            ctx.lineTo(gX + gW, gy);
+            ctx.stroke();
+        }
+        
+        // Draw axes
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.lineWidth = 1.5 * scale;
+        ctx.beginPath();
+        ctx.moveTo(gX, gY);
+        ctx.lineTo(gX, gY + gH);
+        ctx.lineTo(gX + gW, gY + gH);
+        ctx.stroke();
+        
+        // Axis labels
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.textAlign = "left";
+        ctx.fillText("D² (cm²)", gX - 10, gY - 10);
+        ctx.textAlign = "right";
+        ctx.fillText("U/B² (10⁸ V/T²)", gX + gW, gY + gH + 20);
+        
+        // Axis ticks and numbers
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        for (let val = 0; val <= 120; val += 20) {
+            const y = gY + gH - (val / 120) * gH;
+            ctx.beginPath();
+            ctx.moveTo(gX - 4, y);
+            ctx.lineTo(gX, y);
+            ctx.stroke();
+            ctx.fillText(val, gX - 8, y);
+        }
+        
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        for (let val = 0; val <= 3.0; val += 0.5) {
+            const x = gX + (val / 3.0) * gW;
+            ctx.beginPath();
+            ctx.moveTo(x, gY + gH);
+            ctx.lineTo(x, gY + gH + 4);
+            ctx.stroke();
+            ctx.fillText(val.toFixed(1), x, gY + gH + 8);
+        }
+        
+        // Theoretical Line: D² = 45.45 * X
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
+        ctx.lineWidth = 1.5 * scale;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(gX, gY + gH);
+        const endX = 3.0;
+        const endY = 45.45 * endX;
+        ctx.lineTo(gX + gW, gY + gH - (endY / 120) * gH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // Current point on the graph
+        const currentX_val = (U / (B * B)) * 1e-8;
+        const currentY_val = D_actual * D_actual;
+        const curX = gX + (currentX_val / 3.0) * gW;
+        const curY = gY + gH - (currentY_val / 120) * gH;
+        
+        if (curX >= gX && curX <= gX + gW && curY >= gY && curY <= gY + gH) {
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(curX, gY + gH);
+            ctx.lineTo(curX, curY);
+            ctx.lineTo(gX, curY);
+            ctx.stroke();
+            
+            ctx.fillStyle = "rgba(56, 189, 248, 0.8)";
+            ctx.beginPath();
+            ctx.arc(curX, curY, 5.5 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+        
+        // Plot recorded points
+        recordedPoints.forEach(pt => {
+            const ptX = gX + (pt.xVal / 3.0) * gW;
+            const ptY = gY + gH - (pt.yVal / 120) * gH;
+            
+            if (ptX >= gX && ptX <= gX + gW && ptY >= gY && ptY <= gY + gH) {
+                ctx.fillStyle = "#f59e0b";
+                ctx.strokeStyle = "#ffffff";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(ptX, ptY, 4.5 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            }
+        });
+
+        // Draw fit line if we have at least 2 points
+        const fit = calculateRegressionFit();
+        if (fit && fit.slope > 0) {
+            ctx.strokeStyle = "#ef4444";
+            ctx.lineWidth = 2 * scale;
+            ctx.beginPath();
+            ctx.moveTo(gX, gY + gH);
+            const endY_fit = fit.slope * 3.0;
+            ctx.lineTo(gX + gW, gY + gH - (endY_fit / 120) * gH);
+            ctx.stroke();
+        }
+    }
+
+    if (chargeElectronInterval) clearInterval(chargeElectronInterval);
+    chargeElectronInterval = setInterval(draw, 30);
+    
+    updateCalculations();
+    updatePointsTable();
+}
+
 // --- INTERACTIVE MATHS & PHYSICS TOOLS ---
 function setupInteractiveTools() {
     // 1. Maths Tool: Delta Calculator
@@ -5997,4 +8636,2863 @@ window.toggleTool = function(headerElement) {
     const box = headerElement.closest('.interactive-tool-box');
     box.classList.toggle('collapsed');
 };
+
+// Global navigation helper to switch directly to an animation simulator
+window.navigateToAnim = function(animId) {
+    const animNavBtn = document.querySelector('.nav-link[data-tab="animations"]');
+    if (animNavBtn) animNavBtn.click();
+    setTimeout(() => {
+        const targetBtn = document.querySelector(`.anim-select-btn[data-anim="${animId}"]`);
+        if (targetBtn) targetBtn.click();
+    }, 100);
+};
+
+// 10. Diodes et Applications (Redressement & Filtrage) Simulator
+let diodesRedressementInterval = null;
+function setupDiodesRedressementSimulator() {
+    const canvas = document.getElementById("canvas-diodes-redressement");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const modeSelect = document.getElementById("dr-mode");
+    const emaxSlider = document.getElementById("dr-emax");
+    const freqSlider = document.getElementById("dr-freq");
+    const v0Slider = document.getElementById("dr-v0");
+    const resistanceSlider = document.getElementById("dr-resistance");
+    const capacitorSlider = document.getElementById("dr-capacitor");
+    const checkEin = document.getElementById("dr-show-ein");
+    const checkUout = document.getElementById("dr-show-uout");
+    const btnRecord = document.getElementById("btn-dr-record");
+    const btnPause = document.getElementById("btn-dr-pause");
+    const btnClear = document.getElementById("btn-dr-clear");
+
+    if (!modeSelect || !emaxSlider) return;
+
+    // Clean up event listeners by cloning
+    const newMode = modeSelect.cloneNode(true);
+    modeSelect.parentNode.replaceChild(newMode, modeSelect);
+
+    const newEmax = emaxSlider.cloneNode(true);
+    emaxSlider.parentNode.replaceChild(newEmax, emaxSlider);
+
+    const newFreq = freqSlider.cloneNode(true);
+    freqSlider.parentNode.replaceChild(newFreq, freqSlider);
+
+    const newV0 = v0Slider.cloneNode(true);
+    v0Slider.parentNode.replaceChild(newV0, v0Slider);
+
+    const newRes = resistanceSlider.cloneNode(true);
+    resistanceSlider.parentNode.replaceChild(newRes, resistanceSlider);
+
+    const newCap = capacitorSlider.cloneNode(true);
+    capacitorSlider.parentNode.replaceChild(newCap, capacitorSlider);
+
+    const newEin = checkEin.cloneNode(true);
+    checkEin.parentNode.replaceChild(newEin, checkEin);
+
+    const newUout = checkUout.cloneNode(true);
+    checkUout.parentNode.replaceChild(newUout, checkUout);
+
+    const newRec = btnRecord.cloneNode(true);
+    btnRecord.parentNode.replaceChild(newRec, btnRecord);
+
+    const newPau = btnPause.cloneNode(true);
+    btnPause.parentNode.replaceChild(newPau, btnPause);
+
+    const newClr = btnClear.cloneNode(true);
+    btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    let mode = newMode.value;
+    let Emax = parseFloat(newEmax.value);
+    let freq = parseFloat(newFreq.value);
+    let V0 = parseFloat(newV0.value);
+    let R = parseFloat(newRes.value);
+    let C_uF = parseFloat(newCap.value);
+    let showEin = newEin.checked;
+    let showUout = newUout.checked;
+    let isPaused = false;
+
+    let recordedPoints = [];
+    let animTime = 0;
+
+    function getMetrics() {
+        const C_farad = C_uF * 1e-6;
+        const numDiodes = mode === "double" ? 2 : 1;
+        const Vmax_out = Math.max(0, Emax - numDiodes * V0);
+        
+        let deltaU = 0;
+        let Vdc = 0;
+        const fred = mode === "double" ? 2 * freq : freq;
+
+        if (C_uF === 0 || Vmax_out === 0) {
+            if (mode === "simple") {
+                Vdc = Vmax_out / Math.PI;
+                deltaU = Vmax_out;
+            } else {
+                Vdc = (2 * Vmax_out) / Math.PI;
+                deltaU = Vmax_out;
+            }
+        } else {
+            const rcTerm = fred * R * C_farad;
+            deltaU = Vmax_out / (1 + rcTerm);
+            deltaU = Math.min(deltaU, Vmax_out);
+            Vdc = Vmax_out - deltaU / 2;
+        }
+
+        const rippleRatio = Vdc > 0 ? (deltaU / Vdc) * 100 : 0;
+        return { Vmax_out, deltaU, Vdc, rippleRatio, fred };
+    }
+
+    function updateCalculations() {
+        const state = getMetrics();
+        const theoryDiv = document.getElementById("diodes-redressement-theory");
+        if (!theoryDiv) return;
+
+        const modeText = mode === "simple" ? "Simple Alternance (1 Diode)" : "Double Alternance (Pont de Graetz - 4 Diodes)";
+        const numV0 = mode === "double" ? "2 \\cdot V_0" : "V_0";
+
+        theoryDiv.innerHTML = `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">
+                    <i data-lucide="calculator" style="vertical-align: middle; margin-right: 6px;"></i> Résultats théoriques et mesures (${modeText})
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                    <div><strong>Tension d'entrée crête :</strong> \\(E_{max} = ${Emax.toFixed(1)}\\text{ V}\\)</div>
+                    <div><strong>Tension de sortie crête :</strong> \\(V_{max,out} = E_{max} - ${numV0} = ${state.Vmax_out.toFixed(2)}\\text{ V}\\)</div>
+                    <div><strong>Tension moyenne (DC) :</strong> \\(V_{dc} \\approx ${state.Vdc.toFixed(2)}\\text{ V}\\)</div>
+                    <div><strong>Tension d'ondulation :</strong> \\(\\Delta U \\approx ${state.deltaU.toFixed(2)}\\text{ V}\\)</div>
+                    <div><strong>Taux de ronflement (Ripple) :</strong> \\(r = \\frac{\\Delta U}{V_{dc}} = ${state.rippleRatio.toFixed(1)}\\%\\)</div>
+                    <div><strong>Constante de décharge :</strong> \\(\\tau = R \\cdot C = ${(R * C_uF * 1e-3).toFixed(2)}\\text{ ms}\\)</div>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 10px;">
+                    <strong>Principe :</strong> Pendant l'alternance positive (ou les deux pour le pont), la diode conduit dès que \\(|e(t)| > ${numV0}\\text{V}\\) et charge le condensateur \\(C\\). Lorsque la tension d'entrée chute au-dessous de \\(u_C(t)\\), les diodes se bloquent et le condensateur se décharge avec une constante de temps \\(\\tau = R \\cdot C\\). Plus \\(C\\) est grand, plus l'ondulation \\(\\Delta U\\) est faible et la tension de sortie devient quasi-continue.
+                </p>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("diodes-redressement-points-body");
+        if (!body) return;
+
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `<tr><td colspan="6" style="padding: 6px; color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer".</td></tr>`;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map((pt) => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">${pt.mode === 'simple' ? 'Mono' : 'Double'}</td>
+                <td style="padding: 4px;">${pt.C}</td>
+                <td style="padding: 4px;">${pt.R}</td>
+                <td style="padding: 4px; font-weight: 600; color: #10b981;">${pt.Vdc.toFixed(2)}</td>
+                <td style="padding: 4px; color: #f59e0b;">${pt.deltaU.toFixed(2)}</td>
+                <td style="padding: 4px;">${pt.r.toFixed(1)}%</td>
+            </tr>
+        `).join("");
+    }
+
+    newMode.addEventListener("change", (e) => {
+        mode = e.target.value;
+        updateCalculations();
+    });
+
+    newEmax.addEventListener("input", (e) => {
+        Emax = parseFloat(e.target.value);
+        document.getElementById("val-dr-emax").textContent = Emax.toFixed(1);
+        updateCalculations();
+    });
+
+    newFreq.addEventListener("input", (e) => {
+        freq = parseFloat(e.target.value);
+        document.getElementById("val-dr-freq").textContent = freq;
+        updateCalculations();
+    });
+
+    newV0.addEventListener("input", (e) => {
+        V0 = parseFloat(e.target.value);
+        document.getElementById("val-dr-v0").textContent = V0.toFixed(2);
+        updateCalculations();
+    });
+
+    newRes.addEventListener("input", (e) => {
+        R = parseFloat(e.target.value);
+        document.getElementById("val-dr-resistance").textContent = R;
+        updateCalculations();
+    });
+
+    newCap.addEventListener("input", (e) => {
+        C_uF = parseFloat(e.target.value);
+        document.getElementById("val-dr-capacitor").textContent = C_uF;
+        updateCalculations();
+    });
+
+    newEin.addEventListener("change", (e) => { showEin = e.target.checked; });
+    newUout.addEventListener("change", (e) => { showUout = e.target.checked; });
+
+    newRec.addEventListener("click", () => {
+        const state = getMetrics();
+        recordedPoints.push({
+            mode: mode,
+            C: C_uF,
+            R: R,
+            Vdc: state.Vdc,
+            deltaU: state.deltaU,
+            r: state.rippleRatio
+        });
+        updatePointsTable();
+    });
+
+    newPau.addEventListener("click", () => {
+        isPaused = !isPaused;
+        newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
+        if (window.lucide) window.lucide.createIcons();
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (!isPaused) {
+            animTime += 0.005;
+        }
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const scale = W / 900;
+
+        const oscX = 40 * scale;
+        const oscY = 30 * scale;
+        const oscW = 540 * scale;
+        const oscH = 340 * scale;
+        const centerY = oscY + oscH / 2;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(oscX, oscY, oscW, oscH);
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.15)";
+        ctx.lineWidth = 1;
+
+        for (let x = oscX; x <= oscX + oscW; x += oscW / 10) {
+            ctx.beginPath();
+            ctx.moveTo(x, oscY);
+            ctx.lineTo(x, oscY + oscH);
+            ctx.stroke();
+        }
+        for (let y = oscY; y <= oscY + oscH; y += oscH / 8) {
+            ctx.beginPath();
+            ctx.moveTo(oscX, y);
+            ctx.lineTo(oscX + oscW, y);
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(oscX, centerY);
+        ctx.lineTo(oscX + oscW, centerY);
+        ctx.stroke();
+
+        const vScale = (oscH / 8) / 5;
+
+        ctx.fillStyle = "rgba(16, 185, 129, 0.8)";
+        ctx.font = `${Math.round(11 * scale)}px sans-serif`;
+        ctx.textAlign = "left";
+        ctx.fillText("CH1 (Entrée AC): 5V/div (Jaune)", oscX + 10, oscY + 20);
+        ctx.fillStyle = "rgba(56, 189, 248, 0.9)";
+        ctx.fillText("CH2 (Sortie Redressée): 5V/div (Cyan)", oscX + 10, oscY + 36);
+
+        const T_period = 1 / freq;
+        const timeWindow = 3 * T_period;
+        const numPoints = 600;
+
+        let isConducting = false;
+
+        ctx.lineWidth = 2 * scale;
+
+        if (showEin) {
+            ctx.strokeStyle = "#facc15";
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = "#facc15";
+            ctx.beginPath();
+            for (let i = 0; i <= numPoints; i++) {
+                const t = (i / numPoints) * timeWindow;
+                const e_val = Emax * Math.sin(2 * Math.PI * freq * (t + animTime));
+                const pxX = oscX + (i / numPoints) * oscW;
+                const pxY = centerY - e_val * vScale;
+                if (i === 0) ctx.moveTo(pxX, pxY);
+                else ctx.lineTo(pxX, pxY);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        if (showUout) {
+            ctx.strokeStyle = "#38bdf8";
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = "#38bdf8";
+            ctx.beginPath();
+
+            const C_farad = C_uF * 1e-6;
+            const dt = timeWindow / numPoints;
+            const numV0 = mode === "double" ? 2 * V0 : V0;
+
+            let u_c = 0;
+            for (let i = 0; i <= numPoints; i++) {
+                const t = (i / numPoints) * timeWindow;
+                const e_val = Emax * Math.sin(2 * Math.PI * freq * (t + animTime));
+                
+                let targetRectified = 0;
+                if (mode === "simple") {
+                    targetRectified = Math.max(0, e_val - numV0);
+                } else {
+                    targetRectified = Math.max(0, Math.abs(e_val) - numV0);
+                }
+
+                if (C_uF === 0) {
+                    u_c = targetRectified;
+                    isConducting = targetRectified > 0;
+                } else {
+                    if (targetRectified > u_c) {
+                        u_c = targetRectified;
+                        isConducting = true;
+                    } else {
+                        const decay = Math.exp(-dt / (R * C_farad));
+                        u_c = u_c * decay;
+                        isConducting = false;
+                    }
+                }
+
+                const pxX = oscX + (i / numPoints) * oscW;
+                const pxY = centerY - u_c * vScale;
+
+                if (i === 0) ctx.moveTo(pxX, pxY);
+                else ctx.lineTo(pxX, pxY);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        const metrics = getMetrics();
+        const yVdc = centerY - metrics.Vdc * vScale;
+        ctx.strokeStyle = "#10b981";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(oscX, yVdc);
+        ctx.lineTo(oscX + oscW, yVdc);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#10b981";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.textAlign = "right";
+        ctx.fillText(`V_dc = ${metrics.Vdc.toFixed(2)}V`, oscX + oscW - 10, yVdc - 4);
+
+        const schemX = 610 * scale;
+        const schemY = 30 * scale;
+        const schemW = 260 * scale;
+        const schemH = 340 * scale;
+
+        ctx.fillStyle = "rgba(15, 23, 42, 0.8)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 1;
+        ctx.fillRect(schemX, schemY, schemW, schemH);
+        ctx.strokeRect(schemX, schemY, schemW, schemH);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${Math.round(13 * scale)}px 'Outfit', sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillText(mode === "simple" ? "Circuit Simple Alternance" : "Pont de Graetz (4 Diodes)", schemX + schemW / 2, schemY + 25 * scale);
+
+        ctx.fillStyle = isConducting ? "rgba(16, 185, 129, 0.2)" : "rgba(239, 68, 68, 0.2)";
+        ctx.strokeStyle = isConducting ? "#10b981" : "#ef4444";
+        ctx.lineWidth = 1.5;
+        const badgeW = 180 * scale;
+        const badgeH = 28 * scale;
+        const badgeX = schemX + (schemW - badgeW) / 2;
+        const badgeY = schemY + 40 * scale;
+        ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+        ctx.strokeRect(badgeX, badgeY, badgeW, badgeH);
+
+        ctx.fillStyle = isConducting ? "#10b981" : "#ef4444";
+        ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+        ctx.fillText(isConducting ? "⚡ Diode CONDUCTRICE (Charge)" : "🔒 Diode BLOQUÉE (Décharge)", schemX + schemW / 2, badgeY + 18 * scale);
+
+        const cX = schemX + 30 * scale;
+        const cY = schemY + 95 * scale;
+        const cW = 200 * scale;
+        const cH = 140 * scale;
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.lineWidth = 2 * scale;
+
+        const srcX = cX;
+        const srcY = cY + cH / 2;
+        ctx.beginPath();
+        ctx.arc(srcX, srcY, 18 * scale, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = "#facc15";
+        ctx.font = `bold ${Math.round(12 * scale)}px sans-serif`;
+        ctx.fillText("~", srcX, srcY + 4 * scale);
+
+        if (mode === "simple") {
+            ctx.beginPath();
+            ctx.moveTo(srcX, cY);
+            ctx.lineTo(srcX + 50 * scale, cY);
+            
+            const dX = srcX + 70 * scale;
+            ctx.moveTo(srcX + 50 * scale, cY);
+            ctx.lineTo(dX - 10 * scale, cY);
+            ctx.fillStyle = isConducting ? "#10b981" : "rgba(255,255,255,0.4)";
+            ctx.beginPath();
+            ctx.moveTo(dX - 10 * scale, cY - 10 * scale);
+            ctx.lineTo(dX - 10 * scale, cY + 10 * scale);
+            ctx.lineTo(dX + 10 * scale, cY);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(dX + 10 * scale, cY - 10 * scale);
+            ctx.lineTo(dX + 10 * scale, cY + 10 * scale);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(dX + 10 * scale, cY);
+            ctx.lineTo(cX + cW, cY);
+            ctx.lineTo(cX + cW, cY + cH);
+            ctx.lineTo(srcX, cY + cH);
+            ctx.lineTo(srcX, srcY + 18 * scale);
+            ctx.moveTo(srcX, srcY - 18 * scale);
+            ctx.lineTo(srcX, cY);
+            ctx.stroke();
+
+            const capX = cX + 130 * scale;
+            ctx.beginPath();
+            ctx.moveTo(capX, cY);
+            ctx.lineTo(capX, cY + 55 * scale);
+            ctx.moveTo(capX - 12 * scale, cY + 55 * scale);
+            ctx.lineTo(capX + 12 * scale, cY + 55 * scale);
+            ctx.moveTo(capX - 12 * scale, cY + 65 * scale);
+            ctx.lineTo(capX + 12 * scale, cY + 65 * scale);
+            ctx.moveTo(capX, cY + 65 * scale);
+            ctx.lineTo(capX, cY + cH);
+            ctx.stroke();
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText(`C=${C_uF}µF`, capX + 22 * scale, cY + 62 * scale);
+
+            const resX = cX + cW;
+            ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+            ctx.fillRect(resX - 8 * scale, cY + 45 * scale, 16 * scale, 35 * scale);
+            ctx.strokeRect(resX - 8 * scale, cY + 45 * scale, 16 * scale, 35 * scale);
+            ctx.fillStyle = "#f59e0b";
+            ctx.fillText(`R=${R}Ω`, resX - 22 * scale, cY + 65 * scale);
+        } else {
+            const bX = cX + 75 * scale;
+            const bY = cY + cH / 2;
+            const bRad = 35 * scale;
+
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(bX - bRad, bY);
+            ctx.lineTo(bX, bY - bRad);
+            ctx.lineTo(bX + bRad, bY);
+            ctx.lineTo(bX, bY + bRad);
+            ctx.closePath();
+            ctx.stroke();
+
+            ctx.fillStyle = "rgba(56, 189, 248, 0.15)";
+            ctx.fill();
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("D1", bX - 14 * scale, bY - 14 * scale);
+            ctx.fillText("D2", bX + 14 * scale, bY - 14 * scale);
+            ctx.fillText("D3", bX - 14 * scale, bY + 18 * scale);
+            ctx.fillText("D4", bX + 14 * scale, bY + 18 * scale);
+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+            ctx.beginPath();
+            ctx.moveTo(srcX, srcY - 18 * scale);
+            ctx.lineTo(srcX, cY);
+            ctx.lineTo(bX - bRad, bY);
+            ctx.moveTo(srcX, srcY + 18 * scale);
+            ctx.lineTo(srcX, cY + cH);
+            ctx.lineTo(bX, bY + bRad);
+
+            ctx.moveTo(bX, bY - bRad);
+            ctx.lineTo(cX + cW, cY);
+            ctx.lineTo(cX + cW, cY + cH);
+            ctx.lineTo(bX + bRad, bY);
+            ctx.stroke();
+
+            const capX = cX + 145 * scale;
+            ctx.beginPath();
+            ctx.moveTo(capX, cY);
+            ctx.lineTo(capX, cY + 55 * scale);
+            ctx.moveTo(capX - 10 * scale, cY + 55 * scale);
+            ctx.lineTo(capX + 10 * scale, cY + 55 * scale);
+            ctx.moveTo(capX - 10 * scale, cY + 65 * scale);
+            ctx.lineTo(capX + 10 * scale, cY + 65 * scale);
+            ctx.moveTo(capX, cY + 65 * scale);
+            ctx.lineTo(capX, cY + cH);
+            ctx.stroke();
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillText(`C`, capX + 15 * scale, cY + 62 * scale);
+        }
+
+        const pBoxY = schemY + 250 * scale;
+        ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.fillRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 80 * scale);
+        ctx.strokeRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 80 * scale);
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(`E_max = ${Emax.toFixed(1)} V  |  f = ${freq} Hz`, schemX + 20 * scale, pBoxY + 20 * scale);
+        ctx.fillText(`V_seuil (V0) = ${V0.toFixed(2)} V`, schemX + 20 * scale, pBoxY + 38 * scale);
+        ctx.fillStyle = "#f59e0b";
+        ctx.fillText(`Ondulation ΔU ≈ ${metrics.deltaU.toFixed(2)} V`, schemX + 20 * scale, pBoxY + 56 * scale);
+        ctx.fillStyle = "#10b981";
+        ctx.fillText(`Taux ronflement r ≈ ${metrics.rippleRatio.toFixed(1)}%`, schemX + 20 * scale, pBoxY + 70 * scale);
+    }
+
+    if (diodesRedressementInterval) clearInterval(diodesRedressementInterval);
+    diodesRedressementInterval = setInterval(draw, 30);
+
+    updateCalculations();
+    updatePointsTable();
+}
+
+// 11. Transistor Bipolaire Simulator
+let transistorBipolaireInterval = null;
+function setupTransistorBipolaireSimulator() {
+    const canvas = document.getElementById("canvas-transistor-bipolaire");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const plotSelect = document.getElementById("tb-plot-type");
+    const betaSlider = document.getElementById("tb-beta");
+    const ibSlider = document.getElementById("tb-ib");
+    const vccSlider = document.getElementById("tb-vcc");
+    const rcSlider = document.getElementById("tb-rc");
+    const checkLoadline = document.getElementById("tb-show-loadline");
+    const checkNetwork = document.getElementById("tb-show-network");
+    const btnRecord = document.getElementById("btn-tb-record");
+    const btnClear = document.getElementById("btn-tb-clear");
+
+    if (!plotSelect || !betaSlider) return;
+
+    // Clean up event listeners
+    const newPlot = plotSelect.cloneNode(true);
+    plotSelect.parentNode.replaceChild(newPlot, plotSelect);
+
+    const newBeta = betaSlider.cloneNode(true);
+    betaSlider.parentNode.replaceChild(newBeta, betaSlider);
+
+    const newIb = ibSlider.cloneNode(true);
+    ibSlider.parentNode.replaceChild(newIb, ibSlider);
+
+    const newVcc = vccSlider.cloneNode(true);
+    vccSlider.parentNode.replaceChild(newVcc, vccSlider);
+
+    const newRc = rcSlider.cloneNode(true);
+    rcSlider.parentNode.replaceChild(newRc, rcSlider);
+
+    const newLoadline = checkLoadline.cloneNode(true);
+    checkLoadline.parentNode.replaceChild(newLoadline, checkLoadline);
+
+    const newNetwork = checkNetwork.cloneNode(true);
+    checkNetwork.parentNode.replaceChild(newNetwork, checkNetwork);
+
+    const newRec = btnRecord.cloneNode(true);
+    btnRecord.parentNode.replaceChild(newRec, btnRecord);
+
+    const newClr = btnClear.cloneNode(true);
+    btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    let plotType = newPlot.value;
+    let beta = parseFloat(newBeta.value);
+    let Ib_uA = parseFloat(newIb.value);
+    let Vcc = parseFloat(newVcc.value);
+    let Rc = parseFloat(newRc.value);
+    let showLoadline = newLoadline.checked;
+    let showNetwork = newNetwork.checked;
+
+    let recordedPoints = [];
+    const Vbe0 = 0.65;
+    const Vce_sat = 0.20;
+
+    function getOperatingPoint(ibVal, betaVal, vccVal, rcVal) {
+        const Ib_A = ibVal * 1e-6;
+        if (ibVal === 0) {
+            return {
+                Ib: 0,
+                Vbe: 0,
+                Ic: 0,
+                Vce: vccVal,
+                state: "Bloqué",
+                color: "#ef4444"
+            };
+        }
+
+        const Vbe = Vbe0 + 0.02 * Math.log(ibVal / 10 + 1);
+        const Ic_lin = betaVal * Ib_A * 1000;
+        const Ic_sat = Math.max(0, ((vccVal - Vce_sat) / rcVal) * 1000);
+
+        if (Ic_lin < Ic_sat) {
+            const Vce = vccVal - (rcVal * (Ic_lin / 1000));
+            return {
+                Ib: ibVal,
+                Vbe: Vbe,
+                Ic: Ic_lin,
+                Vce: Math.max(Vce_sat, Vce),
+                state: "Linéaire (Amplificateur)",
+                color: "#10b981"
+            };
+        } else {
+            return {
+                Ib: ibVal,
+                Vbe: Vbe + 0.05,
+                Ic: Ic_sat,
+                Vce: Vce_sat,
+                state: "Saturé (Switch ON)",
+                color: "#f59e0b"
+            };
+        }
+    }
+
+    function updateCalculations() {
+        const Q = getOperatingPoint(Ib_uA, beta, Vcc, Rc);
+        const theoryDiv = document.getElementById("transistor-bipolaire-theory");
+        if (!theoryDiv) return;
+
+        const Ic_sat_mA = (((Vcc - Vce_sat) / Rc) * 1000).toFixed(2);
+        const Pd_mW = (Q.Vce * Q.Ic).toFixed(2);
+
+        theoryDiv.innerHTML = `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                <h4 style="color: #38bdf8; font-size: 1rem; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">
+                    <i data-lucide="cpu" style="vertical-align: middle; margin-right: 6px;"></i> Point de Fonctionnement Statique \\(Q(V_{CEQ}, I_{CQ})\\)
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                    <div><strong>Courant de base :</strong> \\(I_B = ${Ib_uA}\\text{ }\\mu\\text{A}\\)</div>
+                    <div><strong>Tension Base-Émetteur :</strong> \\(V_{BE} \\approx ${Q.Vbe.toFixed(2)}\\text{ V}\\)</div>
+                    <div><strong>Courant Collecteur :</strong> \\(I_C = ${Q.Ic.toFixed(2)}\\text{ mA}\\)</div>
+                    <div><strong>Tension Collecteur-Émetteur :</strong> \\(V_{CE} = ${Q.Vce.toFixed(2)}\\text{ V}\\)</div>
+                    <div><strong>Régime de Fonctionnement :</strong> <span style="color:${Q.color}; font-weight:700;">${Q.state}</span></div>
+                    <div><strong>Puissance Dissipée :</strong> \\(P_D = V_{CE} \\cdot I_C = ${Pd_mW}\\text{ mW}\\)</div>
+                    <div><strong>Courant de Saturation :</strong> \\(I_{C,sat} = \\frac{V_{CC} - V_{sat}}{R_C} = ${Ic_sat_mA}\\text{ mA}\\)</div>
+                </div>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("transistor-bipolaire-points-body");
+        if (!body) return;
+
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `<tr><td colspan="5" style="padding: 6px; color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer Q".</td></tr>`;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map((pt) => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">${pt.Ib}</td>
+                <td style="padding: 4px;">${pt.Vbe.toFixed(2)}</td>
+                <td style="padding: 4px;">${pt.Vce.toFixed(2)}</td>
+                <td style="padding: 4px; font-weight: 600; color: #38bdf8;">${pt.Ic.toFixed(2)}</td>
+                <td style="padding: 4px; color:${pt.color}; font-weight:600;">${pt.state}</td>
+            </tr>
+        `).join("");
+    }
+
+    newPlot.addEventListener("change", (e) => {
+        plotType = e.target.value;
+        updateCalculations();
+    });
+
+    newBeta.addEventListener("input", (e) => {
+        beta = parseFloat(e.target.value);
+        document.getElementById("val-tb-beta").textContent = beta;
+        updateCalculations();
+    });
+
+    newIb.addEventListener("input", (e) => {
+        Ib_uA = parseFloat(e.target.value);
+        document.getElementById("val-tb-ib").textContent = Ib_uA;
+        updateCalculations();
+    });
+
+    newVcc.addEventListener("input", (e) => {
+        Vcc = parseFloat(e.target.value);
+        document.getElementById("val-tb-vcc").textContent = Vcc.toFixed(1);
+        updateCalculations();
+    });
+
+    newRc.addEventListener("input", (e) => {
+        Rc = parseFloat(e.target.value);
+        document.getElementById("val-tb-rc").textContent = Rc;
+        updateCalculations();
+    });
+
+    newLoadline.addEventListener("change", (e) => { showLoadline = e.target.checked; });
+    newNetwork.addEventListener("change", (e) => { showNetwork = e.target.checked; });
+
+    newRec.addEventListener("click", () => {
+        const Q = getOperatingPoint(Ib_uA, beta, Vcc, Rc);
+        recordedPoints.push(Q);
+        updatePointsTable();
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const scale = W / 900;
+
+        const pX = 50 * scale;
+        const pY = 40 * scale;
+        const pW = 530 * scale;
+        const pH = 320 * scale;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(pX, pY, pW, pH);
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.lineWidth = 1;
+        for (let x = pX; x <= pX + pW; x += pW / 10) {
+            ctx.beginPath(); ctx.moveTo(x, pY); ctx.lineTo(x, pY + pH); ctx.stroke();
+        }
+        for (let y = pY; y <= pY + pH; y += pH / 8) {
+            ctx.beginPath(); ctx.moveTo(pX, y); ctx.lineTo(pX + pW, y); ctx.stroke();
+        }
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.lineWidth = 1.5 * scale;
+        ctx.beginPath();
+        ctx.moveTo(pX, pY); ctx.lineTo(pX, pY + pH); ctx.lineTo(pX + pW, pY + pH);
+        ctx.stroke();
+
+        const Q_current = getOperatingPoint(Ib_uA, beta, Vcc, Rc);
+
+        if (plotType === "output") {
+            const maxVce = Math.max(15, Vcc + 2);
+            const maxIc = Math.max(15, (Vcc / Rc) * 1000 * 1.2);
+
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+            ctx.textAlign = "left";
+            ctx.fillText("Ic (mA)", pX + 5, pY - 10);
+            ctx.textAlign = "right";
+            ctx.fillText("Vce (V)", pX + pW, pY + pH + 20);
+
+            const ibStepList = showNetwork ? [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100] : [Ib_uA];
+
+            ibStepList.forEach(ibVal => {
+                const isCurrentIb = Math.abs(ibVal - Ib_uA) < 1;
+                ctx.strokeStyle = isCurrentIb ? "#38bdf8" : "rgba(56, 189, 248, 0.25)";
+                ctx.lineWidth = isCurrentIb ? 2.5 * scale : 1 * scale;
+                ctx.beginPath();
+
+                for (let i = 0; i <= 200; i++) {
+                    const vceVal = (i / 200) * maxVce;
+                    const ib_A = ibVal * 1e-6;
+                    let icVal = beta * ib_A * 1000;
+
+                    if (vceVal < Vce_sat) {
+                        icVal = icVal * (vceVal / Vce_sat);
+                    }
+
+                    const pxX = pX + (vceVal / maxVce) * pW;
+                    const pxY = (pY + pH) - (icVal / maxIc) * pH;
+
+                    if (i === 0) ctx.moveTo(pxX, pxY);
+                    else ctx.lineTo(pxX, pxY);
+                }
+                ctx.stroke();
+
+                if (showNetwork && ibVal % 20 === 0) {
+                    const icEnd = beta * (ibVal * 1e-6) * 1000;
+                    const endY = (pY + pH) - (icEnd / maxIc) * pH;
+                    if (endY >= pY && endY <= pY + pH) {
+                        ctx.fillStyle = isCurrentIb ? "#38bdf8" : "#64748b";
+                        ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+                        ctx.textAlign = "left";
+                        ctx.fillText(`${ibVal}µA`, pX + pW - 35 * scale, endY - 4);
+                    }
+                }
+            });
+
+            if (showLoadline) {
+                const icSat_mA = (Vcc / Rc) * 1000;
+                const xVcc = pX + (Vcc / maxVce) * pW;
+                const yIcSat = (pY + pH) - (icSat_mA / maxIc) * pH;
+
+                ctx.strokeStyle = "#f59e0b";
+                ctx.lineWidth = 1.5 * scale;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(xVcc, pY + pH);
+                ctx.lineTo(pX, yIcSat);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = "#f59e0b";
+                ctx.font = `bold ${Math.round(9 * scale)}px sans-serif`;
+                ctx.fillText(`VCC=${Vcc}V`, xVcc - 10, pY + pH + 15);
+                ctx.fillText(`Ic,sat`, pX + 5, yIcSat - 5);
+            }
+
+            const qX = pX + (Q_current.Vce / maxVce) * pW;
+            const qY = (pY + pH) - (Q_current.Ic / maxIc) * pH;
+
+            if (qX >= pX && qX <= pX + pW && qY >= pY && qY <= pY + pH) {
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                ctx.moveTo(qX, pY + pH); ctx.lineTo(qX, qY); ctx.lineTo(pX, qY);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = Q_current.color;
+                ctx.beginPath();
+                ctx.arc(qX, qY, 6 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1.5; ctx.stroke();
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+                ctx.textAlign = "left";
+                ctx.fillText(` Q(${Q_current.Vce.toFixed(1)}V, ${Q_current.Ic.toFixed(1)}mA)`, qX + 8, qY - 6);
+            }
+
+        } else if (plotType === "input") {
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("Ib (µA)", pX + 5, pY - 10);
+            ctx.textAlign = "right";
+            ctx.fillText("Vbe (V)", pX + pW, pY + pH + 20);
+
+            ctx.strokeStyle = "#10b981";
+            ctx.lineWidth = 2.5 * scale;
+            ctx.beginPath();
+
+            for (let i = 0; i <= 200; i++) {
+                const vbeVal = (i / 200) * 1.0;
+                let ibVal = 0;
+                if (vbeVal > Vbe0) {
+                    ibVal = 10 * (Math.exp((vbeVal - Vbe0) / 0.04) - 1);
+                }
+                ibVal = Math.min(100, ibVal);
+
+                const pxX = pX + (vbeVal / 1.0) * pW;
+                const pxY = (pY + pH) - (ibVal / 100) * pH;
+
+                if (i === 0) ctx.moveTo(pxX, pxY);
+                else ctx.lineTo(pxX, pxY);
+            }
+            ctx.stroke();
+
+            const xVbe0 = pX + (Vbe0 / 1.0) * pW;
+            ctx.strokeStyle = "rgba(239, 68, 68, 0.5)";
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath(); ctx.moveTo(xVbe0, pY); ctx.lineTo(xVbe0, pY + pH); ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = "#ef4444";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.fillText(`Seuil Vbe0 = ${Vbe0}V`, xVbe0 + 5, pY + 20);
+
+        } else if (plotType === "transfer") {
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("Ic (mA)", pX + 5, pY - 10);
+            ctx.textAlign = "right";
+            ctx.fillText("Ib (µA)", pX + pW, pY + pH + 20);
+
+            const maxIc = Math.max(15, (Vcc / Rc) * 1000 * 1.2);
+
+            ctx.strokeStyle = "#8b5cf6";
+            ctx.lineWidth = 2.5 * scale;
+            ctx.beginPath();
+
+            const Ic_sat_mA = ((Vcc - Vce_sat) / Rc) * 1000;
+
+            for (let i = 0; i <= 100; i++) {
+                const ibVal = i;
+                let icVal = beta * (ibVal * 1e-6) * 1000;
+                icVal = Math.min(icVal, Ic_sat_mA);
+
+                const pxX = pX + (ibVal / 100) * pW;
+                const pxY = (pY + pH) - (icVal / maxIc) * pH;
+
+                if (i === 0) ctx.moveTo(pxX, pxY);
+                else ctx.lineTo(pxX, pxY);
+            }
+            ctx.stroke();
+
+            ctx.fillStyle = "#8b5cf6";
+            ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+            ctx.fillText(`Pente β = ${beta}`, pX + 100 * scale, pY + 60 * scale);
+        }
+
+        const schemX = 610 * scale;
+        const schemY = 40 * scale;
+        const schemW = 260 * scale;
+        const schemH = 320 * scale;
+
+        ctx.fillStyle = "rgba(15, 23, 42, 0.8)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 1;
+        ctx.fillRect(schemX, schemY, schemW, schemH);
+        ctx.strokeRect(schemX, schemY, schemW, schemH);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${Math.round(13 * scale)}px 'Outfit', sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillText("Symbole & Montage NPN", schemX + schemW / 2, schemY + 25 * scale);
+
+        const badgeW = 200 * scale;
+        const badgeH = 28 * scale;
+        const badgeX = schemX + (schemW - badgeW) / 2;
+        const badgeY = schemY + 40 * scale;
+
+        ctx.fillStyle = Q_current.state.includes("Linéaire") ? "rgba(16, 185, 129, 0.2)" : Q_current.state.includes("Saturé") ? "rgba(245, 158, 11, 0.2)" : "rgba(239, 68, 68, 0.2)";
+        ctx.strokeStyle = Q_current.color;
+        ctx.lineWidth = 1.5;
+        ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+        ctx.strokeRect(badgeX, badgeY, badgeW, badgeH);
+
+        ctx.fillStyle = Q_current.color;
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(Q_current.state, schemX + schemW / 2, badgeY + 18 * scale);
+
+        const tX = schemX + 130 * scale;
+        const tY = schemY + 145 * scale;
+        const tRad = 28 * scale;
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.arc(tX, tY, tRad, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.lineWidth = 3 * scale;
+        ctx.beginPath();
+        ctx.moveTo(tX - 8 * scale, tY - 14 * scale);
+        ctx.lineTo(tX - 8 * scale, tY + 14 * scale);
+        ctx.stroke();
+
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(tX - tRad, tY);
+        ctx.lineTo(tX - 8 * scale, tY);
+        ctx.stroke();
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("B", tX - tRad - 10 * scale, tY + 4 * scale);
+
+        ctx.beginPath();
+        ctx.moveTo(tX - 8 * scale, tY - 8 * scale);
+        ctx.lineTo(tX + 12 * scale, tY - 18 * scale);
+        ctx.lineTo(tX + 12 * scale, tY - tRad);
+        ctx.stroke();
+        ctx.fillStyle = "#f59e0b";
+        ctx.fillText("C", tX + 22 * scale, tY - tRad + 4 * scale);
+
+        ctx.beginPath();
+        ctx.moveTo(tX - 8 * scale, tY + 8 * scale);
+        ctx.lineTo(tX + 12 * scale, tY + 18 * scale);
+        ctx.lineTo(tX + 12 * scale, tY + tRad);
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.beginPath();
+        ctx.moveTo(tX + 12 * scale, tY + 18 * scale);
+        ctx.lineTo(tX + 2 * scale, tY + 12 * scale);
+        ctx.lineTo(tX + 7 * scale, tY + 22 * scale);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillText("E", tX + 22 * scale, tY + tRad + 4 * scale);
+
+        const pBoxY = schemY + 215 * scale;
+        ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.fillRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 90 * scale);
+        ctx.strokeRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 90 * scale);
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(`Gain β (hfe) = ${beta}`, schemX + 20 * scale, pBoxY + 20 * scale);
+        ctx.fillText(`IB = ${Ib_uA} µA  |  VBE ≈ ${Q_current.Vbe.toFixed(2)} V`, schemX + 20 * scale, pBoxY + 38 * scale);
+        ctx.fillStyle = "#38bdf8";
+        ctx.fillText(`IC = ${Q_current.Ic.toFixed(2)} mA`, schemX + 20 * scale, pBoxY + 56 * scale);
+        ctx.fillStyle = "#10b981";
+        ctx.fillText(`VCE = ${Q_current.Vce.toFixed(2)} V`, schemX + 20 * scale, pBoxY + 74 * scale);
+    }
+
+    if (transistorBipolaireInterval) clearInterval(transistorBipolaireInterval);
+    transistorBipolaireInterval = setInterval(draw, 30);
+
+    updateCalculations();
+    updatePointsTable();
+}
+
+// 12. Amplificateur Opérationnel (AOP) Simulator
+let aopAmplificateurInterval = null;
+function setupAopAmplificateurSimulator() {
+    const canvas = document.getElementById("canvas-aop-amplificateur");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const modeSelect = document.getElementById("aop-mode");
+    const waveSelect = document.getElementById("aop-waveform");
+    const vinSlider = document.getElementById("aop-vin");
+    const v2Slider = document.getElementById("aop-v2");
+    const freqSlider = document.getElementById("aop-freq");
+    const r1Slider = document.getElementById("aop-r1");
+    const r2Slider = document.getElementById("aop-r2");
+    const vsatSlider = document.getElementById("aop-vsat");
+    const btnRecord = document.getElementById("btn-aop-record");
+    const btnPause = document.getElementById("btn-aop-pause");
+    const btnClear = document.getElementById("btn-aop-clear");
+
+    if (!modeSelect || !vinSlider) return;
+
+    // Clean up event listeners by cloning
+    const newMode = modeSelect.cloneNode(true);
+    modeSelect.parentNode.replaceChild(newMode, modeSelect);
+
+    const newWave = waveSelect.cloneNode(true);
+    waveSelect.parentNode.replaceChild(newWave, waveSelect);
+
+    const newVin = vinSlider.cloneNode(true);
+    vinSlider.parentNode.replaceChild(newVin, vinSlider);
+
+    let newV2 = v2Slider;
+    if (v2Slider) {
+        newV2 = v2Slider.cloneNode(true);
+        v2Slider.parentNode.replaceChild(newV2, v2Slider);
+    }
+
+    const newFreq = freqSlider.cloneNode(true);
+    freqSlider.parentNode.replaceChild(newFreq, freqSlider);
+
+    const newR1 = r1Slider.cloneNode(true);
+    r1Slider.parentNode.replaceChild(newR1, r1Slider);
+
+    const newR2 = r2Slider.cloneNode(true);
+    r2Slider.parentNode.replaceChild(newR2, r2Slider);
+
+    const newVsat = vsatSlider.cloneNode(true);
+    vsatSlider.parentNode.replaceChild(newVsat, vsatSlider);
+
+    const newRec = btnRecord.cloneNode(true);
+    btnRecord.parentNode.replaceChild(newRec, btnRecord);
+
+    const newPau = btnPause.cloneNode(true);
+    btnPause.parentNode.replaceChild(newPau, btnPause);
+
+    const newClr = btnClear.cloneNode(true);
+    btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    let mode = newMode.value;
+    let waveform = newWave.value;
+    let Vin_max = parseFloat(newVin.value);
+    let V2 = newV2 ? parseFloat(newV2.value) : 0.5;
+    let freq = parseFloat(newFreq.value);
+    let R1 = parseFloat(newR1.value);
+    let R2 = parseFloat(newR2.value);
+    let Vsat = parseFloat(newVsat.value);
+    let isPaused = false;
+
+    let recordedPoints = [];
+    let animTime = 0;
+
+    function toggleV2Visibility() {
+        const v2Group = document.getElementById("group-aop-v2");
+        if (v2Group) {
+            if (mode === "summing" || mode === "differential" || mode === "comparator") {
+                v2Group.style.display = "flex";
+            } else {
+                v2Group.style.display = "none";
+            }
+        }
+    }
+    toggleV2Visibility();
+
+    function getMetrics() {
+        let Av = 0;
+        let modeName = "";
+        let phaseText = "";
+        let desc = "";
+
+        if (mode === "inverting") {
+            Av = -(R2 / R1);
+            modeName = "Amplificateur Inverseur";
+            phaseText = "Déphasage 180° (π)";
+            desc = "Amplifie la tension d'entrée \\(V_1(t)\\) avec un déphasage de 180° (signe négatif). Relation : \\(V_{out} = -\\frac{R_2}{R_1} V_1\\).";
+        } else if (mode === "noninverting") {
+            Av = 1 + (R2 / R1);
+            modeName = "Amplificateur Non-Inverseur";
+            phaseText = "En phase (0°)";
+            desc = "Amplifie la tension d'entrée \\(V_1(t)\\) tout en conservant exactement sa phase (0°). Relation : \\(V_{out} = \\left(1 + \\frac{R_2}{R_1}\\right) V_1\\).";
+        } else if (mode === "follower") {
+            Av = 1;
+            modeName = "Suiveur de Tension (Buffer)";
+            phaseText = "En phase (0°)";
+            desc = "La sortie recopie fidèlement l'entrée (\\(V_{out} = V_1\\), \\(A_v = 1\\)). Sert d'adaptateur d'impédance idéal grâce à son impédance d'entrée très élevée.";
+        } else if (mode === "summing") {
+            Av = -(R2 / R1);
+            modeName = "Amplificateur Sommateur Inverseur";
+            phaseText = `Vout = -${(R2/R1).toFixed(1)}(V1 + V2)`;
+            desc = "Additionne algébriquement les tensions d'entrée \\(V_1(t)\\) et \\(V_2\\). Relation : \\(V_{out} = -\\frac{R_2}{R_1} (V_1 + V_2)\\). Utilisé dans les tables de mixage audio.";
+        } else if (mode === "differential") {
+            Av = R2 / R1;
+            modeName = "Amplificateur Soustracteur / Différentiel";
+            phaseText = `Vout = ${(R2/R1).toFixed(1)}(V2 - V1)`;
+            desc = "Amplifie uniquement la différence entre deux tensions \\((V_2 - V_1)\\). Permet d'éliminer les bruits et interférences électromagnétiques communs.";
+        } else if (mode === "integrator") {
+            const omega = 2 * Math.PI * freq;
+            Av = -1 / (omega * R1 * 1e3 * 1e-6);
+            modeName = "Amplificateur Intégrateur";
+            phaseText = "Quadrature (+90° / Primitifs)";
+            desc = "Utilise un condensateur \\(C\\) en contre-réaction. La tension de sortie est l'intégrale temporelle de l'entrée : \\(V_{out}(t) = -\\frac{1}{R_1 C} \\int V_1(t) dt\\). Transforme un signal carré en triangulaire.";
+        } else if (mode === "differentiator") {
+            const omega = 2 * Math.PI * freq;
+            Av = -omega * R2 * 1e3 * 1e-6;
+            modeName = "Amplificateur Dérivateur";
+            phaseText = "Quadrature (-90° / Dérivée)";
+            desc = "Utilise un condensateur \\(C\\) à l'entrée. La sortie est proportionnelle à la dérivée temporelle de l'entrée : \\(V_{out}(t) = -R_2 C \\frac{d V_1(t)}{dt}\\). Transforme un signal triangulaire en carré.";
+        } else if (mode === "comparator") {
+            Av = 1000;
+            modeName = "Comparateur de Tension (Régime Non-Linéaire)";
+            phaseText = "Saturation Bipolaire ±Vsat";
+            desc = "Fonctionne en boucle ouverte (sans contre-réaction). La sortie bascule à \\(+V_{sat}\\) si \\(V_1 > V_{ref}\\), et \\(-V_{sat}\\) si \\(V_1 < V_{ref}\\).";
+        }
+
+        const Vout_th_max = Math.abs(Av) * Vin_max + (mode === "summing" || mode === "differential" ? Math.abs(V2) : 0);
+        const isSaturated = Vout_th_max > Vsat || mode === "comparator";
+        const Vout_actual_max = Math.min(Vsat, Vout_th_max);
+
+        return { Av, modeName, phaseText, desc, Vout_th_max, isSaturated, Vout_actual_max };
+    }
+
+    function updateCalculations() {
+        const state = getMetrics();
+        const theoryDiv = document.getElementById("aop-amplificateur-theory");
+        if (!theoryDiv) return;
+
+        const statusColor = state.isSaturated ? "#f59e0b" : "#10b981";
+        const statusText = state.isSaturated ? "🛑 Régime Saturé (Écrêtage à ±Vsat)" : "⚡ Régime Linéaire (Amplification propre)";
+
+        theoryDiv.innerHTML = `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                <h4 style="color: #10b981; font-size: 1rem; margin-bottom: 6px; font-family: 'Outfit', sans-serif;">
+                    <i data-lucide="activity" style="vertical-align: middle; margin-right: 6px;"></i> Résultats théoriques et oscilloscope (${state.modeName})
+                </h4>
+                
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.85rem; color: #000000; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <strong style="color: #0369a1; font-weight: 700;">💡 Définition & Rôle du montage :</strong> <span style="color: #000000; font-weight: 600;">${state.desc}</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                    <div><strong>Entrée 1 $V_1$ :</strong> ${Vin_max.toFixed(1)} V</div>
+                    ${mode === 'summing' || mode === 'differential' || mode === 'comparator' ? `<div><strong>Entrée 2 $V_2$ :</strong> ${V2.toFixed(1)} V</div>` : ''}
+                    <div><strong>Gain Théorique $A_v$ :</strong> ${mode === 'comparator' ? '∞' : state.Av.toFixed(2)}</div>
+                    <div><strong>Sortie Théorique $V_{out,th}$ :</strong> ${state.Vout_th_max.toFixed(2)} V</div>
+                    <div><strong>Sortie Réelle (Crête) $V_{out,max}$ :</strong> ${state.Vout_actual_max.toFixed(2)} V</div>
+                    <div><strong>Relation :</strong> ${state.phaseText}</div>
+                    <div><strong>Tension de Saturation $V_{sat}$ :</strong> ± ${Vsat.toFixed(1)} V</div>
+                    <div style="grid-column: 1 / -1;"><strong>État de Fonctionnement :</strong> <span style="color:${statusColor}; font-weight:700;">${statusText}</span></div>
+                </div>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("aop-amplificateur-points-body");
+        if (!body) return;
+
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `<tr><td colspan="5" style="padding: 6px; color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer".</td></tr>`;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map((pt) => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">${pt.modeName}</td>
+                <td style="padding: 4px;">${pt.Vin_max.toFixed(1)}</td>
+                <td style="padding: 4px;">${pt.Av ? pt.Av.toFixed(2) : '∞'}</td>
+                <td style="padding: 4px; font-weight: 600; color: #38bdf8;">${pt.Vout_actual_max.toFixed(2)}</td>
+                <td style="padding: 4px; color:${pt.isSaturated ? '#f59e0b' : '#10b981'}; font-weight:600;">${pt.isSaturated ? 'Saturé' : 'Linéaire'}</td>
+            </tr>
+        `).join("");
+    }
+
+    newMode.addEventListener("change", (e) => {
+        mode = e.target.value;
+        toggleV2Visibility();
+        updateCalculations();
+    });
+
+    newWave.addEventListener("change", (e) => {
+        waveform = e.target.value;
+        updateCalculations();
+    });
+
+    newVin.addEventListener("input", (e) => {
+        Vin_max = parseFloat(e.target.value);
+        document.getElementById("val-aop-vin").textContent = Vin_max.toFixed(1);
+        updateCalculations();
+    });
+
+    if (newV2) {
+        newV2.addEventListener("input", (e) => {
+            V2 = parseFloat(e.target.value);
+            document.getElementById("val-aop-v2").textContent = V2.toFixed(1);
+            updateCalculations();
+        });
+    }
+
+    newFreq.addEventListener("input", (e) => {
+        freq = parseFloat(e.target.value);
+        document.getElementById("val-aop-freq").textContent = freq;
+        updateCalculations();
+    });
+
+    newR1.addEventListener("input", (e) => {
+        R1 = parseFloat(e.target.value);
+        document.getElementById("val-aop-r1").textContent = R1;
+        updateCalculations();
+    });
+
+    newR2.addEventListener("input", (e) => {
+        R2 = parseFloat(e.target.value);
+        document.getElementById("val-aop-r2").textContent = R2;
+        updateCalculations();
+    });
+
+    newVsat.addEventListener("input", (e) => {
+        Vsat = parseFloat(e.target.value);
+        document.getElementById("val-aop-vsat").textContent = Vsat.toFixed(1);
+        updateCalculations();
+    });
+
+    newRec.addEventListener("click", () => {
+        const state = getMetrics();
+        recordedPoints.push({
+            modeName: state.modeName,
+            Vin_max: Vin_max,
+            Av: state.Av,
+            Vout_actual_max: state.Vout_actual_max,
+            isSaturated: state.isSaturated
+        });
+        updatePointsTable();
+    });
+
+    newPau.addEventListener("click", () => {
+        isPaused = !isPaused;
+        newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
+        if (window.lucide) window.lucide.createIcons();
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+    });
+
+    function evalInputWave(t) {
+        const wt = 2 * Math.PI * freq * (t + animTime);
+        if (waveform === "sine") {
+            return Vin_max * Math.sin(wt);
+        } else if (waveform === "square") {
+            return Vin_max * (Math.sin(wt) >= 0 ? 1 : -1);
+        } else if (waveform === "triangle") {
+            const cycle = (wt / (2 * Math.PI)) % 1;
+            if (cycle < 0.25) return Vin_max * (cycle * 4);
+            else if (cycle < 0.75) return Vin_max * (1 - (cycle - 0.25) * 4);
+            else return Vin_max * (-1 + (cycle - 0.75) * 4);
+        }
+        return Vin_max * Math.sin(wt);
+    }
+
+    function evalOutputWave(vinVal, t) {
+        const state = getMetrics();
+        let vout_th = 0;
+        const wt = 2 * Math.PI * freq * (t + animTime);
+
+        if (mode === "inverting") {
+            vout_th = state.Av * vinVal;
+        } else if (mode === "noninverting") {
+            vout_th = state.Av * vinVal;
+        } else if (mode === "follower") {
+            vout_th = vinVal;
+        } else if (mode === "summing") {
+            vout_th = -(R2 / R1) * (vinVal + V2);
+        } else if (mode === "differential") {
+            vout_th = (R2 / R1) * (V2 - vinVal);
+        } else if (mode === "integrator") {
+            // Primitive of input wave
+            if (waveform === "sine") {
+                vout_th = state.Av * Vin_max * Math.cos(wt);
+            } else if (waveform === "square") {
+                // Square -> Triangle
+                const cycle = (wt / (2 * Math.PI)) % 1;
+                vout_th = state.Av * Vin_max * (cycle < 0.5 ? (cycle * 4 - 1) : (3 - cycle * 4));
+            } else {
+                vout_th = state.Av * Vin_max * Math.cos(wt);
+            }
+        } else if (mode === "differentiator") {
+            // Derivative of input wave
+            if (waveform === "sine") {
+                vout_th = state.Av * Vin_max * Math.cos(wt);
+            } else if (waveform === "triangle") {
+                // Triangle -> Square
+                const cycle = (wt / (2 * Math.PI)) % 1;
+                vout_th = state.Av * Vin_max * (cycle < 0.5 ? 1 : -1);
+            } else {
+                vout_th = state.Av * Vin_max * Math.cos(wt);
+            }
+        } else if (mode === "comparator") {
+            vout_th = vinVal >= V2 ? Vsat : -Vsat;
+        }
+        return Math.max(-Vsat, Math.min(Vsat, vout_th));
+    }
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (!isPaused) {
+            animTime += 0.005;
+        }
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const scale = W / 900;
+
+        const oscX = 40 * scale;
+        const oscY = 30 * scale;
+        const oscW = 540 * scale;
+        const oscH = 340 * scale;
+        const centerY = oscY + oscH / 2;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(oscX, oscY, oscW, oscH);
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.15)";
+        ctx.lineWidth = 1;
+
+        for (let x = oscX; x <= oscX + oscW; x += oscW / 10) {
+            ctx.beginPath(); ctx.moveTo(x, oscY); ctx.lineTo(x, oscY + oscH); ctx.stroke();
+        }
+        for (let y = oscY; y <= oscY + oscH; y += oscH / 8) {
+            ctx.beginPath(); ctx.moveTo(oscX, y); ctx.lineTo(oscX + oscW, y); ctx.stroke();
+        }
+
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(oscX, centerY); ctx.lineTo(oscX + oscW, centerY); ctx.stroke();
+
+        const vScale = (oscH / 8) / 5;
+
+        const yVsatPos = centerY - Vsat * vScale;
+        const yVsatNeg = centerY + Vsat * vScale;
+
+        ctx.strokeStyle = "rgba(239, 68, 68, 0.6)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(oscX, yVsatPos); ctx.lineTo(oscX + oscW, yVsatPos);
+        ctx.moveTo(oscX, yVsatNeg); ctx.lineTo(oscX + oscW, yVsatNeg);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#ef4444";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.textAlign = "right";
+        ctx.fillText(`+Vsat = ${Vsat.toFixed(1)}V`, oscX + oscW - 10, yVsatPos - 4);
+        ctx.fillText(`-Vsat = -${Vsat.toFixed(1)}V`, oscX + oscW - 10, yVsatNeg + 12);
+
+        ctx.fillStyle = "rgba(250, 204, 21, 0.9)";
+        ctx.font = `${Math.round(11 * scale)}px sans-serif`;
+        ctx.textAlign = "left";
+        ctx.fillText("CH1 Entrée Vin(t): 5V/div (Jaune)", oscX + 10, oscY + 20);
+        ctx.fillStyle = "rgba(56, 189, 248, 0.9)";
+        ctx.fillText("CH2 Sortie Vout(t): 5V/div (Cyan)", oscX + 10, oscY + 36);
+
+        const T_period = 1 / freq;
+        const timeWindow = 3 * T_period;
+        const numPoints = 600;
+
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 2 * scale;
+        ctx.shadowBlur = 4; ctx.shadowColor = "#facc15";
+        ctx.beginPath();
+
+        for (let i = 0; i <= numPoints; i++) {
+            const t = (i / numPoints) * timeWindow;
+            const vinVal = evalInputWave(t);
+            const pxX = oscX + (i / numPoints) * oscW;
+            const pxY = centerY - vinVal * vScale;
+
+            if (i === 0) ctx.moveTo(pxX, pxY);
+            else ctx.lineTo(pxX, pxY);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2.5 * scale;
+        ctx.shadowBlur = 6; ctx.shadowColor = "#38bdf8";
+        ctx.beginPath();
+
+        for (let i = 0; i <= numPoints; i++) {
+            const t = (i / numPoints) * timeWindow;
+            const vinVal = evalInputWave(t);
+            const voutVal = evalOutputWave(vinVal, t);
+            const pxX = oscX + (i / numPoints) * oscW;
+            const pxY = centerY - voutVal * vScale;
+
+            if (i === 0) ctx.moveTo(pxX, pxY);
+            else ctx.lineTo(pxX, pxY);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        const schemX = 610 * scale;
+        const schemY = 30 * scale;
+        const schemW = 260 * scale;
+        const schemH = 340 * scale;
+
+        ctx.fillStyle = "rgba(15, 23, 42, 0.8)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 1;
+        ctx.fillRect(schemX, schemY, schemW, schemH);
+        ctx.strokeRect(schemX, schemY, schemW, schemH);
+
+        const state = getMetrics();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${Math.round(13 * scale)}px 'Outfit', sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillText(`Montage ${state.modeName}`, schemX + schemW / 2, schemY + 25 * scale);
+
+        const badgeW = 220 * scale;
+        const badgeH = 28 * scale;
+        const badgeX = schemX + (schemW - badgeW) / 2;
+        const badgeY = schemY + 40 * scale;
+
+        ctx.fillStyle = state.isSaturated ? "rgba(245, 158, 11, 0.2)" : "rgba(16, 185, 129, 0.2)";
+        ctx.strokeStyle = state.isSaturated ? "#f59e0b" : "#10b981";
+        ctx.lineWidth = 1.5;
+        ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+        ctx.strokeRect(badgeX, badgeY, badgeW, badgeH);
+
+        ctx.fillStyle = state.isSaturated ? "#f59e0b" : "#10b981";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(state.isSaturated ? "🛑 Régime Saturé (Écrêtage)" : "⚡ Régime Linéaire (Amplification)", schemX + schemW / 2, badgeY + 18 * scale);
+
+        const opX = schemX + 110 * scale;
+        const opY = schemY + 145 * scale;
+        const opSize = 45 * scale;
+
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2 * scale;
+        ctx.fillStyle = "rgba(56, 189, 248, 0.08)";
+        ctx.beginPath();
+        ctx.moveTo(opX - opSize, opY - opSize);
+        ctx.lineTo(opX - opSize, opY + opSize);
+        ctx.lineTo(opX + opSize, opY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${Math.round(14 * scale)}px sans-serif`;
+        ctx.fillText("-", opX - opSize + 12 * scale, opY - opSize / 2 + 5 * scale);
+        ctx.fillText("+", opX - opSize + 12 * scale, opY + opSize / 2 + 5 * scale);
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+        ctx.beginPath();
+        ctx.moveTo(opX + opSize, opY);
+        ctx.lineTo(schemX + schemW - 25 * scale, opY);
+        ctx.stroke();
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText("Vout", schemX + schemW - 15 * scale, opY + 4 * scale);
+
+        // Helper functions for drawing electronic components in schematic panel
+        function drawResistor(rx, ry, label, isVertical = false) {
+            ctx.strokeStyle = "#f59e0b";
+            ctx.lineWidth = 1.5 * scale;
+            if (!isVertical) {
+                const rw = 24 * scale;
+                const rh = 12 * scale;
+                ctx.fillStyle = "rgba(15, 23, 42, 0.95)";
+                ctx.fillRect(rx - rw / 2, ry - rh / 2, rw, rh);
+                ctx.strokeRect(rx - rw / 2, ry - rh / 2, rw, rh);
+                if (label) {
+                    ctx.fillStyle = "#f59e0b";
+                    ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+                    ctx.textAlign = "center";
+                    ctx.fillText(label, rx, ry - rh / 2 - 3 * scale);
+                }
+            } else {
+                const rw = 12 * scale;
+                const rh = 24 * scale;
+                ctx.fillStyle = "rgba(15, 23, 42, 0.95)";
+                ctx.fillRect(rx - rw / 2, ry - rh / 2, rw, rh);
+                ctx.strokeRect(rx - rw / 2, ry - rh / 2, rw, rh);
+                if (label) {
+                    ctx.fillStyle = "#f59e0b";
+                    ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+                    ctx.textAlign = "left";
+                    ctx.fillText(label, rx + rw / 2 + 3 * scale, ry + 3 * scale);
+                }
+            }
+        }
+
+        function drawCapacitor(cx, cy, label) {
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 2 * scale;
+            const gap = 6 * scale;
+            const h = 14 * scale;
+            // Left plate
+            ctx.beginPath();
+            ctx.moveTo(cx - gap / 2, cy - h / 2);
+            ctx.lineTo(cx - gap / 2, cy + h / 2);
+            ctx.stroke();
+            // Right plate
+            ctx.beginPath();
+            ctx.moveTo(cx + gap / 2, cy - h / 2);
+            ctx.lineTo(cx + gap / 2, cy + h / 2);
+            ctx.stroke();
+
+            if (label) {
+                ctx.fillStyle = "#38bdf8";
+                ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+                ctx.textAlign = "center";
+                ctx.fillText(label, cx, cy - h / 2 - 3 * scale);
+            }
+        }
+
+        function drawGround(gx, gy) {
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.lineWidth = 1.5 * scale;
+            ctx.beginPath();
+            ctx.moveTo(gx - 10 * scale, gy);
+            ctx.lineTo(gx + 10 * scale, gy);
+            ctx.moveTo(gx - 6 * scale, gy + 4 * scale);
+            ctx.lineTo(gx + 6 * scale, gy + 4 * scale);
+            ctx.moveTo(gx - 2 * scale, gy + 8 * scale);
+            ctx.lineTo(gx + 2 * scale, gy + 8 * scale);
+            ctx.stroke();
+        }
+
+        const vMinusY = opY - opSize / 2;
+        const vPlusY = opY + opSize / 2;
+        const inputX = opX - opSize - 50 * scale;
+
+        // Draw Inputs, Feedback, and Component Routing based on selected Montage
+        if (mode === "inverting") {
+            // 1. Inverting Amplifier
+            // V1 -> R1 -> V-
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vMinusY);
+            ctx.lineTo(opX - opSize, vMinusY);
+            ctx.stroke();
+            drawResistor(inputX + 25 * scale, vMinusY, `R1=${R1}kΩ`);
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vMinusY + 3 * scale);
+
+            // V+ -> Ground
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+            ctx.stroke();
+            drawGround(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+
+            // Feedback R2 (V- to Vout)
+            const fbY = opY - opSize - 15 * scale;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize - 10 * scale, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+            drawResistor(opX, fbY, `R2=${R2}kΩ`);
+
+        } else if (mode === "noninverting") {
+            // 2. Non-Inverting Amplifier
+            // V1 -> V+
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vPlusY);
+            ctx.lineTo(opX - opSize, vPlusY);
+            ctx.stroke();
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vPlusY + 3 * scale);
+
+            // V- -> R1 -> Ground
+            const nodeVnegX = opX - opSize - 10 * scale;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize, vMinusY);
+            ctx.lineTo(nodeVnegX, vMinusY);
+            ctx.lineTo(nodeVnegX, vMinusY + 35 * scale);
+            ctx.stroke();
+            drawResistor(nodeVnegX, vMinusY + 18 * scale, `R1=${R1}kΩ`, true);
+            drawGround(nodeVnegX, vMinusY + 35 * scale);
+
+            // Feedback R2
+            const fbY = opY - opSize - 15 * scale;
+            ctx.beginPath();
+            ctx.moveTo(nodeVnegX, vMinusY);
+            ctx.lineTo(nodeVnegX, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+            drawResistor(opX, fbY, `R2=${R2}kΩ`);
+
+        } else if (mode === "follower") {
+            // 3. Voltage Follower
+            // V1 -> V+
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vPlusY);
+            ctx.lineTo(opX - opSize, vPlusY);
+            ctx.stroke();
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vPlusY + 3 * scale);
+
+            // Direct Feedback Wire V- to Vout
+            const fbY = opY - opSize - 12 * scale;
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+
+        } else if (mode === "summing") {
+            // 4. Inverting Summing Amplifier
+            // V1 -> R1 branch
+            const branchY1 = vMinusY - 10 * scale;
+            const branchY2 = vMinusY + 10 * scale;
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, branchY1);
+            ctx.lineTo(opX - opSize - 15 * scale, branchY1);
+            ctx.lineTo(opX - opSize - 15 * scale, vMinusY);
+            ctx.lineTo(opX - opSize, vMinusY);
+            ctx.stroke();
+            drawResistor(inputX + 22 * scale, branchY1, `R1=${R1}kΩ`);
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, branchY1 + 3 * scale);
+
+            // V2 -> R1 branch
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(inputX, branchY2);
+            ctx.lineTo(opX - opSize - 15 * scale, branchY2);
+            ctx.stroke();
+            drawResistor(inputX + 22 * scale, branchY2, `R1=${R1}kΩ`);
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText(`V2=${V2.toFixed(1)}V`, inputX - 4 * scale, branchY2 + 3 * scale);
+
+            // V+ -> Ground
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+            ctx.stroke();
+            drawGround(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+
+            // Feedback R2
+            const fbY = opY - opSize - 15 * scale;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize - 10 * scale, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+            drawResistor(opX, fbY, `R2=${R2}kΩ`);
+
+        } else if (mode === "differential") {
+            // 5. Difference / Differential Amplifier
+            // V1 -> R1 -> V-
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vMinusY);
+            ctx.lineTo(opX - opSize, vMinusY);
+            ctx.stroke();
+            drawResistor(inputX + 25 * scale, vMinusY, `R1=${R1}kΩ`);
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vMinusY + 3 * scale);
+
+            // V2 -> R1 -> V+ and Ground via R2
+            const nodeVplusX = opX - opSize - 10 * scale;
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vPlusY);
+            ctx.lineTo(opX - opSize, vPlusY);
+            ctx.stroke();
+            drawResistor(inputX + 25 * scale, vPlusY, `R1=${R1}kΩ`);
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = `${Math.round(8.5 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText(`V2=${V2.toFixed(1)}V`, inputX - 4 * scale, vPlusY + 3 * scale);
+
+            // R2 to Ground at V+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(nodeVplusX, vPlusY);
+            ctx.lineTo(nodeVplusX, vPlusY + 35 * scale);
+            ctx.stroke();
+            drawResistor(nodeVplusX, vPlusY + 18 * scale, `R2=${R2}kΩ`, true);
+            drawGround(nodeVplusX, vPlusY + 35 * scale);
+
+            // Feedback R2
+            const fbY = opY - opSize - 15 * scale;
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize - 10 * scale, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+            drawResistor(opX, fbY, `R2=${R2}kΩ`);
+
+        } else if (mode === "integrator") {
+            // 6. Integrator (R1 input, C feedback)
+            // V1 -> R1 -> V-
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vMinusY);
+            ctx.lineTo(opX - opSize, vMinusY);
+            ctx.stroke();
+            drawResistor(inputX + 25 * scale, vMinusY, `R1=${R1}kΩ`);
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vMinusY + 3 * scale);
+
+            // V+ -> Ground
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+            ctx.stroke();
+            drawGround(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+
+            // Feedback Capacitor C (V- to Vout)
+            const fbY = opY - opSize - 15 * scale;
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize - 10 * scale, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+            drawCapacitor(opX, fbY, "C = 1 µF");
+
+        } else if (mode === "differentiator") {
+            // 7. Differentiator (C input, R2 feedback)
+            // V1 -> C -> V-
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vMinusY);
+            ctx.lineTo(opX - opSize, vMinusY);
+            ctx.stroke();
+            drawCapacitor(inputX + 25 * scale, vMinusY, "C = 1 µF");
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vMinusY + 3 * scale);
+
+            // V+ -> Ground
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY);
+            ctx.lineTo(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+            ctx.stroke();
+            drawGround(opX - opSize - 20 * scale, vPlusY + 20 * scale);
+
+            // Feedback R2
+            const fbY = opY - opSize - 15 * scale;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.beginPath();
+            ctx.moveTo(opX - opSize - 10 * scale, vMinusY);
+            ctx.lineTo(opX - opSize - 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, fbY);
+            ctx.lineTo(opX + opSize + 10 * scale, opY);
+            ctx.stroke();
+            drawResistor(opX, fbY, `R2=${R2}kΩ`);
+
+        } else if (mode === "comparator") {
+            // 8. Simple Comparator (Open Loop)
+            // V1(t) -> V+
+            ctx.strokeStyle = "#facc15";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vPlusY);
+            ctx.lineTo(opX - opSize, vPlusY);
+            ctx.stroke();
+            ctx.fillStyle = "#facc15";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText("V1(t)", inputX - 4 * scale, vPlusY + 3 * scale);
+
+            // Vref (V2) -> V-
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.moveTo(inputX, vMinusY);
+            ctx.lineTo(opX - opSize, vMinusY);
+            ctx.stroke();
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+            ctx.textAlign = "right";
+            ctx.fillText(`Vref=${V2.toFixed(1)}V`, inputX - 4 * scale, vMinusY + 3 * scale);
+        }
+
+        const pBoxY = schemY + 225 * scale;
+        ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.fillRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 85 * scale);
+        ctx.strokeRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 85 * scale);
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(`Gain Av = ${mode === 'comparator' ? '∞' : state.Av.toFixed(2)}`, schemX + 20 * scale, pBoxY + 20 * scale);
+        ctx.fillText(`Vin(max) = ${Vin_max.toFixed(1)} V  |  f = ${freq} Hz`, schemX + 20 * scale, pBoxY + 38 * scale);
+        ctx.fillStyle = "#facc15";
+        ctx.fillText(`Vout(th) = ${state.Vout_th_max.toFixed(2)} V`, schemX + 20 * scale, pBoxY + 56 * scale);
+        ctx.fillStyle = "#38bdf8";
+        ctx.fillText(`Vout(réel) = ${state.Vout_actual_max.toFixed(2)} V (±${Vsat}V)`, schemX + 20 * scale, pBoxY + 74 * scale);
+    }
+
+    if (aopAmplificateurInterval) clearInterval(aopAmplificateurInterval);
+    aopAmplificateurInterval = setInterval(draw, 30);
+
+    updateCalculations();
+    updatePointsTable();
+}
+
+// 13. TP Mesure de Résistances Simulator
+let mesureResistancesInterval = null;
+function setupMesureResistancesSimulator() {
+    const canvas = document.getElementById("canvas-mesure-resistances");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const modeSelect = document.getElementById("res-mode");
+    const b1Select = document.getElementById("res-b1");
+    const b2Select = document.getElementById("res-b2");
+    const multSelect = document.getElementById("res-mult");
+    const tolSelect = document.getElementById("res-tol");
+    const eSlider = document.getElementById("res-e");
+    const rxSlider = document.getElementById("res-rx");
+    const r3Slider = document.getElementById("res-r3");
+    const btnRecord = document.getElementById("btn-res-record");
+    const btnClear = document.getElementById("btn-res-clear");
+
+    if (!modeSelect) return;
+
+    const newMode = modeSelect.cloneNode(true); modeSelect.parentNode.replaceChild(newMode, modeSelect);
+    const newB1 = b1Select.cloneNode(true); b1Select.parentNode.replaceChild(newB1, b1Select);
+    const newB2 = b2Select.cloneNode(true); b2Select.parentNode.replaceChild(newB2, b2Select);
+    const newMult = multSelect.cloneNode(true); multSelect.parentNode.replaceChild(newMult, multSelect);
+    const newTol = tolSelect.cloneNode(true); tolSelect.parentNode.replaceChild(newTol, tolSelect);
+    const newE = eSlider.cloneNode(true); eSlider.parentNode.replaceChild(newE, eSlider);
+    const newRx = rxSlider.cloneNode(true); rxSlider.parentNode.replaceChild(newRx, rxSlider);
+    const newR3 = r3Slider.cloneNode(true); r3Slider.parentNode.replaceChild(newR3, r3Slider);
+    const newRec = btnRecord.cloneNode(true); btnRecord.parentNode.replaceChild(newRec, btnRecord);
+    const newClr = btnClear.cloneNode(true); btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    let mode = newMode.value;
+    let b1 = parseInt(newB1.value);
+    let b2 = parseInt(newB2.value);
+    let mult = parseFloat(newMult.value);
+    let tol = parseFloat(newTol.value);
+    let E = parseFloat(newE.value);
+    let Rx = parseFloat(newRx.value);
+    let R3 = parseFloat(newR3.value);
+
+    let recordedPoints = [];
+
+    const colorsMap = ["#000000", "#8b4513", "#ff0000", "#ff8c00", "#ffff00", "#008000", "#0000ff", "#ee82ee", "#808080", "#ffffff"];
+    const multColorsMap = { 1: "#000000", 10: "#8b4513", 100: "#ff0000", 1000: "#ff8c00", 10000: "#ffff00", 100000: "#008000", 1000000: "#0000ff" };
+    const tolColorsMap = { 5: "#ffd700", 10: "#c0c0c0", 1: "#8b4513", 2: "#ff0000" };
+
+    function toggleControls() {
+        document.getElementById("group-res-b1").style.display = (mode === "colorcode") ? "flex" : "none";
+        document.getElementById("group-res-b2").style.display = (mode === "colorcode") ? "flex" : "none";
+        document.getElementById("group-res-mult").style.display = (mode === "colorcode") ? "flex" : "none";
+        document.getElementById("group-res-tol").style.display = (mode === "colorcode") ? "flex" : "none";
+        document.getElementById("group-res-e").style.display = (mode !== "colorcode") ? "flex" : "none";
+        document.getElementById("group-res-rx").style.display = (mode !== "colorcode") ? "flex" : "none";
+        document.getElementById("group-res-r3").style.display = (mode === "wheatstone") ? "flex" : "none";
+    }
+    toggleControls();
+
+    function getMetrics() {
+        let R_real = 0;
+        let R_mes = 0;
+        let errPercent = 0;
+        let statusText = "";
+        let desc = "";
+
+        if (mode === "colorcode") {
+            R_real = (10 * b1 + b2) * mult;
+            R_mes = R_real;
+            errPercent = tol;
+            statusText = `Valeur codée : ${R_real >= 1e6 ? (R_real/1e6).toFixed(2) + ' MΩ' : R_real >= 1e3 ? (R_real/1e3).toFixed(2) + ' kΩ' : R_real + ' Ω'} ± ${tol}%`;
+            desc = "Méthode directe par lecture du code des 4 anneaux de couleurs imprimés sur le corps de la résistance.";
+        } else if (mode === "aval") {
+            const RV = 100000;
+            const RA = 2;
+            R_real = Rx;
+            const Uv = E * (Rx / (Rx + RA));
+            const Ia = (Uv / Rx) + (Uv / RV);
+            R_mes = Uv / Ia;
+            errPercent = Math.abs((R_mes - R_real) / R_real) * 100;
+            statusText = Rx < 447 ? "✅ Montage Aval Idéal (Faibles résistances R << Rv)" : "⚠️ Erreur systématique élevée (R proche de Rv)";
+            desc = "Montage Aval : Voltmètre branché aux bornes directes de R. Idéal pour les faibles résistances (R << Rv).";
+        } else if (mode === "amont") {
+            const RA = 2;
+            R_real = Rx;
+            R_mes = Rx + RA;
+            errPercent = (RA / Rx) * 100;
+            statusText = Rx > 447 ? "✅ Montage Amont Idéal (Fortes résistances R >> Ra)" : "⚠️ Erreur due à la résistance interne de l'ampèremètre Ra";
+            desc = "Montage Amont : Voltmètre branché en amont de l'ampèremètre. Idéal pour les fortes résistances (R >> Ra).";
+        } else if (mode === "wheatstone") {
+            R_real = Rx;
+            R_mes = R3;
+            errPercent = Math.abs((R3 - Rx) / Rx) * 100;
+            const isBalanced = Math.abs(R3 - Rx) <= 5;
+            statusText = isBalanced ? "⚖️ Pont à l'Équilibre (Ig = 0 A | Rx = R3)" : "⚖️ Pont Déséquilibré (Ajuster R3 pour annuler Ig)";
+            desc = "Pont de Wheatstone : Permet la mesure de précision par annulation du courant Ig dans le galvanomètre central (Ig = 0 => Rx = R2*R3/R1).";
+        }
+
+        return { R_real, R_mes, errPercent, statusText, desc };
+    }
+
+    function updateCalculations() {
+        const state = getMetrics();
+        const theoryDiv = document.getElementById("mesure-resistances-theory");
+        if (!theoryDiv) return;
+
+        theoryDiv.innerHTML = `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                <h4 style="color: #10b981; font-size: 1rem; margin-bottom: 6px; font-family: 'Outfit', sans-serif;">
+                    <i data-lucide="calculator" style="vertical-align: middle; margin-right: 6px;"></i> Résultats de la mesure de résistance
+                </h4>
+                
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.85rem; color: #000000; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <strong style="color: #0369a1; font-weight: 700;">💡 Principe & Rôle de la méthode :</strong> <span style="color: #000000; font-weight: 600;">${state.desc}</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                    <div><strong>Résistance Réelle $R_{réelle}$ :</strong> ${state.R_real.toFixed(1)} Ω</div>
+                    <div><strong>Résistance Mesurée $R_{mes}$ :</strong> <span style="color:#38bdf8; font-weight:700;">${state.R_mes.toFixed(1)} Ω</span></div>
+                    <div><strong>Erreur Relative $\Delta R / R$ :</strong> ${state.errPercent.toFixed(2)} %</div>
+                    <div style="grid-column: 1 / -1;"><strong>État de la Mesure :</strong> <span style="color:#f59e0b; font-weight:700;">${state.statusText}</span></div>
+                </div>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("mesure-resistances-points-body");
+        if (!body) return;
+
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `<tr><td colspan="5" style="padding: 6px; color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun point enregistré. Cliquez sur "Enregistrer".</td></tr>`;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map(pt => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">${pt.modeName}</td>
+                <td style="padding: 4px;">${pt.R_real.toFixed(1)}</td>
+                <td style="padding: 4px; font-weight: 600; color: #38bdf8;">${pt.R_mes.toFixed(1)}</td>
+                <td style="padding: 4px; color:${pt.errPercent < 5 ? '#10b981' : '#f59e0b'}; font-weight:600;">${pt.errPercent.toFixed(2)} %</td>
+                <td style="padding: 4px;">${pt.errPercent < 5 ? 'Précis' : 'Erreur'}</td>
+            </tr>
+        `).join("");
+    }
+
+    newMode.addEventListener("change", (e) => {
+        mode = e.target.value;
+        toggleControls();
+        updateCalculations();
+    });
+
+    newB1.addEventListener("change", (e) => { b1 = parseInt(e.target.value); updateCalculations(); });
+    newB2.addEventListener("change", (e) => { b2 = parseInt(e.target.value); updateCalculations(); });
+    newMult.addEventListener("change", (e) => { mult = parseFloat(e.target.value); updateCalculations(); });
+    newTol.addEventListener("change", (e) => { tol = parseFloat(e.target.value); updateCalculations(); });
+
+    newE.addEventListener("input", (e) => {
+        E = parseFloat(e.target.value);
+        document.getElementById("val-res-e").textContent = E.toFixed(1);
+        updateCalculations();
+    });
+
+    newRx.addEventListener("input", (e) => {
+        Rx = parseFloat(e.target.value);
+        document.getElementById("val-res-rx").textContent = Rx;
+        updateCalculations();
+    });
+
+    newR3.addEventListener("input", (e) => {
+        R3 = parseFloat(e.target.value);
+        document.getElementById("val-res-r3").textContent = R3;
+        updateCalculations();
+    });
+
+    newRec.addEventListener("click", () => {
+        const state = getMetrics();
+        const modeNames = { colorcode: "Code Couleurs", aval: "Volt-Amp (Aval)", amont: "Volt-Amp (Amont)", wheatstone: "Wheatstone" };
+        recordedPoints.push({
+            modeName: modeNames[mode],
+            R_real: state.R_real,
+            R_mes: state.R_mes,
+            errPercent: state.errPercent
+        });
+        updatePointsTable();
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const scale = W / 900;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(0, 0, W, H);
+
+        if (mode === "colorcode") {
+            const cx = W / 2;
+            const cy = H / 2;
+            const rw = 360 * scale;
+            const rh = 100 * scale;
+
+            ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 12 * scale;
+            ctx.beginPath(); ctx.moveTo(cx - rw / 2 - 120 * scale, cy); ctx.lineTo(cx + rw / 2 + 120 * scale, cy); ctx.stroke();
+
+            ctx.fillStyle = "#d4b886"; ctx.strokeStyle = "#b3925b"; ctx.lineWidth = 4 * scale;
+            ctx.beginPath(); ctx.roundRect(cx - rw / 2, cy - rh / 2, rw, rh, 20 * scale); ctx.fill(); ctx.stroke();
+
+            const bWidth = 24 * scale;
+            const bX1 = cx - rw / 2 + 60 * scale;
+            const bX2 = cx - rw / 2 + 120 * scale;
+            const bX3 = cx - rw / 2 + 180 * scale;
+            const bX4 = cx + rw / 2 - 70 * scale;
+
+            ctx.fillStyle = colorsMap[b1]; ctx.fillRect(bX1, cy - rh / 2, bWidth, rh);
+            ctx.fillStyle = colorsMap[b2]; ctx.fillRect(bX2, cy - rh / 2, bWidth, rh);
+            ctx.fillStyle = multColorsMap[mult] || "#000"; ctx.fillRect(bX3, cy - rh / 2, bWidth, rh);
+            ctx.fillStyle = tolColorsMap[tol] || "#ffd700"; ctx.fillRect(bX4, cy - rh / 2, bWidth, rh);
+
+            const state = getMetrics();
+            ctx.fillStyle = "#ffffff";
+            ctx.font = `bold ${Math.round(22 * scale)}px 'Outfit', sans-serif`;
+            ctx.textAlign = "center";
+            ctx.fillText(`Code des Couleurs : R = ${state.statusText}`, cx, cy + 110 * scale);
+
+        } else if (mode === "aval" || mode === "amont") {
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 3 * scale;
+            ctx.strokeRect(150 * scale, 80 * scale, 600 * scale, 240 * scale);
+
+            ctx.fillStyle = "#090d16"; ctx.fillRect(130 * scale, 170 * scale, 40 * scale, 60 * scale);
+            ctx.fillStyle = "#facc15"; ctx.font = `bold ${Math.round(16 * scale)}px sans-serif`;
+            ctx.fillText(`Generator E = ${E}V`, 60 * scale, 205 * scale);
+
+            ctx.fillStyle = "#090d16"; ctx.fillRect(400 * scale, 60 * scale, 60 * scale, 40 * scale);
+            ctx.strokeStyle = "#f59e0b"; ctx.strokeRect(400 * scale, 60 * scale, 60 * scale, 40 * scale);
+            ctx.fillStyle = "#f59e0b"; ctx.font = `bold ${Math.round(14 * scale)}px sans-serif`;
+            ctx.fillText("Ampère A", 405 * scale, 85 * scale);
+
+            ctx.fillStyle = "#090d16"; ctx.fillRect(730 * scale, 170 * scale, 40 * scale, 60 * scale);
+            ctx.strokeStyle = "#10b981"; ctx.strokeRect(730 * scale, 170 * scale, 40 * scale, 60 * scale);
+            ctx.fillStyle = "#10b981"; ctx.fillText(`Rx = ${Rx}Ω`, 780 * scale, 205 * scale);
+
+            const vX = (mode === "aval") ? 700 * scale : 350 * scale;
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath(); ctx.moveTo(vX, 80 * scale); ctx.lineTo(vX, 320 * scale); ctx.stroke();
+            ctx.fillStyle = "#090d16"; ctx.fillRect(vX - 25 * scale, 180 * scale, 50 * scale, 40 * scale);
+            ctx.strokeRect(vX - 25 * scale, 180 * scale, 50 * scale, 40 * scale);
+            ctx.fillStyle = "#38bdf8"; ctx.fillText("Volt V", vX - 20 * scale, 205 * scale);
+
+        } else if (mode === "wheatstone") {
+            const cx = W / 2;
+            const cy = H / 2 - 20 * scale;
+            const topY = cy - 100 * scale;
+            const botY = cy + 100 * scale;
+            const leftX = cx - 140 * scale;
+            const rightX = cx + 140 * scale;
+
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 3 * scale;
+            ctx.beginPath(); ctx.moveTo(cx, topY); ctx.lineTo(leftX, cy); ctx.lineTo(cx, botY); ctx.lineTo(rightX, cy); ctx.closePath(); ctx.stroke();
+
+            ctx.beginPath(); ctx.moveTo(leftX, cy); ctx.lineTo(rightX, cy); ctx.stroke();
+            ctx.fillStyle = "#090d16"; ctx.fillRect(cx - 30 * scale, cy - 20 * scale, 60 * scale, 40 * scale);
+            ctx.strokeRect(cx - 30 * scale, cy - 20 * scale, 60 * scale, 40 * scale);
+
+            const isBal = Math.abs(R3 - Rx) <= 5;
+            ctx.fillStyle = isBal ? "#10b981" : "#ef4444";
+            ctx.font = `bold ${Math.round(12 * scale)}px sans-serif`;
+            ctx.textAlign = "center";
+            ctx.fillText(isBal ? "Ig = 0 A (Équilibré)" : "Ig ≠ 0 A", cx, cy + 5 * scale);
+
+            ctx.fillStyle = "#ffffff";
+            ctx.fillText("R1 = 1000 Ω", cx - 90 * scale, cy - 60 * scale);
+            ctx.fillText(`R3 (pot) = ${R3} Ω`, cx + 90 * scale, cy - 60 * scale);
+            ctx.fillText("R2 = 1000 Ω", cx - 90 * scale, cy + 60 * scale);
+            ctx.fillText(`Rx (inconnue) = ${Rx} Ω`, cx + 90 * scale, cy + 60 * scale);
+        }
+    }
+
+    if (mesureResistancesInterval) clearInterval(mesureResistancesInterval);
+    mesureResistancesInterval = setInterval(draw, 30);
+
+    updateCalculations();
+    updatePointsTable();
+}
+
+// 14. TP Charge et Décharge Condensateur Simulator
+let chargeDechargeRcInterval = null;
+function setupChargeDechargeRcSimulator() {
+    const canvas = document.getElementById("canvas-charge-decharge-rc");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const toggleBtn = document.getElementById("btn-rc-toggle-switch");
+    const vSlider = document.getElementById("rc-voltage");
+    const rSlider = document.getElementById("rc-r");
+    const cSlider = document.getElementById("rc-c");
+    const btnRecord = document.getElementById("btn-rc-record");
+    const btnPause = document.getElementById("btn-rc-pause");
+    const btnClear = document.getElementById("btn-rc-clear");
+
+    if (!toggleBtn || !vSlider) return;
+
+    const newTog = toggleBtn.cloneNode(true); toggleBtn.parentNode.replaceChild(newTog, toggleBtn);
+    const newV = vSlider.cloneNode(true); vSlider.parentNode.replaceChild(newV, vSlider);
+    const newR = rSlider.cloneNode(true); rSlider.parentNode.replaceChild(newR, rSlider);
+    const newC = cSlider.cloneNode(true); cSlider.parentNode.replaceChild(newC, cSlider);
+    const newRec = btnRecord.cloneNode(true); btnRecord.parentNode.replaceChild(newRec, btnRecord);
+    const newPau = btnPause.cloneNode(true); btnPause.parentNode.replaceChild(newPau, btnPause);
+    const newClr = btnClear.cloneNode(true); btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    let isCharging = true;
+    let E = parseFloat(newV.value);
+    let R_kOhm = parseFloat(newR.value);
+    let C_uF = parseFloat(newC.value);
+    let isPaused = false;
+
+    let recordedPoints = [];
+    let simTime = 0;
+
+    function getMetrics() {
+        const R = R_kOhm * 1000;
+        const C = C_uF * 1e-6;
+        const tau_ms = R * C * 1000;
+        const uC_tau = isCharging ? E * (1 - Math.exp(-1)) : E * Math.exp(-1);
+        const energy_joules = 0.5 * C * Math.pow(isCharging ? E : 0, 2);
+
+        const desc = isCharging 
+            ? "En charge : Le condensateur emmagasine l'énergie électrique. La tension uC(t) augmente selon uC(t) = E(1 - e^{-t/τ}). À t = τ, uC vaut 63% de E."
+            : "En décharge : Le condensateur restitue son énergie à la résistance. La tension uC(t) décroît selon uC(t) = E e^{-t/τ}. À t = τ, uC vaut 37% de E.";
+
+        return { R, C, tau_ms, uC_tau, energy_joules, desc };
+    }
+
+    function updateCalculations() {
+        const state = getMetrics();
+        const theoryDiv = document.getElementById("charge-decharge-rc-theory");
+        if (!theoryDiv) return;
+
+        theoryDiv.innerHTML = `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                <h4 style="color: #10b981; font-size: 1rem; margin-bottom: 6px; font-family: 'Outfit', sans-serif;">
+                    <i data-lucide="battery-charging" style="vertical-align: middle; margin-right: 6px;"></i> Résultats du Régime Transitoire RC (${isCharging ? 'Charge' : 'Décharge'})
+                </h4>
+                
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.85rem; color: #000000; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <strong style="color: #0369a1; font-weight: 700;">💡 Définition & Rôle du régime :</strong> <span style="color: #000000; font-weight: 600;">${state.desc}</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                    <div><strong>Tension Générateur $E$ :</strong> ${E.toFixed(1)} V</div>
+                    <div><strong>Constante de Temps $\tau = R \cdot C$ :</strong> <span style="color:#38bdf8; font-weight:700;">${state.tau_ms.toFixed(2)} ms</span></div>
+                    <div><strong>Tension à $t = \tau$ ($u_C$) :</strong> <span style="color:#facc15; font-weight:700;">${state.uC_tau.toFixed(2)} V</span> (${isCharging ? '63%' : '37%'} de E)</div>
+                    <div><strong>Énergie Emmagasinée $E_e$ :</strong> ${(state.energy_joules * 1e3).toFixed(2)} mJ</div>
+                    <div style="grid-column: 1 / -1;"><strong>Position Interrupteur K :</strong> <span style="color:${isCharging ? '#10b981' : '#f59e0b'}; font-weight:700;">${isCharging ? '⚡ Position 1 (Alimentation par le Générateur E)' : '🔒 Position 2 (Court-circuit à la Masse)'}</span></div>
+                </div>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("charge-decharge-rc-points-body");
+        if (!body) return;
+
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `<tr><td colspan="6" style="padding: 6px; color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer \\(\\tau\\)".</td></tr>`;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map(pt => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">${pt.modeName}</td>
+                <td style="padding: 4px;">${pt.E.toFixed(1)}</td>
+                <td style="padding: 4px;">${pt.R_kOhm.toFixed(1)}</td>
+                <td style="padding: 4px;">${pt.C_uF}</td>
+                <td style="padding: 4px; font-weight: 600; color: #38bdf8;">${pt.tau_ms.toFixed(2)}</td>
+                <td style="padding: 4px; font-weight: 600; color: #facc15;">${pt.uC_tau.toFixed(2)}</td>
+            </tr>
+        `).join("");
+    }
+
+    newTog.addEventListener("click", () => {
+        isCharging = !isCharging;
+        newTog.textContent = isCharging ? "⚡ Position 1 (Charge)" : "🔒 Position 2 (Décharge)";
+        newTog.className = isCharging ? "btn btn-primary" : "btn btn-secondary";
+        simTime = 0;
+        updateCalculations();
+    });
+
+    newV.addEventListener("input", (e) => {
+        E = parseFloat(e.target.value);
+        document.getElementById("val-rc-voltage").textContent = E.toFixed(1);
+        updateCalculations();
+    });
+
+    newR.addEventListener("input", (e) => {
+        R_kOhm = parseFloat(e.target.value);
+        document.getElementById("val-rc-r").textContent = R_kOhm.toFixed(1);
+        updateCalculations();
+    });
+
+    newC.addEventListener("input", (e) => {
+        C_uF = parseFloat(e.target.value);
+        document.getElementById("val-rc-c").textContent = C_uF;
+        updateCalculations();
+    });
+
+    newRec.addEventListener("click", () => {
+        const state = getMetrics();
+        recordedPoints.push({
+            modeName: isCharging ? "Charge" : "Décharge",
+            E: E,
+            R_kOhm: R_kOhm,
+            C_uF: C_uF,
+            tau_ms: state.tau_ms,
+            uC_tau: state.uC_tau
+        });
+        updatePointsTable();
+    });
+
+    newPau.addEventListener("click", () => {
+        isPaused = !isPaused;
+        newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
+        if (window.lucide) window.lucide.createIcons();
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (!isPaused) {
+            simTime += 0.02;
+        }
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const scale = W / 900;
+
+        const state = getMetrics();
+        const tau = state.tau_ms;
+
+        const oscX = 40 * scale;
+        const oscY = 30 * scale;
+        const oscW = 540 * scale;
+        const oscH = 340 * scale;
+        const centerY = oscY + oscH - 40 * scale;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(oscX, oscY, oscW, oscH);
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.15)";
+        ctx.lineWidth = 1;
+
+        for (let x = oscX; x <= oscX + oscW; x += oscW / 10) {
+            ctx.beginPath(); ctx.moveTo(x, oscY); ctx.lineTo(x, oscY + oscH); ctx.stroke();
+        }
+        for (let y = oscY; y <= oscY + oscH; y += oscH / 8) {
+            ctx.beginPath(); ctx.moveTo(oscX, y); ctx.lineTo(oscX + oscW, y); ctx.stroke();
+        }
+
+        const vScale = (oscH - 60 * scale) / 15;
+
+        ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(oscX, centerY); ctx.lineTo(oscX + oscW, centerY); ctx.stroke();
+
+        const yE = centerY - E * vScale;
+        ctx.strokeStyle = "rgba(250, 204, 21, 0.6)";
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath(); ctx.moveTo(oscX, yE); ctx.lineTo(oscX + oscW, yE); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#facc15";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.textAlign = "right";
+        ctx.fillText(`E = ${E.toFixed(1)}V`, oscX + oscW - 10, yE - 4);
+
+        const timeWindow = 5 * tau;
+        const numPoints = 500;
+
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        const genVal = isCharging ? E : 0;
+        ctx.moveTo(oscX, centerY - genVal * vScale);
+        ctx.lineTo(oscX + oscW, centerY - genVal * vScale);
+        ctx.stroke();
+
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2.5 * scale;
+        ctx.shadowBlur = 6; ctx.shadowColor = "#38bdf8";
+        ctx.beginPath();
+
+        for (let i = 0; i <= numPoints; i++) {
+            const t = (i / numPoints) * timeWindow;
+            const uC = isCharging ? E * (1 - Math.exp(-t / tau)) : E * Math.exp(-t / tau);
+            const pxX = oscX + (i / numPoints) * oscW;
+            const pxY = centerY - uC * vScale;
+
+            if (i === 0) ctx.moveTo(pxX, pxY);
+            else ctx.lineTo(pxX, pxY);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        const xTau = oscX + (1 / 5) * oscW;
+        ctx.strokeStyle = "#10b981";
+        ctx.lineWidth = 1.5 * scale;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        if (isCharging) {
+            ctx.moveTo(oscX, centerY); ctx.lineTo(xTau, yE);
+        } else {
+            ctx.moveTo(oscX, yE); ctx.lineTo(xTau, centerY);
+        }
+        ctx.stroke();
+
+        ctx.moveTo(xTau, oscY); ctx.lineTo(xTau, centerY); ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#10b981";
+        ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillText(`τ = ${tau.toFixed(2)} ms`, xTau, centerY + 20 * scale);
+
+        const yUcTau = centerY - state.uC_tau * vScale;
+        ctx.fillStyle = "#facc15";
+        ctx.beginPath(); ctx.arc(xTau, yUcTau, 5 * scale, 0, 2 * Math.PI); ctx.fill();
+        ctx.fillText(`(${tau.toFixed(1)} ms, ${state.uC_tau.toFixed(1)}V)`, xTau + 50 * scale, yUcTau - 5 * scale);
+
+        ctx.fillStyle = "rgba(250, 204, 21, 0.9)";
+        ctx.font = `${Math.round(11 * scale)}px sans-serif`;
+        ctx.textAlign = "left";
+        ctx.fillText("CH1 Générateur e(t) (Jaune)", oscX + 10, oscY + 20);
+        ctx.fillStyle = "rgba(56, 189, 248, 0.9)";
+        ctx.fillText("CH2 Condensateur uC(t) (Cyan)", oscX + 10, oscY + 36);
+
+        const schemX = 610 * scale;
+        const schemY = 30 * scale;
+        const schemW = 260 * scale;
+        const schemH = 340 * scale;
+
+        ctx.fillStyle = "rgba(15, 23, 42, 0.8)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.lineWidth = 1;
+        ctx.fillRect(schemX, schemY, schemW, schemH);
+        ctx.strokeRect(schemX, schemY, schemW, schemH);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${Math.round(13 * scale)}px 'Outfit', sans-serif`;
+        ctx.textAlign = "center";
+        ctx.fillText(`Circuit RC — ${isCharging ? 'Charge' : 'Décharge'}`, schemX + schemW / 2, schemY + 25 * scale);
+
+        ctx.fillStyle = isCharging ? "rgba(16, 185, 129, 0.2)" : "rgba(245, 158, 11, 0.2)";
+        ctx.strokeStyle = isCharging ? "#10b981" : "#f59e0b";
+        ctx.lineWidth = 1.5;
+        ctx.fillRect(schemX + 20 * scale, schemY + 40 * scale, schemW - 40 * scale, 28 * scale);
+        ctx.strokeRect(schemX + 20 * scale, schemY + 40 * scale, schemW - 40 * scale, 28 * scale);
+
+        ctx.fillStyle = isCharging ? "#10b981" : "#f59e0b";
+        ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(isCharging ? "⚡ Switch K = Pos. 1 (Générateur E)" : "🔒 Switch K = Pos. 2 (Masse / Disch.)", schemX + schemW / 2, schemY + 58 * scale);
+
+        const cX1 = schemX + 40 * scale;
+        const cX2 = schemX + schemW - 40 * scale;
+        const cY1 = schemY + 90 * scale;
+        const cY2 = schemY + 220 * scale;
+
+        ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(cX1, cY1); ctx.lineTo(cX2, cY1); ctx.lineTo(cX2, cY2); ctx.lineTo(cX1, cY2); ctx.closePath();
+        ctx.stroke();
+
+        ctx.fillStyle = "#090d16"; ctx.fillRect(schemX + 100 * scale, cY1 - 10 * scale, 60 * scale, 20 * scale);
+        ctx.strokeStyle = "#f59e0b"; ctx.strokeRect(schemX + 100 * scale, cY1 - 10 * scale, 60 * scale, 20 * scale);
+        ctx.fillStyle = "#f59e0b"; ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+        ctx.fillText(`R=${R_kOhm}kΩ`, schemX + 130 * scale, cY1 - 14 * scale);
+
+        ctx.fillStyle = "#090d16"; ctx.fillRect(cX2 - 15 * scale, cY1 + 50 * scale, 30 * scale, 30 * scale);
+        ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 3 * scale;
+        ctx.beginPath();
+        ctx.moveTo(cX2 - 12 * scale, cY1 + 55 * scale); ctx.lineTo(cX2 + 12 * scale, cY1 + 55 * scale);
+        ctx.moveTo(cX2 - 12 * scale, cY1 + 75 * scale); ctx.lineTo(cX2 + 12 * scale, cY1 + 75 * scale);
+        ctx.stroke();
+        ctx.fillStyle = "#38bdf8"; ctx.font = `${Math.round(9 * scale)}px sans-serif`;
+        ctx.fillText(`C=${C_uF}µF`, cX2 + 28 * scale, cY1 + 68 * scale);
+
+        const pBoxY = schemY + 235 * scale;
+        ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.fillRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 90 * scale);
+        ctx.strokeRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 90 * scale);
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+        ctx.fillText(`Tension E = ${E.toFixed(1)} V`, schemX + 20 * scale, pBoxY + 20 * scale);
+        ctx.fillText(`Tau = R*C = ${tau.toFixed(2)} ms`, schemX + 20 * scale, pBoxY + 38 * scale);
+        ctx.fillStyle = "#facc15";
+        ctx.fillText(`uC(tau) = ${state.uC_tau.toFixed(2)} V (${isCharging ? '63%' : '37%'})`, schemX + 20 * scale, pBoxY + 56 * scale);
+        ctx.fillStyle = "#10b981";
+        ctx.fillText(`Énergie Ee = ${(state.energy_joules * 1e3).toFixed(2)} mJ`, schemX + 20 * scale, pBoxY + 74 * scale);
+    }
+
+    if (chargeDechargeRcInterval) clearInterval(chargeDechargeRcInterval);
+    chargeDechargeRcInterval = setInterval(draw, 30);
+
+    updateCalculations();
+    updatePointsTable();
+}
+
+// 15. TP Moteur à Courant Continu (MCC) Simulator
+let moteurCcInterval = null;
+function setupMoteurCcSimulator() {
+    const canvas = document.getElementById("canvas-moteur-cc");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const viewSelect = document.getElementById("mcc-view");
+    const uSlider = document.getElementById("mcc-u");
+    const tlSlider = document.getElementById("mcc-tl");
+    const rSlider = document.getElementById("mcc-r");
+    const kSlider = document.getElementById("mcc-k");
+    const btnRecord = document.getElementById("btn-mcc-record");
+    const btnPause = document.getElementById("btn-mcc-pause");
+    const btnClear = document.getElementById("btn-mcc-clear");
+
+    if (!viewSelect || !uSlider) return;
+
+    const newView = viewSelect.cloneNode(true); viewSelect.parentNode.replaceChild(newView, viewSelect);
+    const newU = uSlider.cloneNode(true); uSlider.parentNode.replaceChild(newU, uSlider);
+    const newTl = tlSlider.cloneNode(true); tlSlider.parentNode.replaceChild(newTl, tlSlider);
+    const newR = rSlider.cloneNode(true); rSlider.parentNode.replaceChild(newR, rSlider);
+    const newK = kSlider.cloneNode(true); kSlider.parentNode.replaceChild(newK, kSlider);
+    const newRec = btnRecord.cloneNode(true); btnRecord.parentNode.replaceChild(newRec, btnRecord);
+    const newPau = btnPause.cloneNode(true); btnPause.parentNode.replaceChild(newPau, btnPause);
+    const newClr = btnClear.cloneNode(true); btnClear.parentNode.replaceChild(newClr, btnClear);
+
+    let view = newView.value;
+    let U = parseFloat(newU.value);
+    let TL = parseFloat(newTl.value);
+    let R = parseFloat(newR.value);
+    let K = parseFloat(newK.value);
+    let isPaused = false;
+
+    let recordedPoints = [];
+    let rotorAngle = 0;
+
+    function getMetrics() {
+        const T0 = 0.02;
+        const Tem = TL + T0;
+        let I = Tem / K;
+
+        let E = U - R * I;
+        let Omega = 0;
+
+        if (E <= 0 || U <= 0) {
+            E = 0;
+            I = U > 0 ? Math.min(U / R, 15.0) : 0;
+            Omega = 0;
+        } else {
+            Omega = E / K;
+        }
+
+        const RPM = (60 * Omega) / (2 * Math.PI);
+        const Pa = U * I;
+        const Pu = TL * Omega;
+        const Pem = E * I;
+        const eta = Pa > 0 ? Math.max(0, Math.min(100, (Pu / Pa) * 100)) : 0;
+
+        const isStalled = E <= 0 && U > 0;
+        const statusText = isStalled 
+            ? "🛑 Moteur Calé / Bloqué (Couple résistant TL trop fort, I_court-circuit = U/R)" 
+            : Omega > 0 ? "⚡ Moteur en Rotation (Régime Permanent)" : "🔒 Moteur à l'Arrêt (Tension nulle U = 0V)";
+
+        const desc = "Le Moteur à Courant Continu (MCC) convertit l'énergie électrique Pa = U·I en énergie mécanique Pu = Tu·Ω. La vitesse N est contrôlée par la tension U, tandis que le courant I s'adapte au couple résistant TL.";
+
+        return { Tem, I, E, Omega, RPM, Pa, Pu, Pem, eta, isStalled, statusText, desc };
+    }
+
+    function updateCalculations() {
+        const state = getMetrics();
+        const theoryDiv = document.getElementById("moteur-cc-theory");
+        if (!theoryDiv) return;
+
+        theoryDiv.innerHTML = `
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                <h4 style="color: #10b981; font-size: 1rem; margin-bottom: 6px; font-family: 'Outfit', sans-serif;">
+                    <i data-lucide="disc" style="vertical-align: middle; margin-right: 6px;"></i> Résultats du Moteur CC (Tension U = ${U.toFixed(1)} V, Charge TL = ${TL.toFixed(2)} N·m)
+                </h4>
+                
+                <div style="background: #ffffff; border: 1px solid #cbd5e1; border-left: 4px solid #0284c7; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.85rem; color: #000000; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <strong style="color: #0369a1; font-weight: 700;">💡 Définition & Rôle Électromécanique :</strong> <span style="color: #000000; font-weight: 600;">${state.desc}</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.85rem;">
+                    <div><strong>Courant Induit $I$ :</strong> <span style="color:#f59e0b; font-weight:700;">${state.I.toFixed(2)} A</span></div>
+                    <div><strong>Force contre-électromotrice $E$ :</strong> ${state.E.toFixed(1)} V</div>
+                    <div><strong>Vitesse de Rotation $N$ :</strong> <span style="color:#38bdf8; font-weight:700;">${state.RPM.toFixed(0)} tr/min</span> (${state.Omega.toFixed(1)} rad/s)</div>
+                    <div><strong>Couple Électromagnétique $T_{em}$ :</strong> ${state.Tem.toFixed(2)} N·m</div>
+                    <div><strong>Puissance Utile $P_u$ :</strong> ${state.Pu.toFixed(1)} W (sur une puissance absorbée $P_a$ de ${state.Pa.toFixed(1)} W)</div>
+                    <div><strong>Rendement Moteur $\eta$ :</strong> <span style="color:#10b981; font-weight:700;">${state.eta.toFixed(1)} %</span></div>
+                    <div style="grid-column: 1 / -1;"><strong>État de Fonctionnement :</strong> <span style="color:${state.isStalled ? '#ef4444' : '#10b981'}; font-weight:700;">${state.statusText}</span></div>
+                </div>
+            </div>
+        `;
+
+        if (window.lucide) window.lucide.createIcons();
+        setTimeout(() => {
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise().catch(err => console.warn(err));
+            }
+        }, 100);
+    }
+
+    function updatePointsTable() {
+        const body = document.getElementById("moteur-cc-points-body");
+        if (!body) return;
+
+        if (recordedPoints.length === 0) {
+            body.innerHTML = `<tr><td colspan="6" style="padding: 6px; color: var(--text-secondary); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer Point".</td></tr>`;
+            return;
+        }
+
+        body.innerHTML = recordedPoints.map(pt => `
+            <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                <td style="padding: 4px;">${pt.U.toFixed(1)}</td>
+                <td style="padding: 4px;">${pt.I.toFixed(2)}</td>
+                <td style="padding: 4px;">${pt.E.toFixed(1)}</td>
+                <td style="padding: 4px; font-weight: 600; color: #38bdf8;">${pt.RPM.toFixed(0)}</td>
+                <td style="padding: 4px;">${pt.Tem.toFixed(2)}</td>
+                <td style="padding: 4px; font-weight: 600; color: #10b981;">${pt.eta.toFixed(1)} %</td>
+            </tr>
+        `).join("");
+    }
+
+    newView.addEventListener("change", (e) => { view = e.target.value; updateCalculations(); });
+
+    newU.addEventListener("input", (e) => {
+        U = parseFloat(e.target.value);
+        document.getElementById("val-mcc-u").textContent = U.toFixed(1);
+        updateCalculations();
+    });
+
+    newTl.addEventListener("input", (e) => {
+        TL = parseFloat(e.target.value);
+        document.getElementById("val-mcc-tl").textContent = TL.toFixed(2);
+        updateCalculations();
+    });
+
+    newR.addEventListener("input", (e) => {
+        R = parseFloat(e.target.value);
+        document.getElementById("val-mcc-r").textContent = R.toFixed(1);
+        updateCalculations();
+    });
+
+    newK.addEventListener("input", (e) => {
+        K = parseFloat(e.target.value);
+        document.getElementById("val-mcc-k").textContent = K.toFixed(2);
+        updateCalculations();
+    });
+
+    newRec.addEventListener("click", () => {
+        const state = getMetrics();
+        recordedPoints.push({
+            U: U, I: state.I, E: state.E, RPM: state.RPM, Tem: state.Tem, eta: state.eta
+        });
+        updatePointsTable();
+    });
+
+    newPau.addEventListener("click", () => {
+        isPaused = !isPaused;
+        newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
+        if (window.lucide) window.lucide.createIcons();
+    });
+
+    newClr.addEventListener("click", () => {
+        recordedPoints = [];
+        updatePointsTable();
+    });
+
+    function draw() {
+        if (!canvas.offsetParent) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const state = getMetrics();
+
+        if (!isPaused && state.Omega > 0) {
+            rotorAngle += (state.Omega * 0.005);
+        }
+
+        const W = canvas.width;
+        const H = canvas.height;
+        const scale = W / 900;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(0, 0, W, H);
+
+        if (view === "rotor") {
+            const cx = W / 2;
+            const cy = H / 2 - 10 * scale;
+            const rRadius = 90 * scale;
+
+            const poleW = 120 * scale;
+            const poleH = 160 * scale;
+
+            ctx.fillStyle = "#ef4444"; ctx.fillRect(cx - rRadius - poleW, cy - poleH / 2, poleW, poleH);
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(24 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText("N", cx - rRadius - poleW / 2, cy + 8 * scale);
+
+            ctx.fillStyle = "#3b82f6"; ctx.fillRect(cx + rRadius, cy - poleH / 2, poleW, poleH);
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(24 * scale)}px sans-serif`;
+            ctx.fillText("S", cx + rRadius + poleW / 2, cy + 8 * scale);
+
+            ctx.strokeStyle = "rgba(16, 185, 129, 0.4)"; ctx.lineWidth = 2 * scale;
+            ctx.setLineDash([6, 6]);
+            for (let y = cy - 60 * scale; y <= cy + 60 * scale; y += 30 * scale) {
+                ctx.beginPath(); ctx.moveTo(cx - rRadius, y); ctx.lineTo(cx + rRadius, y); ctx.stroke();
+            }
+            ctx.setLineDash([]);
+
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(rotorAngle);
+
+            ctx.fillStyle = "#334155"; ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 3 * scale;
+            ctx.beginPath(); ctx.arc(0, 0, rRadius, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+
+            const numCoils = 8;
+            for (let i = 0; i < numCoils; i++) {
+                const a = (i * 2 * Math.PI) / numCoils;
+                const wx = (rRadius - 18 * scale) * Math.cos(a);
+                const wy = (rRadius - 18 * scale) * Math.sin(a);
+                ctx.fillStyle = "#f59e0b";
+                ctx.beginPath(); ctx.arc(wx, wy, 10 * scale, 0, 2 * Math.PI); ctx.fill();
+            }
+
+            ctx.fillStyle = "#d97706"; ctx.beginPath(); ctx.arc(0, 0, 32 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = "#090d16"; ctx.lineWidth = 4 * scale;
+            ctx.beginPath(); ctx.moveTo(-32 * scale, 0); ctx.lineTo(32 * scale, 0); ctx.stroke();
+            ctx.restore();
+
+            ctx.fillStyle = "#1e293b"; ctx.strokeStyle = "#facc15"; ctx.lineWidth = 2 * scale;
+            ctx.fillRect(cx - 14 * scale, cy - 32 * scale - 25 * scale, 28 * scale, 25 * scale);
+            ctx.fillRect(cx - 14 * scale, cy + 32 * scale, 28 * scale, 25 * scale);
+
+            if (state.Omega > 0 && Math.random() < 0.6) {
+                ctx.fillStyle = "#00ffff";
+                ctx.beginPath(); ctx.arc(cx + (Math.random() * 16 - 8), cy - 32 * scale, 3 * scale, 0, 2 * Math.PI); ctx.fill();
+                ctx.beginPath(); ctx.arc(cx + (Math.random() * 16 - 8), cy + 32 * scale, 3 * scale, 0, 2 * Math.PI); ctx.fill();
+            }
+
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(18 * scale)}px 'Outfit', sans-serif`;
+            ctx.textAlign = "center";
+            ctx.fillText(`Vitesse : N = ${state.RPM.toFixed(0)} tr/min (${state.Omega.toFixed(1)} rad/s)`, cx, H - 30 * scale);
+            ctx.fillStyle = "#f59e0b";
+            ctx.fillText(`Courant Induit : I = ${state.I.toFixed(2)} A  |  Couple Tem = ${state.Tem.toFixed(2)} N·m`, cx, H - 8 * scale);
+
+        } else if (view === "speed") {
+            const gX = 80 * scale; const gY = 40 * scale; const gW = 740 * scale; const gH = 300 * scale;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; ctx.lineWidth = 1;
+            ctx.strokeRect(gX, gY, gW, gH);
+
+            ctx.fillStyle = "#ffffff"; ctx.font = `${Math.round(12 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText("Caractéristique Électromécanique : Vitesse N = f(U)", gX + gW / 2, gY - 15 * scale);
+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"; ctx.lineWidth = 2 * scale;
+            ctx.beginPath(); ctx.moveTo(gX, gY + gH); ctx.lineTo(gX + gW, gY + gH); ctx.moveTo(gX, gY + gH); ctx.lineTo(gX, gY); ctx.stroke();
+
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 3 * scale; ctx.beginPath();
+            const maxU = 24.0; const maxN = (60 * (24 / K)) / (2 * Math.PI);
+            for (let u = 0; u <= maxU; u += 0.5) {
+                const i_val = (TL + 0.02) / K;
+                const e_val = u - R * i_val;
+                const om_val = e_val > 0 ? e_val / K : 0;
+                const n_val = (60 * om_val) / (2 * Math.PI);
+
+                const px = gX + (u / maxU) * gW;
+                const py = (gY + gH) - (n_val / maxN) * gH;
+                if (u === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            const ptX = gX + (U / maxU) * gW;
+            const ptY = (gY + gH) - (state.RPM / maxN) * gH;
+            ctx.fillStyle = "#facc15"; ctx.beginPath(); ctx.arc(ptX, ptY, 6 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.fillText(`Point M (${U.toFixed(1)}V, ${state.RPM.toFixed(0)} tr/min)`, ptX, ptY - 10 * scale);
+
+        } else if (view === "torque" || view === "efficiency") {
+            const gX = 80 * scale; const gY = 40 * scale; const gW = 740 * scale; const gH = 300 * scale;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; ctx.lineWidth = 1; ctx.strokeRect(gX, gY, gW, gH);
+
+            const isEta = view === "efficiency";
+            ctx.fillStyle = "#ffffff"; ctx.font = `${Math.round(12 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText(isEta ? "Courbe de Rendement : η = f(I)" : "Caractéristique Interne de Couple : Tem = f(I)", gX + gW / 2, gY - 15 * scale);
+
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.5)"; ctx.lineWidth = 2 * scale;
+            ctx.beginPath(); ctx.moveTo(gX, gY + gH); ctx.lineTo(gX + gW, gY + gH); ctx.moveTo(gX, gY + gH); ctx.lineTo(gX, gY); ctx.stroke();
+
+            ctx.strokeStyle = isEta ? "#10b981" : "#f59e0b"; ctx.lineWidth = 3 * scale; ctx.beginPath();
+            const maxI = 15.0; const maxY = isEta ? 100 : (K * maxI);
+
+            for (let curI = 0.1; curI <= maxI; curI += 0.2) {
+                let yVal = 0;
+                if (isEta) {
+                    const e_val = Math.max(0, U - R * curI);
+                    const om_val = e_val / K;
+                    const pa = U * curI;
+                    const pu = (K * curI - 0.02) * om_val;
+                    yVal = pa > 0 ? Math.max(0, Math.min(100, (pu / pa) * 100)) : 0;
+                } else {
+                    yVal = K * curI;
+                }
+
+                const px = gX + (curI / maxI) * gW;
+                const py = (gY + gH) - (yVal / maxY) * gH;
+                if (curI === 0.1) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            const valY = isEta ? state.eta : state.Tem;
+            const ptX = gX + (state.I / maxI) * gW;
+            const ptY = (gY + gH) - (valY / maxY) * gH;
+            ctx.fillStyle = "#facc15"; ctx.beginPath(); ctx.arc(ptX, ptY, 6 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.fillText(`Point M (${state.I.toFixed(2)}A, ${valY.toFixed(1)}${isEta ? '%' : 'N·m'})`, ptX, ptY - 10 * scale);
+        }
+    }
+
+    if (moteurCcInterval) clearInterval(moteurCcInterval);
+    moteurCcInterval = setInterval(draw, 30);
+
+    updateCalculations();
+    updatePointsTable();
+}
+
 

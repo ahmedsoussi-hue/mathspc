@@ -3316,3 +3316,22 @@ h1, h2, h3, h4, h5, h6 {
         width: 100%;
     }
 }
+
+/* Focométrie styling custom classes */
+.focometrie-select {
+    background-color: var(--bg-card, #1e293b);
+    border: 1px solid var(--border-color, rgba(255,255,255,0.08));
+    color: var(--text-primary, #ffffff);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+.focometrie-select:focus {
+    border-color: var(--primary);
+}
+

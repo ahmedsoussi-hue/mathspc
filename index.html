@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=1.0.8">
+    <link rel="stylesheet" href="style.css?v=1.0.9">
     <!-- MathJax for rendering Equations -->
     <script>
         window.MathJax = {
@@ -314,6 +314,69 @@
                                 <span>Construction de graphes de fonctions</span>
                             </div>
                         </button>
+                        <button class="anim-select-btn" data-anim="focometrie">
+                            <div class="btn-icon-wrapper"><i data-lucide="eye"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>Focométrie (Optique)</strong>
+                                <span>Bessel, Silbermann, Autocollimation, Badal</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="photovoltaique">
+                            <div class="btn-icon-wrapper"><i data-lucide="sun"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>Cellule Photovoltaïque</strong>
+                                <span>Caractéristique I-U, P-U & Rendement</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="charge-electron">
+                            <div class="btn-icon-wrapper"><i data-lucide="magnet"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>Charge spécifique e/m</strong>
+                                <span>Expérience de J.J. Thomson & Helmholtz</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="diodes-redressement">
+                            <div class="btn-icon-wrapper"><i data-lucide="zap"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>TP : Diodes & Applications</strong>
+                                <span>Redressement (mono/double) & Filtrage</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="transistor-bipolaire">
+                            <div class="btn-icon-wrapper"><i data-lucide="cpu"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>TP : Transistor Bipolaire</strong>
+                                <span>Caractéristiques \(I_B(V_{BE})\) & \(I_C(V_{CE})\)</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="aop-amplificateur">
+                            <div class="btn-icon-wrapper"><i data-lucide="activity"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>TP : Amplificateur Opérationnel</strong>
+                                <span>Tensions d'entrée \(V_{in}\) & de sortie \(V_{out}\)</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="mesure-resistances">
+                            <div class="btn-icon-wrapper"><i data-lucide="calculator"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>TP : Mesure de Résistances</strong>
+                                <span>Code des couleurs, Amont/Aval & Wheatstone</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="charge-decharge-rc">
+                            <div class="btn-icon-wrapper"><i data-lucide="battery-charging"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>TP : Charge & Décharge Condensateur</strong>
+                                <span>Dipôle RC, constante \(\tau = RC\) & Tangente</span>
+                            </div>
+                        </button>
+                        <button class="anim-select-btn" data-anim="moteur-cc">
+                            <div class="btn-icon-wrapper"><i data-lucide="disc"></i></div>
+                            <div class="btn-text-wrapper">
+                                <strong>TP : Moteur à Courant Continu</strong>
+                                <span>Caractéristiques \(N(U)\), \(T(I)\) & Rendement \(\eta\)</span>
+                            </div>
+                        </button>
                     </div>
                     <!-- Options de personnalisation -->
                     <div class="animations-settings">
@@ -541,6 +604,773 @@
                         </div>
                     </div>
 
+                    <!-- Focométrie Simulation -->
+                    <div class="anim-workspace" id="anim-focometrie" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>Focométrie - Mesure de distances focales</h3>
+                            <p>Simulez et visualisez les méthodes expérimentales de mesure de la distance focale d'une lentille convergente ou divergente.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-focometrie" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                            <div class="control-group">
+                                <label for="focometrie-method">Méthode :</label>
+                                <select id="focometrie-method" class="focometrie-select">
+                                    <option value="bessel">Méthode de Bessel (Lentille convergente)</option>
+                                    <option value="silbermann">Méthode de Silbermann (Lentille convergente)</option>
+                                    <option value="autocollimation">Méthode d'autocollimation (Lentille convergente)</option>
+                                    <option value="badal">Méthode de Badal (Lentille divergente)</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Control: focal length of main lens (f or f1 for Badal) -->
+                            <div class="control-group" id="group-focometrie-f">
+                                <label id="label-focometrie-f" for="focometrie-f">Focale L1 (f) : <span id="val-focometrie-f">100</span> mm</label>
+                                <input type="range" id="focometrie-f" min="50" max="180" step="5" value="100">
+                            </div>
+
+                            <!-- Control: focal length of diverging lens for Badal -->
+                            <div class="control-group" id="group-focometrie-f2" style="display: none;">
+                                <label for="focometrie-f2">Focale L2 (f2) : <span id="val-focometrie-f2">-120</span> mm</label>
+                                <input type="range" id="focometrie-f2" min="-200" max="-60" step="5" value="-120">
+                            </div>
+
+                            <!-- Control: Object-Screen distance D -->
+                            <div class="control-group" id="group-focometrie-D">
+                                <label id="label-focometrie-D" for="focometrie-D">Distance D (Obj-Écran) : <span id="val-focometrie-D">500</span> mm</label>
+                                <input type="range" id="focometrie-D" min="300" max="800" step="10" value="500">
+                            </div>
+
+                            <!-- Control: Lens Position xL -->
+                            <div class="control-group" id="group-focometrie-xL">
+                                <label id="label-focometrie-xL" for="focometrie-xL">Pos. Lentille L (x) : <span id="val-focometrie-xL">250</span> mm</label>
+                                <input type="range" id="focometrie-xL" min="50" max="450" step="1" value="250">
+                            </div>
+
+                            <!-- Control: Object Position xO (for Badal) -->
+                            <div class="control-group" id="group-focometrie-xO" style="display: none;">
+                                <label for="focometrie-xO">Pos. Objet (xO) : <span id="val-focometrie-xO">80</span> mm</label>
+                                <input type="range" id="focometrie-xO" min="20" max="180" step="2" value="80">
+                            </div>
+
+                            <!-- Control: Screen Position xS (for Badal/Autocollim) -->
+                            <div class="control-group" id="group-focometrie-xS" style="display: none;">
+                                <label for="focometrie-xS">Pos. Écran (xS) : <span id="val-focometrie-xS">450</span> mm</label>
+                                <input type="range" id="focometrie-xS" min="300" max="800" step="1" value="450">
+                            </div>
+
+                            <div class="control-group buttons-group" id="focometrie-buttons" style="min-width: 150px;">
+                                <button class="btn btn-primary" id="btn-focometrie-auto"><i data-lucide="sparkles"></i> Ajuster</button>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="focometrie-theory">
+                            <!-- Injected dynamically by JS depending on method -->
+                        </div>
+                    </div>
+
+                    <!-- Photovoltaïque Simulation -->
+                    <div class="anim-workspace" id="anim-photovoltaique" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>Caractéristique d'une cellule photovoltaïque</h3>
+                            <p>Étudiez le comportement électrique d'une cellule solaire sous différentes conditions d'éclairement (irradiance) et de charge (résistance), tracez les caractéristiques $I=f(U)$ et $P=f(U)$, puis déterminez son rendement électrique maximum.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-photovoltaique" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+                            <!-- Eclairement / Irradiance -->
+                            <div class="control-group">
+                                <label for="pv-irradiance">Irradiance (E) : <span id="val-pv-irradiance">800</span> W/m²</label>
+                                <input type="range" id="pv-irradiance" min="100" max="1000" step="50" value="800">
+                            </div>
+                            
+                            <!-- Surface de la cellule -->
+                            <div class="control-group">
+                                <label for="pv-surface">Surface (S) : <span id="val-pv-surface">50</span> cm²</label>
+                                <input type="range" id="pv-surface" min="10" max="100" step="5" value="50">
+                            </div>
+
+                            <!-- Résistance de charge (Rhéostat) -->
+                            <div class="control-group">
+                                <label for="pv-resistance">Rhéostat (R) : <span id="val-pv-resistance">50</span> Ω</label>
+                                <input type="range" id="pv-resistance" min="0" max="500" step="5" value="50">
+                            </div>
+
+                            <!-- Buttons group -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-pv-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer</button>
+                                    <button class="btn btn-secondary" id="btn-pv-plot" style="flex: 1;"><i data-lucide="line-chart"></i> Tracer</button>
+                                    <button class="btn btn-secondary" id="btn-pv-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <!-- Points Data table -->
+                                <div class="photovoltaique-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">Point</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">U (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">I (mA)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">P (mW)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="photovoltaique-points-body">
+                                            <tr>
+                                                <td colspan="4" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="photovoltaique-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Charge Spécifique de l'Électron -->
+                    <div class="anim-workspace" id="anim-charge-electron" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>Mesure de la charge spécifique de l'électron (e/m)</h3>
+                            <p>Simulez l'expérience historique de J.J. Thomson (tube filiforme) : déviez un faisceau d'électrons à l'aide du champ magnétique créé par des bobines de Helmholtz, ajustez le réticule pour mesurer le diamètre de la trajectoire circulaire et déduisez-en le rapport $e/m$.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-charge-electron" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <!-- Tension d'accélération U -->
+                            <div class="control-group">
+                                <label for="ce-voltage">Tension Anodique (\(U\)) : <span id="val-ce-voltage">200</span> V</label>
+                                <input type="range" id="ce-voltage" min="100" max="300" step="5" value="200">
+                            </div>
+                            
+                            <!-- Courant Helmholtz I -->
+                            <div class="control-group">
+                                <label for="ce-current">Courant Bobines (\(I\)) : <span id="val-ce-current">1.50</span> A</label>
+                                <input type="range" id="ce-current" min="0.5" max="2.5" step="0.05" value="1.50">
+                            </div>
+
+                            <!-- Position du réticule (mesure) -->
+                            <div class="control-group">
+                                <label for="ce-reticule">Réticule (\(D_{mes}\)) : <span id="val-ce-reticule">8.00</span> cm</label>
+                                <input type="range" id="ce-reticule" min="3.0" max="12.0" step="0.05" value="8.00">
+                            </div>
+
+                            <!-- Options toggles -->
+                            <div class="control-group" style="justify-content: center; gap: 4px;">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <input type="checkbox" id="ce-show-vectors" checked style="width: 14px; height: 14px; cursor: pointer;">
+                                    <label for="ce-show-vectors" style="cursor: pointer; margin-bottom: 0;">Afficher vecteurs</label>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                                    <input type="checkbox" id="ce-show-coils" checked style="width: 14px; height: 14px; cursor: pointer;">
+                                    <label for="ce-show-coils" style="cursor: pointer; margin-bottom: 0;">Afficher bobines</label>
+                                </div>
+                            </div>
+
+                            <!-- Buttons group -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-ce-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer</button>
+                                    <button class="btn btn-secondary" id="btn-ce-plot" style="flex: 1;"><i data-lucide="line-chart"></i> Tracer tout</button>
+                                    <button class="btn btn-secondary" id="btn-ce-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <!-- Points Data table -->
+                                <div class="charge-electron-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">Point</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">U (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">I (A)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">B (mT)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">D (cm)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">e/m (10¹¹ C/kg)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="charge-electron-points-body">
+                                            <tr>
+                                                <td colspan="6" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Alignez le réticule et cliquez sur Mesurer.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="charge-electron-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Diodes & Redressement Simulation Workspace -->
+                    <div class="anim-workspace" id="anim-diodes-redressement" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>TP : Diodes et Applications — Redressement & Filtrage</h3>
+                            <p>Utiliser une diode de redressement pour générer des signaux redressés (simple ou double alternance) et filtrés par condensateur $C$. Étudiez la tension de seuil $V_0$, la tension moyenne $V_{dc}$ et la tension d'ondulation $\Delta U$.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-diodes-redressement" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <!-- Mode de Redressement -->
+                            <div class="control-group">
+                                <label for="dr-mode">Type de Redressement :</label>
+                                <select id="dr-mode" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="simple">Simple Alternance (1 Diode)</option>
+                                    <option value="double">Double Alternance (Pont de Graetz 4 Diodes)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tension Crête E_max -->
+                            <div class="control-group">
+                                <label for="dr-emax">Tension Crête (\(E_{max}\)) : <span id="val-dr-emax">12.0</span> V</label>
+                                <input type="range" id="dr-emax" min="3.0" max="24.0" step="0.5" value="12.0">
+                            </div>
+
+                            <!-- Fréquence f -->
+                            <div class="control-group">
+                                <label for="dr-freq">Fréquence (\(f\)) : <span id="val-dr-freq">50</span> Hz</label>
+                                <input type="range" id="dr-freq" min="10" max="200" step="5" value="50">
+                            </div>
+
+                            <!-- Seuil Diode V0 -->
+                            <div class="control-group">
+                                <label for="dr-v0">Seuil Diode (\(V_0\)) : <span id="val-dr-v0">0.70</span> V</label>
+                                <input type="range" id="dr-v0" min="0.0" max="1.5" step="0.05" value="0.70">
+                            </div>
+
+                            <!-- Résistance de Charge R -->
+                            <div class="control-group">
+                                <label for="dr-resistance">Charge (\(R\)) : <span id="val-dr-resistance">1000</span> \(\Omega\)</label>
+                                <input type="range" id="dr-resistance" min="100" max="5000" step="100" value="1000">
+                            </div>
+
+                            <!-- Condensateur C -->
+                            <div class="control-group">
+                                <label for="dr-capacitor">Filtrage (\(C\)) : <span id="val-dr-capacitor">100</span> \(\mu\text{F}\)</label>
+                                <input type="range" id="dr-capacitor" min="0" max="1000" step="20" value="100">
+                            </div>
+
+                            <!-- Checkbox Options -->
+                            <div class="control-group" style="justify-content: center; gap: 4px;">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <input type="checkbox" id="dr-show-ein" checked style="width: 14px; height: 14px; cursor: pointer;">
+                                    <label for="dr-show-ein" style="cursor: pointer; margin-bottom: 0;">Signal d'entrée \(e(t)\)</label>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                                    <input type="checkbox" id="dr-show-uout" checked style="width: 14px; height: 14px; cursor: pointer;">
+                                    <label for="dr-show-uout" style="cursor: pointer; margin-bottom: 0;">Signal de sortie \(u_s(t)\)</label>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons & Data Table -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-dr-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer</button>
+                                    <button class="btn btn-secondary" id="btn-dr-pause" style="flex: 1;"><i data-lucide="pause"></i> Pause</button>
+                                    <button class="btn btn-secondary" id="btn-dr-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <div class="diodes-redressement-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">Mode</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">C (\(\mu\)F)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">R (\(\Omega\))</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(V_{dc}\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(\Delta U\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">r (%)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="diodes-redressement-points-body">
+                                            <tr>
+                                                <td colspan="6" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer".</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="diodes-redressement-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Transistor Bipolaire Simulation Workspace -->
+                    <div class="anim-workspace" id="anim-transistor-bipolaire" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>TP : Transistors Bipolaires — Caractéristiques d'Entrée & de Sortie</h3>
+                            <p>Faire connaissance avec le transistor bipolaire NPN. Tracez la caractéristique d'entrée $I_B = f(V_{BE})$, le réseau de caractéristiques de sortie $I_C = f(V_{CE})$, la droite de charge et identifiez le point de fonctionnement $Q(V_{CEQ}, I_{CQ})$.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-transistor-bipolaire" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));">
+                            <!-- Courbe à afficher -->
+                            <div class="control-group">
+                                <label for="tb-plot-type">Graphe :</label>
+                                <select id="tb-plot-type" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="output">Sortie Ic = f(Vce)</option>
+                                    <option value="input">Entrée Ib = f(Vbe)</option>
+                                    <option value="transfer">Transfert Ic = f(Ib)</option>
+                                </select>
+                            </div>
+
+                            <!-- Gain beta (hfe) -->
+                            <div class="control-group">
+                                <label for="tb-beta">Gain en courant (\(\beta\)) : <span id="val-tb-beta">200</span></label>
+                                <input type="range" id="tb-beta" min="50" max="400" step="10" value="200">
+                            </div>
+
+                            <!-- Courant de base Ib -->
+                            <div class="control-group">
+                                <label for="tb-ib">Courant Base (\(I_B\)) : <span id="val-tb-ib">40</span> \(\mu\text{A}\)</label>
+                                <input type="range" id="tb-ib" min="0" max="100" step="5" value="40">
+                            </div>
+
+                            <!-- Tension Vce / Vcc -->
+                            <div class="control-group">
+                                <label for="tb-vcc">Alim (\(V_{CC}\)) : <span id="val-tb-vcc">12.0</span> V</label>
+                                <input type="range" id="tb-vcc" min="3.0" max="20.0" step="0.5" value="12.0">
+                            </div>
+
+                            <!-- Résistance de Charge Rc -->
+                            <div class="control-group">
+                                <label for="tb-rc">Charge (\(R_C\)) : <span id="val-tb-rc">1000</span> \(\Omega\)</label>
+                                <input type="range" id="tb-rc" min="100" max="2000" step="50" value="1000">
+                            </div>
+
+                            <!-- Options toggles -->
+                            <div class="control-group" style="justify-content: center; gap: 4px;">
+                                <div style="display: flex; align-items: center; gap: 6px;">
+                                    <input type="checkbox" id="tb-show-loadline" checked style="width: 14px; height: 14px; cursor: pointer;">
+                                    <label for="tb-show-loadline" style="cursor: pointer; margin-bottom: 0;">Droite de charge</label>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
+                                    <input type="checkbox" id="tb-show-network" checked style="width: 14px; height: 14px; cursor: pointer;">
+                                    <label for="tb-show-network" style="cursor: pointer; margin-bottom: 0;">Réseau de courbes</label>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons & Data Table -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-tb-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer Q</button>
+                                    <button class="btn btn-secondary" id="btn-tb-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <div class="transistor-bipolaire-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(I_B\) (\(\mu\)A)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(V_{BE}\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(V_{CE}\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(I_C\) (mA)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">Régime</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="transistor-bipolaire-points-body">
+                                            <tr>
+                                                <td colspan="5" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer Q".</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="transistor-bipolaire-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Amplificateur Opérationnel Simulation Workspace -->
+                    <div class="anim-workspace" id="anim-aop-amplificateur" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>TP : Amplificateur Opérationnel — Visualisation des Tensions d'Entrée & de Sortie</h3>
+                            <p>Visualisez en temps réel sur l'oscilloscope bicanal la tension d'entrée $V_{in}(t)$ et de sortie $V_{out}(t)$. Étudiez le gain en tension $A_v$, le déphasage ($\pi$), l'effet des résistances $R_1$, $R_2$ et la saturation $\pm V_{sat}$.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-aop-amplificateur" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <!-- Montage / Mode -->
+                            <div class="control-group">
+                                <label for="aop-mode">Montage AOP :</label>
+                                <select id="aop-mode" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="inverting">Amplificateur Inverseur (Av = -R2/R1)</option>
+                                    <option value="noninverting">Amplificateur Non-Inverseur (Av = 1 + R2/R1)</option>
+                                    <option value="follower">Suiveur de Tension (Av = 1)</option>
+                                    <option value="summing">Amplificateur Sommateur (Vout = -(V1 + V2))</option>
+                                    <option value="differential">Amplificateur Soustracteur (Vout = V2 - V1)</option>
+                                    <option value="integrator">Amplificateur Intégrateur (Vout = -∫Vin dt)</option>
+                                    <option value="differentiator">Amplificateur Dérivateur (Vout = -dVin/dt)</option>
+                                    <option value="comparator">Comparateur Simple (Saturé ±Vsat)</option>
+                                </select>
+                            </div>
+
+                            <!-- Forme du signal -->
+                            <div class="control-group">
+                                <label for="aop-waveform">Signal d'entrée :</label>
+                                <select id="aop-waveform" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="sine">Sinusoïdal</option>
+                                    <option value="triangle">Triangulaire</option>
+                                    <option value="square">Carré</option>
+                                </select>
+                            </div>
+
+                            <!-- Amplitude d'entrée Vin / V1 -->
+                            <div class="control-group">
+                                <label for="aop-vin">Entrée 1 (\(V_1\)) : <span id="val-aop-vin">1.0</span> V</label>
+                                <input type="range" id="aop-vin" min="0.1" max="5.0" step="0.1" value="1.0">
+                            </div>
+
+                            <!-- Amplitude d'entrée V2 (pour Sommateur / Soustracteur) -->
+                            <div class="control-group" id="group-aop-v2">
+                                <label for="aop-v2">Entrée 2 (\(V_2\)) : <span id="val-aop-v2">0.5</span> V</label>
+                                <input type="range" id="aop-v2" min="-3.0" max="3.0" step="0.1" value="0.5">
+                            </div>
+
+                            <!-- Fréquence f -->
+                            <div class="control-group">
+                                <label for="aop-freq">Fréquence (\(f\)) : <span id="val-aop-freq">50</span> Hz</label>
+                                <input type="range" id="aop-freq" min="10" max="500" step="10" value="50">
+                            </div>
+
+                            <!-- Résistance R1 -->
+                            <div class="control-group">
+                                <label for="aop-r1">Résistance (\(R_1\)) : <span id="val-aop-r1">10</span> k\(\Omega\)</label>
+                                <input type="range" id="aop-r1" min="1" max="20" step="1" value="10">
+                            </div>
+
+                            <!-- Résistance R2 -->
+                            <div class="control-group">
+                                <label for="aop-r2">Résistance (\(R_2\)) : <span id="val-aop-r2">30</span> k\(\Omega\)</label>
+                                <input type="range" id="aop-r2" min="1" max="100" step="1" value="30">
+                            </div>
+
+                            <!-- Tension de Saturation Vsat -->
+                            <div class="control-group">
+                                <label for="aop-vsat">Saturation (\(V_{sat}\)) : <span id="val-aop-vsat">12.0</span> V</label>
+                                <input type="range" id="aop-vsat" min="5.0" max="15.0" step="0.5" value="12.0">
+                            </div>
+
+                            <!-- Action Buttons & Data Table -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-aop-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer</button>
+                                    <button class="btn btn-secondary" id="btn-aop-pause" style="flex: 1;"><i data-lucide="pause"></i> Pause</button>
+                                    <button class="btn btn-secondary" id="btn-aop-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <div class="aop-amplificateur-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">Montage</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(V_{in,max}\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">Gain \(A_v\)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(V_{out,max}\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">État</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="aop-amplificateur-points-body">
+                                            <tr>
+                                                <td colspan="5" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer".</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="aop-amplificateur-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Mesure de Résistances Simulation Workspace -->
+                    <div class="anim-workspace" id="anim-mesure-resistances" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>TP : Mesure de Résistances — Code des Couleurs, Amont/Aval & Wheatstone</h3>
+                            <p>Déterminez la résistance par le code des couleurs à 4 anneaux, étudiez l'erreur systématique de la méthode Volt-Ampèremétrique (Montages Amont et Aval), et équilibrez le Pont de Wheatstone.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-mesure-resistances" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <!-- Méthode Select -->
+                            <div class="control-group">
+                                <label for="res-mode">Méthode de Mesure :</label>
+                                <select id="res-mode" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="colorcode">Code des Couleurs (Anneaux)</option>
+                                    <option value="aval">Volt-Ampèremétrique (Montage Aval)</option>
+                                    <option value="amont">Volt-Ampèremétrique (Montage Amont)</option>
+                                    <option value="wheatstone">Pont de Wheatstone à l'Équilibre</option>
+                                </select>
+                            </div>
+
+                            <!-- Anneau 1 -->
+                            <div class="control-group" id="group-res-b1">
+                                <label for="res-b1">1er Anneau (Chiffre 1) :</label>
+                                <select id="res-b1" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="0">0 - Noir</option>
+                                    <option value="1">1 - Marron</option>
+                                    <option value="2">2 - Rouge</option>
+                                    <option value="3">3 - Orange</option>
+                                    <option value="4" selected>4 - Jaune</option>
+                                    <option value="5">5 - Vert</option>
+                                    <option value="6">6 - Bleu</option>
+                                    <option value="7">7 - Violet</option>
+                                    <option value="8">8 - Gris</option>
+                                    <option value="9">9 - Blanc</option>
+                                </select>
+                            </div>
+
+                            <!-- Anneau 2 -->
+                            <div class="control-group" id="group-res-b2">
+                                <label for="res-b2">2ème Anneau (Chiffre 2) :</label>
+                                <select id="res-b2" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="0">0 - Noir</option>
+                                    <option value="1">1 - Marron</option>
+                                    <option value="2">2 - Rouge</option>
+                                    <option value="3" selected>3 - Orange</option>
+                                    <option value="4">4 - Jaune</option>
+                                    <option value="5">5 - Vert</option>
+                                    <option value="6">6 - Bleu</option>
+                                    <option value="7">7 - Violet</option>
+                                    <option value="8">8 - Gris</option>
+                                    <option value="9">9 - Blanc</option>
+                                </select>
+                            </div>
+
+                            <!-- Multiplicateur -->
+                            <div class="control-group" id="group-res-mult">
+                                <label for="res-mult">Multiplicateur :</label>
+                                <select id="res-mult" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="1">x1 Ω (Noir)</option>
+                                    <option value="10">x10 Ω (Marron)</option>
+                                    <option value="100" selected>x100 Ω (Rouge)</option>
+                                    <option value="1000">x1 kΩ (Orange)</option>
+                                    <option value="10000">x10 kΩ (Jaune)</option>
+                                    <option value="100000">x100 kΩ (Vert)</option>
+                                    <option value="1000000">x1 MΩ (Bleu)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tolérance -->
+                            <div class="control-group" id="group-res-tol">
+                                <label for="res-tol">Tolérance :</label>
+                                <select id="res-tol" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="5" selected>±5% (Or)</option>
+                                    <option value="10">±10% (Argent)</option>
+                                    <option value="1">±1% (Marron)</option>
+                                    <option value="2">±2% (Rouge)</option>
+                                </select>
+                            </div>
+
+                            <!-- Slider Tension E -->
+                            <div class="control-group" id="group-res-e" style="display:none;">
+                                <label for="res-e">Tension Générateur (\(E\)) : <span id="val-res-e">10.0</span> V</label>
+                                <input type="range" id="res-e" min="1" max="20" step="0.5" value="10.0">
+                            </div>
+
+                            <!-- Slider Résistance Rx -->
+                            <div class="control-group" id="group-res-rx" style="display:none;">
+                                <label for="res-rx">Résistance à mesurer (\(R_x\)) : <span id="val-res-rx">470</span> \(\Omega\)</label>
+                                <input type="range" id="res-rx" min="10" max="2000" step="10" value="470">
+                            </div>
+
+                            <!-- Slider Potentiomètre R3 Wheatstone -->
+                            <div class="control-group" id="group-res-r3" style="display:none;">
+                                <label for="res-r3">Réglage Potentiomètre (\(R_3\)) : <span id="val-res-r3">470</span> \(\Omega\)</label>
+                                <input type="range" id="res-r3" min="10" max="2000" step="5" value="470">
+                            </div>
+
+                            <!-- Action Buttons & Data Table -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-res-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Enregistrer</button>
+                                    <button class="btn btn-secondary" id="btn-res-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <div class="mesure-resistances-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">Méthode</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(R_{réelle}\) (\(\Omega\))</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(R_{mesurée}\) (\(\Omega\))</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">Erreur \(\Delta R/R\)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">État</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="mesure-resistances-points-body">
+                                            <tr>
+                                                <td colspan="5" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point enregistré. Cliquez sur "Enregistrer".</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="mesure-resistances-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Charge et Décharge Condensateur Workspace -->
+                    <div class="anim-workspace" id="anim-charge-decharge-rc" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>TP : Charge et Décharge d'un Condensateur — Régime Transitoire Dipôle RC</h3>
+                            <p>Visualisez l'évolution temporelle de la tension $u_C(t)$ lors de la charge et décharge du condensateur. Mesurez la constante de temps $\tau = R \cdot C$ par la tangente à l'origine et par $63\%$ / $37\%$ de $E$.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-charge-decharge-rc" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <!-- Switch Position -->
+                            <div class="control-group" style="min-width: 160px;">
+                                <label>Interrupteur K :</label>
+                                <button class="btn btn-primary" id="btn-rc-toggle-switch" style="width: 100%; padding: 8px; font-size: 0.85rem; font-weight: 700;">
+                                    ⚡ Position 1 (Charge)
+                                </button>
+                            </div>
+
+                            <!-- Tension Générateur E -->
+                            <div class="control-group">
+                                <label for="rc-voltage">Tension (\(E\)) : <span id="val-rc-voltage">10.0</span> V</label>
+                                <input type="range" id="rc-voltage" min="1.0" max="12.0" step="0.5" value="10.0">
+                            </div>
+
+                            <!-- Résistance R -->
+                            <div class="control-group">
+                                <label for="rc-r">Résistance (\(R\)) : <span id="val-rc-r">10.0</span> k\(\Omega\)</label>
+                                <input type="range" id="rc-r" min="1.0" max="100.0" step="1.0" value="10.0">
+                            </div>
+
+                            <!-- Capacité C -->
+                            <div class="control-group">
+                                <label for="rc-c">Capacité (\(C\)) : <span id="val-rc-c">47</span> \(\mu\)F</label>
+                                <input type="range" id="rc-c" min="1" max="200" step="1" value="47">
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-rc-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer \(\tau\)</button>
+                                    <button class="btn btn-secondary" id="btn-rc-pause" style="flex: 1;"><i data-lucide="pause"></i> Pause</button>
+                                    <button class="btn btn-secondary" id="btn-rc-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <div class="charge-decharge-rc-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">Régime</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(E\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(R\) (k\(\Omega\))</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(C\) (\(\mu\)F)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(\tau = RC\) (ms)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(u_C(\tau)\) (V)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="charge-decharge-rc-points-body">
+                                            <tr>
+                                                <td colspan="6" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer \(\tau\)".</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="charge-decharge-rc-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Moteur à Courant Continu Simulation Workspace -->
+                    <div class="anim-workspace" id="anim-moteur-cc" style="display:none;">
+                        <div class="workspace-header">
+                            <h3>TP : Moteur à Courant Continu — Caractéristiques Électromécaniques & Rendement</h3>
+                            <p>Visualisez la rotation du rotor du Moteur CC en temps réel, ajustez la tension d'alimentation $U$ et le couple de charge $T_L$, tracez les caractéristiques $N(U)$, $T_{em}(I)$ et évaluez le rendement $\eta$.</p>
+                        </div>
+                        <div class="canvas-container">
+                            <canvas id="canvas-moteur-cc" width="900" height="400"></canvas>
+                        </div>
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <!-- Vue / Mode Select -->
+                            <div class="control-group">
+                                <label for="mcc-view">Affichage / Courbe :</label>
+                                <select id="mcc-view" style="padding: 6px 10px; border-radius: 6px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border-color, rgba(255,255,255,0.1)); font-size: 0.8rem; cursor: pointer;">
+                                    <option value="rotor">Animation Rotor & Champ B</option>
+                                    <option value="speed">Caractéristique Vitesse N = f(U)</option>
+                                    <option value="torque">Caractéristique Couple Tem = f(I)</option>
+                                    <option value="efficiency">Courbe de Rendement η = f(I)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tension d'alimentation U -->
+                            <div class="control-group">
+                                <label for="mcc-u">Tension (\(U\)) : <span id="val-mcc-u">12.0</span> V</label>
+                                <input type="range" id="mcc-u" min="0.0" max="24.0" step="0.5" value="12.0">
+                            </div>
+
+                            <!-- Couple de charge TL -->
+                            <div class="control-group">
+                                <label for="mcc-tl">Couple Charge (\(T_L\)) : <span id="val-mcc-tl">0.20</span> N·m</label>
+                                <input type="range" id="mcc-tl" min="0.00" max="2.00" step="0.05" value="0.20">
+                            </div>
+
+                            <!-- Résistance R -->
+                            <div class="control-group">
+                                <label for="mcc-r">Résistance Induit (\(R\)) : <span id="val-mcc-r">1.0</span> \(\Omega\)</label>
+                                <input type="range" id="mcc-r" min="0.5" max="5.0" step="0.1" value="1.0">
+                            </div>
+
+                            <!-- Constante moteur K -->
+                            <div class="control-group">
+                                <label for="mcc-k">Constante (\(K = K\Phi\)) : <span id="val-mcc-k">0.10</span> V·s/rad</label>
+                                <input type="range" id="mcc-k" min="0.05" max="0.50" step="0.01" value="0.10">
+                            </div>
+
+                            <!-- Action Buttons & Data Table -->
+                            <div class="control-group buttons-group" style="min-width: 250px; grid-column: span 2; display: flex; flex-direction: column; gap: 8px;">
+                                <div style="display: flex; gap: 8px; width: 100%;">
+                                    <button class="btn btn-primary" id="btn-mcc-record" style="flex: 1;"><i data-lucide="plus-circle"></i> Mesurer Point</button>
+                                    <button class="btn btn-secondary" id="btn-mcc-pause" style="flex: 1;"><i data-lucide="pause"></i> Pause</button>
+                                    <button class="btn btn-secondary" id="btn-mcc-clear" style="flex: 1; padding: 8px;"><i data-lucide="trash-2"></i> Vider</button>
+                                </div>
+                                
+                                <div class="moteur-cc-table-wrapper" style="width: 100%; max-height: 90px; overflow-y: auto; background: rgba(0, 0, 0, 0.2); border-radius: 8px; border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));">
+                                    <table style="width: 100%; border-collapse: collapse; text-align: center; color: var(--text-primary, #ffffff); font-size: 0.8rem;">
+                                        <thead>
+                                            <tr style="background: rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(U\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(I\) (A)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(E\) (V)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(N\) (tr/min)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">\(T_{em}\) (N·m)</th>
+                                                <th style="padding: 4px; font-size: 0.75rem;">Rendement \(\eta\)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="moteur-cc-points-body">
+                                            <tr>
+                                                <td colspan="6" style="padding: 6px; color: var(--text-secondary, #94a3b8); font-style: italic; font-size: 0.75rem;">Aucun point mesuré. Cliquez sur "Mesurer Point".</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="workspace-theory" id="moteur-cc-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -748,6 +1578,6 @@
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js?v=1.1.1"></script>
+    <script src="app.js?v=1.2.2"></script>
 </body>
 </html>
