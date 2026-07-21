@@ -11519,6 +11519,125 @@ function setupMoteurCcSimulator() {
             ctx.fillText(`• Couple Tem = K·I = ${state.Tem.toFixed(2)} N·m`, schemX + 20 * scale, pBoxY + 72 * scale);
             ctx.fillStyle = "#10b981";
             ctx.fillText(`• Puissance Pa = U·I = ${state.Pa.toFixed(1)} W`, schemX + 20 * scale, pBoxY + 90 * scale);
+        } else if (view === "principle") {
+            // DETAILED ELECTROMAGNETIC PRINCIPLE & LAPLACE FORCES ANIMATION
+            const cx = 310 * scale;
+            const cy = H / 2 - 10 * scale;
+            const rRadius = 90 * scale;
+
+            // Stator Poles N (Red) and S (Blue)
+            const poleW = 100 * scale;
+            const poleH = 160 * scale;
+
+            // North Pole (Left - Red)
+            ctx.fillStyle = "#ef4444"; ctx.fillRect(cx - rRadius - poleW, cy - poleH / 2, poleW, poleH);
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(22 * scale)}px sans-serif`; ctx.textAlign = "center";
+            ctx.fillText("N (Nord)", cx - rRadius - poleW / 2, cy + 8 * scale);
+
+            // South Pole (Right - Blue)
+            ctx.fillStyle = "#3b82f6"; ctx.fillRect(cx + rRadius, cy - poleH / 2, poleW, poleH);
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(22 * scale)}px sans-serif`;
+            ctx.fillText("S (Sud)", cx + rRadius + poleW / 2, cy + 8 * scale);
+
+            // Magnetic Field Lines B (Green Animated Arrows N -> S)
+            ctx.strokeStyle = "rgba(16, 185, 129, 0.6)"; ctx.lineWidth = 2.5 * scale;
+            ctx.setLineDash([8, 8]);
+            for (let y = cy - 55 * scale; y <= cy + 55 * scale; y += 22 * scale) {
+                ctx.beginPath(); ctx.moveTo(cx - rRadius, y); ctx.lineTo(cx + rRadius, y); ctx.stroke();
+            }
+            ctx.setLineDash([]);
+            ctx.fillStyle = "#10b981"; ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`;
+            ctx.fillText("Champ Magnétique B (Stator)", cx, cy - 70 * scale);
+
+            // Rotating Armature Loop (Single Spire)
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(rotorAngle);
+
+            // Loop Frame
+            ctx.strokeStyle = "#f59e0b"; ctx.lineWidth = 4 * scale;
+            ctx.strokeRect(-rRadius + 15 * scale, -30 * scale, (rRadius - 15 * scale) * 2, 60 * scale);
+
+            // Conductor 1 (Top) - Current I coming out (Circle with Dot)
+            const c1X = 0; const c1Y = -30 * scale;
+            ctx.fillStyle = "#facc15"; ctx.beginPath(); ctx.arc(c1X, c1Y, 12 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.fillStyle = "#000000"; ctx.beginPath(); ctx.arc(c1X, c1Y, 3 * scale, 0, 2 * Math.PI); ctx.fill();
+
+            // Conductor 2 (Bottom) - Current I going in (Circle with Cross)
+            const c2X = 0; const c2Y = 30 * scale;
+            ctx.fillStyle = "#facc15"; ctx.beginPath(); ctx.arc(c2X, c2Y, 12 * scale, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = "#000000"; ctx.lineWidth = 2.5 * scale;
+            ctx.beginPath(); ctx.moveTo(c2X - 5 * scale, c2Y - 5 * scale); ctx.lineTo(c2X + 5 * scale, c2Y + 5 * scale);
+            ctx.moveTo(c2X + 5 * scale, c2Y - 5 * scale); ctx.lineTo(c2X - 5 * scale, c2Y + 5 * scale); ctx.stroke();
+
+            ctx.restore();
+
+            // Calculate current Conductor Positions in World Space
+            const cond1X = cx + (-30 * scale) * Math.sin(-rotorAngle);
+            const cond1Y = cy + (-30 * scale) * Math.cos(-rotorAngle);
+            const cond2X = cx + (30 * scale) * Math.sin(-rotorAngle);
+            const cond2Y = cy + (30 * scale) * Math.cos(-rotorAngle);
+
+            // Draw Laplace Force Vectors F = I * L x B (Lime Green Arrows)
+            if (state.I > 0) {
+                const forceLen = Math.min(60 * scale, Math.max(25 * scale, state.I * 12 * scale));
+
+                // Force F1 on Conductor 1 (Upwards)
+                ctx.strokeStyle = "#a3e635"; ctx.fillStyle = "#a3e635"; ctx.lineWidth = 3.5 * scale;
+                ctx.beginPath(); ctx.moveTo(cond1X, cond1Y); ctx.lineTo(cond1X, cond1Y - forceLen); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(cond1X - 6 * scale, cond1Y - forceLen + 8 * scale); ctx.lineTo(cond1X, cond1Y - forceLen); ctx.lineTo(cond1X + 6 * scale, cond1Y - forceLen + 8 * scale); ctx.fill();
+                ctx.font = `bold ${Math.round(11 * scale)}px sans-serif`; ctx.textAlign = "center";
+                ctx.fillText("F1 = I·L·B (Haut)", cond1X, cond1Y - forceLen - 6 * scale);
+
+                // Force F2 on Conductor 2 (Downwards)
+                ctx.beginPath(); ctx.moveTo(cond2X, cond2Y); ctx.lineTo(cond2X, cond2Y + forceLen); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(cond2X - 6 * scale, cond2Y + forceLen - 8 * scale); ctx.lineTo(cond2X, cond2Y + forceLen); ctx.lineTo(cond2X + 6 * scale, cond2Y + forceLen - 8 * scale); ctx.fill();
+                ctx.fillText("F2 = -I·L·B (Bas)", cond2X, cond2Y + forceLen + 14 * scale);
+            }
+
+            // Torque Arc Arrow Tem (Counter-clockwise)
+            ctx.strokeStyle = "#facc15"; ctx.lineWidth = 3 * scale;
+            ctx.beginPath(); ctx.arc(cx, cy, rRadius + 20 * scale, Math.PI * 0.2, Math.PI * 0.8, false); ctx.stroke();
+
+            // Right Panel: Pedagogical Principle Explanation
+            const schemX = 570 * scale; const schemY = 25 * scale; const schemW = 300 * scale; const schemH = 350 * scale;
+            ctx.fillStyle = "rgba(15, 23, 42, 0.85)"; ctx.strokeStyle = "rgba(255, 255, 255, 0.12)"; ctx.lineWidth = 1.5 * scale;
+            ctx.fillRect(schemX, schemY, schemW, schemH); ctx.strokeRect(schemX, schemY, schemW, schemH);
+
+            ctx.fillStyle = "#ffffff"; ctx.font = `bold ${Math.round(13 * scale)}px 'Outfit', sans-serif`; ctx.textAlign = "center";
+            ctx.fillText("Principe Électromagnétique (Laplace)", schemX + schemW / 2, schemY + 24 * scale);
+
+            const pTextY = schemY + 50 * scale;
+            ctx.textAlign = "left"; ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+
+            ctx.fillStyle = "#ef4444"; ctx.fillText("1. Stator (Inducteur) :", schemX + 15 * scale, pTextY);
+            ctx.fillStyle = "#cbd5e1"; ctx.fillText("Crée le champ d'induction fixe B (N -> S).", schemX + 25 * scale, pTextY + 16 * scale);
+
+            ctx.fillStyle = "#f59e0b"; ctx.fillText("2. Rotor (Induit) :", schemX + 15 * scale, pTextY + 40 * scale);
+            ctx.fillStyle = "#cbd5e1"; ctx.fillText(`Parcouru par le courant I = ${state.I.toFixed(2)} A.`, schemX + 25 * scale, pTextY + 56 * scale);
+
+            ctx.fillStyle = "#a3e635"; ctx.fillText("3. Force de Laplace F = I·L x B :", schemX + 15 * scale, pTextY + 80 * scale);
+            ctx.fillStyle = "#cbd5e1"; ctx.fillText("Exerce 2 forces opposées F1 et F2.", schemX + 25 * scale, pTextY + 96 * scale);
+
+            ctx.fillStyle = "#38bdf8"; ctx.fillText("4. Couple Moteur Tem :", schemX + 15 * scale, pTextY + 120 * scale);
+            ctx.fillStyle = "#cbd5e1"; ctx.fillText(`Tem = K·I = ${state.Tem.toFixed(2)} N·m fait tourner la spire.`, schemX + 25 * scale, pTextY + 136 * scale);
+
+            // Equations Box Bottom
+            const pBoxY = schemY + 215 * scale;
+            ctx.fillStyle = "rgba(0, 0, 0, 0.4)"; ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; ctx.lineWidth = 1;
+            ctx.fillRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 125 * scale);
+            ctx.strokeRect(schemX + 10 * scale, pBoxY, schemW - 20 * scale, 125 * scale);
+
+            ctx.fillStyle = "#facc15"; ctx.font = `bold ${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("Règle des 3 doigts (Main Droite) :", schemX + 20 * scale, pBoxY + 18 * scale);
+            ctx.fillStyle = "#94a3b8"; ctx.font = `${Math.round(10 * scale)}px sans-serif`;
+            ctx.fillText("• Pouce = Force de Laplace F", schemX + 20 * scale, pBoxY + 36 * scale);
+            ctx.fillText("• Index = Champ d'Induction B", schemX + 20 * scale, pBoxY + 54 * scale);
+            ctx.fillText("• Majeur = Courant Électrique I", schemX + 20 * scale, pBoxY + 72 * scale);
+            ctx.fillStyle = "#10b981";
+            ctx.fillText(`• Force : F = I · L · B = ${(state.I * 0.8).toFixed(2)} N`, schemX + 20 * scale, pBoxY + 92 * scale);
+            ctx.fillText(`• Vitesse : N = ${state.RPM.toFixed(0)} tr/min`, schemX + 20 * scale, pBoxY + 110 * scale);
+
         } else if (view === "speed") {
             const gX = 80 * scale; const gY = 40 * scale; const gW = 740 * scale; const gH = 300 * scale;
             ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; ctx.lineWidth = 1;
