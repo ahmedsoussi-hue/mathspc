@@ -3449,34 +3449,34 @@ h1, h2, h3, h4, h5, h6 {
 /* Card Grid */
 .anim-card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
 }
 
 .anim-card {
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
-    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+    border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
 }
 
 .anim-card:hover {
-    transform: translateY(-8px) scale(1.015);
+    transform: translateY(-6px);
     border-color: var(--primary, #10b981);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.25);
 }
 
 .anim-card-img-wrapper {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 135px;
     overflow: hidden;
     background: #0f172a;
 }
@@ -3485,7 +3485,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
 }
 
 .anim-card:hover .anim-card-img-wrapper img {
@@ -3495,28 +3495,28 @@ h1, h2, h3, h4, h5, h6 {
 /* Category Badges */
 .anim-card-badge {
     position: absolute;
-    top: 12px;
-    left: 12px;
-    padding: 5px 12px;
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
     border-radius: 20px;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: #ffffff;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     backdrop-filter: blur(8px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
-.badge-optique { background: rgba(56, 189, 248, 0.85); }
-.badge-electricite { background: rgba(245, 158, 11, 0.85); }
-.badge-electronique { background: rgba(168, 85, 247, 0.85); }
-.badge-electrotechnique { background: rgba(16, 185, 129, 0.85); }
-.badge-mecanique { background: rgba(239, 68, 68, 0.85); }
+.badge-optique { background: rgba(56, 189, 248, 0.9); }
+.badge-electricite { background: rgba(245, 158, 11, 0.9); }
+.badge-electronique { background: rgba(168, 85, 247, 0.9); }
+.badge-electrotechnique { background: rgba(16, 185, 129, 0.9); }
+.badge-mecanique { background: rgba(239, 68, 68, 0.9); }
 
 .anim-card-content {
-    padding: 20px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -3525,17 +3525,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .anim-card-content h3 {
     font-family: var(--font-heading);
-    font-size: 1.15rem;
+    font-size: 1.22rem;
+    font-weight: 700;
     color: #ffffff;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .anim-card-content p {
-    color: var(--text-secondary, #94a3b8);
-    font-size: 0.85rem;
-    line-height: 1.5;
-    margin-bottom: 18px;
+    color: var(--text-secondary, #cbd5e1);
+    font-size: 0.83rem;
+    line-height: 1.45;
+    margin-bottom: 14px;
 }
 
 .anim-card-footer {
@@ -3543,10 +3546,12 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: flex-end;
     margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .anim-btn-launch {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: var(--primary, #10b981);
     display: inline-flex;
