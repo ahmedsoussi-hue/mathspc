@@ -1689,29 +1689,399 @@
             </div>
         </section>
 
-        <!-- SECTION 5: RECHERCHE SCIENTIFIQUE -->
+        <!-- SECTION 5: RECHERCHE SCIENTIFIQUE & PUBLICATIONS -->
         <section id="recherche-section" class="tab-content">
             <div class="anim-gallery-container" style="max-width: 1350px;">
-                <div class="anim-gallery-header">
-                    <span class="badge badge-accent"><i data-lucide="microscope"></i> Littérature & Recherche Académique</span>
-                    <h2>Recherche Scientifique & Publications</h2>
-                    <p>Accédez aux prépublications et articles scientifiques majeurs en Mathématiques, Physique Quantique, Électronique et Sciences Appliquées.</p>
+                
+                <!-- Researcher Profile Header -->
+                <div class="recherche-profile-card" style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 24px; margin-bottom: 30px; backdrop-filter: blur(12px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #3b82f6); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #ffffff; font-weight: 700; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);">
+                            <i data-lucide="award"></i>
+                        </div>
+                        <div>
+                            <h2 style="margin: 0; font-size: 1.4rem; font-weight: 700; color: #ffffff;">Dr. Ahmed Soussi</h2>
+                            <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #94a3b8;"><i data-lucide="building"></i> Laboratoire de Matériaux et des Énergies Renouvelables (LMER), FSA Agadir, Université Ibn Zohr</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                                <span class="badge badge-accent" style="font-size: 0.75rem;"><i data-lucide="trending-up"></i> 579+ Citations</span>
+                                <span class="badge badge-outline" style="font-size: 0.75rem; border-color: rgba(255,255,255,0.2); color: #cbd5e1;"><i data-lucide="book-open"></i> 18 Publications Indexées</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="https://scholar.google.com/citations?user=BjIusZIAAAAJ&hl=fr" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none; padding: 10px 18px; border-radius: 30px; font-weight: 600;">
+                            <i data-lucide="external-link"></i> Profil Google Scholar Officiel
+                        </a>
+                    </div>
+                </div>
+
+                <div class="anim-gallery-header" style="margin-bottom: 20px;">
+                    <span class="badge badge-accent"><i data-lucide="microscope"></i> Publications Scientifiques Indexées</span>
+                    <h2>Travaux de Recherche & Articles Académiques</h2>
+                    <p>Explorez les 18 travaux de recherche publiés par le Dr. Ahmed Soussi en Science des Matériaux, Couches Minces, Calculs DFT et Énergies Renouvelables.</p>
                 </div>
 
                 <!-- Search and Filters Bar for Research -->
-                <div class="anim-gallery-toolbar">
+                <div class="anim-gallery-toolbar" style="margin-bottom: 24px;">
                     <div class="anim-search-wrapper">
                         <i data-lucide="search" class="search-icon"></i>
-                        <input type="text" id="recherche-search-input" placeholder="Rechercher une publication (ex: Moteur CC, Ondes, Supraconductivité, Équations différentielles...)" autocomplete="off">
+                        <input type="text" id="recherche-search-input" placeholder="Rechercher un article (ex: TiO2, ZnO, DFT, Perovskite, MOSFET, Solide...)" autocomplete="off">
                     </div>
                     <div class="anim-category-filters" id="recherche-category-filters">
-                        <button class="recherche-filter-btn active" data-rfilter="materiaux">Nanotechnologies & Matériaux</button>
+                        <button class="recherche-filter-btn active" data-rfilter="all">Tous les Articles (18)</button>
+                        <button class="recherche-filter-btn" data-rfilter="dft">Calculs DFT & Théorie</button>
+                        <button class="recherche-filter-btn" data-rfilter="thin-films">Couches Minces & Optique</button>
+                        <button class="recherche-filter-btn" data-rfilter="photocatalysis">Photocatalyse</button>
+                        <button class="recherche-filter-btn" data-rfilter="photovoltaic">Photovoltaïque & Perovskites</button>
+                        <button class="recherche-filter-btn" data-rfilter="instrumentation">Instrumentation & I-V</button>
                     </div>
                 </div>
 
                 <!-- Research Cards Grid -->
                 <div class="anim-card-grid" id="recherche-card-grid">
-                    <!-- Les publications de recherche seront ajoutées ultérieurement -->
+                    
+                    <!-- 1. TiO2 Thin Films -->
+                    <div class="anim-card recherche-card" data-rcat="thin-films" data-rkeywords="electronic optical properties tio2 thin films experimental theoretical study dft titanium oxide">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/wave_diffraction.jpg" alt="TiO2 Thin Films" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="layers"></i> Couches Minces</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Electronic and Optical Properties of TiO2 Thin Films: Combined Experimental and Theoretical Study</h3>
+                            <p>Étude combinée expérimentale et théorique des propriétés électroniques et optiques des couches minces de \(\text{TiO}_2\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 97 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:u-x6o8ySG0sC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Mg doped ZnO Photocatalysis -->
+                    <div class="anim-card recherche-card" data-rcat="photocatalysis" data-rkeywords="experimental theoretical mg doped zno nitrophenol degradation photocatalytic activity zno">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/resistor_color.jpg" alt="Mg doped ZnO" loading="lazy">
+                            <span class="anim-card-badge badge-electricite"><i data-lucide="flask-conical"></i> Photocatalyse</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Enhancing the Photocatalytic Activity of Mg Doped ZnO for Nitrophenol Degradation</h3>
+                            <p>Investigation expérimentale et théorique de l'amélioration de la photocatalyse du \(\text{ZnO}\) dopé au Mg pour la dégradation du nitrophénol.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 43 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:Y0pCki6q_DkC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. SnO2 & Al-doped SnO2 DFT -->
+                    <div class="anim-card recherche-card" data-rcat="dft" data-rkeywords="structural morphological electronic optical sno2 al-doped dft calculation">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/transistor_chip.jpg" alt="SnO2 Al-doped DFT" loading="lazy">
+                            <span class="anim-card-badge badge-electronique"><i data-lucide="cpu"></i> Calculs DFT</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Structural, Morphological, Electronic, and Optical Properties of SnO2 & Al-Doped SnO2</h3>
+                            <p>Étude théorique DFT et expérimentale des propriétés structurales, morphologiques et optoélectroniques du \(\text{SnO}_2\) dopé à l'aluminium.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 41 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:MXK_kJrjxJIC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Cs2AgBiY6 Double Perovskite -->
+                    <div class="anim-card recherche-card" data-rcat="photovoltaic" data-rkeywords="dft hse06 band gap engineering optoelectronic cs2agbiy6 double perovskites photovoltaic">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/solar_cell.jpg" alt="Cs2AgBiY6 Perovskite" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="sun"></i> Photovoltaïque</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>DFT-Based (HSE06) Band Gap Engineering in Cs2AgBiY6 (Y=Br, I) for Photovoltaics</h3>
+                            <p>Ingénierie de la bande interdite par calculs DFT (HSE06) : propriétés optoélectroniques, mécaniques et thermodynamiques des double perovskites \(\text{Cs}_2\text{AgBiY}_6\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 35 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:UebtZRa9Y70C" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Mo-doped TiO2 First Principle -->
+                    <div class="anim-card recherche-card" data-rcat="dft" data-rkeywords="first principle electronic optical electrical mo doped tio2 titanium oxide dft">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Mo-doped TiO2" loading="lazy">
+                            <span class="anim-card-badge badge-maths"><i data-lucide="line-chart"></i> Calculs DFT</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>First Principle Study of Electronic, Optical and Electrical Properties of Mo Doped TiO2</h3>
+                            <p>Analyse ab-initio des modifications de la structure de bande et des propriétés optiques/électriques induites par le dopage au molybdène dans \(\text{TiO}_2\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 32 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:9yKSN-GCB0IC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Indium Doping Electrochemical ZnO -->
+                    <div class="anim-card recherche-card" data-rcat="thin-films" data-rkeywords="dft indium doping electrochemical deposited zno zinc oxide thin film">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/optics_lens.jpg" alt="Indium Doped ZnO" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="layers"></i> Couches Minces</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>DFT & Experimental Study of Indium Doping Effect in Electrochemical Deposited ZnO</h3>
+                            <p>Caractérisation électrochimique et modélisation DFT de l'incorporation de l'indium dans les réseaux cristallins de \(\text{ZnO}\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 31 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:eQOLeE2rZwMC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. La-doped ZnO Thin Films -->
+                    <div class="anim-card recherche-card" data-rcat="thin-films" data-rkeywords="structural optical electronic la-doped zno thin films dft calculations lanthanum">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/resistor_color.jpg" alt="La-doped ZnO" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="layers"></i> Couches Minces</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Properties of La-Doped ZnO Thin Films: Experimental Study and DFT Calculations</h3>
+                            <p>Influence du dopage au lanthane sur les constantes optiques, la bande interdite et la transmittance des films minces de \(\text{ZnO}\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 31 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:IjCSPb-OGe4C" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Co-doped ZnO First Principle -->
+                    <div class="anim-card recherche-card" data-rcat="dft" data-rkeywords="first principle structural electronic optical co-doped zno cobalt zinc oxide">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/electron_field.jpg" alt="Co-doped ZnO" loading="lazy">
+                            <span class="anim-card-badge badge-maths"><i data-lucide="cpu"></i> Calculs DFT</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>First Principle Study of Structural, Electronic & Optical Properties of Co-Doped ZnO</h3>
+                            <p>Modélisation théorique des états magnétiques et de la structure électronique du \(\text{ZnO}\) substitué par le cobalt.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 28 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:LkGwnXOMwfcC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Cu Doping SILAR Deposited ZnS -->
+                    <div class="anim-card recherche-card" data-rcat="thin-films" data-rkeywords="dft cu doping silar deposited zns zinc sulfide thin film">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/diode_circuit.jpg" alt="Cu doped ZnS" loading="lazy">
+                            <span class="anim-card-badge badge-electronique"><i data-lucide="layers"></i> Couches Minces</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>DFT & Experimental Investigations of Cu Doping in SILAR Deposited ZnS</h3>
+                            <p>Effet du dopage au cuivre sur la morphologie de surface et la réponse luminescente des couches minces de \(\text{ZnS}\) déposées par méthode SILAR.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 25 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:ufrVoPGSRksC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. Cs2AgXCl6 Double Perovskites -->
+                    <div class="anim-card recherche-card" data-rcat="photovoltaic" data-rkeywords="optimizing cs2agxcl6 bi in double perovskites light harvesting solar cells">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/solar_cell.jpg" alt="Cs2AgXCl6 Double Perovskites" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="sun"></i> Photovoltaïque</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Optimizing Cs2AgXCl6 (X= Bi, In) Double Perovskites for Light-Harvesting Devices</h3>
+                            <p>Optimisation théorique des propriétés d'absorption optique et de transport de charge dans les double perovskites sans plomb \(\text{Cs}_2\text{AgXCl}_6\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 24 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:5nxA0vEk-isC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. 4d-Mo doped TiO2 thin films -->
+                    <div class="anim-card recherche-card" data-rcat="thin-films" data-rkeywords="morphological structural electronic optical 4d-mo doped tio2 thin films first principles">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/wave_diffraction.jpg" alt="4d-Mo doped TiO2" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="layers"></i> Couches Minces</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Morphological, Structural, Electronic & Optical Properties of 4d-Mo Doped TiO2 Thin Films</h3>
+                            <p>Comparaison entre mesures spectroscopiques et calculs ab-initio pour les couches minces de \(\text{TiO}_2\) dopées aux métaux de transition 4d.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 24 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:W7OEmFMy1HYC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. MOSFET Transistor Solar Panel Tracing -->
+                    <div class="anim-card recherche-card" data-rcat="instrumentation" data-rkeywords="mosfet transistor electronic load trace iv pv curve solar panel instrumentation">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/dc_motor.jpg" alt="MOSFET Solar Curve Tracing" loading="lazy">
+                            <span class="anim-card-badge badge-electrotechnique"><i data-lucide="activity"></i> Instrumentation</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Utilization of MOSFET Transistor as an Electronic Load to Trace IV and PV Curve of Solar Panel</h3>
+                            <p>Conception d'une charge électronique à transistor MOSFET pour le tracé rapide et précis des caractéristiques courant-tension \(I(U)\) et puissance \(P(U)\) des panneaux photovoltaïques.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 19 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:u5HHmVD_uO8C" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 13. CsGeI2Br Strain DFT -->
+                    <div class="anim-card recherche-card" data-rcat="dft" data-rkeywords="csgei2br tensile compressive strain optoelectronic dft computational">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/motion_plotter.jpg" alt="CsGeI2Br Strain DFT" loading="lazy">
+                            <span class="anim-card-badge badge-maths"><i data-lucide="cpu"></i> Calculs DFT</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Properties of CsGeI2Br Under Tensile and Compressive Strain for Optoelectronics</h3>
+                            <p>Analyse des variations de la masse effective des porteurs et des transitions de phase de la perovskite \(\text{CsGeI}_2\text{Br}\) sous contraintes mécaniques.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 15 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:roLk4NBRz8UC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 14. RLC Circuit PV Characterization -->
+                    <div class="anim-card recherche-card" data-rcat="instrumentation" data-rkeywords="simple rlc circuit electrical characterization pv panels solar">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/rc_circuit.jpg" alt="RLC Circuit PV Characterization" loading="lazy">
+                            <span class="anim-card-badge badge-electricite"><i data-lucide="zap"></i> Instrumentation</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Method Using Simple RLC Circuit for Electrical Characterization of PV Panels</h3>
+                            <p>Développement d'une méthode de caractérisation électrique transitoire des modules solaires par décharge impulsionnelle dans un circuit \(\text{RLC}\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 15 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:qjMakFHDy7sC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 15. Cu2O Electrodeposition -->
+                    <div class="anim-card recherche-card" data-rcat="photocatalysis" data-rkeywords="electrodeposition nanostructured cuprous oxide cu2o photoelectrochemical substrates">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/opamp_scope.jpg" alt="Cu2O Electrodeposition" loading="lazy">
+                            <span class="anim-card-badge badge-electricite"><i data-lucide="flask-conical"></i> Photocatalyse</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Electrodeposition of Nanostructured Cuprous Oxide Cu2O and Photoelectrochemical Properties</h3>
+                            <p>Synthèse par voie électrochimique de l'oxyde cuivreux \(\text{Cu}_2\text{O}\) nanostructuré et évaluation du photocourant sous illumination solaire.</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 14 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:UeHWp8X0CEIC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 16. Bi-doped ZnO Nanorods PV -->
+                    <div class="anim-card recherche-card" data-rcat="photovoltaic" data-rkeywords="bi-doped zno nanorods electrochemically synthesized photovoltaic dft calculations">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/solar_cell.jpg" alt="Bi-doped ZnO Nanorods" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="sun"></i> Photovoltaïque</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Bi-Doped ZnO Nanorods for Photovoltaics: Synthesis and Insights from DFT Calculations</h3>
+                            <p>Synthèse de nanotiges de \(\text{ZnO}\) dopées au bismuth et corrélation entre performances photovoltaïques et calculs de la densité d'états (DOS).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 12 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:dhFuZR0502QC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 17. CH3NH3PbX3 Perovskite Thin Films -->
+                    <div class="anim-card recherche-card" data-rcat="photovoltaic" data-rkeywords="thin film ch3nh3pbx3 perovskite lead halides dft first principles">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/solar_cell.jpg" alt="CH3NH3PbX3 Perovskite" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique"><i data-lucide="sun"></i> Photovoltaïque</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Structural, Electronic & Optical Characterization of CH3NH3PbX3 Perovskite Thin Films</h3>
+                            <p>Caractérisation expérimentale et calculs ab-initio des organométalliques halogénés \(\text{CH}_3\text{NH}_3\text{PbI}_3\) et \(\text{CH}_3\text{NH}_3\text{PbBr}_3\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 12 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:Zph67rFs4hoC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 18. Ga-doping ZnO DFT -->
+                    <div class="anim-card recherche-card" data-rcat="dft" data-rkeywords="first-principles calculations ga-doping zno gallium zinc oxide dft">
+                        <div class="anim-card-img-wrapper" style="height: 140px;">
+                            <img src="assets/images/transistor_chip.jpg" alt="Ga-doped ZnO" loading="lazy">
+                            <span class="anim-card-badge badge-electronique"><i data-lucide="cpu"></i> Calculs DFT</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>First-Principles Calculations & Electrochemical Insights into Ga-Doping Effects on ZnO</h3>
+                            <p>Analyse par premiers principes et mesures électrochimiques de la conductivité électrique et des défauts natifs créés par le gallium dans \(\text{ZnO}\).</p>
+                            <div style="font-size: 0.78rem; color: #94a3b8; margin: 10px 0; display: flex; justify-content: space-between; align-items: center;">
+                                <span><i data-lucide="user"></i> A. Soussi et al. • LMER</span>
+                                <span style="color: #facc15; font-weight: 700;"><i data-lucide="star"></i> 11 Citations</span>
+                            </div>
+                            <div class="anim-card-footer">
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=fr&oe=ASCII&user=BjIusZIAAAAJ&citation_for_view=BjIusZIAAAAJ:hC7cP41nSMkC" target="_blank" class="anim-btn-launch" style="text-decoration: none;">Consulter sur Google Scholar <i data-lucide="external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
