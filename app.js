@@ -3952,8 +3952,7 @@ let userState = {
 
 // --- METHOD SUBCARDS ROUTING MAP ---
 const METHOD_SUBCARDS_MAP = {
-    "sol-gel": { title: "Sol-Gel", category: "Experimental Methods", desc: "Dépôt de couches minces par voie sol-gel organométallique." },
-    "spin-coating": { title: "Spin Coating", category: "Experimental Methods", desc: "Étalement centrifuge pour l'obtention de films homogènes." },
+    "sol-gel-spin-coating": { title: "Sol-Gel / Spin Coating", category: "Experimental Methods", desc: "Préparation sol-gel organométallique et dépôt de couches minces par étalement centrifuge (Spin-Coating)." },
     "cbd": { title: "Chemical Bath Deposition (CBD)", category: "Experimental Methods", desc: "Dépôt par bain chimique en milieu aqueux." },
     "electrochemical-deposition": { title: "Electrochemical Deposition", category: "Experimental Methods", desc: "Électrodéposition et réduction électrochimique sur substrat conducteur." },
     "silar": { title: "SILAR", category: "Experimental Methods", desc: "Adsorption et réaction successives d'ions en couches atomiques." },
@@ -4448,7 +4447,29 @@ function initTheme() {
 // --- TAB NAVIGATION ---
 function setupNavigation() {
     const navLinks = document.querySelectorAll(".nav-link");
-    
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mainHeader = document.querySelector(".main-header");
+
+    function closeMobileMenu() {
+        if (mainHeader && mainHeader.classList.contains("mobile-menu-open")) {
+            mainHeader.classList.remove("mobile-menu-open");
+            if (mobileMenuBtn) {
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
+                if (window.lucide) lucide.createIcons();
+            }
+        }
+    }
+
+    if (mobileMenuBtn && mainHeader) {
+        mobileMenuBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = mainHeader.classList.toggle("mobile-menu-open");
+            mobileMenuBtn.setAttribute("aria-expanded", isOpen);
+            mobileMenuBtn.innerHTML = isOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+            if (window.lucide) lucide.createIcons();
+        });
+    }
+
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
             if (link.classList.contains("dropdown-toggle")) {
@@ -4470,14 +4491,18 @@ function setupNavigation() {
             e.preventDefault();
             const targetTab = link.getAttribute("data-tab");
             switchTab(targetTab);
+            closeMobileMenu();
         });
     });
 
-    // Close dropdowns when clicking outside
-    document.addEventListener("click", () => {
+    // Close dropdowns and mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
         document.querySelectorAll(".nav-dropdown").forEach(d => {
             d.classList.remove("active");
         });
+        if (mainHeader && !mainHeader.contains(e.target)) {
+            closeMobileMenu();
+        }
     });
 
     // Handle dropdown level selection
@@ -4494,15 +4519,17 @@ function setupNavigation() {
             
             switchTab("courses");
             
-            // Close containing dropdown
+            // Close containing dropdown and mobile menu
             const parent = item.closest(".nav-dropdown");
             if (parent) parent.classList.remove("active");
+            closeMobileMenu();
         });
     });
 
     // Handle branding/logo click to go home
     document.querySelector(".logo").addEventListener("click", () => {
         switchTab("home");
+        closeMobileMenu();
     });
     
     // Home Level buttons link to Course Tab with proper filter
@@ -12254,7 +12281,7 @@ function openMethodPage(title, category, desc, options = {}) {
         pageCategory.textContent = category;
         pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
         
-        const placeholder = pagePanel.querySelector(".sol-gel-workspace, div[style*='dashed']");
+        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, div[style*='dashed']");
         
         if (title.toLowerCase().includes("sol-gel")) {
             if (placeholder) {
@@ -12262,6 +12289,13 @@ function openMethodPage(title, category, desc, options = {}) {
             }
             setTimeout(() => {
                 initSolGelAnimation();
+            }, 100);
+        } else if (title.toLowerCase().includes("chemical bath") || title.toLowerCase().includes("cbd")) {
+            if (placeholder) {
+                placeholder.outerHTML = renderCBDCustomPage();
+            }
+            setTimeout(() => {
+                initCBDAnimation();
             }, 100);
         } else {
             if (placeholder && !placeholder.querySelector("h3")?.textContent.includes("Page dédiée prête")) {
@@ -12802,6 +12836,332 @@ function setupExperimentalDftNavigation() {
         });
     });
 }
+
+// --- CHEMICAL BATH DEPOSITION (CBD) ANIMATION ENGINE ---
+let cbdTemp = 60.0;
+let cbdTime = 30;
+let cbdStirSpeed = 400;
+let cbdElapsed = 0;
+let cbdIsPlaying = false;
+let cbdTimer = null;
+let cbdCanvasAnimId = null;
+let cbdAnimFrame = 0;
+
+function renderCBDCustomPage() {
+    return `
+    <div class="cbd-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
+        
+        <!-- Top Banner: CBD Method Overview -->
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="waves"></i> Protocol Expérimental Officiel LMER</span>
+                <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">Chemical Bath Deposition (CBD)</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Dépôt par bain chimique d'oxyde de titane/manganèse (TiO2 et MTO sol) régulé en température à 60.0°C.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" id="btn-start-cbd-anim" onclick="toggleCBDPlay()" style="padding: 10px 20px; font-weight: 700;">
+                    <i data-lucide="play-circle"></i> Lancer la Simulation Interactive CBD
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Layout: Interactive Canvas Animation (Left) + Original LMER Schematic (Right) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+            
+            <!-- Left Column: Interactive CBD Setup & Growth Animation Canvas -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="activity"></i> Montage Expérimental & Croissance du Film
+                    </h4>
+                    <span id="cbd-thickness-badge" class="badge badge-outline" style="border-color: #38bdf8; color: #38bdf8; font-weight: 600;">Épaisseur : 0 nm</span>
+                </div>
+
+                <!-- Canvas Container -->
+                <div style="position: relative; width: 100%; height: 320px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="cbd-canvas" width="600" height="320" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+
+                <!-- Animation Controls -->
+                <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.03); padding: 14px; border-radius: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Température (T) : <strong id="cbd-temp-val" style="color: #ef4444;">60.0 °C</strong></label>
+                            <input type="range" id="cbd-temp-slider" min="30" max="90" step="1" value="60" oninput="onCBDParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Durée Bain (t) : <strong id="cbd-time-val" style="color: #facc15;">30 min</strong></label>
+                            <input type="range" id="cbd-time-slider" min="10" max="90" step="5" value="30" oninput="onCBDParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Agitation : <strong id="cbd-stir-val" style="color: #38bdf8;">400 RPM</strong></label>
+                            <input type="range" id="cbd-stir-slider" min="100" max="800" step="50" value="400" oninput="onCBDParamChange()" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                        <button class="btn btn-primary" id="cbd-play-btn" onclick="toggleCBDPlay()" style="padding: 8px 18px; font-size: 0.85rem;">
+                            <i data-lucide="play"></i> Démarrer la Réaction
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetCBDAnim()" style="padding: 8px 14px; font-size: 0.85rem;">
+                            <i data-lucide="rotate-ccw"></i> Réinitialiser
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step Description Box -->
+                <div style="background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 6px;">
+                    <h5 style="margin: 0 0 4px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">Principe de Dépôt en Bain Chimique (CBD)</h5>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 0.82rem; line-height: 1.4;">
+                        Les précurseurs en solution aqueuse réagissent sous température contrôlée (60.0°C). La précipitation lente et progressive des complexes organométalliques forme un film solide adhérent de TiO2/MTO sur le substrat suspendu.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Column: Original Experimental Setup Schematic (8894.png) -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="image"></i> Schéma Général du Bain Chimique (CBD)
+                    </h4>
+                    <a href="assets/images/cbd_setup.png" target="_blank" class="badge badge-outline" style="border-color: rgba(255,255,255,0.2); color: #cbd5e1; text-decoration: none;">
+                        <i data-lucide="external-link"></i> Voir Plein Écran
+                    </a>
+                </div>
+
+                <!-- Image Container -->
+                <div style="border-radius: 10px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); background: #ffffff; padding: 6px;">
+                    <img src="assets/images/cbd_setup.png" alt="Dispositif expérimental Chemical Bath Deposition CBD" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                </div>
+
+                <!-- Protocol Specifications Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px; font-size: 0.82rem; color: #cbd5e1;">
+                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-weight: 700; font-size: 0.88rem;">📋 Composants du Montage Expérimental :</h5>
+                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.4;">
+                        <li><strong>Thermomètre numérique :</strong> Contrôle précis de la température du bain (60.0°C).</li>
+                        <li><strong>Bain-marie :</strong> Beaker d'eau distillée assurant un chauffage homogène de la réaction.</li>
+                        <li><strong>Solution Préparée :</strong> Précurseurs de TiO2 et MTO sol en milieu contrôlé.</li>
+                        <li><strong>Substrat & Potence :</strong> Substrat suspendu verticalement au statif pour un dépôt propre.</li>
+                        <li><strong>Agitateur Magnétique :</strong> Barreau aimanté assurant l'homogénéité des réactifs.</li>
+                        <li><strong>Chauffage & Support :</strong> Bec électrique réglable sur support élévateur (lab jack).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    `;
+}
+
+function initCBDAnimation() {
+    cbdElapsed = 0;
+    cbdIsPlaying = false;
+    onCBDParamChange();
+    startCBDCanvasLoop();
+}
+
+function onCBDParamChange() {
+    const tempSlider = document.getElementById("cbd-temp-slider");
+    const timeSlider = document.getElementById("cbd-time-slider");
+    const stirSlider = document.getElementById("cbd-stir-slider");
+
+    if (tempSlider) cbdTemp = parseFloat(tempSlider.value);
+    if (timeSlider) cbdTime = parseInt(timeSlider.value);
+    if (stirSlider) cbdStirSpeed = parseInt(stirSlider.value);
+
+    const tempVal = document.getElementById("cbd-temp-val");
+    const timeVal = document.getElementById("cbd-time-val");
+    const stirVal = document.getElementById("cbd-stir-val");
+
+    if (tempVal) tempVal.textContent = `${cbdTemp.toFixed(1)} °C`;
+    if (timeVal) timeVal.textContent = `${cbdTime} min`;
+    if (stirVal) stirVal.textContent = `${cbdStirSpeed} RPM`;
+}
+
+function toggleCBDPlay() {
+    cbdIsPlaying = !cbdIsPlaying;
+    const playBtn = document.getElementById("cbd-play-btn");
+    const topBtn = document.getElementById("btn-start-cbd-anim");
+    if (playBtn) {
+        playBtn.innerHTML = cbdIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Démarrer la Réaction`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+    if (topBtn) {
+        topBtn.innerHTML = cbdIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer la Simulation Interactive CBD`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+}
+
+function resetCBDAnim() {
+    cbdElapsed = 0;
+    cbdIsPlaying = false;
+    const playBtn = document.getElementById("cbd-play-btn");
+    if (playBtn) {
+        playBtn.innerHTML = `<i data-lucide="play"></i> Démarrer la Réaction`;
+        if (window.lucide) window.lucide.createIcons();
+    }
+}
+
+function startCBDCanvasLoop() {
+    if (cbdCanvasAnimId) cancelAnimationFrame(cbdCanvasAnimId);
+    function loop() {
+        cbdAnimFrame++;
+        if (cbdIsPlaying) {
+            cbdElapsed += 0.05;
+            const maxDuration = cbdTime * 60;
+            if (cbdElapsed >= maxDuration) {
+                cbdElapsed = maxDuration;
+                cbdIsPlaying = false;
+                toggleCBDPlay();
+            }
+        }
+        drawCBDCanvas();
+        cbdCanvasAnimId = requestAnimationFrame(loop);
+    }
+    loop();
+}
+
+function drawCBDCanvas() {
+    const canvas = document.getElementById("cbd-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Background Grid
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.05)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < w; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    for (let y = 0; y < h; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
+    // 1. Lab Jack (Support) at bottom center
+    ctx.fillStyle = "#334155";
+    ctx.fillRect(210, 280, 180, 12);
+    ctx.fillStyle = "#1e293b";
+    ctx.fillRect(200, 292, 200, 10);
+    // Scissor arms
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(220, 280); ctx.lineTo(380, 292); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(380, 280); ctx.lineTo(220, 292); ctx.stroke();
+
+    // 2. Electric Heating Plate (Bec Électrique)
+    ctx.fillStyle = "#f8fafc";
+    ctx.fillRect(210, 240, 180, 40);
+    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2;
+    ctx.strokeRect(210, 240, 180, 40);
+    // Red Light indicator
+    ctx.fillStyle = cbdIsPlaying ? "#ef4444" : "#475569";
+    ctx.beginPath(); ctx.arc(370, 260, 6, 0, Math.PI * 2); ctx.fill();
+    if (cbdIsPlaying) {
+        ctx.shadowColor = "#ef4444"; ctx.shadowBlur = 10;
+        ctx.beginPath(); ctx.arc(370, 260, 6, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+    // Heating Plate top surface
+    ctx.fillStyle = "#475569";
+    ctx.fillRect(200, 232, 200, 8);
+
+    // 3. Water Bath Beaker (Bain-marie d'eau distillée)
+    ctx.fillStyle = "rgba(56, 189, 248, 0.25)";
+    ctx.fillRect(225, 120, 150, 112);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.7)"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(220, 100); ctx.lineTo(220, 232); ctx.lineTo(380, 232); ctx.lineTo(380, 100); ctx.stroke();
+    // Water surface label
+    ctx.fillStyle = "#38bdf8"; ctx.font = "10px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText("Eau distillée (60.0°C)", 300, 115);
+
+    // 4. Inner Reaction Beaker (TiO2 et MTO sol)
+    ctx.fillStyle = "rgba(251, 146, 60, 0.45)"; // Orange precursor solution
+    ctx.fillRect(255, 135, 90, 85);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.85)"; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(250, 125); ctx.lineTo(250, 220); ctx.lineTo(350, 220); ctx.lineTo(350, 125); ctx.stroke();
+    ctx.fillStyle = "#f97316"; ctx.font = "bold 9px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("TiO2 & MTO sol", 300, 150);
+
+    // 5. Magnetic Stirrer Bar at bottom of inner beaker
+    const stirAngle = (cbdAnimFrame * (cbdStirSpeed / 600)) % (Math.PI * 2);
+    ctx.save();
+    ctx.translate(300, 214);
+    ctx.rotate(stirAngle);
+    ctx.fillStyle = "#0f172a";
+    ctx.fillRect(-12, -3, 24, 6);
+    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1;
+    ctx.strokeRect(-12, -3, 24, 6);
+    ctx.restore();
+
+    // 6. Substrate & Potence Stand
+    // Stand Bar on right
+    ctx.fillStyle = "#64748b";
+    ctx.fillRect(450, 30, 10, 270);
+    ctx.fillRect(420, 290, 70, 12);
+    // Potence Arm
+    ctx.fillRect(295, 45, 160, 8);
+    // Vertical Clamp holding Substrate
+    ctx.fillRect(295, 45, 8, 80);
+
+    // Glass Substrate immersed vertically
+    const maxDuration = cbdTime * 60;
+    const progress = Math.min(1.0, cbdElapsed / maxDuration);
+    const filmThicknessNm = Math.round(progress * 180 * (cbdTemp / 60.0));
+
+    // Glass base
+    ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+    ctx.fillRect(293, 115, 12, 75);
+    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1;
+    ctx.strokeRect(293, 115, 12, 75);
+
+    // Deposited Film Layer (TiO2 / MTO) on substrate sides
+    if (filmThicknessNm > 0) {
+        const filmAlpha = Math.min(0.9, 0.2 + progress * 0.7);
+        ctx.fillStyle = `rgba(16, 185, 129, ${filmAlpha})`;
+        ctx.fillRect(291, 135, 3, 55); // Left film layer
+        ctx.fillRect(304, 135, 3, 55); // Right film layer
+    }
+
+    // Substrate Label
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText("Substrat", 312, 130);
+
+    // 7. Digital Thermometer (Left Side)
+    ctx.fillStyle = "#1e293b";
+    ctx.fillRect(30, 120, 130, 48);
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+    ctx.strokeRect(30, 120, 130, 48);
+    // Display Screen
+    ctx.fillStyle = "#0f172a";
+    ctx.fillRect(40, 128, 110, 32);
+    ctx.fillStyle = "#ef4444"; ctx.font = "bold 13px 'Courier New', monospace"; ctx.textAlign = "center";
+    ctx.fillText(`TH: ${cbdTemp.toFixed(1)}°C`, 95, 149);
+    // Probe wire into water bath
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(160, 144);
+    ctx.lineTo(240, 144);
+    ctx.lineTo(240, 170);
+    ctx.stroke();
+
+    // 8. Animated Heat / Solution Bubbles when playing
+    if (cbdIsPlaying) {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+        for (let i = 0; i < 6; i++) {
+            const bx = 265 + ((cbdAnimFrame * 3 + i * 15) % 70);
+            const by = 210 - ((cbdAnimFrame * 2 + i * 20) % 65);
+            ctx.beginPath(); ctx.arc(bx, by, 2 + (i % 2), 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
+    // Update thickness badge UI
+    const badge = document.getElementById("cbd-thickness-badge");
+    if (badge) {
+        badge.textContent = `Épaisseur : ${filmThicknessNm} nm`;
+    }
+}
+
 
 
 

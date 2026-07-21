@@ -2,8 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maths et Physiques | Plateforme Éducative Moderne</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#064E3B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="canonical" href="https://mathspc.com/">
+    <title>Maths et Physiques | Plateforme Éducative Moderne - mathspc.com</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +78,9 @@
                     </div>
                     <span class="user-name">Contactez-nous</span>
                 </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu principal">
+                    <i data-lucide="menu"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -1632,7 +1640,7 @@
                     <!-- Category Tab Controls -->
                     <div class="exp-dft-tabs" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;">
                         <button class="exp-tab-btn active" data-exptab="methods" style="padding: 10px 22px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3); background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.25s ease;">
-                            <i data-lucide="beaker"></i> Experimental Methods (10)
+                            <i data-lucide="beaker"></i> Experimental Methods (9)
                         </button>
                         <button class="exp-tab-btn" data-exptab="characterization" style="padding: 10px 22px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.04); color: #94a3b8; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.25s ease;">
                             <i data-lucide="microscope"></i> Thin-Film Characterization (16)
@@ -1642,18 +1650,12 @@
                         </button>
                     </div>
 
-                    <!-- TAB 1: EXPERIMENTAL METHODS (10 Subsections) -->
+                    <!-- TAB 1: EXPERIMENTAL METHODS (9 Subsections) -->
                     <div class="exp-tab-content active" id="exp-tab-methods" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
-                        <div class="method-subcard" data-subid="sol-gel" onclick="openMethodPage('Sol-Gel', 'Experimental Methods', 'Dépôt de couches minces par voie sol-gel organométallique.')">
-                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="flask-round"></i></div>
-                            <h4>Sol-Gel</h4>
-                            <p>Dépôt de couches minces par voie sol-gel organométallique.</p>
-                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
-                        </div>
-                        <div class="method-subcard" data-subid="spin-coating" onclick="openMethodPage('Spin Coating', 'Experimental Methods', 'Étalement centrifuge pour l\'obtention de films homogènes.')">
+                        <div class="method-subcard" data-subid="sol-gel-spin-coating" onclick="openMethodPage('Sol-Gel / Spin Coating', 'Experimental Methods', 'Préparation sol-gel organométallique et dépôt de couches minces par étalement centrifuge (Spin-Coating).')">
                             <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="rotate-cw"></i></div>
-                            <h4>Spin Coating</h4>
-                            <p>Étalement centrifuge pour l'obtention de films homogènes.</p>
+                            <h4>Sol-Gel / Spin Coating</h4>
+                            <p>Préparation sol-gel organométallique et dépôt de couches minces par étalement centrifuge (Spin-Coating).</p>
                             <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
                         </div>
                         <div class="method-subcard" data-subid="cbd" onclick="openMethodPage('Chemical Bath Deposition (CBD)', 'Experimental Methods', 'Dépôt par bain chimique en milieu aqueux.')">
