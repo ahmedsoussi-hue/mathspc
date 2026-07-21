@@ -1621,45 +1621,270 @@
                     </div>
                 </div>
 
-                <!-- SUBSECTION: EXPERIMENTAL METHODS & DFT APPROACHES -->
-                <div class="experimental-dft-section" style="margin-bottom: 40px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 28px; backdrop-filter: blur(12px);">
-                    <div style="margin-bottom: 24px;">
-                        <span class="badge badge-accent" style="font-size: 0.78rem;"><i data-lucide="flask-conical"></i> Techniques & Méthodologie</span>
-                        <h2 style="font-size: 1.4rem; color: #ffffff; margin: 8px 0 4px 0; font-weight: 700;">Méthodes Expérimentales & Approches Numériques (DFT)</h2>
-                        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">Synergie entre caractérisation physique en laboratoire et modélisation quantique des matériaux avancés.</p>
+                <!-- SECTION: EXPERIMENTAL METHODS & DFT APPROACHES NAVIGATION -->
+                <div class="experimental-dft-section" id="experimental-dft-section" style="margin-bottom: 45px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 28px; backdrop-filter: blur(14px);">
+                    <div style="margin-bottom: 24px; text-align: center;">
+                        <span class="badge badge-accent" style="font-size: 0.8rem; padding: 6px 14px;"><i data-lucide="flask-conical"></i> Plateforme de Recherche & Méthodologie</span>
+                        <h2 style="font-size: 1.6rem; color: #ffffff; margin: 10px 0 6px 0; font-weight: 800;">Méthodes Expérimentales & Approches Numériques (DFT)</h2>
+                        <p style="color: #94a3b8; font-size: 0.95rem; margin: 0;">Explorez l'architecture complète des techniques de dépôt, méthodes de caractérisation et outils de calcul DFT.</p>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
-                        <!-- Card 1: Experimental Methods -->
-                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 20px;">
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
-                                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    <i data-lucide="beaker"></i>
-                                </div>
-                                <h3 style="margin: 0; font-size: 1.1rem; color: #ffffff; font-weight: 700;">1. Méthodes Expérimentales</h3>
-                            </div>
-                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; color: #cbd5e1; font-size: 0.86rem; line-height: 1.5;">
-                                <li><strong style="color: #38bdf8;">• Dépôt de Couches Minces :</strong> Pyrolyse de spray (Spray Pyrolysis), Électrodéposition et méthode SILAR (Successive Ionic Layer Adsorption and Reaction).</li>
-                                <li><strong style="color: #38bdf8;">• Dopage des Matériaux :</strong> Dopage par métaux de transition (Mg, Al, La, Co, Cu, Bi, Ga, Mo) dans \(\text{TiO}_2\), \(\text{ZnO}\) et \(\text{ZnS}\).</li>
-                                <li><strong style="color: #38bdf8;">• Caractérisation Optoélectronique :</strong> Spectroscopie UV-Visible, tracé des courbes \(I-V\) sous simulateur solaire, diffraction des Rayons X (XRD) et microscopie électronique.</li>
-                            </ul>
-                        </div>
+                    <!-- Category Tab Controls -->
+                    <div class="exp-dft-tabs" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;">
+                        <button class="exp-tab-btn active" data-exptab="methods" style="padding: 10px 22px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3); background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.25s ease;">
+                            <i data-lucide="beaker"></i> Experimental Methods (10)
+                        </button>
+                        <button class="exp-tab-btn" data-exptab="characterization" style="padding: 10px 22px; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.04); color: #94a3b8; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.25s ease;">
+                            <i data-lucide="microscope"></i> Thin-Film Characterization (16)
+                        </button>
+                        <button class="exp-tab-btn" data-exptab="dft" style="padding: 10px 22px; border-radius: 30px; border: 1px solid rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.05); color: #c084fc; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.25s ease;">
+                            <i data-lucide="cpu"></i> Numerical Approaches (DFT) (8)
+                        </button>
+                    </div>
 
-                        <!-- Card 2: DFT Approaches -->
-                        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; padding: 20px;">
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
-                                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(168, 85, 247, 0.15); color: #c084fc; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    <i data-lucide="cpu"></i>
-                                </div>
-                                <h3 style="margin: 0; font-size: 1.1rem; color: #ffffff; font-weight: 700;">2. Approches Numériques (DFT)</h3>
-                            </div>
-                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; color: #cbd5e1; font-size: 0.86rem; line-height: 1.5;">
-                                <li><strong style="color: #c084fc;">• Modélisation Ab-Initio :</strong> Théorie de la Fonctionnelle de la Densité (DFT) et fonctionnelle hybride HSE06 pour une précision accrue du gap optique.</li>
-                                <li><strong style="color: #c084fc;">• Propriétés Électroniques & Optiques :</strong> Structure de bandes d'énergie, Densité d'États (DOS/PDOS), réflectivité et absorption diélectrique.</li>
-                                <li><strong style="color: #c084fc;">• Ingénierie des Perovskites :</strong> Calculs sous contraintes mécaniques (tensile/compressive strain) pour les double perovskites sans plomb (\(\text{Cs}_2\text{AgBiY}_6\)).</li>
-                            </ul>
+                    <!-- TAB 1: EXPERIMENTAL METHODS (10 Subsections) -->
+                    <div class="exp-tab-content active" id="exp-tab-methods" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
+                        <div class="method-subcard" data-subid="sol-gel" onclick="openMethodPage('Sol-Gel', 'Experimental Methods', 'Dépôt de couches minces par voie sol-gel organométallique.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="flask-round"></i></div>
+                            <h4>Sol-Gel</h4>
+                            <p>Dépôt de couches minces par voie sol-gel organométallique.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="spin-coating" onclick="openMethodPage('Spin Coating', 'Experimental Methods', 'Étalement centrifuge pour l\'obtention de films homogènes.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="rotate-cw"></i></div>
+                            <h4>Spin Coating</h4>
+                            <p>Étalement centrifuge pour l'obtention de films homogènes.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="cbd" onclick="openMethodPage('Chemical Bath Deposition (CBD)', 'Experimental Methods', 'Dépôt par bain chimique en milieu aqueux.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="waves"></i></div>
+                            <h4>Chemical Bath Deposition (CBD)</h4>
+                            <p>Dépôt par bain chimique en milieu aqueux.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="electrochemical-deposition" onclick="openMethodPage('Electrochemical Deposition', 'Experimental Methods', 'Électrodéposition et réduction électrochimique sur substrat conducteur.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="zap"></i></div>
+                            <h4>Electrochemical Deposition</h4>
+                            <p>Électrodéposition et réduction électrochimique sur substrat conducteur.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="silar" onclick="openMethodPage('SILAR', 'Experimental Methods', 'Adsorption et réaction successives d\'ions en couches atomiques.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="layers"></i></div>
+                            <h4>SILAR</h4>
+                            <p>Adsorption et réaction successives d'ions en couches atomiques.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="sputtering" onclick="openMethodPage('Sputtering', 'Experimental Methods', 'Pulvérisation cathodique radiofréquence (RF) / magnetron.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="disc"></i></div>
+                            <h4>Sputtering</h4>
+                            <p>Pulvérisation cathodique radiofréquence (RF) / magnetron.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="thermal-evaporation" onclick="openMethodPage('Thermal Evaporation', 'Experimental Methods', 'Évaporation thermique sous vide poussé.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="flame"></i></div>
+                            <h4>Thermal Evaporation</h4>
+                            <p>Évaporation thermique sous vide poussé.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="cvd-mocvd" onclick="openMethodPage('CVD / MOCVD', 'Experimental Methods', 'Dépôt chimique en phase vapeur à précurseurs organométalliques.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="wind"></i></div>
+                            <h4>CVD / MOCVD</h4>
+                            <p>Dépôt chimique en phase vapeur à précurseurs organométalliques.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="pld" onclick="openMethodPage('Pulsed Laser Deposition (PLD)', 'Experimental Methods', 'Ablation et dépôt par laser pulsé UV.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="sun"></i></div>
+                            <h4>Pulsed Laser Deposition (PLD)</h4>
+                            <p>Ablation et dépôt par laser pulsé UV.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="other-deposition" onclick="openMethodPage('Other Thin-Film Deposition Techniques', 'Experimental Methods', 'Autres méthodes d\'élaboration et de croissance de films minces.')">
+                            <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="grid"></i></div>
+                            <h4>Other Deposition Techniques</h4>
+                            <p>Autres méthodes d'élaboration et de croissance de films minces.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
                         </div>
                     </div>
+
+                    <!-- TAB 2: THIN-FILM CHARACTERIZATION (16 Subsections) -->
+                    <div class="exp-tab-content" id="exp-tab-characterization" style="display: none; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
+                        <div class="method-subcard" data-subid="xrd" onclick="openMethodPage('XRD (X-Ray Diffraction)', 'Thin-Film Characterization', 'Diffraction des Rayons X pour l\'analyse de la structure cristalline.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="box"></i></div>
+                            <h4>XRD</h4>
+                            <p>Diffraction des Rayons X pour l'analyse de la structure cristalline.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="sem" onclick="openMethodPage('SEM (Scanning Electron Microscopy)', 'Thin-Film Characterization', 'Microscopie électronique à balayage (MEB) pour la morphologie de surface.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="eye"></i></div>
+                            <h4>SEM</h4>
+                            <p>Microscopie électronique à balayage (MEB) pour la morphologie de surface.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="tem" onclick="openMethodPage('TEM (Transmission Electron Microscopy)', 'Thin-Film Characterization', 'Microscopie électronique en transmission haute résolution.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="maximize"></i></div>
+                            <h4>TEM</h4>
+                            <p>Microscopie électronique en transmission haute résolution.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="afm" onclick="openMethodPage('AFM (Atomic Force Microscopy)', 'Thin-Film Characterization', 'Microscopie à force atomique et rugométrie nanométrique.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="activity"></i></div>
+                            <h4>AFM</h4>
+                            <p>Microscopie à force atomique et rugométrie nanométrique.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="uv-vis" onclick="openMethodPage('UV-Vis Spectroscopy', 'Thin-Film Characterization', 'Spectroscopie d\'absorption et de transmittance UV-Visible.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="line-chart"></i></div>
+                            <h4>UV-Vis Spectroscopy</h4>
+                            <p>Spectroscopie d'absorption et de transmittance UV-Visible.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="photoluminescence" onclick="openMethodPage('Photoluminescence (PL)', 'Thin-Film Characterization', 'Émission photoluminescente et recombinaison radiative.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="sparkles"></i></div>
+                            <h4>Photoluminescence (PL)</h4>
+                            <p>Émission photoluminescente et recombinaison radiative.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="raman" onclick="openMethodPage('Raman Spectroscopy', 'Thin-Film Characterization', 'Spectroscopie Raman et modes de vibration de réseau (phonons).')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="radio"></i></div>
+                            <h4>Raman Spectroscopy</h4>
+                            <p>Spectroscopie Raman et modes de vibration de réseau (phonons).</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="ftir" onclick="openMethodPage('FTIR (Fourier Transform Infrared)', 'Thin-Film Characterization', 'Spectroscopie infrarouge à transformée de Fourier.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="bar-chart-2"></i></div>
+                            <h4>FTIR</h4>
+                            <p>Spectroscopie infrarouge à transformée de Fourier.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="xps" onclick="openMethodPage('XPS (X-Ray Photoelectron Spectroscopy)', 'Thin-Film Characterization', 'Analyse chimique de surface et états d\'oxydation des éléments.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="target"></i></div>
+                            <h4>XPS</h4>
+                            <p>Analyse chimique de surface et états d'oxydation des éléments.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="eds-edx" onclick="openMethodPage('EDS / EDX', 'Thin-Film Characterization', 'Microanalyse élémentaire par dispersion d\'énergie X.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="pie-chart"></i></div>
+                            <h4>EDS / EDX</h4>
+                            <p>Microanalyse élémentaire par dispersion d'énergie X.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="hall-effect" onclick="openMethodPage('Hall Effect', 'Thin-Film Characterization', 'Mesures d\'effet Hall : concentration et mobilité des porteurs.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="magnet"></i></div>
+                            <h4>Hall Effect</h4>
+                            <p>Mesures d'effet Hall : concentration et mobilité des porteurs.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="four-point-probe" onclick="openMethodPage('Four-Point Probe', 'Thin-Film Characterization', 'Mesure de la résistance carrée (Sheet Resistance).')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="calculator"></i></div>
+                            <h4>Four-Point Probe</h4>
+                            <p>Mesure de la résistance carrée (Sheet Resistance).</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="iv-cv-measurements" onclick="openMethodPage('I-V and C-V Measurements', 'Thin-Film Characterization', 'Caractérisation courant-tension et capacité-tension.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="trending-up"></i></div>
+                            <h4>I-V and C-V Measurements</h4>
+                            <p>Caractérisation courant-tension et capacité-tension.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="vsm" onclick="openMethodPage('VSM (Vibrating Sample Magnetometer)', 'Thin-Film Characterization', 'Magnétométrie à échantillon vibrant pour cycles d\'hystérésis.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="compass"></i></div>
+                            <h4>VSM</h4>
+                            <p>Magnétométrie à échantillon vibrant pour cycles d'hystérésis.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="squid" onclick="openMethodPage('SQUID Magnetometry', 'Thin-Film Characterization', 'Mesure magnétique ultra-sensible à dispositif supraconducteur.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="shield"></i></div>
+                            <h4>SQUID</h4>
+                            <p>Mesure magnétique ultra-sensible à dispositif supraconducteur.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="other-characterization" onclick="openMethodPage('Other Characterization Techniques', 'Thin-Film Characterization', 'Autres méthodes de caractérisation physique et chimique.')">
+                            <div class="method-subcard-icon" style="color: #10b981;"><i data-lucide="sliders"></i></div>
+                            <h4>Other Characterization Techniques</h4>
+                            <p>Autres méthodes de caractérisation physique et chimique.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: NUMERICAL APPROACHES (DFT) (8 Subsections) -->
+                    <div class="exp-tab-content" id="exp-tab-dft" style="display: none; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
+                        <div class="method-subcard" data-subid="wien2k" onclick="openMethodPage('WIEN2k', 'Numerical Approaches (DFT)', 'Code DFT full-potential (L)APW + local orbitals pour les solides.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="cpu"></i></div>
+                            <h4>WIEN2k</h4>
+                            <p>Code DFT full-potential (L)APW + local orbitals pour les solides.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="quantum-espresso" onclick="openMethodPage('Quantum ESPRESSO', 'Numerical Approaches (DFT)', 'Suite open-source DFT en ondes planes et pseudopotentiels.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="terminal"></i></div>
+                            <h4>Quantum ESPRESSO</h4>
+                            <p>Suite open-source DFT en ondes planes et pseudopotentiels.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="spr-kkr" onclick="openMethodPage('SPR-KKR', 'Numerical Approaches (DFT)', 'Calculs de structure électronique Korringa-Kohn-Rostoker avec désordre.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="layers"></i></div>
+                            <h4>SPR-KKR</h4>
+                            <p>Calculs de structure électronique Korringa-Kohn-Rostoker avec désordre.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="vasp" onclick="openMethodPage('VASP', 'Numerical Approaches (DFT)', 'Vienna Ab initio Simulation Package pour calculs de dynamique moléculaire et DFT.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="box"></i></div>
+                            <h4>VASP</h4>
+                            <p>Vienna Ab initio Simulation Package pour calculs de dynamique moléculaire et DFT.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="siesta" onclick="openMethodPage('SIESTA', 'Numerical Approaches (DFT)', 'Calculs DFT ab-initio rapides à bases d\'orbitales atomiques strictement localisées.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="code"></i></div>
+                            <h4>SIESTA</h4>
+                            <p>Calculs DFT ab-initio rapides à bases d'orbitales atomiques strictement localisées.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="boltztrap" onclick="openMethodPage('BoltzTraP', 'Numerical Approaches (DFT)', 'Calculs des propriétés de transport semi-classiques (Seebeck, conductivité).')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="zap"></i></div>
+                            <h4>BoltzTraP</h4>
+                            <p>Calculs des propriétés de transport semi-classiques (Seebeck, conductivité).</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="phonopy" onclick="openMethodPage('Phonopy', 'Numerical Approaches (DFT)', 'Calculs des spectres de phonons et stabilité thermodynamique.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="activity"></i></div>
+                            <h4>Phonopy</h4>
+                            <p>Calculs des spectres de phonons et stabilité thermodynamique.</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                        <div class="method-subcard" data-subid="visualization-tools" onclick="openMethodPage('Visualization Tools (VESTA, XCrySDen, Avogadro)', 'Numerical Approaches (DFT)', 'Logiciels de visualisation 3D des structures cristallines et densités électroniques.')">
+                            <div class="method-subcard-icon" style="color: #c084fc;"><i data-lucide="monitor"></i></div>
+                            <h4>Visualization Tools</h4>
+                            <p>Logiciels de visualisation 3D des structures cristallines (VESTA, XCrySDen, Avogadro).</p>
+                            <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
+                        </div>
+                    </div>
+
+                    <!-- DEDICATED METHOD SUB-PAGE DISPLAY PANEL (Hidden by default, shown when subcard is clicked) -->
+                    <div id="method-page-panel" style="display: none; margin-top: 20px; background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 16px; padding: 24px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 14px;">
+                            <button class="btn btn-secondary" onclick="closeMethodPage()" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px 16px; border-radius: 20px;">
+                                <i data-lucide="arrow-left"></i> ← Retour aux Méthodes & DFT
+                            </button>
+                            <span id="method-page-category-badge" class="badge badge-accent" style="font-size: 0.78rem;">Catégorie</span>
+                        </div>
+
+                        <div style="margin-bottom: 24px;">
+                            <h2 id="method-page-title" style="font-size: 1.6rem; color: #ffffff; margin-bottom: 8px; font-weight: 800;">Titre de la méthode</h2>
+                            <p id="method-page-desc" style="color: #94a3b8; font-size: 0.95rem; margin: 0;">Description synthétique de la technique.</p>
+                        </div>
+
+                        <!-- Workspace Content Placeholder Box Ready for User Content -->
+                        <div style="background: rgba(255, 255, 255, 0.02); border: 2px dashed rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 36px 24px; text-align: center;">
+                            <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(56, 189, 248, 0.1); color: var(--primary, #10b981); display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 14px;">
+                                <i data-lucide="file-text"></i>
+                            </div>
+                            <h3 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 8px;">Page dédiée prête pour le contenu</h3>
+                            <p style="color: #94a3b8; font-size: 0.88rem; max-width: 650px; margin: 0 auto 16px auto; line-height: 1.6;">
+                                Cet espace est structuré et réservé pour accueillir votre contenu détaillé (principes théoriques, schémas de montage, équations, protocoles expérimentaux ou fichiers de configuration DFT).
+                            </p>
+                            <span class="badge badge-outline" style="border-color: rgba(16, 185, 129, 0.4); color: #10b981; font-weight: 600;">Statut : Prêt à recevoir le contenu détaillé</span>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="anim-gallery-header" style="margin-bottom: 20px;">

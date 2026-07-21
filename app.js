@@ -11870,7 +11870,92 @@ function setupRechercheSection() {
             showToast(`Consultation de : ${title}`, true);
         });
     });
+
+    setupExperimentalDftNavigation();
 }
+
+function openMethodPage(title, category, desc) {
+    const pagePanel = document.getElementById("method-page-panel");
+    const pageTitle = document.getElementById("method-page-title");
+    const pageCategory = document.getElementById("method-page-category-badge");
+    const pageDesc = document.getElementById("method-page-desc");
+
+    if (pagePanel && pageTitle && pageCategory && pageDesc) {
+        pageTitle.textContent = title;
+        pageCategory.textContent = category;
+        pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
+        
+        pagePanel.style.display = "block";
+        pagePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
+    }
+}
+
+function closeMethodPage() {
+    const pagePanel = document.getElementById("method-page-panel");
+    if (pagePanel) {
+        pagePanel.style.display = "none";
+        const section = document.getElementById("experimental-dft-section");
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    }
+}
+
+function setupExperimentalDftNavigation() {
+    const tabBtns = document.querySelectorAll(".exp-tab-btn");
+    const tabContents = document.querySelectorAll(".exp-tab-content");
+
+    if (tabBtns.length === 0) return;
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            tabBtns.forEach(b => {
+                b.classList.remove("active");
+                b.style.background = "rgba(255, 255, 255, 0.04)";
+                b.style.color = "#94a3b8";
+                b.style.borderColor = "rgba(255, 255, 255, 0.1)";
+            });
+
+            btn.classList.add("active");
+            const expTab = btn.getAttribute("data-exptab");
+
+            if (expTab === "methods") {
+                btn.style.background = "rgba(56, 189, 248, 0.15)";
+                btn.style.color = "#38bdf8";
+                btn.style.borderColor = "rgba(56, 189, 248, 0.3)";
+            } else if (expTab === "characterization") {
+                btn.style.background = "rgba(16, 185, 129, 0.15)";
+                btn.style.color = "#10b981";
+                btn.style.borderColor = "rgba(16, 185, 129, 0.3)";
+            } else if (expTab === "dft") {
+                btn.style.background = "rgba(168, 85, 247, 0.15)";
+                btn.style.color = "#c084fc";
+                btn.style.borderColor = "rgba(168, 85, 247, 0.3)";
+            }
+
+            tabContents.forEach(content => {
+                if (content.id === `exp-tab-${expTab}`) {
+                    content.style.display = "grid";
+                    content.classList.add("active");
+                } else {
+                    content.style.display = "none";
+                    content.classList.remove("active");
+                }
+            });
+
+            closeMethodPage();
+
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    });
+}
+
 
 
 
