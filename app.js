@@ -12281,7 +12281,7 @@ function openMethodPage(title, category, desc, options = {}) {
         pageCategory.textContent = category;
         pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
         
-        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, .silar-workspace, div[style*='dashed']");
+        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, .silar-workspace, .xrd-workspace, div[style*='dashed']");
         
         if (title.toLowerCase().includes("sol-gel") || title.toLowerCase().includes("spin coating")) {
             if (placeholder) {
@@ -12310,6 +12310,13 @@ function openMethodPage(title, category, desc, options = {}) {
             }
             setTimeout(() => {
                 initSilarAnimation();
+            }, 100);
+        } else if (title.toLowerCase().includes("xrd") || title.toLowerCase().includes("diffraction")) {
+            if (placeholder) {
+                placeholder.outerHTML = renderXRDCustomPage();
+            }
+            setTimeout(() => {
+                initXRDAnimation();
             }, 100);
         } else {
             if (placeholder && !placeholder.querySelector("h3")?.textContent.includes("Page dédiée prête")) {
@@ -13853,6 +13860,370 @@ function drawSilarCanvas() {
     ctx.fillStyle = "#ffffff"; ctx.font = "bold 9px sans-serif"; ctx.textAlign = "center";
     ctx.fillText("Glass Substrate", silarSubstrateX, subY + subH / 2);
 }
+
+// --- XRD (X-RAY DIFFRACTION) ANALYSIS ENGINE ---
+let xrd2Theta = 36.20;
+let xrdFWHMDeg = 0.40;
+let xrdWavelength = 0.15406;
+let xrdK = 0.9;
+let xrdCanvasAnimId = null;
+let xrdAnimFrame = 0;
+
+function renderXRDCustomPage() {
+    return `
+    <div class="xrd-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
+        
+        <!-- Top Banner: XRD Overview -->
+        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="box"></i> Guide & Calculateur d'Analyse Cristallographique</span>
+                <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">XRD (X-Ray Diffraction) — Analyse de Pics & Taille des Cristallites</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Diffraction des Rayons X : Loi de Bragg (n&lambda; = 2d sin&theta;), Équation de Scherrer et Analyse de Microdéformation.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" id="btn-start-xrd-calc" onclick="scrollToXRDCalc()" style="padding: 10px 20px; font-weight: 700;">
+                    <i data-lucide="calculator"></i> Calculateur de Taille de Cristallite
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Layout: Interactive Canvas Diffractogram + Scherrer Calculator (Left) + 3 Infographics & Guides (Right) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+            
+            <!-- Left Column: Interactive XRD Pattern Simulation & Scherrer Calculator -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="activity"></i> Diffractogramme XRD & Calculateur Scherrer
+                    </h4>
+                    <span id="xrd-result-badge" class="badge badge-outline" style="border-color: #10b981; color: #10b981; font-weight: 700;">Taille D : 19.6 nm</span>
+                </div>
+
+                <!-- Canvas Diffractogram Container -->
+                <div style="position: relative; width: 100%; height: 320px; background: #070a14; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="xrd-canvas" width="620" height="320" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+
+                <!-- Interactive Calculation Controls -->
+                <div id="xrd-controls-panel" style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.03); padding: 14px; border-radius: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Position du Pic (2&theta;) : <strong id="xrd-2theta-val" style="color: #38bdf8;">36.20°</strong></label>
+                            <input type="range" id="xrd-2theta-slider" min="15.0" max="75.0" step="0.1" value="36.2" oninput="onXRDParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Largeur FWHM (&beta;) : <strong id="xrd-fwhm-val" style="color: #facc15;">0.40°</strong></label>
+                            <input type="range" id="xrd-fwhm-slider" min="0.10" max="1.20" step="0.02" value="0.40" oninput="onXRDParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Longueur d'onde (&lambda;) :</label>
+                            <select id="xrd-lambda-select" onchange="onXRDParamChange()" style="width: 100%; padding: 4px 8px; border-radius: 6px; background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem;">
+                                <option value="0.15406" selected>Cu K&alpha; (0.15406 nm)</option>
+                                <option value="0.17890">Co K&alpha; (0.17890 nm)</option>
+                                <option value="0.07093">Mo K&alpha; (0.07093 nm)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Facteur de forme (K) : <strong id="xrd-k-val" style="color: #a3e635;">0.90</strong></label>
+                            <input type="range" id="xrd-k-slider" min="0.80" max="1.00" step="0.05" value="0.90" oninput="onXRDParamChange()" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mathematical Conversion & Result Breakdown -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; padding: 14px; border-radius: 6px; font-size: 0.83rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 6px;">
+                    <h5 style="margin: 0; color: #ffffff; font-weight: 700; font-size: 0.9rem;">📐 Détail des Calculs Cristallographiques :</h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 4px;">
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
+                            <span style="color: #94a3b8; font-size: 0.75rem;">Angle Bragg &theta; :</span><br>
+                            <strong id="xrd-calc-theta" style="color: #38bdf8; font-size: 0.95rem;">18.10°</strong>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
+                            <span style="color: #94a3b8; font-size: 0.75rem;">FWHM en Radians &beta; :</span><br>
+                            <strong id="xrd-calc-beta-rad" style="color: #facc15; font-size: 0.95rem;">0.00698 rad</strong>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
+                            <span style="color: #94a3b8; font-size: 0.75rem;">Distance réticulaire d :</span><br>
+                            <strong id="xrd-calc-dspacing" style="color: #c084fc; font-size: 0.95rem;">2.479 Å</strong>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
+                            <span style="color: #94a3b8; font-size: 0.75rem;">Microdéformation &epsilon; :</span><br>
+                            <strong id="xrd-calc-strain" style="color: #ef4444; font-size: 0.95rem;">1.66 &times; 10⁻³</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Steps Workflow Guidance -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px;">
+                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-size: 0.88rem; font-weight: 700;">🔄 Démarche Méthodologique d'Analyse XRD (5 Étapes) :</h5>
+                    <ol style="margin: 0; padding-left: 18px; color: #94a3b8; font-size: 0.8rem; display: flex; flex-direction: column; gap: 4px;">
+                        <li><strong>Collecter le diffractogramme :</strong> Acquisition I(2&theta;) avec un bon rapport signal/bruit.</li>
+                        <li><strong>Sélectionner un pic isolé :</strong> Choisir un pic intense sans chevauchement.</li>
+                        <li><strong>Mesurer la FWHM (&beta;) :</strong> Déterminer la largeur à mi-hauteur en degrés.</li>
+                        <li><strong>Convertir en radians :</strong> &beta;(rad) = &beta;(°) &times; &pi; / 180.</li>
+                        <li><strong>Appliquer l'équation de Scherrer :</strong> D = K &lambda; / (&beta; cos&theta;) pour extraire la taille D en nm.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Right Column: 3 Infographics & Educational Visual Guides -->
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="book-open"></i> Guides Infographiques de Référence XRD (3)
+                    </h4>
+                </div>
+
+                <!-- Infographic 1 Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 1 : Analyse des Pics XRD</span>
+                        <a href="assets/images/xrd_peak_analysis_infographic.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
+                            Plein Écran <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
+                        <img src="assets/images/xrd_peak_analysis_infographic.jpg" alt="XRD Peak Analysis Infographic" style="width: 100%; height: auto; display: block; border-radius: 4px;">
+                    </div>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
+                        <strong>Les 5 Pilliers des Pics XRD :</strong> Position (2&theta;, déplacement de réseau/déformation), Intensité (cristallinité, orientation préférentielle), Largeur FWHM (taille de cristallite), Identification de phase (ICDD/COD) et Pics parasites (impuretés).
+                    </p>
+                </div>
+
+                <!-- Infographic 2 Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 2 : Fonctionnement & Équations Clefs</span>
+                        <a href="assets/images/xrd_graph_analysis_guide.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
+                            Plein Écran <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
+                        <img src="assets/images/xrd_graph_analysis_guide.jpg" alt="XRD Graph Analysis & How XRD Works Guide" style="width: 100%; height: auto; display: block; border-radius: 4px;">
+                    </div>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
+                        <strong>Principe Physique & Équations :</strong> Génération de rayons X (Cu K&alpha;), diffraction Bragg (n&lambda; = 2d sin&theta;), détection 2&theta;, Scherrer (D = K&lambda; / (&beta; cos&theta;)) et calcul de microdéformation (&epsilon; = &beta; cos&theta; / 4).
+                    </p>
+                </div>
+
+                <!-- Infographic 3 Card -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 3 : Mesure de Taille de Cristallite (Scherrer)</span>
+                        <a href="assets/images/xrd_crystallite_size_scherrer.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
+                            Plein Écran <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
+                        <img src="assets/images/xrd_crystallite_size_scherrer.jpg" alt="How to Measure Crystallite Size Using XRD Scherrer" style="width: 100%; height: auto; display: block; border-radius: 4px;">
+                    </div>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
+                        <strong>Distinction Particule vs Cristallite :</strong> La taille de particule (observée au MEB/TEM) est un agrégat de plusieurs domaines cohérents. La taille de cristallite (XRD) mesure le domaine individuel de diffraction cohérente.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    `;
+}
+
+function initXRDAnimation() {
+    onXRDParamChange();
+    startXRDCanvasLoop();
+}
+
+function scrollToXRDCalc() {
+    const panel = document.getElementById("xrd-controls-panel");
+    if (panel) panel.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function onXRDParamChange() {
+    const slider2T = document.getElementById("xrd-2theta-slider");
+    const sliderFWHM = document.getElementById("xrd-fwhm-slider");
+    const selectLambda = document.getElementById("xrd-lambda-select");
+    const sliderK = document.getElementById("xrd-k-slider");
+
+    if (slider2T) xrd2Theta = parseFloat(slider2T.value);
+    if (sliderFWHM) xrdFWHMDeg = parseFloat(sliderFWHM.value);
+    if (selectLambda) xrdWavelength = parseFloat(selectLambda.value);
+    if (sliderK) xrdK = parseFloat(sliderK.value);
+
+    const val2T = document.getElementById("xrd-2theta-val");
+    const valFWHM = document.getElementById("xrd-fwhm-val");
+    const valK = document.getElementById("xrd-k-val");
+
+    if (val2T) val2T.textContent = `${xrd2Theta.toFixed(2)}°`;
+    if (valFWHM) valFWHM.textContent = `${xrdFWHMDeg.toFixed(2)}°`;
+    if (valK) valK.textContent = `${xrdK.toFixed(2)}`;
+
+    // Mathematical Calculations
+    const thetaDeg = xrd2Theta / 2.0;
+    const thetaRad = (thetaDeg * Math.PI) / 180.0;
+    const betaRad = (xrdFWHMDeg * Math.PI) / 180.0;
+
+    // Scherrer Equation: D = (K * lambda) / (beta * cos(theta))
+    const D_nm = (xrdK * xrdWavelength) / (betaRad * Math.cos(thetaRad));
+    
+    // Bragg d-spacing: d = lambda / (2 * sin(theta)) in Angstroms (1 nm = 10 A)
+    const d_angstrom = (xrdWavelength * 10.0) / (2.0 * Math.sin(thetaRad));
+
+    // Microstrain: epsilon = (beta * cos(theta)) / 4
+    const strain = (betaRad * Math.cos(thetaRad)) / 4.0;
+
+    // UI Updates
+    const resBadge = document.getElementById("xrd-result-badge");
+    if (resBadge) resBadge.textContent = `Taille D : ${D_nm.toFixed(1)} nm`;
+
+    const txtTheta = document.getElementById("xrd-calc-theta");
+    const txtBetaRad = document.getElementById("xrd-calc-beta-rad");
+    const txtDspacing = document.getElementById("xrd-calc-dspacing");
+    const txtStrain = document.getElementById("xrd-calc-strain");
+
+    if (txtTheta) txtTheta.textContent = `${thetaDeg.toFixed(2)}°`;
+    if (txtBetaRad) txtBetaRad.textContent = `${betaRad.toFixed(5)} rad`;
+    if (txtDspacing) txtDspacing.textContent = `${d_angstrom.toFixed(3)} Å`;
+    if (txtStrain) txtStrain.textContent = `${(strain * 1000).toFixed(2)} × 10⁻³`;
+}
+
+function startXRDCanvasLoop() {
+    if (xrdCanvasAnimId) cancelAnimationFrame(xrdCanvasAnimId);
+    function loop() {
+        xrdAnimFrame++;
+        drawXRDCanvas();
+        xrdCanvasAnimId = requestAnimationFrame(loop);
+    }
+    loop();
+}
+
+function drawXRDCanvas() {
+    const canvas = document.getElementById("xrd-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Background Grid
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.05)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < w; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+    }
+    for (let y = 0; y < h; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+
+    // Axes
+    const marginL = 55;
+    const marginB = 40;
+    const marginR = 20;
+    const marginT = 30;
+    const plotW = w - marginL - marginR;
+    const plotH = h - marginT - marginB;
+
+    // Draw Axes Box
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.3)"; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(marginL, marginT);
+    ctx.lineTo(marginL, h - marginB);
+    ctx.lineTo(w - marginR, h - marginB);
+    ctx.stroke();
+
+    // Axis Labels
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px 'Outfit', sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("2θ (degrés)", marginL + plotW / 2, h - 10);
+
+    ctx.save();
+    ctx.translate(18, marginT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("Intensité Diffractée I (u.a.)", 0, 0);
+    ctx.restore();
+
+    // 2Theta Scale ticks from 10° to 80°
+    ctx.font = "9px sans-serif";
+    for (let deg = 10; deg <= 80; deg += 10) {
+        const xPos = marginL + ((deg - 10) / 70.0) * plotW;
+        ctx.strokeStyle = "rgba(255,255,255,0.15)";
+        ctx.beginPath(); ctx.moveTo(xPos, h - marginB); ctx.lineTo(xPos, h - marginB + 4); ctx.stroke();
+        ctx.fillStyle = "#cbd5e1"; ctx.fillText(`${deg}°`, xPos, h - marginB + 16);
+    }
+
+    // Reference Peaks Array (Standard XRD pattern background peaks)
+    const refPeaks = [
+        { angle: 21.5, height: 0.35, hkl: "(101)" },
+        { angle: 30.2, height: 0.90, hkl: "(110)" },
+        { angle: 39.5, height: 0.50, hkl: "(200)" },
+        { angle: 52.8, height: 0.42, hkl: "(211)" },
+        { angle: 63.4, height: 0.38, hkl: "(220)" },
+        { angle: 74.6, height: 0.28, hkl: "(301)" }
+    ];
+
+    // Plot XRD Intensity Curve
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    const currentFWHM = xrdFWHMDeg;
+
+    for (let px = 0; px <= plotW; px += 2) {
+        const deg = 10.0 + (px / plotW) * 70.0;
+        let intensity = 0.04;
+
+        // Sum Gaussian peaks
+        const distSel = deg - xrd2Theta;
+        const sigmaSel = currentFWHM / 2.355;
+        const selPeakInt = 0.92 * Math.exp(-(distSel * distSel) / (2 * sigmaSel * sigmaSel));
+        intensity += selPeakInt;
+
+        for (let p of refPeaks) {
+            if (Math.abs(p.angle - xrd2Theta) > 1.5) {
+                const dist = deg - p.angle;
+                const sigma = 0.35 / 2.355;
+                intensity += p.height * Math.exp(-(dist * dist) / (2 * sigma * sigma));
+            }
+        }
+
+        const yPos = (h - marginB) - intensity * (plotH - 20);
+        if (px === 0) ctx.moveTo(marginL + px, yPos);
+        else ctx.lineTo(marginL + px, yPos);
+    }
+    ctx.stroke();
+
+    // Highlight Selected Peak & Draw FWHM lines
+    const selX = marginL + ((xrd2Theta - 10.0) / 70.0) * plotW;
+    const selPeakHeightVal = 0.92;
+    const selPeakTopY = (h - marginB) - selPeakHeightVal * (plotH - 20);
+    const halfMaxY = (h - marginB) - (selPeakHeightVal / 2.0) * (plotH - 20);
+
+    // Dotted vertical center line
+    ctx.strokeStyle = "rgba(250, 204, 21, 0.7)"; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(selX, h - marginB); ctx.lineTo(selX, selPeakTopY - 15); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // FWHM horizontal width arrow line
+    const fwhmPx = (currentFWHM / 70.0) * plotW;
+    ctx.strokeStyle = "#f59e0b"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(selX - fwhmPx / 2, halfMaxY);
+    ctx.lineTo(selX + fwhmPx / 2, halfMaxY);
+    ctx.stroke();
+
+    // FWHM arrows & text
+    ctx.fillStyle = "#facc15"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText(`FWHM β = ${currentFWHM.toFixed(2)}°`, selX, halfMaxY - 6);
+    ctx.fillText(`2θ = ${xrd2Theta.toFixed(2)}°`, selX, selPeakTopY - 20);
+
+    // Calculate Crystallite size D for annotation
+    const thetaRad = (xrd2Theta / 2.0 * Math.PI) / 180.0;
+    const betaRad = (currentFWHM * Math.PI) / 180.0;
+    const D_nm = (xrdK * xrdWavelength) / (betaRad * Math.cos(thetaRad));
+
+    ctx.fillStyle = "#10b981"; ctx.font = "bold 11px 'Outfit', sans-serif";
+    ctx.fillText(`D = ${D_nm.toFixed(1)} nm`, selX, halfMaxY + 16);
+}
+
 
 
 
