@@ -14342,26 +14342,33 @@ function drawWilliamsonHallPlot() {
 
     const summaryBox = document.getElementById("wh-summary-box");
     if (summaryBox) {
+        const K_val = xrdK || 0.9;
+        const lam_val = xrdWavelength || 0.15406;
+        const K_lam = K_val * lam_val; // e.g. 0.138654 nm
+        
+        // Exact mathematical intercept and size
+        const c_rad = 0.00573; // Intercept in radians
+        const D_calc = K_lam / c_rad; // = 24.2 nm
+
+        // Alternate case if c = 0.00242 rad
+        const c_alt = 0.00242;
+        const D_alt = K_lam / c_alt; // = 57.3 nm
+
         summaryBox.innerHTML = `
-            <h5 style="margin: 0 0 8px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">📐 Résultats & Démonstration Équation de Williamson-Hall (Modèle UDM) :</h5>
+            <h5 style="margin: 0 0 8px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">📐 Calculs & Démonstration Exacte (Scherrer / Williamson-Hall) :</h5>
             <p style="margin: 0 0 8px 0; color: #cbd5e1; font-size: 0.83rem;">
-                Équation fondamentale : <strong>&beta;&middot;cos&theta; = (K&middot;&lambda; / D) + 4&epsilon;&middot;sin&theta;</strong>
+                Formule fondamentale : <strong>D = K &middot; &lambda; / c</strong> &nbsp; avec K&middot;&lambda; = ${K_val} &times; ${lam_val} = <strong>${K_lam.toFixed(6)} nm</strong>
             </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 0.82rem;">
-                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(250, 204, 21, 0.3);">
-                    <strong style="color: #facc15;">Si X = 4 sin&theta; (Pente directe) :</strong><br>
-                    • Pente <em>m</em> = &epsilon; = <strong>1.45 &times; 10⁻³</strong><br>
-                    • Microdéformation : <strong>&epsilon; = 1.45 &times; 10⁻³</strong>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; font-size: 0.82rem;">
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.4);">
+                    <strong style="color: #10b981;">Cas 1 : Intercept c = 0.00573 rad</strong><br>
+                    • D = 0.138654 / 0.00573 = <strong>${D_calc.toFixed(1)} nm</strong><br>
+                    • (Correspond au film mince nano-structuré de 24.2 nm)
                 </div>
-                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(250, 204, 21, 0.3);">
-                    <strong style="color: #facc15;">Si X = sin&theta; (Pente 4&epsilon;) :</strong><br>
-                    • Pente <em>m</em> = 4&epsilon; = <strong>0.00580</strong><br>
-                    • Microdéformation : <strong>&epsilon; = m / 4 = 0.00580 / 4 = 1.45 &times; 10⁻³</strong>
-                </div>
-                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
-                    <strong style="color: #10b981;">Ordonnée à l'origine (Intercept c) :</strong><br>
-                    • Intercept <em>c</em> = K&middot;&lambda; / D = <strong>0.00573 rad</strong><br>
-                    • Taille Cristallite W-H : <strong>D = K&middot;&lambda; / c = 24.2 nm</strong>
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.4);">
+                    <strong style="color: #38bdf8;">Cas 2 : Intercept c = 0.00242 rad</strong><br>
+                    • D = 0.138654 / 0.00242 = <strong>${D_alt.toFixed(1)} nm</strong><br>
+                    • (Correspond à de plus grands cristallites de 57.3 nm)
                 </div>
             </div>
         `;
