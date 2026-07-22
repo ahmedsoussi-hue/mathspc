@@ -14022,6 +14022,22 @@ function renderXRDCustomPage() {
                     </p>
                 </div>
 
+                <!-- Infographic 4 Card (MiniFlex600 Guide) -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 4 : Lecture de Diffractogramme & Rigaku MiniFlex600</span>
+                        <a href="assets/images/xrd_reading_guide_miniflex.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
+                            Plein Écran <i data-lucide="external-link"></i>
+                        </a>
+                    </div>
+                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
+                        <img src="assets/images/xrd_reading_guide_miniflex.jpg" alt="How to Read an XRD Pattern Rigaku MiniFlex600" style="width: 100%; height: auto; display: block; border-radius: 4px;">
+                    </div>
+                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
+                        <strong>Guide Expérimental & Identification de Phase (7 Étapes) :</strong> Analyse des données de diffraction brutes en informations matérielles utiles (Matching de phases ICDD/PDF, étude du bruit de fond, orientation préférentielle et de la déformation de réseau).
+                    </p>
+                </div>
+
             </div>
 
         </div>
