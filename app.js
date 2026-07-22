@@ -14343,9 +14343,27 @@ function drawWilliamsonHallPlot() {
     const summaryBox = document.getElementById("wh-summary-box");
     if (summaryBox) {
         summaryBox.innerHTML = `
-            <strong>📊 Résultats de la Régression Linéaire Williamson-Hall :</strong><br>
-            • Pente ($4\\varepsilon$) = $0.00225 \\implies$ Microdéformation $\\varepsilon = 1.45 \\times 10^{-3}$<br>
-            • Ordonnée à l'origine ($\\frac{K\\lambda}{D}$) = $0.00242 \\text{ rad} \\implies$ Taille de Cristallite $D_{\\text{W-H}} = 24.2 \\text{ nm}$
+            <h5 style="margin: 0 0 8px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">📐 Résultats & Démonstration Équation de Williamson-Hall (Modèle UDM) :</h5>
+            <p style="margin: 0 0 8px 0; color: #cbd5e1; font-size: 0.83rem;">
+                Équation fondamentale : <strong>&beta;&middot;cos&theta; = (K&middot;&lambda; / D) + 4&epsilon;&middot;sin&theta;</strong>
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 0.82rem;">
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(250, 204, 21, 0.3);">
+                    <strong style="color: #facc15;">Si X = 4 sin&theta; (Pente directe) :</strong><br>
+                    • Pente <em>m</em> = &epsilon; = <strong>1.45 &times; 10⁻³</strong><br>
+                    • Microdéformation : <strong>&epsilon; = 1.45 &times; 10⁻³</strong>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(250, 204, 21, 0.3);">
+                    <strong style="color: #facc15;">Si X = sin&theta; (Pente 4&epsilon;) :</strong><br>
+                    • Pente <em>m</em> = 4&epsilon; = <strong>0.00580</strong><br>
+                    • Microdéformation : <strong>&epsilon; = m / 4 = 0.00580 / 4 = 1.45 &times; 10⁻³</strong>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <strong style="color: #10b981;">Ordonnée à l'origine (Intercept c) :</strong><br>
+                    • Intercept <em>c</em> = K&middot;&lambda; / D = <strong>0.00573 rad</strong><br>
+                    • Taille Cristallite W-H : <strong>D = K&middot;&lambda; / c = 24.2 nm</strong>
+                </div>
+            </div>
         `;
     }
 }
