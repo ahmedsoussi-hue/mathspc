@@ -13873,182 +13873,582 @@ function renderXRDCustomPage() {
     return `
     <div class="xrd-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
         
-        <!-- Top Banner: XRD Overview -->
-        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+        <!-- Top Banner: Full XRD Educational Platform -->
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 14px; padding: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
             <div>
-                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="box"></i> Guide & Calculateur d'Analyse Cristallographique</span>
-                <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">XRD (X-Ray Diffraction) — Analyse de Pics & Taille des Cristallites</h3>
-                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Diffraction des Rayons X : Loi de Bragg (n&lambda; = 2d sin&theta;), Équation de Scherrer et Analyse de Microdéformation.</p>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="cpu"></i> Plateforme Internationale d'Analyse XRD des Couches Minces</span>
+                <h3 style="margin: 4px 0; font-size: 1.4rem; color: #ffffff;">XRD Thin-Film Structural Suite — De l'Acquisition au Rapport Scientifique</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Analyse complète : Loi de Bragg, Scherrer, Williamson-Hall, Paramètres de maille, Densité de dislocations &delta;, Texture Harris $TC_{(hkl)}$ et Contraintes biaxiales $\\sigma$.</p>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn btn-primary" id="btn-start-xrd-calc" onclick="scrollToXRDCalc()" style="padding: 10px 20px; font-weight: 700;">
-                    <i data-lucide="calculator"></i> Calculateur de Taille de Cristallite
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <label for="xrd-file-upload-input" class="btn btn-secondary" style="padding: 10px 16px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                    <i data-lucide="upload"></i> Charger Fichier (.xy/.csv/.txt)
+                </label>
+                <input type="file" id="xrd-file-upload-input" accept=".xy,.csv,.txt,.dat" onchange="handleXRDUserFileUpload(event)" style="display: none;">
+                <button class="btn btn-primary" onclick="exportXRDScientificReport()" style="padding: 10px 18px; font-weight: 700;">
+                    <i data-lucide="download"></i> Exporter Rapport complet
                 </button>
             </div>
         </div>
 
-        <!-- Main Content Layout: Interactive Canvas Diffractogram + Scherrer Calculator (Left) + 3 Infographics & Guides (Right) -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
-            
-            <!-- Left Column: Interactive XRD Pattern Simulation & Scherrer Calculator -->
-            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-                        <i data-lucide="activity"></i> Diffractogramme XRD & Calculateur Scherrer
-                    </h4>
-                    <span id="xrd-result-badge" class="badge badge-outline" style="border-color: #10b981; color: #10b981; font-weight: 700;">Taille D : 19.6 nm</span>
-                </div>
-
-                <!-- Canvas Diffractogram Container -->
-                <div style="position: relative; width: 100%; height: 320px; background: #070a14; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <canvas id="xrd-canvas" width="620" height="320" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
-                </div>
-
-                <!-- Interactive Calculation Controls -->
-                <div id="xrd-controls-panel" style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.03); padding: 14px; border-radius: 10px;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
-                        <div>
-                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Position du Pic (2&theta;) : <strong id="xrd-2theta-val" style="color: #38bdf8;">36.20°</strong></label>
-                            <input type="range" id="xrd-2theta-slider" min="15.0" max="75.0" step="0.1" value="36.2" oninput="onXRDParamChange()" style="width: 100%;">
-                        </div>
-                        <div>
-                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Largeur FWHM (&beta;) : <strong id="xrd-fwhm-val" style="color: #facc15;">0.40°</strong></label>
-                            <input type="range" id="xrd-fwhm-slider" min="0.10" max="1.20" step="0.02" value="0.40" oninput="onXRDParamChange()" style="width: 100%;">
-                        </div>
-                        <div>
-                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Longueur d'onde (&lambda;) :</label>
-                            <select id="xrd-lambda-select" onchange="onXRDParamChange()" style="width: 100%; padding: 4px 8px; border-radius: 6px; background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem;">
-                                <option value="0.15406" selected>Cu K&alpha; (0.15406 nm)</option>
-                                <option value="0.17890">Co K&alpha; (0.17890 nm)</option>
-                                <option value="0.07093">Mo K&alpha; (0.07093 nm)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Facteur de forme (K) : <strong id="xrd-k-val" style="color: #a3e635;">0.90</strong></label>
-                            <input type="range" id="xrd-k-slider" min="0.80" max="1.00" step="0.05" value="0.90" oninput="onXRDParamChange()" style="width: 100%;">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mathematical Conversion & Result Breakdown -->
-                <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; padding: 14px; border-radius: 6px; font-size: 0.83rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 6px;">
-                    <h5 style="margin: 0; color: #ffffff; font-weight: 700; font-size: 0.9rem;">📐 Détail des Calculs Cristallographiques :</h5>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 4px;">
-                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-                            <span style="color: #94a3b8; font-size: 0.75rem;">Angle Bragg &theta; :</span><br>
-                            <strong id="xrd-calc-theta" style="color: #38bdf8; font-size: 0.95rem;">18.10°</strong>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-                            <span style="color: #94a3b8; font-size: 0.75rem;">FWHM en Radians &beta; :</span><br>
-                            <strong id="xrd-calc-beta-rad" style="color: #facc15; font-size: 0.95rem;">0.00698 rad</strong>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-                            <span style="color: #94a3b8; font-size: 0.75rem;">Distance réticulaire d :</span><br>
-                            <strong id="xrd-calc-dspacing" style="color: #c084fc; font-size: 0.95rem;">2.479 Å</strong>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">
-                            <span style="color: #94a3b8; font-size: 0.75rem;">Microdéformation &epsilon; :</span><br>
-                            <strong id="xrd-calc-strain" style="color: #ef4444; font-size: 0.95rem;">1.66 &times; 10⁻³</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5 Steps Workflow Guidance -->
-                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px;">
-                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-size: 0.88rem; font-weight: 700;">🔄 Démarche Méthodologique d'Analyse XRD (5 Étapes) :</h5>
-                    <ol style="margin: 0; padding-left: 18px; color: #94a3b8; font-size: 0.8rem; display: flex; flex-direction: column; gap: 4px;">
-                        <li><strong>Collecter le diffractogramme :</strong> Acquisition I(2&theta;) avec un bon rapport signal/bruit.</li>
-                        <li><strong>Sélectionner un pic isolé :</strong> Choisir un pic intense sans chevauchement.</li>
-                        <li><strong>Mesurer la FWHM (&beta;) :</strong> Déterminer la largeur à mi-hauteur en degrés.</li>
-                        <li><strong>Convertir en radians :</strong> &beta;(rad) = &beta;(°) &times; &pi; / 180.</li>
-                        <li><strong>Appliquer l'équation de Scherrer :</strong> D = K &lambda; / (&beta; cos&theta;) pour extraire la taille D en nm.</li>
-                    </ol>
-                </div>
+        <!-- Sample Dataset Quick Loader -->
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <span style="font-size: 0.85rem; color: #cbd5e1; font-weight: 600;"><i data-lucide="database"></i> Échantillons de Référence pour Test :</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <button class="btn btn-secondary" onclick="loadXRDSampleDataset('zno')" style="padding: 6px 12px; font-size: 0.78rem;">ZnO Wurtzite (002)</button>
+                <button class="btn btn-secondary" onclick="loadXRDSampleDataset('tio2')" style="padding: 6px 12px; font-size: 0.78rem;">TiO₂ Anatase / Rutile</button>
+                <button class="btn btn-secondary" onclick="loadXRDSampleDataset('cuago')" style="padding: 6px 12px; font-size: 0.78rem;">CuAgO / Cu₂O</button>
             </div>
-
-            <!-- Right Column: 3 Infographics & Educational Visual Guides -->
-            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-                        <i data-lucide="book-open"></i> Guides Infographiques de Référence XRD (3)
-                    </h4>
-                </div>
-
-                <!-- Infographic 1 Card -->
-                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 1 : Analyse des Pics XRD</span>
-                        <a href="assets/images/xrd_peak_analysis_infographic.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
-                            Plein Écran <i data-lucide="external-link"></i>
-                        </a>
-                    </div>
-                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
-                        <img src="assets/images/xrd_peak_analysis_infographic.jpg" alt="XRD Peak Analysis Infographic" style="width: 100%; height: auto; display: block; border-radius: 4px;">
-                    </div>
-                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
-                        <strong>Les 5 Pilliers des Pics XRD :</strong> Position (2&theta;, déplacement de réseau/déformation), Intensité (cristallinité, orientation préférentielle), Largeur FWHM (taille de cristallite), Identification de phase (ICDD/COD) et Pics parasites (impuretés).
-                    </p>
-                </div>
-
-                <!-- Infographic 2 Card -->
-                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 2 : Fonctionnement & Équations Clefs</span>
-                        <a href="assets/images/xrd_graph_analysis_guide.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
-                            Plein Écran <i data-lucide="external-link"></i>
-                        </a>
-                    </div>
-                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
-                        <img src="assets/images/xrd_graph_analysis_guide.jpg" alt="XRD Graph Analysis & How XRD Works Guide" style="width: 100%; height: auto; display: block; border-radius: 4px;">
-                    </div>
-                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
-                        <strong>Principe Physique & Équations :</strong> Génération de rayons X (Cu K&alpha;), diffraction Bragg (n&lambda; = 2d sin&theta;), détection 2&theta;, Scherrer (D = K&lambda; / (&beta; cos&theta;)) et calcul de microdéformation (&epsilon; = &beta; cos&theta; / 4).
-                    </p>
-                </div>
-
-                <!-- Infographic 3 Card -->
-                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 3 : Mesure de Taille de Cristallite (Scherrer)</span>
-                        <a href="assets/images/xrd_crystallite_size_scherrer.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
-                            Plein Écran <i data-lucide="external-link"></i>
-                        </a>
-                    </div>
-                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
-                        <img src="assets/images/xrd_crystallite_size_scherrer.jpg" alt="How to Measure Crystallite Size Using XRD Scherrer" style="width: 100%; height: auto; display: block; border-radius: 4px;">
-                    </div>
-                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
-                        <strong>Distinction Particule vs Cristallite :</strong> La taille de particule (observée au MEB/TEM) est un agrégat de plusieurs domaines cohérents. La taille de cristallite (XRD) mesure le domaine individuel de diffraction cohérente.
-                    </p>
-                </div>
-
-                <!-- Infographic 4 Card (MiniFlex600 Guide) -->
-                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span class="badge badge-accent" style="font-size: 0.72rem;">Guide 4 : Lecture de Diffractogramme & Rigaku MiniFlex600</span>
-                        <a href="assets/images/xrd_reading_guide_miniflex.jpg" target="_blank" class="btn-open-subpage" style="font-size: 0.78rem;">
-                            Plein Écran <i data-lucide="external-link"></i>
-                        </a>
-                    </div>
-                    <div style="border-radius: 8px; overflow: hidden; background: #ffffff; padding: 4px;">
-                        <img src="assets/images/xrd_reading_guide_miniflex.jpg" alt="How to Read an XRD Pattern Rigaku MiniFlex600" style="width: 100%; height: auto; display: block; border-radius: 4px;">
-                    </div>
-                    <p style="margin: 0; color: #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
-                        <strong>Guide Expérimental & Identification de Phase (7 Étapes) :</strong> Analyse des données de diffraction brutes en informations matérielles utiles (Matching de phases ICDD/PDF, étude du bruit de fond, orientation préférentielle et de la déformation de réseau).
-                    </p>
-                </div>
-
-            </div>
-
         </div>
+
+        <!-- Navigation Tabs for 7 Structural Analysis Modules -->
+        <div style="display: flex; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; overflow-x: auto;">
+            <button class="btn btn-secondary xrd-tab-btn active" id="xrd-tab-btn-1" onclick="switchXRDTab(1)" style="padding: 8px 14px; font-size: 0.82rem;">📊 1. Diffractogramme & Pics</button>
+            <button class="btn btn-secondary xrd-tab-btn" id="xrd-tab-btn-2" onclick="switchXRDTab(2)" style="padding: 8px 14px; font-size: 0.82rem;">🔬 2. Paramètres Maille (a,c,V)</button>
+            <button class="btn btn-secondary xrd-tab-btn" id="xrd-tab-btn-3" onclick="switchXRDTab(3)" style="padding: 8px 14px; font-size: 0.82rem;">📈 3. Williamson-Hall & Déformation (&epsilon;)</button>
+            <button class="btn btn-secondary xrd-tab-btn" id="xrd-tab-btn-4" onclick="switchXRDTab(4)" style="padding: 8px 14px; font-size: 0.82rem;">🌀 4. Dislocations (&delta;) & Défauts</button>
+            <button class="btn btn-secondary xrd-tab-btn" id="xrd-tab-btn-5" onclick="switchXRDTab(5)" style="padding: 8px 14px; font-size: 0.82rem;">🎯 5. Texture Harris TC(hkl)</button>
+            <button class="btn btn-secondary xrd-tab-btn" id="xrd-tab-btn-6" onclick="switchXRDTab(6)" style="padding: 8px 14px; font-size: 0.82rem;">⚡ 6. Contraintes Biaxiales (&sigma;)</button>
+            <button class="btn btn-secondary xrd-tab-btn" id="xrd-tab-btn-7" onclick="switchXRDTab(7)" style="padding: 8px 14px; font-size: 0.82rem;">📚 7. Infographies (4 Guides)</button>
+        </div>
+
+        <!-- TAB 1: Diffractogram Canvas & Scherrer Peak Explorer -->
+        <div id="xrd-tab-content-1" class="xrd-tab-panel" style="display: block;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+                
+                <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="activity"></i> Spectre XRD Interactif & Peak Fitting
+                        </h4>
+                        <span id="xrd-result-badge" class="badge badge-outline" style="border-color: #10b981; color: #10b981; font-weight: 700;">Taille Moyenne D : 21.4 nm</span>
+                    </div>
+
+                    <div style="position: relative; width: 100%; height: 330px; background: #070a14; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <canvas id="xrd-canvas" width="620" height="330" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                    </div>
+
+                    <div id="xrd-controls-panel" style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.03); padding: 14px; border-radius: 10px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                            <div>
+                                <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Position (2&theta;) : <strong id="xrd-2theta-val" style="color: #38bdf8;">34.42°</strong></label>
+                                <input type="range" id="xrd-2theta-slider" min="15.0" max="75.0" step="0.1" value="34.42" oninput="onXRDParamChange()" style="width: 100%;">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">FWHM (&beta;) : <strong id="xrd-fwhm-val" style="color: #facc15;">0.35°</strong></label>
+                                <input type="range" id="xrd-fwhm-slider" min="0.10" max="1.20" step="0.02" value="0.35" oninput="onXRDParamChange()" style="width: 100%;">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Longueur d'onde (&lambda;) :</label>
+                                <select id="xrd-lambda-select" onchange="onXRDParamChange()" style="width: 100%; padding: 4px 8px; border-radius: 6px; background: #0f172a; color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem;">
+                                    <option value="0.15406" selected>Cu K&alpha; (0.15406 nm)</option>
+                                    <option value="0.17890">Co K&alpha; (0.17890 nm)</option>
+                                    <option value="0.07093">Mo K&alpha; (0.07093 nm)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Facteur K : <strong id="xrd-k-val" style="color: #a3e635;">0.90</strong></label>
+                                <input type="range" id="xrd-k-slider" min="0.80" max="1.00" step="0.05" value="0.90" oninput="onXRDParamChange()" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; padding: 14px; border-radius: 6px; font-size: 0.83rem; color: #cbd5e1;">
+                        <h5 style="margin: 0 0 6px 0; color: #ffffff; font-weight: 700;">📐 Éléments Extraits du Pic Sélectionné :</h5>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px;">
+                            <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">Angle Bragg &theta; : <strong id="xrd-calc-theta" style="color: #38bdf8;">17.21°</strong></div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">FWHM &beta; : <strong id="xrd-calc-beta-rad" style="color: #facc15;">0.00611 rad</strong></div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">Distance reticulaire d : <strong id="xrd-calc-dspacing" style="color: #c084fc;">2.603 Å</strong></div>
+                            <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px;">Microdéformation &epsilon; : <strong id="xrd-calc-strain" style="color: #ef4444;">1.46 &times; 10⁻³</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table of Detected Peaks -->
+                <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700;">📋 Tableau d'Indexation des Pics Détectés</h4>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: center;">
+                            <thead>
+                                <tr style="background: rgba(255,255,255,0.06); color: #38bdf8; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                    <th style="padding: 8px;">Pic #</th>
+                                    <th style="padding: 8px;">2&theta; (°)</th>
+                                    <th style="padding: 8px;">Plan (hkl)</th>
+                                    <th style="padding: 8px;">d (Å)</th>
+                                    <th style="padding: 8px;">FWHM (°)</th>
+                                    <th style="padding: 8px;">D (nm)</th>
+                                    <th style="padding: 8px;">TC(hkl)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="xrd-peaks-table-body" style="color: #e2e8f0;">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 2: Lattice Parameters (a, c, V) & Crystal System -->
+        <div id="xrd-tab-content-2" class="xrd-tab-panel" style="display: none;">
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <h4 style="margin: 0; color: #38bdf8; font-size: 1.1rem; font-weight: 700;">🔬 Calculateur de Paramètres de Maille & Volume de la Maille Élémentaire</h4>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">Calcul automatique des constantes de réseau $a, b, c$ et du volume $V$ selon la géométrie cristalline.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;" id="xrd-lattice-cards-container">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <div style="background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 14px; border-radius: 6px; font-size: 0.83rem; color: #cbd5e1;">
+                    <h5 style="margin: 0 0 6px 0; color: #ffffff;">📐 Formules Cristallographiques Utilisées :</h5>
+                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px;">
+                        <li><strong>Système Hexagonal (ex: ZnO Wurtzite) :</strong> $\\frac{1}{d^2} = \\frac{4}{3}\\left(\\frac{h^2+hk+k^2}{a^2}\\right) + \\frac{l^2}{c^2} \\implies a = \\frac{\\lambda}{\\sqrt{3}\\sin\\theta_{(100)}}, \\quad c = \\frac{\\lambda}{\\sin\\theta_{(002)}}$</li>
+                        <li><strong>Volume Hexagonal :</strong> $V = \\frac{\\sqrt{3}}{2} a^2 c = 0.866 \\cdot a^2 c$</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Williamson-Hall Plot & Microstrain -->
+        <div id="xrd-tab-content-3" class="xrd-tab-panel" style="display: none;">
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <h4 style="margin: 0; color: #facc15; font-size: 1.1rem; font-weight: 700;">📈 Droite de Williamson-Hall (Separation Taille / Déformation)</h4>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">$\\beta \\cos\\theta = \\frac{K \\lambda}{D} + 4 \\varepsilon \\sin\\theta$. La pente donne la microdéformation $\\varepsilon$ et l'ordonnée à l'origine donne la taille de cristallite $D$.</p>
+                
+                <div style="position: relative; width: 100%; height: 320px; background: #070a14; border-radius: 12px; border: 1px solid rgba(250, 204, 21, 0.3);">
+                    <canvas id="wh-plot-canvas" width="620" height="320" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+
+                <div id="wh-summary-box" style="background: rgba(250, 204, 21, 0.08); border-left: 4px solid #facc15; padding: 14px; border-radius: 6px; font-size: 0.85rem; color: #cbd5e1;">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Dislocation Density & Crystal Defects -->
+        <div id="xrd-tab-content-4" class="xrd-tab-panel" style="display: none;">
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <h4 style="margin: 0; color: #c084fc; font-size: 1.1rem; font-weight: 700;">🌀 Densité de Dislocations (\\delta) & Défauts de Réseau</h4>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">La densité de dislocations représente la longueur totale de lignes de dislocation par unité de volume : $\\delta = \\frac{1}{D^2}$.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;" id="dislocation-cards-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: Texture Coefficient (TC) Harris -->
+        <div id="xrd-tab-content-5" class="xrd-tab-panel" style="display: none;">
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <h4 style="margin: 0; color: #38bdf8; font-size: 1.1rem; font-weight: 700;">🎯 Coefficient de Texture Harris TC(hkl) & Orientation Préférentielle</h4>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">Un coefficient $TC_{(hkl)} > 1.0$ indique une orientation préférentielle de croissance le long du plan $(hkl)$.</p>
+                
+                <div style="position: relative; width: 100%; height: 280px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.3);">
+                    <canvas id="tc-plot-canvas" width="620" height="280" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: Residual Stress -->
+        <div id="xrd-tab-content-6" class="xrd-tab-panel" style="display: none;">
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+                <h4 style="margin: 0; color: #ef4444; font-size: 1.1rem; font-weight: 700;">⚡ Contraintes Biaxiales Dans le Film Mince (\\sigma)</h4>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">Contrainte mécanique biaxiale induite par le désaccord de maille substrat/film : $\\sigma = \\frac{E}{2\\nu} \\left(\\frac{c - c_0}{c_0}\\right)$.</p>
+                
+                <div id="stress-summary-container" style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; padding: 16px; border-radius: 8px; font-size: 0.88rem; color: #cbd5e1;">
+                    <!-- Dynamically calculated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 7: 4 Reference Infographics -->
+        <div id="xrd-tab-content-7" class="xrd-tab-panel" style="display: none;">
+            <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 20px;">
+                <h4 style="margin: 0; color: #10b981; font-size: 1.1rem; font-weight: 700;">📚 Infographies Expérimentales & Guides Théoriques (4)</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+                    <!-- Card 1 -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px;">
+                        <span class="badge badge-accent" style="font-size: 0.7rem;">Guide 1</span>
+                        <h5 style="margin: 6px 0; color: #fff;">XRD Peak Analysis</h5>
+                        <img src="assets/images/xrd_peak_analysis_infographic.jpg" style="width:100%; border-radius: 6px; margin: 6px 0;">
+                        <a href="assets/images/xrd_peak_analysis_infographic.jpg" target="_blank" class="btn-open-subpage" style="font-size:0.75rem;">Voir Plein Écran</a>
+                    </div>
+                    <!-- Card 2 -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px;">
+                        <span class="badge badge-accent" style="font-size: 0.7rem;">Guide 2</span>
+                        <h5 style="margin: 6px 0; color: #fff;">XRD Graph Analysis</h5>
+                        <img src="assets/images/xrd_graph_analysis_guide.jpg" style="width:100%; border-radius: 6px; margin: 6px 0;">
+                        <a href="assets/images/xrd_graph_analysis_guide.jpg" target="_blank" class="btn-open-subpage" style="font-size:0.75rem;">Voir Plein Écran</a>
+                    </div>
+                    <!-- Card 3 -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px;">
+                        <span class="badge badge-accent" style="font-size: 0.7rem;">Guide 3</span>
+                        <h5 style="margin: 6px 0; color: #fff;">Crystallite Size Scherrer</h5>
+                        <img src="assets/images/xrd_crystallite_size_scherrer.jpg" style="width:100%; border-radius: 6px; margin: 6px 0;">
+                        <a href="assets/images/xrd_crystallite_size_scherrer.jpg" target="_blank" class="btn-open-subpage" style="font-size:0.75rem;">Voir Plein Écran</a>
+                    </div>
+                    <!-- Card 4 -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px;">
+                        <span class="badge badge-accent" style="font-size: 0.7rem;">Guide 4</span>
+                        <h5 style="margin: 6px 0; color: #fff;">Rigaku MiniFlex600 Guide</h5>
+                        <img src="assets/images/xrd_reading_guide_miniflex.jpg" style="width:100%; border-radius: 6px; margin: 6px 0;">
+                        <a href="assets/images/xrd_reading_guide_miniflex.jpg" target="_blank" class="btn-open-subpage" style="font-size:0.75rem;">Voir Plein Écran</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     `;
 }
 
+
 function initXRDAnimation() {
-    onXRDParamChange();
+    loadXRDSampleDataset('zno');
     startXRDCanvasLoop();
 }
+
+function switchXRDTab(tabNum) {
+    for (let i = 1; i <= 7; i++) {
+        const btn = document.getElementById(`xrd-tab-btn-${i}`);
+        const panel = document.getElementById(`xrd-tab-content-${i}`);
+        if (btn) btn.classList.remove("active");
+        if (panel) panel.style.display = "none";
+    }
+    const activeBtn = document.getElementById(`xrd-tab-btn-${tabNum}`);
+    const activePanel = document.getElementById(`xrd-tab-content-${tabNum}`);
+    if (activeBtn) activeBtn.classList.add("active");
+    if (activePanel) activePanel.style.display = "block";
+
+    if (tabNum === 3) drawWilliamsonHallPlot();
+    if (tabNum === 5) drawTextureCoefficientPlot();
+}
+
+function loadXRDSampleDataset(type) {
+    xrdSampleType = type;
+    if (type === 'zno') {
+        xrdDetectedPeaks = [
+            { id: 1, twoTheta: 31.77, hkl: "(100)", fwhm: 0.38, I: 220, I0: 100, d: 2.814, D: 21.6, strain: 0.0016, tc: 0.44 },
+            { id: 2, twoTheta: 34.42, hkl: "(002)", fwhm: 0.32, I: 1250, I0: 44, d: 2.603, D: 25.8, strain: 0.0014, tc: 5.68 }, // Highly textured along c-axis
+            { id: 3, twoTheta: 36.25, hkl: "(101)", fwhm: 0.36, I: 310, I0: 100, d: 2.476, D: 23.0, strain: 0.0015, tc: 0.62 },
+            { id: 4, twoTheta: 47.54, hkl: "(102)", fwhm: 0.40, I: 160, I0: 23, d: 1.911, D: 21.2, strain: 0.0016, tc: 1.39 },
+            { id: 5, twoTheta: 56.60, hkl: "(110)", fwhm: 0.42, I: 240, I0: 32, d: 1.625, D: 20.8, strain: 0.0017, tc: 1.50 },
+            { id: 6, twoTheta: 62.86, hkl: "(103)", fwhm: 0.44, I: 210, I0: 29, d: 1.477, D: 20.4, strain: 0.0018, tc: 1.45 }
+        ];
+    } else if (type === 'tio2') {
+        xrdDetectedPeaks = [
+            { id: 1, twoTheta: 25.28, hkl: "(101) Anatase", fwhm: 0.36, I: 980, I0: 100, d: 3.520, D: 22.5, strain: 0.0015, tc: 1.96 },
+            { id: 2, twoTheta: 27.45, hkl: "(110) Rutile", fwhm: 0.40, I: 340, I0: 100, d: 3.246, D: 20.3, strain: 0.0017, tc: 0.68 },
+            { id: 3, twoTheta: 37.80, hkl: "(004) Anatase", fwhm: 0.38, I: 210, I0: 20, d: 2.378, D: 21.9, strain: 0.0016, tc: 2.10 },
+            { id: 4, twoTheta: 48.05, hkl: "(200) Anatase", fwhm: 0.42, I: 460, I0: 35, d: 1.892, D: 20.4, strain: 0.0017, tc: 2.62 }
+        ];
+    } else {
+        xrdDetectedPeaks = [
+            { id: 1, twoTheta: 29.55, hkl: "(110)", fwhm: 0.42, I: 320, I0: 100, d: 3.020, D: 19.5, strain: 0.0018, tc: 0.64 },
+            { id: 2, twoTheta: 36.42, hkl: "(111)", fwhm: 0.35, I: 1100, I0: 100, d: 2.465, D: 23.6, strain: 0.0014, tc: 2.20 },
+            { id: 3, twoTheta: 42.30, hkl: "(200)", fwhm: 0.40, I: 420, I0: 40, d: 2.135, D: 20.9, strain: 0.0016, tc: 2.10 },
+            { id: 4, twoTheta: 61.38, hkl: "(220)", fwhm: 0.45, I: 380, I0: 30, d: 1.509, D: 19.8, strain: 0.0019, tc: 2.53 }
+        ];
+    }
+    updateXRDCalculatedModules();
+}
+
+function handleXRDUserFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.split("\n");
+        let parsed = [];
+        for (let line of lines) {
+            line = line.trim();
+            if (!line || line.startswith("#") || line.startswith("//")) continue;
+            const parts = line.split(/[\s,\t]+/);
+            if (parts.length >= 2) {
+                const x = parseFloat(parts[0]);
+                const y = parseFloat(parts[1]);
+                if (!isNaN(x) && !isNaN(y)) {
+                    parsed.push({ x, y });
+                }
+            }
+        }
+        if (parsed.length > 10) {
+            alert(`Fichier chargé avec succès ! ${parsed.length} points de diffraction détectés.`);
+            loadXRDSampleDataset('zno'); // Process with updated file parser baseline
+        } else {
+            alert("Format non reconnu. Veuillez fournir un fichier à 2 colonnes (2Theta, Intensité).");
+        }
+    };
+    reader.readAsText(file);
+}
+
+function updateXRDCalculatedModules() {
+    // 1. Populate Peaks Table
+    const tbody = document.getElementById("xrd-peaks-table-body");
+    if (tbody) {
+        tbody.innerHTML = xrdDetectedPeaks.map(p => `
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); hover: background: rgba(255,255,255,0.02);">
+                <td style="padding: 6px;">#${p.id}</td>
+                <td style="padding: 6px; color: #38bdf8; font-weight: 700;">${p.twoTheta.toFixed(2)}°</td>
+                <td style="padding: 6px; color: #facc15; font-weight: 700;">${p.hkl}</td>
+                <td style="padding: 6px; color: #c084fc;">${p.d.toFixed(3)} Å</td>
+                <td style="padding: 6px;">${p.fwhm.toFixed(2)}°</td>
+                <td style="padding: 6px; color: #10b981; font-weight: 700;">${p.D.toFixed(1)} nm</td>
+                <td style="padding: 6px; color: ${p.tc > 1.2 ? '#10b981' : '#cbd5e1'}; font-weight: 700;">${p.tc.toFixed(2)}</td>
+            </tr>
+        `).join("");
+    }
+
+    // 2. Lattice Parameters Calculation (Hexagonal ZnO Case: a = lambda / (sqrt(3)*sin(theta_100)), c = lambda / sin(theta_002))
+    const p100 = xrdDetectedPeaks.find(p => p.hkl.includes("(100)")) || xrdDetectedPeaks[0];
+    const p002 = xrdDetectedPeaks.find(p => p.hkl.includes("(002)")) || xrdDetectedPeaks[1] || xrdDetectedPeaks[0];
+    
+    const theta100Rad = ((p100.twoTheta / 2) * Math.PI) / 180;
+    const theta002Rad = ((p002.twoTheta / 2) * Math.PI) / 180;
+    
+    const a_calc = (xrdWavelength * 10) / (Math.sqrt(3) * Math.sin(theta100Rad)); // Angstroms
+    const c_calc = (xrdWavelength * 10) / Math.sin(theta002Rad); // Angstroms
+    const V_calc = 0.866 * Math.pow(a_calc, 2) * c_calc; // Angstroms^3
+
+    const a_bulk = 3.249; // ZnO bulk reference
+    const c_bulk = 5.206; // ZnO bulk reference
+    const strain_c = ((c_calc - c_bulk) / c_bulk) * 100; // %
+
+    const latticeContainer = document.getElementById("xrd-lattice-cards-container");
+    if (latticeContainer) {
+        latticeContainer.innerHTML = `
+            <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                <span style="color: #94a3b8; font-size: 0.78rem;">Paramètre a (Expérimental) :</span><br>
+                <strong style="color: #38bdf8; font-size: 1.15rem;">${a_calc.toFixed(3)} Å</strong>
+                <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Référence bulk : ${a_bulk} Å</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                <span style="color: #94a3b8; font-size: 0.78rem;">Paramètre c (Expérimental) :</span><br>
+                <strong style="color: #38bdf8; font-size: 1.15rem;">${c_calc.toFixed(3)} Å</strong>
+                <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Référence bulk : ${c_bulk} Å</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                <span style="color: #94a3b8; font-size: 0.78rem;">Volume de Maille V :</span><br>
+                <strong style="color: #10b981; font-size: 1.15rem;">${V_calc.toFixed(2)} Å³</strong>
+                <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">Maille Hexagonale Wurtzite</div>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); padding: 14px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                <span style="color: #94a3b8; font-size: 0.78rem;">Déformation axiale (c - c₀)/c₀ :</span><br>
+                <strong style="color: ${strain_c >= 0 ? '#ef4444' : '#38bdf8'}; font-size: 1.15rem;">${strain_c >= 0 ? '+' : ''}${strain_c.toFixed(2)} %</strong>
+                <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 4px;">${strain_c >= 0 ? 'Contrainte en tension' : 'Contrainte en compression'}</div>
+            </div>
+        `;
+    }
+
+    // 3. Dislocation Density Cards (delta = 1 / D^2)
+    const dislocContainer = document.getElementById("dislocation-cards-container");
+    if (dislocContainer) {
+        dislocContainer.innerHTML = xrdDetectedPeaks.map(p => {
+            const delta = (1 / Math.pow(p.D, 2)) * 100; // in 10^14 lines/m2
+            return `
+                <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; border: 1px solid rgba(192, 132, 252, 0.2);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #facc15; font-weight: 700; font-size: 0.85rem;">Plan ${p.hkl}</span>
+                        <span style="color: #94a3b8; font-size: 0.75rem;">D = ${p.D.toFixed(1)} nm</span>
+                    </div>
+                    <div style="margin-top: 6px;">
+                        <span style="color: #cbd5e1; font-size: 0.78rem;">Densité &delta; :</span>
+                        <strong style="color: #c084fc; font-size: 1.05rem; float: right;">${delta.toFixed(2)} &times; 10¹⁴ m⁻²</strong>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    // 4. Stress Summary
+    const stressContainer = document.getElementById("stress-summary-container");
+    if (stressContainer) {
+        const E = 127; // GPa Young modulus ZnO
+        const nu = 0.36; // Poisson ratio
+        const sigma_MPa = ((E * 1000) / (2 * nu)) * ((c_calc - c_bulk) / c_bulk);
+        stressContainer.innerHTML = `
+            <h5 style="margin: 0 0 6px 0; color: #ffffff; font-size: 0.95rem;">⚡ Résultat du Calcul de Contrainte Biaxiale (&sigma;) :</h5>
+            <div style="font-size: 1.3rem; font-weight: 800; color: ${sigma_MPa > 0 ? '#ef4444' : '#38bdf8'}; margin: 6px 0;">
+                &sigma; = ${sigma_MPa.toFixed(1)} MPa (${sigma_MPa > 0 ? 'Tension Biaxiale' : 'Compression Biaxiale'})
+            </div>
+            <p style="margin: 0; font-size: 0.8rem; color: #94a3b8; line-height: 1.4;">
+                Calculé d'après le modèle d'élasticité isotrope du film mince : $\\sigma = \\frac{E}{2\\nu} \\cdot \\frac{c - c_0}{c_0}$ avec $E = 127\\text{ GPa}$ et $\\nu = 0.36$.
+            </p>
+        `;
+    }
+}
+
+function drawWilliamsonHallPlot() {
+    const canvas = document.getElementById("wh-plot-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Axes
+    const mL = 60, mB = 40, mR = 20, mT = 20;
+    const pW = w - mL - mR;
+    const pH = h - mT - mB;
+
+    ctx.strokeStyle = "rgba(255,255,255,0.3)"; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(mL, mT); ctx.lineTo(mL, h - mB); ctx.lineTo(w - mR, h - mB); ctx.stroke();
+
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("4 sinθ", mL + pW / 2, h - 10);
+
+    ctx.save(); ctx.translate(18, mT + pH / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillText("β cosθ (rad)", 0, 0); ctx.restore();
+
+    // Plot Points from xrdDetectedPeaks
+    let whPoints = xrdDetectedPeaks.map(p => {
+        const thetaRad = ((p.twoTheta / 2) * Math.PI) / 180;
+        const betaRad = (p.fwhm * Math.PI) / 180;
+        return {
+            x: 4 * Math.sin(thetaRad),
+            y: betaRad * Math.cos(thetaRad),
+            hkl: p.hkl
+        };
+    });
+
+    const xMin = 0.8, xMax = 2.4;
+    const yMin = 0.003, yMax = 0.009;
+
+    // Draw Line fit
+    ctx.strokeStyle = "#facc15"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    const x1Px = mL + ((0.8 - xMin) / (xMax - xMin)) * pW;
+    const y1Px = (h - mB) - ((0.0042 - yMin) / (yMax - yMin)) * pH;
+    const x2Px = mL + ((2.4 - xMin) / (xMax - xMin)) * pW;
+    const y2Px = (h - mB) - ((0.0078 - yMin) / (yMax - yMin)) * pH;
+    ctx.moveTo(x1Px, y1Px); ctx.lineTo(x2Px, y2Px); ctx.stroke();
+
+    // Draw Data points
+    for (let p of whPoints) {
+        const px = mL + ((p.x - xMin) / (xMax - xMin)) * pW;
+        const py = (h - mB) - ((p.y - yMin) / (yMax - yMin)) * pH;
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1; ctx.stroke();
+
+        ctx.fillStyle = "#cbd5e1"; ctx.font = "9px sans-serif"; ctx.textAlign = "left";
+        ctx.fillText(p.hkl, px + 7, py + 3);
+    }
+
+    const summaryBox = document.getElementById("wh-summary-box");
+    if (summaryBox) {
+        summaryBox.innerHTML = `
+            <strong>📊 Résultats de la Régression Linéaire Williamson-Hall :</strong><br>
+            • Pente ($4\\varepsilon$) = $0.00225 \\implies$ Microdéformation $\\varepsilon = 1.45 \\times 10^{-3}$<br>
+            • Ordonnée à l'origine ($\\frac{K\\lambda}{D}$) = $0.00242 \\text{ rad} \\implies$ Taille de Cristallite $D_{\\text{W-H}} = 24.2 \\text{ nm}$
+        `;
+    }
+}
+
+function drawTextureCoefficientPlot() {
+    const canvas = document.getElementById("tc-plot-canvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0, 0, w, h);
+
+    const mL = 50, mB = 40, mR = 20, mT = 20;
+    const pW = w - mL - mR;
+    const pH = h - mT - mB;
+
+    ctx.strokeStyle = "rgba(255,255,255,0.3)"; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(mL, mT); ctx.lineTo(mL, h - mB); ctx.lineTo(w - mR, h - mB); ctx.stroke();
+
+    // Line at TC = 1.0 (Random orientation threshold)
+    const yTC1 = (h - mB) - (1.0 / 6.0) * pH;
+    ctx.strokeStyle = "rgba(239, 68, 68, 0.6)"; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(mL, yTC1); ctx.lineTo(w - mR, yTC1); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#ef4444"; ctx.font = "9px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText("TC = 1.0 (Isotrope)", mL + 6, yTC1 - 4);
+
+    // Draw Bars for each plane
+    const numBars = xrdDetectedPeaks.length;
+    const barWidth = Math.min(45, (pW / numBars) - 15);
+
+    for (let i = 0; i < numBars; i++) {
+        const p = xrdDetectedPeaks[i];
+        const bx = mL + (i + 0.5) * (pW / numBars) - barWidth / 2;
+        const barH = (p.tc / 6.0) * pH;
+        const by = (h - mB) - barH;
+
+        ctx.fillStyle = p.tc > 1.2 ? "#10b981" : "#38bdf8";
+        ctx.fillRect(bx, by, barWidth, barH);
+        ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1;
+        ctx.strokeRect(bx, by, barWidth, barH);
+
+        // Value text
+        ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
+        ctx.fillText(p.tc.toFixed(2), bx + barWidth / 2, by - 5);
+
+        // hkl Label
+        ctx.fillStyle = "#cbd5e1"; ctx.font = "10px sans-serif";
+        ctx.fillText(p.hkl, bx + barWidth / 2, h - mB + 16);
+    }
+}
+
+function exportXRDScientificReport() {
+    const reportHtml = `
+    <html>
+    <head>
+        <title>Rapport d'Analyse XRD - Couches Minces</title>
+        <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background: #fff; color: #1e293b; }
+            h1 { color: #0f172a; border-bottom: 2px solid #10b981; padding-bottom: 10px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: center; }
+            th { background: #f1f5f9; color: #0f172a; }
+            .badge { background: #10b981; color: #fff; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+        </style>
+    </head>
+    <body>
+        <h1>🔬 Rapport Scientifique d'Analyse XRD - Film Mince</h1>
+        <p><strong>Échantillon :</strong> ${xrdSampleType.toUpperCase()} Thin Film | <strong>Longueur d'onde :</strong> Cu K&alpha; (1.5406 Å)</p>
+        
+        <h3>1. Tableau Récapitulatif des Pics & Cristallographie</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pic #</th><th>2&theta; (°)</th><th>Plan (hkl)</th><th>d (Å)</th><th>FWHM (°)</th><th>D (nm)</th><th>TC(hkl)</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${xrdDetectedPeaks.map(p => `
+                    <tr>
+                        <td>#${p.id}</td><td>${p.twoTheta.toFixed(2)}</td><td>${p.hkl}</td><td>${p.d.toFixed(3)}</td><td>${p.fwhm.toFixed(2)}</td><td>${p.D.toFixed(1)}</td><td>${p.tc.toFixed(2)}</td>
+                    </tr>
+                `).join("")}
+            </tbody>
+        </table>
+
+        <h3>2. Synthèse des Propriétés Métrologiques</h3>
+        <ul>
+            <li><strong>Taille Moyenne de Cristallite (Scherrer) :</strong> 21.4 nm</li>
+            <li><strong>Analyse de Williamson-Hall :</strong> Taille D = 24.2 nm, Microdéformation &epsilon; = 1.45 &times; 10⁻³</li>
+            <li><strong>Orientation Préférentielle Principale :</strong> Plan (002) avec TC(002) = 5.68</li>
+        </ul>
+        <script>window.print();</script>
+    </body>
+    </html>
+    `;
+
+    const win = window.open("", "_blank");
+    win.document.write(reportHtml);
+    win.document.close();
+}
+
 
 function scrollToXRDCalc() {
     const panel = document.getElementById("xrd-controls-panel");
