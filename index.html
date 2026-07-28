@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="canonical" href="https://mathspc.com/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
     <title>Maths et Physiques | Plateforme Éducative Moderne - mathspc.com</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=1.0.9">
+    <link rel="stylesheet" href="style.css?v=2.6.0">
     <!-- MathJax for rendering Equations -->
     <script>
         window.MathJax = {
@@ -134,7 +135,52 @@
             </div>
 
             <div class="anim-card-grid" style="margin-top: 20px;">
-                <!-- 1. Ondes Progressives & Diffraction -->
+                <!-- 0d. Modes de Transfert de Chaleur (Conduction, Convection & Rayonnement) -->
+                    <div class="anim-card" data-anim="transferts-thermiques" data-category="thermodynamique" data-keywords="transfert chaleur thermique conduction convection rayonnement fourier newton stefan boltzmann wien planck flux">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Modes de Transfert de Chaleur" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4);"><i data-lucide="sun"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Transfert de Chaleur : Conduction, Convection & Rayonnement</h3>
+                            <p>Étudiez la conduction (Fourier), la convection (Newton & cellules de fluides) et le rayonnement (Stefan-Boltzmann & Wien).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 0c. Gaz Parfait (PhET Interactive) -->
+                    <div class="anim-card" data-anim="gaz-parfait" data-category="thermodynamique" data-keywords="gaz parfait phet temperature pression volume particules thermodynamique boltzmann cinetique chocs phet">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Gaz Parfait" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4);"><i data-lucide="flame"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Gaz Parfait & Propriétés Microscopiques</h3>
+                            <p>Explorez la théorie cinétique des gaz, la pression cinétique, les chocs moléculaires et l'agitation thermique (PhET).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 0b. Transformations Thermodynamiques (Réversible, Irréversible & Quasistatique) -->
+                    <div class="anim-card" data-anim="transformations-thermo" data-category="thermodynamique" data-keywords="transformations thermodynamique reversible irreversible quasistatique entropie travail hysteresis frottement piston joule gay lussac">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Transformations Thermodynamiques" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);"><i data-lucide="scale"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Transformations : Réversible, Irréversible & Quasistatique</h3>
+                            <p>Mettez en évidence la différence entre transformations quasistatiques, réversibles ($S_{créée} = 0$) et irréversibles ($S_{créée} > 0$, hystérésis $W_{perdu}$).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1. Ondes Progressives & Diffraction -->
                 <div class="anim-card" data-anim="wave" onclick="navigateToAnim('wave')">
                     <div class="anim-card-img-wrapper">
                         <img src="assets/images/wave_diffraction.jpg" alt="Ondes Progressives & Diffraction" loading="lazy">
@@ -452,11 +498,71 @@
                         <button class="anim-filter-btn" data-filter="electronique">Électronique</button>
                         <button class="anim-filter-btn" data-filter="electrotechnique">Électrotechnique</button>
                         <button class="anim-filter-btn" data-filter="mecanique">Physique & Mécanique</button>
+                        <button class="anim-filter-btn" data-filter="thermodynamique">Thermodynamique</button>
                     </div>
                 </div>
 
                 <!-- Interactive Responsive Card Grid -->
                 <div class="anim-card-grid" id="anim-card-grid">
+                    <!-- 0. Thermodynamique & Cycles Thermiques -->
+                    <div class="anim-card" data-anim="thermodynamique" data-category="thermodynamique" data-keywords="thermodynamique carnot otto diesel cycle pv ts pression volume temperature entropie piston">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Thermodynamique & Cycles Thermiques" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4);"><i data-lucide="flame"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Thermodynamique & Cycles Thermiques</h3>
+                            <p>Explorez les cycles de Carnot, Otto et Diesel, les diagrammes \(P-V\) & \(T-S\), le rendement \(\eta\) et le mouvement du piston.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 0d. Modes de Transfert de Chaleur (Conduction, Convection & Rayonnement) -->
+                    <div class="anim-card" data-anim="transferts-thermiques" data-category="thermodynamique" data-keywords="transfert chaleur thermique conduction convection rayonnement fourier newton stefan boltzmann wien planck flux">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Modes de Transfert de Chaleur" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4);"><i data-lucide="sun"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Transfert de Chaleur : Conduction, Convection & Rayonnement</h3>
+                            <p>Étudiez la conduction (Fourier), la convection (Newton & cellules de fluides) et le rayonnement (Stefan-Boltzmann & Wien).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 0c. Gaz Parfait (PhET Interactive) -->
+                    <div class="anim-card" data-anim="gaz-parfait" data-category="thermodynamique" data-keywords="gaz parfait phet temperature pression volume particules thermodynamique boltzmann cinetique chocs phet">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Gaz Parfait" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4);"><i data-lucide="flame"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Gaz Parfait & Propriétés Microscopiques</h3>
+                            <p>Explorez la théorie cinétique des gaz, la pression cinétique, les chocs moléculaires et l'agitation thermique (PhET).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 0b. Transformations Thermodynamiques (Réversible, Irréversible & Quasistatique) -->
+                    <div class="anim-card" data-anim="transformations-thermo" data-category="thermodynamique" data-keywords="transformations thermodynamique reversible irreversible quasistatique entropie travail hysteresis frottement piston joule gay lussac">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Transformations Thermodynamiques" loading="lazy">
+                            <span class="anim-card-badge badge-mecanique" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);"><i data-lucide="scale"></i> Thermodynamique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Transformations : Réversible, Irréversible & Quasistatique</h3>
+                            <p>Mettez en évidence la différence entre transformations quasistatiques, réversibles ($S_{créée} = 0$) et irréversibles ($S_{créée} > 0$, hystérésis $W_{perdu}$).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- 1. Ondes Progressives & Diffraction -->
                     <div class="anim-card" data-anim="wave" data-category="optique" data-keywords="ondes diffraction corde progressive frequence amplitude">
                         <div class="anim-card-img-wrapper">
@@ -1319,6 +1425,339 @@
                         </div>
                     </div>
 
+                    <!-- Thermodynamique & Cycles Thermiques Simulation Workspace -->
+                    <div class="anim-workspace" id="anim-thermodynamique" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                                <h3 style="margin: 0;"><i data-lucide="flame" style="color: #ef4444;"></i> Thermodynamique : Cycles Thermiques ($P-V$, $T-S$) & Mouvement du Piston</h3>
+                                <button class="btn btn-secondary btn-sm" onclick="openAnimPlayer('transformations-thermo', 'Transformations Thermodynamiques : Réversible, Irréversible & Quasistatique')" style="cursor: pointer; font-weight: 600;">
+                                    <i data-lucide="scale"></i> Voir Réversible vs Irréversible vs Quasistatique →
+                                </button>
+                            </div>
+                            <p>Explorez les principes fondamentaux de la thermodynamique (1er & 2ème principes, théorèmes de Carnot, cycles d'Otto et Diesel). Observez le diagramme de Watt ($P-V$), le diagramme entropique ($T-S$), le mouvement alternatif du piston et calculez le rendement thermique $\eta$ en temps réel.</p>
+                        </div>
+                        
+                        <div class="canvas-container">
+                            <canvas id="canvas-thermodynamique" width="900" height="420"></canvas>
+                        </div>
+                        
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+                            <div class="control-group">
+                                <label for="thermo-cycle-select">Cycle Thermique :</label>
+                                <select id="thermo-cycle-select" class="form-select">
+                                    <option value="carnot">Cycle de Carnot (2 Isothermes + 2 Adiabatiques)</option>
+                                    <option value="otto">Cycle d'Otto / Beau de Rochas (2 Isochores + 2 Adiabatiques)</option>
+                                    <option value="diesel">Cycle Diesel (1 Isobare + 1 Isochore + 2 Adiabatiques)</option>
+                                    <option value="stirling">Cycle de Stirling (2 Isothermes + 2 Isochores)</option>
+                                    <option value="rankine">Cycle de Rankine (Centrale à Vapeur Eau-Vapeur)</option>
+                                    <option value="frigorigene">Cycle Frigorifique & Pompe à Chaleur (Cycle Inverse)</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="thermo-th-slider">Temp. Source Chaude $T_H$ : <span id="thermo-th-val">800 K</span></label>
+                                <input type="range" id="thermo-th-slider" min="400" max="1500" value="800">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="thermo-tc-slider">Temp. Source Froide $T_C$ : <span id="thermo-tc-val">300 K</span></label>
+                                <input type="range" id="thermo-tc-slider" min="200" max="400" value="300">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="thermo-ratio-slider">Taux de Compression $r$ : <span id="thermo-ratio-val">8.0</span></label>
+                                <input type="range" id="thermo-ratio-slider" min="3" max="18" step="0.5" value="8">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="thermo-gas-select">Nature du Gaz ($\gamma$) :</label>
+                                <select id="thermo-gas-select" class="form-select">
+                                    <option value="1.40">Diatomique ($\text{N}_2/\text{O}_2, \gamma=1.40$)</option>
+                                    <option value="1.67">Monoatomique ($\text{He}/\text{Ar}, \gamma=1.67$)</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group" style="display: flex; align-items: flex-end; gap: 8px;">
+                                <button id="btn-thermo-play" class="btn btn-primary" style="flex: 1; padding: 8px;"><i data-lucide="pause"></i> Pause</button>
+                                <button id="btn-thermo-reset" class="btn btn-secondary" style="padding: 8px;"><i data-lucide="rotate-ccw"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Live Calculations Cards -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 16px;">
+                            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; padding: 12px; text-align: center;">
+                                <div style="color: #ef4444; font-size: 0.78rem; font-weight: 700;">Chaleur Reçue $Q_{in}$</div>
+                                <div id="thermo-val-qin" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 4px;">+1240 J</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 12px; text-align: center;">
+                                <div style="color: #38bdf8; font-size: 0.78rem; font-weight: 700;">Chaleur Cédée $Q_{out}$</div>
+                                <div id="thermo-val-qout" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 4px;">-465 J</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 12px; text-align: center;">
+                                <div style="color: #10b981; font-size: 0.78rem; font-weight: 700;">Travail Utile Net $W_{net}$</div>
+                                <div id="thermo-val-wnet" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 4px;">+775 J</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(250, 204, 21, 0.4); border-radius: 10px; padding: 12px; text-align: center;">
+                                <div style="color: #facc15; font-size: 0.78rem; font-weight: 700;">Rendement Thermique $\eta$</div>
+                                <div id="thermo-val-eta" style="color: #facc15; font-size: 1.15rem; font-weight: 700; margin-top: 4px;">62.5 %</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modes de Transfert de Chaleur (Conduction, Convection & Rayonnement) Workspace -->
+                    <div class="anim-workspace" id="anim-transferts-thermiques" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                                <h3 style="margin: 0;"><i data-lucide="sun" style="color: #f59e0b;"></i> Modes de Transfert de Chaleur : Conduction, Convection & Rayonnement</h3>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn btn-secondary btn-sm" onclick="openAnimPlayer('thermodynamique', 'Thermodynamique & Cycles Thermiques')">
+                                        <i data-lucide="flame"></i> Cycles ($P-V, T-S$)
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" onclick="openAnimPlayer('gaz-parfait', 'Gaz Parfait')">
+                                        <i data-lucide="flame"></i> Gaz Parfait (PhET)
+                                    </button>
+                                </div>
+                            </div>
+                            <p>Explorez les 3 modes fondamentaux de transfert d'énergie thermique : <strong>Conduction</strong> (vibrations du réseau solide, loi de Fourier), <strong>Convection</strong> (mouvement macropose de fluide, loi de Newton) et <strong>Rayonnement</strong> (ondes électromagnétiques dans le vide/matière, lois de Stefan-Boltzmann & Wien).</p>
+                        </div>
+                        
+                        <div class="canvas-container">
+                            <canvas id="canvas-transferts-thermiques" width="900" height="440"></canvas>
+                        </div>
+                        
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                            <div class="control-group">
+                                <label for="heat-mode-select"><strong>Mode d'Affichage :</strong></label>
+                                <select id="heat-mode-select" class="form-select" style="background: #0f172a; color: #f59e0b; border-color: #f59e0b; font-weight: 600;">
+                                    <option value="comparative">1. Vue Comparative des 3 Modes</option>
+                                    <option value="conduction">2. Focus Conduction (Loi de Fourier)</option>
+                                    <option value="convection">3. Focus Convection (Cellules de Flottabilité)</option>
+                                    <option value="radiation">4. Focus Rayonnement (Planck & Wien)</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="heat-th-slider">Temp. Source Chaude $T_H$ : <span id="heat-th-val">800 K</span></label>
+                                <input type="range" id="heat-th-slider" min="300" max="2500" step="50" value="800">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="heat-tc-slider">Temp. Source Froide $T_C$ : <span id="heat-tc-val">300 K</span></label>
+                                <input type="range" id="heat-tc-slider" min="100" max="500" step="10" value="300">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="heat-mat-select">Matériau Conduction :</label>
+                                <select id="heat-mat-select" class="form-select">
+                                    <option value="copper">Cuivre (k = 385 W/m·K)</option>
+                                    <option value="aluminum">Aluminium (k = 205 W/m·K)</option>
+                                    <option value="steel">Acier (k = 50 W/m·K)</option>
+                                    <option value="glass">Verre (k = 1.0 W/m·K)</option>
+                                    <option value="wood">Bois (k = 0.15 W/m·K)</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group" style="display: flex; flex-direction: column; gap: 6px; justify-content: flex-end;">
+                                <div style="display: flex; gap: 6px;">
+                                    <button id="btn-heat-play" class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 0.85rem;"><i data-lucide="pause"></i> Pause</button>
+                                    <button id="btn-heat-reset" class="btn btn-secondary" style="padding: 6px 10px;" title="Réinitialiser"><i data-lucide="rotate-ccw"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Heat Flux Readouts -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 16px;">
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #38bdf8; font-size: 0.75rem; font-weight: 700;">Conduction $\Phi_{	ext{cond}}$</div>
+                                <div id="heat-val-cond" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">1925 W</div>
+                                <div style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">$\Phi = -k A \frac{\Delta T}{L}$</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #10b981; font-size: 0.75rem; font-weight: 700;">Convection $\Phi_{	ext{conv}}$</div>
+                                <div id="heat-val-conv" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">375 W</div>
+                                <div style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">$\Phi = h A (T_H - T_C)$</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #f59e0b; font-size: 0.75rem; font-weight: 700;">Rayonnement $\Phi_{	ext{rad}}$</div>
+                                <div id="heat-val-rad" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">2280 W</div>
+                                <div style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">$\Phi = \epsilon \sigma A (T_H^4 - T_C^4)$</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #ef4444; font-size: 0.75rem; font-weight: 700;">Lumière Émise $\lambda_{	ext{max}}$</div>
+                                <div id="heat-val-lambda" style="color: #ef4444; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">3622 nm</div>
+                                <div id="heat-sub-lambda" style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">Infra-Rouge (Infaible)</div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Theory Card -->
+                        <div class="workspace-theory" style="margin-top: 16px; background: rgba(15, 23, 42, 0.6); border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+                            <h4 style="margin: 0 0 6px 0; color: #f59e0b; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                                <i data-lucide="book-open"></i> Comparatif des 3 Modes de Transfert de Chaleur :
+                            </h4>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
+                                <li><strong>Conduction (Milieu Solide / Statique) :</strong> Transfert d'énergie de proche en proche sans déplacement macroscopique de matière, par chocs moléculaires et vibrations du réseau cristal (phonons). Régie par la <em>Loi de Fourier</em> : $\Phi = -k A \frac{dT}{dx}$.</li>
+                                <li><strong>Convection (Milieu Fluide) :</strong> Transfert avec <u>déplacement de matière</u> dans un liquide ou un gaz. La différence de masse volumique ($ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>cellules de convection</em>. Régie par la <em>Loi de Newton</em> : $\Phi = h A (T_s - T_f)$.</li>
+                                <li><strong>Rayonnement (Vacuo / Ondes Électromagnétiques) :</strong> Émission d'ondes électromagnétiques (photons thermiques). **Ne nécessite aucun milieu matériel** et peut se propager dans le vide absolu. Régie par la <em>Loi de Stefan-Boltzmann</em> ($\Phi = \epsilon \sigma A T^4$) et la <em>Loi de Wien</em> ($\lambda_{	ext{max}} T = 2.898 \times 10^{-3} \text{ m}\cdot\text{K}$).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Gaz Parfait Simulation Workspace (PhET Embedded) -->
+                    <div class="anim-workspace" id="anim-gaz-parfait" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                                <h3 style="margin: 0;"><i data-lucide="flame" style="color: #10b981;"></i> Gaz Parfait — Propriétés Microscopiques & Théorie Cinétique</h3>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn btn-secondary btn-sm" onclick="openAnimPlayer('thermodynamique', 'Thermodynamique & Cycles Thermiques')">
+                                        <i data-lucide="flame"></i> Cycles ($P-V, T-S$)
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" onclick="openAnimPlayer('transformations-thermo', 'Transformations Thermodynamiques')">
+                                        <i data-lucide="scale"></i> Réversible vs Irréversible
+                                    </button>
+                                    <a href="https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_all.html?locale=fr" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                                        <i data-lucide="external-link"></i> Plein Écran
+                                    </a>
+                                </div>
+                            </div>
+                            <p>Explorez le comportement microscopique des molécules d'un gaz parfait à l'échelle moléculaire. Modifiez la température, injectez des particules, faites varier le volume du récipient et observez l'impact direct sur la pression cinétique $P$.</p>
+                        </div>
+                        
+                        <!-- Embedded PhET Interactive Simulation Container -->
+                        <div class="canvas-container" style="padding: 0; background: #000; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 36px rgba(0,0,0,0.6); position: relative; min-height: 560px;">
+                            <iframe id="iframe-gaz-parfait" src="https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_all.html?locale=fr" width="100%" height="580" style="border: 0; display: block; border-radius: 16px;" allowfullscreen title="Simulation Gaz Parfait PhET"></iframe>
+                        </div>
+
+                        <!-- Theoretical Summary & Key Formulas -->
+                        <div class="workspace-theory" style="margin-top: 16px; background: rgba(15, 23, 42, 0.6); border-left: 4px solid #10b981; padding: 14px 18px; border-radius: 0 10px 10px 0;">
+                            <h4 style="margin: 0 0 8px 0; color: #10b981; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="book-open"></i> Principes de la Théorie Cinétique des Gaz Parfaits :
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 10px;">
+                                <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <strong style="color: #38bdf8;">1. Équation d'État du Gaz Parfait :</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #cbd5e1;">$$P \cdot V = n \cdot R \cdot T = N \cdot k_B \cdot T$$</p>
+                                    <span style="font-size: 0.78rem; color: #94a3b8;">Révèle le lien entre la pression $P$, le volume $V$ et la température absolue $T$ (K).</span>
+                                </div>
+
+                                <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <strong style="color: #facc15;">2. Pression Cinétique & Chocs :</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #cbd5e1;">$$P = \frac{1}{3} \cdot n^* \cdot m \cdot v_q^2$$</p>
+                                    <span style="font-size: 0.78rem; color: #94a3b8;">La pression résulte des chocs élastiques répétés des molécules sur les parois du récipient.</span>
+                                </div>
+
+                                <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <strong style="color: #ef4444;">3. Énergie Cinétique & Température :</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #cbd5e1;">$$\bar{E}_c = \frac{3}{2} k_B T \implies v_q = \sqrt{\frac{3 R T}{M}}$$</p>
+                                    <span style="font-size: 0.78rem; color: #94a3b8;">La température mesure directement l'agitation thermique moyenne des particules.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transformations Thermodynamiques (Réversible, Irréversible & Quasistatique) Workspace -->
+                    <div class="anim-workspace" id="anim-transformations-thermo" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                                <h3 style="margin: 0;"><i data-lucide="scale" style="color: #ef4444;"></i> Transformations Thermodynamiques : Réversible, Irréversible & Quasistatique</h3>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="btn btn-secondary btn-sm" onclick="openAnimPlayer('thermodynamique', 'Thermodynamique & Cycles Thermiques')">
+                                        <i data-lucide="flame"></i> Cycles Thermiques ($P-V, T-S$)
+                                    </button>
+                                </div>
+                            </div>
+                            <p>Mettez en évidence la différence entre une transformation <strong>Quasistatique</strong> ($P_{int} \approx P_{ext}$), <strong>Réversible</strong> (Quasistatique sans frottement, $S_{créée} = 0$) et <strong>Irréversible</strong> (Rupture brutale d'équilibre, frottements, choc piston, $S_{créée} > 0$ et hystérésis de travail perdu $W_{perdu} = T_0 S_{créée}$).</p>
+                        </div>
+                        
+                        <div class="canvas-container">
+                            <canvas id="canvas-transformations-thermo" width="900" height="440"></canvas>
+                        </div>
+                        
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                            <div class="control-group">
+                                <label for="trans-mode-select"><strong>Mode de Transformation :</strong></label>
+                                <select id="trans-mode-select" class="form-select" style="background: #0f172a; color: #38bdf8; border-color: #38bdf8; font-weight: 600;">
+                                    <option value="reversible">1. Réversible (Quasistatique Lente, Sans Frottement)</option>
+                                    <option value="quasistatic-friction">2. Quasistatique avec Frottements (Hystérésis)</option>
+                                    <option value="irreversible-brutal">3. Irréversible Brutale (Masse Monobloc Pext Constant)</option>
+                                    <option value="joule-gay-lussac">4. Détente de Joule-Gay-Lussac (Vide W=0, Q=0)</option>
+                                </select>
+                            </div>
+
+                            <div class="control-group">
+                                <label for="trans-speed-slider">Vitesse / Nb Grains : <span id="trans-speed-val">50 grains (Lent)</span></label>
+                                <input type="range" id="trans-speed-slider" min="1" max="100" value="50">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="trans-friction-slider">Frottement Piston ($\mu$) : <span id="trans-friction-val">0.0 N</span></label>
+                                <input type="range" id="trans-friction-slider" min="0" max="10" step="0.5" value="0">
+                            </div>
+
+                            <div class="control-group">
+                                <label for="trans-temp-slider">Température Thermostat $T_0$ : <span id="trans-temp-val">300 K</span></label>
+                                <input type="range" id="trans-temp-slider" min="200" max="600" step="10" value="300">
+                            </div>
+
+                            <div class="control-group" style="display: flex; flex-direction: column; gap: 6px; justify-content: flex-end;">
+                                <div style="display: flex; gap: 6px;">
+                                    <button id="btn-trans-compress" class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 0.85rem;"><i data-lucide="arrow-down"></i> Compresser</button>
+                                    <button id="btn-trans-expand" class="btn btn-secondary" style="flex: 1; padding: 6px 10px; font-size: 0.85rem;"><i data-lucide="arrow-up"></i> Détendre</button>
+                                </div>
+                                <div style="display: flex; gap: 6px;">
+                                    <button id="btn-trans-cycle" class="btn" style="background: #8b5cf6; color: white; flex: 1; padding: 6px 10px; font-size: 0.85rem;"><i data-lucide="refresh-cw"></i> Cycle Aller-Retour</button>
+                                    <button id="btn-trans-reset" class="btn btn-secondary" style="padding: 6px 10px;" title="Réinitialiser"><i data-lucide="rotate-ccw"></i></button>
+                                </div>
+                                <button id="btn-trans-demo" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: 700; width: 100%; margin-top: 6px; padding: 8px 12px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 8px; cursor: pointer;"><i data-lucide="play-circle"></i> ▶️ Démarrer la Démo Automatique</button>
+                            </div>
+                        </div>
+
+                        <!-- Live Real-Time Diagnostics Cards -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 16px;">
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #38bdf8; font-size: 0.75rem; font-weight: 700;">Travail Reçu $W$</div>
+                                <div id="trans-val-w" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">0.0 J</div>
+                                <div id="trans-sub-w" style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">$W_{rév} = -\int P dV$</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #ef4444; font-size: 0.75rem; font-weight: 700;">Chaleur Échangée $Q$</div>
+                                <div id="trans-val-q" style="color: #ffffff; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">0.0 J</div>
+                                <div id="trans-sub-q" style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">$\Delta U = W + Q$</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #c084fc; font-size: 0.75rem; font-weight: 700;">Entropie Créée $S_{créée}$</div>
+                                <div id="trans-val-scree" style="color: #10b981; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">0.00 J/K</div>
+                                <div id="trans-sub-scree" style="color: #10b981; font-size: 0.7rem; font-weight: 600; margin-top: 2px;">Réversible ($S_{créée} = 0$)</div>
+                            </div>
+
+                            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(250, 204, 21, 0.4); border-radius: 10px; padding: 10px; text-align: center;">
+                                <div style="color: #facc15; font-size: 0.75rem; font-weight: 700;">Travail Perdu $W_{perdu}$</div>
+                                <div id="trans-val-wperdu" style="color: #facc15; font-size: 1.1rem; font-weight: 700; margin-top: 2px;">0.0 J</div>
+                                <div id="trans-sub-wperdu" style="color: #94a3b8; font-size: 0.7rem; margin-top: 2px;">$W_{perdu} = T_0 \cdot S_{créée}$</div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Theory Note -->
+                        <div class="workspace-theory" style="margin-top: 16px; background: rgba(15, 23, 42, 0.6); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 0 8px 8px 0;">
+                            <h4 style="margin: 0 0 6px 0; color: #38bdf8; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                                <i data-lucide="book-open"></i> Comparatif Physique des 3 Concepts :
+                            </h4>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
+                                <li><strong>Le chemin dans le cas Quasistatique :</strong> L'évolution étant infiniment lente ($\Delta t \to \infty$), le système passe par une <u>suite continue d'états d'équilibre thermo-mécanique internes</u>. À chaque instant $t$, la pression interne $P_{int}(t)$ et la température $T(t)$ sont parfaitement définies et uniformes dans tout le gaz. <strong>Conséquence géométrique :</strong> Le chemin est représenté par une <strong>ligne continue et bien tracée</strong> $P(V)$ du point $A$ au point $B$ (contrairement aux transformations brutales hors-équilibre représentées en pointillés).</li>
+                                <li><strong>Quasistatique $\neq$ Réversible :</strong> Si la transformation quasistatique comporte des frottements ($\mu > 0$), $P_{int}(V)$ est un chemin continu, mais le travail extérieur $P_{ext}(V)$ forme une boucle d'hystérésis fermée ($S_{créée} > 0$). Une transformation n'est <em>Réversible</em> que si elle est <u>à la fois Quasistatique ET Sans Frottement</u> ($S_{créée} = 0$, aller-retour sur la même courbe).</li>
+                                <li><strong>Transformation Irréversible Brutale :</strong>
+<li><strong>Transformation Irréversible :</strong> Causée par une rupture brutale d'équilibre ($P_{int} \neq P_{ext}$), des frottements ou des chocs. $S_{créée} > 0$. Lors d'un aller-retour, le travail fourni est supérieur au travail récupéré : l'aire fermée sur le diagramme $(P,V)$ correspond à l'énergie dissipée $W_{perdu} = T_0 S_{créée}$.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <!-- Mesure de Résistances Simulation Workspace -->
                     <div class="anim-workspace" id="anim-mesure-resistances" style="display:none;">
                         <div class="workspace-header">
@@ -1475,14 +1914,14 @@
 
                             <!-- Résistance R -->
                             <div class="control-group">
-                                <label for="rc-r">Résistance (\(R\)) : <span id="val-rc-r">10.0</span> k\(\Omega\)</label>
-                                <input type="range" id="rc-r" min="1.0" max="100.0" step="1.0" value="10.0">
+                                <label for="rc-exp-r">Résistance (\(R\)) : <span id="val-rc-exp-r">10.0</span> k\(\Omega\)</label>
+                                <input type="range" id="rc-exp-r" min="1.0" max="100.0" step="1.0" value="10.0">
                             </div>
 
                             <!-- Capacité C -->
                             <div class="control-group">
-                                <label for="rc-c">Capacité (\(C\)) : <span id="val-rc-c">47</span> \(\mu\)F</label>
-                                <input type="range" id="rc-c" min="1" max="200" step="1" value="47">
+                                <label for="rc-exp-c">Capacité (\(C\)) : <span id="val-rc-exp-c">47</span> \(\mu\)F</label>
+                                <input type="range" id="rc-exp-c" min="1" max="200" step="1" value="47">
                             </div>
 
                             <!-- Buttons -->
@@ -2502,6 +2941,6 @@
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js?v=1.2.2"></script>
+    <script src="app.js?v=2.6.0"></script>
 </body>
 </html>

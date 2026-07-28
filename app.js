@@ -4141,7 +4141,8 @@ function renderRoute(route, options = {}) {
             switchTab("home", { skipUrlUpdate: true });
             closeChapterModal({ skipUrlUpdate: true });
             closeMethodPage({ skipUrlUpdate: true });
-            showGallery({ skipUrlUpdate: true });
+            if (typeof showGallery === "function") showGallery({ skipUrlUpdate: true });
+            else if (window.showGallery) window.showGallery({ skipUrlUpdate: true });
             updateSEO({
                 title: "Maths et Physiques | Plateforme Éducative Moderne",
                 description: "Plateforme éducative et scientifique d'excellence pour les Mathématiques, la Physique-Chimie et la Recherche Scientifique (DFT, Films minces).",
@@ -4199,7 +4200,8 @@ function renderRoute(route, options = {}) {
             }
         } else if (type === "animations") {
             switchTab("animations", { skipUrlUpdate: true });
-            showGallery({ skipUrlUpdate: true });
+            if (typeof showGallery === "function") showGallery({ skipUrlUpdate: true });
+            else if (window.showGallery) window.showGallery({ skipUrlUpdate: true });
             closeChapterModal({ skipUrlUpdate: true });
             closeMethodPage({ skipUrlUpdate: true });
             let url = "/#animations";
@@ -4277,7 +4279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadStateFromStorage();
     
     // Initial UI updates
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     initTheme();
     updateDashboardUI();
     renderChapters();
@@ -4389,7 +4391,7 @@ function updateDashboardUI() {
                 li.innerHTML = `<i data-lucide="${act.icon}"></i> <span>${act.text}</span>`;
                 activityList.appendChild(li);
             });
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         }
     }
 }
@@ -4431,7 +4433,7 @@ function showToast(message, isSuccess = true) {
         iconContainer.innerHTML = '<i data-lucide="info"></i>';
     }
     
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     
     setTimeout(() => {
         toast.classList.remove("active");
@@ -4455,7 +4457,7 @@ function setupNavigation() {
             mainHeader.classList.remove("mobile-menu-open");
             if (mobileMenuBtn) {
                 mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
-                if (window.lucide) lucide.createIcons();
+                if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
             }
         }
     }
@@ -4466,7 +4468,7 @@ function setupNavigation() {
             const isOpen = mainHeader.classList.toggle("mobile-menu-open");
             mobileMenuBtn.setAttribute("aria-expanded", isOpen);
             mobileMenuBtn.innerHTML = isOpen ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
-            if (window.lucide) lucide.createIcons();
+            if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         });
     }
 
@@ -4527,36 +4529,54 @@ function setupNavigation() {
     });
 
     // Handle branding/logo click to go home
-    document.querySelector(".logo").addEventListener("click", () => {
-        switchTab("home");
-        closeMobileMenu();
-    });
+    const logoEl = document.querySelector(".logo");
+    if (logoEl) {
+        logoEl.addEventListener("click", () => {
+            switchTab("home");
+            closeMobileMenu();
+        });
+    }
     
     // Home Level buttons link to Course Tab with proper filter
     const levelBtns = document.querySelectorAll(".level-btn");
     levelBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             const level = btn.getAttribute("data-level");
-            document.getElementById("levelFilter").value = level;
-            document.getElementById("levelFilter").dispatchEvent(new Event("change"));
+            const filterEl = document.getElementById("levelFilter");
+            if (filterEl) {
+                filterEl.value = level;
+                filterEl.dispatchEvent(new Event("change"));
+            }
             switchTab("courses");
         });
     });
 
     // Footer actions
-    document.getElementById("footerMathsLink").addEventListener("click", (e) => {
-        e.preventDefault();
-        document.getElementById("subjectFilter").value = "math";
-        document.getElementById("subjectFilter").dispatchEvent(new Event("change"));
-        switchTab("courses");
-    });
+    const footerMaths = document.getElementById("footerMathsLink");
+    if (footerMaths) {
+        footerMaths.addEventListener("click", (e) => {
+            e.preventDefault();
+            const subjectEl = document.getElementById("subjectFilter");
+            if (subjectEl) {
+                subjectEl.value = "math";
+                subjectEl.dispatchEvent(new Event("change"));
+            }
+            switchTab("courses");
+        });
+    }
 
-    document.getElementById("footerPcLink").addEventListener("click", (e) => {
-        e.preventDefault();
-        document.getElementById("subjectFilter").value = "pc";
-        document.getElementById("subjectFilter").dispatchEvent(new Event("change"));
-        switchTab("courses");
-    });
+    const footerPc = document.getElementById("footerPcLink");
+    if (footerPc) {
+        footerPc.addEventListener("click", (e) => {
+            e.preventDefault();
+            const subjectEl = document.getElementById("subjectFilter");
+            if (subjectEl) {
+                subjectEl.value = "pc";
+                subjectEl.dispatchEvent(new Event("change"));
+            }
+            switchTab("courses");
+        });
+    }
 
     document.querySelectorAll("[data-level-footer]").forEach(fLink => {
         fLink.addEventListener("click", (e) => {
@@ -4727,7 +4747,7 @@ function renderChapters(level = "2bac-pc", subject = "all", query = "") {
                 <p>Essayez de modifier vos critères de filtrage ou effectuez une autre recherche.</p>
             </div>
         `;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         return;
     }
 
@@ -4761,7 +4781,7 @@ function renderChapters(level = "2bac-pc", subject = "all", query = "") {
         container.appendChild(card);
     });
 
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function renderHomeChapters() {
@@ -4818,7 +4838,7 @@ function renderHomeChapters() {
         container.appendChild(card);
     });
 
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function renderHomePhysicsChapters() {
@@ -4871,7 +4891,7 @@ function renderHomePhysicsChapters() {
         container.appendChild(card);
     });
 
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 // --- LESSON DETAIL MODAL (MODAL) ---
@@ -5029,7 +5049,7 @@ window.openChapterModal = function(chapterId, options = {}) {
     document.getElementById("lessonModal").classList.add("active");
     document.body.style.overflow = "hidden"; // Prevent background scroll
     
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     setupInteractiveTools();
 
     // Trigger MathJax Typesetting for math equations inside the course summary
@@ -5169,6 +5189,20 @@ function setupAnimations() {
     const animCards = document.querySelectorAll(".anim-card");
 
     function openAnimPlayer(targetAnim, cardTitle, options = {}) {
+        window.openAnimPlayer = openAnimPlayer;
+
+        // Ensure animations tab section is active
+        const animSection = document.getElementById("animations-section");
+        if (animSection && !animSection.classList.contains("active")) {
+            document.querySelectorAll(".tab-content").forEach(panel => {
+                panel.classList.remove("active");
+            });
+            animSection.classList.add("active");
+            document.querySelectorAll(".nav-link").forEach(btn => {
+                if (btn.getAttribute("data-tab") === "animations") btn.classList.add("active");
+                else btn.classList.remove("active");
+            });
+        }
         if (!galleryView || !playerView) return;
 
         galleryView.style.display = "none";
@@ -5208,6 +5242,7 @@ function setupAnimations() {
     }
 
     function showGallery(options = {}) {
+        window.showGallery = showGallery;
         if (!galleryView || !playerView) return;
         playerView.style.display = "none";
         galleryView.style.display = "block";
@@ -5222,6 +5257,7 @@ function setupAnimations() {
             });
         }
     }
+    window.showGallery = showGallery;
 
     // Attach click listeners to cards
     animCards.forEach(card => {
@@ -5332,6 +5368,14 @@ function initCanvasFor(type) {
         setupChargeDechargeRcSimulator();
     } else if (type === "moteur-cc") {
         setupMoteurCcSimulator();
+    } else if (type === "thermodynamique") {
+        setupThermodynamiqueSimulator();
+    } else if (type === "transformations-thermo") {
+        setupTransformationsThermoSimulator();
+    } else if (type === "gaz-parfait") {
+        setupGazParfaitSimulator();
+    } else if (type === "transferts-thermiques") {
+        setupTransfertsThermiquesSimulator();
     }
 }
 
@@ -5381,7 +5425,7 @@ function setupWaveSimulator() {
     newPlay.addEventListener("click", () => {
         wavePlaying = !wavePlaying;
         newPlay.innerHTML = wavePlaying ? '<i data-lucide="pause"></i> Pause' : '<i data-lucide="play"></i> Lancer';
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     });
 
     function draw() {
@@ -5711,7 +5755,7 @@ function setupNewtonSimulator() {
     newPlay.addEventListener("click", () => {
         newtonIsRunning = !newtonIsRunning;
         newPlay.innerHTML = newtonIsRunning ? '<i data-lucide="pause"></i> Pause' : '<i data-lucide="play"></i> Lancer';
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     });
 
     newReset.addEventListener("click", resetSim);
@@ -5721,7 +5765,7 @@ function setupNewtonSimulator() {
         newtonX = 100;
         newtonV = 0;
         newPlay.innerHTML = '<i data-lucide="play"></i> Lancer';
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 
     function draw() {
@@ -5754,7 +5798,7 @@ function setupNewtonSimulator() {
                 newtonV = 0;
                 newtonIsRunning = false;
                 newPlay.innerHTML = '<i data-lucide="play"></i> Lancer';
-                lucide.createIcons();
+                if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
             }
         }
 
@@ -6565,22 +6609,20 @@ function setupPlotterSimulator() {
 
 
 
-// Add CSS keyframes for rotation in CSS dynamically if not present
-const styleSheet = document.styleSheets[0];
-try {
-    styleSheet.insertRule(`
+// Add CSS keyframes for rotation dynamically if not present
+if (!document.getElementById("dynamic-spin-styles")) {
+    const spinStyle = document.createElement("style");
+    spinStyle.id = "dynamic-spin-styles";
+    spinStyle.textContent = `
         @keyframes spin-animation {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-    `, styleSheet.cssRules.length);
-    styleSheet.insertRule(`
         .spin-animation {
             animation: spin-animation 1s linear infinite;
         }
-    `, styleSheet.cssRules.length);
-} catch (e) {
-    console.log("Dynamically added CSS rule error: " + e);
+    `;
+    document.head.appendChild(spinStyle);
 }
 
 // 7. Focometrie Simulator
@@ -6801,7 +6843,7 @@ function setupFocometrieSimulator() {
                 • Focale divergente déduite $f_{2, calc} = $ <strong style="color:var(--primary); font-size:1.05rem;">${f2calcText}</strong> (théorique)</p>
             `;
         }
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 
     newMethod.addEventListener("change", () => {
@@ -7645,7 +7687,7 @@ function setupPhotovoltaiqueSimulator() {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
             }
         }, 100);
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 
     function updatePointsTable() {
@@ -8211,7 +8253,7 @@ function setupChargeElectronSimulator() {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
             }
         }, 100);
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 
     function updatePointsTable() {
@@ -8899,7 +8941,7 @@ function renderQuizWelcomeSelector() {
         grid.appendChild(card);
     });
 
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function setupQuizEngine() {
@@ -8932,9 +8974,12 @@ function startQuiz(quizId) {
     quizScore = 0;
     selectedOptionIndex = null;
 
-    document.getElementById("quizWelcomePanel").style.display = "none";
-    document.getElementById("quizResultPanel").style.display = "none";
-    document.getElementById("quizScreenPanel").style.display = "block";
+    const wPanel = document.getElementById("quizWelcomePanel");
+    const rPanel = document.getElementById("quizResultPanel");
+    const sPanel = document.getElementById("quizScreenPanel");
+    if (wPanel) wPanel.style.display = "none";
+    if (rPanel) rPanel.style.display = "none";
+    if (sPanel) sPanel.style.display = "block";
 
     showQuestion();
 }
@@ -9009,7 +9054,7 @@ function showFeedback(isCorrect) {
 
     fbDesc.innerHTML = q.explanation;
     fbBox.style.display = "block";
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 
     document.getElementById("quizSkipBtn").style.display = "none";
     document.getElementById("quizNextBtn").disabled = false;
@@ -9260,7 +9305,7 @@ function setupDiodesRedressementSimulator() {
             </div>
         `;
 
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         setTimeout(() => {
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
@@ -9343,7 +9388,7 @@ function setupDiodesRedressementSimulator() {
     newPau.addEventListener("click", () => {
         isPaused = !isPaused;
         newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     });
 
     newClr.addEventListener("click", () => {
@@ -9789,7 +9834,7 @@ function setupTransistorBipolaireSimulator() {
             </div>
         `;
 
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         setTimeout(() => {
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
@@ -10328,7 +10373,7 @@ function setupAopAmplificateurSimulator() {
             </div>
         `;
 
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         setTimeout(() => {
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
@@ -10420,7 +10465,7 @@ function setupAopAmplificateurSimulator() {
     newPau.addEventListener("click", () => {
         isPaused = !isPaused;
         newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     });
 
     newClr.addEventListener("click", () => {
@@ -11151,7 +11196,7 @@ function setupMesureResistancesSimulator() {
             </div>
         `;
 
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         setTimeout(() => {
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
@@ -11334,8 +11379,8 @@ function setupChargeDechargeRcSimulator() {
 
     const toggleBtn = document.getElementById("btn-rc-toggle-switch");
     const vSlider = document.getElementById("rc-voltage");
-    const rSlider = document.getElementById("rc-r");
-    const cSlider = document.getElementById("rc-c");
+    const rSlider = document.getElementById("rc-exp-r");
+    const cSlider = document.getElementById("rc-exp-c");
     const btnRecord = document.getElementById("btn-rc-record");
     const btnPause = document.getElementById("btn-rc-pause");
     const btnClear = document.getElementById("btn-rc-clear");
@@ -11398,7 +11443,7 @@ function setupChargeDechargeRcSimulator() {
             </div>
         `;
 
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         setTimeout(() => {
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
@@ -11443,13 +11488,15 @@ function setupChargeDechargeRcSimulator() {
 
     newR.addEventListener("input", (e) => {
         R_kOhm = parseFloat(e.target.value);
-        document.getElementById("val-rc-r").textContent = R_kOhm.toFixed(1);
+        const valR = document.getElementById("val-rc-exp-r");
+        if (valR) valR.textContent = R_kOhm.toFixed(1);
         updateCalculations();
     });
 
     newC.addEventListener("input", (e) => {
         C_uF = parseFloat(e.target.value);
-        document.getElementById("val-rc-c").textContent = C_uF;
+        const valC = document.getElementById("val-rc-exp-c");
+        if (valC) valC.textContent = C_uF;
         updateCalculations();
     });
 
@@ -11469,7 +11516,7 @@ function setupChargeDechargeRcSimulator() {
     newPau.addEventListener("click", () => {
         isPaused = !isPaused;
         newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     });
 
     newClr.addEventListener("click", () => {
@@ -11757,7 +11804,7 @@ function setupMoteurCcSimulator() {
             </div>
         `;
 
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         setTimeout(() => {
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise().catch(err => console.warn(err));
@@ -11823,7 +11870,7 @@ function setupMoteurCcSimulator() {
     newPau.addEventListener("click", () => {
         isPaused = !isPaused;
         newPau.innerHTML = isPaused ? `<i data-lucide="play"></i> Reprendre` : `<i data-lucide="pause"></i> Pause`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     });
 
     newClr.addEventListener("click", () => {
@@ -12281,7 +12328,7 @@ function openMethodPage(title, category, desc, options = {}) {
         pageCategory.textContent = category;
         pageDesc.textContent = desc || `Page dédiée aux principes, protocoles et résultats pour : ${title}`;
         
-        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, .silar-workspace, .xrd-workspace, div[style*='dashed']");
+        const placeholder = pagePanel.querySelector(".sol-gel-workspace, .cbd-workspace, .electro-workspace, .silar-workspace, .xrd-workspace, .wien2k-workspace, div[style*='dashed']");
         
         if (title.toLowerCase().includes("sol-gel") || title.toLowerCase().includes("spin coating")) {
             if (placeholder) {
@@ -12318,6 +12365,13 @@ function openMethodPage(title, category, desc, options = {}) {
             setTimeout(() => {
                 initXRDAnimation();
             }, 100);
+        } else if (title.toLowerCase().includes("wien2k") || title.toLowerCase().includes("dft") || title.toLowerCase().includes("quantum espresso") || title.toLowerCase().includes("vasp")) {
+            if (placeholder) {
+                placeholder.outerHTML = renderWien2kCustomPage();
+            }
+            setTimeout(() => {
+                initWien2kCifFinder();
+            }, 100);
         } else {
             if (placeholder && !placeholder.querySelector("h3")?.textContent.includes("Page dédiée prête")) {
                 placeholder.outerHTML = `
@@ -12339,7 +12393,7 @@ function openMethodPage(title, category, desc, options = {}) {
         pagePanel.scrollIntoView({ behavior: "smooth", block: "start" });
 
         if (window.lucide) {
-            window.lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
         }
 
         let subId = options.subId;
@@ -12474,7 +12528,7 @@ function toggleSolGelPlay() {
     const playBtn = document.getElementById("solgel-play-btn");
     if (playBtn) {
         playBtn.innerHTML = solGelIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lecture`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
     if (solGelIsPlaying) {
         runSolGelAutoPlay();
@@ -12852,7 +12906,7 @@ function setupExperimentalDftNavigation() {
             closeMethodPage();
 
             if (window.lucide) {
-                window.lucide.createIcons();
+                if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
             }
         });
     });
@@ -13004,11 +13058,11 @@ function toggleCBDPlay() {
     const topBtn = document.getElementById("btn-start-cbd-anim");
     if (playBtn) {
         playBtn.innerHTML = cbdIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Démarrer la Réaction`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
     if (topBtn) {
         topBtn.innerHTML = cbdIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer la Simulation Interactive CBD`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 }
 
@@ -13018,7 +13072,7 @@ function resetCBDAnim() {
     const playBtn = document.getElementById("cbd-play-btn");
     if (playBtn) {
         playBtn.innerHTML = `<i data-lucide="play"></i> Démarrer la Réaction`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 }
 
@@ -13328,11 +13382,11 @@ function toggleElectroPlay() {
     const topBtn = document.getElementById("btn-start-electro-anim");
     if (playBtn) {
         playBtn.innerHTML = electroIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lancer la Déposition`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
     if (topBtn) {
         topBtn.innerHTML = electroIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer la Simulation Interactive`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 }
 
@@ -13342,7 +13396,7 @@ function resetElectroAnim() {
     const playBtn = document.getElementById("electro-play-btn");
     if (playBtn) {
         playBtn.innerHTML = `<i data-lucide="play"></i> Lancer la Déposition`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 }
 
@@ -13656,11 +13710,11 @@ function toggleSilarPlay() {
     const topBtn = document.getElementById("btn-start-silar-anim");
     if (playBtn) {
         playBtn.innerHTML = silarIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lecture`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
     if (topBtn) {
         topBtn.innerHTML = silarIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer l'Animation du Cycle SILAR`;
-        if (window.lucide) window.lucide.createIcons();
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
     if (silarIsPlaying) {
         runSilarAutoPlay();
@@ -14665,6 +14719,1162 @@ function drawXRDCanvas() {
     ctx.fillText(`D = ${D_nm.toFixed(1)} nm`, selX, halfMaxY + 16);
 }
 
+/* ==========================================================================
+   WIEN2k & CIF Finder Workspace Module
+   ========================================================================== */
+function renderWien2kCustomPage() {
+    return `
+    <div class="wien2k-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
+        
+        <!-- Top Banner: WIEN2k & Materials Project Structure Management -->
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+            <div>
+                <span class="badge badge-accent" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); font-size: 0.8rem; margin-bottom: 6px; display: inline-flex; align-items: center; gap: 6px;">
+                    <i data-lucide="layers"></i> Materials Project (MP) & WIEN2k Suite
+                </span>
+                <h3 style="margin: 4px 0; font-size: 1.35rem; color: #ffffff;">WIEN2k & Visualisateur de Structure Cristalline 3D</h3>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
+                    Visualisation 3D interactive de la maille élémentaire, détails des atomes (couleurs, coordonnées, rayons $R_{MT}$) et exportateur de fichiers <strong>.CIF</strong> et <strong>.struct (WIEN2k)</strong>.
+                </p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a href="find_cif.py" download="find_cif.py" class="btn btn-outline" style="border-color: #38bdf8; color: #38bdf8; padding: 10px 16px; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; text-decoration: none;">
+                    <i data-lucide="download"></i> Script Materials Project (find_cif.py)
+                </a>
+            </div>
+        </div>
+
+        <!-- 3D CRYSTAL STRUCTURE VISUALIZER & ATOM INSPECTOR PANEL -->
+        <div style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 14px;">
+                <div>
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="box"></i> Visualisation 3D & Inspecteur d'Atomes WIEN2k
+                    </h4>
+                    <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 0.85rem;">
+                        Inspectez la disposition tridimensionnelle des atomes, les axes de maille ($a, b, c$) et les rayons de sphères Muffin-Tin ($R_{MT}$).
+                    </p>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button id="btn-spin-crystal" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem; border-color: rgba(56, 189, 248, 0.4); color: #38bdf8;">
+                        <i data-lucide="rotate-cw"></i> Auto-Rotation
+                    </button>
+                    <button id="btn-reset-crystal-view" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
+                        <i data-lucide="refresh-cw"></i> Réinitialiser la Vue
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visualizer Grid Layout: Canvas (Left) + Atom Details & Legend (Right) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                
+                <!-- Left: 3D Canvas Visualizer -->
+                <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; position: relative;">
+                    
+                    <span id="current-structure-badge" class="badge badge-accent" style="position: absolute; top: 16px; left: 16px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; font-size: 0.78rem;">
+                        TiO2 (Rutile mp-2657)
+                    </span>
+
+                    <canvas id="wien2k-structure-canvas" width="380" height="340" style="width: 100%; max-width: 380px; height: 340px; border-radius: 8px; background: #070b14; cursor: grab;"></canvas>
+
+                    <!-- Interactive Rotation Sliders -->
+                    <div style="width: 100%; display: flex; flex-direction: column; gap: 8px; margin-top: 12px; font-size: 0.8rem; color: #94a3b8;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="width: 70px; color: #ef4444; font-weight: 600;">Axe X (Rot):</span>
+                            <input type="range" id="rot-x-slider" min="-180" max="180" value="25" style="flex: 1; accent-color: #ef4444;">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="width: 70px; color: #10b981; font-weight: 600;">Axe Y (Rot):</span>
+                            <input type="range" id="rot-y-slider" min="-180" max="180" value="-35" style="flex: 1; accent-color: #10b981;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Atom Legend, Coordinates & WIEN2k Parameters -->
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    
+                    <!-- Atomic Species Color Legend -->
+                    <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px;">
+                        <h5 style="margin: 0 0 12px 0; color: #ffffff; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="palette"></i> Légende des Atomes & Couleurs CPK
+                        </h5>
+                        <div id="atom-color-legend-container" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <!-- Dynamic Badges rendered via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Atomic Positions Table -->
+                    <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 16px; flex: 1;">
+                        <h5 style="margin: 0 0 12px 0; color: #ffffff; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+                            <i data-lucide="table"></i> Coordonnées Frractionnaires & Rayons $R_{MT}$ WIEN2k
+                        </h5>
+                        <div style="overflow-x: auto; max-height: 180px;">
+                            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.8rem;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.12); color: #38bdf8;">
+                                        <th style="padding: 6px;">Atome</th>
+                                        <th style="padding: 6px;">Forme</th>
+                                        <th style="padding: 6px;">Fractionnaire (x, y, z)</th>
+                                        <th style="padding: 6px;">Rayon $R_{MT}$ (bohr)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="atom-coordinates-table-body">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- WIEN2k Calculations Card & .struct Generator -->
+                    <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <span style="color: #38bdf8; font-size: 0.8rem; font-weight: 700;">Paramètres DFT WIEN2k:</span>
+                            <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 2px;">
+                                Cutoff $R_{MT} \times K_{max} = 7.0$ &bull; Muffin-Tin Spheres &bull; APW+lo Basis
+                            </div>
+                        </div>
+                        <button id="btn-generate-wien2k-struct" class="btn btn-primary" style="background: #38bdf8; color: #0f172a; font-weight: 700; padding: 8px 16px; font-size: 0.8rem; border: none; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                            <i data-lucide="file-code"></i> Générer Fichier WIEN2k (.struct)
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MATERIALS PROJECT SEARCH ENGINE WORKSPACE -->
+        <div style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+                <div>
+                    <h4 style="margin: 0; color: #38bdf8; font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="search"></i> Rechercher dans la Base Materials Project (MP)
+                    </h4>
+                    <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 0.85rem;">
+                        Saisissez une formule (ex: <code>TiO2</code>, <code>ZnO</code>, <code>Si</code>, <code>BaTiO3</code>, <code>Fe2O3</code>) ou un MP ID (ex: <code>mp-149</code>, <code>mp-2657</code>, <code>mp-2133</code>).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Search Bar Input -->
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <input type="text" id="cif-search-input" placeholder="Ex: TiO2, ZnO, Si, BaTiO3, mp-149..." value="TiO2" style="flex: 1; min-width: 240px; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; padding: 12px 16px; color: #ffffff; font-size: 0.95rem; outline: none;">
+                <button id="btn-search-cif" class="btn btn-primary" style="background: #38bdf8; color: #0f172a; font-weight: 700; border: none; padding: 12px 24px; cursor: pointer; border-radius: 8px; display: flex; align-items: center; gap: 8px;">
+                    <i data-lucide="search"></i> Rechercher MP .CIF
+                </button>
+            </div>
+
+            <!-- Quick Suggestions -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                <span style="color: #64748b; font-size: 0.8rem; font-weight: 600;">Composés Materials Project:</span>
+                <button class="cif-quick-btn badge badge-outline" data-formula="TiO2" style="cursor: pointer; background: rgba(255,255,255,0.03); border-color: rgba(56, 189, 248, 0.3); color: #e2e8f0;">TiO2 (Rutile mp-2657)</button>
+                <button class="cif-quick-btn badge badge-outline" data-formula="ZnO" style="cursor: pointer; background: rgba(255,255,255,0.03); border-color: rgba(56, 189, 248, 0.3); color: #e2e8f0;">ZnO (Wurtzite mp-2133)</button>
+                <button class="cif-quick-btn badge badge-outline" data-formula="Si" style="cursor: pointer; background: rgba(255,255,255,0.03); border-color: rgba(56, 189, 248, 0.3); color: #e2e8f0;">Si (Diamond mp-149)</button>
+                <button class="cif-quick-btn badge badge-outline" data-formula="BaTiO3" style="cursor: pointer; background: rgba(255,255,255,0.03); border-color: rgba(56, 189, 248, 0.3); color: #e2e8f0;">BaTiO3 (mp-2998)</button>
+                <button class="cif-quick-btn badge badge-outline" data-formula="Fe2O3" style="cursor: pointer; background: rgba(255,255,255,0.03); border-color: rgba(56, 189, 248, 0.3); color: #e2e8f0;">Fe2O3 (mp-19770)</button>
+                <button class="cif-quick-btn badge badge-outline" data-formula="GaAs" style="cursor: pointer; background: rgba(255,255,255,0.03); border-color: rgba(56, 189, 248, 0.3); color: #e2e8f0;">GaAs (mp-2534)</button>
+            </div>
+
+            <!-- Results Table Container -->
+            <div id="cif-results-container" style="margin-top: 10px;">
+                <div style="text-align: center; padding: 24px; color: #94a3b8; font-size: 0.9rem;">
+                    Cliquez sur "Rechercher MP .CIF" pour charger les données Materials Project.
+                </div>
+            </div>
+
+            <!-- Preview Modal / Section -->
+            <div id="cif-preview-box" style="display: none; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 18px; margin-top: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h5 id="cif-preview-title" style="margin: 0; color: #38bdf8; font-size: 0.95rem; font-weight: 700;">Contenu du Fichier .CIF (Materials Project)</h5>
+                    <button id="btn-close-cif-preview" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">Fermer</button>
+                </div>
+                <pre id="cif-preview-code" style="background: rgba(0,0,0,0.5); color: #38bdf8; font-family: monospace; font-size: 0.8rem; padding: 14px; border-radius: 6px; max-height: 280px; overflow-y: auto; white-space: pre-wrap; margin: 0;"></pre>
+            </div>
+        </div>
+
+    </div>
+    `;
+}
+
+function initWien2kCifFinder() {
+    const searchBtn = document.getElementById("btn-search-cif");
+    const searchInput = document.getElementById("cif-search-input");
+    const resultsContainer = document.getElementById("cif-results-container");
+    const quickBtns = document.querySelectorAll(".cif-quick-btn");
+    const previewBox = document.getElementById("cif-preview-box");
+    const previewTitle = document.getElementById("cif-preview-title");
+    const previewCode = document.getElementById("cif-preview-code");
+    const closePreviewBtn = document.getElementById("btn-close-cif-preview");
+
+    // 3D Canvas Visualizer Elements
+    const canvas = document.getElementById("wien2k-structure-canvas");
+    const rotXSlider = document.getElementById("rot-x-slider");
+    const rotYSlider = document.getElementById("rot-y-slider");
+    const spinBtn = document.getElementById("btn-spin-crystal");
+    const resetViewBtn = document.getElementById("btn-reset-crystal-view");
+    const structureBadge = document.getElementById("current-structure-badge");
+    const legendContainer = document.getElementById("atom-color-legend-container");
+    const coordsTableBody = document.getElementById("atom-coordinates-table-body");
+    const generateStructBtn = document.getElementById("btn-generate-wien2k-struct");
+
+    // CPK Colors & Radii Database
+    const ELEMENT_CPK = {
+        "Ti": { color: "#a855f7", radius: 1.40, Z: 22, rmt: 1.95, name: "Titanium" },
+        "O":  { color: "#ef4444", radius: 0.60, Z: 8,  rmt: 1.70, name: "Oxygen" },
+        "Zn": { color: "#14b8a6", radius: 1.35, Z: 30, rmt: 2.00, name: "Zinc" },
+        "Si": { color: "#eab308", radius: 1.10, Z: 14, rmt: 2.05, name: "Silicon" },
+        "Ba": { color: "#22c55e", radius: 2.15, Z: 56, rmt: 2.50, name: "Barium" },
+        "Fe": { color: "#f97316", radius: 1.25, Z: 26, rmt: 2.00, name: "Iron" },
+        "Ga": { color: "#6366f1", radius: 1.30, Z: 31, rmt: 2.10, name: "Gallium" },
+        "As": { color: "#ec4899", radius: 1.15, Z: 33, rmt: 2.05, name: "Arsenic" },
+        "Al": { color: "#94a3b8", radius: 1.25, Z: 13, rmt: 1.90, name: "Aluminum" },
+        "Mo": { color: "#06b6d4", radius: 1.45, Z: 42, rmt: 2.15, name: "Molybdenum" },
+        "S":  { color: "#facc15", radius: 1.00, Z: 16, rmt: 1.90, name: "Sulfur" },
+        "Sr": { color: "#84cc16", radius: 2.00, Z: 38, rmt: 2.40, name: "Strontium" }
+    };
+
+    const MP_DB = {
+        "tio2": [
+            { mp_id: "mp-2657", formula: "TiO2", name: "Rutile (Titanium Dioxide)", spacegroup: "P42/mnm", a: 4.5937, b: 4.5937, c: 2.9587, alpha: 90, beta: 90, gamma: 90, atoms: [["Ti", "Ti4+", 0.0, 0.0, 0.0], ["Ti", "Ti4+", 0.5, 0.5, 0.5], ["O", "O2-", 0.3048, 0.3048, 0.0], ["O", "O2-", 0.6952, 0.6952, 0.0], ["O", "O2-", 0.1952, 0.8048, 0.5], ["O", "O2-", 0.8048, 0.1952, 0.5]] },
+            { mp_id: "mp-390", formula: "TiO2", name: "Anatase (Titanium Dioxide)", spacegroup: "I41/amd", a: 3.7845, b: 3.7845, c: 9.5143, alpha: 90, beta: 90, gamma: 90, atoms: [["Ti", "Ti4+", 0.0, 0.0, 0.0], ["O", "O2-", 0.0, 0.0, 0.208]] }
+        ],
+        "zno": [
+            { mp_id: "mp-2133", formula: "ZnO", name: "Wurtzite (Zinc Oxide)", spacegroup: "P63mc", a: 3.249, b: 3.249, c: 5.206, alpha: 90, beta: 90, gamma: 120, atoms: [["Zn", "Zn2+", 0.3333, 0.6667, 0.0], ["O", "O2-", 0.3333, 0.6667, 0.380]] }
+        ],
+        "si": [
+            { mp_id: "mp-149", formula: "Si", name: "Silicon (Diamond cubic)", spacegroup: "Fd-3m", a: 5.431, b: 5.431, c: 5.431, alpha: 90, beta: 90, gamma: 90, atoms: [["Si", "Si", 0.0, 0.0, 0.0], ["Si", "Si", 0.25, 0.25, 0.25]] }
+        ],
+        "batio3": [
+            { mp_id: "mp-2998", formula: "BaTiO3", name: "Barium Titanate (Perovskite)", spacegroup: "Pm-3m", a: 4.008, b: 4.008, c: 4.008, alpha: 90, beta: 90, gamma: 90, atoms: [["Ba", "Ba2+", 0.0, 0.0, 0.0], ["Ti", "Ti4+", 0.5, 0.5, 0.5], ["O", "O2-", 0.5, 0.5, 0.0], ["O", "O2-", 0.5, 0.0, 0.5], ["O", "O2-", 0.0, 0.5, 0.5]] }
+        ],
+        "fe2o3": [
+            { mp_id: "mp-19770", formula: "Fe2O3", name: "Hematite (Iron Oxide)", spacegroup: "R-3c", a: 5.035, b: 5.035, c: 13.747, alpha: 90, beta: 90, gamma: 120, atoms: [["Fe", "Fe3+", 0.0, 0.0, 0.355], ["O", "O2-", 0.306, 0.0, 0.25]] }
+        ],
+        "gaas": [
+            { mp_id: "mp-2534", formula: "GaAs", name: "Gallium Arsenide (Zincblende)", spacegroup: "F-43m", a: 5.653, b: 5.653, c: 5.653, alpha: 90, beta: 90, gamma: 90, atoms: [["Ga", "Ga3+", 0.0, 0.0, 0.0], ["As", "As3-", 0.25, 0.25, 0.25]] }
+        ]
+    };
+
+    let activeStructureItem = MP_DB["tio2"][0];
+    let isAutoSpinning = false;
+    let spinAnimId = null;
+    let angleX = 25 * (Math.PI / 180);
+    let angleY = -35 * (Math.PI / 180);
+
+    // Initial render of 3D crystal structure
+    updateVisualizer(activeStructureItem);
+
+    if (rotXSlider && rotYSlider) {
+        rotXSlider.addEventListener("input", (e) => {
+            angleX = parseFloat(e.target.value) * (Math.PI / 180);
+            render3DCrystal();
+        });
+        rotYSlider.addEventListener("input", (e) => {
+            angleY = parseFloat(e.target.value) * (Math.PI / 180);
+            render3DCrystal();
+        });
+    }
+
+    if (resetViewBtn) {
+        resetViewBtn.addEventListener("click", () => {
+            angleX = 25 * (Math.PI / 180);
+            angleY = -35 * (Math.PI / 180);
+            if (rotXSlider) rotXSlider.value = "25";
+            if (rotYSlider) rotYSlider.value = "-35";
+            if (isAutoSpinning) stopAutoSpin();
+            render3DCrystal();
+        });
+    }
+
+    if (spinBtn) {
+        spinBtn.addEventListener("click", () => {
+            if (isAutoSpinning) {
+                stopAutoSpin();
+            } else {
+                startAutoSpin();
+            }
+        });
+    }
+
+    function startAutoSpin() {
+        isAutoSpinning = true;
+        spinBtn.innerHTML = `<i data-lucide="pause"></i> Pause Rotation`;
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+        function loop() {
+            if (!isAutoSpinning) return;
+            angleY += 0.015;
+            if (rotYSlider) rotYSlider.value = (angleY * (180 / Math.PI) % 360).toFixed(0);
+            render3DCrystal();
+            spinAnimId = requestAnimationFrame(loop);
+        }
+        loop();
+    }
+
+    function stopAutoSpin() {
+        isAutoSpinning = false;
+        if (spinAnimId) cancelAnimationFrame(spinAnimId);
+        spinBtn.innerHTML = `<i data-lucide="rotate-cw"></i> Auto-Rotation`;
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    }
+
+    function updateVisualizer(item) {
+        activeStructureItem = item;
+        if (structureBadge) {
+            structureBadge.textContent = `${item.formula} (${item.name} ${item.mp_id})`;
+        }
+
+        // Render Species Legend
+        if (legendContainer) {
+            const speciesSet = new Set();
+            (item.atoms || []).forEach(at => speciesSet.add(at[0]));
+            let legendHtml = "";
+            speciesSet.forEach(sym => {
+                const info = ELEMENT_CPK[sym] || { color: "#38bdf8", Z: "?", rmt: 2.0, name: sym };
+                legendHtml += `
+                    <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 8px; font-size: 0.8rem;">
+                        <span style="width: 12px; height: 12px; border-radius: 50%; background: ${info.color}; display: inline-block; box-shadow: 0 0 6px ${info.color};"></span>
+                        <strong style="color: #ffffff;">${sym}</strong>
+                        <span style="color: #94a3b8; font-size: 0.72rem;">(Z=${info.Z}, R_MT=${info.rmt}b)</span>
+                    </div>
+                `;
+            });
+            legendContainer.innerHTML = legendHtml;
+        }
+
+        // Render Coordinates Table
+        if (coordsTableBody) {
+            let tableHtml = "";
+            (item.atoms || []).forEach((at, i) => {
+                const sym = at[0];
+                const form = at[1] || sym;
+                const x = (at[2] || 0).toFixed(4);
+                const y = (at[3] || 0).toFixed(4);
+                const z = (at[4] || 0).toFixed(4);
+                const info = ELEMENT_CPK[sym] || { color: "#38bdf8", rmt: 2.0 };
+
+                tableHtml += `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <td style="padding: 6px; font-weight: 700; color: ${info.color}; display: flex; align-items: center; gap: 6px;">
+                            <span style="width: 8px; height: 8px; border-radius: 50%; background: ${info.color};"></span> ${sym}${i+1}
+                        </td>
+                        <td style="padding: 6px; color: #cbd5e1;"><code>${form}</code></td>
+                        <td style="padding: 6px; color: #94a3b8;">(${x}, ${y}, ${z})</td>
+                        <td style="padding: 6px; color: #38bdf8; font-weight: 600;">${info.rmt} bohr</td>
+                    </tr>
+                `;
+            });
+            coordsTableBody.innerHTML = tableHtml;
+        }
+
+        render3DCrystal();
+    }
+
+    function render3DCrystal() {
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const width = canvas.width;
+        const height = canvas.height;
+        ctx.clearRect(0, 0, width, height);
+
+        const item = activeStructureItem;
+        if (!item) return;
+
+        const cosX = Math.cos(angleX), sinX = Math.sin(angleX);
+        const cosY = Math.cos(angleY), sinY = Math.sin(angleY);
+
+        function project3D(x, y, z) {
+            // Center origin
+            let cx = x - 0.5;
+            let cy = y - 0.5;
+            let cz = z - 0.5;
+
+            // Scale aspect ratio
+            const scale = 140;
+            let x1 = cx * scale;
+            let y1 = cy * scale;
+            let z1 = cz * scale;
+
+            // Rotate Y
+            let x2 = x1 * cosY + z1 * sinY;
+            let y2 = y1;
+            let z2 = -x1 * sinY + z1 * cosY;
+
+            // Rotate X
+            let x3 = x2;
+            let y3 = y2 * cosX - z2 * sinX;
+            let z3 = y2 * sinX + z2 * cosX;
+
+            return {
+                px: width / 2 + x3,
+                py: height / 2 + y3,
+                pz: z3
+            };
+        }
+
+        // Draw 3D Unit Cell Box Edges
+        const boxCorners = [
+            [0,0,0], [1,0,0], [1,1,0], [0,1,0],
+            [0,0,1], [1,0,1], [1,1,1], [0,1,1]
+        ];
+        const projectedBox = boxCorners.map(c => project3D(c[0], c[1], c[2]));
+        const edges = [
+            [0,1], [1,2], [2,3], [3,0],
+            [4,5], [5,6], [6,7], [7,4],
+            [0,4], [1,5], [2,6], [3,7]
+        ];
+
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
+        ctx.lineWidth = 1.5;
+        edges.forEach(edge => {
+            const p1 = projectedBox[edge[0]];
+            const p2 = projectedBox[edge[1]];
+            ctx.beginPath();
+            ctx.moveTo(p1.px, p1.py);
+            ctx.lineTo(p2.px, p2.py);
+            ctx.stroke();
+        });
+
+        // Draw RGB Crystal Coordinate Axes at origin
+        const o = project3D(0,0,0);
+        const ax = project3D(0.3,0,0);
+        const ay = project3D(0,0.3,0);
+        const az = project3D(0,0,0.3);
+
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#ef4444"; ctx.beginPath(); ctx.moveTo(o.px, o.py); ctx.lineTo(ax.px, ax.py); ctx.stroke();
+        ctx.strokeStyle = "#10b981"; ctx.beginPath(); ctx.moveTo(o.px, o.py); ctx.lineTo(ay.px, ay.py); ctx.stroke();
+        ctx.strokeStyle = "#38bdf8"; ctx.beginPath(); ctx.moveTo(o.px, o.py); ctx.lineTo(az.px, az.py); ctx.stroke();
+
+        // Project and Sort Atoms by Depth (z-order)
+        const renderAtoms = [];
+        (item.atoms || []).forEach(at => {
+            const sym = at[0];
+            const fx = at[2] || 0;
+            const fy = at[3] || 0;
+            const fz = at[4] || 0;
+            const proj = project3D(fx, fy, fz);
+            const info = ELEMENT_CPK[sym] || { color: "#38bdf8", radius: 1.0 };
+            renderAtoms.push({
+                sym,
+                px: proj.px,
+                py: proj.py,
+                pz: proj.pz,
+                color: info.color,
+                r: Math.max(10, Math.min(22, 14 * info.radius))
+            });
+        });
+
+        renderAtoms.sort((a, b) => a.pz - b.pz);
+
+        // Draw Atomic Spheres with 3D Shader Gradient
+        renderAtoms.forEach(at => {
+            const grad = ctx.createRadialGradient(
+                at.px - at.r * 0.3, at.py - at.r * 0.3, at.r * 0.1,
+                at.px, at.py, at.r
+            );
+            grad.addColorStop(0, "#ffffff");
+            grad.addColorStop(0.3, at.color);
+            grad.addColorStop(1, "#0f172a");
+
+            ctx.beginPath();
+            ctx.arc(at.px, at.py, at.r, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.shadowColor = at.color;
+            ctx.shadowBlur = 10;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Element Symbol Label
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 10px 'Outfit', sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(at.sym, at.px, at.py);
+        });
+    }
+
+    // WIEN2k .struct Generator Event
+    if (generateStructBtn) {
+        generateStructBtn.addEventListener("click", () => {
+            const item = activeStructureItem;
+            if (!item) return;
+
+            let structTxt = [
+                `${item.formula} - WIEN2k Struct File`,
+                `${item.spacegroup.padEnd(4)} LATTICE,MODE=NONE`,
+                `RELAXED UNIT CELL PARAMETERS`,
+                `  ${item.a.toFixed(6).padStart(10)}  ${item.b.toFixed(6).padStart(10)}  ${item.c.toFixed(6).padStart(10)}  ${item.alpha.toFixed(6).padStart(10)}  ${item.beta.toFixed(6).padStart(10)}  ${item.gamma.toFixed(6).padStart(10)}`,
+                `NUMBER OF ATOMIC SPECIES IN UNIT CELL = ${(item.atoms || []).length}`
+            ];
+
+            (item.atoms || []).forEach((at, i) => {
+                const sym = at[0];
+                const info = ELEMENT_CPK[sym] || { Z: 1, rmt: 2.0 };
+                structTxt.push(`ATOM ${i+1}: X=${at[2].toFixed(5)} Y=${at[3].toFixed(5)} Z=${at[4].toFixed(5)}`);
+                structTxt.push(`      ${sym.padEnd(4)} NPT= 781  R0=0.00005000 RMT= ${info.rmt.toFixed(2)}   Z: ${info.Z}.0`);
+            });
+
+            if (previewBox && previewCode && previewTitle) {
+                previewTitle.textContent = `Fichier Structure WIEN2k (.struct) - ${item.formula} (${item.mp_id})`;
+                previewCode.textContent = structTxt.join("\n");
+                previewBox.style.display = "block";
+            }
+        });
+    }
+
+    // --- MATERIALS PROJECT SEARCH LOGIC ---
+    function generateCif(item) {
+        let lines = [
+            `#=======================================================================`,
+            `# Materials Project (MP) Database - CIF Structure File`,
+            `# ID: ${item.mp_id}`,
+            `# Compound: ${item.formula} (${item.name})`,
+            `# Source: https://next-gen.materialsproject.org/materials/${item.mp_id}`,
+            `#=======================================================================`,
+            `data_${item.mp_id}_${item.formula}`,
+            `_audit_creation_method          'Materials Project Database Exporter'`,
+            `_chemical_name_common           '${item.name}'`,
+            `_chemical_formula_structural    '${item.formula}'`,
+            `_chemical_formula_sum           '${item.formula}'`,
+            `_symmetry_space_group_name_H-M  '${item.spacegroup}'`,
+            `_cell_length_a                  ${item.a.toFixed(4)}`,
+            `_cell_length_b                  ${item.b.toFixed(4)}`,
+            `_cell_length_c                  ${item.c.toFixed(4)}`,
+            `_cell_angle_alpha               ${item.alpha.toFixed(2)}`,
+            `_cell_angle_beta                ${item.beta.toFixed(2)}`,
+            `_cell_angle_gamma               ${item.gamma.toFixed(2)}`,
+            ``,
+            `loop_`,
+            `  _atom_site_label`,
+            `  _atom_site_type_symbol`,
+            `  _atom_site_fract_x`,
+            `  _atom_site_fract_y`,
+            `  _atom_site_fract_z`,
+            `  _atom_site_occupancy`
+        ];
+
+        (item.atoms || []).forEach((atom, idx) => {
+            let sym = atom[0];
+            let type_sym = atom[1] || sym;
+            let x = atom[2] || 0.0;
+            let y = atom[3] || 0.0;
+            let z = atom[4] || 0.0;
+            let label = `${sym}${idx + 1}`;
+            lines.push(`  ${label.padEnd(6)} ${type_sym.padEnd(6)} ${x.toFixed(5).padStart(8)} ${y.toFixed(5).padStart(8)} ${z.toFixed(5).padStart(8)} 1.00`);
+        });
+
+        return lines.join("\n");
+    }
+
+    if (closePreviewBtn && previewBox) {
+        closePreviewBtn.addEventListener("click", () => {
+            previewBox.style.display = "none";
+        });
+    }
+
+    quickBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const formula = btn.getAttribute("data-formula");
+            if (searchInput && formula) {
+                searchInput.value = formula;
+                performCifSearch(formula);
+            }
+        });
+    });
+
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener("click", () => {
+            performCifSearch(searchInput.value.trim());
+        });
+        searchInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                performCifSearch(searchInput.value.trim());
+            }
+        });
+    }
+
+    if (searchInput && searchInput.value) {
+        performCifSearch(searchInput.value.trim());
+    }
+
+    function performCifSearch(query) {
+        if (!query) return;
+        if (!resultsContainer) return;
+
+        const q = query.trim().toLowerCase().replace(/\s+/g, "");
+        let items = MP_DB[q] || [];
+
+        if (items.length === 0) {
+            for (let key in MP_DB) {
+                if (key.includes(q) || q.includes(key)) {
+                    items = items.concat(MP_DB[key]);
+                }
+            }
+        }
+
+        if (q.startsWith("mp-")) {
+            for (let key in MP_DB) {
+                MP_DB[key].forEach(it => {
+                    if (it.mp_id.toLowerCase() === q && !items.includes(it)) {
+                        items.push(it);
+                    }
+                });
+            }
+        }
+
+        if (items.length === 0) {
+            items = [{
+                mp_id: `mp-gen-${q.slice(0, 6)}`,
+                formula: query.toUpperCase(),
+                name: `${query.toUpperCase()} (Materials Project Reference)`,
+                spacegroup: "P1",
+                a: 5.0, b: 5.0, c: 5.0, alpha: 90, beta: 90, gamma: 90,
+                atoms: [[query.toUpperCase(), query.toUpperCase(), 0.0, 0.0, 0.0]]
+            }];
+        }
+
+        let tableHtml = `
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.15); color: #38bdf8;">
+                            <th style="padding: 10px;">Materials Project ID</th>
+                            <th style="padding: 10px;">Nom & Formule</th>
+                            <th style="padding: 10px;">Groupe d'espace</th>
+                            <th style="padding: 10px;">Maille (a, b, c Å)</th>
+                            <th style="padding: 10px; text-align: right;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+
+        items.forEach((item, index) => {
+            const mpUrl = `https://next-gen.materialsproject.org/materials/${item.mp_id}`;
+            tableHtml += `
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                    <td style="padding: 10px; font-weight: 700; color: #38bdf8;">
+                        <a href="${mpUrl}" target="_blank" style="color: #38bdf8; text-decoration: underline;">${item.mp_id}</a>
+                    </td>
+                    <td style="padding: 10px; color: #ffffff;">
+                        <strong>${item.name}</strong>
+                    </td>
+                    <td style="padding: 10px; color: #cbd5e1;"><code>${item.spacegroup}</code></td>
+                    <td style="padding: 10px; color: #94a3b8;">a=${item.a}, b=${item.b}, c=${item.c}</td>
+                    <td style="padding: 10px; text-align: right; display: flex; gap: 8px; justify-content: flex-end;">
+                        <button class="btn btn-outline btn-view-3d-crystal" data-idx="${index}" style="padding: 5px 12px; font-size: 0.78rem; border-color: rgba(56, 189, 248, 0.4); color: #38bdf8;">
+                            <i data-lucide="eye"></i> Voir en 3D
+                        </button>
+                        <button class="btn btn-outline btn-preview-mp-cif" data-idx="${index}" style="padding: 5px 12px; font-size: 0.78rem; border-color: rgba(255, 255, 255, 0.2); color: #e2e8f0;">
+                            Aperçu .CIF
+                        </button>
+                        <button class="btn btn-primary btn-download-mp-cif" data-idx="${index}" style="padding: 5px 12px; font-size: 0.78rem; background: #38bdf8; color: #0f172a; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                            <i data-lucide="download"></i> Télécharger
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        tableHtml += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+        resultsContainer.innerHTML = tableHtml;
+        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+
+        // Bind 3D Visualizer View Event
+        document.querySelectorAll(".btn-view-3d-crystal").forEach(vBtn => {
+            vBtn.addEventListener("click", () => {
+                const idx = parseInt(vBtn.getAttribute("data-idx"));
+                const item = items[idx];
+                if (item) {
+                    updateVisualizer(item);
+                    canvas.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+            });
+        });
+
+        // Bind preview events
+        document.querySelectorAll(".btn-preview-mp-cif").forEach(pBtn => {
+            pBtn.addEventListener("click", () => {
+                const idx = parseInt(pBtn.getAttribute("data-idx"));
+                const item = items[idx];
+                if (item && previewBox && previewCode && previewTitle) {
+                    previewTitle.textContent = `Aperçu .CIF Materials Project (${item.mp_id} - ${item.formula})`;
+                    previewCode.textContent = generateCif(item);
+                    previewBox.style.display = "block";
+                }
+            });
+        });
+
+        // Bind download events
+        document.querySelectorAll(".btn-download-mp-cif").forEach(dBtn => {
+            dBtn.addEventListener("click", () => {
+                const idx = parseInt(dBtn.getAttribute("data-idx"));
+                const item = items[idx];
+                if (item) {
+                    const cifTxt = generateCif(item);
+                    const blob = new Blob([cifTxt], { type: "text/plain;charset=utf-8" });
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `MaterialsProject_${item.mp_id}_${item.formula}.cif`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+
+                    dBtn.innerHTML = `<i data-lucide="check"></i> Téléchargé`;
+                    if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+                }
+            });
+        });
+
+        // Auto-load 3D Visualizer with first result if available
+        if (items.length > 0) {
+            updateVisualizer(items[0]);
+        }
+    }
+}
+
+/* ==========================================================================
+   Thermodynamics Virtual Lab & Thermal Cycle Simulator
+   ========================================================================== */
+let thermoAnimId = null;
+let thermoIsPlaying = true;
+let thermoTime = 0;
+
+function setupThermodynamiqueSimulator() {
+    const canvas = document.getElementById("canvas-thermodynamique");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const cycleSelect = document.getElementById("thermo-cycle-select");
+    const thSlider = document.getElementById("thermo-th-slider");
+    const tcSlider = document.getElementById("thermo-tc-slider");
+    const ratioSlider = document.getElementById("thermo-ratio-slider");
+    const gasSelect = document.getElementById("thermo-gas-select");
+    const playBtn = document.getElementById("btn-thermo-play");
+    const resetBtn = document.getElementById("btn-thermo-reset");
+
+    const thValSpan = document.getElementById("thermo-th-val");
+    const tcValSpan = document.getElementById("thermo-tc-val");
+    const ratioValSpan = document.getElementById("thermo-ratio-val");
+
+    const qinValEl = document.getElementById("thermo-val-qin");
+    const qoutValEl = document.getElementById("thermo-val-qout");
+    const wnetValEl = document.getElementById("thermo-val-wnet");
+    const etaValEl = document.getElementById("thermo-val-eta");
+
+    if (playBtn) {
+        playBtn.addEventListener("click", () => {
+            thermoIsPlaying = !thermoIsPlaying;
+            playBtn.innerHTML = thermoIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Play`;
+            if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+            if (thermoIsPlaying) loop();
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+            thermoTime = 0;
+            if (thSlider) thSlider.value = "800";
+            if (tcSlider) tcSlider.value = "300";
+            if (ratioSlider) ratioSlider.value = "8";
+            updateLabels();
+            draw();
+        });
+    }
+
+    [thSlider, tcSlider, ratioSlider, cycleSelect, gasSelect].forEach(el => {
+        if (el) {
+            el.addEventListener("input", () => {
+                updateLabels();
+                draw();
+            });
+        }
+    });
+
+    function updateLabels() {
+        if (thValSpan && thSlider) thValSpan.textContent = `${thSlider.value} K`;
+        if (tcValSpan && tcSlider) tcValSpan.textContent = `${tcSlider.value} K`;
+        if (ratioValSpan && ratioSlider) ratioValSpan.textContent = `${ratioSlider.value}`;
+    }
+
+    updateLabels();
+
+    function loop() {
+        if (!thermoIsPlaying) return;
+        thermoTime += 0.025;
+        draw();
+        thermoAnimId = requestAnimationFrame(loop);
+    }
+
+    if (thermoAnimId) cancelAnimationFrame(thermoAnimId);
+    loop();
+
+    function draw() {
+        const width = canvas.width;
+        const height = canvas.height;
+        ctx.clearRect(0, 0, width, height);
+
+        const cycleType = cycleSelect ? cycleSelect.value : "carnot";
+        const Th = thSlider ? parseFloat(thSlider.value) : 800;
+        const Tc = tcSlider ? parseFloat(tcSlider.value) : 300;
+        const r = ratioSlider ? parseFloat(ratioSlider.value) : 8;
+        const gamma = gasSelect ? parseFloat(gasSelect.value) : 1.40;
+        const nR = 8.314 * 0.1;
+
+        let Qin = 0, Qout = 0, Wnet = 0, etaReal = 0;
+        let isInverseCycle = (cycleType === "frigorigene");
+
+        if (cycleType === "carnot") {
+            const V1 = 1.0, V2 = 2.2;
+            const V3 = V2 * Math.pow(Th / Tc, 1 / (gamma - 1));
+            const V4 = V1 * Math.pow(Th / Tc, 1 / (gamma - 1));
+            Qin = nR * Th * Math.log(V2 / V1) * 120;
+            Qout = nR * Tc * Math.log(V3 / V4) * 120;
+            Wnet = Qin - Qout;
+            etaReal = 1 - (Tc / Th);
+        } else if (cycleType === "otto") {
+            const T1 = Tc, T2 = T1 * Math.pow(r, gamma - 1), T3 = Th;
+            const T4 = T3 / Math.pow(r, gamma - 1);
+            const Cv = nR / (gamma - 1);
+            Qin = Cv * (T3 - T2) * 80;
+            Qout = Cv * (T4 - T1) * 80;
+            Wnet = Qin - Qout;
+            etaReal = 1 - (1 / Math.pow(r, gamma - 1));
+        } else if (cycleType === "diesel") {
+            const T1 = Tc, T2 = T1 * Math.pow(r, gamma - 1);
+            const rc = 2.0;
+            const T3 = T2 * rc;
+            const T4 = T3 * Math.pow(rc / r, gamma - 1);
+            const Cv = nR / (gamma - 1), Cp = gamma * Cv;
+            Qin = Cp * (T3 - T2) * 60;
+            Qout = Cv * (T4 - T1) * 60;
+            Wnet = Qin - Qout;
+            etaReal = 1 - (1 / Math.pow(r, gamma - 1)) * ((Math.pow(rc, gamma) - 1) / (gamma * (rc - 1)));
+        } else if (cycleType === "stirling") {
+            const Vmin = 1.0, Vmax = 2.5;
+            Qin = nR * Th * Math.log(Vmax / Vmin) * 110;
+            Qout = nR * Tc * Math.log(Vmax / Vmin) * 110;
+            Wnet = Qin - Qout;
+            etaReal = 1 - (Tc / Th);
+        } else if (cycleType === "rankine") {
+            Qin = 1850;
+            Qout = 650;
+            Wnet = Qin - Qout;
+            etaReal = Wnet / Qin;
+        } else if (cycleType === "frigorigene") {
+            Qout = 1400; // Refroidissement condenseur
+            Qin = 950;   // Évaporation source froide
+            Wnet = Qout - Qin; // Travail compresseur reçu
+            const copFroid = Qin / Wnet;
+            if (etaValEl) etaValEl.textContent = `COP (Froid) = ${copFroid.toFixed(2)}`;
+        }
+
+        if (!isInverseCycle) {
+            if (qinValEl) qinValEl.textContent = `+${Math.round(Math.abs(Qin))} J`;
+            if (qoutValEl) qoutValEl.textContent = `-${Math.round(Math.abs(Qout))} J`;
+            if (wnetValEl) wnetValEl.textContent = `+${Math.round(Math.abs(Wnet))} J`;
+            if (etaValEl) etaValEl.textContent = `${(Math.max(0, etaReal) * 100).toFixed(1)} %`;
+        } else {
+            if (qinValEl) qinValEl.textContent = `+${Math.round(Qin)} J (Évaporateur)`;
+            if (qoutValEl) qoutValEl.textContent = `-${Math.round(Qout)} J (Condenseur)`;
+            if (wnetValEl) wnetValEl.textContent = `-${Math.round(Wnet)} J (Compresseur)`;
+        }
+
+        // -------------------------------------------------------------
+        // P-V & T-S DIAGRAM PLOT (0 .. 500 px)
+        // -------------------------------------------------------------
+        const padL = 60, padR = 480, padT = 45, padB = 360;
+        const graphW = padR - padL;
+        const graphH = padB - padT;
+
+        ctx.fillStyle = "#070b14";
+        ctx.fillRect(padL, padT, graphW, graphH);
+
+        // Grid
+        ctx.strokeStyle = "rgba(255,255,255,0.06)";
+        ctx.lineWidth = 1;
+        for (let x = padL; x <= padR; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padB); ctx.stroke();
+        }
+        for (let y = padT; y <= padB; y += 40) {
+            ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padR, y); ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padB); ctx.lineTo(padR, padB); ctx.stroke();
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.fillText("Pression P (bar)", padL - 10, padT - 14);
+        ctx.fillText("Volume V (Litre)", padR - 30, padB + 20);
+
+        let curvePoints = [];
+
+        if (cycleType === "stirling") {
+            // Stirling: 2 Isothermes (A->B Th, C->D Tc) + 2 Isochores (B->C Vmax, D->A Vmin)
+            const Vmin = 1.0, Vmax = r;
+            const Pa = 32.0, Pb = Pa * (Vmin / Vmax);
+            const Pc = Pb * (Tc / Th);
+            const Pd = Pc * (Vmax / Vmin);
+
+            // A -> B (Isotherme Th)
+            for (let i = 0; i <= 30; i++) {
+                let v = Vmin + (i / 30) * (Vmax - Vmin);
+                let p = Pa * (Vmin / v);
+                curvePoints.push({ v, p, step: "1->2: Détente Isotherme (Th)" });
+            }
+            // B -> C (Isochore à Vmax)
+            for (let i = 0; i <= 30; i++) {
+                let v = Vmax;
+                let p = Pb - (i / 30) * (Pb - Pc);
+                curvePoints.push({ v, p, step: "2->3: Refroidissement Isochore (Vmax)" });
+            }
+            // C -> D (Isotherme Tc)
+            for (let i = 0; i <= 30; i++) {
+                let v = Vmax - (i / 30) * (Vmax - Vmin);
+                let p = Pc * (Vmax / v);
+                curvePoints.push({ v, p, step: "3->4: Compression Isotherme (Tc)" });
+            }
+            // D -> A (Isochore à Vmin)
+            for (let i = 0; i <= 30; i++) {
+                let v = Vmin;
+                let p = Pd + (i / 30) * (Pa - Pd);
+                curvePoints.push({ v, p, step: "4->1: Chauffage Isochore (Vmin)" });
+            }
+        } else if (cycleType === "rankine") {
+            // Rankine: Clapeyron Bell Curve + Liquid Pump -> Boiler Isobar -> Turbine Expansion -> Condenser Isobar
+            // Draw Liquid-Vapor Saturation Dome (Cloche de Clapeyron)
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(148, 163, 184, 0.4)";
+            ctx.setLineDash([4, 4]);
+            ctx.lineWidth = 1.5;
+            for (let v = 0.8; v <= 12.0; v += 0.1) {
+                let pSat = 28 * Math.exp(-Math.pow(Math.log(v / 2.5), 2) / 1.2);
+                let sx = padL + ((v - 0.5) / 12.5) * graphW;
+                let sy = padB - (pSat / 35.0) * graphH;
+                if (v === 0.8) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset dash
+
+            ctx.fillStyle = "rgba(148, 163, 184, 0.5)";
+            ctx.font = "italic 10px sans-serif";
+            ctx.fillText("Cloche de Saturation (Eau-Vapeur)", padL + 120, padT + 30);
+
+            // Points Rankine
+            const V1 = 1.0, V2 = 1.05, V3 = 8.5, V4 = 10.5;
+            const P1 = 3.0, P2 = 28.0, P3 = 28.0, P4 = 3.0;
+
+            // 1 -> 2 (Pompe: Compression liquide quasi-verticale)
+            for (let i = 0; i <= 15; i++) {
+                let v = V1 + (i / 15) * (V2 - V1);
+                let p = P1 + (i / 15) * (P2 - P1);
+                curvePoints.push({ v, p, step: "1->2: Pompe (Compression liquide)" });
+            }
+            // 2 -> 3 (Chaudière: Chauffage & Vaporisation Isobare à Phis)
+            for (let i = 0; i <= 40; i++) {
+                let v = V2 + (i / 40) * (V3 - V2);
+                let p = P3;
+                curvePoints.push({ v, p, step: "2->3: Chaudière (Vaporisation Isobare)" });
+            }
+            // 3 -> 4 (Turbine: Détente Isentropique)
+            for (let i = 0; i <= 35; i++) {
+                let v = V3 + (i / 35) * (V4 - V3);
+                let p = P3 * Math.pow(V3 / v, 1.25);
+                curvePoints.push({ v, p, step: "3->4: Turbine (Détente vapeur)" });
+            }
+            // 4 -> 1 (Condenseur: Condensation Isobare)
+            for (let i = 0; i <= 30; i++) {
+                let v = V4 - (i / 30) * (V4 - V1);
+                let p = P1;
+                curvePoints.push({ v, p, step: "4->1: Condenseur (Condensation Isobare)" });
+            }
+        } else if (cycleType === "frigorigene") {
+            // Frigorifique: Cycle Inverse parcouru dans le sens ANTI-HORAIRE (1 -> 2 -> 3 -> 4 -> 1)
+            const V1 = 9.0, V2 = 2.5, V3 = 1.2, V4 = 3.5;
+            const P1 = 4.0, P2 = 24.0, P3 = 24.0, P4 = 4.0;
+
+            // 1 -> 2 (Compresseur: Compression Isentropique 1->2)
+            for (let i = 0; i <= 35; i++) {
+                let t = i / 35;
+                let v = V1 - t * (V1 - V2);
+                let p = P1 * Math.pow(V1 / v, 1.2);
+                curvePoints.push({ v, p, step: "1->2: Compresseur (Compression)" });
+            }
+            // 2 -> 3 (Condenseur: Refroidissement Isobare 2->3)
+            for (let i = 0; i <= 30; i++) {
+                let t = i / 30;
+                let v = V2 - t * (V2 - V3);
+                let p = P2;
+                curvePoints.push({ v, p, step: "2->3: Condenseur (Condensation à Th)" });
+            }
+            // 3 -> 4 (Détendeur: Détente Isenthalpique 3->4)
+            for (let i = 0; i <= 25; i++) {
+                let t = i / 25;
+                let v = V3 + t * (V4 - V3);
+                let p = P3 - t * (P3 - P4);
+                curvePoints.push({ v, p, step: "3->4: Détendeur (Détente)" });
+            }
+            // 4 -> 1 (Évaporateur: Évaporation Isobare 4->1)
+            for (let i = 0; i <= 30; i++) {
+                let t = i / 30;
+                let v = V4 + t * (V1 - V4);
+                let p = P4;
+                curvePoints.push({ v, p, step: "4->1: Évaporateur (Évaporation à Tc)" });
+            }
+        } else if (cycleType === "carnot") {
+            const Va = 1.0, Vb = 2.2;
+            const Vc = Vb * Math.pow(Th / Tc, 1 / (gamma - 1));
+            const Vd = Va * Math.pow(Th / Tc, 1 / (gamma - 1));
+            const Pa = 32.0, Pb = Pa * (Va / Vb);
+            const Pc = Pb * Math.pow(Vb / Vc, gamma);
+            const Pd = Pa * Math.pow(Va / Vd, gamma);
+
+            for (let i = 0; i <= 30; i++) curvePoints.push({ v: Va + (i / 30) * (Vb - Va), p: Pa * (Va / (Va + (i / 30) * (Vb - Va))) });
+            for (let i = 0; i <= 30; i++) { let v = Vb + (i / 30) * (Vc - Vb); curvePoints.push({ v, p: Pb * Math.pow(Vb / v, gamma) }); }
+            for (let i = 0; i <= 30; i++) curvePoints.push({ v: Vc - (i / 30) * (Vc - Vd), p: Pc * (Vc / (Vc - (i / 30) * (Vc - Vd))) });
+            for (let i = 0; i <= 30; i++) { let v = Vd - (i / 30) * (Vd - Va); curvePoints.push({ v, p: Pd * Math.pow(Vd / v, gamma) }); }
+        } else if (cycleType === "otto") {
+            const Va = r, Vb = 1.0;
+            const Pa = 1.5, Pb = Pa * Math.pow(r, gamma);
+            const Pc = Pb * (Th / (Tc * Math.pow(r, gamma - 1)));
+            const Pd = Pc * Math.pow(1 / r, gamma);
+
+            for (let i = 0; i <= 30; i++) { let v = Va - (i / 30) * (Va - Vb); curvePoints.push({ v, p: Pa * Math.pow(Va / v, gamma) }); }
+            for (let i = 0; i <= 30; i++) curvePoints.push({ v: Vb, p: Pb + (i / 30) * (Pc - Pb) });
+            for (let i = 0; i <= 30; i++) { let v = Vb + (i / 30) * (Va - Vb); curvePoints.push({ v, p: Pc * Math.pow(Vb / v, gamma) }); }
+            for (let i = 0; i <= 30; i++) curvePoints.push({ v: Va, p: Pd - (i / 30) * (Pd - Pa) });
+        } else if (cycleType === "diesel") {
+            const Va = r, Vb = 1.0, rc = 2.0, Vc = Vb * rc;
+            const Pa = 1.5, Pb = Pa * Math.pow(r, gamma);
+            const Pc = Pb;
+            const Pd = Pc * Math.pow(Vc / Va, gamma);
+
+            for (let i = 0; i <= 30; i++) { let v = Va - (i / 30) * (Va - Vb); curvePoints.push({ v, p: Pa * Math.pow(Va / v, gamma) }); }
+            for (let i = 0; i <= 30; i++) curvePoints.push({ v: Vb + (i / 30) * (Vc - Vb), p: Pc });
+            for (let i = 0; i <= 30; i++) { let v = Vc + (i / 30) * (Va - Vc); curvePoints.push({ v, p: Pc * Math.pow(Vc / v, gamma) }); }
+            for (let i = 0; i <= 30; i++) curvePoints.push({ v: Va, p: Pd - (i / 30) * (Pd - Pa) });
+        }
+
+        // Screen mapping
+        const vMinPlot = 0.5, vMaxPlot = Math.max(12.5, r + 1);
+        const pMinPlot = 0, pMaxPlot = 38.0;
+
+        const screenPts = curvePoints.map(pt => ({
+            sx: padL + ((pt.v - vMinPlot) / (vMaxPlot - vMinPlot)) * graphW,
+            sy: padB - ((pt.p - pMinPlot) / (pMaxPlot - pMinPlot)) * graphH,
+            v: pt.v,
+            p: pt.p,
+            step: pt.step
+        }));
+
+        // Fill area
+        ctx.beginPath();
+        screenPts.forEach((pt, idx) => {
+            if (idx === 0) ctx.moveTo(pt.sx, pt.sy);
+            else ctx.lineTo(pt.sx, pt.sy);
+        });
+        ctx.closePath();
+        ctx.fillStyle = isInverseCycle ? "rgba(56, 189, 248, 0.15)" : "rgba(239, 68, 68, 0.18)";
+        ctx.fill();
+
+        // Contour
+        ctx.strokeStyle = isInverseCycle ? "#38bdf8" : "#ef4444";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // Direction Arrows on Cycle Loop
+        const arrowIndices = [15, 45, 75, 105];
+        arrowIndices.forEach(idx => {
+            if (idx < screenPts.length - 1) {
+                let p1 = screenPts[idx], p2 = screenPts[idx + 1];
+                let angle = Math.atan2(p2.sy - p1.sy, p2.sx - p1.sx);
+                ctx.save();
+                ctx.translate(p1.sx, p1.sy);
+                ctx.rotate(angle);
+                ctx.fillStyle = isInverseCycle ? "#38bdf8" : "#ef4444";
+                ctx.beginPath();
+                ctx.moveTo(0, 0); ctx.lineTo(-8, -4); ctx.lineTo(-8, 4); ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        });
+
+        // Animated State Dot
+        let loopTime = (thermoTime * 0.8) % 1.0;
+        let activeIdx = Math.floor(loopTime * screenPts.length);
+        let currStatePt = screenPts[activeIdx % screenPts.length];
+
+        if (currStatePt) {
+            ctx.beginPath();
+            ctx.arc(currStatePt.sx, currStatePt.sy, 7, 0, Math.PI * 2);
+            ctx.fillStyle = "#facc15";
+            ctx.shadowColor = "#facc15";
+            ctx.shadowBlur = 14;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText(`P=${currStatePt.p.toFixed(1)}b, V=${currStatePt.v.toFixed(1)}L`, currStatePt.sx + 10, currStatePt.sy - 10);
+
+            if (currStatePt.step) {
+                ctx.fillStyle = "#facc15";
+                ctx.font = "bold 11px 'Outfit', sans-serif";
+                ctx.fillText(currStatePt.step, padL + 10, padB - 15);
+            }
+        }
+
+        // -------------------------------------------------------------
+        // RIGHT HALF: ANIMATED PISTON-CYLINDER / MACHINE SYSTEM (540 .. 880 px)
+        // -------------------------------------------------------------
+        const cylX = 560, cylY = 80, cylW = 260, cylH = 250;
+
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(cylX, cylY, cylW, cylH);
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(cylX, cylY, cylW, cylH);
+
+        let normV = currStatePt ? (currStatePt.v - vMinPlot) / (vMaxPlot - vMinPlot) : 0.5;
+        let pistonY = cylY + 35 + normV * (cylH - 90);
+
+        let tempR = Math.round(239 * (1 - normV) + 56 * normV);
+        let tempG = Math.round(68 * (1 - normV) + 189 * normV);
+        let tempB = Math.round(68 * (1 - normV) + 248 * normV);
+
+        const gasGrad = ctx.createLinearGradient(cylX, cylY, cylX, pistonY);
+        gasGrad.addColorStop(0, `rgba(${tempR}, ${tempG}, ${tempB}, 0.85)`);
+        gasGrad.addColorStop(1, `rgba(${tempR}, ${tempG}, ${tempB}, 0.25)`);
+
+        ctx.fillStyle = gasGrad;
+        ctx.fillRect(cylX + 3, cylY + 3, cylW - 6, pistonY - cylY - 3);
+
+        ctx.fillStyle = "#475569";
+        ctx.fillRect(cylX + 4, pistonY, cylW - 8, 20);
+        ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2;
+        ctx.strokeRect(cylX + 4, pistonY, cylW - 8, 20);
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.fillRect(cylX + cylW / 2 - 8, pistonY + 20, 16, cylH - (pistonY - cylY));
+
+        ctx.fillStyle = "#ef4444"; ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.fillText(isInverseCycle ? "❄️ Q_evap (Extraction)" : "🔥 Q_in (Source Chaude)", cylX - 65, cylY + 35);
+        ctx.fillStyle = "#38bdf8";
+        ctx.fillText(isInverseCycle ? "🔥 Q_cond (Rejet chaud)" : "❄️ Q_out (Source Froide)", cylX - 65, cylY + 115);
+        ctx.fillStyle = "#10b981";
+        ctx.fillText(isInverseCycle ? "⚡ W_reçu (Compresseur)" : "⚙️ W_utile (Moteur)", cylX + cylW + 10, pistonY + 10);
+    }
+}
 
 
 
@@ -14672,3 +15882,1062 @@ function drawXRDCanvas() {
 
 
 
+
+
+
+/* ==========================================================================
+   Transformations Thermodynamiques (Réversible, Irréversible & Quasistatique)
+   ========================================================================== */
+let transAnimId = null;
+let transIsPlaying = true;
+let transTime = 0;
+
+function setupTransformationsThermoSimulator() {
+    const canvas = document.getElementById("canvas-transformations-thermo");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const modeSelect = document.getElementById("trans-mode-select");
+    const speedSlider = document.getElementById("trans-speed-slider");
+    const frictionSlider = document.getElementById("trans-friction-slider");
+    const tempSlider = document.getElementById("trans-temp-slider");
+
+    const compressBtn = document.getElementById("btn-trans-compress");
+    const expandBtn = document.getElementById("btn-trans-expand");
+    const cycleBtn = document.getElementById("btn-trans-cycle");
+    const resetBtn = document.getElementById("btn-trans-reset");
+    const demoBtn = document.getElementById("btn-trans-demo");
+
+    const speedValSpan = document.getElementById("trans-speed-val");
+    const frictionValSpan = document.getElementById("trans-friction-val");
+    const tempValSpan = document.getElementById("trans-temp-val");
+
+    const valWEl = document.getElementById("trans-val-w");
+    const valQEl = document.getElementById("trans-val-q");
+    const valScreeEl = document.getElementById("trans-val-scree");
+    const valWperduEl = document.getElementById("trans-val-wperdu");
+
+    const subWEl = document.getElementById("trans-sub-w");
+    const subQEl = document.getElementById("trans-sub-q");
+    const subScreeEl = document.getElementById("trans-sub-scree");
+    const subWperduEl = document.getElementById("trans-sub-wperdu");
+
+    // State Variables
+    let V1 = 2.0; // Litres initial
+    let V2 = 1.0; // Litres target when compressed
+    let V_current = 2.0;
+    let P_int = 1.0; // bar
+    let P_ext = 1.0; // bar
+    let T_gas = 300; // K
+    
+    let isMoving = false;
+    let moveDirection = 0; // +1 compress, -1 expand, 0 idle
+    let isCycleActive = false;
+    let cyclePhase = 0; // 0: initial, 1: compress, 2: expand, 3: completed
+    let moveProgress = 0; // 0 to 1
+
+    let W_total = 0;
+    let Q_total = 0;
+    let S_cree = 0;
+    let W_perdu = 0;
+
+    let pathPointsForward = []; // [{v, p}]
+    let pathPointsBackward = [];
+
+    // Gas Particles
+    const numParticles = 50;
+    let particles = [];
+    for (let i = 0; i < numParticles; i++) {
+        particles.push({
+            x: Math.random(),
+            y: Math.random(),
+            vx: (Math.random() - 0.5) * 2,
+            vy: (Math.random() - 0.5) * 2
+        });
+    }
+
+    if (modeSelect) {
+        modeSelect.onchange = () => {
+            const m = modeSelect.value;
+            if (m === "reversible") {
+                if (speedSlider) speedSlider.value = "50";
+                if (frictionSlider) frictionSlider.value = "0";
+            } else if (m === "quasistatic-friction") {
+                if (speedSlider) speedSlider.value = "50";
+                if (frictionSlider) frictionSlider.value = "4.0";
+            } else if (m === "irreversible-brutal") {
+                if (speedSlider) speedSlider.value = "1";
+                if (frictionSlider) frictionSlider.value = "1.0";
+            } else if (m === "joule-gay-lussac") {
+                if (speedSlider) speedSlider.value = "1";
+                if (frictionSlider) frictionSlider.value = "0";
+            }
+            resetSim();
+            runDemoCycle();
+        };
+    }
+
+    [speedSlider, frictionSlider, tempSlider].forEach(el => {
+        if (el) el.oninput = updateLabels;
+    });
+
+    function updateLabels() {
+        if (speedValSpan && speedSlider) {
+            const val = parseInt(speedSlider.value);
+            if (val === 1) speedValSpan.textContent = "1 bloc (Brutal / Irréversible)";
+            else if (val < 30) speedValSpan.textContent = `${val} grains (Moyen)`;
+            else speedValSpan.textContent = `${val} grains (Lent / Quasistatique)`;
+        }
+        if (frictionValSpan && frictionSlider) frictionValSpan.textContent = `${parseFloat(frictionSlider.value).toFixed(1)} N`;
+        if (tempValSpan && tempSlider) tempValSpan.textContent = `${tempSlider.value} K`;
+    }
+    updateLabels();
+
+    function resetSim() {
+        V_current = 2.0;
+        P_int = 1.0;
+        P_ext = 1.0;
+        T_gas = tempSlider ? parseFloat(tempSlider.value) : 300;
+        isMoving = false;
+        moveDirection = 0;
+        isCycleActive = false;
+        cyclePhase = 0;
+        moveProgress = 0;
+        W_total = 0;
+        Q_total = 0;
+        S_cree = 0;
+        W_perdu = 0;
+        pathPointsForward = [{ v: V_current, p: P_int }];
+        pathPointsBackward = [];
+        updateUI();
+    }
+
+    if (resetBtn) resetBtn.onclick = resetSim;
+
+    if (compressBtn) {
+        compressBtn.onclick = () => {
+            if (isMoving) return;
+            startMove(1);
+        };
+    }
+
+    if (expandBtn) {
+        expandBtn.onclick = () => {
+            if (isMoving) return;
+            startMove(-1);
+        };
+    }
+
+    function runDemoCycle() {
+        if (isMoving) return;
+        resetSim();
+        isCycleActive = true;
+        cyclePhase = 1;
+        startMove(1);
+    }
+
+    if (cycleBtn) cycleBtn.onclick = runDemoCycle;
+    if (demoBtn) demoBtn.onclick = runDemoCycle;
+
+    function startMove(dir) {
+        isMoving = true;
+        moveDirection = dir;
+        moveProgress = 0;
+    }
+
+    function loop() {
+        transTime += 0.02;
+        updatePhysics();
+        draw();
+        transAnimId = requestAnimationFrame(loop);
+    }
+
+    if (transAnimId) cancelAnimationFrame(transAnimId);
+    loop();
+
+    // Auto-start initial demo cycle
+    setTimeout(() => {
+        if (!isMoving && V_current === 2.0) {
+            runDemoCycle();
+        }
+    }, 400);
+
+    function updatePhysics() {
+        const mode = modeSelect ? modeSelect.value : "reversible";
+        const speedVal = speedSlider ? parseInt(speedSlider.value) : 50;
+        const mu = frictionSlider ? parseFloat(frictionSlider.value) : 0;
+        const T0 = tempSlider ? parseFloat(tempSlider.value) : 300;
+
+        let stepRate = 0.003 * (105 - speedVal);
+        if (mode === "irreversible-brutal" || mode === "joule-gay-lussac") {
+            stepRate = 0.035;
+        }
+
+        if (isMoving) {
+            moveProgress += stepRate;
+            if (moveProgress > 1) moveProgress = 1;
+
+            let targetV = (moveDirection === 1) ? V2 : V1;
+            let startV = (moveDirection === 1) ? V1 : V2;
+
+            if (mode === "reversible") {
+                V_current = startV + (targetV - startV) * moveProgress;
+                P_int = (1.0 * V1) / V_current;
+                P_ext = P_int;
+                T_gas = T0;
+                
+                let W_calc = -1.0 * V1 * 100 * Math.log(V_current / startV);
+                if (moveDirection === 1) W_total = Math.abs(W_calc);
+                else W_total = -Math.abs(W_calc);
+                Q_total = -W_total;
+                S_cree = 0;
+                W_perdu = 0;
+
+                if (moveDirection === 1) {
+                    pathPointsForward.push({ v: V_current, p: P_int });
+                } else {
+                    pathPointsBackward.push({ v: V_current, p: P_int });
+                }
+            } else if (mode === "quasistatic-friction") {
+                V_current = startV + (targetV - startV) * moveProgress;
+                P_int = (1.0 * V1) / V_current;
+                const frotP = (mu * 0.05);
+                P_ext = (moveDirection === 1) ? P_int - frotP : P_int + frotP;
+                T_gas = T0;
+
+                let W_rev_step = 1.0 * V1 * 100 * Math.log(V1 / V_current);
+                let W_frot_step = Math.abs(V_current - startV) * frotP * 100;
+                W_total = (moveDirection === 1) ? (W_rev_step + W_frot_step) : (-W_rev_step + W_frot_step);
+                Q_total = -W_total;
+                S_cree = W_frot_step / T0;
+                W_perdu = T0 * S_cree;
+
+                if (moveDirection === 1) {
+                    pathPointsForward.push({ v: V_current, p: P_ext });
+                } else {
+                    pathPointsBackward.push({ v: V_current, p: P_ext });
+                }
+            } else if (mode === "irreversible-brutal") {
+                V_current = startV + (targetV - startV) * moveProgress;
+                let P_target = (1.0 * V1) / targetV;
+                P_ext = P_target;
+                
+                let bounce = Math.sin(moveProgress * Math.PI * 6) * (1 - moveProgress) * 0.4;
+                P_int = ((1.0 * V1) / V_current) + bounce;
+                T_gas = T0 + bounce * 50;
+
+                let W_irrev = P_ext * (startV - V_current) * 100;
+                W_total = W_irrev;
+                Q_total = -W_total;
+
+                let DeltaS_gas = 1.0 * 100 * Math.log(V_current / startV);
+                let S_echange = Q_total / T0;
+                S_cree = Math.abs(DeltaS_gas - S_echange) + 0.15;
+                W_perdu = T0 * S_cree;
+
+                if (moveDirection === 1) {
+                    pathPointsForward.push({ v: V_current, p: P_int });
+                } else {
+                    pathPointsBackward.push({ v: V_current, p: P_int });
+                }
+            } else if (mode === "joule-gay-lussac") {
+                V_current = startV + (targetV - startV) * moveProgress;
+                P_ext = 0;
+                P_int = (1.0 * V1) / V_current;
+                T_gas = T0;
+
+                W_total = 0;
+                Q_total = 0;
+                let DeltaS_gas = 1.0 * 8.314 * Math.log(V_current / startV);
+                S_cree = Math.abs(DeltaS_gas);
+                W_perdu = T0 * S_cree;
+
+                if (moveDirection === 1) {
+                    pathPointsForward.push({ v: V_current, p: P_int });
+                } else {
+                    pathPointsBackward.push({ v: V_current, p: P_int });
+                }
+            }
+
+            if (moveProgress >= 1) {
+                isMoving = false;
+                if (isCycleActive) {
+                    if (cyclePhase === 1) {
+                        cyclePhase = 2;
+                        setTimeout(() => startMove(-1), 600);
+                    } else if (cyclePhase === 2) {
+                        isCycleActive = false;
+                        cyclePhase = 3;
+                    }
+                }
+            }
+        }
+
+        let tempFactor = Math.sqrt(T_gas / 300);
+        for (let p of particles) {
+            p.x += p.vx * 0.01 * tempFactor;
+            p.y += p.vy * 0.01 * tempFactor;
+
+            if (p.x < 0) { p.x = 0; p.vx = -p.vx; }
+            if (p.x > 1) { p.x = 1; p.vx = -p.vx; }
+            if (p.y < 0) { p.y = 0; p.vy = -p.vy; }
+            if (p.y > 1) { p.y = 1; p.vy = -p.vy; }
+        }
+
+        updateUI();
+    }
+
+    function updateUI() {
+        const mode = modeSelect ? modeSelect.value : "reversible";
+
+        if (valWEl) valWEl.textContent = `${W_total >= 0 ? '+' : ''}${W_total.toFixed(1)} J`;
+        if (valQEl) valQEl.textContent = `${Q_total >= 0 ? '+' : ''}${Q_total.toFixed(1)} J`;
+        if (valScreeEl) {
+            valScreeEl.textContent = `${S_cree.toFixed(3)} J/K`;
+            if (S_cree < 0.01) {
+                valScreeEl.style.color = "#10b981";
+                if (subScreeEl) {
+                    subScreeEl.textContent = "Réversible (S_créée = 0)";
+                    subScreeEl.style.color = "#10b981";
+                }
+            } else {
+                valScreeEl.style.color = "#ef4444";
+                if (subScreeEl) {
+                    subScreeEl.textContent = "Irréversible (S_créée > 0)";
+                    subScreeEl.style.color = "#ef4444";
+                }
+            }
+        }
+        if (valWperduEl) valWperduEl.textContent = `${W_perdu.toFixed(1)} J`;
+    }
+
+    function draw() {
+        const width = canvas.width;
+        const height = canvas.height;
+        ctx.clearRect(0, 0, width, height);
+
+        const mode = modeSelect ? modeSelect.value : "reversible";
+        const speedVal = speedSlider ? parseInt(speedSlider.value) : 50;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(0, 0, width, height);
+
+        const appW = 420;
+        const appH = height;
+
+        // -----------------------------------------------------------------
+        // LEFT SIDE: PISTON & CYLINDER APPARATUS
+        // -----------------------------------------------------------------
+        const cylX = 60, cylY = 80, cylW = 200, maxCylH = 280;
+        const minCylH = 140;
+        const currentCylH = minCylH + ((V_current - 1.0) / 1.0) * (maxCylH - minCylH);
+        const pistonY = cylY + (maxCylH - currentCylH);
+
+        // Thermal Bath / Reservoir background
+        ctx.fillStyle = "rgba(56, 189, 248, 0.08)";
+        ctx.fillRect(cylX - 25, cylY - 20, cylW + 50, maxCylH + 40);
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
+        ctx.strokeRect(cylX - 25, cylY - 20, cylW + 50, maxCylH + 40);
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.fillText(`Thermostat T₀ = ${tempSlider ? tempSlider.value : 300} K`, cylX - 15, cylY - 4);
+
+        // Cylinder Body
+        ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+        ctx.fillRect(cylX, pistonY, cylW, currentCylH);
+        
+        ctx.strokeStyle = "#94a3b8";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(cylX, cylY);
+        ctx.lineTo(cylX, cylY + maxCylH);
+        ctx.lineTo(cylX + cylW, cylY + maxCylH);
+        ctx.lineTo(cylX + cylW, cylY);
+        ctx.stroke();
+
+        // Gas Particles
+        ctx.fillStyle = (mode === "irreversible-brutal" && isMoving) ? "#f87171" : "#38bdf8";
+        for (let p of particles) {
+            let px = cylX + 10 + p.x * (cylW - 20);
+            let py = pistonY + 10 + p.y * (currentCylH - 20);
+            ctx.beginPath();
+            ctx.arc(px, py, 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Irreversible Shockwave front
+        if (mode === "irreversible-brutal" && isMoving) {
+            ctx.strokeStyle = "rgba(239, 68, 68, 0.8)";
+            ctx.lineWidth = 4;
+            let waveY = pistonY + 20 + Math.sin(transTime * 20) * 15;
+            ctx.beginPath();
+            ctx.moveTo(cylX + 5, waveY);
+            ctx.lineTo(cylX + cylW - 5, waveY);
+            ctx.stroke();
+
+            ctx.fillStyle = "#ef4444";
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText("⚡ Onde de choc / Gradient Non-Équilibre", cylX + 10, waveY - 6);
+        }
+
+        // Piston Plate
+        const pistonH = 20;
+        ctx.fillStyle = "#475569";
+        ctx.fillRect(cylX + 2, pistonY - pistonH, cylW - 4, pistonH);
+        ctx.strokeStyle = "#e2e8f0";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(cylX + 2, pistonY - pistonH, cylW - 4, pistonH);
+
+        // Piston Rod
+        ctx.fillStyle = "#64748b";
+        ctx.fillRect(cylX + cylW / 2 - 8, 30, 16, pistonY - pistonH - 30);
+
+        // Weights / Sand Grains on Piston
+        if (mode === "reversible" || mode === "quasistatic-friction") {
+            ctx.fillStyle = "#facc15";
+            let grainsCount = Math.round(speedVal * (3.0 - V_current));
+            for (let i = 0; i < grainsCount; i++) {
+                let gx = cylX + 20 + (i % 15) * 11;
+                let gy = pistonY - pistonH - 6 - Math.floor(i / 15) * 8;
+                ctx.beginPath();
+                ctx.arc(gx, gy, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            ctx.fillStyle = "#facc15";
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText(`Sable Quasistatique (${grainsCount} grains)`, cylX + 20, pistonY - pistonH - 35);
+        } else if (mode === "irreversible-brutal") {
+            ctx.fillStyle = "#ef4444";
+            ctx.fillRect(cylX + 40, pistonY - pistonH - 40, 120, 38);
+            ctx.strokeStyle = "#ffffff";
+            ctx.strokeRect(cylX + 40, pistonY - pistonH - 40, 120, 38);
+
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 12px 'Outfit', sans-serif";
+            ctx.fillText("Masse Monobloc M", cylX + 48, pistonY - pistonH - 16);
+        } else if (mode === "joule-gay-lussac") {
+            ctx.fillStyle = "#a855f7";
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText("Détente Libre dans le Vide (Pext = 0)", cylX + 10, pistonY - pistonH - 15);
+        }
+
+        // Friction Spark particles
+        const mu = frictionSlider ? parseFloat(frictionSlider.value) : 0;
+        if (mu > 0 && isMoving) {
+            ctx.fillStyle = "#f97316";
+            for (let i = 0; i < 6; i++) {
+                let fy = pistonY - 10 + (Math.random() - 0.5) * 20;
+                ctx.fillRect(cylX - 4, fy, 4, 4);
+                ctx.fillRect(cylX + cylW, fy, 4, 4);
+            }
+        }
+
+        // Pressure Sensors (P_int vs P_ext)
+        ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
+        ctx.fillRect(cylX - 35, cylY + maxCylH + 10, cylW + 70, 32);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.strokeRect(cylX - 35, cylY + maxCylH + 10, cylW + 70, 32);
+
+        ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.fillStyle = "#38bdf8";
+        ctx.fillText(`P_int = ${P_int.toFixed(2)} bar`, cylX - 25, cylY + maxCylH + 30);
+
+        ctx.fillStyle = "#facc15";
+        ctx.fillText(`P_ext = ${P_ext.toFixed(2)} bar`, cylX + 85, cylY + maxCylH + 30);
+
+        let deltaP = Math.abs(P_int - P_ext);
+        ctx.fillStyle = deltaP < 0.05 ? "#10b981" : "#ef4444";
+        ctx.fillText(`|ΔP| = ${deltaP.toFixed(2)}`, cylX + 175, cylY + maxCylH + 30);
+
+        // -----------------------------------------------------------------
+        // -----------------------------------------------------------------
+        // RIGHT SIDE: REAL-TIME P-V DIAGRAM & HYSTERESIS LOOP
+        // -----------------------------------------------------------------
+        const padL = 460, padR = 860, padT = 45, padB = 370;
+        const graphW = padR - padL;
+        const graphH = padB - padT;
+
+        ctx.fillStyle = "#070b14";
+        ctx.fillRect(padL, padT, graphW, graphH);
+
+        // Grid
+        ctx.strokeStyle = "rgba(255,255,255,0.06)";
+        ctx.lineWidth = 1;
+        for (let x = padL; x <= padR; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padB); ctx.stroke();
+        }
+        for (let y = padT; y <= padB; y += 40) {
+            ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(padR, y); ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padB); ctx.lineTo(padR, padB); ctx.stroke();
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.fillText("Pression P (bar)", padL - 10, padT - 12);
+        ctx.fillText("Volume V (L)", padR - 30, padB + 20);
+
+        function mapV(v) { return padL + ((v - 0.5) / 2.0) * graphW; }
+        function mapP(p) { return padB - (p / 2.8) * graphH; }
+
+        // State Points A (Initial: 2.0L, 1.0bar) and B (Compressed: 1.0L, 2.0bar)
+        const Ax = mapV(2.0), Ay = mapP(1.0);
+        const Bx = mapV(1.0), By = mapP(2.0);
+
+        // Draw State Points A and B
+        [{x: Ax, y: Ay, label: "A (2.0 L, 1.0 bar)"}, {x: Bx, y: By, label: "B (1.0 L, 2.0 bar)"}].forEach(pt => {
+            ctx.fillStyle = "#38bdf8";
+            ctx.beginPath(); ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2); ctx.fill();
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText(pt.label, pt.x + 8, pt.y - 4);
+        });
+
+        // Theoretical Reversible Isotherm P(V) reference curve (Dashed Cyan)
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.35)";
+        ctx.setLineDash([4, 4]);
+        for (let v = 0.8; v <= 2.2; v += 0.05) {
+            let p = (1.0 * V1) / v;
+            let sx = mapV(v), sy = mapP(p);
+            if (v === 0.8) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "rgba(56, 189, 248, 0.5)";
+        ctx.font = "italic 10px sans-serif";
+        ctx.fillText("Isotherme Rév. Théorique P·V = cte", padL + 10, padT + 20);
+
+        // MODE SPECIFIC DIAGRAM RENDERING
+        if (mode === "reversible") {
+            // MODE 1: REVERSIBLE ISOTHERM
+            ctx.fillStyle = "rgba(56, 189, 248, 0.15)";
+            ctx.beginPath();
+            ctx.moveTo(mapV(V1), mapP(0));
+            for (let v = V1; v >= V_current; v -= 0.02) {
+                ctx.lineTo(mapV(v), mapP(V1 / v));
+            }
+            ctx.lineTo(mapV(V_current), mapP(0));
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 3;
+            for (let v = 0.8; v <= 2.2; v += 0.05) {
+                let p = (1.0 * V1) / v;
+                let sx = mapV(v), sy = mapP(p);
+                if (v === 0.8) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+            }
+            ctx.stroke();
+
+            ctx.fillStyle = "#10b981";
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText("✓ Aller & Retour confondus sur l'isotherme", padL + 10, padB - 20);
+            ctx.fillText("✓ Aire d'Hystérésis = 0 (W_cycle = 0, S_créée = 0)", padL + 10, padB - 6);
+
+        } else if (mode === "quasistatic-friction") {
+            // MODE 2: QUASISTATIC WITH FRICTION
+            const frotP = mu * 0.05;
+
+            if (pathPointsForward.length > 1) {
+                ctx.beginPath();
+                ctx.strokeStyle = "#f97316";
+                ctx.lineWidth = 3;
+                for (let i = 0; i < pathPointsForward.length; i++) {
+                    let pt = pathPointsForward[i];
+                    let sx = mapV(pt.v), sy = mapP(pt.p);
+                    if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+                }
+                ctx.stroke();
+            }
+
+            if (pathPointsBackward.length > 1) {
+                ctx.beginPath();
+                ctx.strokeStyle = "#c084fc";
+                ctx.lineWidth = 3;
+                for (let i = 0; i < pathPointsBackward.length; i++) {
+                    let pt = pathPointsBackward[i];
+                    let sx = mapV(pt.v), sy = mapP(pt.p);
+                    if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+                }
+                ctx.stroke();
+
+                ctx.fillStyle = "rgba(239, 68, 68, 0.25)";
+                ctx.beginPath();
+                for (let i = 0; i < pathPointsForward.length; i++) {
+                    let pt = pathPointsForward[i];
+                    if (i === 0) ctx.moveTo(mapV(pt.v), mapP(pt.p)); else ctx.lineTo(mapV(pt.v), mapP(pt.p));
+                }
+                for (let i = pathPointsBackward.length - 1; i >= 0; i--) {
+                    let pt = pathPointsBackward[i];
+                    ctx.lineTo(mapV(pt.v), mapP(pt.p));
+                }
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            ctx.fillStyle = "#ef4444";
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText("⚠ Quasistatique avec frottements (Hystérésis)", padL + 10, padB - 20);
+            ctx.fillText("⚠ Aire du cycle = W_perdu = T₀·S_créée > 0", padL + 10, padB - 6);
+
+        } else if (mode === "irreversible-brutal") {
+            // MODE 3: BRUTAL IRREVERSIBLE (RECTANGULAR HYSTERESIS LOOP)
+            const P_high = 2.0;
+            const P_low = 1.0;
+
+            ctx.fillStyle = "rgba(239, 68, 68, 0.15)";
+            ctx.fillRect(mapV(1.0), mapP(P_high), mapV(2.0) - mapV(1.0), mapP(0) - mapP(P_high));
+
+            ctx.beginPath();
+            ctx.strokeStyle = "#ef4444";
+            ctx.lineWidth = 3;
+            ctx.moveTo(mapV(2.0), mapP(P_high));
+            ctx.lineTo(mapV(1.0), mapP(P_high));
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "#f97316";
+            ctx.lineWidth = 3;
+            ctx.moveTo(mapV(1.0), mapP(P_low));
+            ctx.lineTo(mapV(2.0), mapP(P_low));
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(239, 68, 68, 0.6)";
+            ctx.setLineDash([4, 4]);
+            ctx.moveTo(mapV(1.0), mapP(P_low)); ctx.lineTo(mapV(1.0), mapP(P_high));
+            ctx.moveTo(mapV(2.0), mapP(P_low)); ctx.lineTo(mapV(2.0), mapP(P_high));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            if (pathPointsBackward.length > 1) {
+                ctx.fillStyle = "rgba(239, 68, 68, 0.35)";
+                ctx.fillRect(mapV(1.0), mapP(P_high), mapV(2.0) - mapV(1.0), mapP(P_low) - mapP(P_high));
+            }
+
+            if (pathPointsForward.length > 1) {
+                ctx.beginPath();
+                ctx.strokeStyle = "rgba(248, 113, 113, 0.8)";
+                ctx.setLineDash([2, 2]);
+                for (let i = 0; i < pathPointsForward.length; i++) {
+                    let pt = pathPointsForward[i];
+                    if (i === 0) ctx.moveTo(mapV(pt.v), mapP(pt.p)); else ctx.lineTo(mapV(pt.v), mapP(pt.p));
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            ctx.fillStyle = "#ef4444";
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText("⚡ Cycle Irréversible Brutal (Pext constante)", padL + 10, padB - 20);
+            ctx.fillText("⚡ Aire du rectangle = W_perdu = (P₂ - P₁)ΔV = T₀·S_créée", padL + 10, padB - 6);
+
+        } else if (mode === "joule-gay-lussac") {
+            // MODE 4: JOULE GAY LUSSAC
+            ctx.beginPath();
+            ctx.strokeStyle = "#a855f7";
+            ctx.lineWidth = 3;
+            ctx.moveTo(mapV(1.0), mapP(0));
+            ctx.lineTo(mapV(2.0), mapP(0));
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.strokeStyle = "rgba(168, 85, 247, 0.5)";
+            ctx.setLineDash([4, 4]);
+            ctx.moveTo(mapV(1.0), mapP(2.0));
+            ctx.quadraticCurveTo(mapV(1.5), mapP(0.5), mapV(2.0), mapP(1.0));
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = "#a855f7";
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText("💜 Détente libre dans le vide (Pext = 0)", padL + 10, padB - 20);
+            ctx.fillText("💜 Travail W = 0, Q = 0 mais S_créée = n R ln(V₂/V₁) > 0", padL + 10, padB - 6);
+        }
+
+        // Current State Point
+        let curP = (mode === "irreversible-brutal" && !isMoving) ? P_ext : P_int;
+        let curX = mapV(V_current), curY = mapP(curP);
+        ctx.fillStyle = "#facc15";
+        ctx.beginPath();
+        ctx.arc(curX, curY, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.fillText(`M (${V_current.toFixed(2)} L, ${curP.toFixed(2)} bar)`, curX + 10, curY - 6);
+    }
+}
+
+/* ==========================================================================
+   Gaz Parfait (PhET Interactive Simulation Integration)
+   ========================================================================== */
+function setupGazParfaitSimulator() {
+    const iframe = document.getElementById("iframe-gaz-parfait");
+    if (iframe && !iframe.src) {
+        iframe.src = "https://phet.colorado.edu/sims/html/gases-intro/latest/gases-intro_all.html?locale=fr";
+    }
+    if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise().catch(err => console.warn(err));
+    }
+}
+
+
+/* ==========================================================================
+   Modes de Transfert de Chaleur (Conduction, Convection & Rayonnement)
+   ========================================================================== */
+let heatAnimId = null;
+let heatIsPlaying = true;
+let heatTime = 0;
+
+function setupTransfertsThermiquesSimulator() {
+    const canvas = document.getElementById("canvas-transferts-thermiques");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const modeSelect = document.getElementById("heat-mode-select");
+    const thSlider = document.getElementById("heat-th-slider");
+    const tcSlider = document.getElementById("heat-tc-slider");
+    const matSelect = document.getElementById("heat-mat-select");
+    const playBtn = document.getElementById("btn-heat-play");
+    const resetBtn = document.getElementById("btn-heat-reset");
+
+    const thValSpan = document.getElementById("heat-th-val");
+    const tcValSpan = document.getElementById("heat-tc-val");
+
+    const valCondEl = document.getElementById("heat-val-cond");
+    const valConvEl = document.getElementById("heat-val-conv");
+    const valRadEl = document.getElementById("heat-val-rad");
+    const valLambdaEl = document.getElementById("heat-val-lambda");
+    const subLambdaEl = document.getElementById("heat-sub-lambda");
+
+    const matConductivities = {
+        copper: 385,
+        aluminum: 205,
+        steel: 50,
+        glass: 1.0,
+        wood: 0.15
+    };
+
+    // Solid Lattice Grid for Conduction
+    const cols = 20, rows = 6;
+    let gridTemps = [];
+    for (let r = 0; r < rows; r++) {
+        let rowArray = [];
+        for (let c = 0; c < cols; c++) {
+            rowArray.push(300);
+        }
+        gridTemps.push(rowArray);
+    }
+
+    // Fluid Convection Particles
+    const numFluidParticles = 40;
+    let fluidParticles = [];
+    for (let i = 0; i < numFluidParticles; i++) {
+        fluidParticles.push({
+            x: 40 + Math.random() * 220,
+            y: 80 + Math.random() * 200,
+            temp: 300,
+            vy: 0
+        });
+    }
+
+    // Radiation Photons
+    let photons = [];
+
+    if (playBtn) {
+        playBtn.onclick = () => {
+            heatIsPlaying = !heatIsPlaying;
+            playBtn.innerHTML = heatIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Play`;
+            if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+            if (heatIsPlaying) loop();
+        };
+    }
+
+    if (resetBtn) {
+        resetBtn.onclick = () => {
+            heatTime = 0;
+            if (thSlider) thSlider.value = "800";
+            if (tcSlider) tcSlider.value = "300";
+            updateLabels();
+            resetGrid();
+        };
+    }
+
+    [thSlider, tcSlider, modeSelect, matSelect].forEach(el => {
+        if (el) el.oninput = updateLabels;
+    });
+
+    function updateLabels() {
+        if (thValSpan && thSlider) thValSpan.textContent = `${thSlider.value} K`;
+        if (tcValSpan && tcSlider) tcValSpan.textContent = `${tcSlider.value} K`;
+    }
+    updateLabels();
+
+    function resetGrid() {
+        const Th = thSlider ? parseFloat(thSlider.value) : 800;
+        const Tc = tcSlider ? parseFloat(tcSlider.value) : 300;
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                gridTemps[r][c] = Th - (c / (cols - 1)) * (Th - Tc);
+            }
+        }
+    }
+    resetGrid();
+
+    function loop() {
+        if (!heatIsPlaying) return;
+        heatTime += 0.025;
+        updatePhysics();
+        draw();
+        heatAnimId = requestAnimationFrame(loop);
+    }
+
+    if (heatAnimId) cancelAnimationFrame(heatAnimId);
+    loop();
+
+    function updatePhysics() {
+        const Th = thSlider ? parseFloat(thSlider.value) : 800;
+        const Tc = tcSlider ? parseFloat(tcSlider.value) : 300;
+        const matKey = matSelect ? matSelect.value : "copper";
+        const k = matConductivities[matKey] || 385;
+
+        // Calculations
+        const Area = 0.01; // m^2
+        const Length = 0.2; // m
+        const Phicond = (k * Area * Math.abs(Th - Tc)) / Length;
+        const h_conv = 15; // W/m^2 K
+        const Phiconv = h_conv * Area * Math.abs(Th - Tc);
+        const sigma = 5.67e-8;
+        const epsilon = 0.9;
+        const Phirad = epsilon * sigma * Area * (Math.pow(Th, 4) - Math.pow(Tc, 4));
+
+        // Wien's Law: lambda_max (nm) = 2.898e6 / T
+        const lambdaMax = Math.round(2.898e6 / Th);
+
+        if (valCondEl) valCondEl.textContent = `${Math.round(Phicond)} W`;
+        if (valConvEl) valConvEl.textContent = `${Math.round(Phiconv)} W`;
+        if (valRadEl) valRadEl.textContent = `${Math.round(Phirad)} W`;
+        if (valLambdaEl) valLambdaEl.textContent = `${lambdaMax} nm`;
+
+        if (subLambdaEl) {
+            if (lambdaMax > 750) {
+                subLambdaEl.textContent = "Infra-Rouge (Thermique Infaible)";
+                subLambdaEl.style.color = "#ef4444";
+            } else if (lambdaMax >= 620) {
+                subLambdaEl.textContent = "Rouge Sombre (Incandescent)";
+                subLambdaEl.style.color = "#f97316";
+            } else if (lambdaMax >= 550) {
+                subLambdaEl.textContent = "Jaune-Orange (Incandescent)";
+                subLambdaEl.style.color = "#facc15";
+            } else {
+                subLambdaEl.textContent = "Blanc / Ultra-Violet";
+                subLambdaEl.style.color = "#38bdf8";
+            }
+        }
+
+        // Convection Particles Movement
+        for (let p of fluidParticles) {
+            // Near bottom hot plate -> heats up -> rises
+            if (p.y > 230) p.temp += (Th - p.temp) * 0.08;
+            if (p.y < 100) p.temp += (Tc - p.temp) * 0.08;
+
+            let buoyancy = (p.temp - 300) * 0.005;
+            p.y -= buoyancy;
+            p.x += Math.sin(p.y * 0.05 + heatTime * 3) * 0.8;
+
+            if (p.y < 80) p.y = 80;
+            if (p.y > 250) p.y = 250;
+            if (p.x < 40) p.x = 40;
+            if (p.x > 260) p.x = 260;
+        }
+
+        // Spawn Photons for Radiation
+        if (Math.random() < 0.35) {
+            photons.push({
+                x: 620,
+                y: 100 + Math.random() * 160,
+                vx: 3 + Math.random() * 2,
+                vy: (Math.random() - 0.5) * 1.5,
+                life: 0
+            });
+        }
+
+        for (let i = photons.length - 1; i >= 0; i--) {
+            let ph = photons[i];
+            ph.x += ph.vx;
+            ph.y += ph.vy;
+            ph.life++;
+            if (ph.x > 860 || ph.life > 100) photons.splice(i, 1);
+        }
+    }
+
+    function getTempColor(T) {
+        // Map T from 200K (blue) -> 300K (green/cyan) -> 800K (orange) -> 2000K+ (white/yellow)
+        let norm = Math.min(1.0, Math.max(0.0, (T - 250) / 1500));
+        let r = Math.round(Math.min(255, norm * 300));
+        let g = Math.round(Math.max(0, 180 - norm * 150));
+        let b = Math.round(Math.max(0, 255 - norm * 255));
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function draw() {
+        const width = canvas.width;
+        const height = canvas.height;
+        ctx.clearRect(0, 0, width, height);
+
+        const mode = modeSelect ? modeSelect.value : "comparative";
+        const Th = thSlider ? parseFloat(thSlider.value) : 800;
+        const Tc = tcSlider ? parseFloat(tcSlider.value) : 300;
+
+        ctx.fillStyle = "#090d16";
+        ctx.fillRect(0, 0, width, height);
+
+        if (mode === "comparative") {
+            // -------------------------------------------------------------
+            // SECTION 1: CONDUCTION (LEFT TOP PANEL - 280x180)
+            // -------------------------------------------------------------
+            const bx1 = 30, by1 = 45, bw1 = 250, bh1 = 170;
+            ctx.fillStyle = "#0f172a"; ctx.fillRect(bx1, by1, bw1, bh1);
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.3)"; ctx.strokeRect(bx1, by1, bw1, bh1);
+
+            ctx.fillStyle = "#38bdf8"; ctx.font = "bold 12px 'Outfit', sans-serif";
+            ctx.fillText("1. CONDUCTION THERMIQUE (Solide)", bx1 + 10, by1 + 18);
+
+            // Metal Bar Grid (Vibrating Atoms)
+            const barX = bx1 + 20, barY = by1 + 45, barW = 210, barH = 80;
+            ctx.fillStyle = "#1e293b"; ctx.fillRect(barX, barY, barW, barH);
+            ctx.strokeStyle = "#475569"; ctx.strokeRect(barX, barY, barW, barH);
+
+            const gridCols = 10, gridRows = 4;
+            for (let r = 0; r < gridRows; r++) {
+                for (let c = 0; c < gridCols; c++) {
+                    let localT = Th - (c / (gridCols - 1)) * (Th - Tc);
+                    let vib = (localT / 500) * 2.5;
+                    let ax = barX + 12 + c * 20 + (Math.random() - 0.5) * vib;
+                    let ay = barY + 12 + r * 18 + (Math.random() - 0.5) * vib;
+
+                    ctx.fillStyle = getTempColor(localT);
+                    ctx.beginPath(); ctx.arc(ax, ay, 5, 0, Math.PI * 2); ctx.fill();
+                }
+            }
+
+            ctx.fillStyle = "#ef4444"; ctx.font = "bold 10px sans-serif";
+            ctx.fillText(`Chaud T_H = ${Th}K`, barX, barY + barH + 18);
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillText(`Froid T_C = ${Tc}K`, barX + barW - 65, barY + barH + 18);
+
+            // -------------------------------------------------------------
+            // SECTION 2: CONVECTION (MIDDLE PANEL - 280x180)
+            // -------------------------------------------------------------
+            const bx2 = 310, by2 = 45, bw2 = 280, bh2 = 170;
+            ctx.fillStyle = "#0f172a"; ctx.fillRect(bx2, by2, bw2, bh2);
+            ctx.strokeStyle = "rgba(16, 185, 129, 0.3)"; ctx.strokeRect(bx2, by2, bw2, bh2);
+
+            ctx.fillStyle = "#10b981"; ctx.font = "bold 12px 'Outfit', sans-serif";
+            ctx.fillText("2. CONVECTION THERMIQUE (Fluide)", bx2 + 10, by2 + 18);
+
+            // Fluid Beaker
+            const flX = bx2 + 30, flY = by2 + 35, flW = 220, flH = 110;
+            ctx.fillStyle = "rgba(15, 23, 42, 0.9)"; ctx.fillRect(flX, flY, flW, flH);
+            ctx.strokeStyle = "#64748b"; ctx.lineWidth = 2; ctx.strokeRect(flX, flY, flW, flH);
+
+            // Heated Bottom Plate
+            ctx.fillStyle = "#ef4444"; ctx.fillRect(flX, flY + flH - 6, flW, 6);
+
+            // Fluid particles
+            for (let p of fluidParticles) {
+                let px = flX + (p.x - 40);
+                let py = flY + (p.y - 80);
+                if (px >= flX && px <= flX + flW && py >= flY && py <= flY + flH) {
+                    ctx.fillStyle = getTempColor(p.temp);
+                    ctx.beginPath(); ctx.arc(px, py, 4, 0, Math.PI * 2); ctx.fill();
+                }
+            }
+
+            // Convection Loops arrows
+            ctx.strokeStyle = "rgba(16, 185, 129, 0.5)"; ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(flX + 50, flY + flH / 2, 28, 0, Math.PI * 2);
+            ctx.arc(flX + flW - 50, flY + flH / 2, 28, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.fillStyle = "#10b981"; ctx.font = "bold 10px sans-serif";
+            ctx.fillText("🌀 Cellules de convection (Archimède)", flX + 15, flY + flH + 16);
+
+            // -------------------------------------------------------------
+            // SECTION 3: RAYONNEMENT (RIGHT PANEL - 270x180)
+            // -------------------------------------------------------------
+            const bx3 = 600, by3 = 45, bw3 = 270, bh3 = 170;
+            ctx.fillStyle = "#0f172a"; ctx.fillRect(bx3, by3, bw3, bh3);
+            ctx.strokeStyle = "rgba(245, 158, 11, 0.3)"; ctx.strokeRect(bx3, by3, bw3, bh3);
+
+            ctx.fillStyle = "#f59e0b"; ctx.font = "bold 12px 'Outfit', sans-serif";
+            ctx.fillText("3. RAYONNEMENT (Ondes dans le Vide)", bx3 + 10, by3 + 18);
+
+            // Hot Emitter Body
+            const emX = bx3 + 20, emY = by3 + 45, emW = 50, emH = 90;
+            ctx.fillStyle = getTempColor(Th);
+            ctx.fillRect(emX, emY, emW, emH);
+            ctx.strokeStyle = "#ffffff"; ctx.strokeRect(emX, emY, emW, emH);
+
+            ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif";
+            ctx.fillText(`${Th} K`, emX + 8, emY + 48);
+
+            // Photons / Radiant Waves
+            for (let ph of photons) {
+                let px = bx3 + (ph.x - 600);
+                let py = by3 + (ph.y - 45);
+                ctx.fillStyle = "#f59e0b";
+                ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
+            }
+
+            ctx.fillStyle = "#f59e0b"; ctx.font = "bold 10px sans-serif";
+            ctx.fillText("✨ Photons thermiques (Pas de milieu)", emX, emY + emH + 18);
+
+            // -------------------------------------------------------------
+            // BOTTOM SUMMARY PANEL (GRAPH & PROFILES)
+            // -------------------------------------------------------------
+            const botY = 240, botH = 180;
+            ctx.fillStyle = "#070b14"; ctx.fillRect(30, botY, 840, botH);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.1)"; ctx.strokeRect(30, botY, 840, botH);
+
+            // Temperature Profile Graph T(x)
+            ctx.fillStyle = "#38bdf8"; ctx.font = "bold 11px 'Outfit', sans-serif";
+            ctx.fillText("Profil de Température T(x) le long de la barre solide (Loi de Fourier)", 50, botY + 22);
+
+            const gX = 50, gY = botY + 40, gW = 790, gH = 110;
+            ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 1.5;
+            ctx.beginPath(); ctx.moveTo(gX, gY); ctx.lineTo(gX, gY + gH); ctx.lineTo(gX + gW, gY + gH); ctx.stroke();
+
+            // Plot T(x) line from Th to Tc
+            ctx.beginPath();
+            ctx.strokeStyle = "#ef4444"; ctx.lineWidth = 3;
+            for (let x = 0; x <= gW; x += 10) {
+                let tx = gX + x;
+                let tempAtX = Th - (x / gW) * (Th - Tc);
+                let ty = gY + gH - ((tempAtX - 100) / 2400) * gH;
+                if (x === 0) ctx.moveTo(tx, ty); else ctx.lineTo(tx, ty);
+            }
+            ctx.stroke();
+
+            ctx.fillStyle = "#ef4444"; ctx.font = "bold 10px sans-serif";
+            ctx.fillText(`T(0) = ${Th} K`, gX + 10, gY + 15);
+            ctx.fillText(`T(L) = ${Tc} K`, gX + gW - 80, gY + gH - 10);
+        } else {
+            // Detailed single mode view (conduction/convection/radiation)
+            ctx.fillStyle = "#38bdf8"; ctx.font = "bold 14px 'Outfit', sans-serif";
+            ctx.fillText(`Vue Détaillée du Mode : ${mode.toUpperCase()}`, 50, 40);
+        }
+    }
+}
