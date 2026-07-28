@@ -14,19 +14,35 @@ const chaptersData = [
         description: "Étude des limites, continuité d'une fonction numérique, Théorème des Valeurs Intermédiaires (TVI) et fonctions réciproques.",
         courseContent: `
 <!-- PDF DOWNLOAD BANNER -->
-<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; backdrop-filter: blur(8px);">
-    <div style="display: flex; align-items: center; gap: 14px;">
-        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.5rem; flex-shrink: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 14px; backdrop-filter: blur(8px);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(56, 189, 248, 0.2); display: flex; align-items: center; justify-content: center; color: #38bdf8; font-size: 1.3rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: #ffffff;">Résumé de Cours - Limites (PDF)</h4>
+                <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: #94a3b8;">Fiche de synthèse rédigée par Dr. Ahmed Soussi</p>
+            </div>
         </div>
-        <div>
-            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Résumé de Cours - Continuité & TVI (PDF)</h4>
-            <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Fiche de synthèse rédigée par Dr. Ahmed Soussi</p>
-        </div>
+        <a href="pdf/Resum_Limite_By_soussi.pdf" download="Resum_Limite_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF (Limites)
+        </a>
     </div>
-    <a href="pdf/Resum_Continuité_By_soussi.pdf" download="Resum_Continuité_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
-    </a>
+    <div style="border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: #ffffff;">Résumé de Cours - Continuité & TVI (PDF)</h4>
+                <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: #94a3b8;">Fiche de synthèse rédigée par Dr. Ahmed Soussi</p>
+            </div>
+        </div>
+        <a href="pdf/Resum_Continuité_By_soussi.pdf" download="Resum_Continuité_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF (Continuité)
+        </a>
+    </div>
 </div>
 
 <!-- TABLE OF CONTENTS -->
@@ -575,7 +591,8 @@ const chaptersData = [
             }
         ],
         exams: [
-            { title: "Résumé de cours : Continuité & TVI - Dr. Ahmed Soussi (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète en format PDF.", file: "pdf/Resum_Continuité_By_soussi.pdf" }
+            { title: "Résumé de cours : Limites - Dr. Ahmed Soussi (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète sur les limites en format PDF.", file: "pdf/Resum_Limite_By_soussi.pdf" },
+            { title: "Résumé de cours : Continuité & TVI - Dr. Ahmed Soussi (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète sur la continuité et le TVI en format PDF.", file: "pdf/Resum_Continuité_By_soussi.pdf" }
         ]
     },
     {
