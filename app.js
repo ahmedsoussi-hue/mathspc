@@ -5072,34 +5072,8 @@ window.openChapterModal = function(chapterId, options = {}) {
         });
     }
 
-    // Exams
-    const examsContainer = document.getElementById("modalExamsContent");
-    examsContainer.innerHTML = "";
-    const activeExams = chap.exams || [];
-    if (activeExams.length === 0) {
-        examsContainer.innerHTML = `<p class="text-muted">Aucune archive d'examen pour ce chapitre.</p>`;
-    } else {
-        activeExams.forEach(exam => {
-            const examDiv = document.createElement("div");
-            examDiv.className = "exam-item";
-            
-            let downloadAction = `simulateDownloadExam('${exam.title}')`;
-            if (exam.file) {
-                downloadAction = `downloadRealFile('${exam.file}', '${exam.title}')`;
-            }
-            
-            examDiv.innerHTML = `
-                <div class="exam-details">
-                    <h5>${["Devoir Surveillé", "Devoir", "Cours", "Résumé", "Série"].includes(exam.type) ? exam.title : `Examen ${exam.type} (${exam.year})`}</h5>
-                    <p>${exam.description || 'Sujet officiel complet + Corrigé type rédigé par des inspecteurs.'}</p>
-                </div>
-                <button class="btn btn-secondary" onclick="${downloadAction}">
-                    <i data-lucide="download"></i> PDF
-                </button>
-            `;
-            examsContainer.appendChild(examDiv);
-        });
-    }
+    // Render Interactive Chapter Quiz
+    renderChapterQuiz(chapterId);
 
     // Mastered Checkbox state
     const mastered = userState.completedChapters.includes(chapterId);
@@ -5119,6 +5093,201 @@ window.openChapterModal = function(chapterId, options = {}) {
         }
     }, 100);
 };
+
+/* ==========================================================================
+   INTERACTIVE CHAPTER QUIZ ENGINE (QCM & SCORE CALCULATOR)
+   ========================================================================== */
+let currentModalQuizState = {
+    chapterId: null,
+    questions: [],
+    currentIndex: 0,
+    userAnswers: {},
+    score: 0
+};
+
+function renderChapterQuiz(chapterId) {
+    const chap = chaptersData.find(c => c.id === chapterId);
+    const container = document.getElementById("modalQuizContent");
+    if (!container || !chap) return;
+
+    let questions = chap.quizQuestions || [
+        {
+            question: "Quelle est la limite de \\( \\frac{\\sin x}{x} \\) lorsque \\( x \\to 0 \\) ?",
+            options: ["0", "1", "+\\infty", "N'existe pas"],
+            answer: 1,
+            explanation: "Il s'agit d'une limite de référence fondamentale : \\( \\lim_{x\\to 0} \\frac{\\sin x}{x} = 1 \\)."
+        },
+        {
+            question: "Si \\( f \\) est continue sur \\( [a, b] \\) avec \\( f(a) \\cdot f(b) < 0 \\), alors l'équation \\( f(x) = 0 \\) admet :",
+            options: ["Au moins une solution sur ]a, b[", "Aucune solution", "Exactement deux solutions", "Une asymptote"],
+            answer: 0,
+            explanation: "D'après le Théorème des Valeurs Intermédiaires (TVI), si une fonction continue change de signe sur un intervalle, elle s'annule au moins une fois."
+        },
+        {
+            question: "Quelle est la valeur de \\( \\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1} \\) ?",
+            options: ["0", "1", "2", "Forme Indéterminée sans limite"],
+            answer: 2,
+            explanation: "Forme indéterminée 0/0. En factorisant le numérateur : \\( \\frac{(x-1)(x+1)}{x-1} = x + 1 \\to 2 \\)."
+        },
+        {
+            question: "Si \\( f \\) est continue et STRICTEMENT croissante sur \\( [1, 3] \\) avec \\( f(1) = -2 \\) et \\( f(3) = 4 \\), alors l'équation \\( f(x) = 0 \\) admet :",
+            options: ["Aucune solution", "Une unique solution sur ]1, 3[", "Une infinité de solutions", "On ne peut pas déterminer"],
+            answer: 1,
+            explanation: "La stricte monotonie garantit l'unicité de la solution d'après le corollaire du TVI."
+        },
+        {
+            question: "Quelle est la limite de \\( \\sqrt{x^2 + 1} - x \\) quand \\( x \\to +\\infty \\) ?",
+            options: ["+\\infty", "0", "1", "1/2"],
+            answer: 1,
+            explanation: "En multipliant par l'expression conjuguée : \\( \\frac{(x^2+1)-x^2}{\\sqrt{x^2+1}+x} = \\frac{1}{\\sqrt{x^2+1}+x} \\to 0 \\)."
+        }
+    ];
+
+    currentModalQuizState = {
+        chapterId: chapterId,
+        questions: questions,
+        currentIndex: 0,
+        userAnswers: {},
+        score: 0
+    };
+
+    displayCurrentModalQuestion();
+}
+
+function displayCurrentModalQuestion() {
+    const container = document.getElementById("modalQuizContent");
+    if (!container) return;
+
+    const { questions, currentIndex, userAnswers } = currentModalQuizState;
+
+    if (currentIndex >= questions.length) {
+        renderModalQuizResults();
+        return;
+    }
+
+    const q = questions[currentIndex];
+    const progressPercent = Math.round(((currentIndex + 1) / questions.length) * 100);
+    const answeredOpt = userAnswers[currentIndex];
+
+    let optionsHtml = q.options.map((opt, idx) => {
+        let btnClass = "quiz-opt-btn";
+        if (answeredOpt !== undefined) {
+            if (idx === q.answer) btnClass += " correct";
+            else if (idx === answeredOpt) btnClass += " wrong";
+        }
+        return `
+            <button class="${btnClass}" onclick="submitModalQuizAnswer(${idx})" ${answeredOpt !== undefined ? 'disabled' : ''}>
+                <span class="quiz-opt-badge">${String.fromCharCode(65 + idx)}</span>
+                <span>${opt}</span>
+            </button>
+        `;
+    }).join("");
+
+    let explanationHtml = "";
+    if (answeredOpt !== undefined) {
+        const isCorrect = answeredOpt === q.answer;
+        explanationHtml = `
+            <div class="quiz-explanation-box" style="border-left-color: ${isCorrect ? '#10b981' : '#ef4444'};">
+                <div style="font-weight: 700; margin-bottom: 4px; color: ${isCorrect ? '#34d399' : '#f87171'};">
+                    ${isCorrect ? '✓ Bonne Réponse !' : '✗ Mauvaise Réponse !'}
+                </div>
+                <div>${q.explanation}</div>
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="quiz-modal-container">
+            <div class="quiz-header-card">
+                <div style="font-weight: 700; color: #ffffff;">Question ${currentIndex + 1} / ${questions.length}</div>
+                <div class="badge badge-accent"><i data-lucide="help-circle"></i> Quiz QCM</div>
+            </div>
+            
+            <div class="quiz-progress-bar-wrap">
+                <div class="quiz-progress-bar-fill" style="width: ${progressPercent}%;"></div>
+            </div>
+
+            <div class="quiz-question-box">
+                <h3 style="font-size: 1.1rem; color: #ffffff; margin: 0 0 12px 0; line-height: 1.5;">${q.question}</h3>
+                <div class="quiz-options-grid">
+                    ${optionsHtml}
+                </div>
+                ${explanationHtml}
+            </div>
+
+            ${answeredOpt !== undefined ? `
+                <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                    <button class="btn btn-primary" onclick="nextModalQuizQuestion()" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 30px; font-weight: 700;">
+                        ${currentIndex + 1 === questions.length ? 'Voir le Score Final' : 'Question Suivante'} <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
+            ` : ''}
+        </div>
+    `;
+
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise().catch(err => console.warn(err));
+    }
+}
+
+function submitModalQuizAnswer(optIdx) {
+    const { questions, currentIndex, userAnswers } = currentModalQuizState;
+    if (userAnswers[currentIndex] !== undefined) return;
+
+    userAnswers[currentIndex] = optIdx;
+    if (optIdx === questions[currentIndex].answer) {
+        currentModalQuizState.score += 1;
+    }
+
+    displayCurrentModalQuestion();
+}
+
+function nextModalQuizQuestion() {
+    currentModalQuizState.currentIndex += 1;
+    displayCurrentModalQuestion();
+}
+
+function renderModalQuizResults() {
+    const container = document.getElementById("modalQuizContent");
+    if (!container) return;
+
+    const { questions, score } = currentModalQuizState;
+    const total = questions.length;
+    const scorePercent = Math.round((score / total) * 100);
+
+    let badgeText = "🏆 Excellent ! Maîtrise parfaite du cours !";
+    let badgeColor = "#10b981";
+    if (scorePercent < 50) {
+        badgeText = "💡 Bon début, réévisez la fiche de cours et réessayez.";
+        badgeColor = "#f59e0b";
+    } else if (scorePercent < 80) {
+        badgeText = "👍 Bon travail ! Quelques notions à perfectionner.";
+        badgeColor = "#38bdf8";
+    }
+
+    container.innerHTML = `
+        <div class="quiz-modal-container">
+            <div class="quiz-score-summary">
+                <div class="quiz-score-circle">
+                    <span style="font-size: 1.8rem; font-weight: 800; color: #ffffff;">${score} / ${total}</span>
+                    <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 700;">${scorePercent}%</span>
+                </div>
+                <h3 style="font-size: 1.4rem; color: #ffffff; margin: 0 0 10px 0;">Score Final du Quiz</h3>
+                <div class="badge" style="background: rgba(255,255,255,0.06); color: ${badgeColor}; border: 1px solid ${badgeColor}; padding: 8px 18px; font-size: 0.9rem; margin-bottom: 25px;">
+                    ${badgeText}
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="renderChapterQuiz('${currentModalQuizState.chapterId}')" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; border-radius: 30px; font-weight: 700;">
+                        <i data-lucide="rotate-ccw"></i> Recommencer le Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+}
 
 function closeChapterModal(options = {}) {
     const modal = document.getElementById("lessonModal");
