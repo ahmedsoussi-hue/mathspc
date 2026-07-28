@@ -600,6 +600,38 @@ const chaptersData = [
             description: "Série d'exercices d'application et de synthèse rédigée par Dr. Ahmed Soussi.",
             file: "pdf/serie_conrinuite.pdf"
         },
+        quizQuestions: [
+            {
+                question: "Quelle est la valeur de la limite usuelle \\( \\lim_{x \\to 0} \\frac{\\sin x}{x} \\) ?",
+                options: ["0", "1", "+\\infty", "N'existe pas"],
+                answer: 1,
+                explanation: "C'est une limite de référence fondamentale : \\( \\lim_{x\\to 0} \\frac{\\sin x}{x} = 1 \\)."
+            },
+            {
+                question: "Soit \\( f \\) une fonction continue sur \\( [a, b] \\) telle que \\( f(a) \\cdot f(b) < 0 \\). D'après le TVI, l'équation \\( f(x) = 0 \\) admet :",
+                options: ["Au moins une solution sur ]a, b[", "Aucune solution", "Exactement deux solutions", "Une asymptote verticale"],
+                answer: 0,
+                explanation: "Le Théorème des Valeurs Intermédiaires (TVI) garantit l'existence d'au moins une solution sur l'intervalle ouvert ]a, b[."
+            },
+            {
+                question: "Quelle est la limite \\( \\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1} \\) ?",
+                options: ["0", "1", "2", "Forme Indéterminée sans limite"],
+                answer: 2,
+                explanation: "Forme indéterminée 0/0. En factorisant le numérateur : \\( \\frac{(x-1)(x+1)}{x-1} = x + 1 \\to 2 \\)."
+            },
+            {
+                question: "Si \\( f \\) est continue et STRICTEMENT croissante sur \\( [1, 3] \\) avec \\( f(1) = -2 \\) et \\( f(3) = 4 \\), alors l'équation \\( f(x) = 0 \\) admet :",
+                options: ["Aucune solution", "Une unique solution sur ]1, 3[", "Une infinité de solutions", "Deux solutions"],
+                answer: 1,
+                explanation: "La stricte monotonie d'une fonction continue garantit l'unicité de la solution d'après le corollaire du TVI."
+            },
+            {
+                question: "Quelle est la limite de \\( \\sqrt{x^2 + 1} - x \\) quand \\( x \\to +\\infty \\) ?",
+                options: ["+\\infty", "0", "1", "1/2"],
+                answer: 1,
+                explanation: "En multipliant et divisant par l'expression conjuguée : \\( \\frac{(x^2+1)-x^2}{\\sqrt{x^2+1}+x} = \\frac{1}{\\sqrt{x^2+1}+x} \\to 0 \\)."
+            }
+        ],
         exams: [
             { title: "Résumé de cours : Limites - Dr. Ahmed Soussi (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète sur les limites en format PDF.", file: "pdf/Resum_Limite_By_soussi.pdf" },
             { title: "Résumé de cours : Continuité & TVI - Dr. Ahmed Soussi (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète sur la continuité et le TVI en format PDF.", file: "pdf/Resum_Continuité_By_soussi.pdf" }
@@ -4961,6 +4993,10 @@ function setupModals() {
                     content.classList.remove("active");
                 }
             });
+
+            if (targetTab === "quiz-tab" && currentOpenChapterId) {
+                renderChapterQuiz(currentOpenChapterId);
+            }
 
             // Trigger MathJax Typesetting for newly visible tab equations
             setTimeout(() => {
