@@ -13,6 +13,22 @@ const chaptersData = [
         subject: "math",
         description: "Étude des limites, continuité d'une fonction numérique, Théorème des Valeurs Intermédiaires (TVI) et fonctions réciproques.",
         courseContent: `
+<!-- PDF DOWNLOAD BANNER -->
+<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; backdrop-filter: blur(8px);">
+    <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.5rem; flex-shrink: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+        </div>
+        <div>
+            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Résumé de Cours - Continuité & TVI (PDF)</h4>
+            <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Fiche de synthèse rédigée par Dr. Ahmed Soussi</p>
+        </div>
+    </div>
+    <a href="pdf/Resum_Continuité_By_soussi.pdf" download="Resum_Continuité_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+    </a>
+</div>
+
 <!-- TABLE OF CONTENTS -->
   <div class="toc reveal">
     <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire</div>
@@ -558,7 +574,9 @@ const chaptersData = [
                 solution: "<strong>1) Dérivée de g :</strong> $g'(x) = 0 - [2x \\cdot e^{-x} + (x^2+1)(-e^{-x})] = (x^2 - 2x + 1)e^{-x} = (x-1)^2 e^{-x}$. Comme $(x-1)^2 \\ge 0$ et $e^{-x} > 0$, $g'(x) \\ge 0$, donc $g$ est strictement croissante sur $\\mathbb{R}$.<br><strong>2) Signe de g :</strong> On a $g(0) = 1 - (0+1)e^0 = 0$. Comme $g$ est strictement croissante :<br>- Si $x \\le 0$, $g(x) \\le g(0) = 0$.<br>- Si $x \\ge 0$, $g(x) \\ge g(0) = 0$.<br><br><strong>Partie II :</strong><br><strong>1) Limite en $+\\infty$ :</strong> $\\lim_{x\\to+\\infty} (x^2+2x+3)e^{-x} = 0$ (croissances comparées), donc $\\lim_{x\\to+\\infty} f(x) = +\\infty$. La différence $f(x) - (x-1) = (x^2+2x+3)e^{-x}$ tend vers $0$ en $+\\infty$, donc la droite $y = x - 1$ est une asymptote oblique à $(C)$ au voisinage de $+\\infty$.<br><strong>2) Limite en $-\\infty$ :</strong> En factorisant par $e^{-x}$, $\\lim_{x\\to-\\infty} f(x) = +\\infty$. On a $\\lim_{x\\to-\\infty} f(x)/x = -\\infty$ (branche parabolique de direction $(Oy)$).<br><strong>3) Dérivée de f :</strong> $f'(x) = 1 + [(2x+2)e^{-x} - (x^2+2x+3)e^{-x}] = 1 - (x^2+1)e^{-x} = g(x)$. Le signe de $f'(x)$ est celui de $g(x)$. Ainsi, $f$ est décroissante sur $]-\\infty, 0]$ et croissante sur $[0, +\\infty[$.<br><strong>4) TVI :</strong> Posons $h(x) = f(x) - x = (x^2+2x+3)e^{-x} - 1$. La fonction $h$ est continue et strictement décroissante sur $[2, 3]$. On calcule $h(2) \\approx 0.4 > 0$ et $h(3) \\approx -0.2 < 0$. D'après le TVI, l'équation $h(x) = 0$ (soit $f(x) = x$) admet une unique solution $\\alpha$ dans l'intervalle $]2, 3[$."
             }
         ],
-        exams: []
+        exams: [
+            { title: "Résumé de cours : Continuité & TVI - Dr. Ahmed Soussi (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète en format PDF.", file: "pdf/Resum_Continuité_By_soussi.pdf" }
+        ]
     },
     {
         id: "math-deriv-etude",
@@ -5009,11 +5027,7 @@ window.openChapterModal = function(chapterId, options = {}) {
     // Exams
     const examsContainer = document.getElementById("modalExamsContent");
     examsContainer.innerHTML = "";
-    const activeExams = (chap.exams || []).filter(exam => {
-        const title = (exam.title || "").toLowerCase();
-        const file = (exam.file || "").toLowerCase();
-        return !title.includes("- pdf") && !title.includes(" - pdf") && !file.endsWith(".pdf");
-    });
+    const activeExams = chap.exams || [];
     if (activeExams.length === 0) {
         examsContainer.innerHTML = `<p class="text-muted">Aucune archive d'examen pour ce chapitre.</p>`;
     } else {
