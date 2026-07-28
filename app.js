@@ -559,11 +559,8 @@ const chaptersData = [
             }
         ],
         exams: [
-            { title: "Cours 1 : Continuité (BIOF) - PDF", type: "Cours", year: 2025, description: "Cours complet sur les limites, la continuité et le TVI.", file: "pdf/Cours1-Continuité-2bac-BIOF-2025.pdf" },
             { title: "Cours 1 : Continuité (BIOF) - Word", type: "Cours", year: 2025, description: "Version modifiable (.docx) du cours.", file: "pdf/Cours1-Continuité-2bac-BIOF-2025.docx" },
-            { title: "Résumé de cours : Continuité (BIOF) - PDF", type: "Résumé", year: 2025, description: "Fiche de synthèse des formules et concepts clés.", file: "pdf/Résumé-Continuité-2bac-BIOF.pdf" },
             { title: "Résumé de cours : Continuité (BIOF) - Word", type: "Résumé", year: 2025, description: "Version modifiable (.docx) de la fiche de synthèse.", file: "pdf/Résumé-Continuité-2bac-BIOF.docx" },
-            { title: "Série d'exercices 1 : Continuité (BIOF) - PDF", type: "Série", year: 2025, description: "Sujets d'exercices corrigés.", file: "pdf/Série1-Continuité-2bac-BIOF 2025.pdf" },
             { title: "Série d'exercices 1 : Continuité (BIOF) - Word", type: "Série", year: 2025, description: "Version modifiable (.docx) de la série d'exercices.", file: "pdf/Série1-Continuité-2bac-BIOF 2025.docx" }
         ]
     },
@@ -5016,10 +5013,15 @@ window.openChapterModal = function(chapterId, options = {}) {
     // Exams
     const examsContainer = document.getElementById("modalExamsContent");
     examsContainer.innerHTML = "";
-    if (chap.exams.length === 0) {
+    const activeExams = (chap.exams || []).filter(exam => {
+        const title = (exam.title || "").toLowerCase();
+        const file = (exam.file || "").toLowerCase();
+        return !title.includes("- pdf") && !title.includes(" - pdf") && !file.endsWith(".pdf");
+    });
+    if (activeExams.length === 0) {
         examsContainer.innerHTML = `<p class="text-muted">Aucune archive d'examen pour ce chapitre.</p>`;
     } else {
-        chap.exams.forEach(exam => {
+        activeExams.forEach(exam => {
             const examDiv = document.createElement("div");
             examDiv.className = "exam-item";
             
