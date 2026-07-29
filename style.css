@@ -4135,6 +4135,47 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 0.82rem;
     }
 
+    /* Mobile Dropdown Menu Positioning & Visibility */
+    .nav-dropdown {
+        position: static !important;
+    }
+    .dropdown-menu {
+        position: fixed !important;
+        top: 65px !important;
+        left: 5vw !important;
+        width: 90vw !important;
+        min-width: 0 !important;
+        transform: none !important;
+        background: #0f172a !important;
+        border: 1.5px solid rgba(16, 185, 129, 0.4) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
+        z-index: 10000 !important;
+        padding: 10px 6px !important;
+    }
+    .nav-dropdown.active .dropdown-menu {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+    .dropdown-item {
+        padding: 12px 18px !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #ffffff !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 8px !important;
+    }
+    .dropdown-item:last-child {
+        border-bottom: none !important;
+    }
+    .dropdown-item:hover,
+    .dropdown-item:active {
+        background: rgba(16, 185, 129, 0.2) !important;
+        color: #34d399 !important;
+    }
+
     /* Grids & Cards */
     .courses-grid,
     .simulators-grid,
