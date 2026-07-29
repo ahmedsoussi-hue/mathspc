@@ -4100,5 +4100,153 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
 }
 
+/* ==========================================================================
+   SMARTPHONE & MOBILE RESPONSIVE DESIGN (@media max-width: 768px & 480px)
+   Constraint: Desktop version (>1024px) remains 100% unchanged.
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* Container & Layout Spacing */
+    .container, .main-container {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+        width: 100% !important;
+    }
+
+    /* Navbar & Mobile Header */
+    .navbar {
+        padding: 10px 14px !important;
+    }
+    .nav-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .nav-links {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+        gap: 8px;
+    }
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 0.82rem;
+    }
+
+    /* Grids & Cards */
+    .courses-grid,
+    .simulators-grid,
+    .methods-grid,
+    .features-grid,
+    .quiz-selector-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    /* Hero & Headers */
+    .hero-title {
+        font-size: 1.8rem !important;
+        line-height: 1.25 !important;
+    }
+    .hero-subtitle {
+        font-size: 0.95rem !important;
+    }
+    .section-title {
+        font-size: 1.5rem !important;
+    }
+
+    /* Math Tables & Equations Touch Scrolling */
+    .math-table-wrap,
+    .table-responsive,
+    .cours-section table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+    mjx-container {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 2px 0;
+    }
+
+    /* Lesson Modal Adaptive Bottom-Sheet / Fullscreen */
+    .modal-container {
+        width: 96vw !important;
+        max-width: 96vw !important;
+        height: 94vh !important;
+        margin: 3vh auto !important;
+        border-radius: 20px !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .modal-header {
+        padding: 16px 18px !important;
+    }
+    .modal-tabs {
+        padding: 0 10px !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    .modal-tab-btn {
+        padding: 10px 14px !important;
+        font-size: 0.82rem !important;
+    }
+    .modal-body {
+        padding: 16px !important;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* PDF Banners & Download Cards */
+    .pdf-download-card {
+        padding: 14px 16px !important;
+    }
+    .pdf-download-card a.btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Quiz Mobile Touch Buttons */
+    .quiz-question-box {
+        padding: 16px !important;
+    }
+    .quiz-opt-btn {
+        padding: 12px 14px !important;
+        font-size: 0.88rem !important;
+    }
+    .quiz-score-summary {
+        padding: 24px 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+    .modal-container {
+        width: 98vw !important;
+        height: 96vh !important;
+        margin: 2vh auto !important;
+    }
+    .quiz-opt-btn {
+        font-size: 0.84rem !important;
+        gap: 10px !important;
+    }
+    .quiz-opt-badge {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 0.75rem !important;
+    }
+}
+
 
 
