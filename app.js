@@ -5141,43 +5141,272 @@ let currentModalQuizState = {
     score: 0
 };
 
+function getQuestionsForChapter(chap) {
+    if (chap.quizQuestions && chap.quizQuestions.length > 0) {
+        return chap.quizQuestions;
+    }
+    
+    // Subject and chapter specific QCM question banks
+    if (chap.subject === "math") {
+        if (chap.id.includes("deriv")) {
+            return [
+                {
+                    question: "Quelle est la dérivée de la fonction \\( f(x) = \\ln(x) \\) sur \\( ]0, +\\infty[ \\) ?",
+                    options: ["\\( e^x \\)", "\\( \\frac{1}{x} \\)", "\\( -\\frac{1}{x^2} \\)", "\\( x \\)"],
+                    answer: 1,
+                    explanation: "La fonction logarithme népérien est dérivable sur ]0, +\\infty[ et sa dérivée est \\( f'(x) = \\frac{1}{x} \\)."
+                },
+                {
+                    question: "Si \\( f'(x_0) = 0 \\) et \\( f'' \\) change de signe en \\( x_0 \\), alors le point \\( (x_0, f(x_0)) \\) est :",
+                    options: ["Un point d'inflexion", "Un extremum absolu", "Une asymptote", "Un point d'arrêt"],
+                    answer: 0,
+                    explanation: "Un changement de signe de la dérivée seconde \\( f'' \\) caractérise un point d'inflexion pour la courbe représentative."
+                },
+                {
+                    question: "Quelle est l'équation de la tangente à la courbe de \\( f \\) au point d'abscisse \\( a \\) ?",
+                    options: ["\\( y = f'(a)(x - a) + f(a) \\)", "\\( y = f(a)(x - a) + f'(a) \\)", "\\( y = f'(x)(x - a) \\)", "\\( y = f'(a)x + a \\)"],
+                    answer: 0,
+                    explanation: "L'équation de la tangente en \\( a \\) est donnée par la formule classique : \\( y = f'(a)(x - a) + f(a) \\)."
+                },
+                {
+                    question: "Si \\( \\lim_{x \\to +\\infty} \\frac{f(x)}{x} = 0 \\), alors la courbe \\( (C_f) \\) admet en \\( +\\infty \\) :",
+                    options: ["Une branche parabolique de direction (Ox)", "Une branche parabolique de direction (Oy)", "Une asymptote verticale", "Une asymptote oblique"],
+                    answer: 0,
+                    explanation: "Lorsque \\( \\lim_{x\\to +\\infty} f(x) = +\\infty \\) et \\( \\lim_{x\\to +\\infty} \\frac{f(x)}{x} = 0 \\), la courbe admet une branche parabolique de direction l'axe des abscisses (Ox)."
+                },
+                {
+                    question: "Quelle est la dérivée de la fonction composée \\( f(x) = e^{u(x)} \\) ?",
+                    options: ["\\( u'(x) e^{u(x)} \\)", "\\( e^{u'(x)} \\)", "\\( u(x) e^{u'(x)} \\)", "\\( \\frac{e^{u(x)}}{u'(x)} \\)"],
+                    answer: 0,
+                    explanation: "La formule de dérivation d'une exponentielle composée est : \\( (e^u)' = u' \\cdot e^u \\)."
+                }
+            ];
+        } else if (chap.id.includes("suites")) {
+            return [
+                {
+                    question: "Si une suite \\( (u_n) \\) est croissante et majorée par \\( M \\), alors la suite \\( (u_n) \\) est :",
+                    options: ["Convergente", "Divergente vers +\\infty", "Stationnaire", "Périodique"],
+                    answer: 0,
+                    explanation: "D'après le théorème de convergence monotone, toute suite réelle croissante et majorée est convergente."
+                },
+                {
+                    question: "Quelle est la somme des \\( n+1 \\) premiers termes d'une suite géométrique de raison \\( q \\neq 1 \\) et de premier terme \\( u_0 \\) ?",
+                    options: ["\\( u_0 \\frac{1 - q^{n+1}}{1 - q} \\)", "\\( u_0 \\frac{1 - q^n}{1 - q} \\)", "\\( u_0 (1 - q^n) \\)", "\\( n \\cdot u_0 \\)"],
+                    answer: 0,
+                    explanation: "Pour une suite géométrique de \\( u_0 \\) à \\( u_n \\) (soit \\( n+1 \\) termes), la somme vaut \\( u_0 \\frac{1 - q^{n+1}}{1 - q} \\)."
+                },
+                {
+                    question: "Si \\( u_{n+1} = f(u_n) \\) avec \\( f \\) continue et \\( (u_n) \\) converge vers \\( \\ell \\), alors la limite \\( \\ell \\) vérifie :",
+                    options: ["\\( f(\\ell) = \\ell \\)", "\\( f(\\ell) = 0 \\)", "\\( \\ell = 0 \\)", "\\( f'(\\ell) = 1 \\)"],
+                    answer: 0,
+                    explanation: "Par continuité de \\( f \\), la limite \\( \\ell \\) d'une suite récurrente \\( u_{n+1} = f(u_n) \\) est solution de l'équation point fixe \\( f(\\ell) = \\ell \\)."
+                },
+                {
+                    question: "Quelle est la limite de la suite \\( q^n \\) si \\( |q| < 1 \\) ?",
+                    options: ["0", "1", "+\\infty", "N'existe pas"],
+                    answer: 0,
+                    explanation: "Lorsque la raison \\( q \\) vérifie \\( -1 < q < 1 \\), la suite géométrique \\( q^n \\) tend vers 0 quand \\( n \\to +\\infty \\)."
+                },
+                {
+                    question: "Une suite \\( (u_n) \\) vérifiant \\( u_{n+1} - u_n = r \\) (constante) est une suite :",
+                    options: ["Arithmétique", "Géométrique", "Harmonique", "Exponentielle"],
+                    answer: 0,
+                    explanation: "Par définition, une suite arithmétique a une différence constante entre deux termes consécutifs."
+                }
+            ];
+        } else if (chap.id.includes("complexes")) {
+            return [
+                {
+                    question: "Soit \\( z = a + ib \\) un nombre complexe. Son module \\( |z| \\) est égal à :",
+                    options: ["\\( \\sqrt{a^2 + b^2} \\)", "\\( a^2 + b^2 \\)", "\\( a + b \\)", "\\( \\sqrt{a^2 - b^2} \\)"],
+                    answer: 0,
+                    explanation: "Le module d'un nombre complexe \\( z = a + ib \\) (avec \\( a, b \\in \\mathbb{R} \\)) est \\( |z| = \\sqrt{a^2 + b^2} \\)."
+                },
+                {
+                    question: "Quelle est la forme exponentielle d'un complexe de module \\( r \\) et d'argument \\( \\theta \\) ?",
+                    options: ["\\( r e^{i\\theta} \\)", "\\( r (\\cos\\theta - i\\sin\\theta) \\)", "\\( e^{r\\theta} \\)", "\\( r^2 e^{i\\theta} \\)"],
+                    answer: 0,
+                    explanation: "Par la formule d'Euler, \\( z = r(\\cos\\theta + i\\sin\\theta) = r e^{i\\theta} \\)."
+                },
+                {
+                    question: "Quelle est la valeur de \\( i^2 \\) ?",
+                    options: ["-1", "1", "i", "0"],
+                    answer: 0,
+                    explanation: "Par définition de l'ensemble des nombres complexes, l'unité imaginaire \\( i \\) vérifie \\( i^2 = -1 \\)."
+                },
+                {
+                    question: "L'écriture complexe de la rotation de centre \\( \\Omega(\\omega) \\) et d'angle \\( \\theta \\) est :",
+                    options: ["\\( z' - \\omega = e^{i\\theta}(z - \\omega) \\)", "\\( z' = e^{i\\theta} z \\)", "\\( z' - z = \\omega \\)", "\\( z' = z + e^{i\\theta} \\)"],
+                    answer: 0,
+                    explanation: "La transformation géométrique de rotation d'angle \\( \\theta \\) autour du point d'affixe \\( \\omega \\) s'écrit \\( z' - \\omega = e^{i\\theta}(z - \\omega) \\)."
+                },
+                {
+                    question: "Si \\( z = 1 + i \\), quel est l'argument principal \\( \\arg(z) \\) ?",
+                    options: ["\\( \\pi/4 \\)", "\\( \\pi/2 \\)", "\\( \\pi/3 \\)", "\\( \\pi/6 \\)"],
+                    answer: 0,
+                    explanation: "\\( z = \\sqrt{2}(\\frac{\\sqrt{2}}{2} + i \\frac{\\sqrt{2}}{2}) = \\sqrt{2} e^{i\\pi/4} \\), donc \\( \\arg(z) \\equiv \\frac{\\pi}{4} [2\\pi] \\)."
+                }
+            ];
+        }
+    } else if (chap.subject === "pc") {
+        if (chap.id.includes("onde")) {
+            return [
+                {
+                    question: "Quelle est la relation entre la célérité \\( v \\), la longueur d'onde \\( \\lambda \\) et la fréquence \\( N \\) ?",
+                    options: ["\\( \\lambda = v / N \\)", "\\( \\lambda = v \\cdot N \\)", "\\( v = \\lambda / N \\)", "\\( N = v \\cdot \\lambda \\)"],
+                    answer: 0,
+                    explanation: "La longueur d'onde est la distance parcourue pendant une période \\( T = 1/N \\), donc \\( \\lambda = v \\cdot T = v / N \\)."
+                },
+                {
+                    question: "Une onde mécanique progressive nécessite pour se propager :",
+                    options: ["Un milieu matériel élastique", "Le vide spatial", "Un champ magnétique", "Un milieu conducteur"],
+                    answer: 0,
+                    explanation: "Contrairement aux ondes électromagnétiques, une onde mécanique a besoin d'un milieu matériel pour se propager."
+                },
+                {
+                    question: "Le phénomène de diffraction d'une onde lumineuse à travers une fente de largeur \\( a \\) est nettement observable si :",
+                    options: ["\\( a \\le \\lambda \\) ou du même ordre", "\\( a \\gg \\lambda \\)", "\\( a = 100 \\lambda \\)", "\\( a = 0 \\)"],
+                    answer: 0,
+                    explanation: "La diffraction de la lumière apparaît lorsque la dimension de la fente \\( a \\) est du même ordre de grandeur que la longueur d'onde \\( \\lambda \\)."
+                },
+                {
+                    question: "Quelle est l'expression de l'écart angulaire \\( \\theta \\) lors de la diffraction par une fente de largeur \\( a \\) ?",
+                    options: ["\\( \\theta = \\lambda / a \\)", "\\( \\theta = a / \\lambda \\)", "\\( \\theta = \\lambda \\cdot a \\)", "\\( \\theta = 2\\lambda / a \\)"],
+                    answer: 0,
+                    explanation: "L'écart angulaire du demi-faisceau central vaut \\( \\theta = \\frac{\\lambda}{a} \\) rad."
+                },
+                {
+                    question: "Un milieu est dit dispersif pour une onde si :",
+                    options: ["Sa célérité dépend de la fréquence", "Sa célérité est constante", "L'onde s'arrête", "L'amplitude augmente"],
+                    answer: 0,
+                    explanation: "Par définition, un milieu est dispersif lorsque la vitesse de propagation (célérité) de l'onde dépend de sa fréquence."
+                }
+            ];
+        } else if (chap.id.includes("radioactivite")) {
+            return [
+                {
+                    question: "Quelle est la relation entre la constante radioactive \\( \\lambda \\) et la demi-vie \\( t_{1/2} \\) ?",
+                    options: ["\\( t_{1/2} = \\frac{\\ln 2}{\\lambda} \\)", "\\( t_{1/2} = \\lambda \\ln 2 \\)", "\\( t_{1/2} = \\frac{1}{\\lambda} \\)", "\\( t_{1/2} = 2 \\lambda \\)"],
+                    answer: 0,
+                    explanation: "À \\( t = t_{1/2} \\), \\( N(t) = N_0 / 2 \\), ce qui donne \\( e^{-\\lambda t_{1/2}} = 1/2 \\Rightarrow t_{1/2} = \\frac{\\ln 2}{\\lambda} \\)."
+                },
+                {
+                    question: "La radioactivité \\( \\beta^- \\) correspond à l'émission de :",
+                    options: ["Un électron \\( _-1^0 e \\)", "Un positron \\( _1^0 e \\)", "Un noyau d'hélium \\( _2^4 He \\)", "Un photon \\( \\gamma \\)"],
+                    answer: 0,
+                    explanation: "La désintégration \\( \\beta^- \\) consiste en la transformation d'un neutron en proton avec émission d'un électron \\( _-1^0 e \\)."
+                },
+                {
+                    question: "Quelle est l'unité de l'activité d'une source radioactive dans le SI ?",
+                    options: ["Le Becquerel (Bq)", "Le Gray (Gy)", "Le Sievert (Sv)", "Le Curie (Ci)"],
+                    answer: 0,
+                    explanation: "Dans le Système International, l'activité s'exprime en Becquerels (Bq), où 1 Bq correspond à 1 désintégration par seconde."
+                },
+                {
+                    question: "L'énergie de liaison par nucléon \\( E_l / A \\) permet d'évaluer :",
+                    options: ["La stabilité du noyau", "La masse de l'atome", "La vitesse des électrons", "La charge électrique"],
+                    answer: 0,
+                    explanation: "Plus l'énergie de liaison par nucléon \\( E_l / A \\) est grande, plus le noyau est stable."
+                },
+                {
+                    question: "La loi de décroissance radioactive s'écrit :",
+                    options: ["\\( N(t) = N_0 e^{-\\lambda t} \\)", "\\( N(t) = N_0 - \\lambda t \\)", "\\( N(t) = N_0 / (1 + \\lambda t) \\)", "\\( N(t) = N_0 e^{\\lambda t} \\)"],
+                    answer: 0,
+                    explanation: "Le nombre de noyaux radioactifs diminue de façon exponentielle au cours du temps selon \\( N(t) = N_0 e^{-\\lambda t} \\)."
+                }
+            ];
+        } else if (chap.id.includes("rc")) {
+            return [
+                {
+                    question: "Quelle est la constante de temps \\( \\tau \\) d'un dipole RC ?",
+                    options: ["\\( \\tau = R \\cdot C \\)", "\\( \\tau = R / C \\)", "\\( \\tau = C / R \\)", "\\( \\tau = 1 / (R \\cdot C) \\)"],
+                    answer: 0,
+                    explanation: "La constante de temps d'un circuit comportant un conducteur ohmique \\( R \\) et un condensateur \\( C \\) est \\( \\tau = R C \\) (en secondes)."
+                },
+                {
+                    question: "Lors de la charge d'un condensateur sous tension échelon \\( E \\), la tension \\( u_c(t) \\) à \\( t = \\tau \\) atteint :",
+                    options: ["63% de E", "37% de E", "100% de E", "50% de E"],
+                    answer: 0,
+                    explanation: "À \\( t = \\tau \\), \\( u_c(\\tau) = E(1 - e^{-1}) \\approx 0,63 E \\) (soit 63% de la valeur maximale)."
+                },
+                {
+                    question: "Quelle est l'énergie emmagasinée dans un condensateur de capacité \\( C \\) sous une tension \\( u_c \\) ?",
+                    options: ["\\( E_e = \\frac{1}{2} C u_c^2 \\)", "\\( E_e = C u_c^2 \\)", "\\( E_e = \\frac{1}{2} C^2 u_c \\)", "\\( E_e = R C u_c \\)"],
+                    answer: 0,
+                    explanation: "L'énergie électrostatique stockée dans un condensateur s'exprime par \\( E_e = \\frac{1}{2} C u_c^2 \\)."
+                },
+                {
+                    question: "La relation entre la charge \\( q \\) et l'intensité \\( i \\) en convention récepteur est :",
+                    options: ["\\( i = \\frac{dq}{dt} \\)", "\\( i = q \\cdot t \\)", "\\( q = \\frac{di}{dt} \\)", "\\( i = \\frac{u_c}{C} \\)"],
+                    answer: 0,
+                    explanation: "Par définition, l'intensité du courant électrique est le débit de charge : \\( i = \\frac{dq}{dt} = C \\frac{du_c}{dt} \\)."
+                },
+                {
+                    question: "L'équation différentielle régissant la tension \\( u_c(t) \\) lors de la charge d'un condensateur est :",
+                    options: ["\\( u_c + R C \\frac{du_c}{dt} = E \\)", "\\( u_c - R C \\frac{du_c}{dt} = E \\)", "\\( R C u_c + \\frac{du_c}{dt} = 0 \\)", "\\( \\frac{d^2u_c}{dt^2} + u_c = E \\)"],
+                    answer: 0,
+                    explanation: "Par la loi d'additivité des tensions : \\( u_R + u_c = E \\Rightarrow R C \\frac{du_c}{dt} + u_c = E \\)."
+                }
+            ];
+        }
+    }
+    
+    // Default fallback QCM bank for all other chapters
+    return [
+        {
+            question: "Quelle est la définition fondamentale de la continuité d'une fonction \\( f \\) en un point \\( x_0 \\) ?",
+            options: [
+                "\\( \\lim_{x \\to x_0} f(x) = f(x_0) \\)",
+                "\\( f(x_0) = 0 \\)",
+                "\\( f'(x_0) = 1 \\)",
+                "\\( \\lim_{x \\to +\\infty} f(x) = f(x_0) \\)"
+            ],
+            answer: 0,
+            explanation: "Une fonction \\( f \\) est continue en \\( x_0 \\) ssi sa limite en \\( x_0 \\) existe et est égale à la valeur de la fonction \\( f(x_0) \\)."
+        },
+        {
+            question: "Le Théorème des Valeurs Intermédiaires (TVI) s'applique à toute fonction :",
+            options: [
+                "Continue sur un intervalle \\( [a, b] \\)",
+                "Dérivable uniquement en 0",
+                "Constante sur \\( \\mathbb{R} \\)",
+                "Périodique de période \\( 2\\pi \\)"
+            ],
+            answer: 0,
+            explanation: "La continuité de la fonction sur l'intervalle \\( [a, b] \\) est la condition nécessaire et suffisante pour appliquer le TVI."
+        },
+        {
+            question: "Que vaut la limite usuelle \\( \\lim_{x \\to 0} \\frac{e^x - 1}{x} \\) ?",
+            options: ["1", "0", "+\\infty", "-1"],
+            answer: 0,
+            explanation: "Il s'agit du nombre dérivé de la fonction exponentielle en 0 : \\( \\lim_{x \\to 0} \\frac{e^x - 1}{x} = e^0 = 1 \\)."
+        },
+        {
+            question: "Si \\( f \\) est une fonction continue et strictement monotone sur \\( [a, b] \\), alors \\( f \\) réalise une bijection de \\( [a, b] \\) sur :",
+            options: [
+                "L'intervalle image \\( f([a, b]) \\)",
+                "L'ensemble \\( \\mathbb{R} \\) tout entier",
+                "L'intervalle \\( [0, 1] \\)",
+                "L'ensemble des nombres entiers"
+            ],
+            answer: 0,
+            explanation: "Toute fonction continue et strictement monotone sur un intervalle \\( I \\) admet une fonction réciproque définie sur l'intervalle image \\( f(I) \\)."
+        },
+        {
+            question: "Quelle est la limite de \\( \\frac{\\ln(x + 1)}{x} \\) quand \\( x \\to 0 \\) ?",
+            options: ["1", "0", "+\\infty", "e"],
+            answer: 0,
+            explanation: "C'est le nombre dérivé de la fonction \\( x \\mapsto \\ln(1+x) \\) en 0 : \\( \\lim_{x \\to 0} \\frac{\\ln(1+x)}{x} = 1 \\)."
+        }
+    ];
+}
+
 function renderChapterQuiz(chapterId) {
     const chap = chaptersData.find(c => c.id === chapterId);
     const container = document.getElementById("modalQuizContent");
     if (!container || !chap) return;
 
-    let questions = chap.quizQuestions || [
-        {
-            question: "Quelle est la limite de \\( \\frac{\\sin x}{x} \\) lorsque \\( x \\to 0 \\) ?",
-            options: ["0", "1", "+\\infty", "N'existe pas"],
-            answer: 1,
-            explanation: "Il s'agit d'une limite de référence fondamentale : \\( \\lim_{x\\to 0} \\frac{\\sin x}{x} = 1 \\)."
-        },
-        {
-            question: "Si \\( f \\) est continue sur \\( [a, b] \\) avec \\( f(a) \\cdot f(b) < 0 \\), alors l'équation \\( f(x) = 0 \\) admet :",
-            options: ["Au moins une solution sur ]a, b[", "Aucune solution", "Exactement deux solutions", "Une asymptote"],
-            answer: 0,
-            explanation: "D'après le Théorème des Valeurs Intermédiaires (TVI), si une fonction continue change de signe sur un intervalle, elle s'annule au moins une fois."
-        },
-        {
-            question: "Quelle est la valeur de \\( \\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1} \\) ?",
-            options: ["0", "1", "2", "Forme Indéterminée sans limite"],
-            answer: 2,
-            explanation: "Forme indéterminée 0/0. En factorisant le numérateur : \\( \\frac{(x-1)(x+1)}{x-1} = x + 1 \\to 2 \\)."
-        },
-        {
-            question: "Si \\( f \\) est continue et STRICTEMENT croissante sur \\( [1, 3] \\) avec \\( f(1) = -2 \\) et \\( f(3) = 4 \\), alors l'équation \\( f(x) = 0 \\) admet :",
-            options: ["Aucune solution", "Une unique solution sur ]1, 3[", "Une infinité de solutions", "On ne peut pas déterminer"],
-            answer: 1,
-            explanation: "La stricte monotonie garantit l'unicité de la solution d'après le corollaire du TVI."
-        },
-        {
-            question: "Quelle est la limite de \\( \\sqrt{x^2 + 1} - x \\) quand \\( x \\to +\\infty \\) ?",
-            options: ["+\\infty", "0", "1", "1/2"],
-            answer: 1,
-            explanation: "En multipliant par l'expression conjuguée : \\( \\frac{(x^2+1)-x^2}{\\sqrt{x^2+1}+x} = \\frac{1}{\\sqrt{x^2+1}+x} \\to 0 \\)."
-        }
-    ];
+    let questions = getQuestionsForChapter(chap);
 
     currentModalQuizState = {
         chapterId: chapterId,
