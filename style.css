@@ -1056,6 +1056,11 @@ h1, h2, h3, h4, h5, h6 {
     border-color: rgba(6, 95, 70, 0.3);
 }
 
+.chapter-card.eco-theme:hover {
+    box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.2);
+    border-color: rgba(217, 119, 6, 0.4);
+}
+
 .chapter-header {
     display: flex;
     justify-content: space-between;
@@ -1073,6 +1078,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .math-badge { background-color: rgba(6, 78, 59, 0.1); color: var(--primary); }
 .pc-badge { background-color: rgba(6, 95, 70, 0.1); color: var(--secondary); }
+.eco-badge { background-color: rgba(217, 119, 6, 0.12); color: #d97706; }
 
 .mastered-badge {
     background-color: rgba(6, 95, 70, 0.1);

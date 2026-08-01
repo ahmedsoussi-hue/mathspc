@@ -1,0 +1,3 @@
+*.py
+cif_files/
+.DS_Store

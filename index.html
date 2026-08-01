@@ -52,8 +52,8 @@
                     <button class="nav-link dropdown-toggle" id="navLycéeToggle" data-tab="courses"><i data-lucide="graduation-cap"></i> Lycée <i data-lucide="chevron-down" class="chevron-icon"></i></button>
                     <div class="dropdown-menu">
                         <a href="#courses" class="dropdown-item" data-level-nav="2bac-sm">2ème Bac Sciences Math</a>
-                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-pc">2ème Bac Sciences Physiques</a>
-                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-svt">2ème Bac SVT</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-pc">2ème Bac PC / SVT (Sciences Physiques & SVT)</a>
+                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-eco">2ème Bac Sciences Économiques & Gestion</a>
                         <a href="#courses" class="dropdown-item" data-level-nav="1bac">1ère Année Bac</a>
                         <a href="#courses" class="dropdown-item" data-level-nav="tc">Tronc Commun</a>
                     </div>
@@ -363,8 +363,8 @@
 
             <!-- Math2Bac Chapters Section -->
             <div class="section-title" style="margin-top: 48px;">
-                <h2><i data-lucide="book-open"></i> Chapitres de Mathématiques — 2ème Bac Sciences Physiques</h2>
-                <p>Retrouvez tous les chapitres conformes au programme officiel du Baccalauréat marocain (Sciences Physiques), avec résumés de cours, exercices corrigés et examens nationaux.</p>
+                <h2><i data-lucide="book-open"></i> Chapitres de Mathématiques — 2ème Bac PC & SVT</h2>
+                <p>Retrouvez tous les chapitres conformes au programme officiel du Baccalauréat marocain (Sciences Physiques & SVT), avec résumés de cours, exercices corrigés et examens nationaux.</p>
             </div>
 
             <div class="chapters-container" id="homeChaptersContainer" style="margin-top: 24px;">
@@ -373,8 +373,8 @@
 
             <!-- PC2Bac Chapters Section -->
             <div class="section-title" style="margin-top: 48px;">
-                <h2><i data-lucide="atom"></i> Chapitres de Physique-Chimie — 2ème Bac Sciences Physiques</h2>
-                <p>Retrouvez tous les chapitres de Physique-Chimie conformes au programme officiel du Baccalauréat marocain (Sciences Physiques), avec résumés de cours, exercices corrigés et examens nationaux.</p>
+                <h2><i data-lucide="atom"></i> Chapitres de Physique-Chimie — 2ème Bac PC & SVT</h2>
+                <p>Retrouvez tous les chapitres de Physique-Chimie conformes au programme officiel du Baccalauréat marocain (Sciences Physiques & SVT), avec résumés de cours, exercices corrigés et examens nationaux.</p>
             </div>
 
             <div class="chapters-container" id="homePhysicsChaptersContainer" style="margin-top: 24px;">
@@ -390,8 +390,8 @@
                     <select id="levelFilter">
                         <option value="all">Tous les niveaux</option>
                         <option value="2bac-sm">2ème Bac Sciences Math</option>
-                        <option value="2bac-pc" selected>2ème Bac Sciences Physiques</option>
-                        <option value="2bac-svt">2ème Bac SVT</option>
+                        <option value="2bac-pc" selected>2ème Bac PC & SVT (Sciences Physiques / SVT)</option>
+                        <option value="2bac-eco">2ème Bac Sciences Économiques & Gestion</option>
                         <option value="1bac">1ère Année Bac</option>
                         <option value="tc">Tronc Commun</option>
                         <option value="3ac">3ème Année Collège (3AC)</option>
@@ -405,6 +405,7 @@
                         <option value="all">Toutes les matières</option>
                         <option value="math">Mathématiques</option>
                         <option value="pc">Physique - Chimie</option>
+                        <option value="eco">Économie & Gestion</option>
                     </select>
                 </div>
                 <div class="filter-group search-group">
@@ -1602,7 +1603,8 @@
                             </h4>
                             <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; color: #cbd5e1; line-height: 1.5;">
                                 <li><strong>Conduction (Milieu Solide / Statique) :</strong> Transfert d'énergie de proche en proche sans déplacement macroscopique de matière, par chocs moléculaires et vibrations du réseau cristal (phonons). Régie par la <em>Loi de Fourier</em> : $\Phi = -k A \frac{dT}{dx}$.</li>
-                                <li><strong>Convection (Milieu Fluide) :</strong> Transfert avec <u>déplacement de matière</u> dans un liquide ou un gaz. La différence de masse volumique ($ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>cellules de convection</em>. Régie par la <em>Loi de Newton</em> : $\Phi = h A (T_s - T_f)$.</li>
+                                <li><strong>Convection (Milieu Fluide) :</strong> Transfert avec <u>déplacement de matière</u> dans un liquide ou un gaz. La différence de masse volumique ($
+ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>cellules de convection</em>. Régie par la <em>Loi de Newton</em> : $\Phi = h A (T_s - T_f)$.</li>
                                 <li><strong>Rayonnement (Vacuo / Ondes Électromagnétiques) :</strong> Émission d'ondes électromagnétiques (photons thermiques). **Ne nécessite aucun milieu matériel** et peut se propager dans le vide absolu. Régie par la <em>Loi de Stefan-Boltzmann</em> ($\Phi = \epsilon \sigma A T^4$) et la <em>Loi de Wien</em> ($\lambda_{	ext{max}} T = 2.898 \times 10^{-3} \text{ m}\cdot\text{K}$).</li>
                             </ul>
                         </div>
@@ -2854,8 +2856,9 @@
             </div>
             <div class="footer-links-group">
                 <h4>Niveaux Populaires</h4>
-                <a href="#courses" data-level-footer="2bac-pc">2ème Bac Sciences Physiques</a>
+                <a href="#courses" data-level-footer="2bac-pc">2ème Bac PC & SVT</a>
                 <a href="#courses" data-level-footer="2bac-sm">2ème Bac Sciences Math</a>
+                <a href="#courses" data-level-footer="2bac-eco">2ème Bac Économie & Gestion</a>
                 <a href="#courses" data-level-footer="3ac">3ème Année Collège (3AC)</a>
             </div>
             <div class="footer-links-group">
@@ -2941,6 +2944,6 @@
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js?v=2.6.0"></script>
+    <script src="app.js?v=20260729_pdf_v3"></script>
 </body>
 </html>

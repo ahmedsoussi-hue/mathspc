@@ -6,6 +6,327 @@
 
 // --- DATA SOURCE: CHAPTERS ---
 const chaptersData = [
+    // ==========================================
+    // 2ème BAC SCIENCES ÉCONOMIQUES ET GESTION (2BAC ÉCO)
+    // ==========================================
+    {
+        id: "math-eco-limites",
+        title: "Limites, Continuité & Coût Marginal",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Étude des limites, continuité, Théorème des Valeurs Intermédiaires (TVI) et applications au calcul du coût marginal et asymptotes.",
+        courseContent: `
+<!-- PDF DOWNLOAD BANNER -->
+<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.15), rgba(59, 130, 246, 0.15)); border: 1.5px solid rgba(217, 119, 6, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="background: rgba(217, 119, 6, 0.2); color: #d97706; width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+            <i data-lucide="file-text"></i>
+        </div>
+        <div>
+            <h4 style="margin: 0 0 4px 0; color: var(--text-color); font-weight: 700;">Résumé de Cours en PDF (2BAC Éco)</h4>
+            <p style="margin: 0; color: var(--text-muted); font-size: 0.88rem;">Téléchargez le cours complet Limites & TVI avec exemples économiques.</p>
+        </div>
+    </div>
+    <a href="./pdf/2bac-eco-limites-cours.pdf" target="_blank" download class="btn" style="background: #d97706; color: #fff; border: none; font-weight: 600; padding: 10px 18px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <i data-lucide="download"></i> Télécharger PDF
+    </a>
+</div>
+
+<h3>1. Notion de Limite & Continuité</h3>
+<p>Pour une fonction économique de coût $C(x)$ ou de recette $R(x)$, la continuité garantit l'absence de rupture brutale dans la production.</p>
+
+<div class="formula-box">
+    <h4>Propriété clé — TVI (Théorème des Valeurs Intermédiaires)</h4>
+    <p>Si $f$ est continue sur $[a, b]$ et si $f(a) \cdot f(b) < 0$, alors l'équation <strong>$f(x) = 0$</strong> admet au moins une solution $\alpha \in ]a, b[$.</p>
+    <p><em>Application Économique :</em> Détermination du point de rentabilité (seuil de rentabilité où $R(x) - C(x) = 0$).</p>
+</div>
+
+<h3>2. Interprétation des Asymptotes</h3>
+<ul>
+    <li><strong>Asymptote verticale ($x = a$) :</strong> $\lim_{x \to a} f(x) = \pm \infty$ (surchauffe de coût lorsque la production s'approche d'une capacité limite $a$).</li>
+    <li><strong>Asymptote horizontale ($y = L$) :</strong> $\lim_{x \to +\infty} f(x) = L$ (coût moyen à long terme se stabilisant vers un coût fixe limite $L$).</li>
+</ul>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Seuil de Rentabilité & TVI",
+                statement: "Soit la fonction de bénéfice $B(x) = x^3 + 2x - 5$ en milliers de DH pour $x \in [1, 2]$ centaine d'unités.<br>1) Montrer que $B$ est strictement croissante sur $[1, 2]$.<br>2) Démontrer qu'il existe un unique niveau de production $\alpha \in ]1, 2[$ rendant le bénéfice nul.",
+                solution: "1) $B'(x) = 3x^2 + 2 > 0$ pour tout $x$, donc $B$ est strictement croissante et continue.<br>2) $B(1) = 1 + 2 - 5 = -2 < 0$ et $B(2) = 8 + 4 - 5 = 7 > 0$.<br>Comme $B(1) \cdot B(2) < 0$, d'après le TVI, l'équation $B(x) = 0$ admet une unique solution $\alpha \in ]1, 2[$ (seuil d'équilibre)."
+            }
+        ],
+        exams: [
+            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 },
+            { title: "National 2023 - Session Rattrapage (Éco)", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "math-eco-derivation",
+        title: "Dérivation, Coût Marginal & Élasticité",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Calcul de dérivées, étude des variations, coût moyen, coût marginal et élasticité de la demande par rapport au prix.",
+        courseContent: `
+<h3>1. Coût Marginal & Coût Moyen</h3>
+<p>En sciences économiques, le coût marginal $C_m(x)$ mesure la variation du coût total engendrée par la production d'une unité supplémentaire.</p>
+<div class="formula-box">
+    <h4>Formules Fondamentales</h4>
+    <ul>
+        <li><strong>Coût Marginal :</strong> $C_m(x) = C'(x)$</li>
+        <li><strong>Coût Moyen :</strong> $C_M(x) = \frac{C(x)}{x}$</li>
+        <li><strong>Optimum de Production :</strong> Le coût moyen est minimal lorsque $C_M(x) = C_m(x)$.</li>
+    </ul>
+</div>
+
+<h3>2. Élasticité de la Demande</h3>
+<p>L'élasticité mesure la sensibilité de la demande $D(p)$ par rapport au prix $p$ :</p>
+$$\mathcal{E}(p) = \frac{D'(p)}{D(p)} \times p$$
+<ul>
+    <li>Si $|\mathcal{E}| > 1$ : Demande très élastique (les consommateurs réagissent fortement au prix).</li>
+    <li>Si $|\mathcal{E}| < 1$ : Demande inélastique (bien de première nécessité).</li>
+</ul>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Minimisation du Coût Moyen",
+                statement: "Soit $C(x) = x^2 + 100x + 400$ le coût total.<br>1) Exprimer le coût moyen $C_M(x)$.<br>2) Déterminer la quantité $x$ qui minimise le coût moyen.",
+                solution: "1) $C_M(x) = \frac{C(x)}{x} = x + 100 + \frac{400}{x}$.<br>2) $C_M'(x) = 1 - \frac{400}{x^2} = \frac{x^2 - 400}{x^2}$.<br>$C_M'(x) = 0 \implies x = 20$ unités. Le coût moyen minimum est $C_M(20) = 20 + 100 + 20 = 140$ DH."
+            }
+        ],
+        exams: [
+            { title: "National 2023 - Session Ordinaire (Éco)", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "math-eco-logarithme",
+        coursePdf: {
+            file: "pdf/logarithme.pdf",
+            title: "Résumé de cours : Fonction Logarithme Népérien (ln) (PDF)",
+            description: "Fiche de synthèse officielle complète sur les propriétés, limites et dérivées des logarithmes."
+        },
+        title: "Fonction Logarithme Népérien (ln)",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Étude complète de la fonction ln(x), propriétés algébriques, limites, dérivée et applications aux taux de croissance et d'intérêt.",
+        courseContent: `
+<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Fonctions Logarithmiques)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF officiel.</p>
+            </div>
+        </div>
+        <a href="./pdf/logarithme.pdf" download="logarithme.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+        </a>
+    </div>
+    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
+        <iframe src="./pdf/logarithme.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+</div>
+
+<h3>1. Définition et Propriétés Algébriques</h3>
+<p>La fonction logarithme népérien $x \mapsto \ln(x)$ est définie et strictement croissante sur $]0, +\infty[$.</p>
+<div class="formula-box">
+    <h4>Règles de Calcul ($	o a, b > 0$)</h4>
+    <ul>
+        <li>$\ln(a \cdot b) = \ln(a) + \ln(b)$</li>
+        <li>$\ln\left(\frac{a}{b}\right) = \ln(a) - \ln(b)$</li>
+        <li>$\ln(a^n) = n \ln(a)$</li>
+        <li>$\ln(1) = 0 \quad \text{et} \quad \ln(e) = 1$</li>
+    </ul>
+</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Équation d'Investissement",
+                statement: "Résoudre dans $\mathbb{R}$ l'équation : $\ln(2x - 1) = 3$.",
+                solution: "Condition d'existence : $2x - 1 > 0 \implies x > 1/2$.<br>En appliquant l'exponentielle : $2x - 1 = e^3 \implies x = \frac{e^3 + 1}{2} \approx 10,54$."
+            }
+        ],
+        exams: [
+            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 }
+        ]
+    },
+    {
+        id: "math-eco-exponentielle",
+        title: "Fonction Exponentielle (exp)",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Fonction exponentielle e^x, équations, inéquations, dérivées, limites remarquables et calculs d'amortissement continu.",
+        courseContent: `
+<h3>1. Définition & Réciproque de ln</h3>
+<p>Pour tout $x \in \mathbb{R}$, $y = e^x \iff \ln(y) = x$ (avec $y > 0$).</p>
+<div class="formula-box">
+    <h4>Propriétés Essentielles</h4>
+    <ul>
+        <li>$e^{a+b} = e^a \cdot e^b$</li>
+        <li>$\frac{e^a}{e^b} = e^{a-b}$</li>
+        <li>$(e^a)^n = e^{n \cdot a}$</li>
+        <li>$\lim_{x \to +\infty} e^x = +\infty \quad \text{et} \quad \lim_{x \to -\infty} e^x = 0$</li>
+    </ul>
+</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Modèle de Ventes",
+                statement: "Les ventes mensuelles d'un produit sont données par $V(t) = 500 (1 - e^{-0,2 t})$ où $t$ est en mois.<br>1) Calculer les ventes initiales $V(0)$.<br>2) Déterminer la limite des ventes à long terme.",
+                solution: "1) $V(0) = 500(1 - e^0) = 0$.<br>2) $\lim_{t \to +\infty} e^{-0,2 t} = 0$, donc $\lim_{t \to +\infty} V(t) = 500$ unités (seuil de saturation)."
+            }
+        ],
+        exams: [
+            { title: "National 2022 - Session Ordinaire (Éco)", type: "National", year: 2022 }
+        ]
+    },
+    {
+        id: "math-eco-suites",
+        coursePdf: {
+            file: "pdf/Resum_suites_By_soussi.pdf",
+            title: "Résumé de cours : Suites Numériques (PDF) — By Dr. Soussi",
+            description: "Fiche de synthèse officielle complète sur les suites numériques."
+        },
+        title: "Suites Numériques & Mathématiques Financières",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Suites arithmétiques, géométriques, intérêts composés, capitalisation, valeur acquise et annuités de remboursement.",
+        courseContent: `
+<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Suites Numériques — By Dr. Soussi)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF résumé.</p>
+            </div>
+        </div>
+        <a href="./pdf/Resum_suites_By_soussi.pdf" download="Resum_suites_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+        </a>
+    </div>
+    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
+        <iframe src="./pdf/Resum_suites_By_soussi.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+</div>
+
+<h3>1. Capitalisation et Intérêts Composés</h3>
+<p>Un capital $C_0$ placé au taux d'intérêt annuel $i$ devient après $n$ années :</p>
+<div class="formula-box">
+    <h4>Formule du Capital Acquise (Intérêts Composés)</h4>
+    $$C_n = C_0 \cdot (1 + i)^n$$
+    <p>Cette suite est une <strong>suite géométrique</strong> de raison $q = 1 + i$.</p>
+</div>
+
+<h3>2. Somme des Termes d'une Suite Géométrique</h3>
+$$S_n = u_0 \cdot \frac{1 - q^{n+1}}{1 - q}$$
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul de Capital",
+                statement: "Un épargnant dépose $10\,000$ DH dans un compte rémunéré à $5\%$ d'intérêts composés par an.<br>Calculer la somme disponible au bout de $6$ ans.",
+                solution: "$C_6 = 10\,000 \cdot (1 + 0{,}05)^6 = 10\,000 \cdot (1{,}05)^6 \approx 13\,400{,}96$ DH."
+            }
+        ],
+        exams: [
+            { title: "National 2023 - Session Ordinaire (Éco)", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "math-eco-statistiques",
+        title: "Statistiques à Deux Variables & Ajustement Linéaire",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Nuages de points, point moyen G, covariance, méthode des moindres carrés et prévisions économiques.",
+        courseContent: `
+<h3>1. Covariance & Point Moyen</h3>
+<p>Soit la série statistique à deux variables $(x_i, y_i)$ :</p>
+<ul>
+    <li>Point moyen : $G(\bar{x}, \bar{y})$ où $\bar{x} = \frac{1}{N}\sum x_i$ et $\bar{y} = \frac{1}{N}\sum y_i$.</li>
+    <li>Covariance : $Cov(X,Y) = \frac{1}{N}\sum x_i y_i - \bar{x}\bar{y}$.</li>
+</ul>
+
+<div class="formula-box">
+    <h4>Droite d'Ajustement par les Moindres Carrés : $y = a x + b$</h4>
+    $$a = \frac{Cov(X,Y)}{V(X)} = \frac{Cov(X,Y)}{\bar{x^2} - \bar{x}^2}$$
+    $$b = \bar{y} - a \bar{x}$$
+</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Prévision du Chiffre d'Affaires",
+                statement: "On donne $\bar{x} = 3$, $\bar{y} = 15$, $Cov(X,Y) = 4$ et $V(X) = 2$.<br>1) Établir l'équation de la droite d'ajustement linéaire.<br>2) Estimer $y$ pour $x = 6$.",
+                solution: "1) $a = \frac{4}{2} = 2$. Puis $b = 15 - (2 \times 3) = 9$. D'où $y = 2x + 9$.<br>2) Pour $x = 6$, $y = 2(6) + 9 = 21$ (en millions de DH)."
+            }
+        ],
+        exams: [
+            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 }
+        ]
+    },
+    {
+        id: "eco-generale-marche",
+        title: "Économie Générale — Le Marché et les Agrégats Économiques",
+        level: "2bac-eco",
+        subject: "eco",
+        description: "Lois du marché (offre et demande), structures de marché (CPP, Monopole, Oligopole) et grands agrégats de la comptabilité nationale (PIB, RNBD, Épargne).",
+        courseContent: `
+<h3>1. Concept de Marché et Régimes de Concurrence</h3>
+<p>Le marché est le lieu de rencontre réel ou fictif entre l'offre et la demande qui détermine le prix d'équilibre.</p>
+<div class="formula-box">
+    <h4>Agrégats de la Comptabilité Nationale Marocaine</h4>
+    <ul>
+        <li><strong>PIB (Produit Intérieur Brut) :</strong> $\text{PIB} = \sum \text{Valeurs Ajoutées} + \text{TVA} + \text{Droits de Douane}$</li>
+        <li><strong>RNBD (Revenu National Brut Disponible) :</strong> $\text{RNBD} = \text{PIB} + \text{Revenus primaires nets de l'extérieur}$</li>
+        <li><strong>Taux de Croissance du PIB :</strong> $\frac{\text{PIB}_t - \text{PIB}_{t-1}}{\text{PIB}_{t-1}} \times 100$</li>
+    </ul>
+</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul de PIB et Croissance",
+                statement: "En 2022, le PIB du Maroc était de 1330 milliards DH. En 2023, il est passé à 1400 milliards DH.<br>Calculer le taux de croissance économique en 2023.",
+                solution: "$\text{Taux} = \frac{1400 - 1330}{1330} \times 100 = \frac{70}{1330} \times 100 \approx 5{,}26\%$."
+            }
+        ],
+        exams: [
+            { title: "National 2023 - Session Ordinaire (Éco)", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "eco-comptabilite-amortissements",
+        title: "Comptabilité & Finance — Amortissements & Provisions",
+        level: "2bac-eco",
+        subject: "eco",
+        description: "Travaux d'inventaire, plan d'amortissement linéaire et dégressif, régularisation des stocks et écritures comptables d'inventaire.",
+        courseContent: `
+<h3>1. Amortissement Constant (Linéaire)</h3>
+<p>L'amortissement constate la dépréciation irréversible des immobilisations due à l'usure ou à l'obsolescence.</p>
+<div class="formula-box">
+    <h4>Formules Comptables Clés</h4>
+    <ul>
+        <li><strong>Taux d'amortissement :</strong> $t = \frac{100}{N}$ (où $N$ est la durée de vie)</li>
+        <li><strong>Annuité :</strong> $a = V_0 \times t \times \frac{m}{12}$</li>
+        <li><strong>Valeur Nette d'Amortissement (VNA) :</strong> $\text{VNA} = V_0 - \sum \text{Amortissements}$</li>
+    </ul>
+</div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul d'Annuité d'Amortissement",
+                statement: "Une entreprise achète un matériel informatique pour $50\,000$ DH HT le 01/04/2023. Durée d'utilisation : 5 ans.<br>Calculer la première annuité pour l'exercice 2023.",
+                solution: "Taux $t = 100/5 = 20\%$.<br>Nombre de mois en 2023 (d'avril à décembre) : $m = 9$ mois.<br>Annuité 2023 = $50\,000 \times 0{,}20 \times \frac{9}{12} = 7\,500$ DH."
+            }
+        ],
+        exams: [
+            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 }
+        ]
+    },
+
     {
         id: "math-lim-cont",
         title: "Limites et continuité",
@@ -629,11 +950,49 @@ const chaptersData = [
     },
     {
         id: "math-deriv-etude",
+        coursePdf: {
+            file: "pdf/derivabilite-resume.pdf",
+            title: "Résumé de cours : Dérivabilité & Étude de Fonctions (PDF)",
+            description: "Fiche de synthèse officielle complète sur la dérivabilité et l'étude des fonctions."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/derivabilite-1.pdf",
+                title: "Série d'Exercices Corrigés 1 : Dérivabilité (PDF)",
+                description: "Fiche complète d'exercices d'application corrigés et d'entraînement sur la dérivabilité."
+            },
+            {
+                file: "pdf/etude_de_fonction-1.pdf",
+                title: "Série d'Exercices Corrigés 2 : Étude de Fonctions (PDF)",
+                description: "Problèmes et exercices corrigés complets sur l'étude des fonctions numériques."
+            }
+        ],
         title: "Dérivation et étude des fonctions",
         level: "2bac-pc",
         subject: "math",
         description: "Calcul de dérivées, tangentes, sens de variation, extremums, branches infinies, concavité et étude complète de fonctions.",
         courseContent: `
+<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Dérivabilité & Étude de Fonctions)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF officiel (301 KB).</p>
+            </div>
+        </div>
+        <a href="./pdf/derivabilite-resume.pdf" download="derivabilite-resume.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+        </a>
+    </div>
+    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
+        <iframe src="./pdf/derivabilite-resume.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+</div>
+
 <div class="toc reveal">
     <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire</div>
     <ol class="toc-list">
@@ -1053,16 +1412,43 @@ const chaptersData = [
             }
         ],
         exams: [
+            { title: "Résumé de cours : Dérivabilité & Étude de Fonctions (PDF)", type: "Résumé", year: 2026, description: "Fiche de synthèse officielle complète sur la dérivabilité et l'étude des fonctions en format PDF.", file: "pdf/derivabilite-resume.pdf" },
             { title: "Devoir Surveillé N°2 - Modèle A", type: "Devoir", year: 2026 }
         ]
     },
     {
         id: "math-suites",
+        coursePdf: {
+            file: "pdf/Resum_suites_By_soussi.pdf",
+            title: "Résumé de cours : Suites Numériques (PDF) — By Dr. Soussi",
+            description: "Fiche de synthèse officielle complète et schémas sur les suites numériques."
+        },
         title: "Suites numériques",
         level: "2bac-pc",
         subject: "math",
         description: "Suites arithmétiques et géométriques, récurrence, convergence, limites de suites et suites de type f(Un).",
         courseContent: `
+<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Suites Numériques — By Dr. Soussi)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF résumé.</p>
+            </div>
+        </div>
+        <a href="./pdf/Resum_suites_By_soussi.pdf" download="Resum_suites_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+        </a>
+    </div>
+    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
+        <iframe src="./pdf/Resum_suites_By_soussi.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+</div>
+
 <div class="toc reveal">
     <div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire</div>
     <ol class="toc-list">
@@ -1525,11 +1911,37 @@ const chaptersData = [
     },
     {
         id: "math-logarithmes",
+        coursePdf: {
+            file: "pdf/logarithme.pdf",
+            title: "Résumé de cours : Fonction Logarithme Népérien (ln) (PDF)",
+            description: "Fiche de synthèse officielle complète sur les propriétés, limites et dérivées des logarithmes."
+        },
         title: "Fonctions logarithmiques",
         level: "2bac-pc",
         subject: "math",
         description: "Étude complète de la fonction logarithme népérien (ln) : propriétés algébriques, limites de référence et dérivées.",
         courseContent: `
+<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Fonctions Logarithmiques)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF officiel.</p>
+            </div>
+        </div>
+        <a href="./pdf/logarithme.pdf" download="logarithme.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+        </a>
+    </div>
+    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
+        <iframe src="./pdf/logarithme.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+</div>
+
 <div class="toc reveal"><div class="toc-title"><svg xmlns="http://www.w3.org/2000/svg" style="width:0.95em;height:0.95em;vertical-align:middle;display:inline-block;margin-right:2px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Sommaire</div><ol class="toc-list">
     <li><a href="#s1"><span class="toc-num">I</span> Définition du logarithme népérien</a></li>
     <li><a href="#s2"><span class="toc-num">II</span> Propriétés de la fonction ln</a></li>
@@ -4658,7 +5070,7 @@ function switchTab(tabId, options = {}) {
             if (tabId === "courses") {
                 const currentLevel = document.getElementById("levelFilter").value;
                 if (btn.id === "navLycéeToggle") {
-                    const isLycée = ["2bac-sm", "2bac-pc", "2bac-svt", "1bac", "tc"].includes(currentLevel);
+                    const isLycée = ["2bac-sm", "2bac-pc", "2bac-svt", "2bac-eco", "1bac", "tc"].includes(currentLevel);
                     if (isLycée) btn.classList.add("active");
                     else btn.classList.remove("active");
                 } else if (btn.id === "navCollègeToggle") {
@@ -4786,8 +5198,12 @@ function renderChapters(level = "2bac-pc", subject = "all", query = "") {
     container.innerHTML = "";
 
     const filtered = chaptersData.filter(chap => {
-        // level filter
-        const matchLevel = (level === "all" || chap.level === level);
+        // level filter (2bac-pc & 2bac-svt share the same curriculum in Maths and PC)
+        const matchLevel = (
+            level === "all" ||
+            chap.level === level ||
+            ((level === "2bac-pc" || level === "2bac-svt") && (chap.level === "2bac-pc" || chap.level === "2bac-svt"))
+        );
         // subject filter
         const matchSubject = (subject === "all" || chap.subject === subject);
         // search query
@@ -4832,9 +5248,12 @@ function renderChapters(level = "2bac-pc", subject = "all", query = "") {
                     <span><i data-lucide="file-text"></i> ${chap.exercises.length} Exos</span>
                     <span><i data-lucide="award"></i> ${chap.exams.length} Examens</span>
                 </div>
-                <button class="read-btn" title="Explorer le chapitre" onclick="openChapterModal('${chap.id}')">
-                    <i data-lucide="arrow-right"></i>
-                </button>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    ${(chap.coursePdf || chap.id === "math-deriv-etude") ? '<a href="./pdf/derivabilite-resume.pdf" target="_blank" download class="btn" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Télécharger le Résumé PDF"><i data-lucide="download" style="width:14px;height:14px;"></i> PDF</a>' : ''}
+                    <button class="read-btn" title="Explorer le chapitre" onclick="openChapterModal('${chap.id}')">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
             </div>
         `;
         
@@ -5048,32 +5467,38 @@ window.openChapterModal = function(chapterId, options = {}) {
     document.getElementById("modalTitle").textContent = chap.title;
     
     // Course HTML Content
-    document.getElementById("modalCourseContent").innerHTML = chap.courseContent;
+    document.getElementById("modalCourseContent").innerHTML = chap.courseContent || "";
     
     // Exercises Accordion
     const exercisesContainer = document.getElementById("modalExercisesContent");
     exercisesContainer.innerHTML = "";
     
-    if (chap.exercisePdf) {
-        const pdfBanner = document.createElement("div");
-        pdfBanner.className = "pdf-download-card";
-        pdfBanner.style.cssText = "background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 18px 22px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; backdrop-filter: blur(8px);";
-        pdfBanner.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+    const pdfsToRender = chap.exercisePdfs || (chap.exercisePdf ? [chap.exercisePdf] : []);
+    pdfsToRender.forEach((pdfObj) => {
+        const pdfViewerCard = document.createElement("div");
+        pdfViewerCard.className = "pdf-viewer-card";
+        pdfViewerCard.style.cssText = "background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);";
+        pdfViewerCard.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+                    </div>
+                    <div>
+                        <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: #ffffff;">📄 ${pdfObj.title || "Série d'exercices (PDF)"}</h4>
+                        <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: #94a3b8;">${pdfObj.description || "Fiche d'exercices d'application et de synthèse."}</p>
+                    </div>
                 </div>
-                <div>
-                    <h4 style="margin: 0; font-size: 1rem; font-weight: 700; color: #ffffff;">${chap.exercisePdf.title || "Série d'exercices (PDF)"}</h4>
-                    <p style="margin: 2px 0 0 0; font-size: 0.82rem; color: #94a3b8;">${chap.exercisePdf.description || "Fiche d'exercices d'application et de synthèse."}</p>
-                </div>
+                <a href="${pdfObj.file}" download="${pdfObj.file.split('/').pop()}" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+                </a>
             </div>
-            <a href="${chap.exercisePdf.file}" download="${chap.exercisePdf.file.split('/').pop()}" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger la Série d'Exercices (PDF)
-            </a>
+            <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
+                <iframe src="./${pdfObj.file}" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
         `;
-        exercisesContainer.appendChild(pdfBanner);
-    }
+        exercisesContainer.appendChild(pdfViewerCard);
+    });
     
     if (chap.exercises.length === 0) {
         exercisesContainer.innerHTML = `<p class="text-muted">Aucun exercice disponible pour ce chapitre.</p>`;
