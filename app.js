@@ -328,6 +328,73 @@ $$S_n = u_0 \cdot \frac{1 - q^{n+1}}{1 - q}$$
     },
 
     {
+        id: "math-examen-national-2026-pc",
+        title: "Examen National 2026 — Mathématiques (Session Ordinaire)",
+        level: "2bac-pc",
+        subject: "math",
+        description: "Épreuve officielle 2026 du Baccalauréat National avec sujet complet et corrigé détaillé pas à pas par Prof. Tadoummant.",
+        coursePdf: {
+            file: "pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf",
+            title: "Examen National 2026 Mathématiques 2BAC PC — Sujet & Corrigé (PDF)",
+            description: "Document officiel haute définition avec toutes les étapes de calcul et barème MEN."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf",
+                title: "Corrigé Détaillé de l'Épreuve 2026 (PDF)",
+                description: "Correction complète et détaillée rédigée par Prof. Tadoummant."
+            }
+        ],
+        courseContent: `
+<!-- PDF DOWNLOAD & PREVIEW BANNER -->
+<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(56, 189, 248, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.5); border-radius: 16px; padding: 22px 26px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 16px; backdrop-filter: blur(8px);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #ffffff;">Examen National 2026 — Mathématiques (Session Ordinaire)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Filière : 2ème Bac Sciences Physiques & SVT • Auteur corrigé : Prof. Tadoummant</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 30px; font-weight: 600; font-size: 0.88rem; text-decoration: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Plein Écran
+            </a>
+            <a href="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Structure de l'épreuve 2026</h4>
+    <ul>
+        <li><strong>Exercice 1 :</strong> Géométrie dans l'espace (Produit scalaire, produit vectoriel, plan et sphère).</li>
+        <li><strong>Exercice 2 :</strong> Nombres complexes (Équations du second degré, forme trigonométrique, rotations).</li>
+        <li><strong>Exercice 3 :</strong> Calcul des probabilités & variables aléatoires.</li>
+        <li><strong>Problème :</strong> Étude approfondie d'une fonction numérique & calcul intégral.</li>
+    </ul>
+</div>
+
+<div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; margin-top: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <iframe src="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf#toolbar=1" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+        `,
+        exercises: [
+            {
+                title: "Épreuve Officielle & Corrigé Intégral 2026",
+                statement: "Retrouvez l'intégralité du sujet d'examen national 2026 de Mathématiques (Session Ordinaire) pour la filière 2BAC PC.",
+                solution: "Consultez le document PDF ci-dessous ou cliquez sur Télécharger pour obtenir le corrigé pas à pas rédigé par Prof. Tadoummant."
+            }
+        ],
+        exams: [
+            { title: "Examen National 2026 - Session Ordinaire (PC/SVT)", type: "National", year: 2026, file: "pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" }
+        ]
+    },
+    {
         id: "math-lim-cont",
         title: "Limites et continuité",
         level: "2bac-pc",
@@ -4766,6 +4833,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupQuizEngine();
     setupInteractiveTools();
     setupProfileModal();
+    setupExamsModule();
     setupRouterEvents();
     triggerMathJax();
 
@@ -5100,6 +5168,9 @@ function switchTab(tabId, options = {}) {
     if (tabId === "recherche") {
         setupRechercheSection();
     }
+    if (tabId === "examens") {
+        setupExamsModule();
+    }
 
     // Smooth scroll back to top of main view
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -5249,7 +5320,7 @@ function renderChapters(level = "2bac-pc", subject = "all", query = "") {
                     <span><i data-lucide="award"></i> ${chap.exams.length} Examens</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    ${(chap.coursePdf || chap.id === "math-deriv-etude") ? '<a href="./pdf/derivabilite-resume.pdf" target="_blank" download class="btn" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Télécharger le Résumé PDF"><i data-lucide="download" style="width:14px;height:14px;"></i> PDF</a>' : ''}
+                    ${chap.coursePdf ? `<a href="${chap.coursePdf.file || chap.coursePdf}" target="_blank" download="${(chap.coursePdf.file || chap.coursePdf).split('/').pop()}" class="btn" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Télécharger le PDF"><i data-lucide="download" style="width:14px;height:14px;"></i> PDF</a>` : ''}
                     <button class="read-btn" title="Explorer le chapitre" onclick="openChapterModal('${chap.id}')">
                         <i data-lucide="arrow-right"></i>
                     </button>
@@ -5260,7 +5331,7 @@ function renderChapters(level = "2bac-pc", subject = "all", query = "") {
         container.appendChild(card);
     });
 
-    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function renderHomeChapters() {
@@ -5269,6 +5340,7 @@ function renderHomeChapters() {
     container.innerHTML = "";
 
     const homeChaptersList = [
+        "math-examen-national-2026-pc",
         "math-lim-cont",
         "math-deriv-etude",
         "math-suites",
@@ -5290,12 +5362,12 @@ function renderHomeChapters() {
         const card = document.createElement("div");
         card.className = `chapter-card math-theme`;
         
-        const chapNum = String(idx + 1).padStart(2, '0');
+        const chapLabel = chap.id === "math-examen-national-2026-pc" ? "Examen National" : `Chapitre ${String(idx).padStart(2, '0')}`;
         
         card.innerHTML = `
             <div class="chapter-header">
-                <span class="chapter-subject-badge math-badge">
-                    Chapitre ${chapNum}
+                <span class="chapter-subject-badge math-badge" ${chap.id === "math-examen-national-2026-pc" ? 'style="background: rgba(16, 185, 129, 0.2); color: #10b981;"' : ''}>
+                    ${chapLabel}
                 </span>
                 ${isMastered ? '<span class="mastered-badge"><i data-lucide="check-circle-2"></i> Maîtrisé</span>' : ''}
             </div>
@@ -5308,16 +5380,19 @@ function renderHomeChapters() {
                     <span><i data-lucide="file-text"></i> ${chap.exercises.length} Exos</span>
                     <span><i data-lucide="award"></i> ${chap.exams.length} Examens</span>
                 </div>
-                <button class="read-btn" title="Explorer le chapitre" onclick="openChapterModal('${chap.id}')">
-                    <i data-lucide="arrow-right"></i>
-                </button>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    ${chap.coursePdf ? `<a href="${chap.coursePdf.file || chap.coursePdf}" target="_blank" download="${(chap.coursePdf.file || chap.coursePdf).split('/').pop()}" class="btn" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;" title="Télécharger le PDF"><i data-lucide="download" style="width:14px;height:14px;"></i> PDF</a>` : ''}
+                    <button class="read-btn" title="Explorer" onclick="openChapterModal('${chap.id}')">
+                        <i data-lucide="arrow-right"></i>
+                    </button>
+                </div>
             </div>
         `;
         
         container.appendChild(card);
     });
 
-    if (window.lucide && typeof window.lucide.createIcons === "function") if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function renderHomePhysicsChapters() {
@@ -17766,3 +17841,568 @@ function setupTransfertsThermiquesSimulator() {
         }
     }
 }
+
+
+/* ==========================================================================
+   DATA SOURCE: EXAMENS NATIONAUX DU BACCALAURÉAT MAROCAIN (ANNALES)
+   ========================================================================== */
+const examsData = [
+    {
+        id: "exam-2026-math-pc-ord",
+        title: "Examen National 2026 — Mathématiques (Session Ordinaire)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2026,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        pdfUrl: "pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf",
+        description: "Épreuve officielle 2026 avec Sujet & Corrigé Détaillé (Prof. Tadoummant) : Géométrie de l'espace, Nombres complexes, Probabilités et Étude de fonction numérique.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations sur l'épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (Sciences Expérimentales)</li>
+                        <li><strong>Session :</strong> Session Ordinaire 2026</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5</li>
+                        <li><strong>Calculatrice non programmable autorisée.</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Épreuve & Corrigé Complet 2026 (PDF Haute Qualité)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Document original de l'examen national avec solution détaillée pas à pas rédigée par Prof. Tadoummant.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Ouvrir en Plein Écran
+                        </a>
+                        <a href="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="download"></i> Télécharger le PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2026 (Visionneuse PDF intégrée)
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
+                    <h4>Correction Officielle Détaillée — Examen National 2026</h4>
+                    <p>Corrigé complet étape par étape par Prof. Tadoummant avec barème officiel et justifications rigoureuses.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Intégral Pas à Pas (PDF)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Solution complète et détaillée pour toutes les questions de l'épreuve 2026.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Visionner en Grand
+                        </a>
+                        <a href="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="download"></i> Télécharger la Solution PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Correction Détaillée Pas à Pas (Visionneuse PDF intégrée)
+                        </span>
+                        <span style="font-size: 0.8rem; color: #38bdf8; font-weight: 600;">Par Prof. Tadoummant</span>
+                    </div>
+                    <iframe src="pdf/Examen_National_2026_Maths_PC_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2024-math-pc-ord",
+        title: "Examen National 2024 — Mathématiques (Session Ordinaire)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2024,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        description: "Épreuve officielle du Baccalauréat 2024 : Nombres complexes, Équations différentielles, Probabilités et Étude d'une fonction exponentielle.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations sur l'épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5</li>
+                        <li><strong>Usage de la calculatrice non programmable est autorisé.</strong></li>
+                    </ul>
+                </div>
+
+                <h3>Exercice 1 : Nombres Complexes (3 points)</h3>
+                <p>1. Résoudre dans l'ensemble $\mathbb{C}$ des nombres complexes l'équation :</p>
+                $$z^2 - 2\sqrt{2}z + 4 = 0$$
+                <p>2. On pose $a = \sqrt{2} + i\sqrt{2}$. Écrire $a$ sous forme trigonométrique et déterminer $a^8$.</p>
+
+                <h3>Exercice 2 : Équations Différentielles (3 points)</h3>
+                <p>On considère l'équation différentielle $(E) : y' - 2y = e^x$.</p>
+                <p>1. Déterminer la valeur du réel $k$ pour que la fonction $g(x) = k e^x$ soit solution de $(E)$.</p>
+                <p>2. En déduire la solution générale de $(E)$, puis déterminer la solution $f$ vérifiant la condition initiale $f(0) = 2$.</p>
+
+                <h3>Exercice 3 : Probabilités (3 points)</h3>
+                <p>Une urne contient 8 boules : 4 boules rouges numérotées 1, 1, 2, 2 et 4 boules vertes numérotées 1, 2, 2, 3. On tire simultanément 3 boules.</p>
+                <p>Calculer la probabilité d'obtenir 3 boules de même couleur.</p>
+
+                <h3>Problème : Étude de Fonction & Calcul Intégral (11 points)</h3>
+                <p>Soit $f$ la fonction numérique définie sur $\mathbb{R}$ par $f(x) = (x - 1)e^x + x$.</p>
+                <p>1. Calculer $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. Montrer que la droite $(\Delta) : y = x$ est asymptote oblique à $(C_f)$ en $-\infty$.</p>
+                <p>2. Montrer que $f'(x) = x e^x + 1$ et dresser le tableau de variations de $f$.</p>
+                <p>3. Calculer l'intégrale $I = \int_0^1 (x-1)e^x dx$ par parties et déterminer l'aire du domaine délimité par $(C_f)$.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
+                    <h4>Correction Officielle Détaillée — Barème MEN</h4>
+                    <p>Suivez étape par étape la rédaction type exigée le jour de l'examen national.</p>
+                </div>
+
+                <div class="cours-section">
+                    <h3>Exercice 1 : Nombres Complexes (3 pts)</h3>
+                    <p><strong>1. Résolution de $z^2 - 2\sqrt{2}z + 4 = 0$ :</strong></p>
+                    <p>$\Delta = (-2\sqrt{2})^2 - 4(1)(4) = 8 - 16 = -8 = (2\sqrt{2} i)^2 < 0$.</p>
+                    <p>Solutions complexes conjuguées :</p>
+                    $$z_1 = \sqrt{2} + i\sqrt{2} \quad \text{et} \quad z_2 = \sqrt{2} - i\sqrt{2}$$
+                    <p><strong>2. Forme trigonométrique & $a^8$ :</strong></p>
+                    $$a = 2\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right) = 2 e^{i\frac{\pi}{4}}$$
+                    $$a^8 = (2 e^{i\frac{\pi}{4}})^8 = 2^8 e^{i 2\pi} = 256$$
+                </div>
+
+                <div class="cours-section" style="margin-top: 24px;">
+                    <h3>Problème : Étude de Fonction (11 pts)</h3>
+                    <p><strong>1. Limites & Asymptote :</strong></p>
+                    $$\lim_{x \to +\infty} f(x) = +\infty \quad \text{et} \quad \lim_{x \to -\infty} [f(x) - x] = \lim_{x \to -\infty} (x-1)e^x = 0$$
+                    <p>Donc $(\Delta) : y = x$ est asymptote oblique à $(C_f)$ en $-\infty$.</p>
+                    <p><strong>3. Intégrale & Aire :</strong></p>
+                    $$I = [(x-1)e^x]_0^1 - \int_0^1 e^x dx = 1 - (e - 1) = 2 - e$$
+                    <p>Aire $\mathcal{A} = (2 - e) + \frac{1}{2} = \frac{5}{2} - e \approx 0{,}22 \text{ cm}^2$.</p>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2024-pc-pc-ord",
+        title: "Examen National 2024 — Physique-Chimie (Session Ordinaire)",
+        level: "2bac-pc",
+        subject: "pc",
+        year: 2024,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC",
+        subjectLabel: "Physique - Chimie",
+        duration: "3 heures",
+        coefficient: "7",
+        description: "Épreuve officielle 2024 : Suivi temporel de réaction Zinc-HCl, Laser & Diffraction, Circuit RLC et Projectile.",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>CHIMIE (7 pts) : Cinétique de la réaction Zinc-Acide Chlorhydrique</h3>
+                <p>On introduit $m = 0{,}65\text{ g}$ de zinc dans $V = 100\text{ mL}$ d'acide chlorhydrique à $C = 0{,}5\text{ mol/L}$.</p>
+                $$\text{Zn}_{(s)} + 2\text{H}^+_{(aq)} \longrightarrow \text{Zn}^{2+}_{(aq)} + \text{H}_{2(g)}$$
+                <p>1. Déterminer l'avancement maximal $x_{max}$. (Donnée : $M(\text{Zn}) = 65{,}4\text{ g/mol}$).</p>
+                <p>2. Définir le temps de demi-réaction $t_{1/2}$ et déterminer $x(t_{1/2})$.</p>
+
+                <h3>PHYSIQUE (13 pts) : Ondes lumineuses & Électricité</h3>
+                <p>1. Un laser de longueur d'onde $\lambda$ éclaire une fente de largeur $a = 0{,}10\text{ mm}$. La largeur de la tache centrale sur un écran à $D = 2{,}0\text{ m}$ est $L = 2{,}6\text{ cm}$. Déterminer $\lambda$ en nm.</p>
+                <p>2. Établir l'équation différentielle du circuit RLC en charge $q(t)$ et calculer la pseudo-période $T_0 = 2\pi\sqrt{LC}$.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Correction Physique-Chimie 2024</h3>
+                <p><strong>CHIMIE :</strong> $n_0(\text{Zn}) = \frac{0{,}65}{65{,}4} = 0{,}010\text{ mol}$. $n_0(\text{H}^+) = 0{,}050\text{ mol}$. Le zinc est le réactif limitant, $x_{max} = 10\text{ mmol}$.</p>
+                <p>À $t_{1/2}$, $x(t_{1/2}) = x_{max}/2 = 5\text{ mmol}$.</p>
+                <p><strong>PHYSIQUE (Diffraction) :</strong> $\lambda = \frac{L \cdot a}{2 D} = \frac{2{,}6 \times 10^{-2} \times 10^{-4}}{4} = 6,5 \times 10^{-7}\text{ m} = 650\text{ nm}$.</p>
+            </div>
+        `
+    },
+    {
+        id: "exam-2024-math-sm-ord",
+        title: "Examen National 2024 — Mathématiques (Session Ordinaire - SM A&B)",
+        level: "2bac-sm",
+        subject: "math",
+        year: 2024,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac SM (A & B)",
+        subjectLabel: "Mathématiques",
+        duration: "4 heures",
+        coefficient: "9",
+        description: "Épreuve pour Sciences Mathématiques : Groupe (R, *), Arithmétique mod p et Suites d'intégrales.",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>Exercice 1 : Structures Algébriques (3.5 pts)</h3>
+                <p>On munit $\mathbb{R}$ de la loi $x * y = x + y - 2$. Montrer que $(\mathbb{R}, *)$ est un groupe commutatif.</p>
+                <h3>Exercice 2 : Suites d'Intégrales (13 pts)</h3>
+                <p>Soit $u_n = \int_0^1 \frac{x^n}{1 + x^2} dx$. Montrer que $(u_n)$ converge et déterminer sa limite.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Correction SM 2024</h3>
+                <p><strong>Exercice 1 :</strong> Associativité et commutativité évidentes. Élément neutre $e = 2$. Symétrique $x' = 4 - x$.</p>
+                <p><strong>Exercice 2 :</strong> $0 \le u_n \le \frac{1}{n+1} \implies \lim_{n \to +\infty} u_n = 0$.</p>
+            </div>
+        `
+    },
+    {
+        id: "exam-2023-math-pc-ord",
+        title: "Examen National 2023 — Mathématiques (Session Ordinaire)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2023,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        description: "Épreuve du Bac 2023 : Géométrie 3D (Sphère & Plan), Nombres complexes et Fonction ln(x).",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>Exercice 1 : Géométrie 3D (3 pts)</h3>
+                <p>Sphère $(S) : x^2 + y^2 + z^2 - 2x + 4y - 4 = 0$ et plan $(P) : 2x - y + 2z + 1 = 0$. Déterminer le centre et le rayon de $(S)$.</p>
+                <h3>Exercice 2 : Fonction Logarithme (11 pts)</h3>
+                <p>Soit $f(x) = x + 1 - \ln(x)$ sur $]0, +\infty[$. Déterminer les variations de $f$.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Correction 2023</h3>
+                <p><strong>Sphère :</strong> Centre $\Omega(1, -2, 0)$ et rayon $R = 3$.</p>
+                <p><strong>Fonction :</strong> $f'(x) = 1 - 1/x = (x-1)/x$. Minimum en $x = 1$ valant $f(1) = 2$.</p>
+            </div>
+        `
+    },
+    {
+        id: "exam-2023-pc-pc-ord",
+        title: "Examen National 2023 — Physique-Chimie (Session Ordinaire)",
+        level: "2bac-pc",
+        subject: "pc",
+        year: 2023,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC",
+        subjectLabel: "Physique - Chimie",
+        duration: "3 heures",
+        coefficient: "7",
+        description: "Épreuve officielle 2023 : Dosage pH-métrique de l'acide éthanoïque et résonance RLC.",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>CHIMIE : Dosage d'un Acide Faible</h3>
+                <p>On dose $V_A = 20\text{ mL}$ d'acide éthanoïque par la soude $C_B = 0{,}10\text{ mol/L}$. Volume équivalent $V_E = 15\text{ mL}$. Calculer $C_A$.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Correction Chimie 2023</h3>
+                <p>$C_A V_A = C_B V_E \implies C_A = \frac{0{,}10 \times 15}{20} = 0{,}075\text{ mol/L}$.</p>
+            </div>
+        `
+    },
+    {
+        id: "exam-2023-math-eco-ord",
+        title: "Examen National 2023 — Mathématiques (Session Ordinaire - Éco)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2023,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac Éco",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "3",
+        description: "Épreuve officielle pour Sciences Économiques : Coût moyen $C_M(x)$ et minimisation.",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>Exercice : Minimisation du Coût Moyen</h3>
+                <p>Coût total $C(x) = x^2 + 4x + 16$. Déterminer la quantité $x$ qui minimise le coût moyen.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Correction Math Éco 2023</h3>
+                <p>$C_M(x) = x + 4 + 16/x$. $C_M'(x) = 0 \implies x = 4$ unités.</p>
+            </div>
+        `
+    }
+];
+
+/* ==========================================================================
+   MODULE EXAMENS NATIONAUX LOGIC
+   ========================================================================== */
+function setupExamsModule() {
+    const levelFilter = document.getElementById("examLevelFilter");
+    const subjectFilter = document.getElementById("examSubjectFilter");
+    const yearFilter = document.getElementById("examYearFilter");
+    const sessionFilter = document.getElementById("examSessionFilter");
+    const searchInput = document.getElementById("examSearchInput");
+
+    const modal = document.getElementById("examModal");
+    const closeBtn = document.getElementById("examModalCloseBtn");
+    const closeFooterBtn = document.getElementById("examModalCloseFooterBtn");
+    const backdrop = document.getElementById("examModalBackdrop");
+
+    const closeModal = () => {
+        if (modal) modal.classList.remove("active");
+    };
+
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (closeFooterBtn) closeFooterBtn.addEventListener("click", closeModal);
+    if (backdrop) backdrop.addEventListener("click", closeModal);
+
+    // Modal Tabs logic
+    const modalTabBtns = document.querySelectorAll("[data-exam-tab]");
+    modalTabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-exam-tab");
+            modalTabBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            document.querySelectorAll("#examModal .modal-tab-content").forEach(content => {
+                content.classList.remove("active");
+            });
+            const activeContent = document.getElementById(targetId);
+            if (activeContent) activeContent.classList.add("active");
+            triggerMathJax();
+        });
+    });
+
+    const applyExamFilters = () => {
+        const lvl = levelFilter ? levelFilter.value : "all";
+        const subj = subjectFilter ? subjectFilter.value : "all";
+        const yr = yearFilter ? yearFilter.value : "all";
+        const sess = sessionFilter ? sessionFilter.value : "all";
+        const q = searchInput ? searchInput.value.toLowerCase().trim() : "";
+
+        renderExams(lvl, subj, yr, sess, q);
+    };
+
+    [levelFilter, subjectFilter, yearFilter, sessionFilter].forEach(el => {
+        if (el) el.addEventListener("change", applyExamFilters);
+    });
+    if (searchInput) searchInput.addEventListener("input", applyExamFilters);
+
+    // Initial Render
+    renderExams();
+}
+
+function renderExams(level = "all", subject = "all", year = "all", session = "all", query = "") {
+    const grid = document.getElementById("examCardGrid");
+    const countBadge = document.getElementById("examCountBadge");
+    if (!grid) return;
+
+    grid.innerHTML = "";
+
+    const filtered = examsData.filter(ex => {
+        const matchLvl = (level === "all" || ex.level === level);
+        const matchSubj = (subject === "all" || ex.subject === subject);
+        const matchYr = (year === "all" || ex.year.toString() === year);
+        const matchSess = (session === "all" || ex.session === session);
+        
+        const textToSearch = `${ex.title} ${ex.description} ${ex.statement} ${ex.subjectLabel} ${ex.levelLabel}`.toLowerCase();
+        const matchQ = (query === "" || textToSearch.includes(query));
+
+        return matchLvl && matchSubj && matchYr && matchSess && matchQ;
+    });
+
+    if (countBadge) countBadge.textContent = filtered.length;
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; background: rgba(15, 23, 42, 0.4); border-radius: 16px; border: 1.5px dashed var(--border-color);">
+                <div style="font-size: 2.5rem; margin-bottom: 12px; opacity: 0.7;">📜</div>
+                <h3 style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 8px;">Aucune épreuve trouvée</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Essayez de modifier vos filtres ou la recherche par mot-clé.</p>
+            </div>
+        `;
+        return;
+    }
+
+    filtered.forEach(ex => {
+        const card = document.createElement("div");
+        card.className = "anim-card exam-card";
+        card.style.cursor = "pointer";
+
+        const subjBadgeStyle = ex.subject === "math" 
+            ? "background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);" 
+            : "background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);";
+
+        card.innerHTML = `
+            <div class="anim-card-img-wrapper" style="height: 120px; background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(30,41,59,0.9)); display: flex; align-items: center; justify-content: center; padding: 16px; position: relative;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.2rem; font-weight: 800; color: #ffffff; line-height: 1; font-family: 'Outfit', sans-serif;">${ex.year}</div>
+                    <span style="font-size: 0.75rem; color: #38bdf8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; display: block;">${ex.sessionLabel}</span>
+                </div>
+                <span class="anim-card-badge" style="position: absolute; top: 12px; right: 12px; ${subjBadgeStyle}">
+                    <i data-lucide="${ex.subject === 'math' ? 'binary' : 'atom'}"></i> ${ex.subjectLabel}
+                </span>
+                <span class="anim-card-badge" style="position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.5); color: #94a3b8; font-size: 0.72rem;">
+                    ${ex.levelLabel}
+                </span>
+                ${ex.pdfUrl ? `<span class="anim-card-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3);"><i data-lucide="file-text" style="width: 12px; height: 12px; vertical-align: middle;"></i> PDF Inclus</span>` : ''}
+            </div>
+            <div class="anim-card-content" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="font-size: 1.05rem; line-height: 1.35; margin-bottom: 8px;">${ex.title}</h3>
+                    <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px;">${ex.description}</p>
+                </div>
+                <div>
+                    <div style="display: flex; gap: 12px; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 14px; background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                        <span><i data-lucide="clock" style="width: 14px; height: 14px; vertical-align: middle;"></i> ${ex.duration}</span>
+                        <span><i data-lucide="award" style="width: 14px; height: 14px; vertical-align: middle;"></i> Coeff: ${ex.coefficient}</span>
+                    </div>
+                    <div class="anim-card-footer" style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary btn-sm btn-open-statement" style="flex: 1; min-width: 70px; font-size: 0.8rem; padding: 8px 6px;">
+                            <i data-lucide="file-text"></i> Sujet
+                        </button>
+                        <button class="btn btn-primary btn-sm btn-open-correction" style="flex: 1; min-width: 85px; font-size: 0.8rem; padding: 8px 6px;">
+                            <i data-lucide="check-circle"></i> Correction
+                        </button>
+                        ${ex.pdfUrl ? `
+                        <button class="btn btn-sm btn-open-pdf" style="flex: 1; min-width: 70px; font-size: 0.8rem; padding: 8px 6px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35);">
+                            <i data-lucide="file"></i> PDF
+                        </button>` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        card.querySelector(".btn-open-statement").addEventListener("click", (e) => {
+            e.stopPropagation();
+            openExamModal(ex.id, "statement-tab");
+        });
+
+        card.querySelector(".btn-open-correction").addEventListener("click", (e) => {
+            e.stopPropagation();
+            openExamModal(ex.id, "correction-tab");
+        });
+
+        const pdfBtn = card.querySelector(".btn-open-pdf");
+        if (pdfBtn) {
+            pdfBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openExamModal(ex.id, "pdf-tab");
+            });
+        }
+
+        card.addEventListener("click", () => {
+            openExamModal(ex.id, "statement-tab");
+        });
+
+        grid.appendChild(card);
+    });
+
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+}
+
+function openExamModal(examId, initialTab = "statement-tab") {
+    const exam = examsData.find(e => e.id === examId);
+    if (!exam) return;
+
+    const modal = document.getElementById("examModal");
+    const modalBadge = document.getElementById("examModalBadge");
+    const modalTitle = document.getElementById("examModalTitle");
+    const statementEl = document.getElementById("examModalStatement");
+    const correctionEl = document.getElementById("examModalCorrection");
+    const pdfTabBtn = document.getElementById("examModalPdfTabBtn");
+    const pdfContainer = document.getElementById("examModalPdfContainer");
+    const downloadPdfBtn = document.getElementById("examModalDownloadPdfBtn");
+
+    if (modalBadge) modalBadge.textContent = `${exam.levelLabel} • ${exam.year} (${exam.sessionLabel})`;
+    if (modalTitle) modalTitle.textContent = exam.title;
+    if (statementEl) statementEl.innerHTML = exam.statement;
+    if (correctionEl) correctionEl.innerHTML = exam.correction;
+
+    if (exam.pdfUrl) {
+        if (pdfTabBtn) pdfTabBtn.style.display = "inline-flex";
+        if (pdfContainer) {
+            pdfContainer.innerHTML = `
+                <div style="background: rgba(16, 185, 129, 0.08); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5rem;">📄</span>
+                        <div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem;">Document PDF Officiel & Correction Complète</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Consultable directement dans votre navigateur ou téléchargeable.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="${exam.pdfUrl}" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                            <i data-lucide="external-link"></i> Plein écran
+                        </a>
+                        <a href="${exam.pdfUrl}" download="${exam.pdfUrl.split('/').pop()}" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                            <i data-lucide="download"></i> Télécharger
+                        </a>
+                    </div>
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+                    <iframe src="${exam.pdfUrl}#toolbar=1" width="100%" height="650px" style="border: none; display: block;"></iframe>
+                </div>
+            `;
+        }
+        if (downloadPdfBtn) {
+            downloadPdfBtn.style.display = "inline-flex";
+            downloadPdfBtn.href = exam.pdfUrl;
+            downloadPdfBtn.setAttribute("download", exam.pdfUrl.split('/').pop());
+        }
+    } else {
+        if (pdfTabBtn) pdfTabBtn.style.display = "none";
+        if (pdfContainer) pdfContainer.innerHTML = "";
+        if (downloadPdfBtn) downloadPdfBtn.style.display = "none";
+    }
+
+    const tabBtns = document.querySelectorAll("[data-exam-tab]");
+    tabBtns.forEach(btn => {
+        if (btn.getAttribute("data-exam-tab") === initialTab) {
+            btn.classList.add("active");
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+
+    document.querySelectorAll("#examModal .modal-tab-content").forEach(content => {
+        if (content.id === initialTab) {
+            content.classList.add("active");
+        } else {
+            content.classList.remove("active");
+        }
+    });
+
+    if (modal) modal.classList.add("active");
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    triggerMathJax();
+}
+

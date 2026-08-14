@@ -69,6 +69,7 @@
                     </div>
                 </div>
 
+                <a href="#examens" class="nav-link" data-tab="examens"><i data-lucide="award"></i> Examens Nationaux</a>
                 <a href="#animations" class="nav-link" data-tab="animations"><i data-lucide="play"></i> Animations</a>
                 <a href="#recherche" class="nav-link" data-tab="recherche"><i data-lucide="microscope"></i> Recherche Scientifique</a>
             </nav>
@@ -2834,6 +2835,131 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
             </div>
         </section>
 
+        <!-- SECTION 5: EXAMENS NATIONAUX DU BACCALAURÉAT -->
+        <section id="examens-section" class="tab-content">
+            <div class="anim-gallery-container">
+                <div class="anim-gallery-header">
+                    <span class="badge badge-accent"><i data-lucide="award"></i> Annales & Épreuves Officielles MEN</span>
+                    <h2>Examens Nationaux du Baccalauréat Marocain</h2>
+                    <p>Préparez votre Baccalauréat avec les sujets et corrections officielles de la Session Ordinaire et Rattrapage avec explications détaillées pas à pas.</p>
+                </div>
+
+                <!-- Search and Filters Bar for Exams -->
+                <div class="anim-gallery-toolbar" style="margin-bottom: 24px;">
+                    <div class="anim-search-wrapper">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" id="examSearchInput" placeholder="Rechercher un examen ou thème (ex: Nombres complexes, Ondes, RLC, Limites, Intégrales...)" autocomplete="off">
+                    </div>
+                    
+                    <div class="filter-bar" style="margin-top: 14px; background: transparent; padding: 0; border: none; box-shadow: none; display: flex; flex-wrap: wrap; gap: 14px;">
+                        <div class="filter-group">
+                            <label for="examLevelFilter"><i data-lucide="graduation-cap"></i> Filière :</label>
+                            <select id="examLevelFilter">
+                                <option value="all">Toutes les filières</option>
+                                <option value="2bac-pc">2ème Bac PC (Sciences Physiques)</option>
+                                <option value="2bac-sm">2ème Bac SM (Sciences Math A & B)</option>
+                                <option value="2bac-svt">2ème Bac SVT (Sciences de la Vie et de la Terre)</option>
+                                <option value="2bac-eco">2ème Bac Éco (Sciences Économiques)</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="examSubjectFilter"><i data-lucide="book"></i> Matière :</label>
+                            <select id="examSubjectFilter">
+                                <option value="all">Toutes les matières</option>
+                                <option value="math">Mathématiques</option>
+                                <option value="pc">Physique - Chimie</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="examYearFilter"><i data-lucide="calendar"></i> Année :</label>
+                            <select id="examYearFilter">
+                                <option value="all">Toutes les années</option>
+                                <option value="2026">2026</option>
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="examSessionFilter"><i data-lucide="clock"></i> Session :</label>
+                            <select id="examSessionFilter">
+                                <option value="all">Toutes les sessions</option>
+                                <option value="ordinaire">Session Ordinaire</option>
+                                <option value="rattrapage">Session Rattrapage</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Filters & Counter Row -->
+                <div class="active-filters-row" style="margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span class="filter-badge">Épreuves affichées : <strong id="examCountBadge" style="color: var(--primary);">0</strong></span>
+                    </div>
+                </div>
+
+                <!-- Exams Card Grid -->
+                <div class="anim-card-grid" id="examCardGrid">
+                    <!-- Dynamic rendering by JS -->
+                </div>
+            </div>
+
+            <!-- Exam Subject & Solution Modal -->
+            <div class="lesson-modal" id="examModal">
+                <div class="modal-backdrop" id="examModalBackdrop"></div>
+                <div class="modal-card" style="max-width: 960px; width: 92vw;">
+                    <div class="modal-header">
+                        <div class="modal-title-wrapper">
+                            <span class="modal-badge" id="examModalBadge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">2BAC PC • 2024</span>
+                            <h3 id="examModalTitle">Examen National 2024 — Mathématiques</h3>
+                        </div>
+                        <button class="modal-close" id="examModalCloseBtn"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="modal-tabs">
+                        <button class="modal-tab-btn active" data-exam-tab="statement-tab"><i data-lucide="file-text"></i> Sujet de l'Épreuve</button>
+                        <button class="modal-tab-btn" data-exam-tab="correction-tab"><i data-lucide="check-circle"></i> Correction Détaillée Pas à Pas</button>
+                        <button class="modal-tab-btn" id="examModalPdfTabBtn" data-exam-tab="pdf-tab" style="display: none;"><i data-lucide="file"></i> Document PDF Officiel</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Sujet Tab -->
+                        <div id="statement-tab" class="modal-tab-content active">
+                            <div class="course-text-content" id="examModalStatement">
+                                <!-- HTML content injected dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Correction Tab -->
+                        <div id="correction-tab" class="modal-tab-content">
+                            <div class="course-text-content" id="examModalCorrection">
+                                <!-- HTML content injected dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- PDF Tab -->
+                        <div id="pdf-tab" class="modal-tab-content">
+                            <div class="course-text-content" id="examModalPdfContainer">
+                                <!-- PDF embed injected dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted);"><i data-lucide="shield-check"></i> Conforme au barème officiel du Ministère de l'Éducation Nationale (MEN)</span>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <a id="examModalDownloadPdfBtn" href="#" target="_blank" class="btn btn-secondary" style="display: none; align-items: center; gap: 6px;">
+                                <i data-lucide="download"></i> Télécharger le PDF
+                            </a>
+                            <button class="btn btn-primary" id="examModalCloseFooterBtn">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
