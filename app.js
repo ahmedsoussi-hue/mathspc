@@ -10,6 +10,72 @@ const chaptersData = [
     // 2ème BAC SCIENCES ÉCONOMIQUES ET GESTION (2BAC ÉCO)
     // ==========================================
     {
+        id: "math-examen-national-2026-eco",
+        title: "Examen National 2026 — Mathématiques (Session Ordinaire - 2BAC Éco)",
+        level: "2bac-eco",
+        subject: "math",
+        description: "Épreuve officielle 2026 du Baccalauréat National Sciences Économiques & Gestion avec sujet complet et corrigé détaillé pas à pas.",
+        coursePdf: {
+            file: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
+            title: "Examen National 2026 Mathématiques 2BAC Éco — Sujet & Corrigé (PDF)",
+            description: "Document officiel haute définition avec corrigé complet, barème et explications détaillées."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
+                title: "Correction Détaillée de l'Épreuve Éco 2026 (PDF)",
+                description: "Corrigé pas à pas de l'examen national 2026 Sciences Économiques."
+            }
+        ],
+        courseContent: `
+<!-- PDF DOWNLOAD & PREVIEW BANNER -->
+<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.2), rgba(59, 130, 246, 0.2)); border: 1.5px solid rgba(217, 119, 6, 0.5); border-radius: 16px; padding: 22px 26px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 16px; backdrop-filter: blur(8px);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(217, 119, 6, 0.25); display: flex; align-items: center; justify-content: center; color: #d97706; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #ffffff;">Examen National 2026 — Mathématiques (Session Ordinaire - 2BAC Éco)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Filière : 2ème Bac Sciences Économiques et Gestion • Sujet & Corrigé Officiel</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 30px; font-weight: 600; font-size: 0.88rem; text-decoration: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Plein Écran
+            </a>
+            <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35); background: #d97706; border-color: #d97706;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Informations & Thèmes de l'épreuve</h4>
+    <ul>
+        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Économiques et Gestion (Sciences Éco & TGC)</li>
+        <li><strong>Session :</strong> Session Ordinaire 2026 | <strong>Durée :</strong> 2 heures | <strong>Coefficient :</strong> 3</li>
+        <li><strong>Contenu :</strong> Suites numériques, calcul de probabilités, fonctions exponentielles/logarithmes et optimisation du bénéfice / coût marginal.</li>
+    </ul>
+</div>
+
+<div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; margin-top: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+        `,
+        exercises: [
+            {
+                title: "Épreuve Officielle & Corrigé Intégral 2026 (2BAC Éco)",
+                statement: "Retrouvez l'intégralité du sujet d'examen national 2026 de Mathématiques (Session Ordinaire) pour la filière Sciences Économiques.",
+                solution: "Consultez le document PDF ci-dessous ou cliquez sur Télécharger pour obtenir le corrigé détaillé pas à pas."
+            }
+        ],
+        exams: [
+            { title: "Examen National 2026 - Session Ordinaire (Éco)", type: "National", year: 2026, file: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" }
+        ]
+    },
+    {
         id: "math-eco-limites",
         title: "Limites, Continuité & Coût Marginal",
         level: "2bac-eco",
@@ -17847,6 +17913,98 @@ function setupTransfertsThermiquesSimulator() {
    DATA SOURCE: EXAMENS NATIONAUX DU BACCALAURÉAT MAROCAIN (ANNALES)
    ========================================================================== */
 const examsData = [
+    {
+        id: "exam-2026-math-eco-ord",
+        title: "Examen National 2026 — Mathématiques (Session Ordinaire - Éco)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2026,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac Éco",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "3",
+        pdfUrl: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
+        description: "Épreuve officielle 2026 pour Sciences Économiques et Gestion avec Sujet & Corrigé Complet (PDF) : Suites numériques, Probabilités et Étude de fonctions économiques.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations sur l'épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Économiques & TGC</li>
+                        <li><strong>Session :</strong> Session Ordinaire 2026</li>
+                        <li><strong>Durée :</strong> 2 heures | <strong>Coefficient :</strong> 3</li>
+                        <li><strong>Usage de la calculatrice non programmable autorisé.</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.12), rgba(59, 130, 246, 0.12)); border: 1.5px solid rgba(217, 119, 6, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Épreuve 2026 Économie & Corrigé Complet (PDF)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Document original de l'examen national 2026 avec solutions et barème officiel MEN.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Ouvrir en Plein Écran
+                        </a>
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
+                            <i data-lucide="download"></i> Télécharger le PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2026 — 2BAC Éco (Visionneuse PDF intégrée)
+                        </span>
+                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">2BAC Sciences Économiques</span>
+                    </div>
+                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
+                    <h4>Correction Officielle Détaillée — Examen National 2026 (2BAC Éco)</h4>
+                    <p>Corrigé intégral de l'épreuve avec toutes les justifications et étapes de calcul selon le barème officiel MEN.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Intégral Pas à Pas (PDF)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Solution complète et détaillée pour toutes les questions de l'épreuve 2026.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Visionner en Grand
+                        </a>
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
+                            <i data-lucide="download"></i> Télécharger la Solution PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Correction Détaillée Pas à Pas (Visionneuse PDF intégrée)
+                        </span>
+                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">Session Ordinaire 2026</span>
+                    </div>
+                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
     {
         id: "exam-2026-math-pc-ord",
         title: "Examen National 2026 — Mathématiques (Session Ordinaire)",
