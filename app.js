@@ -17913,99 +17913,7 @@ function setupTransfertsThermiquesSimulator() {
    DATA SOURCE: EXAMENS NATIONAUX DU BACCALAURÉAT MAROCAIN (ANNALES)
    ========================================================================== */
 const examsData = [
-    {
-        id: "exam-2026-math-eco-ord",
-        title: "Examen National 2026 — Mathématiques (Session Ordinaire - Éco)",
-        level: "2bac-eco",
-        subject: "math",
-        year: 2026,
-        session: "ordinaire",
-        sessionLabel: "Session Ordinaire",
-        levelLabel: "2ème Bac Éco",
-        subjectLabel: "Mathématiques",
-        duration: "2 heures",
-        coefficient: "3",
-        pdfUrl: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
-        description: "Épreuve officielle 2026 pour Sciences Économiques et Gestion avec Sujet & Corrigé Complet (PDF) : Suites numériques, Probabilités et Étude de fonctions économiques.",
-        statement: `
-            <div class="exam-statement-body">
-                <div class="formula-box" style="margin-bottom: 20px;">
-                    <h4>Informations sur l'épreuve</h4>
-                    <ul>
-                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Économiques & TGC</li>
-                        <li><strong>Session :</strong> Session Ordinaire 2026</li>
-                        <li><strong>Durée :</strong> 2 heures | <strong>Coefficient :</strong> 3</li>
-                        <li><strong>Usage de la calculatrice non programmable autorisé.</strong></li>
-                    </ul>
-                </div>
-
-                <div style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.12), rgba(59, 130, 246, 0.12)); border: 1.5px solid rgba(217, 119, 6, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <span style="font-size: 2rem;">📑</span>
-                        <div>
-                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Épreuve 2026 Économie & Corrigé Complet (PDF)</div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">Document original de l'examen national 2026 avec solutions et barème officiel MEN.</div>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
-                            <i data-lucide="external-link"></i> Ouvrir en Plein Écran
-                        </a>
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
-                            <i data-lucide="download"></i> Télécharger le PDF
-                        </a>
-                    </div>
-                </div>
-
-                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
-                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
-                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2026 — 2BAC Éco (Visionneuse PDF intégrée)
-                        </span>
-                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">2BAC Sciences Économiques</span>
-                    </div>
-                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
-                </div>
-            </div>
-        `,
-        correction: `
-            <div class="exam-correction-body">
-                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
-                    <h4>Correction Officielle Détaillée — Examen National 2026 (2BAC Éco)</h4>
-                    <p>Corrigé intégral de l'épreuve avec toutes les justifications et étapes de calcul selon le barème officiel MEN.</p>
-                </div>
-
-                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <span style="font-size: 2rem;">✅</span>
-                        <div>
-                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Intégral Pas à Pas (PDF)</div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">Solution complète et détaillée pour toutes les questions de l'épreuve 2026.</div>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
-                            <i data-lucide="external-link"></i> Visionner en Grand
-                        </a>
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
-                            <i data-lucide="download"></i> Télécharger la Solution PDF
-                        </a>
-                    </div>
-                </div>
-
-                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
-                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
-                            <i data-lucide="check-circle"></i> Correction Détaillée Pas à Pas (Visionneuse PDF intégrée)
-                        </span>
-                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">Session Ordinaire 2026</span>
-                    </div>
-                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
-                </div>
-            </div>
-        `
-    },
-    {
+{
         id: "exam-2026-math-pc-ord",
         title: "Examen National 2026 — Mathématiques (Session Ordinaire)",
         level: "2bac-pc",
@@ -18098,8 +18006,138 @@ const examsData = [
         `
     },
     {
+        id: "exam-2025-math-pc-ord",
+        title: "Examen National 2025 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2025,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2025 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2025</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2025 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf" download="Examen_National_2025_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2025 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Corrigé en cours de mise en ligne</h4>
+                    <p>La correction détaillée pour l'examen national 2025 (Session Ordinaire) est en cours de numérisation par nos enseignants. En attendant, consultez le sujet officiel ci-dessus ou entraînez-vous sur les autres sessions.</p>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2025-math-pc-rat",
+        title: "Examen National 2025 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2025,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2025 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2025</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2025 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf" download="Examen_National_2025_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2025 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Corrigé en cours de mise en ligne</h4>
+                    <p>La correction détaillée pour l'examen national 2025 (Session de Rattrapage) est en cours de numérisation par nos enseignants. En attendant, consultez le sujet officiel ci-dessus ou entraînez-vous sur les autres sessions.</p>
+                </div>
+            </div>
+        `
+    },
+    {
         id: "exam-2024-math-pc-ord",
-        title: "Examen National 2024 — Mathématiques (Session Ordinaire)",
+        title: "Examen National 2024 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
         level: "2bac-pc",
         subject: "math",
         year: 2024,
@@ -18109,70 +18147,2579 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        description: "Épreuve officielle du Baccalauréat 2024 : Nombres complexes, Équations différentielles, Probabilités et Étude d'une fonction exponentielle.",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2024 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
                 <div class="formula-box" style="margin-bottom: 20px;">
-                    <h4>Informations sur l'épreuve</h4>
+                    <h4>Informations & Modalités de l'Épreuve</h4>
                     <ul>
-                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT</li>
-                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5</li>
-                        <li><strong>Usage de la calculatrice non programmable est autorisé.</strong></li>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2024</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
                     </ul>
                 </div>
 
-                <h3>Exercice 1 : Nombres Complexes (3 points)</h3>
-                <p>1. Résoudre dans l'ensemble $\mathbb{C}$ des nombres complexes l'équation :</p>
-                $$z^2 - 2\sqrt{2}z + 4 = 0$$
-                <p>2. On pose $a = \sqrt{2} + i\sqrt{2}$. Écrire $a$ sous forme trigonométrique et déterminer $a^8$.</p>
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2024 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf" download="Examen_National_2024_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
 
-                <h3>Exercice 2 : Équations Différentielles (3 points)</h3>
-                <p>On considère l'équation différentielle $(E) : y' - 2y = e^x$.</p>
-                <p>1. Déterminer la valeur du réel $k$ pour que la fonction $g(x) = k e^x$ soit solution de $(E)$.</p>
-                <p>2. En déduire la solution générale de $(E)$, puis déterminer la solution $f$ vérifiant la condition initiale $f(0) = 2$.</p>
-
-                <h3>Exercice 3 : Probabilités (3 points)</h3>
-                <p>Une urne contient 8 boules : 4 boules rouges numérotées 1, 1, 2, 2 et 4 boules vertes numérotées 1, 2, 2, 3. On tire simultanément 3 boules.</p>
-                <p>Calculer la probabilité d'obtenir 3 boules de même couleur.</p>
-
-                <h3>Problème : Étude de Fonction & Calcul Intégral (11 points)</h3>
-                <p>Soit $f$ la fonction numérique définie sur $\mathbb{R}$ par $f(x) = (x - 1)e^x + x$.</p>
-                <p>1. Calculer $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. Montrer que la droite $(\Delta) : y = x$ est asymptote oblique à $(C_f)$ en $-\infty$.</p>
-                <p>2. Montrer que $f'(x) = x e^x + 1$ et dresser le tableau de variations de $f$.</p>
-                <p>3. Calculer l'intégrale $I = \int_0^1 (x-1)e^x dx$ par parties et déterminer l'aire du domaine délimité par $(C_f)$.</p>
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2024 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
             </div>
-        `,
+    `,
         correction: `
-            <div class="exam-correction-body">
-                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
-                    <h4>Correction Officielle Détaillée — Barème MEN</h4>
-                    <p>Suivez étape par étape la rédaction type exigée le jour de l'examen national.</p>
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2024 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
                 </div>
 
-                <div class="cours-section">
-                    <h3>Exercice 1 : Nombres Complexes (3 pts)</h3>
-                    <p><strong>1. Résolution de $z^2 - 2\sqrt{2}z + 4 = 0$ :</strong></p>
-                    <p>$\Delta = (-2\sqrt{2})^2 - 4(1)(4) = 8 - 16 = -8 = (2\sqrt{2} i)^2 < 0$.</p>
-                    <p>Solutions complexes conjuguées :</p>
-                    $$z_1 = \sqrt{2} + i\sqrt{2} \quad \text{et} \quad z_2 = \sqrt{2} - i\sqrt{2}$$
-                    <p><strong>2. Forme trigonométrique & $a^8$ :</strong></p>
-                    $$a = 2\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right) = 2 e^{i\frac{\pi}{4}}$$
-                    $$a^8 = (2 e^{i\frac{\pi}{4}})^8 = 2^8 e^{i 2\pi} = 256$$
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2024 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf" download="Corrige_National_2024_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
                 </div>
 
-                <div class="cours-section" style="margin-top: 24px;">
-                    <h3>Problème : Étude de Fonction (11 pts)</h3>
-                    <p><strong>1. Limites & Asymptote :</strong></p>
-                    $$\lim_{x \to +\infty} f(x) = +\infty \quad \text{et} \quad \lim_{x \to -\infty} [f(x) - x] = \lim_{x \to -\infty} (x-1)e^x = 0$$
-                    <p>Donc $(\Delta) : y = x$ est asymptote oblique à $(C_f)$ en $-\infty$.</p>
-                    <p><strong>3. Intégrale & Aire :</strong></p>
-                    $$I = [(x-1)e^x]_0^1 - \int_0^1 e^x dx = 1 - (e - 1) = 2 - e$$
-                    <p>Aire $\mathcal{A} = (2 - e) + \frac{1}{2} = \frac{5}{2} - e \approx 0{,}22 \text{ cm}^2$.</p>
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2024 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
     },
     {
+        id: "exam-2024-math-pc-rat",
+        title: "Examen National 2024 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2024,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2024 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2024</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2024 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf" download="Examen_National_2024_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2024 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2024 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2024 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf" download="Corrige_National_2024_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2024 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2023-math-pc-ord",
+        title: "Examen National 2023 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2023,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2023 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2023</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2023 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf" download="Examen_National_2023_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2023 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2023 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2023 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf" download="Corrige_National_2023_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2023 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2023-math-pc-rat",
+        title: "Examen National 2023 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2023,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2023 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2023</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2023 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf" download="Examen_National_2023_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2023 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2023 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2023 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf" download="Corrige_National_2023_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2023 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2022-math-pc-ord",
+        title: "Examen National 2022 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2022,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2022 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2022</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2022 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf" download="Examen_National_2022_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2022 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2022 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2022 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf" download="Corrige_National_2022_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2022 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2022-math-pc-rat",
+        title: "Examen National 2022 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2022,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2022 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2022</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2022 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf" download="Examen_National_2022_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2022 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2022 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2022 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf" download="Corrige_National_2022_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2022 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2021-math-pc-ord",
+        title: "Examen National 2021 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2021,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2021 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2021</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2021 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf" download="Examen_National_2021_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2021 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2021 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2021 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf" download="Corrige_National_2021_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2021 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2021-math-pc-rat",
+        title: "Examen National 2021 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2021,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2021 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2021</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2021 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf" download="Examen_National_2021_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2021 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2021 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2021 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf" download="Corrige_National_2021_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2021 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2020-math-pc-ord",
+        title: "Examen National 2020 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2020,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2020 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2020</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2020 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf" download="Examen_National_2020_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2020 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2020 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2020 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf" download="Corrige_National_2020_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2020 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2020-math-pc-rat",
+        title: "Examen National 2020 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2020,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2020 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2020</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2020 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf" download="Examen_National_2020_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2020 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2020 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2020 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf" download="Corrige_National_2020_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2020 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2019-math-pc-ord",
+        title: "Examen National 2019 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2019,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2019 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2019</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2019 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf" download="Examen_National_2019_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2019 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2019 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2019 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf" download="Corrige_National_2019_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2019 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2019-math-pc-rat",
+        title: "Examen National 2019 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2019,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2019 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2019</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2019 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf" download="Examen_National_2019_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2019 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2019 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2019 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf" download="Corrige_National_2019_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2019 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2018-math-pc-ord",
+        title: "Examen National 2018 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2018,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2018 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2018</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2018 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf" download="Examen_National_2018_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2018 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2018 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2018 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf" download="Corrige_National_2018_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2018 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2018-math-pc-rat",
+        title: "Examen National 2018 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2018,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2018 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2018</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2018 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf" download="Examen_National_2018_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2018 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2018 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2018 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf" download="Corrige_National_2018_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2018 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2017-math-pc-ord",
+        title: "Examen National 2017 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2017,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/element/94530",
+        pdfUrl: "https://www.alloschool.com/element/94530",
+        description: "Épreuve officielle du Baccalauréat National 2017 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2017</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2017 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf" download="Examen_National_2017_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2017 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2017 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2017 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/element/94530" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/element/94530" download="Corrige_National_2017_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2017 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/element/94530#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2017-math-pc-rat",
+        title: "Examen National 2017 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2017,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2017 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2017</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2017 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf" download="Examen_National_2017_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2017 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2017 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2017 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf" download="Corrige_National_2017_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2017 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2016-math-pc-ord",
+        title: "Examen National 2016 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2016,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2016 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2016</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2016 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf" download="Examen_National_2016_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2016 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2016 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2016 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf" download="Corrige_National_2016_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2016 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2016-math-pc-rat",
+        title: "Examen National 2016 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2016,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2016 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2016</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2016 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf" download="Examen_National_2016_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2016 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2016 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2016 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf" download="Corrige_National_2016_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2016 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2015-math-pc-ord",
+        title: "Examen National 2015 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2015,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2015 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2015</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2015 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf" download="Examen_National_2015_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2015 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2015 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2015 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf" download="Corrige_National_2015_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2015 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2014-math-pc-ord",
+        title: "Examen National 2014 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2014,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2014 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2014</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2014 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf" download="Examen_National_2014_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2014 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2014 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2014 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf" download="Corrige_National_2014_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2014 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2014-math-pc-rat",
+        title: "Examen National 2014 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2014,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2014 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2014</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2014 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf" download="Examen_National_2014_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2014 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Corrigé en cours de mise en ligne</h4>
+                    <p>La correction détaillée pour l'examen national 2014 (Session de Rattrapage) est en cours de numérisation par nos enseignants. En attendant, consultez le sujet officiel ci-dessus ou entraînez-vous sur les autres sessions.</p>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2013-math-pc-ord",
+        title: "Examen National 2013 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2013,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2013 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2013</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2013 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf" download="Examen_National_2013_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2013 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2013 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2013 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf" download="Corrige_National_2013_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2013 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2012-math-pc-ord",
+        title: "Examen National 2012 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2012,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2012 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2012</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2012 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf" download="Examen_National_2012_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2012 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2012 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2012 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf" download="Corrige_National_2012_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2012 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2011-math-pc-ord",
+        title: "Examen National 2011 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2011,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2011 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2011</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2011 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf" download="Examen_National_2011_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2011 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2011 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2011 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf" download="Corrige_National_2011_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2011 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2011-math-pc-rat",
+        title: "Examen National 2011 — Mathématiques (Session de Rattrapage - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2011,
+        session: "rattrapage",
+        sessionLabel: "Session de Rattrapage",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2011 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session de Rattrapage 2011</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2011 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf" download="Examen_National_2011_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2011 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2011 — Mathématiques (Session de Rattrapage)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2011 (Session de Rattrapage)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf" download="Corrige_National_2011_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2011 (Session de Rattrapage) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2010-math-pc-ord",
+        title: "Examen National 2010 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2010,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf",
+        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2010 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2010</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2010 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf" download="Examen_National_2010_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2010 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px; border-left-color: #10b981;">
+                    <h4>Corrigé Détaillé & Barème Officiel</h4>
+                    <ul>
+                        <li><strong>Épreuve :</strong> Examen National 2010 — Mathématiques (Session Ordinaire)</li>
+                        <li><strong>Contenu :</strong> Solutions rédigées pas à pas avec méthodes, justifications et barème de notation.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Officiel & Barème 2010 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Correction détaillée pas à pas de tous les exercices et problèmes.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf" download="Corrige_National_2010_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                            <i data-lucide="download"></i> Télécharger Corrigé PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Solution Détaillée 2010 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+    {
+        id: "exam-2009-math-pc-ord",
+        title: "Examen National 2009 — Mathématiques (Session Ordinaire - 2BAC PC/SVT)",
+        level: "2bac-pc",
+        subject: "math",
+        year: 2009,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac PC / SVT",
+        subjectLabel: "Mathématiques",
+        duration: "3 heures",
+        coefficient: "5",
+        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf",
+        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf",
+        description: "Épreuve officielle du Baccalauréat National 2009 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations & Modalités de l'Épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Physiques & SVT (BIOF)</li>
+                        <li><strong>Matière :</strong> Mathématiques | <strong>Session :</strong> Session Ordinaire 2009</li>
+                        <li><strong>Durée :</strong> 3 heures | <strong>Coefficient :</strong> 5 (PC/SVT)</li>
+                        <li><strong>Thèmes abordés :</strong> Nombres Complexes, Géométrie dans l'Espace, Probabilités / Dénombrement, Étude de Fonctions (ln & exp) et Calcul Intégral.</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Sujet Officiel 2009 (Session Ordinaire)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Épreuve complète du Ministère de l'Éducation Nationale.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Plein Écran
+                        </a>
+                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf" download="Examen_National_2009_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download"></i> Télécharger Sujet PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2009 (Session Ordinaire) — Visionneuse PDF
+                        </span>
+                        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
+                    </div>
+                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+    `,
+        correction: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Corrigé en cours de mise en ligne</h4>
+                    <p>La correction détaillée pour l'examen national 2009 (Session Ordinaire) est en cours de numérisation par nos enseignants. En attendant, consultez le sujet officiel ci-dessus ou entraînez-vous sur les autres sessions.</p>
+                </div>
+            </div>
+        `
+    },
+{
+        id: "exam-2024-math-sm-ord",
+        title: "Examen National 2024 — Mathématiques (Session Ordinaire - SM A&B)",
+        level: "2bac-sm",
+        subject: "math",
+        year: 2024,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac SM (A & B)",
+        subjectLabel: "Mathématiques",
+        duration: "4 heures",
+        coefficient: "9",
+        description: "Épreuve pour Sciences Mathématiques : Groupe (R, *), Arithmétique mod p et Suites d'intégrales.",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>Exercice 1 : Structures Algébriques (3.5 pts)</h3>
+                <p>On munit $\mathbb{R}$ de la loi $x * y = x + y - 2$. Montrer que $(\mathbb{R}, *)$ est un groupe commutatif.</p>
+                <h3>Exercice 2 : Suites d'Intégrales (13 pts)</h3>
+                <p>Soit $u_n = \int_0^1 \frac{x^n}{1 + x^2} dx$. Montrer que $(u_n)$ converge et déterminer sa limite.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Correction SM 2024</h3>
+                <p><strong>Exercice 1 :</strong> Associativité et commutativité évidentes. Élément neutre $e = 2$. Symétrique $x' = 4 - x$.</p>
+                <p><strong>Exercice 2 :</strong> $0 \le u_n \le \frac{1}{n+1} \implies \lim_{n \to +\infty} u_n = 0$.</p>
+            </div>
+        `
+    },
+{
         id: "exam-2024-pc-pc-ord",
         title: "Examen National 2024 — Physique-Chimie (Session Ordinaire)",
         level: "2bac-pc",
@@ -18207,65 +20754,7 @@ const examsData = [
             </div>
         `
     },
-    {
-        id: "exam-2024-math-sm-ord",
-        title: "Examen National 2024 — Mathématiques (Session Ordinaire - SM A&B)",
-        level: "2bac-sm",
-        subject: "math",
-        year: 2024,
-        session: "ordinaire",
-        sessionLabel: "Session Ordinaire",
-        levelLabel: "2ème Bac SM (A & B)",
-        subjectLabel: "Mathématiques",
-        duration: "4 heures",
-        coefficient: "9",
-        description: "Épreuve pour Sciences Mathématiques : Groupe (R, *), Arithmétique mod p et Suites d'intégrales.",
-        statement: `
-            <div class="exam-statement-body">
-                <h3>Exercice 1 : Structures Algébriques (3.5 pts)</h3>
-                <p>On munit $\mathbb{R}$ de la loi $x * y = x + y - 2$. Montrer que $(\mathbb{R}, *)$ est un groupe commutatif.</p>
-                <h3>Exercice 2 : Suites d'Intégrales (13 pts)</h3>
-                <p>Soit $u_n = \int_0^1 \frac{x^n}{1 + x^2} dx$. Montrer que $(u_n)$ converge et déterminer sa limite.</p>
-            </div>
-        `,
-        correction: `
-            <div class="exam-correction-body">
-                <h3>Correction SM 2024</h3>
-                <p><strong>Exercice 1 :</strong> Associativité et commutativité évidentes. Élément neutre $e = 2$. Symétrique $x' = 4 - x$.</p>
-                <p><strong>Exercice 2 :</strong> $0 \le u_n \le \frac{1}{n+1} \implies \lim_{n \to +\infty} u_n = 0$.</p>
-            </div>
-        `
-    },
-    {
-        id: "exam-2023-math-pc-ord",
-        title: "Examen National 2023 — Mathématiques (Session Ordinaire)",
-        level: "2bac-pc",
-        subject: "math",
-        year: 2023,
-        session: "ordinaire",
-        sessionLabel: "Session Ordinaire",
-        levelLabel: "2ème Bac PC / SVT",
-        subjectLabel: "Mathématiques",
-        duration: "3 heures",
-        coefficient: "5",
-        description: "Épreuve du Bac 2023 : Géométrie 3D (Sphère & Plan), Nombres complexes et Fonction ln(x).",
-        statement: `
-            <div class="exam-statement-body">
-                <h3>Exercice 1 : Géométrie 3D (3 pts)</h3>
-                <p>Sphère $(S) : x^2 + y^2 + z^2 - 2x + 4y - 4 = 0$ et plan $(P) : 2x - y + 2z + 1 = 0$. Déterminer le centre et le rayon de $(S)$.</p>
-                <h3>Exercice 2 : Fonction Logarithme (11 pts)</h3>
-                <p>Soit $f(x) = x + 1 - \ln(x)$ sur $]0, +\infty[$. Déterminer les variations de $f$.</p>
-            </div>
-        `,
-        correction: `
-            <div class="exam-correction-body">
-                <h3>Correction 2023</h3>
-                <p><strong>Sphère :</strong> Centre $\Omega(1, -2, 0)$ et rayon $R = 3$.</p>
-                <p><strong>Fonction :</strong> $f'(x) = 1 - 1/x = (x-1)/x$. Minimum en $x = 1$ valant $f(1) = 2$.</p>
-            </div>
-        `
-    },
-    {
+{
         id: "exam-2023-pc-pc-ord",
         title: "Examen National 2023 — Physique-Chimie (Session Ordinaire)",
         level: "2bac-pc",
@@ -18291,7 +20780,99 @@ const examsData = [
             </div>
         `
     },
-    {
+{
+        id: "exam-2026-math-eco-ord",
+        title: "Examen National 2026 — Mathématiques (Session Ordinaire - Éco)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2026,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2ème Bac Éco",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "3",
+        pdfUrl: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
+        description: "Épreuve officielle 2026 pour Sciences Économiques et Gestion avec Sujet & Corrigé Complet (PDF) : Suites numériques, Probabilités et Étude de fonctions économiques.",
+        statement: `
+            <div class="exam-statement-body">
+                <div class="formula-box" style="margin-bottom: 20px;">
+                    <h4>Informations sur l'épreuve</h4>
+                    <ul>
+                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Économiques & TGC</li>
+                        <li><strong>Session :</strong> Session Ordinaire 2026</li>
+                        <li><strong>Durée :</strong> 2 heures | <strong>Coefficient :</strong> 3</li>
+                        <li><strong>Usage de la calculatrice non programmable autorisé.</strong></li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.12), rgba(59, 130, 246, 0.12)); border: 1.5px solid rgba(217, 119, 6, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">📑</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Épreuve 2026 Économie & Corrigé Complet (PDF)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Document original de l'examen national 2026 avec solutions et barème officiel MEN.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Ouvrir en Plein Écran
+                        </a>
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
+                            <i data-lucide="download"></i> Télécharger le PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2026 — 2BAC Éco (Visionneuse PDF intégrée)
+                        </span>
+                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">2BAC Sciences Économiques</span>
+                    </div>
+                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
+                    <h4>Correction Officielle Détaillée — Examen National 2026 (2BAC Éco)</h4>
+                    <p>Corrigé intégral de l'épreuve avec toutes les justifications et étapes de calcul selon le barème officiel MEN.</p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2rem;">✅</span>
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Intégral Pas à Pas (PDF)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Solution complète et détaillée pour toutes les questions de l'épreuve 2026.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <i data-lucide="external-link"></i> Visionner en Grand
+                        </a>
+                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
+                            <i data-lucide="download"></i> Télécharger la Solution PDF
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
+                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
+                            <i data-lucide="check-circle"></i> Correction Détaillée Pas à Pas (Visionneuse PDF intégrée)
+                        </span>
+                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">Session Ordinaire 2026</span>
+                    </div>
+                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
+                </div>
+            </div>
+        `
+    },
+{
         id: "exam-2023-math-eco-ord",
         title: "Examen National 2023 — Mathématiques (Session Ordinaire - Éco)",
         level: "2bac-eco",
@@ -18319,9 +20900,6 @@ const examsData = [
     }
 ];
 
-/* ==========================================================================
-   MODULE EXAMENS NATIONAUX LOGIC
-   ========================================================================== */
 function setupExamsModule() {
     const levelFilter = document.getElementById("examLevelFilter");
     const subjectFilter = document.getElementById("examSubjectFilter");
@@ -18391,7 +20969,7 @@ function renderExams(level = "all", subject = "all", year = "all", session = "al
         const matchYr = (year === "all" || ex.year.toString() === year);
         const matchSess = (session === "all" || ex.session === session);
         
-        const textToSearch = `${ex.title} ${ex.description} ${ex.statement} ${ex.subjectLabel} ${ex.levelLabel}`.toLowerCase();
+        const textToSearch = `${ex.title} ${ex.description} ${ex.statement} ${ex.subjectLabel} ${ex.levelLabel} ${ex.year}`.toLowerCase();
         const matchQ = (query === "" || textToSearch.includes(query));
 
         return matchLvl && matchSubj && matchYr && matchSess && matchQ;
@@ -18419,6 +20997,8 @@ function renderExams(level = "all", subject = "all", year = "all", session = "al
             ? "background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);" 
             : "background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);";
 
+        const hasCorrige = !!ex.corrigePdfUrl || (ex.correction && ex.correction.length > 300);
+
         card.innerHTML = `
             <div class="anim-card-img-wrapper" style="height: 120px; background: linear-gradient(135deg, rgba(15,23,42,0.9), rgba(30,41,59,0.9)); display: flex; align-items: center; justify-content: center; padding: 16px; position: relative;">
                 <div style="text-align: center;">
@@ -18431,7 +21011,10 @@ function renderExams(level = "all", subject = "all", year = "all", session = "al
                 <span class="anim-card-badge" style="position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.5); color: #94a3b8; font-size: 0.72rem;">
                     ${ex.levelLabel}
                 </span>
-                ${ex.pdfUrl ? `<span class="anim-card-badge" style="position: absolute; bottom: 12px; right: 12px; background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3);"><i data-lucide="file-text" style="width: 12px; height: 12px; vertical-align: middle;"></i> PDF Inclus</span>` : ''}
+                <div style="position: absolute; bottom: 12px; right: 12px; display: flex; gap: 4px;">
+                    <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3);"><i data-lucide="file-text" style="width: 12px; height: 12px; vertical-align: middle;"></i> Sujet</span>
+                    ${hasCorrige ? `<span class="anim-card-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 0.72rem; border: 1px solid rgba(56, 189, 248, 0.3);"><i data-lucide="check-circle" style="width: 12px; height: 12px; vertical-align: middle;"></i> Corrigé</span>` : ''}
+                </div>
             </div>
             <div class="anim-card-content" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
@@ -18450,10 +21033,9 @@ function renderExams(level = "all", subject = "all", year = "all", session = "al
                         <button class="btn btn-primary btn-sm btn-open-correction" style="flex: 1; min-width: 85px; font-size: 0.8rem; padding: 8px 6px;">
                             <i data-lucide="check-circle"></i> Correction
                         </button>
-                        ${ex.pdfUrl ? `
                         <button class="btn btn-sm btn-open-pdf" style="flex: 1; min-width: 70px; font-size: 0.8rem; padding: 8px 6px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35);">
                             <i data-lucide="file"></i> PDF
-                        </button>` : ''}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -18487,6 +21069,7 @@ function renderExams(level = "all", subject = "all", year = "all", session = "al
     if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
+
 function openExamModal(examId, initialTab = "statement-tab") {
     const exam = examsData.find(e => e.id === examId);
     if (!exam) return;
@@ -18505,36 +21088,67 @@ function openExamModal(examId, initialTab = "statement-tab") {
     if (statementEl) statementEl.innerHTML = exam.statement;
     if (correctionEl) correctionEl.innerHTML = exam.correction;
 
-    if (exam.pdfUrl) {
+    const activePdf = exam.pdfUrl || exam.sujetPdfUrl || exam.corrigePdfUrl;
+    if (activePdf) {
         if (pdfTabBtn) pdfTabBtn.style.display = "inline-flex";
         if (pdfContainer) {
+            const hasSujet = !!exam.sujetPdfUrl;
+            const hasCorrige = !!exam.corrigePdfUrl;
+            
+            let downloadButtonsHtml = '';
+            if (hasSujet) {
+                downloadButtonsHtml += `
+                    <a href="${exam.sujetPdfUrl}" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <i data-lucide="external-link"></i> Sujet Plein Écran
+                    </a>
+                    <a href="${exam.sujetPdfUrl}" download="Sujet_${exam.year}_${exam.session}.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; background: #10b981; border-color: #10b981;">
+                        <i data-lucide="download"></i> Télécharger Sujet PDF
+                    </a>
+                `;
+            }
+            if (hasCorrige) {
+                downloadButtonsHtml += `
+                    <a href="${exam.corrigePdfUrl}" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <i data-lucide="external-link"></i> Corrigé Plein Écran
+                    </a>
+                    <a href="${exam.corrigePdfUrl}" download="Corrige_${exam.year}_${exam.session}.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px; background: #0284c7; border-color: #0284c7;">
+                        <i data-lucide="download"></i> Télécharger Corrigé PDF
+                    </a>
+                `;
+            }
+            if (!hasSujet && !hasCorrige && exam.pdfUrl) {
+                downloadButtonsHtml += `
+                    <a href="${exam.pdfUrl}" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <i data-lucide="external-link"></i> Plein Écran
+                    </a>
+                    <a href="${exam.pdfUrl}" download="${exam.pdfUrl.split('/').pop()}" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <i data-lucide="download"></i> Télécharger PDF
+                    </a>
+                `;
+            }
+
             pdfContainer.innerHTML = `
                 <div style="background: rgba(16, 185, 129, 0.08); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <span style="font-size: 1.5rem;">📄</span>
                         <div>
-                            <strong style="color: var(--text-primary); font-size: 0.95rem;">Document PDF Officiel & Correction Complète</strong>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Consultable directement dans votre navigateur ou téléchargeable.</div>
+                            <strong style="color: var(--text-primary); font-size: 0.95rem;">Document PDF Officiel (${exam.year} - ${exam.sessionLabel})</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Consultable directement dans votre navigateur ou téléchargeable en haute définition.</div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 8px;">
-                        <a href="${exam.pdfUrl}" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
-                            <i data-lucide="external-link"></i> Plein écran
-                        </a>
-                        <a href="${exam.pdfUrl}" download="${exam.pdfUrl.split('/').pop()}" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
-                            <i data-lucide="download"></i> Télécharger
-                        </a>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${downloadButtonsHtml}
                     </div>
                 </div>
                 <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
-                    <iframe src="${exam.pdfUrl}#toolbar=1" width="100%" height="650px" style="border: none; display: block;"></iframe>
+                    <iframe src="${activePdf}#toolbar=1" width="100%" height="650px" style="border: none; display: block;"></iframe>
                 </div>
             `;
         }
         if (downloadPdfBtn) {
             downloadPdfBtn.style.display = "inline-flex";
-            downloadPdfBtn.href = exam.pdfUrl;
-            downloadPdfBtn.setAttribute("download", exam.pdfUrl.split('/').pop());
+            downloadPdfBtn.href = activePdf;
+            downloadPdfBtn.setAttribute("download", activePdf.split('/').pop());
         }
     } else {
         if (pdfTabBtn) pdfTabBtn.style.display = "none";
