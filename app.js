@@ -18017,8 +18017,8 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf",
         description: "Épreuve officielle du Baccalauréat National 2025 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18041,10 +18041,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf" download="Examen_National_2025_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf" download="Examen_National_2025_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18057,7 +18057,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2025-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18082,8 +18082,8 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf",
         description: "Épreuve officielle du Baccalauréat National 2025 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18106,10 +18106,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf" download="Examen_National_2025_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf" download="Examen_National_2025_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18122,7 +18122,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2025-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18147,9 +18147,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2024 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18172,10 +18172,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf" download="Examen_National_2024_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf" download="Examen_National_2024_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18188,7 +18188,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-sujet-3.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18211,10 +18211,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf" download="Corrige_National_2024_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf" download="Corrige_National_2024_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18227,7 +18227,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2024-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18244,9 +18244,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2024 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18269,10 +18269,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf" download="Examen_National_2024_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf" download="Examen_National_2024_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18285,7 +18285,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18308,10 +18308,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf" download="Corrige_National_2024_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf" download="Corrige_National_2024_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18324,7 +18324,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2024-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18341,9 +18341,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2023 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18366,10 +18366,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf" download="Examen_National_2023_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf" download="Examen_National_2023_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18382,7 +18382,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18405,10 +18405,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf" download="Corrige_National_2023_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf" download="Corrige_National_2023_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18421,7 +18421,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2023-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18438,9 +18438,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2023 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18463,10 +18463,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf" download="Examen_National_2023_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf" download="Examen_National_2023_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18479,7 +18479,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18502,10 +18502,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf" download="Corrige_National_2023_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf" download="Corrige_National_2023_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18518,7 +18518,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2023-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18535,9 +18535,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2022 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18560,10 +18560,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf" download="Examen_National_2022_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf" download="Examen_National_2022_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18576,7 +18576,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18599,10 +18599,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf" download="Corrige_National_2022_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf" download="Corrige_National_2022_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18615,7 +18615,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2022-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18632,9 +18632,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2022 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18657,10 +18657,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf" download="Examen_National_2022_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf" download="Examen_National_2022_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18673,7 +18673,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18696,10 +18696,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf" download="Corrige_National_2022_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf" download="Corrige_National_2022_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18712,7 +18712,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2022-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18729,9 +18729,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2021 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18754,10 +18754,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf" download="Examen_National_2021_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf" download="Examen_National_2021_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18770,7 +18770,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18793,10 +18793,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf" download="Corrige_National_2021_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf" download="Corrige_National_2021_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18809,7 +18809,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2021-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18826,9 +18826,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2021 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18851,10 +18851,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf" download="Examen_National_2021_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf" download="Examen_National_2021_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18867,7 +18867,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18890,10 +18890,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf" download="Corrige_National_2021_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf" download="Corrige_National_2021_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -18906,7 +18906,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2021-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -18923,9 +18923,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2020 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -18948,10 +18948,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf" download="Examen_National_2020_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf" download="Examen_National_2020_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -18964,7 +18964,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -18987,10 +18987,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf" download="Corrige_National_2020_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf" download="Corrige_National_2020_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19003,7 +19003,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2020-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19020,9 +19020,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2020 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19045,10 +19045,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf" download="Examen_National_2020_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf" download="Examen_National_2020_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19061,7 +19061,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19084,10 +19084,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf" download="Corrige_National_2020_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf" download="Corrige_National_2020_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19100,7 +19100,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2020-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19117,9 +19117,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2019 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19142,10 +19142,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf" download="Examen_National_2019_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf" download="Examen_National_2019_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19158,7 +19158,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-sujet-3.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19181,10 +19181,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf" download="Corrige_National_2019_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf" download="Corrige_National_2019_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19197,7 +19197,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2019-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19214,9 +19214,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2019 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19239,10 +19239,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf" download="Examen_National_2019_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf" download="Examen_National_2019_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19255,7 +19255,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19278,10 +19278,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf" download="Corrige_National_2019_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf" download="Corrige_National_2019_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19294,7 +19294,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2019-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19311,9 +19311,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2018 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19336,10 +19336,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf" download="Examen_National_2018_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf" download="Examen_National_2018_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19352,7 +19352,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19375,10 +19375,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf" download="Corrige_National_2018_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf" download="Corrige_National_2018_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19391,7 +19391,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2018-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19408,9 +19408,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2018 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19433,10 +19433,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf" download="Examen_National_2018_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf" download="Examen_National_2018_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19449,7 +19449,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19472,10 +19472,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf" download="Corrige_National_2018_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf" download="Corrige_National_2018_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19488,7 +19488,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2018-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19505,9 +19505,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/element/94530",
-        pdfUrl: "https://www.alloschool.com/element/94530",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2017 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19530,10 +19530,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf" download="Examen_National_2017_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf" download="Examen_National_2017_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19546,7 +19546,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19569,10 +19569,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/element/94530" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/element/94530" download="Corrige_National_2017_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-corrige.pdf" download="Corrige_National_2017_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19585,7 +19585,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/element/94530#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2017-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19602,9 +19602,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2017 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19627,10 +19627,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf" download="Examen_National_2017_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf" download="Examen_National_2017_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19643,7 +19643,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19666,10 +19666,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf" download="Corrige_National_2017_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf" download="Corrige_National_2017_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19682,7 +19682,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2017-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19699,9 +19699,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2016 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19724,10 +19724,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf" download="Examen_National_2016_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf" download="Examen_National_2016_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19740,7 +19740,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19763,10 +19763,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf" download="Corrige_National_2016_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf" download="Corrige_National_2016_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19779,7 +19779,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2016-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19796,9 +19796,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2016 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19821,10 +19821,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf" download="Examen_National_2016_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf" download="Examen_National_2016_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19837,7 +19837,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19860,10 +19860,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf" download="Corrige_National_2016_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf" download="Corrige_National_2016_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19876,7 +19876,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2016-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19893,9 +19893,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2015 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -19918,10 +19918,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf" download="Examen_National_2015_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf" download="Examen_National_2015_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -19934,7 +19934,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -19957,10 +19957,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf" download="Corrige_National_2015_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf" download="Corrige_National_2015_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -19973,7 +19973,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2015-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -19990,9 +19990,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2014 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20015,10 +20015,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf" download="Examen_National_2014_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf" download="Examen_National_2014_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20031,7 +20031,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20054,10 +20054,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf" download="Corrige_National_2014_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf" download="Corrige_National_2014_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -20070,7 +20070,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2014-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -20087,8 +20087,8 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf",
         description: "Épreuve officielle du Baccalauréat National 2014 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20111,10 +20111,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf" download="Examen_National_2014_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf" download="Examen_National_2014_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20127,7 +20127,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2014-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20152,9 +20152,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2013 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20177,10 +20177,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf" download="Examen_National_2013_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf" download="Examen_National_2013_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20193,7 +20193,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20216,10 +20216,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf" download="Corrige_National_2013_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf" download="Corrige_National_2013_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -20232,7 +20232,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2013-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -20249,9 +20249,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2012 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20274,10 +20274,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf" download="Examen_National_2012_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf" download="Examen_National_2012_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20290,7 +20290,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20313,10 +20313,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf" download="Corrige_National_2012_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf" download="Corrige_National_2012_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -20329,7 +20329,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2012-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -20346,9 +20346,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2011 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20371,10 +20371,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf" download="Examen_National_2011_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf" download="Examen_National_2011_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20387,7 +20387,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20410,10 +20410,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf" download="Corrige_National_2011_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf" download="Corrige_National_2011_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -20426,7 +20426,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2011-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -20443,9 +20443,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2011 (Session de Rattrapage) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20468,10 +20468,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf" download="Examen_National_2011_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf" download="Examen_National_2011_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20484,7 +20484,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20507,10 +20507,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf" download="Corrige_National_2011_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf" download="Corrige_National_2011_Maths_PC_rattrapage.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -20523,7 +20523,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2011-rattrapage-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -20540,9 +20540,9 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf",
-        corrigePdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf",
+        corrigePdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf",
         description: "Épreuve officielle du Baccalauréat National 2010 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20565,10 +20565,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf" download="Examen_National_2010_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf" download="Examen_National_2010_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20581,7 +20581,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
@@ -20604,10 +20604,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf" download="Corrige_National_2010_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf" download="Corrige_National_2010_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #0284c7; border-color: #0284c7;">
                             <i data-lucide="download"></i> Télécharger Corrigé PDF
                         </a>
                     </div>
@@ -20620,7 +20620,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #0284c7; font-weight: 600;">Correction Complète</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2010-normale-corrige.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
         `
@@ -20637,8 +20637,8 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "3 heures",
         coefficient: "5",
-        sujetPdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf",
-        pdfUrl: "https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf",
+        sujetPdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf",
+        pdfUrl: "pdf/examens/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf",
         description: "Épreuve officielle du Baccalauréat National 2009 (Session Ordinaire) — Mathématiques 2BAC Sciences Physiques & SVT (BIOF) avec Sujet et Corrigé.",
         statement: `
             <div class="exam-statement-body">
@@ -20661,10 +20661,10 @@ const examsData = [
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <i data-lucide="external-link"></i> Plein Écran
                         </a>
-                        <a href="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf" download="Examen_National_2009_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
+                        <a href="pdf/examens/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf" download="Examen_National_2009_Maths_PC_ordinaire.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; border-color: #10b981;">
                             <i data-lucide="download"></i> Télécharger Sujet PDF
                         </a>
                     </div>
@@ -20677,7 +20677,7 @@ const examsData = [
                         </span>
                         <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">2BAC PC / SVT</span>
                     </div>
-                    <iframe src="https://www.alloschool.com/assets/documents/course-438/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
+                    <iframe src="pdf/examens/examen-national-maths-sciences-et-technologies-2009-normale-sujet.pdf#toolbar=1" width="100%" height="680px" style="border: none; display: block;"></iframe>
                 </div>
             </div>
     `,
