@@ -3805,64 +3805,844 @@ $$S_n = u_0 \cdot \frac{1 - q^{n+1}}{1 - q}$$
             { title: "Session Ordinaire 2024 - Sciences Physiques", type: "National", year: 2024 }
         ]
     },
+    // ==========================================
+// TRONC COMMUN SCIENCES (TCS) - MATHÉMATIQUES
+// ==========================================
     {
-        id: "math-second-degre",
-        title: "Équations du Second Degré",
+        id: "tc-math-arithmetique-n",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-01-arithmetique-n-cours.pdf",
+            title: "Résumé de cours : Arithmétique dans N (PDF)",
+            description: "Fiche de synthèse officielle complète sur l'arithmétique dans N avec définitions et propriétés."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-01-arithmetique-n-serie.pdf",
+                title: "Série d'Exercices : Arithmétique dans N (PDF)",
+                description: "Série complète d'exercices d'application et d'approfondissement."
+            },
+            {
+                file: "pdf/tc/math/tc-math-01-arithmetique-n-corrige.pdf",
+                title: "Corrigé Détaillé de la Série d'Exercices (PDF)",
+                description: "Solutions complètes et rédigées pas à pas par nos enseignants."
+            },
+            {
+                file: "pdf/tc/math/tc-math-01-arithmetique-n-fiche.pdf",
+                title: "Fiche Pédagogique du Chapitre (PDF)",
+                description: "Guide des compétences exigibles et prérequis officiels du programme."
+            }
+        ],
+        title: "Arithmétique dans N",
         level: "tc",
         subject: "math",
-        description: "Résolution dans R des équations du type ax² + bx + c = 0, étude du signe du trinôme et factorisation.",
-        courseContent: `
-            <h4>1. Discriminant</h4>
-            <p>Pour résoudre ax² + bx + c = 0 (avec a ≠ 0), on calcule le discriminant :</p>
-            <div class="math-formula">\\Delta = b^2 - 4ac</div>
-
-            <h4>2. Solutions dans R</h4>
-            <ul>
-                <li><strong>Si \\Delta > 0 :</strong> Deux solutions réelles :<br>x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a}  et  x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a}</li>
-                <li><strong>Si \\Delta = 0 :</strong> Une solution double :<br>x_0 = \\frac{-b}{2a}</li>
-                <li><strong>Si \\Delta < 0 :</strong> Pas de solution réelle.</li>
-            </ul>
-
-            <h4>3. Signe du trinôme</h4>
-            <p>Le trinôme ax² + bx + c est toujours du signe de <strong>a</strong> à l'extérieur des racines (si elles existent) et du signe opposé de <strong>a</strong> entre les racines.</p>
-
-            <div class="interactive-tool-box collapsed" style="margin-top: 24px;">
-                <div class="tool-header" onclick="toggleTool(this)">
-                    <h4>
-                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="10" y2="18"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M12 18h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/><path d="M8 18h.01"/></svg> Calculateur de Discriminant \\Delta</span>
-                        <i data-lucide="chevron-down" class="tool-chevron"></i>
-                    </h4>
-                    <p>Résolvez instantanément n'importe quel trinôme ax² + bx + c = 0.</p>
-                </div>
-                <div class="tool-body">
-                    <div class="calc-inputs">
-                        <div class="input-field">
-                            <label for="calc-a">Coeff a</label>
-                            <input type="number" id="calc-a" value="2">
-                        </div>
-                        <div class="input-field">
-                            <label for="calc-b">Coeff b</label>
-                            <input type="number" id="calc-b" value="-5">
-                        </div>
-                        <div class="input-field">
-                            <label for="calc-c">Coeff c</label>
-                            <input type="number" id="calc-c" value="2">
-                        </div>
-                    </div>
-                    <button class="btn btn-primary calc-btn" id="btn-calc-delta">Calculer les Solutions</button>
-                    <div class="calc-result" id="delta-result" style="display: none;"></div>
-                </div>
+        description: "Ensemble des entiers naturels, parité, diviseurs et multiples, nombres premiers, décomposition en facteurs premiers, PGCD et PPCM.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
             </div>
-        `,
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Arithmétique dans N (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-01-arithmetique-n-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-01-arithmetique-n-cours.pdf" download="tc-math-01-arithmetique-n-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-01-arithmetique-n-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Parité :</strong> Un entier $n$ est pair s'il s'écrit $n = 2k$, et impair s'il s'écrit $n = 2k + 1$ avec $k \in \mathbb{N}$.</li><li><strong>Nombres Premiers :</strong> Un entier $p \ge 2$ est premier s'il admet exactement deux diviseurs positifs : 1 et $p$.</li><li><strong>Théorème Fondamental :</strong> Tout entier $n \ge 2$ se décompose de manière unique en produit de facteurs premiers : $n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_k^{\alpha_k}$.</li><li><strong>PGCD & PPCM :</strong> $\text{PGCD}(a,b) \times \text{PPCM}(a,b) = a \times b$.</li></ul>
+</div>
+`,
         exercises: [
             {
-                title: "Exercice 1 : Résoudre 2x² - 5x + 2 = 0",
-                statement: "Résoudre dans ℝ l'équation : <strong>2x² - 5x + 2 = 0</strong>",
-                solution: "Ici a = 2, b = -5, c = 2.<br>Δ = (-5)² - 4(2)(2) = 25 - 16 = 9.<br>Puisque Δ > 0, il y a deux solutions réelles :<br>x₁ = (5 - √9)/(2×2) = (5 - 3)/4 = 2/4 = 0.5.<br>x₂ = (5 + √9)/(2×2) = (5 + 3)/4 = 8/4 = 2.<br>L'ensemble des solutions est <strong>S = {0.5 ; 2}</strong>."
+                title: "Exercice 1 : Étude de Parité",
+                statement: "Soit $n \in \mathbb{N}$.<br>1) Déterminer la parité du nombre $A = (n + 1)^2 - (n - 1)^2$.<br>2) Montrer que pour tout $n \in \mathbb{N}$, le nombre $B = n^2 + n + 1$ est toujours impair.",
+                solution: "1) $A = (n^2 + 2n + 1) - (n^2 - 2n + 1) = 4n = 2(2n)$. Comme $2n \in \mathbb{N}$, $A$ est un multiple de 2, donc <strong>$A$ est pair</strong>.<br>2) $B = n(n + 1) + 1$. Le produit de deux entiers consécutifs $n(n+1)$ est toujours pair ($n(n+1) = 2k$). Ainsi $B = 2k + 1$, donc <strong>$B$ est impair</strong> pour tout $n \in \mathbb{N}$."
+            },
+            {
+                title: "Exercice 2 : Décomposition, PGCD et PPCM",
+                statement: "On donne $a = 1260$ et $b = 378$.<br>1) Décomposer $a$ et $b$ en produit de facteurs premiers.<br>2) En déduire $\text{PGCD}(a, b)$ et $\text{PPCM}(a, b)$.<br>3) Rendre la fraction $\frac{378}{1260}$ irréductible.",
+                solution: "1) $1260 = 2^2 \times 3^2 \times 5 \times 7$ et $378 = 2 \times 3^3 \times 7$.<br>2) $\text{PGCD}(a, b) = 2^1 \times 3^2 \times 7^1 = 126$.<br>$\text{PPCM}(a, b) = 2^2 \times 3^3 \times 5^1 \times 7^1 = 3780$.<br>3) $\frac{378}{1260} = \frac{378 \div 126}{1260 \div 126} = \frac{3}{10}$."
             }
         ],
         exams: [
-            { title: "Examen Normalisé Local - Tronc Commun", type: "Régional", year: 2023 }
+            { title: "Devoir Surveillé N°1 (DS1 TCS) - Modèle A (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds1-tcs1-gr1-2021.pdf" },
+            { title: "Devoir Libre N°1 (DL1 TCS) avec Correction (PDF)", type: "Devoir", year: 2020, file: "pdf/tc/math/devoirs/tc-math-devoir-libre-1-corrige-2020.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Le nombre 171 est-il un nombre premier ?",
+                options: ["Oui, c'est un nombre premier", "Non, car 1 + 7 + 1 = 9 donc il est divisible par 3 et 9", "Non, car il est pair", "Oui, car il se termine par 1"],
+                answer: 1,
+                explanation: "La somme des chiffres de 171 est 1 + 7 + 1 = 9 (multiple de 3 et 9), donc 171 n'est pas premier car $171 = 9 \times 19$."
+            },
+            {
+                question: "Quel est le PGCD de 24 et 36 ?",
+                options: ["6", "12", "72", "4"],
+                answer: 1,
+                explanation: "$24 = 2^3 \times 3$ et $36 = 2^2 \times 3^2$. Le PGCD est $2^2 \times 3 = 12$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-calcul-vectoriel",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-02-calcul-vectoriel-cours.pdf",
+            title: "Résumé de cours : Calcul Vectoriel dans le Plan (PDF)",
+            description: "Fiche de synthèse officielle complète sur les vecteurs et les configurations géométriques."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-02-calcul-vectoriel-serie.pdf",
+                title: "Série d'Exercices : Calcul Vectoriel (PDF)",
+                description: "Exercices d'entraînement et problèmes sur les relations vectorielles et Chasles."
+            },
+            {
+                file: "pdf/tc/math/tc-math-02-calcul-vectoriel-fiche.pdf",
+                title: "Fiche Pédagogique du Calcul Vectoriel (PDF)",
+                description: "Objectifs didactiques et méthodes de démonstration vectorielle."
+            }
+        ],
+        title: "Calcul Vectoriel dans le Plan",
+        level: "tc",
+        subject: "math",
+        description: "Égalité vectorielle, relation de Chasles, multiplication par un scalaire, colinéarité, alignement de points et parallélisme.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Calcul Vectoriel dans le Plan (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-02-calcul-vectoriel-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-02-calcul-vectoriel-cours.pdf" download="tc-math-02-calcul-vectoriel-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-02-calcul-vectoriel-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Relation de Chasles :</strong> Pour tous points $A, B, C$ du plan : $\vec{AB} + \vec{BC} = \vec{AC}$.</li><li><strong>Colinéarité :</strong> Deux vecteurs non nuls $\vec{u}$ et $\vec{v}$ sont colinéaires si et seulement s'il existe $k \in \mathbb{R}$ tel que $\vec{u} = k\vec{v}$.</li><li><strong>Alignement :</strong> Les points $A, B, C$ sont alignés si et seulement si $\vec{AB}$ et $\vec{AC}$ sont colinéaires.</li><li><strong>Milieu d'un segment :</strong> $I$ est milieu de $[AB] \iff \vec{IA} + \vec{IB} = \vec{0} \iff \vec{AI} = \frac{1}{2}\vec{AB}$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Simplification Vectorielle",
+                statement: "Simplifier l'expression vectorielle suivante :<br>$$\vec{V} = \vec{AB} - \vec{CB} + \vec{CA} - 2\vec{AB}$$",
+                solution: "On utilise $-\vec{CB} = \vec{BC}$ :<br>$\vec{V} = \vec{AB} + \vec{BC} + \vec{CA} - 2\vec{AB}$<br>Par Chasles, $(\vec{AB} + \vec{BC}) + \vec{CA} = \vec{AC} + \vec{CA} = \vec{AA} = \vec{0}$.<br>Donc $\vec{V} = \vec{0} - 2\vec{AB} = <strong>-2\vec{AB} = 2\vec{BA}</strong>$."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°1 (DS1 TCS) - Modèle B (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds1-tcs1-gr2-2021.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Que vaut le vecteur $\vec{MN} + \vec{NP} + \vec{PM}$ ?",
+                options: ["$\\vec{MP}$", "$\\vec{0}$", "$2\\vec{MN}$", "$\\vec{NM}$"],
+                answer: 1,
+                explanation: "Par application successive de la relation de Chasles : $(\vec{MN} + \vec{NP}) + \vec{PM} = \vec{MP} + \vec{PM} = \vec{MM} = \vec{0}$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-projection",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-03-projection-cours.pdf",
+            title: "Résumé de cours : La Projection dans le Plan (PDF)",
+            description: "Fiche de synthèse officielle complète sur la projection et le théorème de Thalès."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-03-projection-serie.pdf",
+                title: "Série d'Exercices : La Projection (PDF)",
+                description: "Exercices d'application du théorème de Thalès et des propriétés de la projection."
+            },
+            {
+                file: "pdf/tc/math/tc-math-03-projection-fiche.pdf",
+                title: "Fiche Pédagogique : Projection (PDF)",
+                description: "Fiche pédagogique avec compétences exigibles et méthodes géométriques."
+            }
+        ],
+        title: "La Projection dans le Plan",
+        level: "tc",
+        subject: "math",
+        description: "Projection sur une droite parallèlement à une autre, conservation du coefficient de colinéarité, théorème de Thalès.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : La Projection dans le Plan (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-03-projection-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-03-projection-cours.pdf" download="tc-math-03-projection-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-03-projection-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Conservation de la colinéarité :</strong> Si $p$ est une projection, et si $\vec{AB} = k\vec{CD}$, alors $\vec{A'B'} = k\vec{C'D'}$ où $A', B', C', D'$ sont les projetés respectifs de $A, B, C, D$.</li><li><strong>Conservation du milieu :</strong> Le projeté du milieu d'un segment est le milieu du segment projeté.</li><li><strong>Théorème de Thalès :</strong> Trois droites parallèles déterminent sur deux sécantes des segments proportionnels.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Application du Théorème de Thalès",
+                statement: "Soit $ABC$ un triangle. Soit $M \in [AB]$ tel que $AM = 2$ et $AB = 6$. La parallèle à $(BC)$ passant par $M$ coupe $(AC)$ en $N$. Sachant que $AC = 9$, calculer la longueur $AN$.",
+                solution: "Comme $(MN) \parallel (BC)$, d'après le théorème de Thalès :<br>$$\frac{AM}{AB} = \frac{AN}{AC} \implies \frac{2}{6} = \frac{AN}{9} \implies AN = \frac{2 \times 9}{6} = <strong>3</strong>$$."
+            }
+        ],
+        exams: [
+            { title: "Devoir Libre N°1 TCS (PDF)", type: "Devoir", year: 2022, file: "pdf/tc/math/devoirs/tc-math-devoir-libre-1-2022.pdf" }
+        ],
+        quiz: [
+            {
+                question: "La projection d'un segment conserve-t-elle toujours la longueur ?",
+                options: ["Oui, toujours", "Non, la longueur n'est pas conservée en général", "Seulement pour les triangles rectangles", "Uniquement si la droite est horizontale"],
+                answer: 1,
+                explanation: "La projection conserve le rapport de colinéarité et les milieux, mais ne conserve pas les longueurs (sauf dans le cas trivial où la droite est parallèle à l'axe de projection)."
+            }
+        ]
+    },
+    {
+        id: "tc-math-ensembles-nombres",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-04-ensembles-nombres-cours.pdf",
+            title: "Résumé de cours : Ensembles des Nombres & Calculs (PDF)",
+            description: "Fiche de synthèse officielle sur la classification des nombres et les techniques de calcul algébrique."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-04-ensembles-nombres-serie.pdf",
+                title: "Série d'Exercices : Ensembles des Nombres (PDF)",
+                description: "Série d'exercices sur les simplifications, factorisations et développements cubiques."
+            },
+            {
+                file: "pdf/tc/math/tc-math-04-ensembles-nombres-fiche.pdf",
+                title: "Fiche Pédagogique : Ensembles de Nombres (PDF)",
+                description: "Fiche didactique des notions fondamentales sur les nombres."
+            }
+        ],
+        title: "Ensembles des Nombres & Calcul Numérique",
+        level: "tc",
+        subject: "math",
+        description: "Les ensembles N, Z, D, Q, R, identités remarquables (2nd & 3ème degré), puissances, racines carrées et écriture scientifique.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Ensembles des Nombres & Calculs (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-04-ensembles-nombres-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-04-ensembles-nombres-cours.pdf" download="tc-math-04-ensembles-nombres-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-04-ensembles-nombres-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Inclusion des ensembles :</strong> $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{D} \subset \mathbb{Q} \subset \mathbb{R}$.</li><li><strong>Identités Remarquables d'Ordre 3 :</strong><br>$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$<br>$(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$<br>$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$<br>$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Factorisation avec Identité Cubique",
+                statement: "Factoriser l'expression algébrique : $P(x) = x^3 - 8 + (x - 2)(2x + 1)$.",
+                solution: "On remarque que $x^3 - 8 = x^3 - 2^3 = (x - 2)(x^2 + 2x + 4)$.<br>Alors :<br>$P(x) = (x - 2)(x^2 + 2x + 4) + (x - 2)(2x + 1) = (x - 2)[(x^2 + 2x + 4) + (2x + 1)] = <strong>(x - 2)(x^2 + 4x + 5)</strong>$."
+            }
+        ],
+        exams: [
+            { title: "Devoir Libre N°1 TCS (PDF)", type: "Devoir", year: 2020, file: "pdf/tc/math/devoirs/tc-math-devoir-libre-1-2020.pdf" }
+        ],
+        quiz: [
+            {
+                question: "À quel plus petit ensemble appartient le nombre $-3/4$ ?",
+                options: ["$\\mathbb{N}$", "$\\mathbb{Z}$", "$\\mathbb{D}$", "$\\mathbb{R} \\setminus \\mathbb{Q}$"],
+                answer: 2,
+                explanation: "$-3/4 = -0{,}75 = -75/10^2$, c'est un nombre décimal, donc il appartient à $\mathbb{D}$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-ordre-r",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-05-ordre-r-cours.pdf",
+            title: "Résumé de cours : L'Ordre dans R & Intervalles (PDF)",
+            description: "Fiche de synthèse officielle complète sur les encadrements, la valeur absolue et les intervalles."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-05-ordre-r-serie.pdf",
+                title: "Série d'Exercices : Ordre dans R (PDF)",
+                description: "Exercices d'encadrements et de résolution d'inéquations avec valeur absolue."
+            },
+            {
+                file: "pdf/tc/math/tc-math-05-ordre-r-fiche.pdf",
+                title: "Fiche Pédagogique : Ordre dans R (PDF)",
+                description: "Compétences d'encadrement et manipulation de la valeur absolue."
+            }
+        ],
+        title: "L'Ordre dans R (Intervalles & Valeur Absolue)",
+        level: "tc",
+        subject: "math",
+        description: "Relation d'ordre, encadrement, intervalles de R, valeur absolue, distance et résolution d'inéquations avec valeur absolue.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : L'Ordre dans R & Intervalles (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-05-ordre-r-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-05-ordre-r-cours.pdf" download="tc-math-05-ordre-r-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-05-ordre-r-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Propriétés de l'ordre :</strong> $a \le b \iff a - b \le 0$. Si $c > 0$, $a \le b \implies ac \le bc$. Si $c < 0$, $a \le b \implies ac \ge bc$.</li><li><strong>Valeur Absolue :</strong> $|x| = x$ si $x \ge 0$, et $|x| = -x$ si $x < 0$. $\sqrt{x^2} = |x|$.</li><li><strong>Inégalités Fondamentales :</strong> $|x| \le r \iff -r \le x \le r$. $|x| \ge r \iff x \ge r \text{ ou } x \le -r$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Encadrement",
+                statement: "Soient $x, y \in \mathbb{R}$ tels que $2 \le x \le 5$ et $-4 \le y \le -1$.<br>Donner un encadrement de $x - 2y$ et $x \times y$.",
+                solution: "1) $-4 \le y \le -1 \implies 2 \le -2y \le 8$.<br>En additionnant avec $2 \le x \le 5$ : <strong>$4 \le x - 2y \le 13$</strong>.<br>2) Pour le produit, $1 \le -y \le 4$, donc $2 \times 1 \le -xy \le 5 \times 4 \implies 2 \le -xy \le 20 \implies <strong>-20 \le xy \le -2</strong>$."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°2 TCS (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds2-tcs1-2021.pdf" }
+        ],
+        quiz: [
+            {
+                question: "L'ensemble des solutions de $|x - 3| \le 2$ est :",
+                options: ["$[1, 5]$", "$[-1, 5]$", "$[2, 3]$", "$]-\\infty, 1] \\cup [5, +\\infty[$"],
+                answer: 0,
+                explanation: "$|x - 3| \le 2 \iff -2 \le x - 3 \le 2 \iff 1 \le x \le 5 \iff x \in [1, 5]$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-droite-plan",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-06-droite-plan-cours.pdf",
+            title: "Résumé de cours : La Droite dans le Plan (PDF)",
+            description: "Fiche de synthèse officielle sur la géométrie analytique plane et les équations de droites."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-06-droite-plan-serie.pdf",
+                title: "Série d'Exercices : La Droite dans le Plan (PDF)",
+                description: "Exercices sur les équations cartésiennes, représentations paramétriques et positions relatives."
+            },
+            {
+                file: "pdf/tc/math/tc-math-06-droite-plan-fiche.pdf",
+                title: "Fiche Pédagogique : Droite dans le Plan (PDF)",
+                description: "Objectifs didactiques sur la géométrie repérée."
+            }
+        ],
+        title: "La Droite dans le Plan",
+        level: "tc",
+        subject: "math",
+        description: "Repère du plan, coordonnées, déterminant de deux vecteurs, représentation paramétrique, équation cartésienne ax + by + c = 0.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : La Droite dans le Plan (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-06-droite-plan-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-06-droite-plan-cours.pdf" download="tc-math-06-droite-plan-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-06-droite-plan-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Déterminant :</strong> Pour $\vec{u}(x, y)$ et $\vec{v}(x', y')$, $\det(\vec{u}, \vec{v}) = xy' - x'y$. $\vec{u}$ et $\vec{v}$ colinéaires $\iff \det(\vec{u}, \vec{v}) = 0$.</li><li><strong>Équation Cartésienne :</strong> Toute droite $(D)$ admet une équation de la forme $ax + by + c = 0$ avec $(a, b) \neq (0,0)$. Le vecteur $\vec{u}(-b, a)$ est un vecteur directeur.</li><li><strong>Parallélisme :</strong> $(D) : ax+by+c=0$ et $(D') : a'x+b'y+c'=0$ sont parallèles $\iff ab' - a'b = 0$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Équation Cartésienne de Droite",
+                statement: "Déterminer une équation cartésienne de la droite $(D)$ passant par $A(1, 3)$ et de vecteur directeur $\vec{u}(-2, 5)$.",
+                solution: "Soit $M(x, y) \in (D) \iff \det(\vec{AM}, \vec{u}) = 0$.<br>$\vec{AM}(x - 1, y - 3)$ et $\vec{u}(-2, 5)$.<br>$\det(\vec{AM}, \vec{u}) = 5(x - 1) - (-2)(y - 3) = 5x - 5 + 2y - 6 = <strong>5x + 2y - 11 = 0</strong>$."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°2 TCS (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds2-tcs1-2021.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Quel est un vecteur directeur de la droite $(D) : 3x - 4y + 7 = 0$ ?",
+                options: ["$\\vec{u}(4, 3)$", "$\\vec{u}(-3, 4)$", "$\\vec{u}(3, -4)$", "$\\vec{u}(-4, -3)$"],
+                answer: 0,
+                explanation: "Pour $ax + by + c = 0$, un vecteur directeur est $\vec{u}(-b, a)$. Ici $a=3, b=-4$, donc $\vec{u}(-(-4), 3) = \vec{u}(4, 3)$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-polynomes",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-07-polynomes-cours.pdf",
+            title: "Résumé de cours : Les Polynômes (PDF)",
+            description: "Fiche de synthèse officielle complète sur les fonctions polynômes et la factorisation."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-07-polynomes-resume.pdf",
+                title: "Fiche Méthodes & Résumé Synthétique (PDF)",
+                description: "Guide des méthodes de division euclidienne et tableau d'Horner."
+            },
+            {
+                file: "pdf/tc/math/tc-math-07-polynomes-serie.pdf",
+                title: "Série d'Exercices : Polynômes (PDF)",
+                description: "Exercices de factorisation et recherche de racines réelles."
+            },
+            {
+                file: "pdf/tc/math/tc-math-07-polynomes-fiche.pdf",
+                title: "Fiche Pédagogique : Polynômes (PDF)",
+                description: "Objectifs du programme officiel."
+            }
+        ],
+        title: "Les Polynômes & Division Euclidienne",
+        level: "tc",
+        subject: "math",
+        description: "Degré d'un polynôme, racine d'un polynôme, factorisation par (x - a), division euclidienne et méthode d'Horner.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Les Polynômes (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-07-polynomes-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-07-polynomes-cours.pdf" download="tc-math-07-polynomes-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-07-polynomes-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Racine et Factorisation :</strong> $\alpha$ est racine de $P(x) \iff P(\alpha) = 0 \iff P(x) = (x - \alpha) Q(x)$ où $\deg(Q) = \deg(P) - 1$.</li><li><strong>Division Euclidienne :</strong> Pour tous polynômes $A(x)$ et $B(x) \neq 0$, il existe un unique couple $(Q(x), R(x))$ tel que $A(x) = B(x)Q(x) + R(x)$ avec $\deg(R) < \deg(B)$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Division Euclidienne et Racines",
+                statement: "Soit $P(x) = 2x^3 - 3x^2 - 11x + 6$.<br>1) Vérifier que $3$ est racine de $P(x)$.<br>2) Effectuer la division euclidienne de $P(x)$ par $(x - 3)$.<br>3) Résoudre dans $\mathbb{R}$ l'équation $P(x) = 0$.",
+                solution: "1) $P(3) = 2(27) - 3(9) - 11(3) + 6 = 54 - 27 - 33 + 6 = 0$, donc 3 est bien une racine.<br>2) En effectuant la division euclidienne : $P(x) = (x - 3)(2x^2 + 3x - 2)$.<br>3) Pour $2x^2 + 3x - 2 = 0$, $\Delta = 9 - 4(2)(-2) = 25 = 5^2$.<br>Racines : $x_1 = \frac{-3 - 5}{4} = -2$ et $x_2 = \frac{-3 + 5}{4} = \frac{1}{2}$.<br>Ainsi, <strong>$S = \{-2, \frac{1}{2}, 3\}$</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°3 TCS (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds3-tcs1-2021.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Si $P(x)$ est de degré 4 et $Q(x)$ de degré 2, quel est le degré de $P(x) \times Q(x)$ ?",
+                options: ["6", "8", "4", "2"],
+                answer: 0,
+                explanation: "Pour le produit de deux polynômes non nuls, $\deg(P \times Q) = \deg(P) + \deg(Q) = 4 + 2 = 6$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-equations-inequations-systemes",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-08-equations-inequations-systemes-cours.pdf",
+            title: "Résumé de cours : Équations, Inéquations et Systèmes (PDF)",
+            description: "Fiche de synthèse officielle complète sur la résolution des équations et systèmes."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-08-equations-inequations-systemes-serie.pdf",
+                title: "Série d'Exercices : Équations & Inéquations (PDF)",
+                description: "Exercices variés sur les équations du second degré et systèmes linéaires."
+            },
+            {
+                file: "pdf/tc/math/tc-math-08-equations-inequations-systemes-fiche.pdf",
+                title: "Fiche Pédagogique : Équations & Systèmes (PDF)",
+                description: "Méthodes de résolution et tableau de signes."
+            }
+        ],
+        title: "Équations, Inéquations et Systèmes",
+        level: "tc",
+        subject: "math",
+        description: "Équations du 1er et 2nd degré, discriminant Delta, signe du trinôme, inéquations et systèmes linéaires (Cramer & substitution).",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Équations, Inéquations et Systèmes (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-08-equations-inequations-systemes-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-08-equations-inequations-systemes-cours.pdf" download="tc-math-08-equations-inequations-systemes-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-08-equations-inequations-systemes-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Trinôme du Second Degré :</strong> Pour $ax^2 + bx + c = 0$ ($a \neq 0$), $\Delta = b^2 - 4ac$.<br>• Si $\Delta > 0$ : 2 racines distinctes $x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a}$.<br>• Si $\Delta = 0$ : 1 racine double $x_0 = -\frac{b}{2a}$.<br>• Si $\Delta < 0$ : Aucune racine dans $\mathbb{R}$.</li><li><strong>Signe du Trinôme :</strong> Le trinôme est du signe de $a$ à l'extérieur des racines et du signe de $-a$ entre les racines.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Inéquation du Second Degré",
+                statement: "Résoudre dans $\mathbb{R}$ l'inéquation : $2x^2 - 5x + 2 \le 0$.",
+                solution: "Discriminant : $\Delta = (-5)^2 - 4(2)(2) = 25 - 16 = 9 = 3^2 > 0$.<br>Racines : $x_1 = \frac{5 - 3}{4} = \frac{1}{2}$ et $x_2 = \frac{5 + 3}{4} = 2$.<br>Comme $a = 2 > 0$, le trinôme est négatif ou nul entre ses racines :<br><strong>$S = \left[\frac{1}{2}, 2\right]$</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°3 TCS (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds3-tcs1-2021.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Quel est le nombre de solutions réelles de $x^2 + x + 1 = 0$ ?",
+                options: ["0", "1", "2", "Une infinité"],
+                answer: 0,
+                explanation: "$\Delta = 1^2 - 4(1)(1) = 1 - 4 = -3 < 0$. Comme $\Delta < 0$, il n'y a aucune solution dans $\mathbb{R}$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-calcul-trigonometrique",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-09-calcul-trigonometrique-cours.pdf",
+            title: "Résumé de cours : Calcul Trigonométrique (PDF)",
+            description: "Fiche de synthèse officielle complète sur le cercle trigonométrique et les formules d'angles associés."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-09-calcul-trigonometrique-fiche.pdf",
+                title: "Fiche Pédagogique : Trigonométrie (PDF)",
+                description: "Fiche didactique des propriétés trigonométriques et représentations angulaires."
+            }
+        ],
+        title: "Calcul Trigonométrique",
+        level: "tc",
+        subject: "math",
+        description: "Cercle trigonométrique, abscisses curvilignes, sinus, cosinus, tangente, relations fondamentales et équations trigonométriques.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Calcul Trigonométrique (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-09-calcul-trigonometrique-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-09-calcul-trigonometrique-cours.pdf" download="tc-math-09-calcul-trigonometrique-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-09-calcul-trigonometrique-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Relation Fondamentale :</strong> Pour tout réel $x$ : $\cos^2(x) + \sin^2(x) = 1$.</li><li><strong>Angles Associés :</strong><br>$\cos(\pi - x) = -\cos(x)$ et $\sin(\pi - x) = \sin(x)$<br>$\cos(\pi + x) = -\cos(x)$ et $\sin(\pi + x) = -\sin(x)$<br>$\cos\left(\frac{\pi}{2} - x\right) = \sin(x)$ et $\sin\left(\frac{\pi}{2} - x\right) = \cos(x)$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Équation Trigonométrique",
+                statement: "Résoudre dans $[0, 2\pi[$ l'équation : $2\sin(x) - \sqrt{3} = 0$.",
+                solution: "$2\sin(x) = \sqrt{3} \iff \sin(x) = \frac{\sqrt{3}}{2} = \sin\left(\frac{\pi}{3}\right)$.<br>Les solutions dans $[0, 2\pi[$ sont :<br>$x = \frac{\pi}{3}$ ou $x = \pi - \frac{\pi}{3} = \frac{2\pi}{3}$.<br>Ainsi <strong>$S = \left\{\frac{\pi}{3}, \frac{2\pi}{3}\right\}$</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Libre N°2 TCS (PDF)", type: "Devoir", year: 2022, file: "pdf/tc/math/devoirs/tc-math-devoir-libre-2-2022.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Que vaut $\cos\left(\frac{\pi}{3}\right)$ ?",
+                options: ["$1/2$", "$\\sqrt{3}/2$", "$\\sqrt{2}/2$", "$0$"],
+                answer: 0,
+                explanation: "La valeur remarquable exacte de $\cos(\pi/3)$ est $1/2$ (ou 0,5)."
+            }
+        ]
+    },
+    {
+        id: "tc-math-fonctions-numeriques",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-10-fonctions-numeriques-cours.pdf",
+            title: "Résumé de cours : Généralités sur les Fonctions (PDF)",
+            description: "Fiche de synthèse officielle complète sur l'étude des fonctions numériques."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-10-fonctions-numeriques-serie.pdf",
+                title: "Série d'Exercices : Fonctions Numériques (PDF)",
+                description: "Série d'exercices d'application sur le domaine de définition, la parité et les variations."
+            },
+            {
+                file: "pdf/tc/math/tc-math-10-fonctions-numeriques-fiche.pdf",
+                title: "Fiche Pédagogique : Fonctions Numériques (PDF)",
+                description: "Guide des compétences d'analyse graphique et algébrique."
+            }
+        ],
+        title: "Généralités sur les Fonctions Numériques",
+        level: "tc",
+        subject: "math",
+        description: "Domaine de définition, parité, monotonie, taux de variation, extremums locaux et étude des fonctions de référence.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Généralités sur les Fonctions (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-10-fonctions-numeriques-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-10-fonctions-numeriques-cours.pdf" download="tc-math-10-fonctions-numeriques-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-10-fonctions-numeriques-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Parité :</strong> $f$ est paire si $\forall x \in D_f, -x \in D_f$ et $f(-x) = f(x)$ (axe $(Oy)$ est axe de symétrie). $f$ est impaire si $f(-x) = -f(x)$ (origine $O$ est centre de symétrie).</li><li><strong>Taux de Variation :</strong> $T(a,b) = \frac{f(a) - f(b)}{a - b}$. Si $T(a,b) \ge 0$, $f$ est croissante ; si $T(a,b) \le 0$, $f$ est décroissante.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Domaine et Parité",
+                statement: "Soit $f(x) = \frac{2x}{x^2 + 1}$.<br>1) Déterminer $D_f$.<br>2) Étudier la parité de la fonction $f$.",
+                solution: "1) Pour tout $x \in \mathbb{R}$, $x^2 + 1 \ge 1 > 0 \neq 0$. Donc <strong>$D_f = \mathbb{R}$</strong>.<br>2) Pour tout $x \in \mathbb{R}$, $-x \in \mathbb{R}$ et :<br>$f(-x) = \frac{2(-x)}{(-x)^2 + 1} = \frac{-2x}{x^2 + 1} = -f(x)$.<br>Donc <strong>$f$ est une fonction impaire</strong> (sa courbe admet l'origine $O$ comme centre de symétrie)."
+            }
+        ],
+        exams: [
+            { title: "Devoir Surveillé N°3 TCS (PDF)", type: "Devoir", year: 2021, file: "pdf/tc/math/devoirs/tc-math-ds3-tcs1-2021.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Le domaine de définition de $f(x) = \sqrt{x - 3}$ est :",
+                options: ["$[3, +\\infty[$", "$]-\\infty, 3]$", "$]3, +\\infty[$", "$\\mathbb{R} \\setminus \\{3\\}$"],
+                answer: 0,
+                explanation: "$x \in D_f \iff x - 3 \ge 0 \iff x \ge 3 \iff x \in [3, +\infty[$."
+            }
+        ]
+    },
+    {
+        id: "tc-math-produit-scalaire",
+        coursePdf: {
+            file: "pdf/tc/math/tc-math-11-produit-scalaire-cours.pdf",
+            title: "Résumé de cours : Le Produit Scalaire dans le Plan (PDF)",
+            description: "Fiche de synthèse officielle complète sur le produit scalaire, Al-Kashi et les relations métriques."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/tc/math/tc-math-11-produit-scalaire-cours.pdf",
+                title: "Fiche de Cours & Exercices d'Application (PDF)",
+                description: "Applications métriques dans les triangles et calculs de longueurs et d'angles."
+            }
+        ],
+        title: "Le Produit Scalaire dans le Plan",
+        level: "tc",
+        subject: "math",
+        description: "Définition géométrique et analytique du produit scalaire, orthogonalité, théorème d'Al-Kashi et théorème de la médiane.",
+        courseContent: `<!-- EMBEDDED PDF VIEWER CARD -->
+<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+            </div>
+            <div>
+                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Résumé de cours : Le Produit Scalaire dans le Plan (PDF)</h4>
+                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document officiel haute définition ou téléchargez-le.</p>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="pdf/tc/math/tc-math-11-produit-scalaire-cours.pdf" target="_blank" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Plein Écran
+            </a>
+            <a href="pdf/tc/math/tc-math-11-produit-scalaire-cours.pdf" download="tc-math-11-produit-scalaire-cours.pdf" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Télécharger PDF
+            </a>
+        </div>
+    </div>
+    <div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: #0f172a;">
+        <iframe src="pdf/tc/math/tc-math-11-produit-scalaire-cours.pdf#toolbar=1" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+    </div>
+</div>
+
+<div class="formula-box" style="margin-bottom: 20px;">
+    <h4>Points Clés & Propriétés Fondamentales</h4>
+    <ul><li><strong>Définition Géométrique :</strong> $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\widehat{\vec{u}, \vec{v}})$.</li><li><strong>Expression Analytique :</strong> Dans un repère orthonormé, si $\vec{u}(x, y)$ et $\vec{v}(x', y')$, alors $\vec{u} \cdot \vec{v} = xx' + yy'$.</li><li><strong>Théorème d'Al-Kashi :</strong> Dans un triangle $ABC$, $BC^2 = AB^2 + AC^2 - 2 AB \cdot AC \cos(\widehat{BAC})$.</li></ul>
+</div>
+`,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul de Longueur avec Al-Kashi",
+                statement: "Soit un triangle $ABC$ tel que $AB = 6$, $AC = 4$ et $\widehat{BAC} = 60^\circ$.<br>1) Calculer le produit scalaire $\vec{AB} \cdot \vec{AC}$.<br>2) Calculer la longueur du côté $BC$.",
+                solution: "1) $\vec{AB} \cdot \vec{AC} = AB \times AC \times \cos(60^\circ) = 6 \times 4 \times \frac{1}{2} = <strong>12</strong>$.<br>2) D'après le théorème d'Al-Kashi :<br>$BC^2 = AB^2 + AC^2 - 2 \vec{AB} \cdot \vec{AC} = 6^2 + 4^2 - 2(12) = 36 + 16 - 24 = 28$.<br>Donc <strong>$BC = \sqrt{28} = 2\sqrt{7} \approx 5{,}29$</strong>."
+            }
+        ],
+        exams: [
+            { title: "Devoir Libre N°2 TCS (PDF)", type: "Devoir", year: 2022, file: "pdf/tc/math/devoirs/tc-math-devoir-libre-2-2022.pdf" }
+        ],
+        quiz: [
+            {
+                question: "Deux vecteurs non nuls $\vec{u}$ et $\vec{v}$ sont orthogonaux si et seulement si :",
+                options: ["$\\vec{u} \\cdot \\vec{v} = 0$", "$\\vec{u} = k\\vec{v}$", "$\\det(\\vec{u}, \\vec{v}) = 0$", "$\\|\\vec{u}\\| = \\|\\vec{v}\\|$"],
+                answer: 0,
+                explanation: "L'orthogonalité de deux vecteurs non nuls équivaut à un produit scalaire nul : $\vec{u} \perp \vec{v} \iff \vec{u} \cdot \vec{v} = 0$."
+            }
         ]
     },
     {
