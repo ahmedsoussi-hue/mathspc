@@ -6477,179 +6477,582 @@ let currentModalQuizState = {
     score: 0
 };
 
+const chapterQuizBank = {
+    "tc-math-arithmetique-n": [
+        {
+            "question": "Soit $n \\in \\mathbb{N}$. Quelle est la parité du nombre $A = (n+1)^2 - (n-1)^2$ ?",
+            "options": [
+                "Toujours pair",
+                "Toujours impair",
+                "Pair si n est pair, impair si n est impair",
+                "Dépend de la valeur de n"
+            ],
+            "answer": 0,
+            "explanation": "$A = (n^2 + 2n + 1) - (n^2 - 2n + 1) = 4n = 2(2n)$, qui est un multiple de 2 pour tout $n \\in \\mathbb{N}$, donc $A$ est toujours pair."
+        },
+        {
+            "question": "Le nombre 171 est-il un nombre premier ?",
+            "options": [
+                "Non, car 1 + 7 + 1 = 9 donc il est divisible par 3 et 9",
+                "Oui, c'est un nombre premier",
+                "Non, car il est pair",
+                "Oui, car il se termine par 1"
+            ],
+            "answer": 0,
+            "explanation": "La somme des chiffres est $1 + 7 + 1 = 9$ (multiple de 3 et 9). Donc $171 = 9 \\times 19$, ce n'est pas un nombre premier."
+        },
+        {
+            "question": "Quel est le PGCD de $a = 2^3 \\times 3^2 \\times 5$ et $b = 2^2 \\times 3^3 \\times 7$ ?",
+            "options": [
+                "$2^2 \\times 3^2 = 36$",
+                "$2^3 \\times 3^3 = 216$",
+                "$2^2 \\times 3^2 \\times 5 \\times 7 = 1260$",
+                "$2^3 \\times 3^3 \\times 5 \\times 7 = 7560$"
+            ],
+            "answer": 0,
+            "explanation": "Le PGCD s'obtient en prenant les facteurs premiers communs munis de leurs plus petits exposants : $\\text{PGCD}(a,b) = 2^2 \\times 3^2 = 36$."
+        },
+        {
+            "question": "Pour tout entier naturel $n$, le produit $n(n+1)(n+2)$ de 3 entiers consécutifs est toujours divisible par :",
+            "options": [
+                "6",
+                "12",
+                "8",
+                "9"
+            ],
+            "answer": 0,
+            "explanation": "Parmi 3 entiers consécutifs, au moins un est divisible par 2 et un est divisible par 3. Comme 2 et 3 sont premiers entre eux, le produit est divisible par $2 \\times 3 = 6$."
+        },
+        {
+            "question": "Si $\\text{PGCD}(a,b) = 12$ et $a \\times b = 4320$, que vaut $\\text{PPCM}(a,b)$ ?",
+            "options": [
+                "360",
+                "720",
+                "180",
+                "432"
+            ],
+            "answer": 0,
+            "explanation": "On utilise la relation fondamentale $\\text{PGCD}(a,b) \\times \\text{PPCM}(a,b) = a \\times b$. D'où $\\text{PPCM} = 4320 / 12 = 360$."
+        }
+    ],
+    "tc-math-calcul-vectoriel": [
+        {
+            "question": "Que vaut la somme vectorielle $\\vec{AB} + \\vec{BC} + \\vec{CA}$ d'après la relation de Chasles ?",
+            "options": [
+                "$\\vec{0}$",
+                "$2\\vec{AB}$",
+                "$\\vec{AC}$",
+                "$\\vec{BA}$"
+            ],
+            "answer": 0,
+            "explanation": "Par la relation de Chasles : $(\\vec{AB} + \\vec{BC}) + \\vec{CA} = \\vec{AC} + \\vec{CA} = \\vec{AA} = \\vec{0}$."
+        },
+        {
+            "question": "Le point $I$ est le milieu du segment $[AB]$ si et seulement si :",
+            "options": [
+                "$\\vec{IA} + \\vec{IB} = \\vec{0}$",
+                "$\\vec{AB} = \\vec{AI}$",
+                "$\\vec{IA} = \\vec{IB}$",
+                "$\\vec{AI} + \\vec{BI} = \\vec{AB}$"
+            ],
+            "answer": 0,
+            "explanation": "$I$ est milieu de $[AB] \\iff \\vec{IA} = -\\vec{IB} \\iff \\vec{IA} + \\vec{IB} = \\vec{0}$ (ou $\\vec{AI} = \\frac{1}{2}\\vec{AB}$)."
+        },
+        {
+            "question": "Deux vecteurs non nuls $\\vec{u}$ et $\\vec{v}$ sont colinéaires si et seulement si :",
+            "options": [
+                "Il existe $k \\in \\mathbb{R}$ tel que $\\vec{u} = k\\vec{v}$",
+                "$\\vec{u} + \\vec{v} = \\vec{0}$",
+                "$\\|\\vec{u}\\| = \\|\\vec{v}\\|$",
+                "Ils ont la même origine"
+            ],
+            "answer": 0,
+            "explanation": "La colinéarité de deux vecteurs non nuls signifie qu'ils ont la même direction, ce qui s'écrit $\\vec{u} = k\\vec{v}$ avec $k \\in \\mathbb{R}$."
+        },
+        {
+            "question": "Soit $ABCD$ un parallélogramme. Quelle relation est toujours exacte ?",
+            "options": [
+                "$\\vec{AB} = \\vec{DC}$",
+                "$\\vec{AB} = \\vec{CD}$",
+                "$\\vec{AC} = \\vec{BD}$",
+                "$\\vec{AD} = \\vec{CB}$"
+            ],
+            "answer": 0,
+            "explanation": "Dans un parallélogramme $ABCD$, les côtés opposés sont parallèles et de même sens : $\\vec{AB} = \\vec{DC}$ et $\\vec{AD} = \\vec{BC}$."
+        },
+        {
+            "question": "Si $\\vec{AM} = 3\\vec{AB} - 2\\vec{AC}$, alors le vecteur $\\vec{BM}$ s'exprime par :",
+            "options": [
+                "$2\\vec{AB} - 2\\vec{AC}$",
+                "$4\\vec{AB} - 2\\vec{AC}$",
+                "$3\\vec{AB} - \\vec{AC}$",
+                "$\\vec{AB} + \\vec{BC}$"
+            ],
+            "answer": 0,
+            "explanation": "$\\vec{BM} = \\vec{BA} + \\vec{AM} = -\\vec{AB} + (3\\vec{AB} - 2\\vec{AC}) = 2\\vec{AB} - 2\\vec{AC} = 2\\vec{CB}$."
+        }
+    ],
+    "tc-math-projection": [
+        {
+            "question": "Quelle propriété est conservée par la projection sur une droite parallèlement à une autre ?",
+            "options": [
+                "Le coefficient de colinéarité de deux vecteurs alignés",
+                "La distance entre deux points",
+                "La mesure des angles",
+                "L'aire des triangles"
+            ],
+            "answer": 0,
+            "explanation": "La projection conserve le rapport de colinéarité : si $\\vec{AB} = k\\vec{CD}$, alors $\\vec{A'B'} = k\\vec{C'D'}$, et conserve ainsi les milieux et barycentres."
+        },
+        {
+            "question": "Soit $ABC$ un triangle, $M \\in [AB]$ avec $AM = 2, AB = 6$. La parallèle à $(BC)$ passant par $M$ coupe $(AC)$ en $N$. Si $AC = 9$, que vaut $AN$ ?",
+            "options": [
+                "3",
+                "4",
+                "4.5",
+                "2"
+            ],
+            "answer": 0,
+            "explanation": "D'après le théorème de Thalès : $AN / AC = AM / AB \\implies AN / 9 = 2 / 6 = 1/3 \\implies AN = 9/3 = 3$."
+        },
+        {
+            "question": "Le projeté du milieu $I$ d'un segment $[AB]$ sur une droite $(\\Delta)$ est :",
+            "options": [
+                "Le milieu du segment projeté $[A'B']$",
+                "Le point $A'$",
+                "Le centre de gravité du plan",
+                "Un point situé au tiers de $[A'B']$"
+            ],
+            "answer": 0,
+            "explanation": "Comme la projection conserve le coefficient de colinéarité ($k = 1/2$), le projeté du milieu $I$ est le milieu $I'$ de $[A'B']$."
+        }
+    ],
+    "tc-math-ensembles-nombres": [
+        {
+            "question": "Quelle est l'inclusion correcte des ensembles de nombres ?",
+            "options": [
+                "$\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{D} \\subset \\mathbb{Q} \\subset \\mathbb{R}$",
+                "$\\mathbb{N} \\subset \\mathbb{D} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R}$",
+                "$\\mathbb{Z} \\subset \\mathbb{N} \\subset \\mathbb{Q} \\subset \\mathbb{D} \\subset \\mathbb{R}$",
+                "$\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{D} \\subset \\mathbb{R}$"
+            ],
+            "answer": 0,
+            "explanation": "Les entiers naturels sont inclus dans les entiers relatifs, inclus dans les décimaux, inclus dans les rationnels, inclus dans les réels."
+        },
+        {
+            "question": "À quel plus petit ensemble appartient le nombre $-7/4$ ?",
+            "options": [
+                "$\\mathbb{D}$ (Décimaux)",
+                "$\\mathbb{Z}$ (Entiers relatifs)",
+                "$\\mathbb{Q} \\setminus \\mathbb{D}$",
+                "$\\mathbb{R} \\setminus \\mathbb{Q}$ (Irrationnels)"
+            ],
+            "answer": 0,
+            "explanation": "$-7/4 = -1{,}75 = -175/10^2$, c'est un nombre décimal (dénominateur de la forme $2^p 5^q$), donc $-7/4 \\in \\mathbb{D}$."
+        },
+        {
+            "question": "Quelle est la factorisation de $a^3 - b^3$ ?",
+            "options": [
+                "$(a - b)(a^2 + ab + b^2)$",
+                "$(a - b)(a^2 - ab + b^2)$",
+                "$(a - b)^3$",
+                "$(a + b)(a^2 - ab + b^2)$"
+            ],
+            "answer": 0,
+            "explanation": "L'identité remarquable d'ordre 3 est $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$."
+        },
+        {
+            "question": "Que vaut l'expression $(\\sqrt{5} + \\sqrt{2})(\\sqrt{5} - \\sqrt{2})$ ?",
+            "options": [
+                "3",
+                "7",
+                "$\\sqrt{3}$",
+                "21"
+            ],
+            "answer": 0,
+            "explanation": "Identité remarquable $(a+b)(a-b) = a^2 - b^2 = (\\sqrt{5})^2 - (\\sqrt{2})^2 = 5 - 2 = 3$."
+        }
+    ],
+    "tc-math-ordre-r": [
+        {
+            "question": "Si $-3 \\le x \\le 2$, alors l'encadrement de $x^2$ est :",
+            "options": [
+                "$0 \\le x^2 \\le 9$",
+                "$4 \\le x^2 \\le 9$",
+                "$9 \\le x^2 \\le 4$",
+                "$-9 \\le x^2 \\le 4$"
+            ],
+            "answer": 0,
+            "explanation": "Puisque l'intervalle $[-3, 2]$ contient 0, le carré est toujours positif ou nul ($x^2 \\ge 0$). Le maximum est $(-3)^2 = 9$. Donc $0 \\le x^2 \\le 9$."
+        },
+        {
+            "question": "L'ensemble des solutions réelles de l'inéquation $|x - 4| \\le 3$ est :",
+            "options": [
+                "$[1, 7]$",
+                "$[-1, 7]$",
+                "$[3, 4]$",
+                "$]-\\infty, 1] \\cup [7, +\\infty[$"
+            ],
+            "answer": 0,
+            "explanation": "$|x - 4| \\le 3 \\iff -3 \\le x - 4 \\le 3 \\iff 1 \\le x \\le 7 \\iff x \\in [1, 7]$."
+        },
+        {
+            "question": "Si $a < b$ et $c < 0$, alors :",
+            "options": [
+                "$ac > bc$",
+                "$ac < bc$",
+                "$ac = bc$",
+                "$a + c > b + c$"
+            ],
+            "answer": 0,
+            "explanation": "Multiplier les deux membres d'une inégalité par un nombre réel strictement négatif change le sens de l'inégalité."
+        },
+        {
+            "question": "Que vaut $\\sqrt{(3 - \\pi)^2}$ ?",
+            "options": [
+                "$\\pi - 3$",
+                "$3 - \\pi$",
+                "$(\\pi - 3)^2$",
+                "$\\pi + 3$"
+            ],
+            "answer": 0,
+            "explanation": "$\\sqrt{A^2} = |A|$. Comme $\\pi \\approx 3{,}14 > 3$, on a $3 - \\pi < 0$, donc $|3 - \\pi| = -(3 - \\pi) = \\pi - 3$."
+        }
+    ],
+    "tc-math-droite-plan": [
+        {
+            "question": "Quel est un vecteur directeur de la droite $(D)$ d'équation cartésienne $3x - 5y + 2 = 0$ ?",
+            "options": [
+                "$\\vec{u}(5, 3)$",
+                "$\\vec{u}(3, -5)$",
+                "$\\vec{u}(-3, 5)$",
+                "$\\vec{u}(-5, -3)$"
+            ],
+            "answer": 0,
+            "explanation": "Pour une droite $ax + by + c = 0$, un vecteur directeur est $\\vec{u}(-b, a)$. Ici $a=3, b=-5$, donc $\\vec{u}(-(-5), 3) = \\vec{u}(5, 3)$."
+        },
+        {
+            "question": "Les vecteurs $\\vec{u}(2, -3)$ et $\\vec{v}(-4, 6)$ sont-ils colinéaires ?",
+            "options": [
+                "Oui, car $\\det(\\vec{u}, \\vec{v}) = 2(6) - (-3)(-4) = 12 - 12 = 0$",
+                "Non, car leurs composantes ont des signes différents",
+                "Oui, car ils sont perpendiculaires",
+                "Non, car leur somme n'est pas nulle"
+            ],
+            "answer": 0,
+            "explanation": "$\\det(\\vec{u}, \\vec{v}) = 2 \\times 6 - (-3) \\times (-4) = 12 - 12 = 0$, donc $\\vec{u}$ et $\\vec{v}$ sont colinéaires (on a d'ailleurs $\\vec{v} = -2\\vec{u}$)."
+        },
+        {
+            "question": "Quelle est l'équation cartésienne de la droite passant par $A(0, 2)$ et de coefficient directeur $m = -3$ ?",
+            "options": [
+                "$3x + y - 2 = 0$",
+                "$3x - y + 2 = 0$",
+                "$x - 3y + 2 = 0$",
+                "$-3x + y + 2 = 0$"
+            ],
+            "answer": 0,
+            "explanation": "$y = mx + p \\implies y = -3x + 2 \\iff 3x + y - 2 = 0$."
+        }
+    ],
+    "tc-math-polynomes": [
+        {
+            "question": "Si $\\alpha$ est une racine du polynôme $P(x)$, alors $P(x)$ est divisible par :",
+            "options": [
+                "$x - \\alpha$",
+                "$x + \\alpha$",
+                "$\\alpha x$",
+                "$x^2 - \\alpha$"
+            ],
+            "answer": 0,
+            "explanation": "Par théorème, $\\alpha$ est racine de $P(x) \\iff P(\\alpha) = 0 \\iff P(x)$ est factorisable par $(x - \\alpha)$."
+        },
+        {
+            "question": "Quel est le degré du polynôme $P(x) = (3x^2 - 1)^3 \\times (x + 4)$ ?",
+            "options": [
+                "7",
+                "6",
+                "9",
+                "5"
+            ],
+            "answer": 0,
+            "explanation": "$\\deg((3x^2 - 1)^3) = 2 \\times 3 = 6$. Donc $\\deg(P) = 6 + 1 = 7$."
+        },
+        {
+            "question": "Soit $P(x) = x^3 - 4x^2 + x + 6$. Laquelle de ces valeurs est une racine évidente de $P(x)$ ?",
+            "options": [
+                "$-1$",
+                "$1$",
+                "$0$",
+                "$4$"
+            ],
+            "answer": 0,
+            "explanation": "$P(-1) = (-1)^3 - 4(-1)^2 + (-1) + 6 = -1 - 4 - 1 + 6 = 0$. Donc $-1$ est racine."
+        }
+    ],
+    "tc-math-equations-inequations-systemes": [
+        {
+            "question": "Quel est le discriminant de l'équation $2x^2 - 5x + 2 = 0$ ?",
+            "options": [
+                "$\\Delta = 9$",
+                "$\\Delta = -9$",
+                "$\\Delta = 41$",
+                "$\\Delta = 1$"
+            ],
+            "answer": 0,
+            "explanation": "$\\Delta = b^2 - 4ac = (-5)^2 - 4(2)(2) = 25 - 16 = 9 = 3^2$."
+        },
+        {
+            "question": "L'ensemble des solutions de l'inéquation $2x^2 - 5x + 2 \\le 0$ est :",
+            "options": [
+                "$[1/2, 2]$",
+                "$]-\\infty, 1/2] \\cup [2, +\\infty[$",
+                "$[-2, -1/2]$",
+                "$\\emptyset$"
+            ],
+            "answer": 0,
+            "explanation": "Les racines sont $x_1 = (5-3)/4 = 1/2$ et $x_2 = (5+3)/4 = 2$. Comme $a = 2 > 0$, le trinôme est négatif entre les racines : $[1/2, 2]$."
+        },
+        {
+            "question": "Pour le système $\\begin{cases} ax + by = c \\\\ a'x + b'y = c' \\end{cases}$, il admet une unique solution dans $\\mathbb{R}^2$ si et seulement si :",
+            "options": [
+                "$ab' - a'b \\neq 0$",
+                "$ab' - a'b = 0$",
+                "$a + b \\neq 0$",
+                "$c = c'$"
+            ],
+            "answer": 0,
+            "explanation": "Le déterminant du système $D = \\begin{vmatrix} a & b \\\\ a' & b' \\end{vmatrix} = ab' - a'b$ doit être non nul."
+        }
+    ],
+    "tc-math-calcul-trigonometrique": [
+        {
+            "question": "Pour tout réel $x$, que vaut l'expression $\\cos(\\pi - x) + \\sin\\left(\\frac{\\pi}{2} - x\\right)$ ?",
+            "options": [
+                "0",
+                "$2\\cos(x)$",
+                "$-2\\cos(x)$",
+                "$2\\sin(x)$"
+            ],
+            "answer": 0,
+            "explanation": "On sait que $\\cos(\\pi - x) = -\\cos(x)$ et $\\sin(\\pi/2 - x) = \\cos(x)$. Leur somme vaut $-\\cos(x) + \\cos(x) = 0$."
+        },
+        {
+            "question": "L'abscisse curviligne principale du point associé à $\\frac{19\\pi}{3}$ est :",
+            "options": [
+                "$\\frac{\\pi}{3}$",
+                "$-\\frac{\\pi}{3}$",
+                "$\\frac{2\\pi}{3}$",
+                "$-\\frac{2\\pi}{3}$"
+            ],
+            "answer": 0,
+            "explanation": "$\\frac{19\\pi}{3} = \\frac{18\\pi + \\pi}{3} = 6\\pi + \\frac{\\pi}{3} = 3(2\\pi) + \\frac{\\pi}{3}$. L'abscisse principale dans $]-\\pi, \\pi]$ est $\\frac{\\pi}{3}$."
+        },
+        {
+            "question": "Que vaut $\\tan(x)$ sachant que $\\cos(x) = 3/5$ et $x \\in [0, \\pi/2]$ ?",
+            "options": [
+                "$4/3$",
+                "$3/4$",
+                "$4/5$",
+                "$5/3$"
+            ],
+            "answer": 0,
+            "explanation": "$\\sin^2(x) = 1 - (3/5)^2 = 16/25 \\implies \\sin(x) = 4/5$. D'où $\\tan(x) = \\frac{\\sin(x)}{\\cos(x)} = \\frac{4/5}{3/5} = \\frac{4}{3}$."
+        }
+    ],
+    "tc-math-fonctions-numeriques": [
+        {
+            "question": "Le domaine de définition de $f(x) = \\frac{\\sqrt{x+2}}{x - 1}$ est :",
+            "options": [
+                "$[-2, 1[ \\cup ]1, +\\infty[$",
+                "$[-2, +\\infty[$",
+                "$]1, +\\infty[$",
+                "$\\mathbb{R} \\setminus \\{1\\}$"
+            ],
+            "answer": 0,
+            "explanation": "Il faut $x + 2 \\ge 0 \\iff x \\ge -2$ et $x - 1 \\neq 0 \\iff x \\neq 1$. Donc $D_f = [-2, 1[ \\cup ]1, +\\infty[$."
+        },
+        {
+            "question": "La fonction $f(x) = \\frac{x^3}{x^2 + 4}$ est :",
+            "options": [
+                "Impaire (symétrique par rapport à l'origine O)",
+                "Paire (symétrique par rapport à l'axe Oy)",
+                "Ni paire ni impaire",
+                "Périodique de période $\\pi$"
+            ],
+            "answer": 0,
+            "explanation": "$D_f = \\mathbb{R}$. $f(-x) = \\frac{(-x)^3}{(-x)^2 + 4} = \\frac{-x^3}{x^2 + 4} = -f(x)$, donc $f$ est impaire."
+        },
+        {
+            "question": "Si le taux de variation $T(a,b) = \\frac{f(a) - f(b)}{a - b} \\le 0$ pour tous $a \\neq b \\in I$, alors la fonction $f$ est :",
+            "options": [
+                "Décroissante sur I",
+                "Croissante sur I",
+                "Constante sur I",
+                "Strictement positive"
+            ],
+            "answer": 0,
+            "explanation": "Par définition, un taux de variation négatif ou nul caractérise une fonction décroissante."
+        }
+    ],
+    "tc-math-produit-scalaire": [
+        {
+            "question": "Soit un triangle $ABC$ avec $AB = 5, AC = 6$ et $\\widehat{BAC} = 60^\\circ$. Que vaut le produit scalaire $\\vec{AB} \\cdot \\vec{AC}$ ?",
+            "options": [
+                "15",
+                "30",
+                "$15\\sqrt{3}$",
+                "25"
+            ],
+            "answer": 0,
+            "explanation": "$\\vec{AB} \\cdot \\vec{AC} = AB \\times AC \\times \\cos(60^\\circ) = 5 \\times 6 \\times \\frac{1}{2} = 15$."
+        },
+        {
+            "question": "Dans un repère orthonormé, $\\vec{u}(3, -2)$ et $\\vec{v}(4, 6)$ sont :",
+            "options": [
+                "Orthogonaux, car $\\vec{u} \\cdot \\vec{v} = 3(4) + (-2)(6) = 12 - 12 = 0$",
+                "Colinéaires",
+                "De même longueur",
+                "Parallèles à l'axe des ordonnées"
+            ],
+            "answer": 0,
+            "explanation": "Dans un repère orthonormé, $\\vec{u} \\cdot \\vec{v} = xx' + yy' = 3(4) + (-2)(6) = 0$. Le produit scalaire est nul, donc ils sont orthogonaux."
+        },
+        {
+            "question": "Le théorème d'Al-Kashi dans un triangle $ABC$ quelconque s'exprime par :",
+            "options": [
+                "$BC^2 = AB^2 + AC^2 - 2 AB \\cdot AC \\cos(\\widehat{A})$",
+                "$BC^2 = AB^2 + AC^2 + 2 AB \\cdot AC \\cos(\\widehat{A})$",
+                "$BC^2 = AB^2 - AC^2$",
+                "$BC = AB + AC \\cos(\\widehat{A})$"
+            ],
+            "answer": 0,
+            "explanation": "Le théorème d'Al-Kashi (généralisation du théorème de Pythagore) est : $a^2 = b^2 + c^2 - 2bc\\cos(\\widehat{A})$."
+        }
+    ]
+};
+
 function getQuestionsForChapter(chap) {
-    if (chap.quizQuestions && chap.quizQuestions.length > 0) {
+    if (!chap) return [];
+
+    // 1. Direct quiz array in chapter object
+    if (Array.isArray(chap.quiz) && chap.quiz.length > 0) {
+        return chap.quiz;
+    }
+    if (Array.isArray(chap.quizQuestions) && chap.quizQuestions.length > 0) {
         return chap.quizQuestions;
     }
-    
-    // Subject and chapter specific QCM question banks (20 Questions each)
-    if (chap.subject === "math") {
-        if (chap.id.includes("deriv")) {
-            return [
-                { question: "Quelle est la dérivée de la fonction \\( f(x) = \\ln(x) \\) sur \\( ]0, +\\infty[ \\) ?", options: ["\\( e^x \\)", "\\( \\frac{1}{x} \\)", "\\( -\\frac{1}{x^2} \\)", "\\( x \\)"], answer: 1, explanation: "La fonction logarithme népérien est dérivable sur ]0, +\\infty[ et sa dérivée est \\( f'(x) = \\frac{1}{x} \\)." },
-                { question: "Si \\( f'(x_0) = 0 \\) et \\( f'' \\) change de signe en \\( x_0 \\), alors le point \\( (x_0, f(x_0)) \\) est :", options: ["Un point d'inflexion", "Un extremum absolu", "Une asymptote", "Un point d'arrêt"], answer: 0, explanation: "Un changement de signe de la dérivée seconde \\( f'' \\) caractérise un point d'inflexion pour la courbe représentative." },
-                { question: "Quelle est l'équation de la tangente à la courbe de \\( f \\) au point d'abscisse \\( a \\) ?", options: ["\\( y = f'(a)(x - a) + f(a) \\)", "\\( y = f(a)(x - a) + f'(a) \\)", "\\( y = f'(x)(x - a) \\)", "\\( y = f'(a)x + a \\)"], answer: 0, explanation: "L'équation de la tangente en \\( a \\) est donnée par la formule classique : \\( y = f'(a)(x - a) + f(a) \\)." },
-                { question: "Si \\( \\lim_{x \\to +\\infty} \\frac{f(x)}{x} = 0 \\), alors la courbe \\( (C_f) \\) admet en \\( +\\infty \\) :", options: ["Une branche parabolique de direction (Ox)", "Une branche parabolique de direction (Oy)", "Une asymptote verticale", "Une asymptote oblique"], answer: 0, explanation: "Lorsque \\( \\lim_{x\\to +\\infty} f(x) = +\\infty \\) et \\( \\lim_{x\\to +\\infty} \\frac{f(x)}{x} = 0 \\), la courbe admet une branche parabolique de direction l'axe des abscisses (Ox)." },
-                { question: "Quelle est la dérivée de la fonction composée \\( f(x) = e^{u(x)} \\) ?", options: ["\\( u'(x) e^{u(x)} \\)", "\\( e^{u'(x)} \\)", "\\( u(x) e^{u'(x)} \\)", "\\( \\frac{e^{u(x)}}{u'(x)} \\)"], answer: 0, explanation: "La formule de dérivation d'une exponentielle composée est : \\( (e^u)' = u' \\cdot e^u \\)." },
-                { question: "Si \\( f'(x) > 0 \\) sur un intervalle \\( I \\), alors \\( f \\) est :", options: ["Strictement croissante sur I", "Strictement décroissante sur I", "Constante sur I", "Négative sur I"], answer: 0, explanation: "Une dérivée strictement positive implique la stricte croissance de la fonction." },
-                { question: "Quelle est la dérivée de \\( f(x) = x^n \\) (pour \\( n \\in \\mathbb{Z}^* \\)) ?", options: ["\\( n x^{n-1} \\)", "\( n x^n \)", "\( x^{n-1} \)", "\( (n-1)x^n \)"], answer: 0, explanation: "Formule usuelle de dérivation des puissances : \( (x^n)' = n x^{n-1} \)." },
-                { question: "Quelle est la dérivée de \\( f(x) = \\sqrt{x} \\) sur \\( ]0, +\\infty[ \\) ?", options: ["\\( \\frac{1}{2\\sqrt{x}} \\)", "\( \frac{1}{\sqrt{x}} \)", "\( 2\sqrt{x} \)", "\( -\frac{1}{2x} \)"], answer: 0, explanation: "Formule usuelle de la dérivée de la racine carrée : \( (\sqrt{x})' = \frac{1}{2\sqrt{x}} \)." },
-                { question: "Si \\( f(x) = u(x) \\cdot v(x) \\), sa dérivée \\( f'(x) \\) est :", options: ["\\( u'v + uv' \\)", "\( u'v' \)", "\( u'v - uv' \)", "\( \frac{u'}{v'} \)"], answer: 0, explanation: "La formule de dérivation d'un produit de deux fonctions est \( (uv)' = u'v + uv' \)." },
-                { question: "Si \\( f(x) = \\frac{u(x)}{v(x)} \\), sa dérivée \\( f'(x) \\) est :", options: ["\\( \\frac{u'v - uv'}{v^2} \\)", "\( \frac{u'v + uv'}{v^2} \)", "\( \frac{u'}{v'} \)", "\( \frac{u'v - uv'}{u^2} \)"], answer: 0, explanation: "Règle de dérivation du quotient de deux fonctions : \( (u/v)' = \frac{u'v - uv'}{v^2} \)." },
-                { question: "Si \\( f''(x) > 0 \\) sur un intervalle \\( I \\), la courbe de \\( f \\) est :", options: ["Convexe sur I", "Concave sur I", "Une droite", "Constante"], answer: 0, explanation: "Lorsque la dérivée seconde est strictement positive, la fonction est convexe (tournée vers le haut)." },
-                { question: "Si \\( f''(x) < 0 \\) sur un intervalle \| I \|, la courbe de \( f \) est :", options: ["Concave sur I", "Convexe sur I", "Incurvée", "Nulle"], answer: 0, explanation: "Lorsque la dérivée seconde est strictement négative, la fonction est concave (tournée vers le bas)." },
-                { question: "Quelle est la dérivée de \\( f(x) = \\sin(x) \\) ?", options: ["\\( \\cos(x) \\)", "\( -\cos(x) \)", "\( \sin(x) \)", "\( -\sin(x) \)"], answer: 0, explanation: "La dérivée de la fonction sinus est la fonction cosinus : \( (\sin x)' = \cos x \)." },
-                { question: "Quelle est la dérivée de \\( f(x) = \\cos(x) \\) ?", options: ["\\( -\\sin(x) \\)", "\( \sin(x) \)", "\( \cos(x) \)", "\( -\cos(x) \)"], answer: 0, explanation: "La dérivée de la fonction cosinus est l'opposé de la fonction sinus : \( (\cos x)' = -\sin x \)." },
-                { question: "La dérivée de la fonction réciproque \\( f^{-1} \\) en \\( b = f(a) \\) (avec \\( f'(a) \\neq 0 \\)) est :", options: ["\\( (f^{-1})'(b) = \\frac{1}{f'(a)} \\)", "\( (f^{-1})'(b) = f'(a) \)", "\( (f^{-1})'(b) = -f'(a) \)", "\( (f^{-1})'(b) = f(a) \)"], answer: 0, explanation: "Théorème de dérivation d'une fonction réciproque : \( (f^{-1})'(f(a)) = \frac{1}{f'(a)} \)." },
-                { question: "Une fonction \\( f \\) est dérivable à gauche en \\( a \\) si :", options: ["\\( \\lim_{x \\to a^-} \\frac{f(x) - f(a)}{x - a} \\) est finie", "\( f(a) = 0 \)", "\( \lim f(x) = +\infty \)", "\( f'(a) = 1 \)"], answer: 0, explanation: "Par définition, la dérivabilité à gauche exige l'existence d'une limite finie du taux d'accroissement à gauche de \( a \)." },
-                { question: "Si une fonction est dérivable en un point \\( a \\), alors elle est nécessairement :", options: ["Continue en a", "Strictement croissante en a", "Positive en a", "Nulle en a"], answer: 0, explanation: "Toute fonction dérivable en un point est automatiquement continue en ce point." },
-                { question: "Si \\( \\lim_{x \\to +\\infty} [f(x) - (ax + b)] = 0 \\), alors la droite \\( y = ax + b \\) est :", options: ["Une asymptote oblique en +\infty", "Une asymptote horizontale", "Une asymptote verticale", "Une tangente"], answer: 0, explanation: "Par définition, la droite \( y = ax + b \) est une asymptote oblique à la courbe représentative au voisinage de \( +\infty \)." },
-                { question: "Si \\( \\lim_{x \\to +\\infty} \\frac{f(x)}{x} = +\\infty \\), la courbe \\( (C_f) \\) admet en \\( +\\infty \\) :", options: ["Une branche parabolique de direction (Oy)", "Une branche parabolique de direction (Ox)", "Une asymptote horizontale", "Un point d'arrêt"], answer: 0, explanation: "Lorsque \( f(x)/x \to +\infty \) en \( +\infty \), la courbe admet une branche parabolique orientée selon l'axe des ordonnées (Oy)." },
-                { question: "Quelle est la dérivée de \\( f(x) = \\ln(u(x)) \\) (avec \\( u(x) > 0 \\)) ?", options: ["\\( \\frac{u'(x)}{u(x)} \\)", "\( u'(x) \ln(u(x)) \)", "\( \frac{1}{u(x)} \)", "\( u'(x) u(x) \)"], answer: 0, explanation: "Formule de dérivation de la composée du logarithme : \( (\ln u)' = \frac{u'}{u} \)." }
-            ];
-        } else if (chap.id.includes("suites")) {
-            return [
-                { question: "Si une suite \\( (u_n) \\) est croissante et majorée par \\( M \\), alors la suite \\( (u_n) \\) est :", options: ["Convergente", "Divergente vers +\\infty", "Stationnaire", "Périodique"], answer: 0, explanation: "D'après le théorème de convergence monotone, toute suite réelle croissante et majorée est convergente." },
-                { question: "Quelle est la somme des \\( n+1 \\) premiers termes d'une suite géométrique de raison \\( q \\neq 1 \\) et de premier terme \\( u_0 \\) ?", options: ["\\( u_0 \\frac{1 - q^{n+1}}{1 - q} \\)", "\( u_0 \frac{1 - q^n}{1 - q} \)", "\( u_0 (1 - q^n) \)", "\( n \cdot u_0 \)"], answer: 0, explanation: "Pour une suite géométrique de \( u_0 \) à \( u_n \) (soit \( n+1 \) termes), la somme vaut \( u_0 \frac{1 - q^{n+1}}{1 - q} \)." },
-                { question: "Si \\( u_{n+1} = f(u_n) \\) avec \\( f \\) continue et \\( (u_n) \\) converge vers \\( \\ell \\), alors la limite \\( \\ell \\) vérifie :", options: ["\\( f(\\ell) = \\ell \\)", "\( f(\ell) = 0 \)", "\( \ell = 0 \)", "\( f'(\ell) = 1 \)"], answer: 0, explanation: "Par continuité de \( f \), la limite \( \ell \) d'une suite récurrente \( u_{n+1} = f(u_n) \) est solution de l'équation point fixe \( f(\ell) = \ell \)." },
-                { question: "Quelle est la limite de la suite \\( q^n \\) si \\( |q| < 1 \\) ?", options: ["0", "1", "+\\infty", "N'existe pas"], answer: 0, explanation: "Lorsque la raison \( q \) vérifie \( -1 < q < 1 \), la suite géométrique \( q^n \) tend vers 0 quand \( n \to +\infty \)." },
-                { question: "Une suite \\( (u_n) \\) vérifiant \\( u_{n+1} - u_n = r \\) (constante) est une suite :", options: ["Arithmétique", "Géométrique", "Harmonique", "Exponentielle"], answer: 0, explanation: "Par définition, une suite arithmétique a une différence constante entre deux termes consécutifs." },
-                { question: "Le terme général d'une suite arithmétique de premier terme \\( u_0 \\) et de raison \\( r \\) est :", options: ["\\( u_n = u_0 + n \\cdot r \\)", "\( u_n = u_0 \cdot r^n \)", "\( u_n = u_0 + r^n \)", "\( u_n = n \cdot u_0 + r \)"], answer: 0, explanation: "Le terme général d'une suite arithmétique s'exprime par \( u_n = u_0 + n \cdot r \)." },
-                { question: "Le terme général d'une suite géométrique de premier terme \\( u_0 \\) et de raison \\( q \\) est :", options: ["\\( u_n = u_0 \\cdot q^n \\)", "\( u_n = u_0 + nq \)", "\( u_n = u_0^n \cdot q \)", "\( u_n = q^n \)"], answer: 0, explanation: "Le terme général d'une suite géométrique s'exprime par \( u_n = u_0 \cdot q^n \)." },
-                { question: "Si une suite \\( (u_n) \\) est décroissante et minorée par \\( m \\), alors elle est :", options: ["Convergente", "Divergente vers -\\infty", "Nulle", "Strictement négative"], answer: 0, explanation: "Toute suite réelle décroissante et minorée est convergente." },
-                { question: "Quelle est la somme des \\( n \\) premiers entiers naturels non nuls \\( 1 + 2 + 3 + ... + n \\) ?", options: ["\\( \\frac{n(n+1)}{2} \\)", "\( n^2 \)", "\( \frac{n(n-1)}{2} \)", "\( n(n+1) \)"], answer: 0, explanation: "La somme des \( n \) premiers entiers consécutifs vaut \( \frac{n(n+1)}{2} \)." },
-                { question: "Si \\( q > 1 \\) et \\( u_0 > 0 \\), quelle est la limite de la suite géométrique \\( u_n = u_0 q^n \\) ?", options: ["+\\infty", "0", "1", "u_0"], answer: 0, explanation: "Pour une raison \( q > 1 \), \( q^n \to +\infty \), donc \( u_n \to +\infty \)." },
-                { question: "Une suite \\( (u_n) \\) est dite majorée par un réel \\( M \\) si :", options: ["\\( \\forall n \\in \\mathbb{N}, u_n \\le M \\)", "\( \exists n, u_n = M \)", "\( u_0 \le M \)", "\( \lim u_n = M \)"], answer: 0, explanation: "La majoration doit être vérifiée pour tout entier \( n \in \mathbb{N} \)." },
-                { question: "Deux suites \\( (u_n) \\) et \\( (v_n) \\) sont dites adjacentes si l'une est croissante, l'autre décroissante et :", options: ["\\( \\lim (u_n - v_n) = 0 \\)", "\( u_n = v_n \)", "\( \lim u_n = 0 \)", "\( u_n \cdot v_n = 1 \)"], answer: 0, explanation: "Deux suites adjacentes ont des sens de variation opposés et leur différence tend vers 0." },
-                { question: "Si deux suites sont adjacentes, alors elles :", options: ["Convergent vers la même limite", "Divergent toutes les deux", "Sont stationnaires", "Sont nulles"], answer: 0, explanation: "Deux suites adjacentes sont toujours convergentes et possèdent exactement la même limite commune." },
-                { question: "Si pour tout \\( n \\), \\( u_n \\le v_n \\) et \\( \\lim u_n = +\\infty \\), alors par comparaison :", options: ["\\( \\lim v_n = +\\infty \\)", "\( \lim v_n = 0 \)", "\( (v_n) \) converge", "\( v_n \le 0 \)"], answer: 0, explanation: "Par théorème de comparaison aux infinis, si une suite plus petite tend vers \( +\infty \), la plus grande tend aussi vers \( +\infty \)." },
-                { question: "Si \\( v_n = u_n - \\ell \\) est une suite géométrique de raison \\( q \\) (avec \\( |q| < 1 \\)), alors \\( (u_n) \\) converge vers :", options: ["\\( \\ell \\)", "0", "1", "+\infty"], answer: 0, explanation: "Puisque \( v_n \to 0 \), \( u_n = v_n + \ell \to \ell \)." },
-                { question: "Une suite \\( (u_n) \\) est stationnaire à partir d'un rang \\( n_0 \\) si :", options: ["\\( \\forall n \\ge n_0, u_n = u_{n_0} \\)", "\( u_n = 0 \)", "\( u_{n+1} > u_n \)", "\( \lim u_n = +\infty \)"], answer: 0, explanation: "Une suite stationnaire conserve une valeur constante à partir d'un certain rang." },
-                { question: "Une suite arithmético-géométrique s'écrit sous la forme récurrente :", options: ["\\( u_{n+1} = a u_n + b \\)", "\( u_{n+1} = u_n^2 + b \)", "\( u_{n+1} = a^n + b \)", "\( u_n = a n + b \)"], answer: 0, explanation: "Une suite arithmético-géométrique combine multiplication par \( a \) et addition de \( b \) : \( u_{n+1} = a u_n + b \)." },
-                { question: "Quelle est la limite de \\( u_n = \\frac{2n + 1}{n + 3} \\) quand \\( n \\to +\\infty \\) ?", options: ["2", "1/3", "0", "+\infty"], answer: 0, explanation: "En factorisant par \( n \) au numérateur et au dénominateur : \( \frac{n(2 + 1/n)}{n(1 + 3/n)} \to 2 \)." },
-                { question: "Si \\( u_n = (-1)^n \\), la suite \\( (u_n) \\) est :", options: ["Divergente (n'admet pas de limite)", "Convergente vers 0", "Convergente vers 1", "Divergente vers +\infty"], answer: 0, explanation: "La suite \( (-1)^n \) oscille indéfiniment entre -1 et 1 sans tendre vers aucune limite unique." },
-                { question: "Le principe de raisonnement par récurrence comporte combien d'étapes fondamentales ?",
-                  options: ["3 étapes (Initialisation, Hérédité, Conclusion)", "1 étape", "5 étapes", "2 étapes"], answer: 0, explanation: "La démonstration par récurrence comprend 3 étapes : l'initialisation au premier rang, l'hérédité (supposé vrai au rang n, prouver au rang n+1), et la conclusion." }
-            ];
-        } else if (chap.id.includes("complexes")) {
-            return [
-                { question: "Soit \\( z = a + ib \\) un nombre complexe. Son module \\( |z| \\) est égal à :", options: ["\\( \\sqrt{a^2 + b^2} \\)", "\( a^2 + b^2 \)", "\( a + b \)", "\( \sqrt{a^2 - b^2} \)"], answer: 0, explanation: "Le module d'un nombre complexe \( z = a + ib \) (avec \( a, b \in \mathbb{R} \)) est \( |z| = \sqrt{a^2 + b^2} \)." },
-                { question: "Quelle est la forme exponentielle d'un complexe de module \\( r \\) et d'argument \\( \\theta \\) ?", options: ["\\( r e^{i\\theta} \\)", "\( r (\cos\theta - i\sin\theta) \)", "\( e^{r\theta} \)", "\( r^2 e^{i\theta} \)"], answer: 0, explanation: "Par la formule d'Euler, \( z = r(\cos\theta + i\sin\theta) = r e^{i\theta} \)." },
-                { question: "Quelle est la valeur de \\( i^2 \\) ?", options: ["-1", "1", "i", "0"], answer: 0, explanation: "Par définition de l'ensemble des nombres complexes, l'unité imaginaire \( i \) vérifie \( i^2 = -1 \)." },
-                { question: "L'écriture complexe de la rotation de centre \\( \\Omega(\\omega) \\) et d'angle \\( \\theta \\) est :", options: ["\\( z' - \\omega = e^{i\\theta}(z - \\omega) \\)", "\( z' = e^{i\theta} z \)", "\( z' - z = \omega \)", "\( z' = z + e^{i\theta} \)"], answer: 0, explanation: "La transformation géométrique de rotation d'angle \( \theta \) autour du point d'affixe \( \omega \) s'écrit \( z' - \omega = e^{i\theta}(z - \omega) \)." },
-                { question: "Si \\( z = 1 + i \\), quel est l'argument principal \\( \\arg(z) \\) ?", options: ["\\( \\pi/4 \\)", "\( \pi/2 \)", "\( \pi/3 \)", "\( \pi/6 \)"], answer: 0, explanation: "\( z = \sqrt{2}(\frac{\sqrt{2}}{2} + i \frac{\sqrt{2}}{2}) = \sqrt{2} e^{i\pi/4} \), donc \( \arg(z) \equiv \frac{\pi}{4} [2\pi] \)." },
-                { question: "Le conjugué du nombre complexe \\( z = a + ib \\) est :", options: ["\\( \\bar{z} = a - ib \\)", "\( \bar{z} = -a + ib \)", "\( \bar{z} = -a - ib \)", "\( \bar{z} = a + ib \)"], answer: 0, explanation: "Le conjugué d'un complexe s'obtient en changeant le signe de sa partie imaginaire : \( \bar{z} = a - ib \)." },
-                { question: "Le produit d'un complexe \\( z \\) par son conjugué \\( \\bar{z} \\) est égal à :", options: ["\\( |z|^2 \\)", "\( |z| \)", "\( 2a \)", "\( 2ib \)"], answer: 0, explanation: "Propriété fondamentale des complexes : \( z \bar{z} = (a+ib)(a-ib) = a^2 + b^2 = |z|^2 \)." },
-                { question: "L'écriture complexe d'une translation de vecteur \\( \\vec{u} \\) d'affixe \\( b \\) est :", options: ["\\( z' = z + b \\)", "\( z' = b z \)", "\( z' = z - b \)", "\( z' = e^{ib} z \)"], answer: 0, explanation: "L'image d'un point d'affixe \( z \) par une translation de vecteur d'affixe \( b \) a pour affixe \( z' = z + b \)." },
-                { question: "L'écriture complexe d'une homothétie de centre \\( \\Omega(\\omega) \\) et de rapport \\( k \\in \\mathbb{R}^* \\) est :", options: ["\\( z' - \\omega = k(z - \\omega) \\)", "\( z' = k z \)", "\( z' - z = k \omega \)", "\( z' = \omega + k \)"], answer: 0, explanation: "L'homothétie de rapport réel \( k \) centrée en \( \omega \) transforme \( z \) selon \( z' - \omega = k(z - \omega) \)." },
-                { question: "Si le discriminant \\( \\Delta < 0 \\) pour une équation du second degré \\( az^2 + bz + c = 0 \\) (à coefficients réels), les solutions complexes sont :", options: ["Deux solutions complexes conjuguées", "Une unique solution réelle", "Deux solutions réelles", "Aucune solution"], answer: 0, explanation: "Lorsque \( \Delta < 0 \), l'équation admet deux racines complexes conjuguées \( z_1 = \frac{-b + i\sqrt{- \Delta}}{2a} \) et \( z_2 = \bar{z_1} \)." },
-                { question: "Que vaut \\( |z_1 \\cdot z_2| \\) pour deux nombres complexes quelconques ?", options: ["\\( |z_1| \\cdot |z_2| \\)", "\( |z_1| + |z_2| \)", "\( |z_1|^2 |z_2|^2 \)", "\( \sqrt{|z_1| |z_2|} \)"], answer: 0, explanation: "Le module du produit de deux complexes est égal au produit de leurs modules : \( |z_1 z_2| = |z_1| |z_2| \)." },
-                { question: "Que vaut \\( \\arg(z_1 \\cdot z_2) \\) [modulo \\( 2\\pi \\)] ?", options: ["\\( \\arg(z_1) + \\arg(z_2) \\)", "\( \arg(z_1) \cdot \arg(z_2) \)", "\( \arg(z_1) - \arg(z_2) \)", "\( 2 \arg(z_1) \)"], answer: 0, explanation: "L'argument transforme les produits en sommes : \( \arg(z_1 z_2) \equiv \arg(z_1) + \arg(z_2) [2\pi] \)." },
-                { question: "Que vaut \\( \\arg(z_1 / z_2) \\) [modulo \\( 2\\pi \\)] ?", options: ["\\( \\arg(z_1) - \\arg(z_2) \\)", "\( \arg(z_1) / \arg(z_2) \)", "\( \arg(z_1) + \arg(z_2) \)", "\( -\arg(z_1) \)"], answer: 0, explanation: "L'argument du quotient de deux complexes est égal à la différence des arguments : \( \arg(z_1 / z_2) \equiv \arg(z_1) - \arg(z_2) [2\pi] \)." },
-                { question: "Un nombre complexe \\( z \\) est un imaginaire pur si et seulement si :", options: ["\\( \\bar{z} = -z \\)", "\( \bar{z} = z \)", "\( |z| = 1 \)", "\( z^2 = 1 \)"], answer: 0, explanation: "Un complexe est imaginaire pur si sa partie réelle est nulle, ce qui équivaut à \( \bar{z} = -z \)." },
-                { question: "Un nombre complexe \\( z \\) est réel si et seulement si :", options: ["\\( \\bar{z} = z \\)", "\( \bar{z} = -z \)", "\( |z| = 0 \)", "\( z = i \)"], answer: 0, explanation: "Un complexe est réel si sa partie imaginaire est nulle, ce qui équivaut à \( \bar{z} = z \)." },
-                { question: "La formule de Moivre s'écrit pour tout \\( n \\in \\mathbb{Z} \\) :", options: ["\\( (\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta) \\)", "\( (\cos\theta + i\sin\theta)^n = \cos^n\theta + i\sin^n\theta \)", "\( e^{i\theta} = \cos n\theta \)", "\( (\cos\theta + i\sin\theta)^n = n(\cos\theta + i\sin\theta) \)"], answer: 0, explanation: "La formule de Moivre exprime la puissance n-ième de l'écriture trigonométrique : \( (e^{i\theta})^n = e^{in\theta} \)." },
-                { question: "Trois points A, B, C d'affixes respectives \\( a, b, c \\) sont alignés si et seulement si :", options: ["\\( \\frac{c - a}{b - a} \\in \\mathbb{R} \\)", "\( \frac{c - a}{b - a} \in i\mathbb{R} \)", "\( |c - a| = |b - a| \)", "\( a + b + c = 0 \)"], answer: 0, explanation: "L'alignement des points A, B, C équivaut à la colinéarité des vecteurs \( \vec{AB} \) et \( \vec{AC} \), soit un quotient d'affixes réel." },
-                { question: "Le triangle ABC est rectangle en A si et seulement si :", options: ["\\( \\frac{c - a}{b - a} \\in i\\mathbb{R}^* \\)", "\( \frac{c - a}{b - a} \in \mathbb{R} \)", "\( |c - a| = |b - a| \)", "\( b = c \)"], answer: 0, explanation: "Le triangle est rectangle en A ssi les vecteurs \( \vec{AB} \) et \( \vec{AC} \) sont orthogonaux, soit un quotient d'affixes imaginaire pur non nul." },
-                { question: "Quelle est l'affixe du milieu I du segment [AB] d'affixes \\( a \\) et \\( b \\) ?", options: ["\\( z_I = \\frac{a + b}{2} \\)", "\( z_I = \frac{a - b}{2} \)", "\( z_I = a \cdot b \)", "\( z_I = \sqrt{ab} \)"], answer: 0, explanation: "L'affixe du milieu d'un segment est la moyenne arithmétique des affixes de ses deux extrémités." },
-                { question: "La distance entre deux points A et B d'affixes \\( a \\) et \\( b \\) est donnée par :", options: ["\\( AB = |b - a| \\)", "\( AB = b - a \)", "\( AB = |a + b| \)", "\( AB = (b - a)^2 \)"], answer: 0, explanation: "La distance géométrique entre deux points correspond au module de la différence de leurs affixes : \( AB = |z_B - z_A| = |b - a| \)." }
-            ];
-        }
-    } else if (chap.subject === "pc") {
-        if (chap.id.includes("onde")) {
-            return [
-                { question: "Quelle est la relation entre la célérité \\( v \\), la longueur d'onde \\( \\lambda \\) et la fréquence \\( N \\) ?", options: ["\\( \\lambda = v / N \\)", "\( \lambda = v \cdot N \)", "\( v = \lambda / N \)", "\( N = v \cdot \lambda \)"], answer: 0, explanation: "La longueur d'onde est la distance parcourue pendant une période \( T = 1/N \), donc \( \lambda = v \cdot T = v / N \)." },
-                { question: "Une onde mécanique progressive nécessite pour se propager :", options: ["Un milieu matériel élastique", "Le vide spatial", "Un champ magnétique", "Un milieu conducteur"], answer: 0, explanation: "Contrairement aux ondes électromagnétiques, une onde mécanique a besoin d'un milieu matériel pour se propager." },
-                { question: "Le phénomène de diffraction d'une onde lumineuse à travers une fente de largeur \\( a \\) est nettement observable si :", options: ["\\( a \\le \\lambda \\) ou du même ordre", "\( a \gg \lambda \)", "\( a = 100 \lambda \)", "\( a = 0 \)"], answer: 0, explanation: "La diffraction de la lumière apparaît lorsque la dimension de la fente \( a \) est du même ordre de grandeur que la longueur d'onde \( \lambda \)." },
-                { question: "Quelle est l'expression de l'écart angulaire \\( \\theta \\) lors de la diffraction par une fente de largeur \\( a \\) ?", options: ["\\( \\theta = \\lambda / a \\)", "\( \theta = a / \lambda \)", "\( \theta = \lambda \cdot a \)", "\( \theta = 2\lambda / a \)"], answer: 0, explanation: "L'écart angulaire du demi-faisceau central vaut \( \theta = \frac{\lambda}{a} \) rad." },
-                { question: "Un milieu est dit dispersif pour une onde si :", options: ["Sa célérité dépend de la fréquence", "Sa célérité est constante", "L'onde s'arrête", "L'amplitude augmente"], answer: 0, explanation: "Par définition, un milieu est dispersif lorsque la vitesse de propagation (célérité) de l'onde dépend de sa fréquence." },
-                { question: "La période temporelle \\( T \\) et la fréquence \\( N \\) d'une onde sont liées par la relation :", options: ["\\( N = 1 / T \\)", "\( N = T \)", "\( N = 2\pi T \)", "\( T = N^2 \)"], answer: 0, explanation: "La fréquence est l'inverse de la période temporelle : \( N = 1/T \) (en Hertz)." },
-                { question: "Une onde longitudinale est une onde dont la déformation est :", options: ["Parallèle à la direction de propagation", "Perpendiculaire à la direction de propagation", "Circulaire", "Oblique"], answer: 0, explanation: "Dans une onde longitudinale (ex: ondes sonores), la perturbation a lieu parallèlement à la direction de propagation." },
-                { question: "Une onde transversale est une onde dont la déformation est :", options: ["Perpendiculaire à la direction de propagation", "Parallèle à la direction de propagation", "Nulle", "Unilatérale"], answer: 0, explanation: "Dans une onde transversale (ex: onde sur une corde, vagues), la perturbation a lieu perpendiculairement à la propagation." },
-                { question: "Le retard temporel \\( \\tau \\) d'un point M par rapport à la source S située à la distance \\( d = SM \\) est :", options: ["\\( \\tau = d / v \\)", "\( \tau = d \cdot v \)", "\( \tau = v / d \)", "\( \tau = d^2 / v \)"], answer: 0, explanation: "Le retard temporel s'exprime par la distance divisée par la vitesse de propagation : \( \tau = SM / v \)." },
-                { question: "Les ondes sonores et ultrasonores sont des ondes :", options: ["Mécaniques longitudinales", "Électromagnétiques", "Transversales", "Lumineuses"], answer: 0, explanation: "Le son nécessite un milieu matériel de compression/dilatation (air, eau, solide) et constitue une onde mécanique longitudinale." },
-                { question: "Quelle est la vitesse de la lumière dans le vide \\( c \\) ?", options: ["\\( 3 \\times 10^8 \\text{ m/s} \\)", "\( 340 \text{ m/s} \)", "\( 1500 \text{ m/s} \)", "\( 3 \times 10^5 \text{ m/s} \)"], answer: 0, explanation: "Dans le vide et l'air, la célérité de la lumière vaut approximativement \( c \approx 3 \times 10^8 \text{ m/s} \)." },
-                { question: "L'indice de réfraction \\( n \\) d'un milieu transparent est défini par :", options: ["\\( n = c / v \\)", "\( n = v / c \)", "\( n = c \cdot v \)", "\( n = 1 / (c \cdot v) \)"], answer: 0, explanation: "L'indice de réfraction d'un milieu est le rapport de la célérité de la lumière dans le vide sur sa vitesse dans ce milieu : \( n = c/v \ge 1 \)." },
-                { question: "Lors du passage d'un rayon lumineux d'un milieu à un autre, quelle grandeur reste STRICTEMENT constante ?", options: ["La fréquence N", "La longueur d'onde \lambda", "La vitesse v", "L'amplitude"], answer: 0, explanation: "La fréquence d'une onde dépend uniquement de la source émettrice et reste invariable lors du changement de milieu." },
-                { question: "Dans l'expérience d'une tache de diffraction de largeur \\( L \\) observée sur un écran à la distance \\( D \\) d'une fente \\( a \\), on a pour un petit angle :", options: ["\\( L = \\frac{2 \\lambda D}{a} \\)", "\( L = \frac{\lambda D}{a} \)", "\( L = \frac{\lambda a}{D} \)", "\( L = \frac{2 a D}{\lambda} \)"], answer: 0, explanation: "Puisque \( \theta = \tan\theta = \frac{L/2}{D} = \frac{\lambda}{a} \), la largeur de la tache centrale vaut \( L = \frac{2\lambda D}{a} \)." },
-                { question: "La formule de la longueur d'onde dans un milieu d'indice \\( n \\) s'écrit en fonction de sa longueur d'onde dans le vide \\( \\lambda_0 \\) :", options: ["\\( \\lambda = \\lambda_0 / n \\)", "\( \lambda = n \cdot \lambda_0 \)", "\( \lambda = \lambda_0 \cdot n^2 \)", "\( \lambda = \lambda_0 + n \)"], answer: 0, explanation: "Puisque \( v = c/n \), \( \lambda = v/N = (c/n)/N = \lambda_0 / n \)." },
-                { question: "Le domaine de la lumière visible pour l'œil humain correspond aux longueurs d'onde dans le vide comprises entre :", options: ["400 nm et 800 nm", "100 nm et 400 nm", "800 nm et 1200 nm", "1 mm et 1 m"], answer: 0, explanation: "Le spectre visible s'étend environ du violet (400 nm) au rouge (800 nm)." },
-                { question: "Les rayons infrarouges (IR) ont une longueur d'onde dans le vide :", options: ["Supérieure à 800 nm", "Inférieure à 400 nm", "Entre 400 et 800 nm", "Égale à 1 nm"], answer: 0, explanation: "Le rayonnement infrarouge se situe au-delà du rouge dans le spectre électromagnétique (\( \lambda > 800 \text{ nm} \))." },
-                { question: "Les rayons ultraviolets (UV) ont une longueur d'onde dans le vide :", options: ["Inférieure à 400 nm", "Supérieure à 800 nm", "Entre 400 et 800 nm", "De l'ordre du mètre"], answer: 0, explanation: "Le rayonnement ultraviolet se situe en-dessous du violet dans le spectre (\( \lambda < 400 \text{ nm} \))." },
-                { question: "Lorsqu'une onde sonore se propage dans l'air à 20°C, sa vitesse moyenne est d'environ :", options: ["340 m/s", "300 000 km/s", "1500 m/s", "5000 m/s"], answer: 0, explanation: "La célérité du son dans l'air sous conditions ambiantes est d'environ 340 m/s." },
-                { question: "Si deux sources sonores sont synchrones et en phase, leurs interférences produisent au centre :", options: ["Des interférences constructives (amplitude maximale)", "Des interférences destructives (silence)", "Une annulation de l'onde", "Une diffraction"], answer: 0, explanation: "En présence de deux sources en phase, les déphasages nuls conduisent à des interférences constructives d'amplitude maximale." }
-            ];
-        } else if (chap.id.includes("radioactivite")) {
-            return [
-                { question: "Quelle est la relation entre la constante radioactive \\( \\lambda \\) et la demi-vie \\( t_{1/2} \\) ?", options: ["\\( t_{1/2} = \\frac{\\ln 2}{\\lambda} \\)", "\( t_{1/2} = \lambda \ln 2 \)", "\( t_{1/2} = \frac{1}{\lambda} \)", "\( t_{1/2} = 2 \lambda \)"], answer: 0, explanation: "À \( t = t_{1/2} \), \( N(t) = N_0 / 2 \), ce qui donne \( e^{-\lambda t_{1/2}} = 1/2 \Rightarrow t_{1/2} = \frac{\ln 2}{\lambda} \)." },
-                { question: "La radioactivité \\( \\beta^- \\) correspond à l'émission de :", options: ["Un électron \\( _-1^0 e \\)", "Un positron \( _1^0 e \)", "Un noyau d'hélium \( _2^4 He \)", "Un photon \( \gamma \)"], answer: 0, explanation: "La désintégration \( \beta^- \) consiste en la transformation d'un neutron en proton avec émission d'un électron \( _-1^0 e \)." },
-                { question: "Quelle est l'unité de l'activité d'une source radioactive dans le SI ?", options: ["Le Becquerel (Bq)", "Le Gray (Gy)", "Le Sievert (Sv)", "Le Curie (Ci)"], answer: 0, explanation: "Dans le Système International, l'activité s'exprime en Becquerels (Bq), où 1 Bq correspond à 1 désintégration par seconde." },
-                { question: "L'énergie de liaison par nucléon \\( E_l / A \\) permet d'évaluer :", options: ["La stabilité du noyau", "La masse de l'atome", "La vitesse des électrons", "La charge électrique"], answer: 0, explanation: "Plus l'énergie de liaison par nucléon \( E_l / A \) est grande, plus le noyau est stable." },
-                { question: "La loi de décroissance radioactive s'écrit :", options: ["\\( N(t) = N_0 e^{-\\lambda t} \\)", "\( N(t) = N_0 - \lambda t \)", "\( N(t) = N_0 / (1 + \lambda t) \)", "\( N(t) = N_0 e^{\lambda t} \)"], answer: 0, explanation: "Le nombre de noyaux radioactifs diminue de façon exponentielle au cours du temps selon \( N(t) = N_0 e^{-\lambda t} \)." },
-                { question: "Dans la représentation d'un noyau \\( _Z^A X \\), que représente le nombre A ?", options: ["Le nombre de nucléons (protons + neutrons)", "Le nombre de protons", "Le nombre de neutrons", "Le nombre d'électrons"], answer: 0, explanation: "A est le nombre de masse, représentant le nombre total de nucléons contenu dans le noyau." },
-                { question: "Dans la représentation d'un noyau \\( _Z^A X \\), que représente le nombre Z ?", options: ["Le nombre de protons (numéro atomique)", "Le nombre de neutrons", "Le nombre de masse", "La charge globale"], answer: 0, explanation: "Z est le numéro atomique (ou nombre de charge), représentant le nombre de protons." },
-                { question: "La radioactivité \\( \\alpha \\) correspond à l'émission de :", options: ["Un noyau d'hélium \\( _2^4 He \\)", "Un électron \( _-1^0 e \)", "Un positron \( _1^0 e \)", "Un neutron \( _0^1 n \)"], answer: 0, explanation: "La désintégration \( \alpha \) éjecte une particule \( \alpha \) constituée d'un noyau d'hélium \( _2^4 He \)." },
-                { question: "La radioactivité \\( \\beta^+ \\) correspond à l'émission de :", options: ["Un positron \\( _1^0 e \\)", "Un électron \( _-1^0 e \)", "Un proton \( _1^1 p \)", "Un photon \( \gamma \)"], answer: 0, explanation: "La désintégration \( \beta^+ \) transforme un proton en neutron avec émission d'un positron \( _1^0 e \)." },
-                { question: "La désexcitation \\( \\gamma \\) est l'émission d'un :", options: ["Photon électromagnétique de haute énergie", "Électron", "Proton", "Noyau d'hélium"], answer: 0, explanation: "La désexcitation \( \gamma \) accompagne souvent une désintégration radioactive pour libérer l'excès d'énergie sous forme de rayonnement électromagnétique." },
-                { question: "L'activité \\( A(t) \\) d'un échantillon radioactif est reliée au nombre de noyaux \\( N(t) \\) par :", options: ["\\( A(t) = \\lambda N(t) \\)", "\( A(t) = \frac{N(t)}{\lambda} \)", "\( A(t) = -\frac{dN(t)}{dt} = \lambda N(t) \)", "\( A(t) = N(t) e^{-\lambda t} \)"], answer: 2, explanation: "Par définition, l'activité est le taux de désintégration : \( A(t) = -\frac{dN}{dt} = \lambda N(t) \)." },
-                { question: "Le défaut de masse \\( \\Delta m \\) d'un noyau \\( _Z^A X \\) est défini par :", options: ["\\( \\Delta m = [Z m_p + (A - Z) m_n] - m(X) \\)", "\( \Delta m = m(X) - [Z m_p + A m_n] \)", "\( \Delta m = Z m_p + Z m_e \)", "\( \Delta m = A m_n - Z m_p \)"], answer: 0, explanation: "Le défaut de masse est la différence entre la somme des masses des nucléons séparés et la masse du noyau lié." },
-                { question: "L'énergie d'équivalence masse-énergie d'Einstein s'écrit :", options: ["\\( E = m c^2 \\)", "\( E = \frac{1}{2} m v^2 \)", "\( E = m g h \)", "\( E = h \nu^2 \)"], answer: 0, explanation: "Formule célèbre d'Einstein liant une masse \( m \) à son énergie au repos : \( E = m c^2 \)." },
-                { question: "L'énergie de liaison \\( E_l \\) d'un noyau est égale à :", options: ["\\( E_l = \\Delta m \\cdot c^2 \\)", "\( E_l = m c^2 \)", "\( E_l = \frac{\Delta m}{c^2} \)", "\( E_l = A c^2 \)"], answer: 0, explanation: "L'énergie de liaison est l'énergie qu'il faut fournir au noyau pour séparer tous ses nucléons au repos : \( E_l = \Delta m \cdot c^2 \)." },
-                { question: "L'unité de masse atomique (u) correspond approximativement à :", options: ["\\( 931,5 \\text{ MeV/c}^2 \\)", "\( 1 \text{ kg} \)", "\( 1 \text{ GeV/c}^2 \)", "\( 9,1 \times 10^{-31} \text{ kg} \)"], answer: 0, explanation: "En physique nucléaire, 1 u correspond à une énergie au repos de 931,5 MeV (soit \( 1 \text{ u} = 931,5 \text{ MeV/c}^2 \))." },
-                { question: "Une réaction de fission nucléaire consiste en :", options: ["La scission d'un noyau lourd sous l'impact d'un neutron", "La fusion de deux noyaux légers", "Une désintégration naturelle \beta", "L'absorption d'un électron"], answer: 0, explanation: "La fission est une réaction nucléaire provoquée au cours de laquelle un noyau lourd instable (ex: Uranium 235) se casse en deux noyaux plus légers." },
-                { question: "Une réaction de fusion nucléaire consiste en :", options: ["L'union de deux noyaux légers pour former un noyau plus lourd", "La cassure d'un noyau lourd", "Une émission de particule alpha", "La capture d'un proton"], answer: 0, explanation: "La fusion est la réunion de deux noyaux légers (ex: Deutérium et Tritium) créant un noyau plus lourd en libérant une très grande énergie." },
-                { question: "Les lois de conservation lors d'une réaction nucléaire sont appelées :", options: ["Lois de Soddy", "Lois de Newton", "Lois de Kepler", "Lois de Lavoisier"], answer: 0, explanation: "Les lois de Soddy imposent la conservation du nombre de masse A et du nombre de charge Z au cours d'une réaction nucléaire." },
-                { question: "L'énergie libérée \\( E_{\\text{libérée}} \\) par une réaction nucléaire vaut :", options: ["\\( E_{\\text{libérée}} = |\\Delta m| c^2 \\)", "\( E = m c \)", "\( E = A c^2 \)", "\( E = Z c^2 \)"], answer: 0, explanation: "L'énergie libérée lors de la réaction nucléaire est la perte de masse absolue multipliée par \( c^2 \)." },
-                { question: "Au bout de 3 demi-vies (\\( t = 3 t_{1/2} \\)), le pourcentage de noyaux radioactifs restant est :", options: ["12.5%", "25%", "50%", "6.25%"], answer: 0, explanation: "Après 3 demi-vies, le nombre de noyaux est divisé par \( 2^3 = 8 \), soit \( 100\% / 8 = 12,5\% \)." }
-            ];
-        } else if (chap.id.includes("rc")) {
-            return [
-                { question: "Quelle est la constante de temps \\( \\tau \\) d'un dipole RC ?", options: ["\\( \\tau = R \\cdot C \\)", "\( \tau = R / C \)", "\( \tau = C / R \)", "\( \tau = 1 / (R \cdot C) \)"], answer: 0, explanation: "La constante de temps d'un circuit comportant un conducteur ohmique \( R \) et un condensateur \( C \) est \( \tau = R C \) (en secondes)." },
-                { question: "Lors de la charge d'un condensateur sous tension échelon \\( E \\), la tension \\( u_c(t) \\) à \\( t = \\tau \\) atteint :", options: ["63% de E", "37% de E", "100% de E", "50% de E"], answer: 0, explanation: "À \( t = \tau \), \( u_c(\tau) = E(1 - e^{-1}) \approx 0,63 E \) (soit 63% de la valeur maximale)." },
-                { question: "Quelle est l'énergie emmagasinée dans un condensateur de capacité \\( C \\) sous une tension \\( u_c \\) ?", options: ["\\( E_e = \\frac{1}{2} C u_c^2 \\)", "\( E_e = C u_c^2 \)", "\( E_e = \frac{1}{2} C^2 u_c \)", "\( E_e = R C u_c \)"], answer: 0, explanation: "L'énergie électrostatique stockée dans un condensateur s'exprime par \( E_e = \frac{1}{2} C u_c^2 \)." },
-                { question: "La relation entre la charge \\( q \\) et l'intensité \\( i \\) en convention récepteur est :", options: ["\\( i = \\frac{dq}{dt} \\)", "\( i = q \cdot t \)", "\( q = \frac{di}{dt} \)", "\( i = \frac{u_c}{C} \)"], answer: 0, explanation: "Par définition, l'intensité du courant électrique est le débit de charge : \( i = \frac{dq}{dt} = C \frac{du_c}{dt} \)." },
-                { question: "L'équation différentielle régissant la tension \\( u_c(t) \\) lors de la charge d'un condensateur est :", options: ["\\( u_c + R C \\frac{du_c}{dt} = E \\)", "\( u_c - R C \frac{du_c}{dt} = E \)", "\( R C u_c + \frac{du_c}{dt} = 0 \)", "\( \frac{d^2u_c}{dt^2} + u_c = E \)"], answer: 0, explanation: "Par la loi d'additivité des tensions : \( u_R + u_c = E \Rightarrow R C \frac{du_c}{dt} + u_c = E \)." },
-                { question: "Lors de la décharge d'un condensateur à travers une résistance \\( R \\), la tension \\( u_c(t) \\) à \\( t = \\tau \\) est :", options: ["37% de U₀", "63% de U₀", "0", "100% de U₀"], answer: 0, explanation: "Pendant la décharge, \( u_c(\tau) = U_0 e^{-1} \approx 0,37 U_0 \) (soit 37% de la tension initiale)." },
-                { question: "La capacité \\( C \\) d'un condensateur s'exprime dans le Système International en :", options: ["Farad (F)", "Henry (H)", "Ohm (\Omega)", "Coulomb (C)"], answer: 0, explanation: "L'unité de capacité électrique est le Farad (F)." },
-                { question: "La relation entre la charge \\( q \\) du condensateur et sa tension \\( u_c \\) est :", options: ["\\( q = C \\cdot u_c \\)", "\( q = C / u_c \)", "\( u_c = q \cdot C \)", "\( q = u_c^2 / C \)"], answer: 0, explanation: "Par définition de la capacité d'un condensateur, la charge emmagasinée est proportionnelle à la tension : \( q = C u_c \)." },
-                { question: "Quelle est la dimension de la constante de temps \\( \\tau = R C \\) ?", options: ["Un temps [T]", "Une résistance [R]", "Une tension [U]", "Adimensionnée"], answer: 0, explanation: "Par analyse dimensionnelle : \( [RC] = [U/I] \times [I \cdot T / U] = [T] \) (exprimée en secondes)." },
-                { question: "En régime permanent (pour \\( t \\ge 5\\tau \\)) lors de la charge sous tension continue, le condensateur se comporte comme :", options: ["Un interrupteur ouvert (courant nul)", "Un court-circuit", "Une bobine", "Une résistance nulle"], answer: 0, explanation: "Une fois complètement chargé, la tension \( u_c = E \) devient constante, la dérivée s'annule et l'intensité \( i = C \frac{du_c}{dt} = 0 \)." },
-                { question: "À l'instant initial \\( t = 0 \\) d'un condensateur complètement déchargé que l'on branche sur un générateur E, le condensateur se comporte comme :", options: ["Un court-circuit (u_c = 0)", "Un interrupteur ouvert", "Une résistance infinie", "Une pile"], answer: 0, explanation: "Par continuité de la tension aux bornes d'un condensateur, \( u_c(0^+) = u_c(0^-) = 0 \), équivalent à un court-circuit." },
-                { question: "La méthode graphique de la tangente à l'origine pour déterminer \\( \\tau \\) consiste à :", options: ["Trouver l'abscisse du point d'intersection de la tangente à t=0 avec l'asymptote horizontale", "Mesurer le milieu de la courbe", "Tracer la dérivée seconde", "Prendre le temps total de charge"], answer: 0, explanation: "La tangente à l'origine de la courbe \( u_c(t) \) coupe l'asymptote de régime permanent (\( u_c = E \)) exactement à \( t = \tau \)." },
-                { question: "La loi de comportement d'un conducteur ohmique (Loi d'Ohm) s'écrit :", options: ["\\( u_R = R \\cdot i \\)", "\( u_R = R / i \)", "\( i = R \cdot u_R \)", "\( u_R = R i^2 \)"], answer: 0, explanation: "La loi d'Ohm aux bornes d'une résistance s'écrit \( u_R = R i \)." },
-                { question: "Quelle est l'unité de la charge électrique \\( q \\) dans le SI ?", options: ["Coulomb (C)", "Ampère (A)", "Volt (V)", "Watt (W)"], answer: 0, explanation: "Dans le Système International, la quantité de charge électrique s'exprime en Coulombs (C)." },
-                { question: "L'équation différentielle de la décharge d'un condensateur à travers une résistance R s'écrit :", options: ["\\( u_c + R C \\frac{du_c}{dt} = 0 \\)", "\( u_c - R C \frac{du_c}{dt} = E \)", "\( \frac{du_c}{dt} = E \)", "\( u_c = R C \)"], answer: 0, explanation: "Pendant la décharge, sans générateur (E=0), l'additivité des tensions donne \( u_R + u_c = 0 \Rightarrow R C \frac{du_c}{dt} + u_c = 0 \)." },
-                { question: "Si la capacité \\( C \\) d'un condensateur augmente, la constante de temps \\( \\tau \\) :", options: ["Augmente", "Diminue", "Reste constante", "Devient nulle"], answer: 0, explanation: "Puisque \( \tau = R C \), la constante de temps est directement proportionnelle à la capacité \( C \)." },
-                { question: "Si la résistance \\( R \\) du circuit diminue, la vitesse de charge du condensateur est :", options: ["Plus rapide (tau plus petit)", "Plus lente", "Inchangée", "Nulle"], answer: 0, explanation: "Une résistance plus faible diminue \( \tau = RC \), ce qui accélère la charge du condensateur." },
-                { question: "Si l'énergie emmagasinée dans un condensateur sous 10 V est 1 mJ, que devient cette énergie si la tension passe à 20 V ?", options: ["4 mJ (multipliée par 4)", "2 mJ", "8 mJ", "1 mJ"], answer: 0, explanation: "Puisque \( E_e \propto u_c^2 \), doubler la tension multiplie l'énergie par \( 2^2 = 4 \)." },
-                { question: "Un condensateur est constitué de deux plaques conductrices appelées :", options: ["Armatures", "Électrodes", "Bornes", "Anodes"], answer: 0, explanation: "Les deux surfaces conductrices d'un condensateur séparées par un isolant (diélectrique) sont appelées les armatures." },
-                { question: "En régime transitoire lors de la charge, l'intensité du courant \\( i(t) \\) :", options: ["Décroît exponentiellement de E/R vers 0", "Augmente linéairement", "Reste constante à E/R", "Oscille"], answer: 0, explanation: "L'intensité du courant s'exprime par \( i(t) = \frac{E}{R} e^{-t/RC} \), décroissant de \( E/R \) à 0." }
-            ];
-        }
+
+    // 2. Lookup in dedicated chapter quiz bank by exact ID
+    if (typeof chapterQuizBank !== "undefined" && chapterQuizBank[chap.id]) {
+        return chapterQuizBank[chap.id];
     }
-    
-    // Default fallback 20 QCM bank for all other chapters (Maths & Sciences)
+
+    const id = (chap.id || "").toLowerCase();
+    const title = (chap.title || "").toLowerCase();
+
+    // 3. Topic-specific matching for Tronc Commun
+    if (id.includes("arithmetique") || title.includes("arithmétique")) {
+        return chapterQuizBank["tc-math-arithmetique-n"] || [];
+    }
+    if (id.includes("vectoriel") || title.includes("vectoriel")) {
+        return chapterQuizBank["tc-math-calcul-vectoriel"] || [];
+    }
+    if (id.includes("projection") || title.includes("projection")) {
+        return chapterQuizBank["tc-math-projection"] || [];
+    }
+    if (id.includes("ensemble") || title.includes("ensembles des nombres")) {
+        return chapterQuizBank["tc-math-ensembles-nombres"] || [];
+    }
+    if (id.includes("ordre") || title.includes("ordre dans r")) {
+        return chapterQuizBank["tc-math-ordre-r"] || [];
+    }
+    if (id.includes("droite") || title.includes("droite dans le plan")) {
+        return chapterQuizBank["tc-math-droite-plan"] || [];
+    }
+    if (id.includes("polynome") || title.includes("polynôme")) {
+        return chapterQuizBank["tc-math-polynomes"] || [];
+    }
+    if (id.includes("equation") || id.includes("second-degre") || title.includes("équations")) {
+        return chapterQuizBank["tc-math-equations-inequations-systemes"] || [];
+    }
+    if (id.includes("trigono") || title.includes("trigonométrique")) {
+        return chapterQuizBank["tc-math-calcul-trigonometrique"] || [];
+    }
+    if (id.includes("fonctions-numeriques") || title.includes("généralités sur les fonctions")) {
+        return chapterQuizBank["tc-math-fonctions-numeriques"] || [];
+    }
+    if (id.includes("produit-scalaire") || title.includes("produit scalaire")) {
+        return chapterQuizBank["tc-math-produit-scalaire"] || [];
+    }
+
+    // 4. Topic-specific matching for 2BAC Math & PC
+    if (id.includes("lim") || id.includes("cont") || title.includes("continuité") || title.includes("limite")) {
+        return [
+            { question: "Quelle est la définition fondamentale de la continuité de $f$ en un point $x_0$ ?", options: ["$\lim_{x \to x_0} f(x) = f(x_0)$", "$f(x_0) = 0$", "$f'(x_0) = 1$", "$\lim_{x \to +\infty} f(x) = f(x_0)$"], answer: 0, explanation: "Une fonction $f$ est continue en $x_0$ ssi sa limite en $x_0$ existe et est égale à $f(x_0)$." },
+            { question: "Le Théorème des Valeurs Intermédiaires (TVI) s'applique à toute fonction :", options: ["Continue sur un intervalle $[a, b]$", "Dérivable uniquement en 0", "Constante sur $\mathbb{R}$", "Périodique de période $2\pi$"], answer: 0, explanation: "La continuité de la fonction sur l'intervalle $[a, b]$ est la condition nécessaire pour appliquer le TVI." },
+            { question: "Que vaut la limite usuelle $\lim_{x \to 0} \frac{\sin(x)}{x}$ ?", options: ["1", "0", "$+\infty$", "$-1$"], answer: 0, explanation: "Limite trigonométrique usuelle : $\lim_{x \to 0} \frac{\sin(x)}{x} = 1$." },
+            { question: "Si $\lim_{x \to a} f(x) = \pm \infty$, alors la droite $(D) : x = a$ est :", options: ["Une asymptote verticale à $(C_f)$", "Une asymptote horizontale", "Une asymptote oblique", "Une tangente horizontale"], answer: 0, explanation: "Une limite infinie en un point fini $a$ caractérise une asymptote verticale d'équation $x = a$." }
+        ];
+    }
+
+    if (id.includes("deriv") || title.includes("dérivation") || title.includes("étude de fonctions")) {
+        return [
+            { question: "Quelle est l'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ ?", options: ["$y = f'(a)(x - a) + f(a)$", "$y = f(a)(x - a) + f'(a)$", "$y = f'(x)(x - a)$", "$y = f'(a)x + a$"], answer: 0, explanation: "L'équation générale de la tangente en $a$ est $y = f'(a)(x - a) + f(a)$." },
+            { question: "Si $f'(x) > 0$ sur un intervalle $I$, alors la fonction $f$ est :", options: ["Strictement croissante sur I", "Strictement décroissante sur I", "Constante sur I", "Négative sur I"], answer: 0, explanation: "Une dérivée strictement positive implique la stricte croissance de la fonction sur cet intervalle." },
+            { question: "Si $f''(x_0) = 0$ en changeant de signe en $x_0$, alors le point $(x_0, f(x_0))$ est :", options: ["Un point d'inflexion pour $(C_f)$", "Un extremum absolu", "Une asymptote", "Un point d'arrêt"], answer: 0, explanation: "L'annulation avec changement de signe de la dérivée seconde caractérise un point d'inflexion." }
+        ];
+    }
+
+    if (id.includes("suites") || title.includes("suites")) {
+        return [
+            { question: "Une suite géométrique de premier terme $u_0 > 0$ et de raison $q$ converge vers 0 si et seulement si :", options: ["$-1 < q < 1$", "$q > 1$", "$q \ge 1$", "$q < -1$"], answer: 0, explanation: "Pour une suite géométrique $u_n = u_0 q^n$, la limite est 0 ssi $|q| < 1$." },
+            { question: "Toute suite réelle croissante et majorée est :", options: ["Convergente", "Divergente vers $+\infty$", "Constante", "Non bornée"], answer: 0, explanation: "Théorème de convergence monotone : toute suite croissante et majorée converge vers une limite finie." },
+            { question: "La somme $S_n = 1 + q + q^2 + \cdots + q^n$ pour $q \neq 1$ vaut :", options: ["$\frac{1 - q^{n+1}}{1 - q}$", "$\frac{1 - q^n}{1 - q}$", "$\frac{q^{n+1} - 1}{q}$", "$(n+1)q$"], answer: 0, explanation: "Formule de la somme des termes consécutifs d'une suite géométrique : $\frac{1 - q^{\text{nb termes}}}{1 - q} = \frac{1 - q^{n+1}}{1 - q}$." }
+        ];
+    }
+
+    if (id.includes("log") || title.includes("logarithme")) {
+        return [
+            { question: "Quel est le domaine de définition de la fonction $f(x) = \ln(x)$ ?", options: ["$]0, +\infty[$", "$[0, +\infty[$", "$\mathbb{R}^*$", "$\mathbb{R}$"], answer: 0, explanation: "Le logarithme népérien est défini strictement pour $x > 0$." },
+            { question: "Quelle est la dérivée de $f(x) = \ln(u(x))$ pour $u(x) > 0$ ?", options: ["$\frac{u'(x)}{u(x)}$", "$\frac{1}{u(x)}$", "$u'(x) \ln(u(x))$", "$\frac{u(x)}{u'(x)}$"], answer: 0, explanation: "$(\ln(u))' = \frac{u'}{u}$." },
+            { question: "Que vaut la limite usuelle $\lim_{x \to 0^+} x \ln(x)$ ?", options: ["0", "$-\infty$", "1", "$+\infty$"], answer: 0, explanation: "Croissance comparée en 0 : $\lim_{x \to 0^+} x \ln(x) = 0$." }
+        ];
+    }
+
+    if (id.includes("exp") || title.includes("exponentielle")) {
+        return [
+            { question: "Quelle est la dérivée de $f(x) = e^{u(x)}$ ?", options: ["$u'(x) e^{u(x)}$", "$e^{u'(x)}$", "$u(x) e^{u(x)}$", "$\frac{e^{u(x)}}{u'(x)}$"], answer: 0, explanation: "Formule de dérivation de l'exponentielle composée : $(e^u)' = u' e^u$." },
+            { question: "Que vaut $\lim_{x \to -\infty} e^x$ ?", options: ["0", "$-\infty$", "$+\infty$", "1"], answer: 0, explanation: "L'axe des abscisses $y=0$ est asymptote horizontale en $-\infty$ pour l'exponentielle : $\lim_{x \to -\infty} e^x = 0$." },
+            { question: "Pour tous réels $a$ et $b$, $e^{a+b} =$ :", options: ["$e^a \times e^b$", "$e^a + e^b$", "$(e^a)^b$", "$e^{ab}$"], answer: 0, explanation: "Propriété fondamentale de morphisme : $e^{a+b} = e^a e^b$." }
+        ];
+    }
+
+    if (id.includes("complexe") || title.includes("complexes")) {
+        return [
+            { question: "Que vaut $i^2$ dans le corps des nombres complexes $\mathbb{C}$ ?", options: ["-1", "1", "0", "-i"], answer: 0, explanation: "Par définition de l'unité imaginaire : $i^2 = -1$." },
+            { question: "Le module du nombre complexe $z = a + ib$ (avec $a, b \in \mathbb{R}$) est :", options: ["$\sqrt{a^2 + b^2}$", "$a^2 + b^2$", "$a + b$", "$\sqrt{a^2 - b^2}$"], answer: 0, explanation: "$|z| = \sqrt{a^2 + b^2}$." },
+            { question: "La forme trigonométrique du nombre $z = 1 + i$ est :", options: ["$\sqrt{2}\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right)$", "$2\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right)$", "$\sqrt{2}\left(\cos\frac{\pi}{3} + i\sin\frac{\pi}{3}\right)$", "$\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}$"], answer: 0, explanation: "$|z| = \sqrt{1+1} = \sqrt{2}$, et $z = \sqrt{2}(1/\sqrt{2} + i/\sqrt{2}) = \sqrt{2} e^{i\pi/4}$." }
+        ];
+    }
+
+    if (id.includes("integral") || title.includes("intégral") || id.includes("primitive")) {
+        return [
+            { question: "Formule d'intégration par parties : $\int_a^b u(x) v'(x) dx =$ :", options: ["$[u(x)v(x)]_a^b - \int_a^b u'(x)v(x) dx$", "$[u'(x)v'(x)]_a^b + \int_a^b u(x)v(x) dx$", "$[u(x)v(x)]_a^b + \int_a^b u'(x)v(x) dx$", "$\int_a^b u'(x)v'(x) dx$"], answer: 0, explanation: "Formule d'intégration par parties : $\int u v' = [uv] - \int u' v$." },
+            { question: "La primitive de $f(x) = e^{3x}$ qui s'annule en 0 est :", options: ["$\frac{e^{3x} - 1}{3}$", "$3e^{3x} - 3$", "$e^{3x} - 1$", "$\frac{e^{3x}}{3}$"], answer: 0, explanation: "$F(x) = \frac{1}{3}e^{3x} + C$. $F(0) = 0 \implies 1/3 + C = 0 \implies C = -1/3$." }
+        ];
+    }
+
+    if (id.includes("probabilit") || title.includes("probabilités") || title.includes("dénombrement")) {
+        return [
+            { question: "Le nombre de tirages simultanés de $p$ éléments parmi $n$ ($p \le n$) est donné par :", options: ["$C_n^p = \frac{n!}{p!(n-p)!}$", "$A_n^p = \frac{n!}{(n-p)!}$", "$n^p$", "$p! \times n$"], answer: 0, explanation: "Un tirage simultané correspond à des combinaisons sans ordre et sans répétition : $C_n^p$." },
+            { question: "Si $A$ et $B$ sont deux événements indépendants, alors $P(A \cap B) =$ :", options: ["$P(A) \times P(B)$", "$P(A) + P(B)$", "$P(A) / P(B)$", "$P(A) + P(B) - 1$"], answer: 0, explanation: "Par définition de l'indépendance de deux événements : $P(A \cap B) = P(A) \times P(B)$." }
+        ];
+    }
+
+    // Default fallback
     return [
-        { question: "Quelle est la définition fondamentale de la continuité d'une fonction \\( f \\) en un point \\( x_0 \\) ?", options: ["\\( \\lim_{x \\to x_0} f(x) = f(x_0) \\)", "\( f(x_0) = 0 \)", "\( f'(x_0) = 1 \)", "\( \lim_{x \to +\infty} f(x) = f(x_0) \)"], answer: 0, explanation: "Une fonction \( f \) est continue en \( x_0 \) ssi sa limite en \( x_0 \) existe et est égale à la valeur de la fonction \( f(x_0) \)." },
-        { question: "Le Théorème des Valeurs Intermédiaires (TVI) s'applique à toute fonction :", options: ["Continue sur un intervalle \\( [a, b] \\)", "Dérivable uniquement en 0", "Constante sur \( \mathbb{R} \)", "Périodique de période \( 2\pi \)"], answer: 0, explanation: "La continuité de la fonction sur l'intervalle \( [a, b] \) est la condition nécessaire et suffisante pour appliquer le TVI." },
-        { question: "Que vaut la limite usuelle \\( \\lim_{x \\to 0} \\frac{e^x - 1}{x} \\) ?", options: ["1", "0", "+\infty", "-1"], answer: 0, explanation: "Il s'agit du nombre dérivé de la fonction exponentielle en 0 : \( \lim_{x \to 0} \frac{e^x - 1}{x} = e^0 = 1 \)." },
-        { question: "Si \\( f \\) est une fonction continue et strictement monotone sur \\( [a, b] \\), alors \\( f \\) réalise une bijection de \\( [a, b] \\) sur :", options: ["L'intervalle image \\( f([a, b]) \\)", "L'ensemble \( \mathbb{R} \) tout entier", "L'intervalle \( [0, 1] \)", "L'ensemble des nombres entiers"], answer: 0, explanation: "Toute fonction continue et strictement monotone sur un intervalle \( I \) admet une fonction réciproque définie sur l'intervalle image \( f(I) \)." },
-        { question: "Quelle est la limite de \\( \\frac{\\ln(x + 1)}{x} \\) quand \\( x \\to 0 \\) ?", options: ["1", "0", "+\infty", "e"], answer: 0, explanation: "C'est le nombre dérivé de la fonction \( x \mapsto \ln(1+x) \) en 0 : \( \lim_{x \to 0} \frac{\ln(1+x)}{x} = 1 \)." },
-        { question: "Quelle est la primitive de \\( f(x) = \\frac{1}{x} \\) sur \\( ]0, +\\infty[ \\) qui s'annule en 1 ?", options: ["\\( \\ln(x) \\)", "\( e^x - 1 \)", "\( -\frac{1}{x^2} \)", "\( \sqrt{x} - 1 \)"], answer: 0, explanation: "La primitive de \( 1/x \) sur \( ]0, +\infty[ \) prenant la valeur 0 en 1 est le logarithme népérien \( \ln(x) \)." },
-        { question: "Que vaut \\( \\int_a^b f'(x) dx \\) pour une fonction \\( f \\) de classe \\( C^1 \\) ?", options: ["\\( f(b) - f(a) \\)", "\( f'(b) - f'(a) \)", "\( f(a) + f(b) \)", "\( f(b) \cdot f(a) \)"], answer: 0, explanation: "Théorème fondamental de l'analyse : l'intégrale d'une dérivée s'exprime par la différence des valeurs de la primitive aux bornes." },
-        { question: "Formule d'intégration par parties : \\( \\int u v' dx = \\) :", options: ["\\( [u v] - \\int u' v dx \\)", "\( [u' v'] + \int u v dx \)", "\( [u v] + \int u' v dx \)", "\( \int u' v' dx \)"], answer: 0, explanation: "La formule d'intégration par parties découle de la dérivation d'un produit : \( \int u v' = [uv] - \int u' v \)." },
-        { question: "La solution générale de l'équation différentielle \\( y' + a y = 0 \\) (avec a constant) est :", options: ["\\( y(x) = K e^{-ax} \\)", "\( y(x) = K e^{ax} \)", "\( y(x) = -ax + K \)", "\( y(x) = K \ln(ax) \)"], answer: 0, explanation: "Les solutions de l'équation linéaire du premier ordre sans second membre \( y' = -ay \) sont les fonctions \( y(x) = K e^{-ax} \)." },
-        { question: "La solution générale de l'équation différentielle \\( y'' + \\omega^2 y = 0 \\) (oscillateur harmonique) est :", options: ["\\( y(x) = A \\cos(\\omega x) + B \\sin(\\omega x) \\)", "\( y(x) = A e^{\omega x} + B e^{-\omega x} \)", "\( y(x) = A x + B \)", "\( y(x) = A \cos(\omega x) \)"], answer: 0, explanation: "L'équation différentielle d'un oscillateur libre sans amortissement a pour solutions des combinaisons sinusoïdales de pulsation \( \omega \)." },
-        { question: "L'aire du domaine délimité par la courbe \\( (C_f) \\), l'axe des abscisses et les droites \\( x=a \\) et \\( x=b \\) (pour \\( f \\ge 0 \\)) est :", options: ["\\( \\int_a^b f(x) dx \\)", "\( f(b) - f(a) \)", "\( \int_a^b f'(x) dx \)", "\( \frac{f(a)+f(b)}{2} \)"], answer: 0, explanation: "L'intégrale d'une fonction continue et positive représente l'aire sous la courbe entre \( a \) et \( b \) en unités d'aire." },
-        { question: "La valeur moyenne d'une fonction \\( f \\) continue sur \\( [a, b] \\) est donnée par :", options: ["\\( \\mu = \\frac{1}{b - a} \\int_a^b f(x) dx \\)", "\( \mu = \int_a^b f(x) dx \)", "\( \mu = \frac{f(a) + f(b)}{2} \)", "\( \mu = \frac{f(b) - f(a)}{b - a} \)"], answer: 0, explanation: "La valeur moyenne d'une fonction sur un intervalle est définie par \( \mu = \frac{1}{b-a} \int_a^b f(x) dx \)." },
-        { question: "Une équation différentielle d'ordre 1 avec second membre constant \\( y' + a y = b \\) (avec \\( a \\neq 0 \\)) a pour solution particulière :", options: ["\\( y_p = \\frac{b}{a} \\)", "\( y_p = b - a \)", "\( y_p = a b \)", "\( y_p = 0 \)"], answer: 0, explanation: "Une constante \( y_p = C \) vérifie \( 0 + aC = b \Rightarrow C = b/a \)." },
-        { question: "Si \\( f \\) est une fonction paire continue sur \\( [-a, a] \\), alors \\( \\int_{-a}^a f(x) dx = \\) :", options: ["\\( 2 \\int_0^a f(x) dx \\)", "0", "\( \int_0^a f(x) dx \)", "\( -2 \int_0^a f(x) dx \)"], answer: 0, explanation: "La symétrie par rapport à l'axe des ordonnées d'une fonction paire permet de doubler l'intégrale sur l'intervalle \( [0, a] \)." },
-        { question: "Si \\( f \\) est une fonction impaire continue sur \\( [-a, a] \\), alors \\( \\int_{-a}^a f(x) dx = \\) :", options: ["0", "\( 2 \int_0^a f(x) dx \)", "\( f(a) \)", "\( a \)"], answer: 0, explanation: "L'intégrale d'une fonction impaire sur un intervalle symétrique par rapport à l'origine est nulle." },
-        { question: "Quelle est l'intégrale \\( \\int_0^1 e^{2x} dx \\) ?", options: ["\\( \\frac{e^2 - 1}{2} \\)", "\( e^2 - 1 \)", "\( 2(e^2 - 1) \)", "\( e^2 \)"], answer: 0, explanation: "Une primitive de \( e^{2x} \) est \( \frac{1}{2}e^{2x} \), d'où \( [\frac{1}{2}e^{2x}]_0^1 = \frac{e^2 - 1}{2} \)." },
-        { question: "La dérivée de la fonction \\( F(x) = \\int_a^x f(t) dt \\) (avec \\( f \\) continue) est :", options: ["\\( F'(x) = f(x) \\)", "\( F'(x) = f(t) \)", "\( F'(x) = F(x) \)", "\( F'(x) = f'(x) \)"], answer: 0, explanation: "La fonction intégrale \( F(x) = \int_a^x f(t) dt \) est l'unique primitive de \( f \) s'annulant en \( a \)." },
-        { question: "Quelle est la limite de \\( \\frac{e^x}{x^n} \\) quand \\( x \\to +\\infty \\) (pour \\( n > 0 \\)) ?", options: ["+\\infty", "0", "1", "n"], answer: 0, explanation: "Théorème de croissance comparée : l'exponentielle l'emporte toujours sur les puissances en \( +\infty \)." },
-        { question: "Quelle est la limite de \\( \\frac{\\ln x}{x^n} \\) quand \\( x \\to +\\infty \\) (pour \\( n > 0 \\)) ?", options: ["0", "+\\infty", "1", "-1"], answer: 0, explanation: "Théorème de croissance comparée : les puissances l'emportent toujours sur le logarithme en \( +\infty \)." },
-        { question: "Quelle est la limite de \\( x^n \\ln x \\) quand \\( x \\to 0^+ \\) (pour \\( n > 0 \\)) ?", options: ["0", "-\infty", "1", "-1"], answer: 0, explanation: "Théorème de croissance comparée à l'origine : \( \lim_{x\to 0^+} x^n \ln x = 0 \)." }
+        { question: "Quelle est la méthode générale pour valider une propriété mathématique sur $\mathbb{N}$ ?", options: ["Le raisonnement par récurrence", "Le calcul approché", "L'interpolation linéaire", "La mesure expérimentale"], answer: 0, explanation: "Le raisonnement par récurrence (initialisation, hérédité, conclusion) est la méthode rigoureuse sur $\mathbb{N}$." },
+        { question: "Deux fonctions $f$ et $g$ sont égales si et seulement si :", options: ["Elles ont le même ensemble de définition $D$ et $\forall x \in D, f(x) = g(x)$", "Elles ont la même dérivée", "Elles ont la même limite en 0", "Elles ont le même tableau de variations"], answer: 0, explanation: "L'égalité de deux fonctions requiert l'égalité de leurs ensembles de définition et de leurs valeurs en tout point." }
     ];
 }
 
