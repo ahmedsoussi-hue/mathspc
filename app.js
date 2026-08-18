@@ -22438,7 +22438,6 @@ function setupMiroirFresnelSimulator() {
     let alphaArcMin = sliderAlpha ? parseFloat(sliderAlpha.value) : 5.0; // In arcminutes
     let distR_cm = sliderR ? parseFloat(sliderR.value) : 10.0; // In cm
     let distD_m = sliderD ? parseFloat(sliderD.value) : 1.00; // In meters
-    let lambdaNm = 532.0;
     let showVirtual = checkVirtual ? checkVirtual.checked : true;
     let showField = checkField ? checkField.checked : true;
     let showProfile = checkProfile ? checkProfile.checked : true;
@@ -22491,26 +22490,20 @@ function setupMiroirFresnelSimulator() {
         const wl = getSourceLambda();
         const lambdaM = wl * 1e-9;
         
-        // alpha in radians: 1 arcmin = (pi / (180 * 60)) rad
         const alphaRad = (alphaArcMin / 60.0) * (Math.PI / 180.0);
         const alphaMrad = alphaRad * 1000.0;
 
-        const RM = distR_cm * 0.01; // in meters
-        const dM = distD_m; // in meters
-        const totalD_m = RM + dM; // D = R + d
+        const RM = distR_cm * 0.01;
+        const dM = distD_m;
+        const totalD_m = RM + dM;
 
-        // Distance between virtual sources a = 2 * R * alpha (in meters & mm)
         const aM = 2.0 * RM * Math.sin(alphaRad);
         const a_mm = aM * 1000.0;
 
-        // Interfrange i = lambda * D / a (in mm)
         const interfrange_mm = (lambdaM * totalD_m / aM) * 1000.0;
-
-        // Interference field width on screen L = 2 * d * alpha (in mm)
-        const champ_mm = (2.0 * dM * alphaRad * 10.0) * 1000.0 * 0.9; // realistic factor with mirror length
+        const champ_mm = (2.0 * dM * alphaRad * 10.0) * 1000.0 * 0.9;
         const numFringes = Math.round(champ_mm / (interfrange_mm || 0.01));
 
-        // Cursor path difference: delta = a * x / D
         const mmPerPx = 0.08;
         const cursorX_mm = (cursorScreenY - 235) * mmPerPx;
         const deltaM = (aM * (cursorX_mm * 1e-3)) / totalD_m;
@@ -22543,7 +22536,6 @@ function setupMiroirFresnelSimulator() {
             </div>
 
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
-                <!-- 1. Sources Virtuelles -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
                     <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Sources Cohérentes Virtuelles</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
@@ -22554,7 +22546,6 @@ function setupMiroirFresnelSimulator() {
                     </div>
                 </div>
 
-                <!-- 2. Formule de l'Interfrange -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
                     <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Interfrange \\(i\\)</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
@@ -22565,7 +22556,6 @@ function setupMiroirFresnelSimulator() {
                     </div>
                 </div>
 
-                <!-- 3. Champ d'Interférence -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
                     <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Champ d'Interférence</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
@@ -22576,7 +22566,6 @@ function setupMiroirFresnelSimulator() {
                     </div>
                 </div>
 
-                <!-- 4. Division du Front d'Onde -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
                     <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Propriétés Pratiques</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
@@ -22621,6 +22610,58 @@ function setupMiroirFresnelSimulator() {
         if (hudDelta) hudDelta.textContent = `${m.deltaUm.toFixed(2)} µm`;
     }
 
+    // Helper: draw realistic hatched mirror plate
+    function drawMirrorPlate(startX, startY, angleRad, length, thickness, label, isTop) {
+        ctx.save();
+        ctx.translate(startX, startY);
+        ctx.rotate(angleRad);
+
+        // Glass Body with gradient
+        const mirGrad = ctx.createLinearGradient(0, -thickness, 0, thickness);
+        mirGrad.addColorStop(0, "#38bdf8");
+        mirGrad.addColorStop(0.3, "#e0f2fe");
+        mirGrad.addColorStop(0.5, "#94a3b8");
+        mirGrad.addColorStop(1, "#334155");
+
+        ctx.fillStyle = mirGrad;
+        ctx.strokeStyle = "#0284c7";
+        ctx.lineWidth = 1.5;
+        ctx.shadowColor = "rgba(56, 189, 248, 0.4)";
+        ctx.shadowBlur = 8;
+        
+        // Front reflective face is at y = 0
+        const backY = isTop ? -thickness : thickness;
+        ctx.fillRect(0, isTop ? -thickness : 0, length, thickness);
+        ctx.strokeRect(0, isTop ? -thickness : 0, length, thickness);
+        ctx.shadowBlur = 0;
+
+        // Shiny reflective coating front surface line
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(length, 0);
+        ctx.stroke();
+
+        // Hatches on non-reflective back side (tain du miroir)
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.7)";
+        ctx.lineWidth = 1;
+        const hatchStep = 8;
+        for (let x = 4; x < length; x += hatchStep) {
+            ctx.beginPath();
+            ctx.moveTo(x, isTop ? -thickness : thickness);
+            ctx.lineTo(x + (isTop ? -5 : 5), isTop ? -thickness + 4 : thickness - 4);
+            ctx.stroke();
+        }
+
+        // Label Badge
+        ctx.fillStyle = isTop ? "#38bdf8" : "#eab308";
+        ctx.font = "bold 12px Inter, sans-serif";
+        ctx.fillText(label, length / 2 - 12, isTop ? -thickness - 8 : thickness + 18);
+
+        ctx.restore();
+    }
+
     function draw() {
         canvas.width = 950;
         canvas.height = 470;
@@ -22643,182 +22684,227 @@ function setupMiroirFresnelSimulator() {
         const m = getFresnelMetrics();
         const baseColor = wavelengthToRGBA(m.wl);
 
-        const edgeX = 330;
+        const edgeX = 350;
         const edgeY = 235;
-        const mirrorLen = 120;
+        const mirrorLen = 135;
+        const mirrorThickness = 9;
         const screenX = 720;
         const screenWidth = 200;
 
-        // Visual angle exaggeration for clear laboratory schematic
-        const visAlpha = (alphaArcMin * 0.04) * Math.PI / 180; // visual angle
-        const mir1Angle = -visAlpha / 2;
-        const mir2Angle = visAlpha / 2;
+        // Visual Angle (Clearly visible wedge opening so M1 and M2 are unmistakably clear!)
+        const visualAngleRad = (Math.max(4.0, alphaArcMin * 0.9)) * Math.PI / 180;
+        const angleM1 = -visualAngleRad / 2.0;
+        const angleM2 = visualAngleRad / 2.0;
 
-        const M1_end = { x: edgeX + Math.cos(mir1Angle) * mirrorLen, y: edgeY - Math.sin(mir1Angle) * mirrorLen };
-        const M2_end = { x: edgeX + Math.cos(mir2Angle) * mirrorLen, y: edgeY + Math.sin(mir2Angle) * mirrorLen };
+        const M1_end = {
+            x: edgeX + Math.cos(angleM1) * mirrorLen,
+            y: edgeY + Math.sin(angleM1) * mirrorLen
+        };
+        const M2_end = {
+            x: edgeX + Math.cos(angleM2) * mirrorLen,
+            y: edgeY + Math.sin(angleM2) * mirrorLen
+        };
 
         // Source S position
-        const srcDistPx = 140;
-        const srcIncAngle = 0.32; // rad
+        const srcDistPx = 160;
+        const srcIncAngle = 0.28; // rad relative to bisector
         const S = {
             x: edgeX - Math.cos(srcIncAngle) * srcDistPx,
             y: edgeY - Math.sin(srcIncAngle) * srcDistPx
         };
 
-        // Virtual sources S1, S2
+        // Virtual sources S1 and S2 (exact reflections)
         const S1 = {
-            x: edgeX - Math.cos(srcIncAngle - 2 * mir1Angle) * srcDistPx,
-            y: edgeY - Math.sin(srcIncAngle - 2 * mir1Angle) * srcDistPx
+            x: edgeX - Math.cos(srcIncAngle - 2 * angleM1) * srcDistPx,
+            y: edgeY - Math.sin(srcIncAngle - 2 * angleM1) * srcDistPx
         };
         const S2 = {
-            x: edgeX - Math.cos(srcIncAngle - 2 * mir2Angle) * srcDistPx,
-            y: edgeY - Math.sin(srcIncAngle - 2 * mir2Angle) * srcDistPx
+            x: edgeX - Math.cos(srcIncAngle - 2 * angleM2) * srcDistPx,
+            y: edgeY - Math.sin(srcIncAngle - 2 * angleM2) * srcDistPx
         };
 
-        // 1. Reflected Beams & Interference Field Polygon
+        // 1. Interference Overlap Field
         if (showField) {
             ctx.save();
-            // Beam 1 from Mirror 1
+            // Beam 1 from M1 (Cyan tint)
             ctx.beginPath();
             ctx.moveTo(edgeX, edgeY);
             ctx.lineTo(M1_end.x, M1_end.y);
-            ctx.lineTo(screenX, 90);
-            ctx.lineTo(screenX, 290);
+            ctx.lineTo(screenX, 85);
+            ctx.lineTo(screenX, 285);
             ctx.closePath();
-            ctx.fillStyle = "rgba(56, 189, 248, 0.08)";
+            ctx.fillStyle = "rgba(56, 189, 248, 0.07)";
             ctx.fill();
 
-            // Beam 2 from Mirror 2
+            // Beam 2 from M2 (Yellow/Amber tint)
             ctx.beginPath();
             ctx.moveTo(edgeX, edgeY);
             ctx.lineTo(M2_end.x, M2_end.y);
-            ctx.lineTo(screenX, 380);
-            ctx.lineTo(screenX, 180);
+            ctx.lineTo(screenX, 385);
+            ctx.lineTo(screenX, 185);
             ctx.closePath();
-            ctx.fillStyle = "rgba(234, 179, 8, 0.08)";
+            ctx.fillStyle = "rgba(234, 179, 8, 0.07)";
             ctx.fill();
 
-            // Overlap Interference Field
+            // Overlap Field (Luminescent Green)
             ctx.beginPath();
-            ctx.moveTo(edgeX + 50, edgeY);
-            ctx.lineTo(screenX, 180);
-            ctx.lineTo(screenX, 290);
+            ctx.moveTo(edgeX + 55, edgeY);
+            ctx.lineTo(screenX, 185);
+            ctx.lineTo(screenX, 285);
             ctx.closePath();
-            ctx.fillStyle = "rgba(16, 185, 129, 0.15)";
+            ctx.fillStyle = "rgba(16, 185, 129, 0.18)";
             ctx.fill();
-            ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
-            ctx.setLineDash([3, 3]);
+            ctx.strokeStyle = "rgba(16, 185, 129, 0.5)";
+            ctx.setLineDash([4, 4]);
             ctx.stroke();
             ctx.setLineDash([]);
+
+            ctx.fillStyle = "#10b981";
+            ctx.font = "bold 11px Inter, sans-serif";
+            ctx.fillText("Champ d'interférence (Recouvrement)", (edgeX + screenX) / 2 - 40, edgeY + 4);
             ctx.restore();
         }
 
-        // 2. Incident Laser Light from S to Mirrors
+        // 2. Incident Laser Light Rays
         ctx.save();
         ctx.strokeStyle = baseColor.css;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2.2;
         ctx.shadowColor = baseColor.css;
         ctx.shadowBlur = 8;
 
-        // Rays to mirror 1 and mirror 2
+        // Incident to M1 and M2
         ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(edgeX, edgeY); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(M1_end.x, M1_end.y); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(M2_end.x, M2_end.y); ctx.stroke();
 
-        // Reflected boundary rays
-        ctx.beginPath(); ctx.moveTo(M1_end.x, M1_end.y); ctx.lineTo(screenX, 90); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(edgeX, edgeY); ctx.lineTo(screenX, 290); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(M2_end.x, M2_end.y); ctx.lineTo(screenX, 380); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(edgeX, edgeY); ctx.lineTo(screenX, 180); ctx.stroke();
+        // Reflected rays towards screen
+        ctx.strokeStyle = "#38bdf8"; // From M1
+        ctx.beginPath(); ctx.moveTo(M1_end.x, M1_end.y); ctx.lineTo(screenX, 85); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(edgeX, edgeY); ctx.lineTo(screenX, 285); ctx.stroke();
+
+        ctx.strokeStyle = "#eab308"; // From M2
+        ctx.beginPath(); ctx.moveTo(M2_end.x, M2_end.y); ctx.lineTo(screenX, 385); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(edgeX, edgeY); ctx.lineTo(screenX, 185); ctx.stroke();
         ctx.restore();
 
-        // 3. Draw Mirrors M1 and M2
+        // 3. Draw Mirrors M1 and M2 with Distinct High-Contrast Glass Plates
+        drawMirrorPlate(edgeX, edgeY, angleM1, mirrorLen, mirrorThickness, "Miroir M₁", true);
+        drawMirrorPlate(edgeX, edgeY, angleM2, mirrorLen, mirrorThickness, "Miroir M₂", false);
+
+        // 4. Arête Commune O & Angle alpha Arc
         ctx.save();
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = "#cbd5e1";
-        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
-        ctx.shadowBlur = 6;
-
-        // Mirror M1
+        // Golden Pivot/Hinge at O
+        ctx.fillStyle = "#f59e0b";
+        ctx.shadowColor = "#f59e0b";
+        ctx.shadowBlur = 10;
         ctx.beginPath();
-        ctx.moveTo(edgeX, edgeY);
-        ctx.lineTo(M1_end.x, M1_end.y);
-        ctx.stroke();
-
-        // Mirror M2
-        ctx.beginPath();
-        ctx.moveTo(edgeX, edgeY);
-        ctx.lineTo(M2_end.x, M2_end.y);
-        ctx.stroke();
-        ctx.shadowBlur = 0;
-
-        // Arête commune O
-        ctx.fillStyle = "#38bdf8";
-        ctx.beginPath();
-        ctx.arc(edgeX, edgeY, 4, 0, Math.PI * 2);
+        ctx.arc(edgeX, edgeY, 6, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = "#38bdf8";
-        ctx.font = "bold 11px Inter, sans-serif";
-        ctx.fillText("O (Arête)", edgeX - 25, edgeY + 18);
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
 
-        ctx.fillStyle = "#cbd5e1";
-        ctx.font = "10px Inter, sans-serif";
-        ctx.fillText("M₁", M1_end.x + 8, M1_end.y - 4);
-        ctx.fillText("M₂", M2_end.x + 8, M2_end.y + 12);
+        // Angle alpha Arc between mirrors
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(edgeX, edgeY, 45, angleM1, angleM2, false);
+        ctx.stroke();
+
+        ctx.fillStyle = "#f59e0b";
+        ctx.font = "bold 11px Inter, sans-serif";
+        ctx.fillText(`α = ${alphaArcMin.toFixed(1)}'`, edgeX + 52, edgeY + 4);
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 12px Inter, sans-serif";
+        ctx.fillText("Arête O", edgeX - 52, edgeY + 4);
         ctx.restore();
 
-        // 4. Source S Body
+        // 5. Source Primaire S
         ctx.save();
         ctx.fillStyle = "#1e293b";
         ctx.strokeStyle = "#475569";
         ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.arc(S.x, S.y, 9, 0, Math.PI * 2);
+        ctx.arc(S.x, S.y, 10, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
 
         ctx.fillStyle = baseColor.css;
         ctx.shadowColor = baseColor.css;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 12;
         ctx.beginPath();
-        ctx.arc(S.x, S.y, 4.5, 0, Math.PI * 2);
+        ctx.arc(S.x, S.y, 5, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        ctx.fillStyle = "#cbd5e1";
-        ctx.font = "bold 11px Inter, sans-serif";
-        ctx.fillText("Source S", S.x - 30, S.y - 12);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 12px Inter, sans-serif";
+        ctx.fillText("Source S", S.x - 30, S.y - 14);
+
+        // Distance R marker: OS
+        ctx.setLineDash([2, 2]);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(S.x, S.y);
+        ctx.lineTo(edgeX, edgeY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "10px Inter, sans-serif";
+        ctx.fillText(`R = ${distR_cm.toFixed(1)} cm`, (S.x + edgeX) / 2 - 20, (S.y + edgeY) / 2 - 10);
         ctx.restore();
 
-        // 5. Virtual Sources S1, S2 (if enabled)
+        // 6. Virtual Sources S1, S2 (Orthogonal Symmetry & Circle Arc)
         if (showVirtual) {
             ctx.save();
-            [S1, S2].forEach((Sv, idx) => {
-                ctx.setLineDash([2, 2]);
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(Sv.x, Sv.y);
-                ctx.lineTo(edgeX, edgeY);
-                ctx.stroke();
+            // Circle Arc radius R passing through S1, S, S2
+            ctx.setLineDash([3, 3]);
+            ctx.strokeStyle = "rgba(168, 85, 247, 0.35)";
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.arc(edgeX, edgeY, srcDistPx, Math.PI - 0.7, Math.PI + 0.7, false);
+            ctx.stroke();
 
-                ctx.fillStyle = "rgba(234, 179, 8, 0.9)";
-                ctx.shadowColor = "#eab308";
-                ctx.shadowBlur = 8;
+            // Symmetry lines S -> Mirror Plane -> S1 & S2
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.4)";
+            ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(S1.x, S1.y); ctx.stroke();
+            ctx.strokeStyle = "rgba(234, 179, 8, 0.4)";
+            ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(S2.x, S2.y); ctx.stroke();
+
+            // Distance a between S1 and S2
+            ctx.strokeStyle = "#10b981";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(S1.x, S1.y);
+            ctx.lineTo(S2.x, S2.y);
+            ctx.stroke();
+
+            ctx.fillStyle = "#10b981";
+            ctx.font = "bold 11px Inter, sans-serif";
+            ctx.fillText(`a = 2Rα = ${m.a_mm.toFixed(2)} mm`, Math.min(S1.x, S2.x) - 105, (S1.y + S2.y) / 2 + 4);
+
+            // Virtual sources points
+            [S1, S2].forEach((Sv, idx) => {
+                ctx.fillStyle = idx === 0 ? "#38bdf8" : "#eab308";
+                ctx.shadowColor = ctx.fillStyle;
+                ctx.shadowBlur = 10;
                 ctx.beginPath();
-                ctx.arc(Sv.x, Sv.y, 4, 0, Math.PI * 2);
+                ctx.arc(Sv.x, Sv.y, 4.5, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.shadowBlur = 0;
 
-                ctx.fillStyle = "#eab308";
+                ctx.fillStyle = idx === 0 ? "#38bdf8" : "#eab308";
                 ctx.font = "bold 11px Inter, sans-serif";
-                ctx.fillText(idx === 0 ? "S₁ (virtuelle)" : "S₂ (virtuelle)", Sv.x - 70, Sv.y + (idx === 0 ? -6 : 14));
+                ctx.fillText(idx === 0 ? "S₁ (Virtuelle)" : "S₂ (Virtuelle)", Sv.x - 85, Sv.y + (idx === 0 ? -8 : 16));
             });
-            ctx.setLineDash([]);
             ctx.restore();
         }
 
-        // 6. Observation Screen with Interference Fringes
+        // 7. Observation Screen
         ctx.save();
         const screenTopY = 30;
         const screenH = 410;
@@ -22832,16 +22918,15 @@ function setupMiroirFresnelSimulator() {
         ctx.fillStyle = "#94a3b8";
         ctx.font = "10px Inter, sans-serif";
         ctx.fillText("Écran d'observation", screenX + 10, screenTopY - 10);
-        ctx.fillText(`D = ${m.totalD_m.toFixed(2)} m`, screenX + screenWidth - 65, screenTopY - 10);
+        ctx.fillText(`D = R+d = ${m.totalD_m.toFixed(2)} m`, screenX + screenWidth - 110, screenTopY - 10);
 
         const mmPerPx = 0.08;
         const i_px = Math.max(4, m.interfrange_mm / mmPerPx);
         const fringeWidth = 70;
         const fringeStartX = screenX + 15;
 
-        // Interference field region on screen in pixels
-        const champTopY = 180;
-        const champBotY = 290;
+        const champTopY = 185;
+        const champBotY = 285;
 
         for (let y = screenTopY; y <= screenTopY + screenH; y += 2) {
             const dy = y - edgeY;
@@ -22873,8 +22958,7 @@ function setupMiroirFresnelSimulator() {
                     ctx.fillStyle = wavelengthToRGBA(m.wl, intensity).css;
                 }
                 ctx.fillRect(fringeStartX, y, fringeWidth, 2);
-            } else if (y >= 90 && y <= 380) {
-                // Uniform weak illumination outside overlap field
+            } else if (y >= 85 && y <= 385) {
                 ctx.fillStyle = wavelengthToRGBA(m.wl, 0.18).css;
                 ctx.fillRect(fringeStartX, y, fringeWidth, 2);
             }
