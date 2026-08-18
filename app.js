@@ -7487,7 +7487,9 @@ function setupAnimations() {
 }
 
 function initCanvasFor(type) {
-    if (type === "trous-young") {
+    if (type === "miroir-fresnel") {
+        setupMiroirFresnelSimulator();
+    } else if (type === "trous-young") {
         setupTrousYoungSimulator();
     } else if (type === "fibre-optique") {
         setupFibreOptiqueSimulator();
@@ -22380,109 +22382,91 @@ function openExamModal(examId, initialTab = "statement-tab") {
 
 
 
-// ==========================================
-// TROUS & FENTES DE YOUNG SIMULATOR
-// ==========================================
-let youngAnimInterval = null;
-let youngWavePhase = 0;
-let youngIsAnimating = true;
 
-function setupTrousYoungSimulator() {
-    const canvas = document.getElementById("canvas-trous-young");
+
+
+// ==========================================
+// MIROIRS DE FRESNEL SIMULATOR
+// ==========================================
+let fresnelAnimInterval = null;
+let fresnelWavePhase = 0;
+
+function setupMiroirFresnelSimulator() {
+    const canvas = document.getElementById("canvas-miroir-fresnel");
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
     // UI Controls
-    const sourceSelect = document.getElementById("young-source");
-    const sliderLambda = document.getElementById("young-lambda");
-    const sliderA = document.getElementById("young-a");
-    const sliderD = document.getElementById("young-D");
-    const sliderB = document.getElementById("young-b");
-    const sliderLameE = document.getElementById("young-lame-e");
-    const checkWaves = document.getElementById("young-show-waves");
-    const checkProfile = document.getElementById("young-show-profile");
-    const checkLame = document.getElementById("young-toggle-lame");
-    const btnAnimate = document.getElementById("btn-young-animate");
-    const btnReset = document.getElementById("btn-young-reset");
+    const sourceSelect = document.getElementById("fresnel-source");
+    const sliderAlpha = document.getElementById("fresnel-alpha");
+    const sliderR = document.getElementById("fresnel-R");
+    const sliderD = document.getElementById("fresnel-d");
+    const sliderLambda = document.getElementById("fresnel-lambda");
+    const checkVirtual = document.getElementById("fresnel-show-virtual");
+    const checkField = document.getElementById("fresnel-show-field");
+    const checkProfile = document.getElementById("fresnel-show-profile");
+    const btnAnimate = document.getElementById("btn-fresnel-animate");
+    const btnReset = document.getElementById("btn-fresnel-reset");
 
-    const groupLambda = document.getElementById("group-young-lambda");
-    const groupLame = document.getElementById("group-young-lame");
-    const badgeColor = document.getElementById("badge-young-color");
+    const groupLambda = document.getElementById("group-fresnel-lambda");
+    const badgeColor = document.getElementById("badge-fresnel-color");
 
-    const valLambda = document.getElementById("val-young-lambda");
-    const valA = document.getElementById("val-young-a");
-    const valD = document.getElementById("val-young-D");
-    const valB = document.getElementById("val-young-b");
-    const valLameE = document.getElementById("val-young-lame-e");
+    const valAlpha = document.getElementById("val-fresnel-alpha");
+    const valAlphaRad = document.getElementById("val-fresnel-alpha-rad");
+    const valR = document.getElementById("val-fresnel-R");
+    const valD = document.getElementById("val-fresnel-d");
+    const valLambda = document.getElementById("val-fresnel-lambda");
 
     // HUD Elements
-    const hudLambda = document.getElementById("hud-young-lambda");
-    const hudA = document.getElementById("hud-young-a");
-    const hudD = document.getElementById("hud-young-D");
-    const hudI = document.getElementById("hud-young-i");
-    const hudDelta = document.getElementById("hud-young-delta");
-    const hudP = document.getElementById("hud-young-p");
-    const hudNature = document.getElementById("hud-young-nature");
-    const hudShift = document.getElementById("hud-young-shift");
-    const theoryDiv = document.getElementById("trous-young-theory");
+    const hudAlpha = document.getElementById("hud-fresnel-alpha");
+    const hudR = document.getElementById("hud-fresnel-R");
+    const hudA = document.getElementById("hud-fresnel-a");
+    const hudD = document.getElementById("hud-fresnel-D");
+    const hudI = document.getElementById("hud-fresnel-i");
+    const hudChamp = document.getElementById("hud-fresnel-champ");
+    const hudN = document.getElementById("hud-fresnel-N");
+    const hudDelta = document.getElementById("hud-fresnel-delta");
+    const theoryDiv = document.getElementById("miroir-fresnel-theory");
 
-    if (youngAnimInterval) {
-        clearInterval(youngAnimInterval);
-        youngAnimInterval = null;
+    if (fresnelAnimInterval) {
+        clearInterval(fresnelAnimInterval);
+        fresnelAnimInterval = null;
     }
 
     // State
     let sourceType = sourceSelect ? sourceSelect.value : "laser_green";
+    let alphaArcMin = sliderAlpha ? parseFloat(sliderAlpha.value) : 5.0; // In arcminutes
+    let distR_cm = sliderR ? parseFloat(sliderR.value) : 10.0; // In cm
+    let distD_m = sliderD ? parseFloat(sliderD.value) : 1.00; // In meters
     let lambdaNm = 532.0;
-    let slitA_mm = sliderA ? parseFloat(sliderA.value) : 0.30;
-    let distD_m = sliderD ? parseFloat(sliderD.value) : 1.50;
-    let slitB_um = sliderB ? parseFloat(sliderB.value) : 40.0;
-    let lameE_um = (sliderLameE && checkLame && checkLame.checked) ? parseFloat(sliderLameE.value) : 0.0;
-    let nLame = 1.50; // glass plate index
-    let showWaves = checkWaves ? checkWaves.checked : true;
+    let showVirtual = checkVirtual ? checkVirtual.checked : true;
+    let showField = checkField ? checkField.checked : true;
     let showProfile = checkProfile ? checkProfile.checked : true;
-    let hasLame = checkLame ? checkLame.checked : false;
 
-    let cursorScreenY = 235; // Default center
+    let cursorScreenY = 235;
     let isDraggingScreen = false;
 
-    // Helper: Wavelength to RGBA
     function wavelengthToRGBA(wl, alpha = 1.0) {
         let r = 0, g = 0, b = 0;
         if (wl >= 380 && wl < 440) {
-            r = -(wl - 440) / (440 - 380);
-            g = 0.0;
-            b = 1.0;
+            r = -(wl - 440) / (440 - 380); g = 0.0; b = 1.0;
         } else if (wl >= 440 && wl < 490) {
-            r = 0.0;
-            g = (wl - 440) / (490 - 440);
-            b = 1.0;
+            r = 0.0; g = (wl - 440) / (490 - 440); b = 1.0;
         } else if (wl >= 490 && wl < 510) {
-            r = 0.0;
-            g = 1.0;
-            b = -(wl - 510) / (510 - 490);
+            r = 0.0; g = 1.0; b = -(wl - 510) / (510 - 490);
         } else if (wl >= 510 && wl < 580) {
-            r = (wl - 510) / (580 - 510);
-            g = 1.0;
-            b = 0.0;
+            r = (wl - 510) / (580 - 510); g = 1.0; b = 0.0;
         } else if (wl >= 580 && wl < 645) {
-            r = 1.0;
-            g = -(wl - 645) / (645 - 580);
-            b = 0.0;
+            r = 1.0; g = -(wl - 645) / (645 - 580); b = 0.0;
         } else if (wl >= 645 && wl <= 750) {
-            r = 1.0;
-            g = 0.0;
-            b = 0.0;
+            r = 1.0; g = 0.0; b = 0.0;
         } else {
             r = 1.0; g = 1.0; b = 1.0;
         }
 
         let factor = 1.0;
-        if (wl >= 380 && wl < 420) {
-            factor = 0.3 + 0.7 * (wl - 380) / (420 - 380);
-        } else if (wl >= 700 && wl <= 750) {
-            factor = 0.3 + 0.7 * (750 - wl) / (750 - 700);
-        }
+        if (wl >= 380 && wl < 420) factor = 0.3 + 0.7 * (wl - 380) / (420 - 380);
+        else if (wl >= 700 && wl <= 750) factor = 0.3 + 0.7 * (750 - wl) / (750 - 700);
 
         const R = Math.round(Math.max(0, Math.min(255, r * factor * 255)));
         const G = Math.round(Math.max(0, Math.min(255, g * factor * 255)));
@@ -22500,139 +22484,126 @@ function setupTrousYoungSimulator() {
         if (sourceType === "laser_violet") return 405.0;
         if (sourceType === "sodium") return 589.3;
         if (sourceType === "custom") return sliderLambda ? parseFloat(sliderLambda.value) : 532.0;
-        return 550.0; // White light center
+        return 550.0;
     }
 
-    function getInterferenceMetrics() {
+    function getFresnelMetrics() {
         const wl = getSourceLambda();
         const lambdaM = wl * 1e-9;
-        const aM = slitA_mm * 1e-3;
-        const DM = distD_m;
+        
+        // alpha in radians: 1 arcmin = (pi / (180 * 60)) rad
+        const alphaRad = (alphaArcMin / 60.0) * (Math.PI / 180.0);
+        const alphaMrad = alphaRad * 1000.0;
+
+        const RM = distR_cm * 0.01; // in meters
+        const dM = distD_m; // in meters
+        const totalD_m = RM + dM; // D = R + d
+
+        // Distance between virtual sources a = 2 * R * alpha (in meters & mm)
+        const aM = 2.0 * RM * Math.sin(alphaRad);
+        const a_mm = aM * 1000.0;
 
         // Interfrange i = lambda * D / a (in mm)
-        const interfrange_mm = (lambdaM * DM / aM) * 1e3;
+        const interfrange_mm = (lambdaM * totalD_m / aM) * 1000.0;
 
-        // Plate shift: Delta x = (n - 1) * e * D / a (in mm)
-        let deltaX_mm = 0;
-        if (hasLame && lameE_um > 0) {
-            const eM = lameE_um * 1e-6;
-            deltaX_mm = ((nLame - 1.0) * eM * DM / aM) * 1e3;
-        }
+        // Interference field width on screen L = 2 * d * alpha (in mm)
+        const champ_mm = (2.0 * dM * alphaRad * 10.0) * 1000.0 * 0.9; // realistic factor with mirror length
+        const numFringes = Math.round(champ_mm / (interfrange_mm || 0.01));
 
-        // Position of cursor relative to center (scale: 1 mm = 12 px)
-        const mmPerPixel = interfrange_mm / 32.0;
-        const cursorX_mm = (cursorScreenY - 235) * mmPerPixel;
-
-        // Path difference at cursor: delta = (a * x / D) - (n - 1) * e (in um)
-        const xM = cursorX_mm * 1e-3;
-        const opticalShiftM = (hasLame && lameE_um > 0) ? (nLame - 1.0) * lameE_um * 1e-6 : 0;
-        const deltaM = (aM * xM / DM) - opticalShiftM;
+        // Cursor path difference: delta = a * x / D
+        const mmPerPx = 0.08;
+        const cursorX_mm = (cursorScreenY - 235) * mmPerPx;
+        const deltaM = (aM * (cursorX_mm * 1e-3)) / totalD_m;
         const deltaUm = deltaM * 1e6;
-
-        // Interference order p = delta / lambda
         const orderP = deltaM / lambdaM;
-        const orderRound = Math.round(orderP);
-        const distToInteger = Math.abs(orderP - orderRound);
-        const isBright = distToInteger < 0.15;
-        const isDark = Math.abs(orderP - (Math.floor(orderP) + 0.5)) < 0.15;
-
-        let fringeNature = "Intermédiaire";
-        if (isBright) {
-            fringeNature = `Brillante (k = ${orderRound >= 0 ? '+' : ''}${orderRound})`;
-        } else if (isDark) {
-            fringeNature = `Sombre`;
-        }
 
         return {
             wl,
-            lambdaM,
+            alphaRad,
+            alphaMrad,
+            RM,
+            dM,
+            totalD_m,
+            a_mm,
             interfrange_mm,
-            deltaX_mm,
-            cursorX_mm,
+            champ_mm,
+            numFringes,
             deltaUm,
-            orderP,
-            fringeNature
+            orderP
         };
     }
 
     function updateTheory() {
         if (!theoryDiv) return;
-        const m = getInterferenceMetrics();
+        const m = getFresnelMetrics();
 
         theoryDiv.innerHTML = `
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; font-weight:700; font-size:1.15rem; color:var(--primary);">
-                <i data-lucide="book-open"></i> Principes Physiques & Formules des Trous de Young
+                <i data-lucide="book-open"></i> Principes Physiques des Miroirs de Fresnel
             </div>
 
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
-                <!-- 1. Différence de Marche -->
+                <!-- 1. Sources Virtuelles -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Différence de Marche & Déphasage</h4>
+                    <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Sources Cohérentes Virtuelles</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
-                        Pour deux sources cohérentes \\(S_1\\) et \\(S_2\\) distantes de \\(a\\), en un point \\(M(x)\\) de l'écran situé à la distance \\(D\\) :
+                        Les miroirs plans \\(M_1\\) et \\(M_2\\) d'arête \\(O\\) et d'angle \\(\\alpha\\) créent deux images virtuelles \\(S_1\\) et \\(S_2\\) de la source \\(S\\) (avec \\(OS_1 = OS_2 = R\\)) :
                     </p>
                     <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #38bdf8;">
-                        $$\\delta = d_2 - d_1 \\approx \\frac{a \\cdot x}{D} \\quad \\text{et} \\quad \\Delta \\varphi = \\frac{2\\pi \\delta}{\\lambda}$$
+                        $$\\widehat{S_1 O S_2} = 2\\alpha \\implies a = S_1 S_2 \\approx 2 R \\alpha$$
                     </div>
                 </div>
 
-                <!-- 2. Formule de Fresnel & Intensité -->
+                <!-- 2. Formule de l'Interfrange -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Formule de Fresnel & Intensité</h4>
+                    <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Interfrange \\(i\\)</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
-                        L'intensité résultante présente une modulation sinusoïdale spatiale caractéristique :
+                        La distance totale source-écran étant \\(D = R + d\\) :
                     </p>
                     <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #eab308;">
-                        $$I(x) = 2I_0 (1 + \\cos \\Delta \\varphi) = 4I_0 \\cos^2\\left(\\frac{\\pi a x}{\\lambda D}\\right)$$
+                        $$i = \\frac{\\lambda \\cdot D}{a} = \\frac{\\lambda (R + d)}{2 R \\alpha}$$
                     </div>
                 </div>
 
-                <!-- 3. Interfrange i -->
+                <!-- 3. Champ d'Interférence -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Interfrange \\(i\\)</h4>
+                    <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Champ d'Interférence</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
-                        Distance séparant deux franges brillantes (ou sombres) consécutives :
+                        Les franges ne sont visibles que dans la région de recouvrement des deux faisceaux réfléchis sur l'écran :
                     </p>
                     <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #a855f7;">
-                        $$i = \\frac{\\lambda \\cdot D}{a}$$
+                        $$N = \\frac{L_{champ}}{i} \\approx \\frac{4 R d \\alpha^2}{\\lambda (R + d)}$$
                     </div>
                 </div>
 
-                <!-- 4. Déplacement par Lame Mince -->
+                <!-- 4. Division du Front d'Onde -->
                 <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Effet d'une Lame Transparente</h4>
+                    <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Propriétés Pratiques</h4>
                     <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
-                        L'insertion d'une lame d'épaisseur \\(e\\) et d'indice \\(n\\) devant un trou décale l'ensemble des franges de :
+                        • <strong>Cohérence parfaite :</strong> \\(S_1\\) et \\(S_2\\) proviennent de la même source primaire \\(S\\).<br>
+                        • <strong>Variation de \\(\\alpha\\) :</strong> Réduire \\(\\alpha\\) élargit les franges (augmente \\(i\\)).
                     </p>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #10b981;">
-                        $$\\Delta x = \\frac{(n - 1) \\cdot e \\cdot D}{a}$$
-                    </div>
                 </div>
             </div>
 
             <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:8px; padding:10px 14px; font-size:0.86rem;">
-                <strong>📊 Paramètres actuels :</strong> \\(\\lambda = ${m.wl}\\text{ nm}\\), \\(a = ${slitA_mm.toFixed(2)}\\text{ mm}\\), \\(D = ${distD_m.toFixed(2)}\\text{ m}\\) 
-                \\(\\implies\\) Interfrange \\(i = <strong style="color:#eab308;">${m.interfrange_mm.toFixed(3)}\\text{ mm}</strong>\\). 
-                ${hasLame && lameE_um > 0 ? `Décalage par la lame (e = ${lameE_um} µm) : \\(\\Delta x = ${m.deltaX_mm.toFixed(3)}\\text{ mm}\\).` : ''}
+                <strong>📊 Données calculées :</strong> \\(\\alpha = ${alphaArcMin.toFixed(1)}' = ${m.alphaMrad.toFixed(2)}\\text{ mrad}\\), \\(a = ${m.a_mm.toFixed(3)}\\text{ mm}\\), \\(D = ${m.totalD_m.toFixed(2)}\\text{ m}\\) 
+                \\(\\implies\\) Interfrange \\(i = <strong style="color:#eab308;">${m.interfrange_mm.toFixed(3)}\\text{ mm}</strong>\\) (champ \\(L = ${m.champ_mm.toFixed(1)}\\text{ mm}\\), \\(N \\approx ${m.numFringes}\\) franges).
             </div>
         `;
 
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([theoryDiv]).catch(() => {});
-        }
-        if (window.lucide && typeof window.lucide.createIcons === "function") {
-            window.lucide.createIcons();
-        }
+        if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise([theoryDiv]).catch(() => {});
+        if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
 
     function updateHUD() {
-        const m = getInterferenceMetrics();
+        const m = getFresnelMetrics();
 
-        if (valLambda) valLambda.textContent = m.wl.toFixed(0);
-        if (valA) valA.textContent = slitA_mm.toFixed(2);
+        if (valAlpha) valAlpha.textContent = alphaArcMin.toFixed(1);
+        if (valAlphaRad) valAlphaRad.textContent = m.alphaMrad.toFixed(2);
+        if (valR) valR.textContent = distR_cm.toFixed(1);
         if (valD) valD.textContent = distD_m.toFixed(2);
-        if (valB) valB.textContent = slitB_um.toFixed(0);
-        if (valLameE) valLameE.textContent = lameE_um.toFixed(1);
+        if (valLambda) valLambda.textContent = m.wl.toFixed(0);
 
         if (badgeColor && sourceType === "custom") {
             const col = wavelengthToRGBA(m.wl);
@@ -22640,14 +22611,14 @@ function setupTrousYoungSimulator() {
             badgeColor.style.boxShadow = `0 0 8px ${col.hex}`;
         }
 
-        if (hudLambda) hudLambda.textContent = (sourceType === "white") ? "Blanche (Spectre)" : `${m.wl.toFixed(0)} nm`;
-        if (hudA) hudA.textContent = `${slitA_mm.toFixed(2)} mm`;
-        if (hudD) hudD.textContent = `${distD_m.toFixed(2)} m`;
+        if (hudAlpha) hudAlpha.textContent = `${alphaArcMin.toFixed(1)}' (${m.alphaMrad.toFixed(2)} mrad)`;
+        if (hudR) hudR.textContent = `${distR_cm.toFixed(1)} cm`;
+        if (hudA) hudA.textContent = `${m.a_mm.toFixed(2)} mm`;
+        if (hudD) hudD.textContent = `${m.totalD_m.toFixed(2)} m`;
         if (hudI) hudI.textContent = `${m.interfrange_mm.toFixed(2)} mm`;
+        if (hudChamp) hudChamp.textContent = `${m.champ_mm.toFixed(1)} mm`;
+        if (hudN) hudN.textContent = `~${m.numFringes} franges`;
         if (hudDelta) hudDelta.textContent = `${m.deltaUm.toFixed(2)} µm`;
-        if (hudP) hudP.textContent = `${m.orderP.toFixed(2)}`;
-        if (hudNature) hudNature.textContent = m.fringeNature;
-        if (hudShift) hudShift.textContent = `${m.deltaX_mm.toFixed(2)} mm`;
     }
 
     function draw() {
@@ -22656,7 +22627,7 @@ function setupTrousYoungSimulator() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // 1. Dark Background
+        // Background grid
         ctx.fillStyle = "#060913";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -22669,265 +22640,267 @@ function setupTrousYoungSimulator() {
             ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
         }
 
-        const midY = 235;
-        const barrierX = 220;
-        const screenX = 720;
-        const screenWidth = 200;
-        const m = getInterferenceMetrics();
-
-        // Slit distance in pixels on canvas
-        const slitDistPx = Math.max(16, Math.min(120, slitA_mm * 110));
-        const S1 = { x: barrierX, y: midY - slitDistPx / 2 };
-        const S2 = { x: barrierX, y: midY + slitDistPx / 2 };
-
+        const m = getFresnelMetrics();
         const baseColor = wavelengthToRGBA(m.wl);
 
-        // 2. Incident Laser Beam from Left
-        ctx.save();
-        const laserGrad = ctx.createLinearGradient(30, midY, barrierX, midY);
-        laserGrad.addColorStop(0, "rgba(56, 189, 248, 0.05)");
-        laserGrad.addColorStop(1, baseColor.css);
-        ctx.fillStyle = (sourceType === "white") ? "rgba(255,255,255,0.4)" : laserGrad;
-        ctx.fillRect(30, midY - slitDistPx / 2 - 15, barrierX - 30, slitDistPx + 30);
+        const edgeX = 330;
+        const edgeY = 235;
+        const mirrorLen = 120;
+        const screenX = 720;
+        const screenWidth = 200;
 
-        // Plane wave crests
-        ctx.strokeStyle = (sourceType === "white") ? "rgba(255,255,255,0.6)" : baseColor.css;
-        ctx.lineWidth = 1.5;
-        for (let x = 40; x < barrierX; x += 22) {
-            ctx.beginPath();
-            ctx.moveTo(x, midY - slitDistPx / 2 - 15);
-            ctx.lineTo(x, midY + slitDistPx / 2 + 15);
-            ctx.stroke();
-        }
+        // Visual angle exaggeration for clear laboratory schematic
+        const visAlpha = (alphaArcMin * 0.04) * Math.PI / 180; // visual angle
+        const mir1Angle = -visAlpha / 2;
+        const mir2Angle = visAlpha / 2;
 
-        // Source Box
-        ctx.fillStyle = "#1e293b";
-        ctx.strokeStyle = "#475569";
-        ctx.lineWidth = 2;
-        ctx.fillRect(20, midY - 30, 45, 60);
-        ctx.strokeRect(20, midY - 30, 45, 60);
+        const M1_end = { x: edgeX + Math.cos(mir1Angle) * mirrorLen, y: edgeY - Math.sin(mir1Angle) * mirrorLen };
+        const M2_end = { x: edgeX + Math.cos(mir2Angle) * mirrorLen, y: edgeY + Math.sin(mir2Angle) * mirrorLen };
 
-        ctx.fillStyle = "#cbd5e1";
-        ctx.font = "10px Inter, sans-serif";
-        ctx.fillText("Source", 24, midY - 36);
-        ctx.restore();
+        // Source S position
+        const srcDistPx = 140;
+        const srcIncAngle = 0.32; // rad
+        const S = {
+            x: edgeX - Math.cos(srcIncAngle) * srcDistPx,
+            y: edgeY - Math.sin(srcIncAngle) * srcDistPx
+        };
 
-        // 3. Barrier with Two Pinholes (Trous de Young)
-        ctx.save();
-        ctx.fillStyle = "#0f172a";
-        ctx.strokeStyle = "#334155";
-        ctx.lineWidth = 4;
+        // Virtual sources S1, S2
+        const S1 = {
+            x: edgeX - Math.cos(srcIncAngle - 2 * mir1Angle) * srcDistPx,
+            y: edgeY - Math.sin(srcIncAngle - 2 * mir1Angle) * srcDistPx
+        };
+        const S2 = {
+            x: edgeX - Math.cos(srcIncAngle - 2 * mir2Angle) * srcDistPx,
+            y: edgeY - Math.sin(srcIncAngle - 2 * mir2Angle) * srcDistPx
+        };
 
-        // Top barrier segment
-        ctx.beginPath();
-        ctx.moveTo(barrierX, 20);
-        ctx.lineTo(barrierX, S1.y - 5);
-        ctx.stroke();
-
-        // Middle barrier segment
-        ctx.beginPath();
-        ctx.moveTo(barrierX, S1.y + 5);
-        ctx.lineTo(barrierX, S2.y - 5);
-        ctx.stroke();
-
-        // Bottom barrier segment
-        ctx.beginPath();
-        ctx.moveTo(barrierX, S2.y + 5);
-        ctx.lineTo(barrierX, 450);
-        ctx.stroke();
-
-        // Glowing Pinholes S1, S2
-        [S1, S2].forEach((S, idx) => {
-            ctx.fillStyle = baseColor.css;
-            ctx.shadowColor = baseColor.css;
-            ctx.shadowBlur = 12;
-            ctx.beginPath();
-            ctx.arc(S.x, S.y, 4, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-
-            ctx.fillStyle = "#f59e0b";
-            ctx.font = "bold 11px Inter, sans-serif";
-            ctx.fillText(idx === 0 ? "S₁" : "S₂", S.x - 22, S.y + 4);
-        });
-
-        // Slit distance marker (a)
-        ctx.strokeStyle = "#f59e0b";
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(barrierX + 15, S1.y);
-        ctx.lineTo(barrierX + 15, S2.y);
-        ctx.moveTo(barrierX + 10, S1.y); ctx.lineTo(barrierX + 20, S1.y);
-        ctx.moveTo(barrierX + 10, S2.y); ctx.lineTo(barrierX + 20, S2.y);
-        ctx.stroke();
-
-        ctx.fillStyle = "#f59e0b";
-        ctx.font = "10px Inter, sans-serif";
-        ctx.fillText(`a = ${slitA_mm.toFixed(2)} mm`, barrierX + 22, midY + 4);
-
-        // Thin Glass Plate in front of S1 (if enabled)
-        if (hasLame && lameE_um > 0) {
-            ctx.fillStyle = "rgba(236, 72, 153, 0.4)";
-            ctx.strokeStyle = "#ec4899";
-            ctx.lineWidth = 1.5;
-            ctx.fillRect(barrierX + 6, S1.y - 12, 10, 24);
-            ctx.strokeRect(barrierX + 6, S1.y - 12, 10, 24);
-
-            ctx.fillStyle = "#ec4899";
-            ctx.font = "9px Inter, sans-serif";
-            ctx.fillText(`Lame (e = ${lameE_um} µm)`, barrierX + 22, S1.y - 8);
-        }
-        ctx.restore();
-
-        // 4. Circular Wavefront Ripples (2D Waves in space)
-        if (showWaves) {
+        // 1. Reflected Beams & Interference Field Polygon
+        if (showField) {
             ctx.save();
-            ctx.lineWidth = 1.2;
-            const maxR = screenX - barrierX;
-            const waveStep = 18;
+            // Beam 1 from Mirror 1
+            ctx.beginPath();
+            ctx.moveTo(edgeX, edgeY);
+            ctx.lineTo(M1_end.x, M1_end.y);
+            ctx.lineTo(screenX, 90);
+            ctx.lineTo(screenX, 290);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(56, 189, 248, 0.08)";
+            ctx.fill();
 
-            for (let r = (youngWavePhase % waveStep); r < maxR; r += waveStep) {
-                const alpha = Math.max(0.04, 0.45 * (1 - r / maxR));
+            // Beam 2 from Mirror 2
+            ctx.beginPath();
+            ctx.moveTo(edgeX, edgeY);
+            ctx.lineTo(M2_end.x, M2_end.y);
+            ctx.lineTo(screenX, 380);
+            ctx.lineTo(screenX, 180);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(234, 179, 8, 0.08)";
+            ctx.fill();
 
-                // Wave from S1
-                ctx.strokeStyle = (sourceType === "white") ? `rgba(255, 255, 255, ${alpha})` : wavelengthToRGBA(m.wl, alpha).css;
-                ctx.beginPath();
-                ctx.arc(S1.x, S1.y, r, -Math.PI / 2, Math.PI / 2);
-                ctx.stroke();
-
-                // Wave from S2
-                ctx.beginPath();
-                ctx.arc(S2.x, S2.y, r, -Math.PI / 2, Math.PI / 2);
-                ctx.stroke();
-            }
+            // Overlap Interference Field
+            ctx.beginPath();
+            ctx.moveTo(edgeX + 50, edgeY);
+            ctx.lineTo(screenX, 180);
+            ctx.lineTo(screenX, 290);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(16, 185, 129, 0.15)";
+            ctx.fill();
+            ctx.strokeStyle = "rgba(16, 185, 129, 0.4)";
+            ctx.setLineDash([3, 3]);
+            ctx.stroke();
+            ctx.setLineDash([]);
             ctx.restore();
         }
 
-        // 5. Rays to Current Cursor Point M(x)
-        const M = { x: screenX, y: cursorScreenY };
+        // 2. Incident Laser Light from S to Mirrors
         ctx.save();
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
-        ctx.setLineDash([3, 3]);
-        ctx.lineWidth = 1.2;
-
-        ctx.beginPath();
-        ctx.moveTo(S1.x, S1.y);
-        ctx.lineTo(M.x, M.y);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(S2.x, S2.y);
-        ctx.lineTo(M.x, M.y);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // Target point M
-        ctx.fillStyle = "#ec4899";
-        ctx.shadowColor = "#ec4899";
+        ctx.strokeStyle = baseColor.css;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = baseColor.css;
         ctx.shadowBlur = 8;
+
+        // Rays to mirror 1 and mirror 2
+        ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(edgeX, edgeY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(M1_end.x, M1_end.y); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(S.x, S.y); ctx.lineTo(M2_end.x, M2_end.y); ctx.stroke();
+
+        // Reflected boundary rays
+        ctx.beginPath(); ctx.moveTo(M1_end.x, M1_end.y); ctx.lineTo(screenX, 90); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(edgeX, edgeY); ctx.lineTo(screenX, 290); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(M2_end.x, M2_end.y); ctx.lineTo(screenX, 380); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(edgeX, edgeY); ctx.lineTo(screenX, 180); ctx.stroke();
+        ctx.restore();
+
+        // 3. Draw Mirrors M1 and M2
+        ctx.save();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+        ctx.shadowBlur = 6;
+
+        // Mirror M1
         ctx.beginPath();
-        ctx.arc(M.x, M.y, 4.5, 0, Math.PI * 2);
+        ctx.moveTo(edgeX, edgeY);
+        ctx.lineTo(M1_end.x, M1_end.y);
+        ctx.stroke();
+
+        // Mirror M2
+        ctx.beginPath();
+        ctx.moveTo(edgeX, edgeY);
+        ctx.lineTo(M2_end.x, M2_end.y);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Arête commune O
+        ctx.fillStyle = "#38bdf8";
+        ctx.beginPath();
+        ctx.arc(edgeX, edgeY, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 11px Inter, sans-serif";
+        ctx.fillText("O (Arête)", edgeX - 25, edgeY + 18);
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "10px Inter, sans-serif";
+        ctx.fillText("M₁", M1_end.x + 8, M1_end.y - 4);
+        ctx.fillText("M₂", M2_end.x + 8, M2_end.y + 12);
+        ctx.restore();
+
+        // 4. Source S Body
+        ctx.save();
+        ctx.fillStyle = "#1e293b";
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(S.x, S.y, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = baseColor.css;
+        ctx.shadowColor = baseColor.css;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(S.x, S.y, 4.5, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        ctx.fillStyle = "#ec4899";
+        ctx.fillStyle = "#cbd5e1";
         ctx.font = "bold 11px Inter, sans-serif";
-        ctx.fillText(`M (δ = ${m.deltaUm.toFixed(2)} µm, p = ${m.orderP.toFixed(2)})`, M.x - 180, M.y - 8);
+        ctx.fillText("Source S", S.x - 30, S.y - 12);
         ctx.restore();
 
-        // 6. Observation Screen (Franges d'interférence 2D)
+        // 5. Virtual Sources S1, S2 (if enabled)
+        if (showVirtual) {
+            ctx.save();
+            [S1, S2].forEach((Sv, idx) => {
+                ctx.setLineDash([2, 2]);
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(Sv.x, Sv.y);
+                ctx.lineTo(edgeX, edgeY);
+                ctx.stroke();
+
+                ctx.fillStyle = "rgba(234, 179, 8, 0.9)";
+                ctx.shadowColor = "#eab308";
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                ctx.arc(Sv.x, Sv.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = "#eab308";
+                ctx.font = "bold 11px Inter, sans-serif";
+                ctx.fillText(idx === 0 ? "S₁ (virtuelle)" : "S₂ (virtuelle)", Sv.x - 70, Sv.y + (idx === 0 ? -6 : 14));
+            });
+            ctx.setLineDash([]);
+            ctx.restore();
+        }
+
+        // 6. Observation Screen with Interference Fringes
         ctx.save();
         const screenTopY = 30;
         const screenH = 410;
 
-        // Screen frame
         ctx.fillStyle = "#020617";
         ctx.strokeStyle = "#475569";
         ctx.lineWidth = 2;
         ctx.fillRect(screenX, screenTopY, screenWidth, screenH);
         ctx.strokeRect(screenX, screenTopY, screenWidth, screenH);
 
-        // Screen Banner
         ctx.fillStyle = "#94a3b8";
         ctx.font = "10px Inter, sans-serif";
         ctx.fillText("Écran d'observation", screenX + 10, screenTopY - 10);
-        ctx.fillText(`D = ${distD_m.toFixed(2)} m`, screenX + screenWidth - 65, screenTopY - 10);
+        ctx.fillText(`D = ${m.totalD_m.toFixed(2)} m`, screenX + screenWidth - 65, screenTopY - 10);
 
-        // Interfrange in screen pixels: i_px = (i_mm / mmPerPixel)
-        const mmPerPx = 0.08; // scale
+        const mmPerPx = 0.08;
         const i_px = Math.max(4, m.interfrange_mm / mmPerPx);
-        const shift_px = m.deltaX_mm / mmPerPx;
-
-        // Draw horizontal interference fringes strip
         const fringeWidth = 70;
         const fringeStartX = screenX + 15;
 
+        // Interference field region on screen in pixels
+        const champTopY = 180;
+        const champBotY = 290;
+
         for (let y = screenTopY; y <= screenTopY + screenH; y += 2) {
-            const dy = (y - midY) - shift_px;
-            const phi = 2 * Math.PI * (dy / i_px);
+            const dy = y - edgeY;
+            const inField = (y >= champTopY && y <= champBotY);
 
-            // Diffraction envelope (sinc)
-            const uDiff = Math.PI * (slitB_um / 1000) * (dy * mmPerPx) / (m.wl * 1e-6 * distD_m * 1000);
-            const sincVal = (Math.abs(uDiff) < 0.001) ? 1.0 : (Math.sin(uDiff) / uDiff);
-            const env = sincVal * sincVal;
-
-            if (sourceType === "white") {
-                // Multi-wavelength summation for White Light fringes
-                let totalR = 0, totalG = 0, totalB = 0;
-                for (let wl = 400; wl <= 700; wl += 20) {
-                    const i_wl_px = (wl * 1e-9 * distD_m / (slitA_mm * 1e-3)) * 1e3 / mmPerPx;
-                    const phi_wl = 2 * Math.PI * (dy / i_wl_px);
-                    const intensity_wl = Math.pow(Math.cos(phi_wl / 2), 2) * env;
-                    const col = wavelengthToRGBA(wl, 1.0);
-                    totalR += col.r * intensity_wl;
-                    totalG += col.g * intensity_wl;
-                    totalB += col.b * intensity_wl;
+            if (inField) {
+                const phi = 2 * Math.PI * (dy / i_px);
+                if (sourceType === "white") {
+                    let totalR = 0, totalG = 0, totalB = 0;
+                    for (let wl = 400; wl <= 700; wl += 20) {
+                        const i_wl_px = (wl * 1e-9 * m.totalD_m / (m.a_mm * 1e-3)) * 1e3 / mmPerPx;
+                        const phi_wl = 2 * Math.PI * (dy / i_wl_px);
+                        const intensity_wl = Math.pow(Math.cos(phi_wl / 2), 2);
+                        const col = wavelengthToRGBA(wl, 1.0);
+                        totalR += col.r * intensity_wl;
+                        totalG += col.g * intensity_wl;
+                        totalB += col.b * intensity_wl;
+                    }
+                    const nWl = 16;
+                    ctx.fillStyle = `rgb(${Math.min(255, Math.round(totalR / nWl * 1.8))}, ${Math.min(255, Math.round(totalG / nWl * 1.8))}, ${Math.min(255, Math.round(totalB / nWl * 1.8))})`;
+                } else if (sourceType === "sodium") {
+                    const i_na1 = (589.0e-9 * m.totalD_m / (m.a_mm * 1e-3)) * 1e3 / mmPerPx;
+                    const i_na2 = (589.6e-9 * m.totalD_m / (m.a_mm * 1e-3)) * 1e3 / mmPerPx;
+                    const int1 = Math.pow(Math.cos(Math.PI * dy / i_na1), 2);
+                    const int2 = Math.pow(Math.cos(Math.PI * dy / i_na2), 2);
+                    ctx.fillStyle = `rgba(234, 179, 8, ${(int1 + int2) / 2})`;
+                } else {
+                    const intensity = Math.pow(Math.cos(phi / 2), 2);
+                    ctx.fillStyle = wavelengthToRGBA(m.wl, intensity).css;
                 }
-                const nWl = 16;
-                const rInt = Math.min(255, Math.round(totalR / nWl * 1.8));
-                const gInt = Math.min(255, Math.round(totalG / nWl * 1.8));
-                const bInt = Math.min(255, Math.round(totalB / nWl * 1.8));
-
-                ctx.fillStyle = `rgb(${rInt}, ${gInt}, ${bInt})`;
                 ctx.fillRect(fringeStartX, y, fringeWidth, 2);
-            } else if (sourceType === "sodium") {
-                // Sodium doublet beats
-                const i_na1 = (589.0e-9 * distD_m / (slitA_mm * 1e-3)) * 1e3 / mmPerPx;
-                const i_na2 = (589.6e-9 * distD_m / (slitA_mm * 1e-3)) * 1e3 / mmPerPx;
-                const int1 = Math.pow(Math.cos(Math.PI * dy / i_na1), 2);
-                const int2 = Math.pow(Math.cos(Math.PI * dy / i_na2), 2);
-                const combinedInt = (int1 + int2) / 2 * env;
-
-                ctx.fillStyle = `rgba(234, 179, 8, ${combinedInt})`;
-                ctx.fillRect(fringeStartX, y, fringeWidth, 2);
-            } else {
-                // Monochromatic Laser Fringes
-                const intensity = Math.pow(Math.cos(phi / 2), 2) * env;
-                ctx.fillStyle = wavelengthToRGBA(m.wl, intensity).css;
+            } else if (y >= 90 && y <= 380) {
+                // Uniform weak illumination outside overlap field
+                ctx.fillStyle = wavelengthToRGBA(m.wl, 0.18).css;
                 ctx.fillRect(fringeStartX, y, fringeWidth, 2);
             }
         }
 
-        // Draw Central Fringe Reference line
-        ctx.strokeStyle = "rgba(234, 179, 8, 0.7)";
+        // Champ limits markers
+        ctx.strokeStyle = "#10b981";
         ctx.lineWidth = 1;
-        ctx.setLineDash([2, 2]);
+        ctx.setLineDash([3, 3]);
         ctx.beginPath();
-        ctx.moveTo(fringeStartX, midY + shift_px);
-        ctx.lineTo(fringeStartX + fringeWidth + 10, midY + shift_px);
+        ctx.moveTo(fringeStartX, champTopY); ctx.lineTo(fringeStartX + fringeWidth + 10, champTopY);
+        ctx.moveTo(fringeStartX, champBotY); ctx.lineTo(fringeStartX + fringeWidth + 10, champBotY);
         ctx.stroke();
         ctx.setLineDash([]);
 
-        ctx.fillStyle = "#eab308";
+        ctx.fillStyle = "#10b981";
         ctx.font = "9px Inter, sans-serif";
-        ctx.fillText("k = 0", fringeStartX + fringeWidth + 14, midY + shift_px + 3);
+        ctx.fillText("Limite Champ", fringeStartX + fringeWidth + 12, champTopY + 3);
+        ctx.fillText("Limite Champ", fringeStartX + fringeWidth + 12, champBotY + 3);
 
-        // Interfrange dimension marker on screen
-        if (i_px > 10) {
-            ctx.strokeStyle = "#38bdf8";
+        // Interfrange ruler
+        if (i_px > 8) {
+            ctx.strokeStyle = "#eab308";
             ctx.lineWidth = 1.2;
             const dimX = fringeStartX - 10;
-            const y0 = midY + shift_px;
+            const y0 = edgeY;
             const y1 = y0 + i_px;
             ctx.beginPath();
             ctx.moveTo(dimX, y0); ctx.lineTo(dimX, y1);
@@ -22935,29 +22908,25 @@ function setupTrousYoungSimulator() {
             ctx.moveTo(dimX - 4, y1); ctx.lineTo(dimX + 4, y1);
             ctx.stroke();
 
-            ctx.fillStyle = "#38bdf8";
+            ctx.fillStyle = "#eab308";
             ctx.font = "10px Inter, sans-serif";
             ctx.fillText(`i = ${m.interfrange_mm.toFixed(2)} mm`, dimX - 75, (y0 + y1) / 2 + 3);
         }
 
-        // 7. Profile Curve I(x) plotted on the right side of the screen
+        // Profile Curve I(x)
         if (showProfile) {
-            const plotStartX = fringeStartX + fringeWidth + 30;
-            const plotW = 75;
+            const plotStartX = fringeStartX + fringeWidth + 35;
+            const plotW = 70;
 
             ctx.strokeStyle = "#38bdf8";
             ctx.lineWidth = 1.5;
             ctx.beginPath();
 
             let plotStarted = false;
-            for (let y = screenTopY; y <= screenTopY + screenH; y += 2) {
-                const dy = (y - midY) - shift_px;
+            for (let y = champTopY; y <= champBotY; y += 2) {
+                const dy = y - edgeY;
                 const phi = 2 * Math.PI * (dy / i_px);
-                const uDiff = Math.PI * (slitB_um / 1000) * (dy * mmPerPx) / (m.wl * 1e-6 * distD_m * 1000);
-                const sincVal = (Math.abs(uDiff) < 0.001) ? 1.0 : (Math.sin(uDiff) / uDiff);
-                const env = sincVal * sincVal;
-                const intensity = Math.pow(Math.cos(phi / 2), 2) * env;
-
+                const intensity = Math.pow(Math.cos(phi / 2), 2);
                 const curX = plotStartX + intensity * plotW;
                 if (!plotStarted) {
                     ctx.moveTo(curX, y);
@@ -22968,7 +22937,6 @@ function setupTrousYoungSimulator() {
             }
             ctx.stroke();
 
-            // Baseline for plot
             ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
             ctx.beginPath();
             ctx.moveTo(plotStartX, screenTopY);
@@ -22977,8 +22945,22 @@ function setupTrousYoungSimulator() {
 
             ctx.fillStyle = "#94a3b8";
             ctx.font = "9px Inter, sans-serif";
-            ctx.fillText("I(x)", plotStartX + 20, screenTopY + 12);
+            ctx.fillText("I(x)", plotStartX + 18, screenTopY + 12);
         }
+
+        // Interactive Cursor M(x)
+        const M = { x: screenX, y: cursorScreenY };
+        ctx.fillStyle = "#ec4899";
+        ctx.shadowColor = "#ec4899";
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(M.x, M.y, 4.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = "#ec4899";
+        ctx.font = "bold 11px Inter, sans-serif";
+        ctx.fillText(`M (δ = ${m.deltaUm.toFixed(2)} µm, p = ${m.orderP.toFixed(2)})`, M.x - 175, M.y - 8);
 
         ctx.restore();
     }
@@ -22989,26 +22971,25 @@ function setupTrousYoungSimulator() {
         draw();
     }
 
-    // Connect UI Events
+    // Connect Events
     if (sourceSelect) {
         sourceSelect.onchange = () => {
             sourceType = sourceSelect.value;
-            if (groupLambda) {
-                groupLambda.style.display = (sourceType === "custom") ? "flex" : "none";
-            }
+            if (groupLambda) groupLambda.style.display = (sourceType === "custom") ? "flex" : "none";
             updateCalculations();
         };
     }
 
-    if (sliderLambda) {
-        sliderLambda.oninput = () => {
+    if (sliderAlpha) {
+        sliderAlpha.oninput = (e) => {
+            alphaArcMin = parseFloat(e.target.value);
             updateCalculations();
         };
     }
 
-    if (sliderA) {
-        sliderA.oninput = (e) => {
-            slitA_mm = parseFloat(e.target.value);
+    if (sliderR) {
+        sliderR.oninput = (e) => {
+            distR_cm = parseFloat(e.target.value);
             updateCalculations();
         };
     }
@@ -23020,23 +23001,22 @@ function setupTrousYoungSimulator() {
         };
     }
 
-    if (sliderB) {
-        sliderB.oninput = (e) => {
-            slitB_um = parseFloat(e.target.value);
+    if (sliderLambda) {
+        sliderLambda.oninput = () => {
             updateCalculations();
         };
     }
 
-    if (sliderLameE) {
-        sliderLameE.oninput = (e) => {
-            lameE_um = parseFloat(e.target.value);
-            updateCalculations();
+    if (checkVirtual) {
+        checkVirtual.onchange = (e) => {
+            showVirtual = e.target.checked;
+            draw();
         };
     }
 
-    if (checkWaves) {
-        checkWaves.onchange = (e) => {
-            showWaves = e.target.checked;
+    if (checkField) {
+        checkField.onchange = (e) => {
+            showField = e.target.checked;
             draw();
         };
     }
@@ -23048,62 +23028,43 @@ function setupTrousYoungSimulator() {
         };
     }
 
-    if (checkLame) {
-        checkLame.onchange = (e) => {
-            hasLame = e.target.checked;
-            if (groupLame) {
-                groupLame.style.display = hasLame ? "flex" : "none";
-            }
-            if (!hasLame) lameE_um = 0;
-            updateCalculations();
-        };
-    }
-
     if (btnReset) {
         btnReset.onclick = () => {
             sourceType = "laser_green";
-            slitA_mm = 0.30;
-            distD_m = 1.50;
-            slitB_um = 40.0;
-            lameE_um = 0.0;
-            hasLame = false;
-
+            alphaArcMin = 5.0;
+            distR_cm = 10.0;
+            distD_m = 1.00;
             if (sourceSelect) sourceSelect.value = sourceType;
-            if (sliderA) sliderA.value = slitA_mm;
+            if (sliderAlpha) sliderAlpha.value = alphaArcMin;
+            if (sliderR) sliderR.value = distR_cm;
             if (sliderD) sliderD.value = distD_m;
-            if (sliderB) sliderB.value = slitB_um;
-            if (sliderLameE) sliderLameE.value = lameE_um;
-            if (checkLame) checkLame.checked = false;
-            if (groupLame) groupLame.style.display = "none";
             if (groupLambda) groupLambda.style.display = "none";
-
             cursorScreenY = 235;
 
-            if (youngAnimInterval) {
-                clearInterval(youngAnimInterval);
-                youngAnimInterval = null;
-                if (btnAnimate) btnAnimate.innerHTML = '<i data-lucide="play"></i> Animation Onde';
+            if (fresnelAnimInterval) {
+                clearInterval(fresnelAnimInterval);
+                fresnelAnimInterval = null;
+                if (btnAnimate) btnAnimate.innerHTML = '<i data-lucide="play"></i> Animation Faisceaux';
             }
-
             updateCalculations();
         };
     }
 
     if (btnAnimate) {
         btnAnimate.onclick = () => {
-            if (youngAnimInterval) {
-                clearInterval(youngAnimInterval);
-                youngAnimInterval = null;
-                btnAnimate.innerHTML = '<i data-lucide="play"></i> Animation Onde';
+            if (fresnelAnimInterval) {
+                clearInterval(fresnelAnimInterval);
+                fresnelAnimInterval = null;
+                btnAnimate.innerHTML = '<i data-lucide="play"></i> Animation Faisceaux';
                 btnAnimate.classList.remove("btn-primary");
                 btnAnimate.classList.add("btn-secondary");
             } else {
-                btnAnimate.innerHTML = '<i data-lucide="pause"></i> Arrêter Onde';
+                btnAnimate.innerHTML = '<i data-lucide="pause"></i> Arrêter Animation';
                 btnAnimate.classList.remove("btn-secondary");
                 btnAnimate.classList.add("btn-primary");
 
-                youngAnimInterval = setInterval(() => {
-                    youngWavePhase += 1.2;
+                fresnelAnimInterval = setInterval(() => {
+                    fresnelWavePhase += 1.0;
                     draw();
                 }, 30);
             }
@@ -23111,7 +23072,6 @@ function setupTrousYoungSimulator() {
         };
     }
 
-    // Mouse Dragging on Screen to inspect point M(x)
     function getCanvasCoords(e) {
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -23147,853 +23107,4 @@ function setupTrousYoungSimulator() {
     updateCalculations();
     requestAnimationFrame(updateCalculations);
 }
-window.setupTrousYoungSimulator = setupTrousYoungSimulator;
-
-
-
-// ==========================================
-// PRISME OPTIQUE & DISPERSION SIMULATOR
-// ==========================================
-let prismeAnimInterval = null;
-let prismeIsSweeping = false;
-let prismeSweepAngle = 0;
-
-function setupPrismeOptiqueSimulator() {
-    const canvas = document.getElementById("canvas-prisme-optique");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-
-    const sourceSelect = document.getElementById("prism-source");
-    const materialSelect = document.getElementById("prism-material");
-    const sliderI = document.getElementById("prism-i");
-    const sliderA = document.getElementById("prism-A");
-    const sliderLambda = document.getElementById("prism-lambda");
-    const sliderCustomN = document.getElementById("prism-custom-n");
-    const sliderScreen = document.getElementById("prism-screen-dist");
-    const checkAngles = document.getElementById("prism-show-angles");
-    const checkGraph = document.getElementById("prism-show-graph");
-    const btnDm = document.getElementById("btn-prism-dm");
-    const btnAnimate = document.getElementById("btn-prism-animate");
-    const btnReset = document.getElementById("btn-prism-reset");
-
-    const groupLambda = document.getElementById("group-prism-lambda");
-    const groupCustomN = document.getElementById("group-prism-custom-n");
-    const badgeColor = document.getElementById("badge-prism-color");
-
-    const valI = document.getElementById("val-prism-i");
-    const valA = document.getElementById("val-prism-A");
-    const valLambda = document.getElementById("val-prism-lambda");
-    const valCustomN = document.getElementById("val-prism-custom-n");
-    const valScreen = document.getElementById("val-prism-screen-dist");
-
-    const hudI = document.getElementById("hud-prism-i");
-    const hudR = document.getElementById("hud-prism-r");
-    const hudRprime = document.getElementById("hud-prism-rprime");
-    const hudIprime = document.getElementById("hud-prism-iprime");
-    const hudD = document.getElementById("hud-prism-D");
-    const hudDm = document.getElementById("hud-prism-Dm");
-    const hudRlim = document.getElementById("hud-prism-rlim");
-    const hudStatus = document.getElementById("hud-prism-status");
-    const theoryDiv = document.getElementById("prisme-optique-theory");
-
-    if (prismeAnimInterval) {
-        clearInterval(prismeAnimInterval);
-        prismeAnimInterval = null;
-        prismeIsSweeping = false;
-    }
-
-    const MATERIALS = {
-        flint: { name: "Verre Flint", nd: 1.620, B: 0.0080 },
-        crown: { name: "Verre Crown", nd: 1.517, B: 0.0042 },
-        flint_dense: { name: "Flint Dense (SF11)", nd: 1.755, B: 0.0135 },
-        quartz: { name: "Silice Fondue (Quartz)", nd: 1.458, B: 0.0035 },
-        diamant: { name: "Diamant", nd: 2.417, B: 0.0440 },
-        eau: { name: "Eau liquide (20°C)", nd: 1.333, B: 0.0031 },
-        custom: { name: "Personnalisé", nd: 1.500, B: 0.0050 }
-    };
-
-    const SPECTRA = {
-        sodium: [
-            { wl: 589.0, label: "Na D2 (589.0 nm)", weight: 1.0 },
-            { wl: 589.6, label: "Na D1 (589.6 nm)", weight: 0.8 }
-        ],
-        mercure: [
-            { wl: 404.7, label: "Hg Violet (404.7 nm)", weight: 0.7 },
-            { wl: 435.8, label: "Hg Bleu (435.8 nm)", weight: 0.9 },
-            { wl: 546.1, label: "Hg Vert (546.1 nm)", weight: 1.0 },
-            { wl: 577.0, label: "Hg Jaune 1 (577.0 nm)", weight: 0.6 },
-            { wl: 579.1, label: "Hg Jaune 2 (579.1 nm)", weight: 0.65 }
-        ],
-        hydrogene: [
-            { wl: 656.3, label: "H-alpha Rouge (656.3 nm)", weight: 1.0 },
-            { wl: 486.1, label: "H-beta Cyan (486.1 nm)", weight: 0.8 },
-            { wl: 434.0, label: "H-gamma Bleu (434.0 nm)", weight: 0.5 },
-            { wl: 410.2, label: "H-delta Violet (410.2 nm)", weight: 0.35 }
-        ]
-    };
-
-    let angleI = sliderI ? parseFloat(sliderI.value) : 48.0;
-    let angleA = sliderA ? parseFloat(sliderA.value) : 60.0;
-    let sourceType = sourceSelect ? sourceSelect.value : "white";
-    let materialKey = materialSelect ? materialSelect.value : "flint";
-    let lambdaLaser = sliderLambda ? parseFloat(sliderLambda.value) : 589.0;
-    let customN = sliderCustomN ? parseFloat(sliderCustomN.value) : 1.50;
-    let screenDist = sliderScreen ? parseFloat(sliderScreen.value) : 220.0;
-    let showAngles = checkAngles ? checkAngles.checked : true;
-    let showGraph = checkGraph ? checkGraph.checked : true;
-
-    function wavelengthToRGBA(wl, alpha = 1.0) {
-        let r = 0, g = 0, b = 0;
-        if (wl >= 380 && wl < 440) {
-            r = -(wl - 440) / (440 - 380);
-            g = 0.0;
-            b = 1.0;
-        } else if (wl >= 440 && wl < 490) {
-            r = 0.0;
-            g = (wl - 440) / (490 - 440);
-            b = 1.0;
-        } else if (wl >= 490 && wl < 510) {
-            r = 0.0;
-            g = 1.0;
-            b = -(wl - 510) / (510 - 490);
-        } else if (wl >= 510 && wl < 580) {
-            r = (wl - 510) / (580 - 510);
-            g = 1.0;
-            b = 0.0;
-        } else if (wl >= 580 && wl < 645) {
-            r = 1.0;
-            g = -(wl - 645) / (645 - 580);
-            b = 0.0;
-        } else if (wl >= 645 && wl <= 750) {
-            r = 1.0;
-            g = 0.0;
-            b = 0.0;
-        } else {
-            r = 1.0; g = 1.0; b = 1.0;
-        }
-
-        let factor = 1.0;
-        if (wl >= 380 && wl < 420) {
-            factor = 0.3 + 0.7 * (wl - 380) / (420 - 380);
-        } else if (wl >= 700 && wl <= 750) {
-            factor = 0.3 + 0.7 * (750 - wl) / (750 - 700);
-        }
-
-        const R = Math.round(Math.max(0, Math.min(255, r * factor * 255)));
-        const G = Math.round(Math.max(0, Math.min(255, g * factor * 255)));
-        const B = Math.round(Math.max(0, Math.min(255, b * factor * 255)));
-        return {
-            r: R, g: G, b: B,
-            css: `rgba(${R}, ${G}, ${B}, ${alpha})`,
-            hex: `#${R.toString(16).padStart(2, '0')}${G.toString(16).padStart(2, '0')}${B.toString(16).padStart(2, '0')}`
-        };
-    }
-
-    function getIndexForWavelength(wlNm) {
-        const mat = MATERIALS[materialKey] || MATERIALS.flint;
-        let baseNd = (materialKey === "custom") ? customN : mat.nd;
-        let B = mat.B;
-        const lambdaUm = wlNm / 1000.0;
-        const lambdaDUm = 0.5893;
-        const delta = B * (1.0 / (lambdaUm * lambdaUm) - 1.0 / (lambdaDUm * lambdaDUm));
-        return Math.max(1.001, baseNd + delta);
-    }
-
-    function calcPrismRay(wlNm, incDeg, ApexDeg) {
-        const n = getIndexForWavelength(wlNm);
-        const iRad = incDeg * Math.PI / 180.0;
-        const ARad = ApexDeg * Math.PI / 180.0;
-
-        const sinR = Math.sin(iRad) / n;
-        if (Math.abs(sinR) > 1.0) return { n, tir: true, reason: "dioptre1" };
-        const rRad = Math.asin(sinR);
-        const rDeg = rRad * 180.0 / Math.PI;
-
-        const rPrimeRad = ARad - rRad;
-        const rPrimeDeg = rPrimeRad * 180.0 / Math.PI;
-
-        const rLimRad = Math.asin(1.0 / n);
-        const rLimDeg = rLimRad * 180.0 / Math.PI;
-
-        const sinIPrime = n * Math.sin(rPrimeRad);
-        if (Math.abs(sinIPrime) > 1.0 || rPrimeRad > rLimRad) {
-            return {
-                n, wl: wlNm, iDeg: incDeg, rDeg, rPrimeDeg, rLimDeg,
-                tir: true, reason: "dioptre2", iPrimeDeg: null, DDeg: null
-            };
-        }
-
-        const iPrimeRad = Math.asin(sinIPrime);
-        const iPrimeDeg = iPrimeRad * 180.0 / Math.PI;
-        const DDeg = incDeg + iPrimeDeg - ApexDeg;
-
-        let DmDeg = null, imDeg = null;
-        const sinIm = n * Math.sin(ARad / 2.0);
-        if (sinIm <= 1.0) {
-            const imRad = Math.asin(sinIm);
-            imDeg = imRad * 180.0 / Math.PI;
-            DmDeg = 2.0 * imDeg - ApexDeg;
-        }
-
-        return {
-            n, wl: wlNm, iDeg: incDeg, rDeg, rPrimeDeg, rLimDeg,
-            iPrimeDeg, DDeg, imDeg, DmDeg, iRad, rRad, rPrimeRad, iPrimeRad, ARad, tir: false
-        };
-    }
-
-    function updateTheory() {
-        if (!theoryDiv) return;
-        const refRay = calcPrismRay(589.3, angleI, angleA);
-        const nRef = getIndexForWavelength(589.3);
-        const matName = (MATERIALS[materialKey] || MATERIALS.flint).name;
-
-        const isTir = refRay.tir;
-        const DmStr = refRay.DmDeg !== null ? refRay.DmDeg.toFixed(2) + "°" : "N/A";
-        const imStr = refRay.imDeg !== null ? refRay.imDeg.toFixed(2) + "°" : "N/A";
-        const DStr = refRay.DDeg !== null ? refRay.DDeg.toFixed(2) + "°" : "Réflexion Totale";
-
-        theoryDiv.innerHTML = `
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; font-weight:700; font-size:1.15rem; color:var(--primary);">
-                <i data-lucide="book-open"></i> Principes Physiques & Formules du Prisme Optique
-            </div>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Les 4 Relations du Prisme</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #38bdf8;">
-                        $$\\sin(i) = n \\sin(r) \\quad \\text{et} \\quad \\sin(i') = n \\sin(r')$$
-                        $$A = r + r' \\quad \\text{et} \\quad D = i + i' - A$$
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Minimum de Déviation (Dm)</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #eab308;">
-                        $$i = i' = i_m \\iff r = r' = \\frac{A}{2}$$
-                        $$n = \\frac{\\sin\\left(\\frac{A + D_m}{2}\\right)}{\\sin\\left(\\frac{A}{2}\\right)}$$
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Dispersion de Cauchy</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #a855f7;">
-                        $$n(\\lambda) \\approx A_c + \\frac{B_c}{\\lambda^2} \\implies D_{violet} > D_{rouge}$$
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Réflexion Totale Interne</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #10b981;">
-                        $$r' \\le r'_{lim} = \\arcsin\\left(\\frac{1}{n}\\right) \\quad \\text{pour émergence}$$
-                    </div>
-                </div>
-            </div>
-            <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:8px; padding:10px 14px; font-size:0.86rem;">
-                <strong>📊 Données en direct :</strong> Matériau = <span style="color:#38bdf8; font-weight:600;">${matName}</span> (n = ${nRef.toFixed(3)}), 
-                Angle A = ${angleA}°, Incidence i = ${angleI.toFixed(1)}°. 
-                ${isTir ? '<span style="color:#ef4444; font-weight:700;">⚠ Réflexion Totale Interne.</span>' : `Déviation D = ${DStr}, Minimum Dm = ${DmStr} pour im = ${imStr}.`}
-            </div>
-        `;
-
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([theoryDiv]).catch(() => {});
-        }
-        if (window.lucide && typeof window.lucide.createIcons === "function") {
-            window.lucide.createIcons();
-        }
-    }
-
-    function updateHUD() {
-        const refWl = (sourceType === "laser") ? lambdaLaser : 589.3;
-        const res = calcPrismRay(refWl, angleI, angleA);
-
-        if (valI) valI.textContent = angleI.toFixed(1);
-        if (valA) valA.textContent = angleA.toFixed(0);
-        if (valLambda) valLambda.textContent = lambdaLaser.toFixed(0);
-        if (valCustomN) valCustomN.textContent = customN.toFixed(2);
-        if (valScreen) valScreen.textContent = screenDist.toFixed(0);
-
-        if (badgeColor && sourceType === "laser") {
-            const colorObj = wavelengthToRGBA(lambdaLaser);
-            badgeColor.style.background = colorObj.hex;
-            badgeColor.style.boxShadow = `0 0 8px ${colorObj.hex}`;
-        }
-
-        if (hudI) hudI.textContent = `${angleI.toFixed(1)}°`;
-        if (hudR) hudR.textContent = res.rDeg !== undefined ? `${res.rDeg.toFixed(1)}°` : "--";
-        if (hudRprime) hudRprime.textContent = res.rPrimeDeg !== undefined ? `${res.rPrimeDeg.toFixed(1)}°` : "--";
-        if (hudRlim) hudRlim.textContent = res.rLimDeg !== undefined ? `${res.rLimDeg.toFixed(1)}°` : "--";
-
-        if (res.tir) {
-            if (hudIprime) hudIprime.textContent = "TIR ⚠";
-            if (hudD) hudD.textContent = "Réfléchi";
-            if (hudStatus) hudStatus.innerHTML = '<span class="prism-status-pill status-tir">Réflexion Totale</span>';
-        } else {
-            if (hudIprime) hudIprime.textContent = `${res.iPrimeDeg.toFixed(1)}°`;
-            if (hudD) hudD.textContent = `${res.DDeg.toFixed(1)}°`;
-            if (hudStatus) hudStatus.innerHTML = '<span class="prism-status-pill status-emergence">Émergence</span>';
-        }
-
-        if (hudDm) hudDm.textContent = res.DmDeg !== null ? `${res.DmDeg.toFixed(1)}°` : "--";
-    }
-
-    function draw() {
-        canvas.width = 950;
-        canvas.height = 460;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#060913";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
-        ctx.lineWidth = 1;
-        for (let x = 0; x < canvas.width; x += 40) {
-            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
-        }
-        for (let y = 0; y < canvas.height; y += 40) {
-            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
-        }
-
-        const ARad = angleA * Math.PI / 180.0;
-        const prismCenterX = 390;
-        const prismApexY = 100;
-        const prismH = 240;
-        const halfBase = prismH * Math.tan(ARad / 2.0);
-
-        const Apex = { x: prismCenterX, y: prismApexY };
-        const LeftV = { x: prismCenterX - halfBase, y: prismApexY + prismH };
-        const RightV = { x: prismCenterX + halfBase, y: prismApexY + prismH };
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.moveTo(Apex.x, Apex.y);
-        ctx.lineTo(RightV.x, RightV.y);
-        ctx.lineTo(LeftV.x, LeftV.y);
-        ctx.closePath();
-
-        const glassGrad = ctx.createLinearGradient(Apex.x, Apex.y, Apex.x, LeftV.y);
-        glassGrad.addColorStop(0, "rgba(56, 189, 248, 0.18)");
-        glassGrad.addColorStop(0.7, "rgba(99, 102, 241, 0.12)");
-        glassGrad.addColorStop(1, "rgba(14, 165, 233, 0.25)");
-        ctx.fillStyle = glassGrad;
-        ctx.fill();
-
-        ctx.strokeStyle = "rgba(186, 230, 253, 0.7)";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        ctx.fillStyle = "#38bdf8";
-        ctx.font = "bold 12px Inter, sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText(`A = ${angleA}°`, Apex.x, Apex.y + 55);
-        ctx.restore();
-
-        const t1 = 0.52;
-        const P1 = {
-            x: Apex.x * (1 - t1) + LeftV.x * t1,
-            y: Apex.y * (1 - t1) + LeftV.y * t1
-        };
-
-        const normLen = 80;
-        const normInwardAngle = ARad / 2.0;
-        const normOutwardAngle = normInwardAngle + Math.PI;
-
-        const iRad = angleI * Math.PI / 180.0;
-        const thetaIn = normInwardAngle - iRad;
-        const beamSourceLen = 220;
-        const SourcePos = {
-            x: P1.x - Math.cos(thetaIn) * beamSourceLen,
-            y: P1.y - Math.sin(thetaIn) * beamSourceLen
-        };
-
-        ctx.save();
-        ctx.fillStyle = "#1e293b";
-        ctx.strokeStyle = "#475569";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(SourcePos.x, SourcePos.y, 10, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = (sourceType === "white") ? "#ffffff" : wavelengthToRGBA(lambdaLaser).css;
-        ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(SourcePos.x, SourcePos.y, 5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        ctx.fillStyle = "#cbd5e1";
-        ctx.font = "11px Inter, sans-serif";
-        ctx.fillText("Source (Glisser pour ajuster i)", SourcePos.x - 40, SourcePos.y - 14);
-        ctx.restore();
-
-        const screenX = Math.min(canvas.width - 25, prismCenterX + 160 + screenDist);
-        const screenTopY = 80;
-        const screenHeight = 300;
-
-        let raysToTrace = [];
-        if (sourceType === "white") {
-            for (let wl = 400; wl <= 700; wl += 12) {
-                raysToTrace.push({ wl, weight: 1.0, isMain: (wl === 589) });
-            }
-        } else if (sourceType === "laser") {
-            raysToTrace.push({ wl: lambdaLaser, weight: 1.0, isMain: true });
-        } else if (SPECTRA[sourceType]) {
-            raysToTrace = SPECTRA[sourceType].map(s => ({ wl: s.wl, weight: s.weight, isMain: true, label: s.label }));
-        }
-
-        ctx.save();
-        if (sourceType === "white") {
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
-            ctx.lineWidth = 3.5;
-            ctx.shadowColor = "#ffffff";
-            ctx.shadowBlur = 8;
-            ctx.beginPath();
-            ctx.moveTo(SourcePos.x, SourcePos.y);
-            ctx.lineTo(P1.x, P1.y);
-            ctx.stroke();
-        } else {
-            const col = wavelengthToRGBA(raysToTrace[0].wl);
-            ctx.strokeStyle = col.css;
-            ctx.lineWidth = 3;
-            ctx.shadowColor = col.css;
-            ctx.shadowBlur = 10;
-            ctx.beginPath();
-            ctx.moveTo(SourcePos.x, SourcePos.y);
-            ctx.lineTo(P1.x, P1.y);
-            ctx.stroke();
-        }
-        ctx.restore();
-
-        const screenHits = [];
-        let mainEmergentRay = null;
-
-        raysToTrace.forEach(rayInfo => {
-            const sim = calcPrismRay(rayInfo.wl, angleI, angleA);
-            const colObj = wavelengthToRGBA(rayInfo.wl, (sourceType === "white") ? 0.75 : 0.95);
-
-            if (sim.tir && sim.reason === "dioptre1") return;
-
-            const thetaInside = ARad / 2.0 - sim.rRad;
-            const dxInside = Math.cos(thetaInside);
-            const dyInside = Math.sin(thetaInside);
-
-            const fx = RightV.x - Apex.x;
-            const fy = RightV.y - Apex.y;
-            const px = P1.x - Apex.x;
-            const py = P1.y - Apex.y;
-            const denom = dxInside * fy - dyInside * fx;
-            if (Math.abs(denom) < 1e-6) return;
-
-            const s = (py * fx - px * fy) / denom;
-            const P2 = { x: P1.x + s * dxInside, y: P1.y + s * dyInside };
-
-            ctx.save();
-            ctx.strokeStyle = colObj.css;
-            ctx.lineWidth = (sourceType === "white") ? 1.8 : 2.5;
-            ctx.beginPath();
-            ctx.moveTo(P1.x, P1.y);
-            ctx.lineTo(P2.x, P2.y);
-            ctx.stroke();
-            ctx.restore();
-
-            if (sim.tir) {
-                const face2Angle = Math.atan2(fy, fx);
-                const reflAngle = 2 * face2Angle - thetaInside;
-                const P_refl = { x: P2.x + Math.cos(reflAngle) * 120, y: P2.y + Math.sin(reflAngle) * 120 };
-
-                ctx.save();
-                ctx.strokeStyle = colObj.css;
-                ctx.setLineDash([2, 2]);
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(P2.x, P2.y);
-                ctx.lineTo(P_refl.x, P_refl.y);
-                ctx.stroke();
-                ctx.restore();
-            } else {
-                const thetaOut = -ARad / 2.0 + sim.iPrimeRad;
-                const dxOut = Math.cos(thetaOut);
-                const dyOut = Math.sin(thetaOut);
-
-                let endX = screenX;
-                let endY = P2.y + ((screenX - P2.x) / dxOut) * dyOut;
-
-                ctx.save();
-                ctx.strokeStyle = colObj.css;
-                ctx.lineWidth = (sourceType === "white") ? 2.0 : 3.0;
-                ctx.shadowColor = colObj.css;
-                ctx.shadowBlur = (sourceType === "white") ? 3 : 8;
-                ctx.beginPath();
-                ctx.moveTo(P2.x, P2.y);
-                ctx.lineTo(endX, endY);
-                ctx.stroke();
-                ctx.restore();
-
-                screenHits.push({ y: endY, wl: rayInfo.wl, col: colObj, label: rayInfo.label });
-
-                if (rayInfo.isMain || raysToTrace.length === 1) {
-                    mainEmergentRay = { P2, endX, endY, thetaOut, sim };
-                }
-            }
-        });
-
-        // Screen
-        ctx.save();
-        ctx.fillStyle = "#1e293b";
-        ctx.strokeStyle = "#475569";
-        ctx.lineWidth = 2;
-        ctx.fillRect(screenX, screenTopY, 14, screenHeight);
-        ctx.strokeRect(screenX, screenTopY, 14, screenHeight);
-
-        ctx.fillStyle = "#f8fafc";
-        ctx.fillRect(screenX - 2, screenTopY + 10, 4, screenHeight - 20);
-
-        if (screenHits.length > 0) {
-            if (sourceType === "white") {
-                const minY = Math.min(...screenHits.map(h => h.y));
-                const maxY = Math.max(...screenHits.map(h => h.y));
-                const hStrip = Math.max(12, maxY - minY);
-
-                const screenGrad = ctx.createLinearGradient(0, minY, 0, maxY);
-                screenHits.forEach(h => {
-                    const norm = (h.y - minY) / Math.max(1, hStrip);
-                    screenGrad.addColorStop(Math.max(0, Math.min(1, norm)), h.col.css);
-                });
-
-                ctx.fillStyle = screenGrad;
-                ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
-                ctx.shadowBlur = 12;
-                ctx.fillRect(screenX - 4, minY - 4, 8, hStrip + 8);
-                ctx.shadowBlur = 0;
-            } else {
-                screenHits.forEach(h => {
-                    ctx.fillStyle = h.col.css;
-                    ctx.shadowColor = h.col.css;
-                    ctx.shadowBlur = 10;
-                    ctx.fillRect(screenX - 5, h.y - 3, 10, 6);
-                    ctx.shadowBlur = 0;
-                });
-            }
-        }
-        ctx.restore();
-    }
-
-    function updateCalculations() {
-        updateHUD();
-        updateTheory();
-        draw();
-    }
-
-    if (sourceSelect) {
-        sourceSelect.onchange = () => {
-            sourceType = sourceSelect.value;
-            if (groupLambda) groupLambda.style.display = (sourceType === "laser") ? "flex" : "none";
-            updateCalculations();
-        };
-    }
-
-    if (materialSelect) {
-        materialSelect.onchange = () => {
-            materialKey = materialSelect.value;
-            if (groupCustomN) groupCustomN.style.display = (materialKey === "custom") ? "flex" : "none";
-            updateCalculations();
-        };
-    }
-
-    if (sliderI) sliderI.oninput = (e) => { angleI = parseFloat(e.target.value); updateCalculations(); };
-    if (sliderA) sliderA.oninput = (e) => { angleA = parseFloat(e.target.value); updateCalculations(); };
-    if (sliderLambda) sliderLambda.oninput = (e) => { lambdaLaser = parseFloat(e.target.value); updateCalculations(); };
-    if (sliderCustomN) sliderCustomN.oninput = (e) => { customN = parseFloat(e.target.value); updateCalculations(); };
-    if (sliderScreen) sliderScreen.oninput = (e) => { screenDist = parseFloat(e.target.value); updateCalculations(); };
-
-    if (btnDm) {
-        btnDm.onclick = () => {
-            const refWl = (sourceType === "laser") ? lambdaLaser : 589.3;
-            const sim = calcPrismRay(refWl, angleI, angleA);
-            if (sim.imDeg !== null) {
-                angleI = parseFloat(sim.imDeg.toFixed(1));
-                if (sliderI) sliderI.value = angleI;
-                updateCalculations();
-            }
-        };
-    }
-
-    if (btnReset) {
-        btnReset.onclick = () => {
-            angleI = 48.0; angleA = 60.0; sourceType = "white"; materialKey = "flint"; screenDist = 220.0;
-            if (sliderI) sliderI.value = angleI;
-            if (sliderA) sliderA.value = angleA;
-            if (sourceSelect) sourceSelect.value = sourceType;
-            if (materialSelect) materialSelect.value = materialKey;
-            if (sliderScreen) sliderScreen.value = screenDist;
-            updateCalculations();
-        };
-    }
-
-    updateCalculations();
-    requestAnimationFrame(updateCalculations);
-}
-window.setupPrismeOptiqueSimulator = setupPrismeOptiqueSimulator;
-
-// ==========================================
-// FIBRE OPTIQUE & GUIDAGE SIMULATOR
-// ==========================================
-let fiberAnimInterval = null;
-
-function setupFibreOptiqueSimulator() {
-    const canvas = document.getElementById("canvas-fibre-optique");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-
-    const typeSelect = document.getElementById("fiber-type");
-    const beamSelect = document.getElementById("fiber-beam-mode");
-    const sliderTheta = document.getElementById("fiber-theta0");
-    const sliderN1 = document.getElementById("fiber-n1");
-    const sliderN2 = document.getElementById("fiber-n2");
-    const sliderRadius = document.getElementById("fiber-radius");
-    const checkCone = document.getElementById("fiber-show-cone");
-    const checkAngles = document.getElementById("fiber-show-angles");
-    const checkLosses = document.getElementById("fiber-show-losses");
-    const btnThetamax = document.getElementById("btn-fiber-thetamax");
-    const btnAnimate = document.getElementById("btn-fiber-animate");
-    const btnReset = document.getElementById("btn-fiber-reset");
-    const groupRadius = document.getElementById("group-fiber-radius");
-
-    const valTheta = document.getElementById("val-fiber-theta0");
-    const valN1 = document.getElementById("val-fiber-n1");
-    const valN2 = document.getElementById("val-fiber-n2");
-    const valRadius = document.getElementById("val-fiber-radius");
-
-    const hudTheta0 = document.getElementById("hud-fiber-theta0");
-    const hudR = document.getElementById("hud-fiber-r");
-    const hudTheta = document.getElementById("hud-fiber-theta");
-    const hudThetac = document.getElementById("hud-fiber-thetac");
-    const hudON = document.getElementById("hud-fiber-on");
-    const hudThetamax = document.getElementById("hud-fiber-thetamax");
-    const hudDispersion = document.getElementById("hud-fiber-dispersion");
-    const hudStatus = document.getElementById("hud-fiber-status");
-    const theoryDiv = document.getElementById("fibre-optique-theory");
-
-    if (fiberAnimInterval) {
-        clearInterval(fiberAnimInterval);
-        fiberAnimInterval = null;
-    }
-
-    let fiberType = typeSelect ? typeSelect.value : "step";
-    let beamMode = beamSelect ? beamSelect.value : "single";
-    let theta0 = sliderTheta ? parseFloat(sliderTheta.value) : 12.0;
-    let n1 = sliderN1 ? parseFloat(sliderN1.value) : 1.500;
-    let n2 = sliderN2 ? parseFloat(sliderN2.value) : 1.460;
-    let bendRadius = sliderRadius ? parseFloat(sliderRadius.value) : 220.0;
-    let showCone = checkCone ? checkCone.checked : true;
-    let showAngles = checkAngles ? checkAngles.checked : true;
-    let showLosses = checkLosses ? checkLosses.checked : true;
-
-    function getOpticsMetrics(incDeg, nCore, nClad) {
-        if (nCore <= nClad) nCore = nClad + 0.005;
-
-        const theta0Rad = incDeg * Math.PI / 180.0;
-        const sinR = Math.sin(theta0Rad) / nCore;
-        const rRad = Math.asin(Math.max(-1, Math.min(1, sinR)));
-        const rDeg = rRad * 180.0 / Math.PI;
-
-        const thetaRad = Math.PI / 2.0 - Math.abs(rRad);
-        const thetaDeg = thetaRad * 180.0 / Math.PI;
-
-        const sinThetaC = Math.min(1.0, nClad / nCore);
-        const thetaCRad = Math.asin(sinThetaC);
-        const thetaCDeg = thetaCRad * 180.0 / Math.PI;
-
-        const onSq = Math.max(0, nCore * nCore - nClad * nClad);
-        const ON = Math.sqrt(onSq);
-        const thetaMaxRad = Math.asin(Math.min(1.0, ON));
-        const thetaMaxDeg = thetaMaxRad * 180.0 / Math.PI;
-
-        const delta = (nCore - nClad) / nCore;
-        const deltaTauNsPerKm = ((nCore * delta) / 299792458) * 1000 * 1e9;
-        const isGuided = (Math.abs(incDeg) <= thetaMaxDeg + 0.01);
-
-        return { theta0Deg: incDeg, rDeg, rRad, thetaDeg, thetaRad, thetaCDeg, thetaCRad, ON, thetaMaxDeg, thetaMaxRad, delta, deltaTauNsPerKm, isGuided };
-    }
-
-    function updateTheory() {
-        if (!theoryDiv) return;
-        const m = getOpticsMetrics(theta0, n1, n2);
-
-        theoryDiv.innerHTML = `
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; font-weight:700; font-size:1.15rem; color:var(--primary);">
-                <i data-lucide="book-open"></i> Principes Physiques & Formules de la Fibre Optique
-            </div>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Réflexion Totale Interne (RTI)</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #38bdf8;">
-                        $$\\sin(\\theta_c) = \\frac{n_2}{n_1} \\implies \\theta \\ge \\theta_c$$
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Ouverture Numérique (ON)</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #eab308;">
-                        $$ON = \\sin(\\theta_{max}) = \\sqrt{n_1^2 - n_2^2}$$
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Dispersion Intermodale</h4>
-                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #a855f7;">
-                        $$\\Delta \\tau = \\frac{L \\cdot n_1}{c} \\left(\\frac{n_1 - n_2}{n_2}\\right)$$
-                    </div>
-                </div>
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
-                    <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Pertes & Macro-Courbure</h4>
-                    <p style="font-size:0.82rem; color:#94a3b8;">La courbure réduit l'angle d'incidence local et provoque la fuite des rayons dans la gaine.</p>
-                </div>
-            </div>
-            <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:8px; padding:10px 14px; font-size:0.86rem;">
-                <strong>📊 Paramètres :</strong> \\(n_1 = ${n1.toFixed(3)}\\), \\(n_2 = ${n2.toFixed(3)}\\), \\(\\theta_c = ${m.thetaCDeg.toFixed(1)}^\\circ\\), \\(ON = ${m.ON.toFixed(3)}\\) (\\(\\theta_{max} = ${m.thetaMaxDeg.toFixed(1)}^\\circ\\)).
-            </div>
-        `;
-
-        if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise([theoryDiv]).catch(() => {});
-        if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
-    }
-
-    function updateHUD() {
-        const m = getOpticsMetrics(theta0, n1, n2);
-        if (valTheta) valTheta.textContent = theta0.toFixed(1);
-        if (valN1) valN1.textContent = n1.toFixed(3);
-        if (valN2) valN2.textContent = n2.toFixed(3);
-        if (valRadius) valRadius.textContent = bendRadius.toFixed(0);
-
-        if (hudTheta0) hudTheta0.textContent = `${theta0.toFixed(1)}°`;
-        if (hudR) hudR.textContent = `${m.rDeg.toFixed(1)}°`;
-        if (hudTheta) hudTheta.textContent = `${m.thetaDeg.toFixed(1)}°`;
-        if (hudThetac) hudThetac.textContent = `${m.thetaCDeg.toFixed(1)}°`;
-        if (hudON) hudON.textContent = m.ON.toFixed(3);
-        if (hudThetamax) hudThetamax.textContent = `${m.thetaMaxDeg.toFixed(1)}°`;
-        if (hudDispersion) hudDispersion.textContent = `${m.deltaTauNsPerKm.toFixed(0)} ns/km`;
-
-        if (hudStatus) {
-            hudStatus.innerHTML = m.isGuided ? '<span class="prism-status-pill status-emergence">Guidage Parfait (RTI)</span>' : '<span class="prism-status-pill status-tir">Pertes dans Gaine</span>';
-        }
-    }
-
-    function draw() {
-        canvas.width = 950;
-        canvas.height = 460;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#060913";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        const fiberStartX = 230;
-        const fiberEndX = 910;
-        const midY = 225;
-        let coreA = (fiberType === "single") ? 14 : 55;
-        let cladH = (fiberType === "single") ? 65 : 45;
-
-        const m = getOpticsMetrics(theta0, n1, n2);
-
-        // Draw straight core & cladding
-        ctx.save();
-        ctx.fillStyle = "rgba(15, 23, 42, 0.75)";
-        ctx.fillRect(fiberStartX, midY - coreA - cladH, fiberEndX - fiberStartX, cladH);
-        ctx.fillRect(fiberStartX, midY + coreA, fiberEndX - fiberStartX, cladH);
-
-        const coreGrad = ctx.createLinearGradient(0, midY - coreA, 0, midY + coreA);
-        coreGrad.addColorStop(0, "rgba(56, 189, 248, 0.18)");
-        coreGrad.addColorStop(0.5, "rgba(14, 165, 233, 0.35)");
-        coreGrad.addColorStop(1, "rgba(56, 189, 248, 0.18)");
-        ctx.fillStyle = coreGrad;
-        ctx.fillRect(fiberStartX, midY - coreA, fiberEndX - fiberStartX, coreA * 2);
-
-        ctx.strokeStyle = "rgba(56, 189, 248, 0.65)";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(fiberStartX, midY - coreA, fiberEndX - fiberStartX, coreA * 2);
-
-        // Entrance facet
-        ctx.strokeStyle = "#38bdf8";
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.moveTo(fiberStartX, midY - coreA - cladH);
-        ctx.lineTo(fiberStartX, midY + coreA + cladH);
-        ctx.stroke();
-
-        ctx.fillStyle = "#38bdf8";
-        ctx.font = "bold 12px Inter, sans-serif";
-        ctx.fillText(`Cœur (n₁ = ${n1.toFixed(3)})`, fiberStartX + 40, midY - 6);
-        ctx.fillStyle = "#94a3b8";
-        ctx.fillText(`Gaine (n₂ = ${n2.toFixed(3)})`, fiberStartX + 40, midY - coreA - 16);
-        ctx.restore();
-
-        // Trace ray
-        const theta0Rad = theta0 * Math.PI / 180.0;
-        const srcX = fiberStartX - Math.cos(theta0Rad) * 160;
-        const srcY = midY - Math.sin(theta0Rad) * 160;
-
-        ctx.save();
-        ctx.strokeStyle = m.isGuided ? "#38bdf8" : "#ef4444";
-        ctx.lineWidth = 2.5;
-        ctx.shadowColor = ctx.strokeStyle;
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        ctx.moveTo(srcX, srcY);
-        ctx.lineTo(fiberStartX, midY);
-
-        let curX = fiberStartX, curY = midY, slope = Math.tan(m.rRad);
-        while (curX < fiberEndX) {
-            let targetY = (slope > 0) ? (midY + coreA) : (midY - coreA);
-            let dx = (targetY - curY) / slope;
-            let nextX = curX + dx;
-            if (nextX > fiberEndX) {
-                ctx.lineTo(fiberEndX, curY + slope * (fiberEndX - curX));
-                break;
-            }
-            ctx.lineTo(nextX, targetY);
-            if (!m.isGuided) {
-                ctx.stroke();
-                ctx.setLineDash([3, 3]);
-                ctx.lineTo(nextX + 60, targetY + (slope > 0 ? 35 : -35));
-                break;
-            }
-            slope = -slope;
-            curX = nextX;
-            curY = targetY;
-        }
-        ctx.stroke();
-        ctx.restore();
-    }
-
-    function updateCalculations() {
-        updateHUD();
-        updateTheory();
-        draw();
-    }
-
-    if (typeSelect) typeSelect.onchange = () => { fiberType = typeSelect.value; updateCalculations(); };
-    if (sliderTheta) sliderTheta.oninput = (e) => { theta0 = parseFloat(e.target.value); updateCalculations(); };
-    if (sliderN1) sliderN1.oninput = (e) => { n1 = parseFloat(e.target.value); updateCalculations(); };
-    if (sliderN2) sliderN2.oninput = (e) => { n2 = parseFloat(e.target.value); updateCalculations(); };
-
-    if (btnThetamax) {
-        btnThetamax.onclick = () => {
-            const m = getOpticsMetrics(theta0, n1, n2);
-            theta0 = parseFloat(m.thetaMaxDeg.toFixed(1));
-            if (sliderTheta) sliderTheta.value = theta0;
-            updateCalculations();
-        };
-    }
-
-    if (btnReset) {
-        btnReset.onclick = () => {
-            theta0 = 12.0; n1 = 1.500; n2 = 1.460;
-            if (sliderTheta) sliderTheta.value = theta0;
-            if (sliderN1) sliderN1.value = n1;
-            if (sliderN2) sliderN2.value = n2;
-            updateCalculations();
-        };
-    }
-
-    updateCalculations();
-    requestAnimationFrame(updateCalculations);
-}
-window.setupFibreOptiqueSimulator = setupFibreOptiqueSimulator;
+window.setupMiroirFresnelSimulator = setupMiroirFresnelSimulator;

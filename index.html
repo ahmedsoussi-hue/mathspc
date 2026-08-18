@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=2.7.3">
+    <link rel="stylesheet" href="style.css?v=2.7.4">
     <!-- MathJax for rendering Equations -->
     <script>
         window.MathJax = {
@@ -270,6 +270,22 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Miroirs de Fresnel -->
+                <div class="anim-card" data-anim="miroir-fresnel" onclick="navigateToAnim('miroir-fresnel')">
+                    <div class="anim-card-img-wrapper">
+                        <img src="assets/images/fresnel_mirrors.jpg" alt="Miroirs de Fresnel & Interférences" loading="lazy">
+                        <span class="anim-card-badge badge-optique"><i data-lucide="flip-horizontal-2"></i> Optique Ondulatoire</span>
+                    </div>
+                    <div class="anim-card-content">
+                        <h3>Miroirs de Fresnel : Interférences par Réflexion</h3>
+                        <p>Étudiez la division du front d'onde par deux miroirs plans sécants, les sources virtuelles \(S_1, S_2\), le champ d'interférence et l'interfrange.</p>
+                        <div class="anim-card-footer">
+                            <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
 
 
 
@@ -702,6 +718,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Miroirs de Fresnel -->
+                    <div class="anim-card" data-anim="miroir-fresnel" data-category="optique" data-keywords="miroirs fresnel reflexion division front onde sources virtuelles champ interference interfrange arete angle plan optique ondulatoire">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/fresnel_mirrors.jpg" alt="Miroirs de Fresnel & Interférences" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="flip-horizontal-2"></i> Optique Ondulatoire</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Miroirs de Fresnel : Interférences</h3>
+                            <p>Simulation interactive du dispositif de Fresnel : sources cohérentes virtuelles, délimitation géométrique du champ d'interférence, calcul de l'interfrange \(i = \frac{\lambda (R+d)}{2 R \alpha}\) et profils d'intensité.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
 
 
 
@@ -1493,6 +1525,126 @@
                             <!-- Injected dynamically by JS -->
                         </div>
                     </div>
+
+                    <!-- Miroirs de Fresnel Simulation -->
+                    <div class="anim-workspace" id="anim-miroir-fresnel" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                                <div>
+                                    <h3 style="display:flex; align-items:center; gap:8px;">
+                                        <i data-lucide="flip-horizontal-2" style="color:var(--primary);"></i> Miroirs de Fresnel - Interférences par Réflexion
+                                    </h3>
+                                    <p>Simulez le dispositif des miroirs de Fresnel : création des deux sources cohérentes virtuelles \(S_1\) et \(S_2\), délimitation du champ d'interférence, mesure de l'interfrange \(i = \frac{\lambda (R+d)}{2 R \alpha}\) et profil d'intensité.</p>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn btn-secondary btn-sm" id="btn-fresnel-animate"><i data-lucide="play"></i> Animation Faisceaux</button>
+                                    <button class="btn btn-secondary btn-sm" id="btn-fresnel-reset"><i data-lucide="rotate-ccw"></i> Réinitialiser</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canvas container -->
+                        <div class="canvas-container" style="position: relative; background: #060913; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
+                            <canvas id="canvas-miroir-fresnel" width="950" height="470"></canvas>
+                        </div>
+
+                        <!-- Live Measurements HUD Cards -->
+                        <div class="prism-hud-grid" id="fresnel-hud-grid">
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Angle des miroirs \(\alpha\)</div>
+                                <div id="hud-fresnel-alpha" class="prism-hud-value" style="color: #f59e0b;">5.0' (1.45 mrad)</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Distance Source \(R = OS\)</div>
+                                <div id="hud-fresnel-R" class="prism-hud-value" style="color: #38bdf8;">10.0 cm</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Écartement \(a = S_1 S_2\)</div>
+                                <div id="hud-fresnel-a" class="prism-hud-value" style="color: #10b981;">0.29 mm</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Distance Écran \(D = R+d\)</div>
+                                <div id="hud-fresnel-D" class="prism-hud-value" style="color: #a855f7;">1.10 m</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Interfrange \(i\)</div>
+                                <div id="hud-fresnel-i" class="prism-hud-value" style="color: #eab308;">2.01 mm</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Champ d'interférence \(L\)</div>
+                                <div id="hud-fresnel-champ" class="prism-hud-value" style="color: #38bdf8;">26.2 mm</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Nombre de franges \(N\)</div>
+                                <div id="hud-fresnel-N" class="prism-hud-value" style="color: #ec4899;">~13 franges</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Différence \(\delta(x_0)\)</div>
+                                <div id="hud-fresnel-delta" class="prism-hud-value" style="color: #cbd5e1;">0.00 \(\mu\)m</div>
+                            </div>
+                        </div>
+
+                        <!-- Workspace Controls -->
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));">
+                            <!-- Source Lumineuse -->
+                            <div class="control-group">
+                                <label for="fresnel-source"><i data-lucide="sun"></i> Source Lumineuse :</label>
+                                <select id="fresnel-source" class="focometrie-select">
+                                    <option value="laser_green">Laser Vert (532 nm - Nd:YAG)</option>
+                                    <option value="laser_red">Laser Rouge (632.8 nm - He-Ne)</option>
+                                    <option value="laser_violet">Laser Violet / Bleu (405 nm)</option>
+                                    <option value="white">Lumière Blanche (Spectre continu)</option>
+                                    <option value="sodium">Lampe Sodium (Doublet 589.0 / 589.6 nm)</option>
+                                    <option value="custom">Laser Réglable (\(\lambda\) variable)</option>
+                                </select>
+                            </div>
+
+                            <!-- Angle alpha entre les miroirs -->
+                            <div class="control-group" id="group-fresnel-alpha">
+                                <label for="fresnel-alpha">Angle miroirs \(\alpha\) : <span id="val-fresnel-alpha" style="font-weight:700; color:var(--primary);">5.0</span>' (<span id="val-fresnel-alpha-rad">1.45</span> mrad)</label>
+                                <input type="range" id="fresnel-alpha" min="1.0" max="15.0" step="0.2" value="5.0">
+                            </div>
+
+                            <!-- Distance Source-Arête R -->
+                            <div class="control-group" id="group-fresnel-R">
+                                <label for="fresnel-R">Distance Source \(R = OS\) : <span id="val-fresnel-R" style="font-weight:700; color:var(--secondary);">10.0</span> cm</label>
+                                <input type="range" id="fresnel-R" min="4.0" max="25.0" step="0.5" value="10.0">
+                            </div>
+
+                            <!-- Distance Arête-Écran d -->
+                            <div class="control-group" id="group-fresnel-d">
+                                <label for="fresnel-d">Distance Arête-Écran \(d\) : <span id="val-fresnel-d" style="font-weight:700; color:#10b981;">1.00</span> m</label>
+                                <input type="range" id="fresnel-d" min="0.40" max="2.50" step="0.05" value="1.00">
+                            </div>
+
+                            <!-- Longueur d'onde custom -->
+                            <div class="control-group" id="group-fresnel-lambda" style="display: none;">
+                                <label for="fresnel-lambda">Longueur d'onde \(\lambda\) : <span id="val-fresnel-lambda" style="font-weight:700;">532</span> nm <span id="badge-fresnel-color" style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#10b981; vertical-align:middle; margin-left:4px; box-shadow: 0 0 6px #10b981;"></span></label>
+                                <input type="range" id="fresnel-lambda" min="380" max="750" step="1" value="532">
+                            </div>
+
+                            <!-- Actions & Toggles -->
+                            <div class="control-group" style="display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+                                <div style="display:flex; gap: 10px; flex-wrap:wrap; font-size: 0.8rem; color: #94a3b8;">
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="fresnel-show-virtual" checked> Sources virtuelles \(S_1, S_2\)
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="fresnel-show-field" checked> Champ d'interférence
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="fresnel-show-profile" checked> Profil \(I(x)\)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theory Section -->
+                        <div class="workspace-theory" id="miroir-fresnel-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
 
 
 
@@ -3574,6 +3726,6 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
     </div>
 
     <!-- Script Entry -->
-    <script src="app.js?v=20260818_optique_v5"></script>
+    <script src="app.js?v=20260818_optique_v6"></script>
 </body>
 </html>
