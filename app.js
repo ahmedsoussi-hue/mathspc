@@ -22372,6 +22372,9 @@ function openExamModal(examId, initialTab = "statement-tab") {
 
 
 
+
+
+
 // ==========================================
 // PRISME OPTIQUE & DISPERSION SIMULATOR
 // ==========================================
@@ -22408,7 +22411,7 @@ function setupPrismeOptiqueSimulator() {
     const valCustomN = document.getElementById("val-prism-custom-n");
     const valScreen = document.getElementById("val-prism-screen-dist");
 
-    // HUD Value Elements
+    // HUD Elements
     const hudI = document.getElementById("hud-prism-i");
     const hudR = document.getElementById("hud-prism-r");
     const hudRprime = document.getElementById("hud-prism-rprime");
@@ -22419,14 +22422,12 @@ function setupPrismeOptiqueSimulator() {
     const hudStatus = document.getElementById("hud-prism-status");
     const theoryDiv = document.getElementById("prisme-optique-theory");
 
-    // Reset sweeping state on new setup
     if (prismeAnimInterval) {
         clearInterval(prismeAnimInterval);
         prismeAnimInterval = null;
         prismeIsSweeping = false;
     }
 
-    // Material definitions
     const MATERIALS = {
         flint: { name: "Verre Flint", nd: 1.620, B: 0.0080 },
         crown: { name: "Verre Crown", nd: 1.517, B: 0.0042 },
@@ -22437,7 +22438,6 @@ function setupPrismeOptiqueSimulator() {
         custom: { name: "Personnalisé", nd: 1.500, B: 0.0050 }
     };
 
-    // Spectral emission lines
     const SPECTRA = {
         sodium: [
             { wl: 589.0, label: "Na D2 (589.0 nm)", weight: 1.0 },
@@ -22458,7 +22458,6 @@ function setupPrismeOptiqueSimulator() {
         ]
     };
 
-    // State
     let angleI = sliderI ? parseFloat(sliderI.value) : 48.0;
     let angleA = sliderA ? parseFloat(sliderA.value) : 60.0;
     let sourceType = sourceSelect ? sourceSelect.value : "white";
@@ -22472,7 +22471,6 @@ function setupPrismeOptiqueSimulator() {
     let isDraggingRay = false;
     let isDraggingScreen = false;
 
-    // Helper: Wavelength to RGBA color
     function wavelengthToRGBA(wl, alpha = 1.0) {
         let r = 0, g = 0, b = 0;
         if (wl >= 380 && wl < 440) {
@@ -22520,7 +22518,6 @@ function setupPrismeOptiqueSimulator() {
         };
     }
 
-    // Refractive index calculation from Cauchy formula
     function getIndexForWavelength(wlNm) {
         const mat = MATERIALS[materialKey] || MATERIALS.flint;
         let baseNd = (materialKey === "custom") ? customN : mat.nd;
@@ -22531,7 +22528,6 @@ function setupPrismeOptiqueSimulator() {
         return Math.max(1.001, baseNd + delta);
     }
 
-    // Optical ray calculation
     function calcPrismRay(wlNm, incDeg, ApexDeg) {
         const n = getIndexForWavelength(wlNm);
         const iRad = incDeg * Math.PI / 180.0;
@@ -22580,7 +22576,6 @@ function setupPrismeOptiqueSimulator() {
         };
     }
 
-    // Update Theory
     function updateTheory() {
         if (!theoryDiv) return;
         const refRay = calcPrismRay(589.3, angleI, angleA);
@@ -22644,7 +22639,6 @@ function setupPrismeOptiqueSimulator() {
         }
     }
 
-    // Update HUD Cards
     function updateHUD() {
         const refWl = (sourceType === "laser") ? lambdaLaser : 589.3;
         const res = calcPrismRay(refWl, angleI, angleA);
@@ -22685,7 +22679,6 @@ function setupPrismeOptiqueSimulator() {
         }
     }
 
-    // Mini Plot D = f(i)
     function drawMiniPlot(plotX, plotY, plotW, plotH, currentI, currentD, im, Dm, nVal, ARad) {
         ctx.save();
         ctx.fillStyle = "rgba(10, 15, 29, 0.88)";
@@ -22797,14 +22790,12 @@ function setupPrismeOptiqueSimulator() {
         ctx.restore();
     }
 
-    // MAIN DRAW FUNCTION
     function draw() {
         canvas.width = 950;
         canvas.height = 460;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // 1. Background Grid
         ctx.fillStyle = "#060913";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -22817,14 +22808,12 @@ function setupPrismeOptiqueSimulator() {
             ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
         }
 
-        // Rail at bottom
         const benchY = 410;
         ctx.fillStyle = "rgba(30, 41, 59, 0.6)";
         ctx.fillRect(40, benchY, canvas.width - 80, 8);
         ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
         ctx.strokeRect(40, benchY, canvas.width - 80, 8);
 
-        // 2. Prism Coordinates & Geometry
         const ARad = angleA * Math.PI / 180.0;
         const prismCenterX = 390;
         const prismApexY = 100;
@@ -22835,7 +22824,6 @@ function setupPrismeOptiqueSimulator() {
         const LeftV = { x: prismCenterX - halfBase, y: prismApexY + prismH };
         const RightV = { x: prismCenterX + halfBase, y: prismApexY + prismH };
 
-        // Prism Glass Body
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(Apex.x, Apex.y);
@@ -22861,7 +22849,6 @@ function setupPrismeOptiqueSimulator() {
         ctx.lineTo(RightV.x, RightV.y);
         ctx.stroke();
 
-        // Apex Angle Arc & Label (A)
         ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
         ctx.lineWidth = 1.5;
         ctx.beginPath();
@@ -22874,7 +22861,6 @@ function setupPrismeOptiqueSimulator() {
         ctx.fillText(`A = ${angleA}°`, Apex.x, Apex.y + 55);
         ctx.restore();
 
-        // 3. Point P1 on Face 1
         const t1 = 0.52;
         const P1 = {
             x: Apex.x * (1 - t1) + LeftV.x * t1,
@@ -22910,7 +22896,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.restore();
         }
 
-        // 4. Source Light Setup
         const iRad = angleI * Math.PI / 180.0;
         const thetaIn = normInwardAngle - iRad;
         const beamSourceLen = 220;
@@ -22919,7 +22904,6 @@ function setupPrismeOptiqueSimulator() {
             y: P1.y - Math.sin(thetaIn) * beamSourceLen
         };
 
-        // Draw Light Source Torch
         ctx.save();
         ctx.fillStyle = "#1e293b";
         ctx.strokeStyle = "#475569";
@@ -22942,12 +22926,10 @@ function setupPrismeOptiqueSimulator() {
         ctx.fillText("Source (Glisser pour ajuster i)", SourcePos.x - 40, SourcePos.y - 14);
         ctx.restore();
 
-        // 5. Screen Position
         const screenX = Math.min(canvas.width - 25, prismCenterX + 160 + screenDist);
         const screenTopY = 80;
         const screenHeight = 300;
 
-        // 6. Ray Tracing
         let raysToTrace = [];
         if (sourceType === "white") {
             for (let wl = 400; wl <= 700; wl += 12) {
@@ -22959,7 +22941,6 @@ function setupPrismeOptiqueSimulator() {
             raysToTrace = SPECTRA[sourceType].map(s => ({ wl: s.wl, weight: s.weight, isMain: true, label: s.label }));
         }
 
-        // Draw Incident Beam
         ctx.save();
         if (sourceType === "white") {
             ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
@@ -22983,7 +22964,6 @@ function setupPrismeOptiqueSimulator() {
         }
         ctx.restore();
 
-        // Straight-through incident dashed extension
         const extendLen = 320;
         const extendEnd = {
             x: P1.x + Math.cos(thetaIn) * extendLen,
@@ -23025,7 +23005,6 @@ function setupPrismeOptiqueSimulator() {
                 y: P1.y + s * dyInside
             };
 
-            // Draw inside prism
             ctx.save();
             ctx.strokeStyle = colObj.css;
             ctx.lineWidth = (sourceType === "white") ? 1.8 : 2.5;
@@ -23036,7 +23015,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.restore();
 
             if (sim.tir) {
-                // TIR Reflection
                 const face2Angle = Math.atan2(fy, fx);
                 const reflAngle = 2 * face2Angle - thetaInside;
                 const P_refl = {
@@ -23054,7 +23032,6 @@ function setupPrismeOptiqueSimulator() {
                 ctx.stroke();
                 ctx.restore();
             } else {
-                // Emergent ray
                 const thetaOut = -ARad / 2.0 + sim.iPrimeRad;
                 const dxOut = Math.cos(thetaOut);
                 const dyOut = Math.sin(thetaOut);
@@ -23084,7 +23061,6 @@ function setupPrismeOptiqueSimulator() {
             }
         });
 
-        // 7. Draw Normals & Angles Arc
         if (mainEmergentRay && showAngles) {
             const P2 = mainEmergentRay.P2;
             const sim = mainEmergentRay.sim;
@@ -23113,7 +23089,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.fillText("Normale N2", N2_out.x + 8, N2_out.y - 4);
             ctx.restore();
 
-            // Backward extension to intersect incident ray extension
             const sinDiff = Math.sin(thetaIn - mainEmergentRay.thetaOut);
             if (Math.abs(sinDiff) > 0.01) {
                 const det = (P2.x - P1.x) * Math.sin(mainEmergentRay.thetaOut) - (P2.y - P1.y) * Math.cos(mainEmergentRay.thetaOut);
@@ -23143,7 +23118,6 @@ function setupPrismeOptiqueSimulator() {
                 ctx.restore();
             }
 
-            // Incidence Arc i
             ctx.save();
             ctx.strokeStyle = "#f59e0b";
             ctx.lineWidth = 1.5;
@@ -23154,7 +23128,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.font = "11px Inter, sans-serif";
             ctx.fillText(`i = ${angleI.toFixed(1)}°`, P1.x - 45, P1.y - 12);
 
-            // Refraction Arc r
             ctx.strokeStyle = "#38bdf8";
             ctx.beginPath();
             ctx.arc(P1.x, P1.y, 25, normInwardAngle - sim.rRad, normInwardAngle, false);
@@ -23162,7 +23135,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.fillStyle = "#38bdf8";
             ctx.fillText(`r = ${sim.rDeg.toFixed(1)}°`, P1.x + 18, P1.y + 24);
 
-            // Internal Arc r'
             ctx.strokeStyle = "#10b981";
             ctx.beginPath();
             ctx.arc(P2.x, P2.y, 25, norm2InwardAngle, norm2InwardAngle + sim.rPrimeRad, false);
@@ -23170,7 +23142,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.fillStyle = "#10b981";
             ctx.fillText(`r' = ${sim.rPrimeDeg.toFixed(1)}°`, P2.x - 38, P2.y + 22);
 
-            // Emergence Arc i'
             ctx.strokeStyle = "#ec4899";
             ctx.beginPath();
             ctx.arc(P2.x, P2.y, 30, norm2OutwardAngle, mainEmergentRay.thetaOut, false);
@@ -23180,7 +23151,6 @@ function setupPrismeOptiqueSimulator() {
             ctx.restore();
         }
 
-        // 8. Observation Screen on Right
         ctx.save();
         ctx.fillStyle = "#1e293b";
         ctx.strokeStyle = "#475569";
@@ -23241,7 +23211,6 @@ function setupPrismeOptiqueSimulator() {
         }
         ctx.restore();
 
-        // 9. Draw Mini-Graph D = f(i) in top right
         if (showGraph) {
             const plotW = 190;
             const plotH = 135;
@@ -23259,7 +23228,6 @@ function setupPrismeOptiqueSimulator() {
         draw();
     }
 
-    // Connect Event Listeners
     if (sourceSelect) {
         sourceSelect.onchange = () => {
             sourceType = sourceSelect.value;
@@ -23401,7 +23369,6 @@ function setupPrismeOptiqueSimulator() {
         };
     }
 
-    // Mouse & Touch Dragging
     function getCanvasCoords(e) {
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -23453,8 +23420,854 @@ function setupPrismeOptiqueSimulator() {
         isDraggingScreen = false;
     };
 
-    // Initial render
     updateCalculations();
     requestAnimationFrame(updateCalculations);
 }
 window.setupPrismeOptiqueSimulator = setupPrismeOptiqueSimulator;
+
+// ==========================================
+// FIBRE OPTIQUE & GUIDAGE SIMULATOR
+// ==========================================
+let fiberAnimInterval = null;
+let fiberPhotonTime = 0;
+let fiberIsFlowing = true;
+
+function setupFibreOptiqueSimulator() {
+    const canvas = document.getElementById("canvas-fibre-optique");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    // UI Controls
+    const typeSelect = document.getElementById("fiber-type");
+    const beamSelect = document.getElementById("fiber-beam-mode");
+    const sliderTheta = document.getElementById("fiber-theta0");
+    const sliderN1 = document.getElementById("fiber-n1");
+    const sliderN2 = document.getElementById("fiber-n2");
+    const sliderRadius = document.getElementById("fiber-radius");
+    const checkCone = document.getElementById("fiber-show-cone");
+    const checkAngles = document.getElementById("fiber-show-angles");
+    const checkLosses = document.getElementById("fiber-show-losses");
+    const btnThetamax = document.getElementById("btn-fiber-thetamax");
+    const btnAnimate = document.getElementById("btn-fiber-animate");
+    const btnReset = document.getElementById("btn-fiber-reset");
+
+    const groupRadius = document.getElementById("group-fiber-radius");
+
+    const valTheta = document.getElementById("val-fiber-theta0");
+    const valN1 = document.getElementById("val-fiber-n1");
+    const valN2 = document.getElementById("val-fiber-n2");
+    const valRadius = document.getElementById("val-fiber-radius");
+
+    // HUD Elements
+    const hudTheta0 = document.getElementById("hud-fiber-theta0");
+    const hudR = document.getElementById("hud-fiber-r");
+    const hudTheta = document.getElementById("hud-fiber-theta");
+    const hudThetac = document.getElementById("hud-fiber-thetac");
+    const hudON = document.getElementById("hud-fiber-on");
+    const hudThetamax = document.getElementById("hud-fiber-thetamax");
+    const hudDispersion = document.getElementById("hud-fiber-dispersion");
+    const hudStatus = document.getElementById("hud-fiber-status");
+    const theoryDiv = document.getElementById("fibre-optique-theory");
+
+    if (fiberAnimInterval) {
+        clearInterval(fiberAnimInterval);
+        fiberAnimInterval = null;
+    }
+
+    let fiberType = typeSelect ? typeSelect.value : "step";
+    let beamMode = beamSelect ? beamSelect.value : "single";
+    let theta0 = sliderTheta ? parseFloat(sliderTheta.value) : 12.0;
+    let n1 = sliderN1 ? parseFloat(sliderN1.value) : 1.500;
+    let n2 = sliderN2 ? parseFloat(sliderN2.value) : 1.460;
+    let bendRadius = sliderRadius ? parseFloat(sliderRadius.value) : 220.0;
+    let showCone = checkCone ? checkCone.checked : true;
+    let showAngles = checkAngles ? checkAngles.checked : true;
+    let showLosses = checkLosses ? checkLosses.checked : true;
+
+    let isDraggingTorch = false;
+
+    function getOpticsMetrics(incDeg, nCore, nClad) {
+        if (nCore <= nClad) {
+            nCore = nClad + 0.005;
+        }
+
+        const theta0Rad = incDeg * Math.PI / 180.0;
+        const sinR = Math.sin(theta0Rad) / nCore;
+        const rRad = Math.asin(Math.max(-1, Math.min(1, sinR)));
+        const rDeg = rRad * 180.0 / Math.PI;
+
+        const thetaRad = Math.PI / 2.0 - Math.abs(rRad);
+        const thetaDeg = thetaRad * 180.0 / Math.PI;
+
+        const sinThetaC = Math.min(1.0, nClad / nCore);
+        const thetaCRad = Math.asin(sinThetaC);
+        const thetaCDeg = thetaCRad * 180.0 / Math.PI;
+
+        const onSq = Math.max(0, nCore * nCore - nClad * nClad);
+        const ON = Math.sqrt(onSq);
+
+        const thetaMaxRad = Math.asin(Math.min(1.0, ON));
+        const thetaMaxDeg = thetaMaxRad * 180.0 / Math.PI;
+
+        const delta = (nCore - nClad) / nCore;
+        const cSpeed = 299792458;
+        const deltaTauNsPerKm = ((nCore * delta) / cSpeed) * 1000 * 1e9;
+        const isGuided = (Math.abs(incDeg) <= thetaMaxDeg + 0.01);
+
+        return {
+            theta0Deg: incDeg,
+            rDeg,
+            rRad,
+            thetaDeg,
+            thetaRad,
+            thetaCDeg,
+            thetaCRad,
+            ON,
+            thetaMaxDeg,
+            thetaMaxRad,
+            delta,
+            deltaTauNsPerKm,
+            isGuided
+        };
+    }
+
+    function updateTheory() {
+        if (!theoryDiv) return;
+        const m = getOpticsMetrics(theta0, n1, n2);
+
+        theoryDiv.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; font-weight:700; font-size:1.15rem; color:var(--primary);">
+                <i data-lucide="book-open"></i> Principes Physiques & Formules de la Fibre Optique
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Réflexion Totale Interne (RTI)</h4>
+                    <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
+                        Pour que la lumière reste confinée dans le cœur d'indice \\(n_1\\) entouré de la gaine d'indice \\(n_2 < n_1\\), l'angle d'incidence interne \\(\\theta\\) doit dépasser l'angle critique :
+                    </p>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #38bdf8;">
+                        $$\\sin(\\theta_c) = \\frac{n_2}{n_1} \\implies \\theta \\ge \\theta_c$$
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Ouverture Numérique (ON)</h4>
+                    <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
+                        L'Ouverture Numérique caractérise le pouvoir collecteur de lumière de la fibre depuis l'air (\\(n_0=1\\)) :
+                    </p>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #eab308;">
+                        $$ON = \\sin(\\theta_{max}) = \\sqrt{n_1^2 - n_2^2}$$
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Dispersion Intermodale</h4>
+                    <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
+                        Dans une fibre multimode à saut d'indice, la différence de temps de trajet entre le rayon axial et le rayon marginal crée un élargissement temporel :
+                    </p>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #a855f7;">
+                        $$\\Delta \\tau = \\frac{L \\cdot n_1}{c} \\left(\\frac{n_1 - n_2}{n_2}\\right) = \\frac{L \\cdot n_1 \\cdot \\Delta}{c}$$
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Gradient d'Indice & Pertes</h4>
+                    <p style="font-size:0.83rem; color:var(--text-secondary,#cbd5e1); margin-bottom:6px;">
+                        • <strong>Fibre GRIN :</strong> Profil parabolique \\(n(r)\\) courbant les rayons sinusoïdalement (réduit \\(\\Delta \\tau\\)).<br>
+                        • <strong>Courbure :</strong> Réduit l'angle interne local sous \\(\\theta_c\\), provoquant des fuites dans la gaine.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:8px; padding:10px 14px; font-size:0.86rem;">
+                <strong>📊 Paramètres actuels :</strong> \\(n_1 = ${n1.toFixed(3)}\\), \\(n_2 = ${n2.toFixed(3)}\\), 
+                Angle critique \\(\\theta_c = ${m.thetaCDeg.toFixed(1)}^\\circ\\), Ouverture Numérique \\(ON = ${m.ON.toFixed(3)}\\) (\\(\\theta_{max} = ${m.thetaMaxDeg.toFixed(1)}^\\circ\\)). 
+                ${m.isGuided ? '<span style="color:#10b981; font-weight:700;">✔ Guidage optimal par Réflexion Totale.</span>' : '<span style="color:#ef4444; font-weight:700;">⚠ Pertes par réfraction dans la gaine (angle hors du cône d\'acceptance).</span>'}
+            </div>
+        `;
+
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([theoryDiv]).catch(() => {});
+        }
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+        }
+    }
+
+    function updateHUD() {
+        const m = getOpticsMetrics(theta0, n1, n2);
+
+        if (valTheta) valTheta.textContent = theta0.toFixed(1);
+        if (valN1) valN1.textContent = n1.toFixed(3);
+        if (valN2) valN2.textContent = n2.toFixed(3);
+        if (valRadius) valRadius.textContent = bendRadius.toFixed(0);
+
+        if (hudTheta0) hudTheta0.textContent = `${theta0.toFixed(1)}°`;
+        if (hudR) hudR.textContent = `${m.rDeg.toFixed(1)}°`;
+        if (hudTheta) hudTheta.textContent = `${m.thetaDeg.toFixed(1)}°`;
+        if (hudThetac) hudThetac.textContent = `${m.thetaCDeg.toFixed(1)}°`;
+        if (hudON) hudON.textContent = m.ON.toFixed(3);
+        if (hudThetamax) hudThetamax.textContent = `${m.thetaMaxDeg.toFixed(1)}°`;
+        if (hudDispersion) hudDispersion.textContent = `${m.deltaTauNsPerKm.toFixed(0)} ns/km`;
+
+        if (hudStatus) {
+            if (m.isGuided) {
+                hudStatus.innerHTML = '<span class="prism-status-pill status-emergence">Guidage Parfait (RTI)</span>';
+            } else {
+                hudStatus.innerHTML = '<span class="prism-status-pill status-tir">Pertes dans Gaine</span>';
+            }
+        }
+    }
+
+    function draw() {
+        canvas.width = 950;
+        canvas.height = 460;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#060913";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        const fiberStartX = 230;
+        const fiberEndX = 910;
+        const midY = 225;
+
+        let coreA = 55;
+        let cladH = 45;
+        if (fiberType === "single") {
+            coreA = 14;
+            cladH = 65;
+        }
+
+        const m = getOpticsMetrics(theta0, n1, n2);
+
+        if (fiberType === "curved") {
+            ctx.save();
+            const bendFactor = 320 - bendRadius * 0.5;
+            const ctrlX = (fiberStartX + fiberEndX) / 2;
+            const ctrlY = midY - bendFactor;
+
+            ctx.fillStyle = "rgba(30, 41, 59, 0.4)";
+            ctx.strokeStyle = "rgba(148, 163, 184, 0.3)";
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY - coreA - cladH);
+            ctx.quadraticCurveTo(ctrlX, ctrlY - coreA - cladH, fiberEndX, midY - coreA - cladH);
+            ctx.lineTo(fiberEndX, midY - coreA);
+            ctx.quadraticCurveTo(ctrlX, ctrlY - coreA, fiberStartX, midY - coreA);
+            ctx.closePath();
+            ctx.fillStyle = "rgba(15, 23, 42, 0.7)";
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY + coreA);
+            ctx.quadraticCurveTo(ctrlX, ctrlY + coreA, fiberEndX, midY + coreA);
+            ctx.lineTo(fiberEndX, midY + coreA + cladH);
+            ctx.quadraticCurveTo(ctrlX, ctrlY + coreA + cladH, fiberStartX, midY + coreA + cladH);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY - coreA);
+            ctx.quadraticCurveTo(ctrlX, ctrlY - coreA, fiberEndX, midY - coreA);
+            ctx.lineTo(fiberEndX, midY + coreA);
+            ctx.quadraticCurveTo(ctrlX, ctrlY + coreA, fiberStartX, midY + coreA);
+            ctx.closePath();
+
+            const coreGrad = ctx.createLinearGradient(0, midY - coreA, 0, midY + coreA);
+            coreGrad.addColorStop(0, "rgba(56, 189, 248, 0.15)");
+            coreGrad.addColorStop(0.5, "rgba(14, 165, 233, 0.28)");
+            coreGrad.addColorStop(1, "rgba(56, 189, 248, 0.15)");
+            ctx.fillStyle = coreGrad;
+            ctx.fill();
+
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.6)";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY - coreA - cladH);
+            ctx.lineTo(fiberStartX, midY + coreA + cladH);
+            ctx.stroke();
+
+            ctx.restore();
+        } else {
+            ctx.save();
+
+            ctx.fillStyle = "rgba(15, 23, 42, 0.75)";
+            ctx.fillRect(fiberStartX, midY - coreA - cladH, fiberEndX - fiberStartX, cladH);
+            ctx.strokeStyle = "rgba(148, 163, 184, 0.3)";
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(fiberStartX, midY - coreA - cladH, fiberEndX - fiberStartX, cladH);
+
+            ctx.fillRect(fiberStartX, midY + coreA, fiberEndX - fiberStartX, cladH);
+            ctx.strokeRect(fiberStartX, midY + coreA, fiberEndX - fiberStartX, cladH);
+
+            const coreGrad = ctx.createLinearGradient(0, midY - coreA, 0, midY + coreA);
+            if (fiberType === "grin") {
+                coreGrad.addColorStop(0, "rgba(56, 189, 248, 0.08)");
+                coreGrad.addColorStop(0.5, "rgba(14, 165, 233, 0.4)");
+                coreGrad.addColorStop(1, "rgba(56, 189, 248, 0.08)");
+            } else {
+                coreGrad.addColorStop(0, "rgba(56, 189, 248, 0.18)");
+                coreGrad.addColorStop(0.5, "rgba(99, 102, 241, 0.12)");
+                coreGrad.addColorStop(1, "rgba(56, 189, 248, 0.18)");
+            }
+            ctx.fillStyle = coreGrad;
+            ctx.fillRect(fiberStartX, midY - coreA, fiberEndX - fiberStartX, coreA * 2);
+
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.65)";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY - coreA);
+            ctx.lineTo(fiberEndX, midY - coreA);
+            ctx.moveTo(fiberStartX, midY + coreA);
+            ctx.lineTo(fiberEndX, midY + coreA);
+            ctx.stroke();
+
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX - 140, midY);
+            ctx.lineTo(fiberEndX + 20, midY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY - coreA - cladH);
+            ctx.lineTo(fiberStartX, midY + coreA + cladH);
+            ctx.stroke();
+
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "11px Inter, sans-serif";
+            ctx.fillText(`Gaine (n2 = ${n2.toFixed(3)})`, fiberStartX + 40, midY - coreA - 16);
+            ctx.fillText(`Gaine (n2 = ${n2.toFixed(3)})`, fiberStartX + 40, midY + coreA + 28);
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = "bold 12px Inter, sans-serif";
+            ctx.fillText(`Cœur (n1 = ${n1.toFixed(3)})`, fiberStartX + 40, midY - 6);
+
+            ctx.restore();
+        }
+
+        if (showCone && fiberType !== "curved") {
+            ctx.save();
+            const coneLen = 140;
+            const coneHalfAngle = m.thetaMaxRad;
+            const topY = midY - Math.tan(coneHalfAngle) * coneLen;
+            const botY = midY + Math.tan(coneHalfAngle) * coneLen;
+
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX, midY);
+            ctx.lineTo(fiberStartX - coneLen, topY);
+            ctx.lineTo(fiberStartX - coneLen, botY);
+            ctx.closePath();
+
+            const coneGrad = ctx.createLinearGradient(fiberStartX - coneLen, 0, fiberStartX, 0);
+            coneGrad.addColorStop(0, "rgba(234, 179, 8, 0.02)");
+            coneGrad.addColorStop(1, "rgba(234, 179, 8, 0.22)");
+            ctx.fillStyle = coneGrad;
+            ctx.fill();
+
+            ctx.strokeStyle = "rgba(234, 179, 8, 0.5)";
+            ctx.setLineDash([3, 3]);
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = "#eab308";
+            ctx.font = "10px Inter, sans-serif";
+            ctx.fillText(`Cône d'acceptance (θmax = ${m.thetaMaxDeg.toFixed(1)}°)`, fiberStartX - coneLen - 10, topY - 6);
+            ctx.restore();
+        }
+
+        const sourceDist = 160;
+        const theta0Rad = theta0 * Math.PI / 180.0;
+        const sourceX = fiberStartX - Math.cos(theta0Rad) * sourceDist;
+        const sourceY = midY - Math.sin(theta0Rad) * sourceDist;
+
+        ctx.save();
+        ctx.fillStyle = "#1e293b";
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(sourceX, sourceY, 11, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = m.isGuided ? "#38bdf8" : "#ef4444";
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(sourceX, sourceY, 5.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "11px Inter, sans-serif";
+        ctx.fillText("Laser (Glisser)", sourceX - 35, sourceY - 16);
+        ctx.restore();
+
+        if (showAngles) {
+            ctx.save();
+            ctx.setLineDash([3, 3]);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(fiberStartX - 60, midY);
+            ctx.lineTo(fiberStartX + 60, midY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.strokeStyle = "#f59e0b";
+            ctx.lineWidth = 1.8;
+            ctx.beginPath();
+            ctx.arc(fiberStartX, midY, 32, Math.PI, Math.PI + theta0Rad, (theta0 < 0));
+            ctx.stroke();
+            ctx.fillStyle = "#f59e0b";
+            ctx.font = "11px Inter, sans-serif";
+            ctx.fillText(`θ₀ = ${theta0.toFixed(1)}°`, fiberStartX - 65, midY - 14);
+
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(fiberStartX, midY, 26, 0, m.rRad, (m.rRad < 0));
+            ctx.stroke();
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillText(`r = ${m.rDeg.toFixed(1)}°`, fiberStartX + 35, midY + 16);
+            ctx.restore();
+        }
+
+        function traceRay(angleDeg, colorCss, alpha = 0.9) {
+            const metrics = getOpticsMetrics(angleDeg, n1, n2);
+            const aRad = angleDeg * Math.PI / 180.0;
+            const srcX = fiberStartX - Math.cos(aRad) * sourceDist;
+            const srcY = midY - Math.sin(aRad) * sourceDist;
+
+            ctx.save();
+            ctx.strokeStyle = colorCss;
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = colorCss;
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.moveTo(srcX, srcY);
+            ctx.lineTo(fiberStartX, midY);
+            ctx.stroke();
+            ctx.restore();
+
+            if (fiberType === "grin") {
+                ctx.save();
+                ctx.strokeStyle = colorCss;
+                ctx.lineWidth = 2.5;
+                ctx.shadowColor = colorCss;
+                ctx.shadowBlur = 6;
+                ctx.beginPath();
+                ctx.moveTo(fiberStartX, midY);
+
+                const k = Math.sqrt(2 * metrics.delta) / coreA;
+                const amp = Math.sin(metrics.rRad) / (k || 0.01);
+
+                for (let x = fiberStartX; x <= fiberEndX; x += 4) {
+                    const dx = x - fiberStartX;
+                    const y = midY + amp * Math.sin(k * dx);
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                ctx.restore();
+
+            } else if (fiberType === "curved") {
+                ctx.save();
+                const bendFactor = 320 - bendRadius * 0.5;
+                const ctrlX = (fiberStartX + fiberEndX) / 2;
+                const ctrlY = midY - bendFactor;
+
+                ctx.strokeStyle = metrics.isGuided ? colorCss : "rgba(239, 68, 68, 0.85)";
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+
+                let curX = fiberStartX;
+                let curY = midY;
+                ctx.moveTo(curX, curY);
+
+                const step = 8;
+                for (let x = fiberStartX; x <= fiberEndX; x += step) {
+                    const t = (x - fiberStartX) / (fiberEndX - fiberStartX);
+                    const coreCenterY = (1 - t) * (1 - t) * midY + 2 * (1 - t) * t * ctrlY + t * t * midY;
+                    const y = coreCenterY + Math.sin((x - fiberStartX) * 0.08) * (coreA * 0.7);
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                if (showLosses && bendRadius < 180) {
+                    ctx.strokeStyle = "rgba(239, 68, 68, 0.7)";
+                    ctx.setLineDash([3, 3]);
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(ctrlX - 20, ctrlY - coreA);
+                    ctx.lineTo(ctrlX + 60, ctrlY - coreA - 45);
+                    ctx.moveTo(ctrlX + 30, ctrlY - coreA + 10);
+                    ctx.lineTo(ctrlX + 110, ctrlY - coreA - 35);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    ctx.fillStyle = "#ef4444";
+                    ctx.font = "bold 10px Inter, sans-serif";
+                    ctx.fillText("⚠ Pertes par macro-courbure", ctrlX - 40, ctrlY - coreA - 55);
+                }
+
+                ctx.restore();
+
+            } else {
+                let curX = fiberStartX;
+                let curY = midY;
+                let slope = Math.tan(metrics.rRad);
+                let isLost = !metrics.isGuided;
+
+                ctx.save();
+                ctx.strokeStyle = isLost ? "rgba(239, 68, 68, 0.9)" : colorCss;
+                ctx.lineWidth = 2.5;
+                ctx.shadowColor = ctx.strokeStyle;
+                ctx.shadowBlur = 6;
+                ctx.beginPath();
+                ctx.moveTo(curX, curY);
+
+                let bounceCount = 0;
+                while (curX < fiberEndX && bounceCount < 30) {
+                    bounceCount++;
+                    let targetY = (slope > 0) ? (midY + coreA) : (midY - coreA);
+                    let dx = (targetY - curY) / slope;
+                    let nextX = curX + dx;
+
+                    if (nextX > fiberEndX) {
+                        let finalY = curY + slope * (fiberEndX - curX);
+                        ctx.lineTo(fiberEndX, finalY);
+                        break;
+                    }
+
+                    ctx.lineTo(nextX, targetY);
+
+                    if (isLost && bounceCount === 1 && showLosses) {
+                        ctx.stroke();
+                        ctx.save();
+                        ctx.strokeStyle = "rgba(239, 68, 68, 0.75)";
+                        ctx.setLineDash([3, 3]);
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(nextX, targetY);
+                        ctx.lineTo(nextX + 70, targetY + (slope > 0 ? 35 : -35));
+                        ctx.stroke();
+                        ctx.restore();
+
+                        ctx.fillStyle = "#ef4444";
+                        ctx.font = "10px Inter, sans-serif";
+                        ctx.fillText(`Réfraction dans la gaine (θ = ${metrics.thetaDeg.toFixed(1)}° < θc)`, nextX + 15, targetY + (slope > 0 ? 48 : -20));
+                        break;
+                    }
+
+                    if (bounceCount === 1 && showAngles && !isLost) {
+                        ctx.save();
+                        ctx.setLineDash([3, 3]);
+                        ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(nextX, targetY - 25);
+                        ctx.lineTo(nextX, targetY + 25);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+
+                        ctx.strokeStyle = "#10b981";
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        const arcStart = (slope > 0) ? -Math.PI / 2 : Math.PI / 2;
+                        const arcEnd = arcStart - (slope > 0 ? 1 : -1) * metrics.thetaRad;
+                        ctx.arc(nextX, targetY, 20, arcStart, arcEnd, (slope > 0));
+                        ctx.stroke();
+
+                        ctx.fillStyle = "#10b981";
+                        ctx.font = "10px Inter, sans-serif";
+                        ctx.fillText(`θ = ${metrics.thetaDeg.toFixed(1)}° (≥ θc)`, nextX - 45, targetY + (slope > 0 ? -12 : 22));
+                        ctx.restore();
+                    }
+
+                    slope = -slope;
+                    curX = nextX;
+                    curY = targetY;
+                }
+
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        if (beamMode === "single" || beamMode === "pulse") {
+            traceRay(theta0, "#38bdf8", 0.95);
+        } else if (beamMode === "multimode") {
+            const testAngles = [0, theta0 * 0.4, theta0, -theta0 * 0.7, -theta0];
+            const colors = ["#eab308", "#10b981", "#38bdf8", "#ec4899", "#a855f7"];
+            testAngles.forEach((ang, idx) => {
+                traceRay(ang, colors[idx % colors.length], 0.85);
+            });
+        } else if (beamMode === "cone") {
+            const maxA = m.thetaMaxDeg;
+            const stepAng = maxA / 4;
+            for (let a = -maxA; a <= maxA; a += stepAng) {
+                traceRay(a, (Math.abs(a) <= maxA) ? "rgba(56, 189, 248, 0.7)" : "rgba(239, 68, 68, 0.7)", 0.6);
+            }
+        }
+
+        if (beamMode === "pulse") {
+            ctx.save();
+            const scopeX = fiberEndX - 180;
+            const scopeY = 25;
+            const scopeW = 160;
+            const scopeH = 110;
+
+            ctx.fillStyle = "rgba(10, 15, 29, 0.9)";
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.roundRect(scopeX, scopeY, scopeW, scopeH, 8);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "10px Inter, sans-serif";
+            ctx.fillText("Oscilloscope Temporel (Sortie)", scopeX + 10, scopeY + 14);
+
+            ctx.strokeStyle = "#eab308";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(scopeX + 15, scopeY + 45);
+            ctx.lineTo(scopeX + 30, scopeY + 45);
+            ctx.lineTo(scopeX + 30, scopeY + 28);
+            ctx.lineTo(scopeX + 45, scopeY + 28);
+            ctx.lineTo(scopeX + 45, scopeY + 45);
+            ctx.lineTo(scopeX + 60, scopeY + 45);
+            ctx.stroke();
+
+            ctx.fillStyle = "#eab308";
+            ctx.font = "8px Inter, sans-serif";
+            ctx.fillText("Entrée (0 ns)", scopeX + 70, scopeY + 38);
+
+            const spread = Math.min(35, Math.max(8, m.deltaTauNsPerKm * 0.2));
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(scopeX + 15, scopeY + 90);
+            ctx.lineTo(scopeX + 30, scopeY + 90);
+            ctx.lineTo(scopeX + 35, scopeY + 75);
+            ctx.lineTo(scopeX + 35 + spread, scopeY + 75);
+            ctx.lineTo(scopeX + 40 + spread, scopeY + 90);
+            ctx.lineTo(scopeX + 145, scopeY + 90);
+            ctx.stroke();
+
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = "8px Inter, sans-serif";
+            ctx.fillText(`Sortie (+${m.deltaTauNsPerKm.toFixed(0)} ns/km)`, scopeX + 50 + spread, scopeY + 82);
+
+            ctx.restore();
+        }
+    }
+
+    function updateCalculations() {
+        updateHUD();
+        updateTheory();
+        draw();
+    }
+
+    if (typeSelect) {
+        typeSelect.onchange = () => {
+            fiberType = typeSelect.value;
+            if (groupRadius) {
+                groupRadius.style.display = (fiberType === "curved") ? "flex" : "none";
+            }
+            updateCalculations();
+        };
+    }
+
+    if (beamSelect) {
+        beamSelect.onchange = () => {
+            beamMode = beamSelect.value;
+            updateCalculations();
+        };
+    }
+
+    if (sliderTheta) {
+        sliderTheta.oninput = (e) => {
+            theta0 = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (sliderN1) {
+        sliderN1.oninput = (e) => {
+            n1 = parseFloat(e.target.value);
+            if (n1 <= n2 && sliderN2) {
+                n2 = Math.max(1.400, n1 - 0.005);
+                sliderN2.value = n2;
+            }
+            updateCalculations();
+        };
+    }
+
+    if (sliderN2) {
+        sliderN2.oninput = (e) => {
+            n2 = parseFloat(e.target.value);
+            if (n2 >= n1 && sliderN1) {
+                n1 = Math.min(1.650, n2 + 0.005);
+                sliderN1.value = n1;
+            }
+            updateCalculations();
+        };
+    }
+
+    if (sliderRadius) {
+        sliderRadius.oninput = (e) => {
+            bendRadius = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (checkCone) {
+        checkCone.onchange = (e) => {
+            showCone = e.target.checked;
+            draw();
+        };
+    }
+
+    if (checkAngles) {
+        checkAngles.onchange = (e) => {
+            showAngles = e.target.checked;
+            draw();
+        };
+    }
+
+    if (checkLosses) {
+        checkLosses.onchange = (e) => {
+            showLosses = e.target.checked;
+            draw();
+        };
+    }
+
+    if (btnThetamax) {
+        btnThetamax.onclick = () => {
+            const m = getOpticsMetrics(theta0, n1, n2);
+            theta0 = parseFloat(m.thetaMaxDeg.toFixed(1));
+            if (sliderTheta) sliderTheta.value = theta0;
+            updateCalculations();
+            if (typeof showToast === "function") {
+                showToast(`Angle calé à la limite d'acceptance : θmax = ${theta0}° (ON = ${m.ON.toFixed(3)})`, true);
+            }
+        };
+    }
+
+    if (btnReset) {
+        btnReset.onclick = () => {
+            theta0 = 12.0;
+            n1 = 1.500;
+            n2 = 1.460;
+            fiberType = "step";
+            beamMode = "single";
+            bendRadius = 220.0;
+
+            if (sliderTheta) sliderTheta.value = theta0;
+            if (sliderN1) sliderN1.value = n1;
+            if (sliderN2) sliderN2.value = n2;
+            if (typeSelect) typeSelect.value = fiberType;
+            if (beamSelect) beamSelect.value = beamMode;
+            if (sliderRadius) sliderRadius.value = bendRadius;
+            if (groupRadius) groupRadius.style.display = "none";
+
+            if (fiberAnimInterval) {
+                clearInterval(fiberAnimInterval);
+                fiberAnimInterval = null;
+                if (btnAnimate) btnAnimate.innerHTML = '<i data-lucide="play"></i> Animation Flux';
+            }
+
+            updateCalculations();
+        };
+    }
+
+    if (btnAnimate) {
+        btnAnimate.onclick = () => {
+            if (fiberAnimInterval) {
+                clearInterval(fiberAnimInterval);
+                fiberAnimInterval = null;
+                btnAnimate.innerHTML = '<i data-lucide="play"></i> Animation Flux';
+                btnAnimate.classList.remove("btn-primary");
+                btnAnimate.classList.add("btn-secondary");
+            } else {
+                btnAnimate.innerHTML = '<i data-lucide="pause"></i> Arrêter Flux';
+                btnAnimate.classList.remove("btn-secondary");
+                btnAnimate.classList.add("btn-primary");
+
+                let sweepT = 0;
+                fiberAnimInterval = setInterval(() => {
+                    sweepT += 0.04;
+                    const m = getOpticsMetrics(theta0, n1, n2);
+                    theta0 = parseFloat(((m.thetaMaxDeg + 5) * Math.sin(sweepT)).toFixed(1));
+                    if (sliderTheta) sliderTheta.value = theta0;
+                    updateHUD();
+                    draw();
+                }, 30);
+            }
+            if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+        };
+    }
+
+    function getCanvasCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+            x: (clientX - rect.left) * scaleX,
+            y: (clientY - rect.top) * scaleY
+        };
+    }
+
+    canvas.onmousedown = (e) => {
+        const pos = getCanvasCoords(e);
+        if (pos.x < 230) {
+            isDraggingTorch = true;
+        }
+    };
+
+    window.onmousemove = (e) => {
+        if (!isDraggingTorch) return;
+        const pos = getCanvasCoords(e);
+        const dx = 230 - pos.x;
+        const dy = 225 - pos.y;
+        let newAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+        newAngle = Math.max(-50, Math.min(50, newAngle));
+        theta0 = parseFloat(newAngle.toFixed(1));
+        if (sliderTheta) sliderTheta.value = theta0;
+        updateCalculations();
+    };
+
+    window.onmouseup = () => {
+        isDraggingTorch = false;
+    };
+
+    updateCalculations();
+    requestAnimationFrame(updateCalculations);
+}
+window.setupFibreOptiqueSimulator = setupFibreOptiqueSimulator;
