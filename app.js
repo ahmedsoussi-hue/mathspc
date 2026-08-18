@@ -7487,7 +7487,9 @@ function setupAnimations() {
 }
 
 function initCanvasFor(type) {
-    if (type === "wave") {
+    if (type === "prisme-optique") {
+        setupPrismeOptiqueSimulator();
+    } else if (type === "wave") {
         setupWaveSimulator();
     } else if (type === "delay") {
         setupDelaySimulator();
@@ -22365,3 +22367,1092 @@ function openExamModal(examId, initialTab = "statement-tab") {
     triggerMathJax();
 }
 
+
+
+
+// ==========================================
+// PRISME OPTIQUE & DISPERSION SIMULATOR
+// ==========================================
+let prismeAnimInterval = null;
+let prismeIsSweeping = false;
+let prismeSweepAngle = 0;
+
+function setupPrismeOptiqueSimulator() {
+    const canvas = document.getElementById("canvas-prisme-optique");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    // UI Controls
+    const sourceSelect = document.getElementById("prism-source");
+    const materialSelect = document.getElementById("prism-material");
+    const sliderI = document.getElementById("prism-i");
+    const sliderA = document.getElementById("prism-A");
+    const sliderLambda = document.getElementById("prism-lambda");
+    const sliderCustomN = document.getElementById("prism-custom-n");
+    const sliderScreen = document.getElementById("prism-screen-dist");
+    const checkAngles = document.getElementById("prism-show-angles");
+    const checkGraph = document.getElementById("prism-show-graph");
+    const btnDm = document.getElementById("btn-prism-dm");
+    const btnAnimate = document.getElementById("btn-prism-animate");
+    const btnReset = document.getElementById("btn-prism-reset");
+
+    const groupLambda = document.getElementById("group-prism-lambda");
+    const groupCustomN = document.getElementById("group-prism-custom-n");
+    const badgeColor = document.getElementById("badge-prism-color");
+
+    const valI = document.getElementById("val-prism-i");
+    const valA = document.getElementById("val-prism-A");
+    const valLambda = document.getElementById("val-prism-lambda");
+    const valCustomN = document.getElementById("val-prism-custom-n");
+    const valScreen = document.getElementById("val-prism-screen-dist");
+
+    // HUD Value Elements
+    const hudI = document.getElementById("hud-prism-i");
+    const hudR = document.getElementById("hud-prism-r");
+    const hudRprime = document.getElementById("hud-prism-rprime");
+    const hudIprime = document.getElementById("hud-prism-iprime");
+    const hudD = document.getElementById("hud-prism-D");
+    const hudDm = document.getElementById("hud-prism-Dm");
+    const hudRlim = document.getElementById("hud-prism-rlim");
+    const hudStatus = document.getElementById("hud-prism-status");
+    const theoryDiv = document.getElementById("prisme-optique-theory");
+
+    // Reset sweeping state on new setup
+    if (prismeAnimInterval) {
+        clearInterval(prismeAnimInterval);
+        prismeAnimInterval = null;
+        prismeIsSweeping = false;
+    }
+
+    // Material definitions
+    const MATERIALS = {
+        flint: { name: "Verre Flint", nd: 1.620, B: 0.0080 },
+        crown: { name: "Verre Crown", nd: 1.517, B: 0.0042 },
+        flint_dense: { name: "Flint Dense (SF11)", nd: 1.755, B: 0.0135 },
+        quartz: { name: "Silice Fondue (Quartz)", nd: 1.458, B: 0.0035 },
+        diamant: { name: "Diamant", nd: 2.417, B: 0.0440 },
+        eau: { name: "Eau liquide (20°C)", nd: 1.333, B: 0.0031 },
+        custom: { name: "Personnalisé", nd: 1.500, B: 0.0050 }
+    };
+
+    // Spectral emission lines
+    const SPECTRA = {
+        sodium: [
+            { wl: 589.0, label: "Na D2 (589.0 nm)", weight: 1.0 },
+            { wl: 589.6, label: "Na D1 (589.6 nm)", weight: 0.8 }
+        ],
+        mercure: [
+            { wl: 404.7, label: "Hg Violet (404.7 nm)", weight: 0.7 },
+            { wl: 435.8, label: "Hg Bleu (435.8 nm)", weight: 0.9 },
+            { wl: 546.1, label: "Hg Vert (546.1 nm)", weight: 1.0 },
+            { wl: 577.0, label: "Hg Jaune 1 (577.0 nm)", weight: 0.6 },
+            { wl: 579.1, label: "Hg Jaune 2 (579.1 nm)", weight: 0.65 }
+        ],
+        hydrogene: [
+            { wl: 656.3, label: "H-alpha Rouge (656.3 nm)", weight: 1.0 },
+            { wl: 486.1, label: "H-beta Cyan (486.1 nm)", weight: 0.8 },
+            { wl: 434.0, label: "H-gamma Bleu (434.0 nm)", weight: 0.5 },
+            { wl: 410.2, label: "H-delta Violet (410.2 nm)", weight: 0.35 }
+        ]
+    };
+
+    // State
+    let angleI = sliderI ? parseFloat(sliderI.value) : 48.0;
+    let angleA = sliderA ? parseFloat(sliderA.value) : 60.0;
+    let sourceType = sourceSelect ? sourceSelect.value : "white";
+    let materialKey = materialSelect ? materialSelect.value : "flint";
+    let lambdaLaser = sliderLambda ? parseFloat(sliderLambda.value) : 589.0;
+    let customN = sliderCustomN ? parseFloat(sliderCustomN.value) : 1.50;
+    let screenDist = sliderScreen ? parseFloat(sliderScreen.value) : 220.0;
+    let showAngles = checkAngles ? checkAngles.checked : true;
+    let showGraph = checkGraph ? checkGraph.checked : true;
+
+    let isDraggingRay = false;
+    let isDraggingScreen = false;
+
+    // Helper: Wavelength to RGBA color
+    function wavelengthToRGBA(wl, alpha = 1.0) {
+        let r = 0, g = 0, b = 0;
+        if (wl >= 380 && wl < 440) {
+            r = -(wl - 440) / (440 - 380);
+            g = 0.0;
+            b = 1.0;
+        } else if (wl >= 440 && wl < 490) {
+            r = 0.0;
+            g = (wl - 440) / (490 - 440);
+            b = 1.0;
+        } else if (wl >= 490 && wl < 510) {
+            r = 0.0;
+            g = 1.0;
+            b = -(wl - 510) / (510 - 490);
+        } else if (wl >= 510 && wl < 580) {
+            r = (wl - 510) / (580 - 510);
+            g = 1.0;
+            b = 0.0;
+        } else if (wl >= 580 && wl < 645) {
+            r = 1.0;
+            g = -(wl - 645) / (645 - 580);
+            b = 0.0;
+        } else if (wl >= 645 && wl <= 750) {
+            r = 1.0;
+            g = 0.0;
+            b = 0.0;
+        } else {
+            r = 1.0; g = 1.0; b = 1.0;
+        }
+
+        let factor = 1.0;
+        if (wl >= 380 && wl < 420) {
+            factor = 0.3 + 0.7 * (wl - 380) / (420 - 380);
+        } else if (wl >= 700 && wl <= 750) {
+            factor = 0.3 + 0.7 * (750 - wl) / (750 - 700);
+        }
+
+        const R = Math.round(Math.max(0, Math.min(255, r * factor * 255)));
+        const G = Math.round(Math.max(0, Math.min(255, g * factor * 255)));
+        const B = Math.round(Math.max(0, Math.min(255, b * factor * 255)));
+        return {
+            r: R, g: G, b: B,
+            css: `rgba(${R}, ${G}, ${B}, ${alpha})`,
+            hex: `#${R.toString(16).padStart(2, '0')}${G.toString(16).padStart(2, '0')}${B.toString(16).padStart(2, '0')}`
+        };
+    }
+
+    // Refractive index calculation from Cauchy formula
+    function getIndexForWavelength(wlNm) {
+        const mat = MATERIALS[materialKey] || MATERIALS.flint;
+        let baseNd = (materialKey === "custom") ? customN : mat.nd;
+        let B = mat.B;
+        const lambdaUm = wlNm / 1000.0;
+        const lambdaDUm = 0.5893;
+        const delta = B * (1.0 / (lambdaUm * lambdaUm) - 1.0 / (lambdaDUm * lambdaDUm));
+        return Math.max(1.001, baseNd + delta);
+    }
+
+    // Optical ray calculation
+    function calcPrismRay(wlNm, incDeg, ApexDeg) {
+        const n = getIndexForWavelength(wlNm);
+        const iRad = incDeg * Math.PI / 180.0;
+        const ARad = ApexDeg * Math.PI / 180.0;
+
+        const sinR = Math.sin(iRad) / n;
+        if (Math.abs(sinR) > 1.0) {
+            return { n, tir: true, reason: "dioptre1" };
+        }
+        const rRad = Math.asin(sinR);
+        const rDeg = rRad * 180.0 / Math.PI;
+
+        const rPrimeRad = ARad - rRad;
+        const rPrimeDeg = rPrimeRad * 180.0 / Math.PI;
+
+        const rLimRad = Math.asin(1.0 / n);
+        const rLimDeg = rLimRad * 180.0 / Math.PI;
+
+        const sinIPrime = n * Math.sin(rPrimeRad);
+        if (Math.abs(sinIPrime) > 1.0 || rPrimeRad > rLimRad) {
+            return {
+                n, wl: wlNm, iDeg: incDeg, rDeg, rPrimeDeg, rLimDeg,
+                tir: true, reason: "dioptre2",
+                iPrimeDeg: null, DDeg: null
+            };
+        }
+
+        const iPrimeRad = Math.asin(sinIPrime);
+        const iPrimeDeg = iPrimeRad * 180.0 / Math.PI;
+        const DDeg = incDeg + iPrimeDeg - ApexDeg;
+
+        let DmDeg = null;
+        let imDeg = null;
+        const sinIm = n * Math.sin(ARad / 2.0);
+        if (sinIm <= 1.0) {
+            const imRad = Math.asin(sinIm);
+            imDeg = imRad * 180.0 / Math.PI;
+            DmDeg = 2.0 * imDeg - ApexDeg;
+        }
+
+        return {
+            n, wl: wlNm, iDeg: incDeg, rDeg, rPrimeDeg, rLimDeg,
+            iPrimeDeg, DDeg, imDeg, DmDeg,
+            iRad, rRad, rPrimeRad, iPrimeRad, ARad,
+            tir: false
+        };
+    }
+
+    // Update Theory
+    function updateTheory() {
+        if (!theoryDiv) return;
+        const refRay = calcPrismRay(589.3, angleI, angleA);
+        const nRef = getIndexForWavelength(589.3);
+        const matName = (MATERIALS[materialKey] || MATERIALS.flint).name;
+
+        const isTir = refRay.tir;
+        const DmStr = refRay.DmDeg !== null ? refRay.DmDeg.toFixed(2) + "°" : "N/A";
+        const imStr = refRay.imDeg !== null ? refRay.imDeg.toFixed(2) + "°" : "N/A";
+        const DStr = refRay.DDeg !== null ? refRay.DDeg.toFixed(2) + "°" : "Réflexion Totale";
+
+        theoryDiv.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; font-weight:700; font-size:1.15rem; color:var(--primary);">
+                <i data-lucide="book-open"></i> Principes Physiques & Formules du Prisme Optique
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#38bdf8; font-size:0.92rem; margin-bottom:6px; font-weight:600;">1. Les 4 Relations du Prisme</h4>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #38bdf8;">
+                        $$\\sin(i) = n \\sin(r) \\quad \\text{et} \\quad \\sin(i') = n \\sin(r')$$
+                        $$A = r + r' \\quad \\text{et} \\quad D = i + i' - A$$
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#eab308; font-size:0.92rem; margin-bottom:6px; font-weight:600;">2. Minimum de Déviation (Dm)</h4>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #eab308;">
+                        $$i = i' = i_m \\iff r = r' = \\frac{A}{2}$$
+                        $$n = \\frac{\\sin\\left(\\frac{A + D_m}{2}\\right)}{\\sin\\left(\\frac{A}{2}\\right)}$$
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#a855f7; font-size:0.92rem; margin-bottom:6px; font-weight:600;">3. Dispersion de Cauchy</h4>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #a855f7;">
+                        $$n(\\lambda) \\approx A_c + \\frac{B_c}{\\lambda^2} \\implies D_{violet} > D_{rouge}$$
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px;">
+                    <h4 style="color:#10b981; font-size:0.92rem; margin-bottom:6px; font-weight:600;">4. Réflexion Totale Interne</h4>
+                    <div style="background:rgba(15,23,42,0.6); padding:6px 10px; border-radius:6px; font-size:0.9rem; margin-bottom:6px; border-left:3px solid #10b981;">
+                        $$r' \\le r'_{lim} = \\arcsin\\left(\\frac{1}{n}\\right) \\quad \\text{pour émergence}$$
+                    </div>
+                </div>
+            </div>
+
+            <div style="background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.2); border-radius:8px; padding:10px 14px; font-size:0.86rem;">
+                <strong>📊 Données en direct :</strong> Matériau = <span style="color:#38bdf8; font-weight:600;">${matName}</span> (n = ${nRef.toFixed(3)}), 
+                Angle A = ${angleA}°, Incidence i = ${angleI.toFixed(1)}°. 
+                ${isTir ? '<span style="color:#ef4444; font-weight:700;">⚠ Réflexion Totale Interne.</span>' : `Déviation D = ${DStr}, Minimum Dm = ${DmStr} pour im = ${imStr}.`}
+            </div>
+        `;
+
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([theoryDiv]).catch(() => {});
+        }
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+        }
+    }
+
+    // Update HUD Cards
+    function updateHUD() {
+        const refWl = (sourceType === "laser") ? lambdaLaser : 589.3;
+        const res = calcPrismRay(refWl, angleI, angleA);
+
+        if (valI) valI.textContent = angleI.toFixed(1);
+        if (valA) valA.textContent = angleA.toFixed(0);
+        if (valLambda) valLambda.textContent = lambdaLaser.toFixed(0);
+        if (valCustomN) valCustomN.textContent = customN.toFixed(2);
+        if (valScreen) valScreen.textContent = screenDist.toFixed(0);
+
+        if (badgeColor && sourceType === "laser") {
+            const colorObj = wavelengthToRGBA(lambdaLaser);
+            badgeColor.style.background = colorObj.hex;
+            badgeColor.style.boxShadow = `0 0 8px ${colorObj.hex}`;
+        }
+
+        if (hudI) hudI.textContent = `${angleI.toFixed(1)}°`;
+        if (hudR) hudR.textContent = res.rDeg !== undefined ? `${res.rDeg.toFixed(1)}°` : "--";
+        if (hudRprime) hudRprime.textContent = res.rPrimeDeg !== undefined ? `${res.rPrimeDeg.toFixed(1)}°` : "--";
+        if (hudRlim) hudRlim.textContent = res.rLimDeg !== undefined ? `${res.rLimDeg.toFixed(1)}°` : "--";
+
+        if (res.tir) {
+            if (hudIprime) hudIprime.textContent = "TIR ⚠";
+            if (hudD) hudD.textContent = "Réfléchi";
+            if (hudStatus) {
+                hudStatus.innerHTML = '<span class="prism-status-pill status-tir">Réflexion Totale</span>';
+            }
+        } else {
+            if (hudIprime) hudIprime.textContent = `${res.iPrimeDeg.toFixed(1)}°`;
+            if (hudD) hudD.textContent = `${res.DDeg.toFixed(1)}°`;
+            if (hudStatus) {
+                hudStatus.innerHTML = '<span class="prism-status-pill status-emergence">Émergence</span>';
+            }
+        }
+
+        if (hudDm) {
+            hudDm.textContent = res.DmDeg !== null ? `${res.DmDeg.toFixed(1)}°` : "--";
+        }
+    }
+
+    // Mini Plot D = f(i)
+    function drawMiniPlot(plotX, plotY, plotW, plotH, currentI, currentD, im, Dm, nVal, ARad) {
+        ctx.save();
+        ctx.fillStyle = "rgba(10, 15, 29, 0.88)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(plotX, plotY, plotW, plotH, 8);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "10px Inter, sans-serif";
+        ctx.fillText("Déviation D = f(i)", plotX + 10, plotY + 14);
+
+        const padL = 28, padR = 12, padT = 24, padB = 22;
+        const axX = plotX + padL;
+        const axY = plotY + plotH - padB;
+        const axW = plotW - padL - padR;
+        const axH = plotH - padT - padB;
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+        ctx.beginPath();
+        ctx.moveTo(axX, plotY + padT);
+        ctx.lineTo(axX, axY);
+        ctx.lineTo(axX + axW, axY);
+        ctx.stroke();
+
+        const iMinPlot = 0;
+        const iMaxPlot = 85;
+        const dMinPlot = Math.max(0, (Dm || 30) - 5);
+        const dMaxPlot = dMinPlot + 45;
+
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        let started = false;
+
+        const rLim = Math.asin(1.0 / nVal);
+        const minIncidentLimit = Math.asin(nVal * Math.sin(Math.max(-1, Math.min(1, ARad - rLim)))) * 180 / Math.PI;
+
+        for (let deg = Math.max(0, Math.ceil(minIncidentLimit) + 1); deg <= iMaxPlot; deg += 0.5) {
+            const rad = deg * Math.PI / 180;
+            const sR = Math.sin(rad) / nVal;
+            if (Math.abs(sR) > 1) continue;
+            const r = Math.asin(sR);
+            const rP = ARad - r;
+            if (rP > rLim) continue;
+            const sIP = nVal * Math.sin(rP);
+            if (Math.abs(sIP) > 1) continue;
+            const iP = Math.asin(sIP);
+            const dev = (rad + iP - ARad) * 180 / Math.PI;
+
+            const px = axX + ((deg - iMinPlot) / (iMaxPlot - iMinPlot)) * axW;
+            const py = axY - ((dev - dMinPlot) / (dMaxPlot - dMinPlot)) * axH;
+
+            if (py >= plotY + padT && py <= axY) {
+                if (!started) {
+                    ctx.moveTo(px, py);
+                    started = true;
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            }
+        }
+        ctx.stroke();
+
+        if (im !== null && Dm !== null && im >= iMinPlot && im <= iMaxPlot) {
+            const minX = axX + ((im - iMinPlot) / (iMaxPlot - iMinPlot)) * axW;
+            const minY = axY - ((Dm - dMinPlot) / (dMaxPlot - dMinPlot)) * axH;
+
+            ctx.setLineDash([2, 2]);
+            ctx.strokeStyle = "rgba(234, 179, 8, 0.4)";
+            ctx.beginPath();
+            ctx.moveTo(minX, axY);
+            ctx.lineTo(minX, minY);
+            ctx.lineTo(axX, minY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = "#eab308";
+            ctx.beginPath();
+            ctx.arc(minX, minY, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.font = "9px Inter, sans-serif";
+            ctx.fillText("Dm", axX - 18, minY + 3);
+        }
+
+        if (currentD !== null && currentI >= iMinPlot && currentI <= iMaxPlot) {
+            const curX = axX + ((currentI - iMinPlot) / (iMaxPlot - iMinPlot)) * axW;
+            const curY = axY - ((currentD - dMinPlot) / (dMaxPlot - dMinPlot)) * axH;
+
+            if (curY >= plotY + padT && curY <= axY) {
+                ctx.fillStyle = "#ec4899";
+                ctx.shadowColor = "#ec4899";
+                ctx.shadowBlur = 6;
+                ctx.beginPath();
+                ctx.arc(curX, curY, 4.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        ctx.fillStyle = "#64748b";
+        ctx.font = "8px Inter, sans-serif";
+        ctx.fillText("i (°)", axX + axW - 12, axY + 14);
+        ctx.fillText("D", axX - 14, plotY + padT + 4);
+
+        ctx.restore();
+    }
+
+    // MAIN DRAW FUNCTION
+    function draw() {
+        canvas.width = 950;
+        canvas.height = 460;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 1. Background Grid
+        ctx.fillStyle = "#060913";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 40) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 40) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+
+        // Rail at bottom
+        const benchY = 410;
+        ctx.fillStyle = "rgba(30, 41, 59, 0.6)";
+        ctx.fillRect(40, benchY, canvas.width - 80, 8);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.strokeRect(40, benchY, canvas.width - 80, 8);
+
+        // 2. Prism Coordinates & Geometry
+        const ARad = angleA * Math.PI / 180.0;
+        const prismCenterX = 390;
+        const prismApexY = 100;
+        const prismH = 240;
+        const halfBase = prismH * Math.tan(ARad / 2.0);
+
+        const Apex = { x: prismCenterX, y: prismApexY };
+        const LeftV = { x: prismCenterX - halfBase, y: prismApexY + prismH };
+        const RightV = { x: prismCenterX + halfBase, y: prismApexY + prismH };
+
+        // Prism Glass Body
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(Apex.x, Apex.y);
+        ctx.lineTo(RightV.x, RightV.y);
+        ctx.lineTo(LeftV.x, LeftV.y);
+        ctx.closePath();
+
+        const glassGrad = ctx.createLinearGradient(Apex.x, Apex.y, Apex.x, LeftV.y);
+        glassGrad.addColorStop(0, "rgba(56, 189, 248, 0.18)");
+        glassGrad.addColorStop(0.7, "rgba(99, 102, 241, 0.12)");
+        glassGrad.addColorStop(1, "rgba(14, 165, 233, 0.25)");
+        ctx.fillStyle = glassGrad;
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(186, 230, 253, 0.7)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(148, 163, 184, 0.4)";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(LeftV.x, LeftV.y);
+        ctx.lineTo(RightV.x, RightV.y);
+        ctx.stroke();
+
+        // Apex Angle Arc & Label (A)
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.arc(Apex.x, Apex.y, 35, Math.PI / 2 - ARad / 2, Math.PI / 2 + ARad / 2, false);
+        ctx.stroke();
+
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 12px Inter, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(`A = ${angleA}°`, Apex.x, Apex.y + 55);
+        ctx.restore();
+
+        // 3. Point P1 on Face 1
+        const t1 = 0.52;
+        const P1 = {
+            x: Apex.x * (1 - t1) + LeftV.x * t1,
+            y: Apex.y * (1 - t1) + LeftV.y * t1
+        };
+
+        const normLen = 80;
+        const normInwardAngle = ARad / 2.0;
+        const normOutwardAngle = normInwardAngle + Math.PI;
+
+        const N1_out = {
+            x: P1.x + Math.cos(normOutwardAngle) * normLen,
+            y: P1.y + Math.sin(normOutwardAngle) * normLen
+        };
+        const N1_in = {
+            x: P1.x + Math.cos(normInwardAngle) * (normLen * 0.8),
+            y: P1.y + Math.sin(normInwardAngle) * (normLen * 0.8)
+        };
+
+        if (showAngles) {
+            ctx.save();
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(N1_out.x, N1_out.y);
+            ctx.lineTo(N1_in.x, N1_in.y);
+            ctx.stroke();
+
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "10px Inter, sans-serif";
+            ctx.fillText("Normale N1", N1_out.x - 10, N1_out.y - 6);
+            ctx.restore();
+        }
+
+        // 4. Source Light Setup
+        const iRad = angleI * Math.PI / 180.0;
+        const thetaIn = normInwardAngle - iRad;
+        const beamSourceLen = 220;
+        const SourcePos = {
+            x: P1.x - Math.cos(thetaIn) * beamSourceLen,
+            y: P1.y - Math.sin(thetaIn) * beamSourceLen
+        };
+
+        // Draw Light Source Torch
+        ctx.save();
+        ctx.fillStyle = "#1e293b";
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(SourcePos.x, SourcePos.y, 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = (sourceType === "white") ? "#ffffff" : wavelengthToRGBA(lambdaLaser).css;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(SourcePos.x, SourcePos.y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.fillStyle = "#cbd5e1";
+        ctx.font = "11px Inter, sans-serif";
+        ctx.fillText("Source (Glisser pour ajuster i)", SourcePos.x - 40, SourcePos.y - 14);
+        ctx.restore();
+
+        // 5. Screen Position
+        const screenX = Math.min(canvas.width - 25, prismCenterX + 160 + screenDist);
+        const screenTopY = 80;
+        const screenHeight = 300;
+
+        // 6. Ray Tracing
+        let raysToTrace = [];
+        if (sourceType === "white") {
+            for (let wl = 400; wl <= 700; wl += 12) {
+                raysToTrace.push({ wl, weight: 1.0, isMain: (wl === 589) });
+            }
+        } else if (sourceType === "laser") {
+            raysToTrace.push({ wl: lambdaLaser, weight: 1.0, isMain: true });
+        } else if (SPECTRA[sourceType]) {
+            raysToTrace = SPECTRA[sourceType].map(s => ({ wl: s.wl, weight: s.weight, isMain: true, label: s.label }));
+        }
+
+        // Draw Incident Beam
+        ctx.save();
+        if (sourceType === "white") {
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
+            ctx.lineWidth = 3.5;
+            ctx.shadowColor = "#ffffff";
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.moveTo(SourcePos.x, SourcePos.y);
+            ctx.lineTo(P1.x, P1.y);
+            ctx.stroke();
+        } else {
+            const col = wavelengthToRGBA(raysToTrace[0].wl);
+            ctx.strokeStyle = col.css;
+            ctx.lineWidth = 3;
+            ctx.shadowColor = col.css;
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.moveTo(SourcePos.x, SourcePos.y);
+            ctx.lineTo(P1.x, P1.y);
+            ctx.stroke();
+        }
+        ctx.restore();
+
+        // Straight-through incident dashed extension
+        const extendLen = 320;
+        const extendEnd = {
+            x: P1.x + Math.cos(thetaIn) * extendLen,
+            y: P1.y + Math.sin(thetaIn) * extendLen
+        };
+        ctx.save();
+        ctx.setLineDash([3, 3]);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(P1.x, P1.y);
+        ctx.lineTo(extendEnd.x, extendEnd.y);
+        ctx.stroke();
+        ctx.restore();
+
+        const screenHits = [];
+        let mainEmergentRay = null;
+
+        raysToTrace.forEach(rayInfo => {
+            const sim = calcPrismRay(rayInfo.wl, angleI, angleA);
+            const colObj = wavelengthToRGBA(rayInfo.wl, (sourceType === "white") ? 0.75 : 0.95);
+
+            if (sim.tir && sim.reason === "dioptre1") return;
+
+            const thetaInside = ARad / 2.0 - sim.rRad;
+            const dxInside = Math.cos(thetaInside);
+            const dyInside = Math.sin(thetaInside);
+
+            const fx = RightV.x - Apex.x;
+            const fy = RightV.y - Apex.y;
+            const px = P1.x - Apex.x;
+            const py = P1.y - Apex.y;
+            const denom = dxInside * fy - dyInside * fx;
+            if (Math.abs(denom) < 1e-6) return;
+
+            const s = (py * fx - px * fy) / denom;
+            const P2 = {
+                x: P1.x + s * dxInside,
+                y: P1.y + s * dyInside
+            };
+
+            // Draw inside prism
+            ctx.save();
+            ctx.strokeStyle = colObj.css;
+            ctx.lineWidth = (sourceType === "white") ? 1.8 : 2.5;
+            ctx.beginPath();
+            ctx.moveTo(P1.x, P1.y);
+            ctx.lineTo(P2.x, P2.y);
+            ctx.stroke();
+            ctx.restore();
+
+            if (sim.tir) {
+                // TIR Reflection
+                const face2Angle = Math.atan2(fy, fx);
+                const reflAngle = 2 * face2Angle - thetaInside;
+                const P_refl = {
+                    x: P2.x + Math.cos(reflAngle) * 120,
+                    y: P2.y + Math.sin(reflAngle) * 120
+                };
+
+                ctx.save();
+                ctx.strokeStyle = colObj.css;
+                ctx.setLineDash([2, 2]);
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(P2.x, P2.y);
+                ctx.lineTo(P_refl.x, P_refl.y);
+                ctx.stroke();
+                ctx.restore();
+            } else {
+                // Emergent ray
+                const thetaOut = -ARad / 2.0 + sim.iPrimeRad;
+                const dxOut = Math.cos(thetaOut);
+                const dyOut = Math.sin(thetaOut);
+
+                let endX = screenX;
+                let endY = P2.y + ((screenX - P2.x) / dxOut) * dyOut;
+
+                if (endY < screenTopY - 20) endY = screenTopY - 20;
+                if (endY > screenTopY + screenHeight + 20) endY = screenTopY + screenHeight + 20;
+
+                ctx.save();
+                ctx.strokeStyle = colObj.css;
+                ctx.lineWidth = (sourceType === "white") ? 2.0 : 3.0;
+                ctx.shadowColor = colObj.css;
+                ctx.shadowBlur = (sourceType === "white") ? 3 : 8;
+                ctx.beginPath();
+                ctx.moveTo(P2.x, P2.y);
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+                ctx.restore();
+
+                screenHits.push({ y: endY, wl: rayInfo.wl, col: colObj, label: rayInfo.label });
+
+                if (rayInfo.isMain || raysToTrace.length === 1) {
+                    mainEmergentRay = { P2, endX, endY, thetaOut, sim };
+                }
+            }
+        });
+
+        // 7. Draw Normals & Angles Arc
+        if (mainEmergentRay && showAngles) {
+            const P2 = mainEmergentRay.P2;
+            const sim = mainEmergentRay.sim;
+
+            const norm2OutwardAngle = -ARad / 2.0;
+            const norm2InwardAngle = norm2OutwardAngle + Math.PI;
+            const N2_out = {
+                x: P2.x + Math.cos(norm2OutwardAngle) * normLen,
+                y: P2.y + Math.sin(norm2OutwardAngle) * normLen
+            };
+            const N2_in = {
+                x: P2.x + Math.cos(norm2InwardAngle) * (normLen * 0.8),
+                y: P2.y + Math.sin(norm2InwardAngle) * (normLen * 0.8)
+            };
+
+            ctx.save();
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(N2_in.x, N2_in.y);
+            ctx.lineTo(N2_out.x, N2_out.y);
+            ctx.stroke();
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "10px Inter, sans-serif";
+            ctx.fillText("Normale N2", N2_out.x + 8, N2_out.y - 4);
+            ctx.restore();
+
+            // Backward extension to intersect incident ray extension
+            const sinDiff = Math.sin(thetaIn - mainEmergentRay.thetaOut);
+            if (Math.abs(sinDiff) > 0.01) {
+                const det = (P2.x - P1.x) * Math.sin(mainEmergentRay.thetaOut) - (P2.y - P1.y) * Math.cos(mainEmergentRay.thetaOut);
+                const distS = det / sinDiff;
+                const S = {
+                    x: P1.x + Math.cos(thetaIn) * distS,
+                    y: P1.y + Math.sin(thetaIn) * distS
+                };
+
+                ctx.save();
+                ctx.setLineDash([2, 2]);
+                ctx.strokeStyle = "rgba(234, 179, 8, 0.6)";
+                ctx.beginPath();
+                ctx.moveTo(P2.x, P2.y);
+                ctx.lineTo(S.x, S.y);
+                ctx.stroke();
+
+                ctx.strokeStyle = "#eab308";
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(S.x, S.y, 28, thetaIn, mainEmergentRay.thetaOut, false);
+                ctx.stroke();
+
+                ctx.fillStyle = "#eab308";
+                ctx.font = "bold 11px Inter, sans-serif";
+                ctx.fillText(`D = ${sim.DDeg.toFixed(1)}°`, S.x + 34, S.y + 4);
+                ctx.restore();
+            }
+
+            // Incidence Arc i
+            ctx.save();
+            ctx.strokeStyle = "#f59e0b";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(P1.x, P1.y, 30, normOutwardAngle, thetaIn + Math.PI, (angleI < 0));
+            ctx.stroke();
+            ctx.fillStyle = "#f59e0b";
+            ctx.font = "11px Inter, sans-serif";
+            ctx.fillText(`i = ${angleI.toFixed(1)}°`, P1.x - 45, P1.y - 12);
+
+            // Refraction Arc r
+            ctx.strokeStyle = "#38bdf8";
+            ctx.beginPath();
+            ctx.arc(P1.x, P1.y, 25, normInwardAngle - sim.rRad, normInwardAngle, false);
+            ctx.stroke();
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillText(`r = ${sim.rDeg.toFixed(1)}°`, P1.x + 18, P1.y + 24);
+
+            // Internal Arc r'
+            ctx.strokeStyle = "#10b981";
+            ctx.beginPath();
+            ctx.arc(P2.x, P2.y, 25, norm2InwardAngle, norm2InwardAngle + sim.rPrimeRad, false);
+            ctx.stroke();
+            ctx.fillStyle = "#10b981";
+            ctx.fillText(`r' = ${sim.rPrimeDeg.toFixed(1)}°`, P2.x - 38, P2.y + 22);
+
+            // Emergence Arc i'
+            ctx.strokeStyle = "#ec4899";
+            ctx.beginPath();
+            ctx.arc(P2.x, P2.y, 30, norm2OutwardAngle, mainEmergentRay.thetaOut, false);
+            ctx.stroke();
+            ctx.fillStyle = "#ec4899";
+            ctx.fillText(`i' = ${sim.iPrimeDeg.toFixed(1)}°`, P2.x + 35, P2.y - 8);
+            ctx.restore();
+        }
+
+        // 8. Observation Screen on Right
+        ctx.save();
+        ctx.fillStyle = "#1e293b";
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 2;
+        ctx.fillRect(screenX, screenTopY, 14, screenHeight);
+        ctx.strokeRect(screenX, screenTopY, 14, screenHeight);
+
+        ctx.fillStyle = "#f8fafc";
+        ctx.fillRect(screenX - 2, screenTopY + 10, 4, screenHeight - 20);
+
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "10px Inter, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Écran d'observation", screenX + 7, screenTopY - 10);
+
+        if (screenHits.length > 0) {
+            if (sourceType === "white") {
+                const minY = Math.min(...screenHits.map(h => h.y));
+                const maxY = Math.max(...screenHits.map(h => h.y));
+                const hStrip = Math.max(12, maxY - minY);
+
+                const screenGrad = ctx.createLinearGradient(0, minY, 0, maxY);
+                screenHits.forEach(h => {
+                    const norm = (h.y - minY) / Math.max(1, hStrip);
+                    screenGrad.addColorStop(Math.max(0, Math.min(1, norm)), h.col.css);
+                });
+
+                ctx.fillStyle = screenGrad;
+                ctx.shadowColor = "rgba(255, 255, 255, 0.8)";
+                ctx.shadowBlur = 12;
+                ctx.fillRect(screenX - 4, minY - 4, 8, hStrip + 8);
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = "#cbd5e1";
+                ctx.font = "10px Inter, sans-serif";
+                ctx.textAlign = "left";
+                ctx.fillText(`Spectre visible (Δy = ${hStrip.toFixed(0)} px)`, screenX + 20, (minY + maxY) / 2);
+                ctx.fillStyle = "#ef4444";
+                ctx.fillText("Rouge (700 nm)", screenX + 20, minY);
+                ctx.fillStyle = "#8b5cf6";
+                ctx.fillText("Violet (400 nm)", screenX + 20, maxY + 8);
+            } else {
+                screenHits.forEach(h => {
+                    ctx.fillStyle = h.col.css;
+                    ctx.shadowColor = h.col.css;
+                    ctx.shadowBlur = 10;
+                    ctx.fillRect(screenX - 5, h.y - 3, 10, 6);
+                    ctx.shadowBlur = 0;
+
+                    if (h.label) {
+                        ctx.fillStyle = h.col.css;
+                        ctx.font = "10px Inter, sans-serif";
+                        ctx.textAlign = "left";
+                        ctx.fillText(h.label, screenX + 18, h.y + 3);
+                    }
+                });
+            }
+        }
+        ctx.restore();
+
+        // 9. Draw Mini-Graph D = f(i) in top right
+        if (showGraph) {
+            const plotW = 190;
+            const plotH = 135;
+            const plotX = 40;
+            const plotY = 25;
+            const refSim = calcPrismRay(589.3, angleI, angleA);
+            const nRef = getIndexForWavelength(589.3);
+            drawMiniPlot(plotX, plotY, plotW, plotH, angleI, refSim.DDeg, refSim.imDeg, refSim.DmDeg, nRef, ARad);
+        }
+    }
+
+    function updateCalculations() {
+        updateHUD();
+        updateTheory();
+        draw();
+    }
+
+    // Connect Event Listeners
+    if (sourceSelect) {
+        sourceSelect.onchange = () => {
+            sourceType = sourceSelect.value;
+            if (groupLambda) {
+                groupLambda.style.display = (sourceType === "laser") ? "flex" : "none";
+            }
+            updateCalculations();
+        };
+    }
+
+    if (materialSelect) {
+        materialSelect.onchange = () => {
+            materialKey = materialSelect.value;
+            if (groupCustomN) {
+                groupCustomN.style.display = (materialKey === "custom") ? "flex" : "none";
+            }
+            updateCalculations();
+        };
+    }
+
+    if (sliderI) {
+        sliderI.oninput = (e) => {
+            angleI = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (sliderA) {
+        sliderA.oninput = (e) => {
+            angleA = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (sliderLambda) {
+        sliderLambda.oninput = (e) => {
+            lambdaLaser = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (sliderCustomN) {
+        sliderCustomN.oninput = (e) => {
+            customN = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (sliderScreen) {
+        sliderScreen.oninput = (e) => {
+            screenDist = parseFloat(e.target.value);
+            updateCalculations();
+        };
+    }
+
+    if (checkAngles) {
+        checkAngles.onchange = (e) => {
+            showAngles = e.target.checked;
+            draw();
+        };
+    }
+
+    if (checkGraph) {
+        checkGraph.onchange = (e) => {
+            showGraph = e.target.checked;
+            draw();
+        };
+    }
+
+    if (btnDm) {
+        btnDm.onclick = () => {
+            const refWl = (sourceType === "laser") ? lambdaLaser : 589.3;
+            const sim = calcPrismRay(refWl, angleI, angleA);
+            if (sim.imDeg !== null) {
+                angleI = parseFloat(sim.imDeg.toFixed(1));
+                if (sliderI) sliderI.value = angleI;
+                updateCalculations();
+                if (typeof showToast === "function") {
+                    showToast(`Minimum de Déviation réglé : i = ${angleI}° (Dm = ${sim.DmDeg.toFixed(1)}°)`, true);
+                }
+            }
+        };
+    }
+
+    if (btnReset) {
+        btnReset.onclick = () => {
+            angleI = 48.0;
+            angleA = 60.0;
+            sourceType = "white";
+            materialKey = "flint";
+            screenDist = 220.0;
+
+            if (sliderI) sliderI.value = angleI;
+            if (sliderA) sliderA.value = angleA;
+            if (sourceSelect) sourceSelect.value = sourceType;
+            if (materialSelect) materialSelect.value = materialKey;
+            if (sliderScreen) sliderScreen.value = screenDist;
+            if (groupLambda) groupLambda.style.display = "none";
+            if (groupCustomN) groupCustomN.style.display = "none";
+
+            if (prismeAnimInterval) {
+                clearInterval(prismeAnimInterval);
+                prismeAnimInterval = null;
+                prismeIsSweeping = false;
+                if (btnAnimate) btnAnimate.innerHTML = '<i data-lucide="play"></i> Balayage Auto';
+            }
+
+            updateCalculations();
+        };
+    }
+
+    if (btnAnimate) {
+        btnAnimate.onclick = () => {
+            if (prismeAnimInterval) {
+                clearInterval(prismeAnimInterval);
+                prismeAnimInterval = null;
+                prismeIsSweeping = false;
+                btnAnimate.innerHTML = '<i data-lucide="play"></i> Balayage Auto';
+                btnAnimate.classList.remove("btn-primary");
+                btnAnimate.classList.add("btn-secondary");
+            } else {
+                prismeIsSweeping = true;
+                btnAnimate.innerHTML = '<i data-lucide="pause"></i> Arrêter Balayage';
+                btnAnimate.classList.remove("btn-secondary");
+                btnAnimate.classList.add("btn-primary");
+
+                const refSim = calcPrismRay(589.3, angleI, angleA);
+                const centerI = (refSim.imDeg !== null) ? refSim.imDeg : 50;
+
+                prismeAnimInterval = setInterval(() => {
+                    prismeSweepAngle += 0.035;
+                    angleI = centerI + 20 * Math.sin(prismeSweepAngle);
+                    if (sliderI) sliderI.value = angleI.toFixed(1);
+                    updateHUD();
+                    draw();
+                }, 30);
+            }
+            if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+        };
+    }
+
+    // Mouse & Touch Dragging
+    function getCanvasCoords(e) {
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+            x: (clientX - rect.left) * scaleX,
+            y: (clientY - rect.top) * scaleY
+        };
+    }
+
+    canvas.onmousedown = (e) => {
+        const pos = getCanvasCoords(e);
+        const screenX = Math.min(canvas.width - 25, 390 + 160 + screenDist);
+
+        if (Math.abs(pos.x - screenX) < 25) {
+            isDraggingScreen = true;
+        } else if (pos.x < 390) {
+            isDraggingRay = true;
+        }
+    };
+
+    window.onmousemove = (e) => {
+        if (!isDraggingRay && !isDraggingScreen) return;
+        const pos = getCanvasCoords(e);
+
+        if (isDraggingScreen) {
+            const newDist = Math.max(100, Math.min(380, pos.x - 550));
+            screenDist = newDist;
+            if (sliderScreen) sliderScreen.value = screenDist;
+            updateCalculations();
+        } else if (isDraggingRay) {
+            const P1 = { x: 390 - 240 * Math.tan(angleA * Math.PI / 360) * 0.52, y: 100 + 240 * 0.52 };
+            const dx = P1.x - pos.x;
+            const dy = P1.y - pos.y;
+            const angleMouse = Math.atan2(dy, dx);
+            const normInward = (angleA * Math.PI / 360);
+            let newI = (normInward - angleMouse) * 180 / Math.PI;
+            newI = Math.max(-75, Math.min(75, newI));
+            angleI = parseFloat(newI.toFixed(1));
+            if (sliderI) sliderI.value = angleI;
+            updateCalculations();
+        }
+    };
+
+    window.onmouseup = () => {
+        isDraggingRay = false;
+        isDraggingScreen = false;
+    };
+
+    // Initial render
+    updateCalculations();
+    requestAnimationFrame(updateCalculations);
+}
+window.setupPrismeOptiqueSimulator = setupPrismeOptiqueSimulator;

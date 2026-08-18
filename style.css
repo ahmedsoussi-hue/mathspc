@@ -4341,3 +4341,58 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
+
+
+/* --- SIMULATION PRISME OPTIQUE & DISPERSION --- */
+.prism-hud-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.prism-hud-card {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px 8px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+}
+
+.prism-hud-card:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-1px);
+}
+
+.prism-hud-label {
+    font-size: 0.74rem;
+    color: var(--text-muted, #94a3b8);
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.prism-hud-value {
+    font-size: 1.12rem;
+    font-weight: 700;
+    font-family: var(--font-mono, monospace);
+}
+
+.prism-status-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+.prism-status-pill.status-emergence {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.prism-status-pill.status-tir {
+    background: rgba(239, 68, 68, 0.18);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}

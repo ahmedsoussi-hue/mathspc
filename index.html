@@ -226,6 +226,22 @@
                     </div>
                 </div>
 
+                <!-- Prisme Optique & Dispersion -->
+                <div class="anim-card" data-anim="prisme-optique" onclick="navigateToAnim('prisme-optique')">
+                    <div class="anim-card-img-wrapper">
+                        <img src="assets/images/prism_dispersion.jpg" alt="Prisme Optique & Dispersion de la Lumière" loading="lazy">
+                        <span class="anim-card-badge badge-optique"><i data-lucide="sun"></i> Optique & Ondes</span>
+                    </div>
+                    <div class="anim-card-content">
+                        <h3>Prisme Optique : Réfraction & Dispersion</h3>
+                        <p>Étudiez les lois de Snell-Descartes, la décomposition de la lumière blanche, le minimum de déviation \(D_m\) et la formule de Cauchy.</p>
+                        <div class="anim-card-footer">
+                            <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
                 <!-- 4. Charge & Décharge Condensateur RC -->
                 <div class="anim-card" data-anim="charge-decharge-rc" onclick="navigateToAnim('charge-decharge-rc')">
                     <div class="anim-card-img-wrapper">
@@ -609,6 +625,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Prisme Optique & Dispersion -->
+                    <div class="anim-card" data-anim="prisme-optique" data-category="optique" data-keywords="prisme optique dispersion lumiere blanche spectre newton refraction snell descartes cauchy deviation minimum reflection totale angle sommet">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/prism_dispersion.jpg" alt="Prisme Optique & Dispersion de la Lumière" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="sun"></i> Optique & Ondes</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Prisme Optique : Réfraction & Dispersion</h3>
+                            <p>Simulation interactive du prisme : réfraction aux deux dioptres, décomposition spectrale, calculs d'angles et minimum de déviation \(D_m\).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <!-- 4. Charge & Décharge Condensateur RC -->
                     <div class="anim-card" data-anim="charge-decharge-rc" data-category="electricite" data-keywords="charge decharge condensateur rc constante de temps tau oscillogramme rlc">
@@ -1003,6 +1035,145 @@
                             <!-- Injected dynamically by JS depending on method -->
                         </div>
                     </div>
+
+                    <!-- Prisme Optique Simulation -->
+                    <div class="anim-workspace" id="anim-prisme-optique" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                                <div>
+                                    <h3 style="display:flex; align-items:center; gap:8px;">
+                                        <i data-lucide="sparkles" style="color:var(--primary);"></i> Prisme Optique - Réfraction, Dispersion & Déviation
+                                    </h3>
+                                    <p>Visualisez la décomposition de la lumière blanche (spectre de Newton), les lois de Snell-Descartes, la réflexion totale interne et le minimum de déviation \(D_m\).</p>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn btn-secondary btn-sm" id="btn-prism-animate"><i data-lucide="play"></i> Balayage Auto</button>
+                                    <button class="btn btn-secondary btn-sm" id="btn-prism-reset"><i data-lucide="rotate-ccw"></i> Réinitialiser</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canvas container with interactive prism -->
+                        <div class="canvas-container" style="position: relative; background: #070a13; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
+                            <canvas id="canvas-prisme-optique" width="950" height="460"></canvas>
+                        </div>
+
+                        <!-- Live Measurements HUD Cards -->
+                        <div class="prism-hud-grid" id="prism-hud-grid">
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Angle d'incidence \(i\)</div>
+                                <div id="hud-prism-i" class="prism-hud-value" style="color: #f59e0b;">48.0°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Réfraction \(r\)</div>
+                                <div id="hud-prism-r" class="prism-hud-value" style="color: #38bdf8;">29.2°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Interne \(r'\)</div>
+                                <div id="hud-prism-rprime" class="prism-hud-value" style="color: #10b981;">30.8°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Émergence \(i'\)</div>
+                                <div id="hud-prism-iprime" class="prism-hud-value" style="color: #ec4899;">51.3°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Déviation \(D\)</div>
+                                <div id="hud-prism-D" class="prism-hud-value" style="color: #a855f7;">39.3°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Min. \(D_m\)</div>
+                                <div id="hud-prism-Dm" class="prism-hud-value" style="color: #eab308;">38.9°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Angle Limite \(r'_{lim}\)</div>
+                                <div id="hud-prism-rlim" class="prism-hud-value" style="color: #94a3b8;">41.1°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">État Faisceau</div>
+                                <div id="hud-prism-status" style="margin-top: 3px;"><span class="prism-status-pill status-emergence">Émergence</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Workspace Controls -->
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));">
+                            <!-- Source Lumineuse -->
+                            <div class="control-group">
+                                <label for="prism-source"><i data-lucide="lightbulb"></i> Source Lumineuse :</label>
+                                <select id="prism-source" class="focometrie-select">
+                                    <option value="white">Lumière Blanche (Spectre Continu)</option>
+                                    <option value="laser">Laser Monochromatique (λ réglable)</option>
+                                    <option value="sodium">Lampe Sodium (Na: 589.0 nm / 589.6 nm)</option>
+                                    <option value="mercure">Lampe Mercure (Hg: 404.7, 435.8, 546.1, 579 nm)</option>
+                                    <option value="hydrogene">Hydrogène (Balmer: Hα, Hβ, Hγ, Hδ)</option>
+                                </select>
+                            </div>
+
+                            <!-- Matériau du Prisme -->
+                            <div class="control-group">
+                                <label for="prism-material"><i data-lucide="box"></i> Matériau du Prisme :</label>
+                                <select id="prism-material" class="focometrie-select">
+                                    <option value="flint">Verre Flint (n = 1.620 - Haute dispersion)</option>
+                                    <option value="crown">Verre Crown (n = 1.517 - Standard)</option>
+                                    <option value="flint_dense">Flint Dense SF11 (n = 1.755)</option>
+                                    <option value="quartz">Silice Fondue / Quartz (n = 1.458)</option>
+                                    <option value="diamant">Diamant (n = 2.417)</option>
+                                    <option value="eau">Eau liquide (n = 1.333)</option>
+                                    <option value="custom">Personnalisé (Indice variable)</option>
+                                </select>
+                            </div>
+
+                            <!-- Angle d'Incidence i -->
+                            <div class="control-group" id="group-prism-i">
+                                <label for="prism-i">Angle d'incidence \(i\) : <span id="val-prism-i" style="font-weight:700; color:var(--primary);">48.0</span>°</label>
+                                <input type="range" id="prism-i" min="-75" max="75" step="0.5" value="48">
+                            </div>
+
+                            <!-- Angle au Sommet A -->
+                            <div class="control-group" id="group-prism-A">
+                                <label for="prism-A">Angle au sommet \(A\) : <span id="val-prism-A" style="font-weight:700; color:var(--secondary);">60</span>°</label>
+                                <input type="range" id="prism-A" min="30" max="75" step="1" value="60">
+                            </div>
+
+                            <!-- Longueur d'onde lambda (if laser) -->
+                            <div class="control-group" id="group-prism-lambda" style="display: none;">
+                                <label for="prism-lambda">Longueur d'onde \(\lambda\) : <span id="val-prism-lambda" style="font-weight:700;">589</span> nm <span id="badge-prism-color" style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#eab308; vertical-align:middle; margin-left:4px; box-shadow: 0 0 6px #eab308;"></span></label>
+                                <input type="range" id="prism-lambda" min="380" max="750" step="1" value="589">
+                            </div>
+
+                            <!-- Indice Custom (if custom material) -->
+                            <div class="control-group" id="group-prism-custom-n" style="display: none;">
+                                <label for="prism-custom-n">Indice \(n\) : <span id="val-prism-custom-n" style="font-weight:700;">1.50</span></label>
+                                <input type="range" id="prism-custom-n" min="1.10" max="2.50" step="0.01" value="1.50">
+                            </div>
+
+                            <!-- Distance Écran -->
+                            <div class="control-group" id="group-prism-screen">
+                                <label for="prism-screen-dist">Distance Écran : <span id="val-prism-screen-dist" style="font-weight:700;">220</span> mm</label>
+                                <input type="range" id="prism-screen-dist" min="100" max="380" step="5" value="220">
+                            </div>
+
+                            <!-- Actions & Toggles -->
+                            <div class="control-group" style="display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+                                <button class="btn btn-primary" id="btn-prism-dm" style="width: 100%;">
+                                    <i data-lucide="target"></i> Caler sur \(D_m\) (Min. Déviation)
+                                </button>
+                                <div style="display:flex; gap: 12px; flex-wrap:wrap; font-size: 0.8rem; color: #94a3b8; margin-top: 4px;">
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="prism-show-angles" checked> Normales & Angles
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="prism-show-graph" checked> Graphe \(D(i)\)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theory Section -->
+                        <div class="workspace-theory" id="prisme-optique-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
 
                     <!-- Photovoltaïque Simulation -->
                     <div class="anim-workspace" id="anim-photovoltaique" style="display:none;">
