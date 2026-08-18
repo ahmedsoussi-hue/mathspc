@@ -241,6 +241,22 @@
                     </div>
                 </div>
 
+                <!-- Fibre Optique & Guidage -->
+                <div class="anim-card" data-anim="fibre-optique" onclick="navigateToAnim('fibre-optique')">
+                    <div class="anim-card-img-wrapper">
+                        <img src="assets/images/fiber_optics.jpg" alt="Fibre Optique & Guidage de la Lumière" loading="lazy">
+                        <span class="anim-card-badge badge-optique"><i data-lucide="radio"></i> Optique & Télécoms</span>
+                    </div>
+                    <div class="anim-card-content">
+                        <h3>Fibre Optique : Guidage & Réflexion Totale</h3>
+                        <p>Étudiez le guidage par réflexion totale interne (RTI), l'ouverture numérique (ON), le cône d'acceptance, les pertes par courbure et la dispersion intermodale.</p>
+                        <div class="anim-card-footer">
+                            <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <!-- 4. Charge & Décharge Condensateur RC -->
                 <div class="anim-card" data-anim="charge-decharge-rc" onclick="navigateToAnim('charge-decharge-rc')">
@@ -640,6 +656,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Fibre Optique & Guidage -->
+                    <div class="anim-card" data-anim="fibre-optique" data-category="optique" data-keywords="fibre optique guidage reflexion totale interne rti ouverture numerique on cone acceptance gaine coeur dispersion intermodale courbure telecom">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/fiber_optics.jpg" alt="Fibre Optique & Guidage de la Lumière" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="radio"></i> Optique & Télécoms</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Fibre Optique : Guidage & Réflexion Totale</h3>
+                            <p>Simulation interactive complète : saut d'indice, gradient d'indice (GRIN), pertes par macro-courbure, cône d'acceptance et propagation d'impulsions lumineuses.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
 
 
                     <!-- 4. Charge & Décharge Condensateur RC -->
@@ -1173,6 +1205,138 @@
                             <!-- Injected dynamically by JS -->
                         </div>
                     </div>
+
+                    <!-- Fibre Optique Simulation -->
+                    <div class="anim-workspace" id="anim-fibre-optique" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                                <div>
+                                    <h3 style="display:flex; align-items:center; gap:8px;">
+                                        <i data-lucide="radio" style="color:var(--primary);"></i> Fibre Optique - Guidage, Réflexion Totale & Ouverture Numérique
+                                    </h3>
+                                    <p>Simulez la propagation de faisceaux laser dans une fibre optique (saut d'indice, gradient GRIN, courbure), observez le cône d'acceptance et mesurez la dispersion intermodale.</p>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button class="btn btn-secondary btn-sm" id="btn-fiber-animate"><i data-lucide="play"></i> Animation Flux</button>
+                                    <button class="btn btn-secondary btn-sm" id="btn-fiber-reset"><i data-lucide="rotate-ccw"></i> Réinitialiser</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Canvas container with interactive optical fiber -->
+                        <div class="canvas-container" style="position: relative; background: #060913; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
+                            <canvas id="canvas-fibre-optique" width="950" height="460"></canvas>
+                        </div>
+
+                        <!-- Live Measurements HUD Cards -->
+                        <div class="prism-hud-grid" id="fiber-hud-grid">
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Angle d'injection \(\theta_0\)</div>
+                                <div id="hud-fiber-theta0" class="prism-hud-value" style="color: #f59e0b;">12.0°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Réfraction Cœur \(r\)</div>
+                                <div id="hud-fiber-r" class="prism-hud-value" style="color: #38bdf8;">8.0°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Incidence Interne \(\theta\)</div>
+                                <div id="hud-fiber-theta" class="prism-hud-value" style="color: #10b981;">82.0°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Angle Critique \(\theta_c\)</div>
+                                <div id="hud-fiber-thetac" class="prism-hud-value" style="color: #ef4444;">76.7°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Ouverture Num. \(ON\)</div>
+                                <div id="hud-fiber-on" class="prism-hud-value" style="color: #a855f7;">0.344</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Acceptance Max \(\theta_{max}\)</div>
+                                <div id="hud-fiber-thetamax" class="prism-hud-value" style="color: #eab308;">20.1°</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">Dispersion \(\Delta \tau\)</div>
+                                <div id="hud-fiber-dispersion" class="prism-hud-value" style="color: #38bdf8;">137 ns/km</div>
+                            </div>
+                            <div class="prism-hud-card">
+                                <div class="prism-hud-label">État du Guidage</div>
+                                <div id="hud-fiber-status" style="margin-top: 3px;"><span class="prism-status-pill status-emergence">Guidage Parfait (RTI)</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Workspace Controls -->
+                        <div class="workspace-controls" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));">
+                            <!-- Profil de la Fibre -->
+                            <div class="control-group">
+                                <label for="fiber-type"><i data-lucide="layers"></i> Profil & Structure :</label>
+                                <select id="fiber-type" class="focometrie-select">
+                                    <option value="step">Fibre à Saut d'Indice (Multimode standard)</option>
+                                    <option value="single">Fibre Monomode (Cœur très fin)</option>
+                                    <option value="grin">Fibre à Gradient d'Indice (GRIN Parabolique)</option>
+                                    <option value="curved">Fibre Courbée (Pertes par Macro-Courbure)</option>
+                                </select>
+                            </div>
+
+                            <!-- Mode Faisceau -->
+                            <div class="control-group">
+                                <label for="fiber-beam-mode"><i data-lucide="zap"></i> Source & Faisceau :</label>
+                                <select id="fiber-beam-mode" class="focometrie-select">
+                                    <option value="single">Rayon Laser Unique (Traçage précis)</option>
+                                    <option value="multimode">Faisceau Multimode (Plusieurs modes)</option>
+                                    <option value="cone">Cône d'Acceptance Complet</option>
+                                    <option value="pulse">Impulsion Lumineuse (Étude Temporelle)</option>
+                                </select>
+                            </div>
+
+                            <!-- Angle d'Injection theta0 -->
+                            <div class="control-group" id="group-fiber-theta0">
+                                <label for="fiber-theta0">Angle d'injection \(\theta_0\) : <span id="val-fiber-theta0" style="font-weight:700; color:var(--primary);">12.0</span>°</label>
+                                <input type="range" id="fiber-theta0" min="-50" max="50" step="0.5" value="12">
+                            </div>
+
+                            <!-- Indice du Coeur n1 -->
+                            <div class="control-group" id="group-fiber-n1">
+                                <label for="fiber-n1">Indice Cœur \(n_1\) : <span id="val-fiber-n1" style="font-weight:700; color:var(--secondary);">1.500</span></label>
+                                <input type="range" id="fiber-n1" min="1.450" max="1.650" step="0.005" value="1.500">
+                            </div>
+
+                            <!-- Indice de la Gaine n2 -->
+                            <div class="control-group" id="group-fiber-n2">
+                                <label for="fiber-n2">Indice Gaine \(n_2\) : <span id="val-fiber-n2" style="font-weight:700; color:#cbd5e1;">1.460</span></label>
+                                <input type="range" id="fiber-n2" min="1.400" max="1.550" step="0.005" value="1.460">
+                            </div>
+
+                            <!-- Rayon de Courbure (if curved) -->
+                            <div class="control-group" id="group-fiber-radius" style="display: none;">
+                                <label for="fiber-radius">Rayon de Courbure \(R\) : <span id="val-fiber-radius" style="font-weight:700; color:#eab308;">220</span> mm</label>
+                                <input type="range" id="fiber-radius" min="60" max="450" step="5" value="220">
+                            </div>
+
+                            <!-- Actions & Toggles -->
+                            <div class="control-group" style="display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+                                <button class="btn btn-primary" id="btn-fiber-thetamax" style="width: 100%;">
+                                    <i data-lucide="target"></i> Caler sur \(\theta_{max}\) (Limite d'Acceptance)
+                                </button>
+                                <div style="display:flex; gap: 12px; flex-wrap:wrap; font-size: 0.8rem; color: #94a3b8; margin-top: 4px;">
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="fiber-show-cone" checked> Cône d'Acceptance
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="fiber-show-angles" checked> Normales & Angles
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:4px; cursor:pointer;">
+                                        <input type="checkbox" id="fiber-show-losses" checked> Pertes dans la Gaine
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theory Section -->
+                        <div class="workspace-theory" id="fibre-optique-theory">
+                            <!-- Injected dynamically by JS -->
+                        </div>
+                    </div>
+
 
 
                     <!-- Photovoltaïque Simulation -->

@@ -7487,7 +7487,9 @@ function setupAnimations() {
 }
 
 function initCanvasFor(type) {
-    if (type === "prisme-optique") {
+    if (type === "fibre-optique") {
+        setupFibreOptiqueSimulator();
+    } else if (type === "prisme-optique") {
         setupPrismeOptiqueSimulator();
     } else if (type === "wave") {
         setupWaveSimulator();
