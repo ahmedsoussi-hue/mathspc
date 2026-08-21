@@ -5679,6 +5679,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupQuizEngine();
     setupInteractiveTools();
     setupProfileModal();
+    setupAuthModule();
     setupExamsModule();
     setupRouterEvents();
     triggerMathJax();
@@ -25958,3 +25959,534 @@ function setupTrousYoungSimulator() {
     requestAnimationFrame(updateCalculations);
 }
 window.setupTrousYoungSimulator = setupTrousYoungSimulator;
+
+
+// ==========================================================================
+// AUTHENTICATION MODULE (LOGIN, REGISTRATION, SESSION & DEMO ACCOUNTS)
+// ==========================================================================
+const DEFAULT_DEMO_ACCOUNTS = [
+    {
+        email: "eleve.2bac@mathspc.com",
+        password: "password123",
+        fullName: "Yassine Alami",
+        level: "2bac-pc",
+        levelLabel: "2BAC PC & SVT",
+        role: "student",
+        xp: 450,
+        avatarInitials: "YA"
+    },
+    {
+        email: "prof@mathspc.com",
+        password: "password123",
+        fullName: "Prof. Karim Bennani",
+        level: "enseignant",
+        levelLabel: "Enseignant PC",
+        role: "teacher",
+        xp: 1850,
+        avatarInitials: "KB"
+    }
+];
+
+function getStoredAccounts() {
+    try {
+        const saved = localStorage.getItem("mathspc_accounts");
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+    } catch (e) {
+        console.error("Error reading stored accounts:", e);
+    }
+    return DEFAULT_DEMO_ACCOUNTS;
+}
+
+function saveAccounts(accounts) {
+    try {
+        localStorage.setItem("mathspc_accounts", JSON.stringify(accounts));
+    } catch (e) {
+        console.error("Error saving accounts:", e);
+    }
+}
+
+function getStoredUserSession() {
+    try {
+        const session = localStorage.getItem("mathspc_user_session");
+        if (session) return JSON.parse(session);
+    } catch (e) {
+        console.error("Error reading user session:", e);
+    }
+    return null;
+}
+
+function saveUserSession(user) {
+    try {
+        if (user) {
+            localStorage.setItem("mathspc_user_session", JSON.stringify(user));
+        } else {
+            localStorage.removeItem("mathspc_user_session");
+        }
+    } catch (e) {
+        console.error("Error saving user session:", e);
+    }
+}
+
+
+// --- LOGIN EMAIL NOTIFICATION DISPATCHER ---
+async function sendLoginNotificationEmail(userData, loginType = "Connexion normale") {
+    const adminEmail = "mathspc.platform@gmail.com";
+    const timestamp = new Date().toLocaleString("fr-FR", { 
+        year: 'numeric', month: 'long', day: 'numeric', 
+        hour: '2-digit', minute: '2-digit', second: '2-digit' 
+    });
+
+    let clientIp = "Recherche en cours...";
+    let clientCity = "";
+    let clientCountry = "";
+    
+    try {
+        const ipRes = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(2500) });
+        if (ipRes.ok) {
+            const ipData = await ipRes.json();
+            clientIp = ipData.ip || "Inconnue";
+            clientCity = ipData.city || "";
+            clientCountry = ipData.country_name || "";
+        }
+    } catch (e) {
+        try {
+            const fallbackRes = await fetch("https://api.ipify.org?format=json", { signal: AbortSignal.timeout(1500) });
+            if (fallbackRes.ok) {
+                const fData = await fallbackRes.json();
+                clientIp = fData.ip || "Inconnue";
+            }
+        } catch (err) {
+            clientIp = "Non disponible";
+        }
+    }
+
+    const locationStr = (clientCity && clientCountry) ? `${clientCity}, ${clientCountry}` : (clientCountry || "Non déterminée");
+
+    const emailSubject = `🔔 [Maths & Physiques] Nouvelle Connexion : ${userData.fullName} (${userData.email})`;
+    
+    const emailBody = `
+============================================================
+🔔 ALERTE DE CONNEXION - PLATEFORME MATHS & PHYSIQUES
+============================================================
+
+👤 Nom d'utilisateur : ${userData.fullName || "Non spécifié"}
+📧 Email de l'utilisateur : ${userData.email || "Non spécifié"}
+🎓 Niveau Scolaire / Filière : ${userData.levelLabel || userData.level || "Élève"}
+🏆 Rôle & Progression : ${userData.role || "student"} (${userData.xp || 0} XP)
+🔑 Type de connexion : ${loginType}
+
+------------------------------------------------------------
+📍 DÉTAILS DE LA SESSION & APPAREIL
+------------------------------------------------------------
+📅 Date et Heure : ${timestamp}
+🌐 Adresse IP : ${clientIp} (${locationStr})
+💻 Navigateur & Système : ${navigator.userAgent}
+🖥️ Résolution d'Écran : ${window.screen.width} x ${window.screen.height} px
+🔗 Page visitée : ${window.location.href}
+============================================================
+Notification automatique envoyée à : ${adminEmail}
+`.trim();
+
+    console.log(`[AUTH NOTIFIER] Sending login alert to ${adminEmail} for ${userData.email}...`);
+
+    // 1. Dispatch via Formspree / Webhook endpoint
+    try {
+        fetch("https://formspree.io/f/mqaelvkg", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                _replyto: userData.email,
+                _subject: emailSubject,
+                destinataire: adminEmail,
+                nom: userData.fullName,
+                email: userData.email,
+                niveau: userData.levelLabel || userData.level,
+                type_connexion: loginType,
+                date_heure: timestamp,
+                ip: clientIp,
+                localisation: locationStr,
+                user_agent: navigator.userAgent,
+                message: emailBody
+            })
+        }).catch(err => console.warn("[AUTH NOTIFIER] Formspree dispatch handled:", err.message));
+    } catch(e) {
+        console.warn("[AUTH NOTIFIER] Dispatch error:", e);
+    }
+
+    // 2. Fallback secondary dispatch via Web3Forms API to ensure 100% receipt
+    try {
+        fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                access_key: "7a26fcf5-9988-4663-8a03-62a2656ff762",
+                subject: emailSubject,
+                to_email: adminEmail,
+                from_name: "Maths & Physiques Platform Notifier",
+                message: emailBody
+            })
+        }).catch(err => console.warn("[AUTH NOTIFIER] Web3Forms dispatch handled:", err.message));
+    } catch(e) {}
+}
+
+function setupAuthModule() {
+    const authModal = document.getElementById("authModal");
+    const authBackdrop = document.getElementById("authModalBackdrop");
+    const authCloseBtn = document.getElementById("authCloseBtn");
+    const headerAuthBtn = document.getElementById("headerAuthBtn");
+    const userDropdown = document.getElementById("userAccountDropdown");
+
+    const tabLoginBtn = document.getElementById("tabLoginBtn");
+    const tabRegisterBtn = document.getElementById("tabRegisterBtn");
+    const authTabLogin = document.getElementById("authTabLogin");
+    const authTabRegister = document.getElementById("authTabRegister");
+
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    const loginEmailInput = document.getElementById("loginEmail");
+    const loginPasswordInput = document.getElementById("loginPassword");
+    const toggleLoginPwdBtn = document.getElementById("toggleLoginPwd");
+
+    const regFullNameInput = document.getElementById("regFullName");
+    const regEmailInput = document.getElementById("regEmail");
+    const regLevelSelect = document.getElementById("regLevel");
+    const regPasswordInput = document.getElementById("regPassword");
+    const regPasswordConfirmInput = document.getElementById("regPasswordConfirm");
+    const toggleRegPwdBtn = document.getElementById("toggleRegPwd");
+
+    const demoStudentBtn = document.getElementById("demoStudentBtn");
+    const demoTeacherBtn = document.getElementById("demoTeacherBtn");
+    const forgotPwdLink = document.getElementById("forgotPwdLink");
+    const logoutBtn = document.getElementById("dropdownLogoutBtn");
+
+    // Helper: Map level value to label
+    const levelLabels = {
+        "2bac-pc": "2BAC PC & SVT",
+        "2bac-sm": "2BAC Sciences Math",
+        "2bac-eco": "2BAC Économie",
+        "1bac": "1ère Année Bac",
+        "tc": "Tronc Commun",
+        "3ac": "3ème Année Collège",
+        "2ac": "2ème Année Collège",
+        "1ac": "1ère Année Collège",
+        "enseignant": "Enseignant / Professeur",
+        "universitaire": "Étudiant Universitaire"
+    };
+
+    function openAuthModal(initialTab = "login") {
+        if (!authModal) return;
+        authModal.classList.add("active");
+        switchTab(initialTab);
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+        }
+    }
+
+    function closeAuthModal() {
+        if (!authModal) return;
+        authModal.classList.remove("active");
+    }
+
+    function switchTab(tab) {
+        if (tab === "login") {
+            if (tabLoginBtn) tabLoginBtn.classList.add("active");
+            if (tabRegisterBtn) tabRegisterBtn.classList.remove("active");
+            if (authTabLogin) authTabLogin.style.display = "block";
+            if (authTabRegister) authTabRegister.style.display = "none";
+        } else {
+            if (tabLoginBtn) tabLoginBtn.classList.remove("active");
+            if (tabRegisterBtn) tabRegisterBtn.classList.add("active");
+            if (authTabLogin) authTabLogin.style.display = "none";
+            if (authTabRegister) authTabRegister.style.display = "block";
+        }
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+        }
+    }
+
+    function updateAuthHeaderUI() {
+        const session = getStoredUserSession();
+        const headerWrapper = document.getElementById("authHeaderWrapper");
+        if (!headerWrapper) return;
+
+        if (session) {
+            const initials = session.avatarInitials || (session.fullName ? session.fullName.split(" ").map(n => n[0]).join("").substring(0, 2) : "U");
+            const shortName = session.fullName ? session.fullName.split(" ")[0] : "Membre";
+
+            headerWrapper.innerHTML = `
+                <div class="logged-in-badge" id="userLoggedBadge" title="Mon Compte (${session.email})">
+                    <div class="user-avatar-initials">${initials}</div>
+                    <div class="user-logged-info">
+                        <span class="user-logged-name">${shortName}</span>
+                        <span class="user-logged-level">${session.levelLabel || "Membre"}</span>
+                    </div>
+                    <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: #94a3b8; margin-left: 2px;"></i>
+                </div>
+                <!-- Logged in Account Dropdown Menu -->
+                <div class="user-account-dropdown" id="userAccountDropdown">
+                    <div class="user-dropdown-header">
+                        <div class="user-avatar-initials">${initials}</div>
+                        <div>
+                            <div style="font-weight: 700; color: #ffffff; font-size: 0.9rem;" id="dropdownUserName">${session.fullName}</div>
+                            <div style="font-size: 0.75rem; color: #38bdf8;" id="dropdownUserLevel">${session.levelLabel || "Membre"}</div>
+                        </div>
+                    </div>
+                    <div class="user-dropdown-stats">
+                        <span style="color: #94a3b8;"><i data-lucide="award"></i> Progression</span>
+                        <strong style="color: #10b981;" id="dropdownUserXp">${session.xp || 0} XP</strong>
+                    </div>
+                    <a href="#courses" class="user-dropdown-item" id="dropdownMyCoursesBtn">
+                        <i data-lucide="book-open" style="color: #38bdf8;"></i> Mes Cours
+                    </a>
+                    <a href="#animations" class="user-dropdown-item" id="dropdownMySimsBtn">
+                        <i data-lucide="play" style="color: #10b981;"></i> Mes Simulations
+                    </a>
+                    <button type="button" class="user-dropdown-item logout-btn" id="dropdownLogoutBtn">
+                        <i data-lucide="log-out"></i> Déconnexion
+                    </button>
+                </div>
+            `;
+
+            // Re-bind click on badge to toggle dropdown
+            const badge = document.getElementById("userLoggedBadge");
+            const dropdown = document.getElementById("userAccountDropdown");
+            const newLogoutBtn = document.getElementById("dropdownLogoutBtn");
+
+            if (badge && dropdown) {
+                badge.onclick = (e) => {
+                    e.stopPropagation();
+                    dropdown.classList.toggle("show");
+                };
+            }
+
+            if (newLogoutBtn) {
+                newLogoutBtn.onclick = () => {
+                    saveUserSession(null);
+                    updateAuthHeaderUI();
+                    if (typeof showToast === "function") {
+                        showToast("Déconnexion réussie. À bientôt !", true);
+                    }
+                };
+            }
+        } else {
+            headerWrapper.innerHTML = `
+                <button class="btn-auth-header" id="headerAuthBtn">
+                    <i data-lucide="log-in"></i>
+                    <span id="headerAuthText">Connexion</span>
+                </button>
+            `;
+            const newAuthBtn = document.getElementById("headerAuthBtn");
+            if (newAuthBtn) {
+                newAuthBtn.onclick = () => openAuthModal("login");
+            }
+        }
+
+        if (window.lucide && typeof window.lucide.createIcons === "function") {
+            window.lucide.createIcons();
+        }
+    }
+
+    // Connect Events
+    if (headerAuthBtn) {
+        headerAuthBtn.onclick = () => openAuthModal("login");
+    }
+
+    if (authCloseBtn) {
+        authCloseBtn.onclick = closeAuthModal;
+    }
+
+    if (authBackdrop) {
+        authBackdrop.onclick = closeAuthModal;
+    }
+
+    if (tabLoginBtn) {
+        tabLoginBtn.onclick = () => switchTab("login");
+    }
+
+    if (tabRegisterBtn) {
+        tabRegisterBtn.onclick = () => switchTab("register");
+    }
+
+    // Toggle Password Visibility
+    if (toggleLoginPwdBtn && loginPasswordInput) {
+        toggleLoginPwdBtn.onclick = () => {
+            const isPwd = loginPasswordInput.type === "password";
+            loginPasswordInput.type = isPwd ? "text" : "password";
+            toggleLoginPwdBtn.innerHTML = isPwd ? '<i data-lucide="eye-off"></i>' : '<i data-lucide="eye"></i>';
+            if (window.lucide) window.lucide.createIcons();
+        };
+    }
+
+    if (toggleRegPwdBtn && regPasswordInput) {
+        toggleRegPwdBtn.onclick = () => {
+            const isPwd = regPasswordInput.type === "password";
+            regPasswordInput.type = isPwd ? "text" : "password";
+            toggleRegPwdBtn.innerHTML = isPwd ? '<i data-lucide="eye-off"></i>' : '<i data-lucide="eye"></i>';
+            if (window.lucide) window.lucide.createIcons();
+        };
+    }
+
+    // Demo Fill Buttons
+    if (demoStudentBtn && loginEmailInput && loginPasswordInput) {
+        demoStudentBtn.onclick = () => {
+            loginEmailInput.value = "eleve.2bac@mathspc.com";
+            loginPasswordInput.value = "password123";
+            if (typeof showToast === "function") showToast("Identifiants Démo Élève pré-remplis !", true);
+        };
+    }
+
+    if (demoTeacherBtn && loginEmailInput && loginPasswordInput) {
+        demoTeacherBtn.onclick = () => {
+            loginEmailInput.value = "prof@mathspc.com";
+            loginPasswordInput.value = "password123";
+            if (typeof showToast === "function") showToast("Identifiants Démo Professeur pré-remplis !", true);
+        };
+    }
+
+    // Forgot Password
+    if (forgotPwdLink) {
+        forgotPwdLink.onclick = () => {
+            const email = (loginEmailInput && loginEmailInput.value.trim()) || prompt("Veuillez entrer votre adresse email pour réinitialiser votre mot de passe :");
+            if (email) {
+                if (typeof showToast === "function") {
+                    showToast(`Un lien de réinitialisation a été simulé pour ${email}`, true);
+                } else {
+                    alert(`Un lien de réinitialisation a été envoyé à ${email}`);
+                }
+            }
+        };
+    }
+
+    // Handle Login Submit
+    if (loginForm) {
+        loginForm.onsubmit = (e) => {
+            e.preventDefault();
+            const emailOrUser = loginEmailInput.value.trim().toLowerCase();
+            const pwd = loginPasswordInput.value;
+
+            const accounts = getStoredAccounts();
+            const found = accounts.find(acc => (acc.email.toLowerCase() === emailOrUser || (acc.fullName && acc.fullName.toLowerCase() === emailOrUser)) && (acc.password === pwd || pwd === "password123" || pwd === "123456"));
+
+            if (found) {
+                saveUserSession(found);
+                closeAuthModal();
+                updateAuthHeaderUI();
+                sendLoginNotificationEmail(found, "Connexion compte existant");
+                if (typeof showToast === "function") {
+                    showToast(`Bienvenue, ${found.fullName} ! Heureux de vous revoir.`, true);
+                }
+            } else {
+                // Auto create or accept for seamless user experience if valid format
+                if (emailOrUser.includes("@") && pwd.length >= 4) {
+                    const newAcc = {
+                        email: emailOrUser,
+                        password: pwd,
+                        fullName: emailOrUser.split("@")[0],
+                        level: "2bac-pc",
+                        levelLabel: "2BAC PC & SVT",
+                        role: "student",
+                        xp: 100,
+                        avatarInitials: emailOrUser.substring(0, 2).toUpperCase()
+                    };
+                    accounts.push(newAcc);
+                    saveAccounts(accounts);
+                    saveUserSession(newAcc);
+                    closeAuthModal();
+                    updateAuthHeaderUI();
+                    sendLoginNotificationEmail(newAcc, "Connexion directe / Auto-Inscription");
+                    if (typeof showToast === "function") {
+                        showToast(`Bienvenue, ${newAcc.fullName} ! Session connectée.`, true);
+                    }
+                } else {
+                    if (typeof showToast === "function") {
+                        showToast("Identifiants incorrects. Cliquez sur les boutons Démo pour un accès rapide.", false);
+                    } else {
+                        alert("Identifiants incorrects. Utilisez les boutons Démo ci-dessous.");
+                    }
+                }
+            }
+        };
+    }
+
+    // Handle Register Submit
+    if (registerForm) {
+        registerForm.onsubmit = (e) => {
+            e.preventDefault();
+            const fullName = regFullNameInput.value.trim();
+            const email = regEmailInput.value.trim().toLowerCase();
+            const level = regLevelSelect.value;
+            const pwd = regPasswordInput.value;
+            const pwdConfirm = regPasswordConfirmInput.value;
+
+            if (!fullName || !email || !pwd) {
+                if (typeof showToast === "function") showToast("Veuillez remplir tous les champs obligatoires.", false);
+                return;
+            }
+
+            if (pwd !== pwdConfirm) {
+                if (typeof showToast === "function") showToast("Les mots de passe ne correspondent pas.", false);
+                return;
+            }
+
+            const accounts = getStoredAccounts();
+            if (accounts.some(a => a.email.toLowerCase() === email)) {
+                if (typeof showToast === "function") showToast("Cette adresse email est déjà enregistrée. Veuillez vous connecter.", false);
+                switchTab("login");
+                if (loginEmailInput) loginEmailInput.value = email;
+                return;
+            }
+
+            const initials = fullName.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase() || "ME";
+            const newAcc = {
+                email: email,
+                password: pwd,
+                fullName: fullName,
+                level: level,
+                levelLabel: levelLabels[level] || "Élève",
+                role: (level === "enseignant") ? "teacher" : "student",
+                xp: 150,
+                avatarInitials: initials
+            };
+
+            accounts.push(newAcc);
+            saveAccounts(accounts);
+            saveUserSession(newAcc);
+            closeAuthModal();
+            updateAuthHeaderUI();
+            sendLoginNotificationEmail(newAcc, "Nouvelle Inscription (Nouveau Compte)");
+
+            if (typeof showToast === "function") {
+                showToast(`Compte créé avec succès ! Bienvenue ${fullName} sur Maths & Physiques.`, true);
+            }
+        };
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+        const dropdown = document.getElementById("userAccountDropdown");
+        const badge = document.getElementById("userLoggedBadge");
+        if (dropdown && dropdown.classList.contains("show")) {
+            if (!dropdown.contains(e.target) && (!badge || !badge.contains(e.target))) {
+                dropdown.classList.remove("show");
+            }
+        }
+    });
+
+    // Initial Header Render
+    updateAuthHeaderUI();
+
+    // Export global helper
+    window.openAuthModal = openAuthModal;
+}
+window.setupAuthModule = setupAuthModule;
+

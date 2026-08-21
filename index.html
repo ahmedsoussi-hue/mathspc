@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css?v=2.7.7">
+    <link rel="stylesheet" href="style.css?v=2.8.0">
     <!-- MathJax for rendering Equations -->
     <script>
         window.MathJax = {
@@ -74,6 +74,37 @@
                 <a href="#recherche" class="nav-link" data-tab="recherche"><i data-lucide="microscope"></i> Recherche Scientifique</a>
             </nav>
             <div class="header-actions">
+                <!-- User Login / Account Button & Dropdown -->
+                <div class="auth-header-wrapper" id="authHeaderWrapper">
+                    <button class="btn-auth-header" id="headerAuthBtn">
+                        <i data-lucide="log-in"></i>
+                        <span id="headerAuthText">Connexion</span>
+                    </button>
+                    <!-- Logged in Account Dropdown Menu -->
+                    <div class="user-account-dropdown" id="userAccountDropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-avatar-initials" id="dropdownAvatar">U</div>
+                            <div>
+                                <div style="font-weight: 700; color: #ffffff; font-size: 0.9rem;" id="dropdownUserName">Élève</div>
+                                <div style="font-size: 0.75rem; color: #38bdf8;" id="dropdownUserLevel">2BAC PC</div>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-stats">
+                            <span style="color: #94a3b8;"><i data-lucide="award"></i> Progression</span>
+                            <strong style="color: #10b981;" id="dropdownUserXp">0 XP</strong>
+                        </div>
+                        <a href="#courses" class="user-dropdown-item" id="dropdownMyCoursesBtn">
+                            <i data-lucide="book-open" style="color: #38bdf8;"></i> Mes Cours
+                        </a>
+                        <a href="#animations" class="user-dropdown-item" id="dropdownMySimsBtn">
+                            <i data-lucide="play" style="color: #10b981;"></i> Mes Simulations
+                        </a>
+                        <button type="button" class="user-dropdown-item logout-btn" id="dropdownLogoutBtn">
+                            <i data-lucide="log-out"></i> Déconnexion
+                        </button>
+                    </div>
+                </div>
+
                 <div class="user-profile" id="userProfileBtn">
                     <div class="avatar" style="width: 32px; height: 32px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1.5px solid #10b981; background: #0f172a;">
                         <img src="assets/images/profile-recherche.png" alt="Dr. Ahmed Soussi" style="width: 100%; height: 100%; object-fit: cover;">
@@ -3726,7 +3757,130 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
         <span id="toastMessage">Notification message</span>
     </div>
 
+
+    <!-- Authentication Modal (Login / Sign Up) -->
+    <div class="lesson-modal" id="authModal">
+        <div class="modal-backdrop" id="authModalBackdrop"></div>
+        <div class="modal-card auth-modal-card">
+            <div class="modal-header auth-modal-header">
+                <div class="modal-title-wrapper">
+                    <span class="modal-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
+                        <i data-lucide="shield-check"></i> Espace Membre
+                    </span>
+                    <h3 id="authModalTitle" style="margin-top: 4px; font-size: 1.25rem;">Espace Membre & Connexion</h3>
+                </div>
+                <button class="modal-close" id="authCloseBtn"><i data-lucide="x"></i></button>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tabLoginBtn" data-auth-tab="login">
+                    <i data-lucide="log-in"></i> Se Connecter
+                </button>
+                <button class="auth-tab-btn" id="tabRegisterBtn" data-auth-tab="register">
+                    <i data-lucide="user-plus"></i> Créer un Compte
+                </button>
+            </div>
+
+            <div class="modal-body auth-modal-body">
+                <!-- TAB 1: LOGIN -->
+                <div class="auth-tab-content active" id="authTabLogin">
+                    <form id="loginForm" onsubmit="return false;">
+                        <div class="auth-input-group">
+                            <label for="loginEmail"><i data-lucide="mail"></i> Adresse Email ou Identifiant</label>
+                            <input type="text" id="loginEmail" placeholder="nom@exemple.com" required autocomplete="username">
+                        </div>
+                        <div class="auth-input-group">
+                            <label for="loginPassword"><i data-lucide="lock"></i> Mot de passe</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+                                <button type="button" class="btn-toggle-pwd" id="toggleLoginPwd" aria-label="Afficher le mot de passe">
+                                    <i data-lucide="eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="auth-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe" checked>
+                                <span>Se souvenir de moi</span>
+                            </label>
+                            <a href="javascript:void(0)" id="forgotPwdLink" class="forgot-link">Mot de passe oublié ?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-auth-submit" id="submitLoginBtn">
+                            <i data-lucide="log-in"></i> Se connecter
+                        </button>
+                    </form>
+
+                    <!-- Demo Accounts Quick Fill -->
+                    <div class="auth-divider">
+                        <span>Ou connexion rapide Démo</span>
+                    </div>
+                    <div class="demo-accounts-grid">
+                        <button type="button" class="demo-acc-btn" id="demoStudentBtn">
+                            <i data-lucide="graduation-cap" style="color: #38bdf8; width: 22px; height: 22px;"></i>
+                            <div class="demo-acc-text">
+                                <strong>Élève 2BAC PC</strong>
+                                <span>eleve.2bac@mathspc.com</span>
+                            </div>
+                        </button>
+                        <button type="button" class="demo-acc-btn" id="demoTeacherBtn">
+                            <i data-lucide="award" style="color: #10b981; width: 22px; height: 22px;"></i>
+                            <div class="demo-acc-text">
+                                <strong>Professeur / Enseignant</strong>
+                                <span>prof@mathspc.com</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TAB 2: REGISTER -->
+                <div class="auth-tab-content" id="authTabRegister" style="display: none;">
+                    <form id="registerForm" onsubmit="return false;">
+                        <div class="auth-input-group">
+                            <label for="regFullName"><i data-lucide="user"></i> Nom Complet</label>
+                            <input type="text" id="regFullName" placeholder="Prénom et Nom" required>
+                        </div>
+                        <div class="auth-input-group">
+                            <label for="regEmail"><i data-lucide="mail"></i> Adresse Email</label>
+                            <input type="email" id="regEmail" placeholder="nom@exemple.com" required>
+                        </div>
+                        <div class="auth-input-group">
+                            <label for="regLevel"><i data-lucide="book-open"></i> Niveau Scolaire / Filière</label>
+                            <select id="regLevel" class="auth-select">
+                                <option value="2bac-pc">2ème Bac Sciences Physiques & SVT</option>
+                                <option value="2bac-sm">2ème Bac Sciences Mathématiques</option>
+                                <option value="2bac-eco">2ème Bac Sciences Économiques</option>
+                                <option value="1bac">1ère Année Baccalauréat</option>
+                                <option value="tc">Tronc Commun Scientifique</option>
+                                <option value="3ac">3ème Année Collège (3AC)</option>
+                                <option value="2ac">2ème Année Collège (2AC)</option>
+                                <option value="1ac">1ère Année Collège (1AC)</option>
+                                <option value="enseignant">Enseignant / Professeur</option>
+                                <option value="universitaire">Étudiant Universitaire / CPGE</option>
+                            </select>
+                        </div>
+                        <div class="auth-input-group">
+                            <label for="regPassword"><i data-lucide="lock"></i> Mot de passe</label>
+                            <div class="password-input-wrapper">
+                                <input type="password" id="regPassword" placeholder="Minimum 6 caractères" required minlength="6">
+                                <button type="button" class="btn-toggle-pwd" id="toggleRegPwd" aria-label="Afficher le mot de passe">
+                                    <i data-lucide="eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="auth-input-group">
+                            <label for="regPasswordConfirm"><i data-lucide="check-circle"></i> Confirmer le mot de passe</label>
+                            <input type="password" id="regPasswordConfirm" placeholder="Répéter le mot de passe" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-auth-submit" id="submitRegisterBtn">
+                            <i data-lucide="user-plus"></i> Créer mon compte
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Script Entry -->
-    <script src="app.js?v=20260820_optique_v10"></script>
+    <script src="app.js?v=20260821_auth_v2"></script>
 </body>
 </html>
