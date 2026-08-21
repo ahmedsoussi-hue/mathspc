@@ -26092,7 +26092,53 @@ Notification automatique envoyée à : ${adminEmail}
 
     console.log(`[AUTH NOTIFIER] Sending login alert to ${adminEmail} for ${userData.email}...`);
 
-    // 1. Dispatch via Formspree / Webhook endpoint
+    // 0. Save in local audit log history
+    try {
+        const history = JSON.parse(localStorage.getItem("mathspc_login_logs") || "[]");
+        history.unshift({
+            nom: userData.fullName,
+            email: userData.email,
+            niveau: userData.levelLabel || userData.level,
+            type: loginType,
+            date: timestamp,
+            ip: clientIp,
+            location: locationStr
+        });
+        if (history.length > 50) history.pop();
+        localStorage.setItem("mathspc_login_logs", JSON.stringify(history));
+    } catch(e) {}
+
+    // 1. Dispatch via FormSubmit direct AJAX endpoint to mathspc.platform@gmail.com
+    try {
+        fetch("https://formsubmit.co/ajax/" + adminEmail, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                _subject: emailSubject,
+                _captcha: "false",
+                _template: "table",
+                _replyto: userData.email,
+                "Nom": userData.fullName || "Non spécifié",
+                "Email": userData.email || "Non spécifié",
+                "Niveau_Filière": userData.levelLabel || userData.level || "Non spécifié",
+                "Type_Connexion": loginType,
+                "Date_Heure": timestamp,
+                "Adresse_IP": clientIp,
+                "Localisation": locationStr,
+                "Appareil_Navigateur": navigator.userAgent,
+                "URL_Active": window.location.href
+            })
+        }).then(res => res.json()).then(data => {
+            console.log("[AUTH NOTIFIER] FormSubmit response:", data);
+        }).catch(err => console.warn("[AUTH NOTIFIER] FormSubmit handled:", err.message));
+    } catch(e) {
+        console.warn("[AUTH NOTIFIER] FormSubmit error:", e);
+    }
+
+    // 2. Dispatch via secondary backup webhook
     try {
         fetch("https://formspree.io/f/mqaelvkg", {
             method: "POST",
@@ -26111,30 +26157,9 @@ Notification automatique envoyée à : ${adminEmail}
                 date_heure: timestamp,
                 ip: clientIp,
                 localisation: locationStr,
-                user_agent: navigator.userAgent,
                 message: emailBody
             })
-        }).catch(err => console.warn("[AUTH NOTIFIER] Formspree dispatch handled:", err.message));
-    } catch(e) {
-        console.warn("[AUTH NOTIFIER] Dispatch error:", e);
-    }
-
-    // 2. Fallback secondary dispatch via Web3Forms API to ensure 100% receipt
-    try {
-        fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                access_key: "7a26fcf5-9988-4663-8a03-62a2656ff762",
-                subject: emailSubject,
-                to_email: adminEmail,
-                from_name: "Maths & Physiques Platform Notifier",
-                message: emailBody
-            })
-        }).catch(err => console.warn("[AUTH NOTIFIER] Web3Forms dispatch handled:", err.message));
+        }).catch(err => {});
     } catch(e) {}
 }
 
