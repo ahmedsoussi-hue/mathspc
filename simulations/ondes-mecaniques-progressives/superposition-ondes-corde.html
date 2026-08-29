@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation : Superposition de deux ondes sur une corde</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0f111a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+        }
+        h1 {
+            color: #4cc9f0;
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        p.subtitle {
+            color: #a0a0b0;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .container {
+            background: #181b29;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 850px;
+            width: 100%;
+        }
+        canvas {
+            background-color: #08090e;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+            width: 100%;
+            height: auto;
+        }
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .card {
+            background: #22263a;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4361ee;
+        }
+        .card.card-right {
+            border-left-color: #f72585;
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        select, input[type="range"] {
+            background: #121420;
+            color: #fff;
+            border: 1px solid #3d4363;
+            padding: 5px 8px;
+            border-radius: 5px;
+            outline: none;
+        }
+        input[type="range"] {
+            cursor: pointer;
+            width: 50%;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #4361ee;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        button:hover {
+            background: #3a0ca3;
+            transform: translateY(-2px);
+        }
+        button.secondary {
+            background: #3d4363;
+        }
+        button.secondary:hover {
+            background: #2b3049;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #bbb;
+        }
+        .info-panel {
+            margin-top: 15px;
+            background: #121420;
+            border-left: 4px solid #4cc9f0;
+            padding: 12px 15px;
+            border-radius: 0 6px 6px 0;
+            width: 100%;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .legend {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .box {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Superposition de Deux Ondes Mécaniques</h1>
+    <p class="subtitle">Observez le croisement et l'interférence de deux impulsions le long d'une corde</p>
+
+    <div class="container">
+        <canvas id="simCanvas" width="800" height="320"></canvas>
+
+        <div class="legend">
+            <div class="legend-item"><div class="box" style="background: #4361ee;"></div> Onde 1 (Gauche ➡️)</div>
+            <div class="legend-item"><div class="box" style="background: #f72585;"></div> Onde 2 (Droite ⬅️)</div>
+            <div class="legend-item"><div class="box" style="background: #4cc9f0;"></div> Corde résultante $y_1 + y_2$</div>
+        </div>
+
+        <div class="controls-grid">
+            <!-- Onde 1 -->
+            <div class="card">
+                <h3 style="color:#4361ee;">Onde 1 (Venant de gauche)</h3>
+                <div class="control-group">
+                    <div class="row">
+                        <label>Impulsion :</label>
+                        <select id="dir1">
+                            <option value="1">Vers le Haut ⬆️</option>
+                            <option value="-1">Vers le Bas ⬇️</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>Amplitude :</label>
+                        <input type="range" id="amp1" min="20" max="80" value="50">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onde 2 -->
+            <div class="card card-right">
+                <h3 style="color:#f72585;">Onde 2 (Venant de droite)</h3>
+                <div class="control-group">
+                    <div class="row">
+                        <label>Impulsion :</label>
+                        <select id="dir2">
+                            <option value="1">Vers le Haut ⬆️</option>
+                            <option value="-1">Vers le Bas ⬇️</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>Amplitude :</label>
+                        <input type="range" id="amp2" min="20" max="80" value="50">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button id="btnPlay">▶️ Démarrer / Pause</button>
+            <button id="btnReset" class="secondary">🔄 Réinitialiser</button>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="chkComponents" checked>
+            <label for="chkComponents">Afficher les composantes individuelles (lignes pointillées)</label>
+        </div>
+
+        <div class="info-panel">
+            <strong>💡 Principe physique :</strong> 
+            Lors de la rencontre des deux ondes, l'élongation globale de la corde est égale à la **somme algébrique** des élongations individuelles : $y(x,t) = y_1(x,t) + y_2(x,t)$. 
+            Après s'être croisées, les deux ondes poursuivent leur propagation **sans aucune altération** de leur forme ni de leur vitesse.
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Form elements
+        const dir1Sel = document.getElementById('dir1');
+        const amp1Input = document.getElementById('amp1');
+        const dir2Sel = document.getElementById('dir2');
+        const amp2Input = document.getElementById('amp2');
+        const btnPlay = document.getElementById('btnPlay');
+        const btnReset = document.getElementById('btnReset');
+        const chkComponents = document.getElementById('chkComponents');
+
+        // Physics variables
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerY = height / 2;
+
+        let isRunning = false;
+        let time = 0;
+        const speed = 2.0; // Wave speed (px/frame)
+        const sigma = 35; // Pulse width parameter
+
+        // Initial pulse center positions
+        let x1_start = 100;
+        let x2_start = width - 100;
+
+        // Gaussian Pulse formula: A * exp( -((x - x0)/sigma)^2 )
+        function getWave1(x, t) {
+            let A = parseFloat(amp1Input.value) * parseInt(dir1Sel.value);
+            let x0 = x1_start + speed * t;
+            let dx = (x - x0) / sigma;
+            return A * Math.exp(-dx * dx);
+        }
+
+        function getWave2(x, t) {
+            let A = parseFloat(amp2Input.value) * parseInt(dir2Sel.value);
+            let x0 = x2_start - speed * t;
+            let dx = (x - x0) / sigma;
+            return A * Math.exp(-dx * dx);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+
+            // 1. Draw Axis/Equilibrium line
+            ctx.strokeStyle = '#2b3049';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(width, centerY);
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset line dash
+
+            // 2. Draw Component Waves (Dotted lines) if checked
+            if (chkComponents.checked) {
+                // Wave 1 (Left -> Right)
+                ctx.strokeStyle = 'rgba(67, 97, 238, 0.6)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                for (let x = 0; x <= width; x += 2) {
+                    let y = centerY - getWave1(x, time);
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Wave 2 (Right -> Left)
+                ctx.strokeStyle = 'rgba(247, 37, 133, 0.6)';
+                ctx.beginPath();
+                for (let x = 0; x <= width; x += 2) {
+                    let y = centerY - getWave2(x, time);
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]); // Reset
+            }
+
+            // 3. Draw Resulting String (Superposition: y_total = y1 + y2)
+            ctx.strokeStyle = '#4cc9f0';
+            ctx.lineWidth = 4;
+            ctx.shadowColor = '#4cc9f0';
+            ctx.shadowBlur = 8; // Glowing string effect
+            ctx.beginPath();
+
+            for (let x = 0; x <= width; x += 2) {
+                let y1 = getWave1(x, time);
+                let y2 = getWave2(x, time);
+                let yTotal = centerY - (y1 + y2);
+
+                if (x === 0) ctx.moveTo(x, yTotal);
+                else ctx.lineTo(x, yTotal);
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0; // Reset shadow
+
+            // 4. Draw Direction Arrows
+            drawArrow(x1_start + speed * time, centerY - getWave1(x1_start + speed * time, time) - 25, true, '#4361ee');
+            drawArrow(x2_start - speed * time, centerY - getWave2(x2_start - speed * time, time) - 25, false, '#f72585');
+        }
+
+        function drawArrow(x, y, toRight, color) {
+            if (x < 30 || x > width - 30) return; // Hide if near borders
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+
+            let length = 20;
+            let dir = toRight ? 1 : -1;
+
+            ctx.beginPath();
+            ctx.moveTo(x - dir * length / 2, y);
+            ctx.lineTo(x + dir * length / 2, y);
+            ctx.stroke();
+
+            // Arrow tip
+            ctx.beginPath();
+            ctx.moveTo(x + dir * length / 2, y);
+            ctx.lineTo(x + dir * length / 2 - dir * 5, y - 4);
+            ctx.lineTo(x + dir * length / 2 - dir * 5, y + 4);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function animate() {
+            if (isRunning) {
+                time += 1;
+                // Stop when pulses leave the canvas
+                if (x1_start + speed * time > width + 100) {
+                    isRunning = false;
+                }
+            }
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        // Event Listeners
+        btnPlay.addEventListener('click', () => {
+            isRunning = !isRunning;
+        });
+
+        btnReset.addEventListener('click', () => {
+            isRunning = false;
+            time = 0;
+            draw();
+        });
+
+        // Redraw instantly when controls change
+        [dir1Sel, amp1Input, dir2Sel, amp2Input, chkComponents].forEach(elem => {
+            elem.addEventListener('input', draw);
+        });
+
+        // Initialize
+        draw();
+        animate();
+    </script>
+</body>
+</html>

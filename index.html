@@ -53,7 +53,6 @@
                     <div class="dropdown-menu">
                         <a href="#courses" class="dropdown-item" data-level-nav="2bac-sm">2ème Bac Sciences Math</a>
                         <a href="#courses" class="dropdown-item" data-level-nav="2bac-pc">2ème Bac PC / SVT (Sciences Physiques & SVT)</a>
-                        <a href="#courses" class="dropdown-item" data-level-nav="2bac-eco">2ème Bac Sciences Économiques & Gestion</a>
                         <a href="#courses" class="dropdown-item" data-level-nav="1bac">1ère Année Bac</a>
                         <a href="#courses" class="dropdown-item" data-level-nav="tc">Tronc Commun</a>
                     </div>
@@ -212,10 +211,25 @@
                         </div>
                     </div>
 
+                    <!-- Ondes Mécaniques Progressives - Suite Interactive (Prof Mouhibi) -->
+                    <div class="anim-card" data-anim="ondes-mecaniques" onclick="navigateToAnim('ondes-mecaniques')">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Ondes Mécaniques Progressives" loading="lazy">
+                            <span class="anim-card-badge badge-optique" style="background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);"><i data-lucide="waves"></i> 12 Animations (Prof Mouhibi)</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Ondes Mécaniques Progressives (Suite Complète)</h3>
+                            <p>12 simulations interactives : ondes transversales, longitudinales, célérité $v=\sqrt{T/\mu}$, son, sonar et superposition.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- 1. Ondes Progressives & Diffraction -->
-                <div class="anim-card" data-anim="wave" onclick="navigateToAnim('wave')">
-                    <div class="anim-card-img-wrapper">
-                        <img src="assets/images/wave_diffraction.jpg" alt="Ondes Progressives & Diffraction" loading="lazy">
+                    <div class="anim-card" data-anim="wave" onclick="navigateToAnim('wave')">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Ondes Progressives & Diffraction" loading="lazy">
                         <span class="anim-card-badge badge-optique"><i data-lucide="waves"></i> Optique & Ondes</span>
                     </div>
                     <div class="anim-card-content">
@@ -487,7 +501,6 @@
                         <option value="all">Tous les niveaux</option>
                         <option value="2bac-sm">2ème Bac Sciences Math</option>
                         <option value="2bac-pc" selected>2ème Bac PC & SVT (Sciences Physiques / SVT)</option>
-                        <option value="2bac-eco">2ème Bac Sciences Économiques & Gestion</option>
                         <option value="1bac">1ère Année Bac</option>
                         <option value="tc">Tronc Commun</option>
                         <option value="3ac">3ème Année Collège (3AC)</option>
@@ -501,7 +514,6 @@
                         <option value="all">Toutes les matières</option>
                         <option value="math">Mathématiques</option>
                         <option value="pc">Physique - Chimie</option>
-                        <option value="eco">Économie & Gestion</option>
                     </select>
                 </div>
                 <div class="filter-group search-group">
@@ -654,6 +666,96 @@
                         <div class="anim-card-content">
                             <h3>Transformations : Réversible, Irréversible & Quasistatique</h3>
                             <p>Mettez en évidence la différence entre transformations quasistatiques, réversibles ($S_{créée} = 0$) et irréversibles ($S_{créée} > 0$, hystérésis $W_{perdu}$).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ondes Mécaniques Progressives - Suite Interactive (Prof Mouhibi) -->
+                    <div class="anim-card" data-anim="ondes-mecaniques" data-category="optique" data-keywords="ondes mecaniques progressives transversale longitudinale sonar vitesse son echoguidage superposition ressort corde cuve eau mouhibi retard celerite">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Ondes Mécaniques Progressives" loading="lazy">
+                            <span class="anim-card-badge badge-optique" style="background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);"><i data-lucide="waves"></i> 12 Animations (Prof Mouhibi)</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Ondes Mécaniques Progressives (Suite Complète)</h3>
+                            <p>Explorez la suite intégrale de 12 simulations : ondes transversales, longitudinales, célérité $v=\sqrt{T/\mu}$, son, sonar et superposition (Prof Mouhibi).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onde Transversale (Corde) -->
+                    <div class="anim-card" data-anim="onde-transversale" data-category="optique" data-keywords="onde transversale corde perturbation ébranlement amplitude vitesse mouhibi">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Onde Transversale (Corde)" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="activity"></i> Onde Transversale</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Onde Transversale sur Corde</h3>
+                            <p>Visualisez la propagation d'ébranlements et d'ondes sinusoïdales le long d'une corde élastique.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onde Longitudinale (Ressort) -->
+                    <div class="anim-card" data-anim="onde-longitudinale" data-category="optique" data-keywords="onde longitudinale ressort compression dilatation spires mouhibi">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_delay.jpg" alt="Onde Longitudinale (Ressort)" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="sliders"></i> Onde Longitudinale</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Onde Longitudinale sur Ressort</h3>
+                            <p>Compression et dilatation des spires le long de la direction de propagation de l'onde.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SONAR & Mesure de Profondeur -->
+                    <div class="anim-card" data-anim="sonar-mesure-profondeur" data-category="optique" data-keywords="sonar ultrasons profondeur echo bathymetrie bateau marine mouhibi">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_delay.jpg" alt="Mesure par SONAR" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="anchor"></i> SONAR & Ultrasons</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Mesure de la Profondeur par SONAR</h3>
+                            <p>Sondage bathymétrique par émission et réflexion d'ultrasons ($d = v \cdot \Delta t / 2$).</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mesure Vitesse du Son -->
+                    <div class="anim-card" data-anim="mesure-vitesse-son" data-category="optique" data-keywords="mesure vitesse celerite son air oscilloscope micro capteurs mouhibi">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_delay.jpg" alt="Vitesse du Son dans l'Air" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="timer"></i> Acoustique</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Mesure de la Vitesse du Son dans l'Air</h3>
+                            <p>Détermination de la célérité du son avec émetteur et deux microphones sur oscilloscope.</p>
+                            <div class="anim-card-footer">
+                                <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Superposition d'Ondes sur Corde -->
+                    <div class="anim-card" data-anim="superposition-ondes-corde" data-category="optique" data-keywords="superposition croisement ondes corde sans deformation interferences mouhibi">
+                        <div class="anim-card-img-wrapper">
+                            <img src="assets/images/wave_diffraction.jpg" alt="Superposition sur Corde" loading="lazy">
+                            <span class="anim-card-badge badge-optique"><i data-lucide="git-merge"></i> Superposition</span>
+                        </div>
+                        <div class="anim-card-content">
+                            <h3>Superposition de Deux Ondes sur Corde</h3>
+                            <p>Rencontre et croisement sans déformation permanente de deux perturbations opposées.</p>
                             <div class="anim-card-footer">
                                 <span class="anim-btn-launch">Lancer la Simulation <i data-lucide="arrow-right"></i></span>
                             </div>
@@ -2717,6 +2819,101 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
                         </div>
                     </div>
 
+                    <!-- Ondes Mécaniques Progressives Interactive Suite (Prof Mouhibi) Workspace -->
+                    <div class="anim-workspace" id="anim-ondes-mecaniques" style="display:none;">
+                        <div class="workspace-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                                <h3 style="margin: 0;"><i data-lucide="waves" style="color: #38bdf8;"></i> Ondes Mécaniques Progressives — Suite Interactive</h3>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="reloadOndesMecaIframe()" title="Recharger l'animation">
+                                        <i data-lucide="rotate-cw"></i> Recharger
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="openOndesMecaFullscreen()" title="Ouvrir en plein écran">
+                                        <i data-lucide="maximize-2"></i> Plein Écran
+                                    </button>
+                                </div>
+                            </div>
+                            <p id="ondes-meca-desc">Sélectionnez l'une des 12 simulations interactives ci-dessous pour explorer la propagation des ondes, le calcul des retards temporels, la célérité et les applications pratiques (Prof Mouhibi).</p>
+                        </div>
+
+                        <!-- 12 Simulation Navigation Selector Tabs -->
+                        <div class="ondes-meca-selector-container">
+                            <div style="font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                                <i data-lucide="layers" style="width: 15px; height: 15px; color: #38bdf8;"></i> Sélectionnez une Simulation (12 Modules Interactifs) :
+                            </div>
+                            <div class="ondes-meca-tabs-grid" style="display: flex; flex-wrap: wrap; gap: 6px;" id="ondes-meca-tabs">
+                                <button type="button" class="ondes-tab-btn active" data-sim="onde-transversale" onclick="switchOndesMecaSimulation('onde-transversale')">
+                                    <i data-lucide="activity"></i> 1. Onde Transversale (Corde)
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="onde-longitudinale" onclick="switchOndesMecaSimulation('onde-longitudinale')">
+                                    <i data-lucide="sliders"></i> 2. Onde Longitudinale (Ressort)
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="onde-surface-eau" onclick="switchOndesMecaSimulation('onde-surface-eau')">
+                                    <i data-lucide="waves"></i> 3. Surface de l'Eau (Cuve)
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="onde-parametres-vitesse" onclick="switchOndesMecaSimulation('onde-parametres-vitesse')">
+                                    <i data-lucide="gauge"></i> 4. Paramètres Célérité (\(v = \sqrt{T/\mu}\))
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="nature-onde-sonore" onclick="switchOndesMecaSimulation('nature-onde-sonore')">
+                                    <i data-lucide="volume-2"></i> 5. Caractère Longitudinal Son
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="onde-sonore-plane" onclick="switchOndesMecaSimulation('onde-sonore-plane')">
+                                    <i data-lucide="radio"></i> 6. Onde Sonore Plane
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="onde-sonore-vide" onclick="switchOndesMecaSimulation('onde-sonore-vide')">
+                                    <i data-lucide="shield-alert"></i> 7. Le Son dans le Vide
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="mesure-vitesse-son" onclick="switchOndesMecaSimulation('mesure-vitesse-son')">
+                                    <i data-lucide="timer"></i> 8. Mesure Vitesse Son (Oscilloscope)
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="mesure-profondeur-puits" onclick="switchOndesMecaSimulation('mesure-profondeur-puits')">
+                                    <i data-lucide="arrow-down-circle"></i> 9. Profondeur Puits (Écho)
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="sonar-mesure-profondeur" onclick="switchOndesMecaSimulation('sonar-mesure-profondeur')">
+                                    <i data-lucide="anchor"></i> 10. Mesure Profondeur SONAR
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="superposition-ondes-corde" onclick="switchOndesMecaSimulation('superposition-ondes-corde')">
+                                    <i data-lucide="git-merge"></i> 11. Superposition sur Corde
+                                </button>
+                                <button type="button" class="ondes-tab-btn" data-sim="principe-superposition" onclick="switchOndesMecaSimulation('principe-superposition')">
+                                    <i data-lucide="layers"></i> 12. Principe de Superposition
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Embedded Interactive Simulation Container -->
+                        <div class="canvas-container" style="padding: 0; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 36px rgba(0,0,0,0.6); position: relative; min-height: 680px; margin-top: 14px;">
+                            <iframe id="iframe-ondes-mecaniques" src="simulations/ondes-mecaniques-progressives/onde-transversale.html" width="100%" height="700" style="border: 0; display: block; border-radius: 16px;" allowfullscreen title="Simulation Ondes Mécaniques Progressives"></iframe>
+                        </div>
+
+                        <!-- Theoretical Summary & Key Bac Formulas -->
+                        <div class="workspace-theory" style="margin-top: 16px; background: rgba(15, 23, 42, 0.6); border-left: 4px solid #38bdf8; padding: 14px 18px; border-radius: 0 10px 10px 0;">
+                            <h4 style="margin: 0 0 8px 0; color: #38bdf8; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="book-open"></i> Rappels Théoriques & Formules Clés (2BAC PC / SVT / SM) :
+                            </h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 10px;">
+                                <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <strong style="color: #38bdf8;">1. Célérité de Propagation :</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #cbd5e1;">$$v = \frac{d}{\Delta t} \quad \text{ou} \quad v = \sqrt{\frac{T}{\mu}}$$</p>
+                                    <span style="font-size: 0.78rem; color: #94a3b8;">La célérité dépend exclusivement des caractéristiques du milieu de propagation.</span>
+                                </div>
+
+                                <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <strong style="color: #facc15;">2. Retard Temporel (\(\tau\)) :</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #cbd5e1;">$$\tau = \frac{M_1 M_2}{v} \implies y_{M_2}(t) = y_{M_1}(t - \tau)$$</p>
+                                    <span style="font-size: 0.78rem; color: #94a3b8;">Le point \(M_2\) reproduit le mouvement du point \(M_1\) avec un retard temporel \(\tau\).</span>
+                                </div>
+
+                                <div style="background: rgba(30, 41, 59, 0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <strong style="color: #10b981;">3. Échoguidage & SONAR :</strong>
+                                    <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #cbd5e1;">$$2 \cdot d = v \cdot \Delta t \implies d = \frac{v \cdot \Delta t}{2}$$</p>
+                                    <span style="font-size: 0.78rem; color: #94a3b8;">L'onde effectue un aller-retour complet avant d'être captée par le récepteur.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -2783,10 +2980,10 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
                             <p>Dépôt par bain chimique en milieu aqueux.</p>
                             <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
                         </div>
-                        <div class="method-subcard" data-subid="electrochemical-deposition" onclick="openMethodPage('Electrochemical Deposition', 'Experimental Methods', 'Électrodéposition et réduction électrochimique sur substrat conducteur.')">
+                        <div class="method-subcard" data-subid="electrochemical-deposition" onclick="openMethodPage('Electrochemical Deposition', 'Experimental Methods', 'Système à trois électrodes (WE FTO, RE, CE) et potentiostat pour le dépôt de ZnO et ZnO:Ga.')">
                             <div class="method-subcard-icon" style="color: #38bdf8;"><i data-lucide="zap"></i></div>
                             <h4>Electrochemical Deposition</h4>
-                            <p>Électrodéposition et réduction électrochimique sur substrat conducteur.</p>
+                            <p>Système à 3 électrodes (WE sur FTO, RE, CE) et potentiostat pour le dépôt de couches minces de ZnO / ZnO:Ga.</p>
                             <span class="btn-open-subpage">Ouvrir la page <i data-lucide="arrow-right"></i></span>
                         </div>
                         <div class="method-subcard" data-subid="silar" onclick="openMethodPage('SILAR', 'Experimental Methods', 'Adsorption et réaction successives d\'ions en couches atomiques.')">
@@ -3536,7 +3733,6 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
                                 <option value="2bac-pc">2ème Bac PC (Sciences Physiques)</option>
                                 <option value="2bac-sm">2ème Bac SM (Sciences Math A & B)</option>
                                 <option value="2bac-svt">2ème Bac SVT (Sciences de la Vie et de la Terre)</option>
-                                <option value="2bac-eco">2ème Bac Éco (Sciences Économiques)</option>
                             </select>
                         </div>
 
@@ -3672,7 +3868,6 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
                 <h4>Niveaux Populaires</h4>
                 <a href="#courses" data-level-footer="2bac-pc">2ème Bac PC & SVT</a>
                 <a href="#courses" data-level-footer="2bac-sm">2ème Bac Sciences Math</a>
-                <a href="#courses" data-level-footer="2bac-eco">2ème Bac Économie & Gestion</a>
                 <a href="#courses" data-level-footer="3ac">3ème Année Collège (3AC)</a>
             </div>
             <div class="footer-links-group">
@@ -3848,7 +4043,6 @@ ho$ diminue avec la chaleur) génère une poussée d'Archimède créant des <em>
                             <select id="regLevel" class="auth-select">
                                 <option value="2bac-pc">2ème Bac Sciences Physiques & SVT</option>
                                 <option value="2bac-sm">2ème Bac Sciences Mathématiques</option>
-                                <option value="2bac-eco">2ème Bac Sciences Économiques</option>
                                 <option value="1bac">1ère Année Baccalauréat</option>
                                 <option value="tc">Tronc Commun Scientifique</option>
                                 <option value="3ac">3ème Année Collège (3AC)</option>

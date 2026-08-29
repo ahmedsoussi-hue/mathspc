@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation - Mesure de la profondeur d'un puits (Prof Mouhibi)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-page: #f4f4f9;
+            --bg-panel: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --accent-purple: #6b46c1;
+            --accent-blue: #3182ce;
+            --water-color: #4299e1;
+            --air-color: #e2e8f0;
+            --pc-screen: #0f172a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        header { text-align: center; margin-bottom: 20px; width: 100%; max-width: 1100px; }
+        header h1 { font-size: 2rem; color: var(--accent-purple); font-weight: 700; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        header p { color: var(--text-muted); margin-top: 5px; }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* Colonne Gauche : Le Puits */
+        .well-container {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #e2e8f0;
+            position: relative;
+        }
+
+        canvas#wellCanvas {
+            width: 100%;
+            height: 450px;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        /* Colonne Droite : PC et Contrôles */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* L'écran du PC (Graphe) */
+        .pc-container {
+            background: #cbd5e0;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border: 2px solid #a0aec0;
+            position: relative;
+        }
+        .pc-container::after {
+            content: '';
+            display: block;
+            height: 15px;
+            background: #a0aec0;
+            border-radius: 0 0 12px 12px;
+            margin: -15px -15px 0 -15px;
+            position: absolute;
+            bottom: -15px;
+            left: 15px;
+            right: 15px;
+        }
+        
+        .pc-screen {
+            background: var(--pc-screen);
+            border-radius: 6px;
+            padding: 15px;
+            border: 4px solid #1a202c;
+            position: relative;
+        }
+
+        .screen-title { color: white; font-weight: 600; margin-bottom: 10px; font-size: 1.1rem; }
+
+        canvas#graphCanvas {
+            width: 100%;
+            height: 220px;
+            background: var(--pc-screen);
+            /* Grille style oscilloscope */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+
+        /* Panneau de Contrôle */
+        .controls {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 2px solid #e2e8f0;
+        }
+
+        .slider-group { margin-bottom: 20px; }
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+        .slider-group label span { color: var(--accent-purple); }
+
+        input[type=range] {
+            width: 100%;
+            accent-color: var(--accent-purple);
+            cursor: pointer;
+        }
+
+        .physics-data {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+
+        .btn-emit {
+            width: 100%;
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(107, 70, 193, 0.3);
+        }
+        .btn-emit:hover { background: #553c9a; transform: translateY(-2px); }
+        .btn-emit:active { transform: translateY(0); }
+
+        .wire {
+            position: absolute;
+            width: 150px;
+            height: 100px;
+            border-top: 3px solid #1a202c;
+            border-radius: 50%;
+            top: 20px;
+            right: -80px;
+            z-index: -1;
+            transform: rotate(20deg);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mesure de la profondeur d'un puits (Échoguidage)</h1>
+        <p>Application de la propagation des ondes ultrasonores dans l'air et dans l'eau</p>
+    </header>
+
+    <div class="dashboard">
+        
+        <!-- Figure 1 : Le Puits -->
+        <div class="well-container">
+            <h3 style="margin-bottom: 10px; color: var(--accent-purple);">Figure 1 : Dispositif</h3>
+            <canvas id="wellCanvas" width="300" height="450"></canvas>
+            <div class="wire"></div>
+        </div>
+
+        <!-- Figure 2 : L'écran et les contrôles -->
+        <div class="right-panel">
+            
+            <div class="pc-container">
+                <div class="pc-screen">
+                    <div class="screen-title">Figure 2 : Amplitude des raies reçues (t en s)</div>
+                    <canvas id="graphCanvas" width="650" height="220"></canvas>
+                </div>
+            </div>
+
+            <div class="controls">
+                
+                <div class="slider-group">
+                    <label>Profondeur de l'air (d₁) : <span id="valD1">85 m</span></label>
+                    <input type="range" id="sliderD1" min="10" max="150" step="5" value="85">
+                </div>
+
+                <div class="slider-group">
+                    <label>Profondeur de l'eau (d₂) : <span id="valD2">15 m</span></label>
+                    <input type="range" id="sliderD2" min="5" max="50" step="1" value="15">
+                </div>
+
+                <div class="physics-data">
+                    <strong>Données physiques :</strong><br>
+                    • Vitesse dans l'air ($v_{air}$) = 340 m/s<br>
+                    • Vitesse dans l'eau ($v_{eau}$) = 1500 m/s<br>
+                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #cbd5e0;">
+                        <strong>Résultats théoriques :</strong><br>
+                        • $t_1$ (Écho surface) = <span id="valT1" style="color:var(--accent-purple); font-weight:bold;">0.50</span> s<br>
+                        • $t_2$ (Écho fond) = <span id="valT2" style="color:var(--accent-purple); font-weight:bold;">0.52</span> s
+                    </div>
+                </div>
+
+                <button class="btn-emit" id="btnEmit">Émettre un signal ultrasonore</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Canvas Setup
+        const wellCanvas = document.getElementById('wellCanvas');
+        const wellCtx = wellCanvas.getContext('2d');
+        const graphCanvas = document.getElementById('graphCanvas');
+        const graphCtx = graphCanvas.getContext('2d');
+
+        // UI Elements
+        const sliderD1 = document.getElementById('sliderD1');
+        const sliderD2 = document.getElementById('sliderD2');
+        const btnEmit = document.getElementById('btnEmit');
+
+        // Constantes Physiques
+        const V_AIR = 340;  // m/s
+        const V_WATER = 1500; // m/s
+        
+        // Variables d'état
+        let d1 = parseInt(sliderD1.value);
+        let d2 = parseInt(sliderD2.value);
+        let t1 = 0, t2 = 0;
+        
+        // Variables d'animation
+        let isAnimating = false;
+        let simTime = 0; // Temps de simulation (mis à l'échelle pour l'affichage)
+        let lastFrameTime = 0;
+        const timeScale = 0.2; // Ralentit le visuel (1 seconde réelle = 0.2s dans la simulation)
+
+        // Géométrie du Puits (Canvas)
+        const wellTop = 40;
+        const wellBottom = 420;
+        const wellTotalH = wellBottom - wellTop;
+        const wellCenterX = wellCanvas.width / 2;
+        const wellRadius = 70;
+
+        function updatePhysics() {
+            d1 = parseInt(sliderD1.value);
+            d2 = parseInt(sliderD2.value);
+            
+            // Calculs théoriques
+            t1 = (2 * d1) / V_AIR;
+            t2 = t1 + (2 * d2) / V_WATER;
+
+            // Mise à jour de l'UI
+            document.getElementById('valD1').innerText = d1 + " m";
+            document.getElementById('valD2').innerText = d2 + " m";
+            document.getElementById('valT1').innerText = t1.toFixed(2);
+            document.getElementById('valT2').innerText = t2.toFixed(3); // 3 décimales pour plus de précision (ex: 0.520)
+
+            if (!isAnimating) {
+                drawWell();
+                drawGraphStatic();
+            }
+        }
+
+        // Écouteurs
+        sliderD1.addEventListener('input', updatePhysics);
+        sliderD2.addEventListener('input', updatePhysics);
+        
+        btnEmit.addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            simTime = 0;
+            lastFrameTime = performance.now();
+            requestAnimationFrame(animate);
+        });
+
+        // --- DESSIN DU PUITS ---
+        function drawWell() {
+            wellCtx.clearRect(0, 0, wellCanvas.width, wellCanvas.height);
+
+            // Ratio de dessin (d1 + d2 = total H)
+            const totalD = d1 + d2;
+            const pxPerMeter = wellTotalH / totalD;
+            const hAir = d1 * pxPerMeter;
+            const hWater = d2 * pxPerMeter;
+            const waterSurfaceY = wellTop + hAir;
+
+            // 1. Fond du puits (Eau)
+            wellCtx.fillStyle = 'rgba(66, 153, 225, 0.7)'; // Bleu eau
+            wellCtx.fillRect(wellCenterX - wellRadius, waterSurfaceY, wellRadius * 2, hWater);
+
+            // 2. Parois du cylindre (Bords rouges comme sur l'image)
+            wellCtx.strokeStyle = '#9b2c2c';
+            wellCtx.lineWidth = 2;
+            // Ellipse haut
+            wellCtx.beginPath(); wellCtx.ellipse(wellCenterX, wellTop, wellRadius, 15, 0, 0, Math.PI * 2); wellCtx.stroke();
+            // Ellipse surface eau
+            wellCtx.beginPath(); wellCtx.ellipse(wellCenterX, waterSurfaceY, wellRadius, 15, 0, 0, Math.PI * 2); 
+            wellCtx.fillStyle = 'rgba(66, 153, 225, 0.8)'; wellCtx.fill(); wellCtx.stroke();
+            // Ellipse fond
+            wellCtx.beginPath(); wellCtx.ellipse(wellCenterX, wellBottom, wellRadius, 15, 0, 0, Math.PI * 2); 
+            wellCtx.fillStyle = '#2b6cb0'; wellCtx.fill(); wellCtx.stroke();
+            // Lignes verticales
+            wellCtx.beginPath(); wellCtx.moveTo(wellCenterX - wellRadius, wellTop); wellCtx.lineTo(wellCenterX - wellRadius, wellBottom); wellCtx.stroke();
+            wellCtx.beginPath(); wellCtx.moveTo(wellCenterX + wellRadius, wellTop); wellCtx.lineTo(wellCenterX + wellRadius, wellBottom); wellCtx.stroke();
+
+            // 3. Cotation d1 et d2
+            wellCtx.fillStyle = '#1a202c';
+            wellCtx.font = 'bold 16px Poppins';
+            // d1
+            drawArrow(wellCtx, wellCenterX + wellRadius + 20, wellTop, wellCenterX + wellRadius + 20, waterSurfaceY);
+            wellCtx.fillText("d₁", wellCenterX + wellRadius + 30, wellTop + hAir/2 + 5);
+            // d2
+            drawArrow(wellCtx, wellCenterX + wellRadius + 20, waterSurfaceY, wellCenterX + wellRadius + 20, wellBottom);
+            wellCtx.fillText("d₂", wellCenterX + wellRadius + 30, waterSurfaceY + hWater/2 + 5);
+
+            // 4. Sonde
+            wellCtx.fillStyle = '#1a202c';
+            wellCtx.beginPath(); wellCtx.roundRect(wellCenterX - 20, wellTop - 25, 40, 25, 5); wellCtx.fill();
+            wellCtx.beginPath(); wellCtx.arc(wellCenterX, wellTop, 15, 0, Math.PI); wellCtx.fill();
+            wellCtx.font = 'bold 16px Poppins'; wellCtx.fillText("Sonde", wellCenterX + 25, wellTop - 20);
+
+            // Ligne Eau ->
+            wellCtx.beginPath(); wellCtx.moveTo(wellCenterX - wellRadius - 40, waterSurfaceY + hWater/2); wellCtx.lineTo(wellCenterX - 20, waterSurfaceY + hWater/2); wellCtx.stroke();
+            wellCtx.beginPath(); wellCtx.arc(wellCenterX - wellRadius - 40, waterSurfaceY + hWater/2, 3, 0, Math.PI*2); wellCtx.fill();
+            wellCtx.fillText("Eau", wellCenterX - wellRadius - 80, waterSurfaceY + hWater/2 + 5);
+
+            // --- GESTION DES ONDES (Pendant l'animation) ---
+            if (isAnimating) {
+                wellCtx.strokeStyle = '#1a202c';
+                wellCtx.lineWidth = 3;
+                
+                // Dessin de l'axe central
+                wellCtx.beginPath(); wellCtx.moveTo(wellCenterX, wellTop); wellCtx.lineTo(wellCenterX, wellBottom); wellCtx.stroke();
+
+                // Calcul de la position de l'onde principale (descente)
+                // L'onde descend en 'simTime'
+                let yWave = wellTop;
+                let isEcho1Active = false;
+                let yEcho1 = waterSurfaceY;
+                let isEcho2Active = false;
+                let yEcho2 = wellBottom;
+
+                // Onde dans l'air (descente)
+                if (simTime <= t1 / 2) {
+                    let distTraveled = simTime * V_AIR;
+                    yWave = wellTop + (distTraveled * pxPerMeter);
+                    drawWaveSymbol(wellCtx, wellCenterX, yWave, 'down');
+                } 
+                else {
+                    // Onde dans l'eau (descente)
+                    let timeInWater = simTime - (t1 / 2);
+                    let timeToBottom = (d2 / V_WATER);
+                    
+                    if (timeInWater <= timeToBottom) {
+                        let distInWater = timeInWater * V_WATER;
+                        yWave = waterSurfaceY + (distInWater * pxPerMeter);
+                        drawWaveSymbol(wellCtx, wellCenterX, yWave, 'down');
+                    }
+
+                    // Echo 1 (Surface eau -> Sonde)
+                    if (simTime > t1 / 2 && simTime <= t1) {
+                        isEcho1Active = true;
+                        let echo1Time = simTime - (t1 / 2);
+                        let echo1Dist = echo1Time * V_AIR;
+                        yEcho1 = waterSurfaceY - (echo1Dist * pxPerMeter);
+                        drawWaveSymbol(wellCtx, wellCenterX, yEcho1, 'up', '#805ad5'); // Echo violet
+                    }
+
+                    // Echo 2 (Fond -> Surface eau -> Sonde)
+                    if (timeInWater > timeToBottom) {
+                        let echo2WaterTime = timeInWater - timeToBottom;
+                        
+                        if (echo2WaterTime <= timeToBottom) {
+                            // Remonte dans l'eau
+                            let echo2WaterDist = echo2WaterTime * V_WATER;
+                            yEcho2 = wellBottom - (echo2WaterDist * pxPerMeter);
+                            drawWaveSymbol(wellCtx, wellCenterX, yEcho2, 'up', '#e53e3e'); // Echo rouge
+                        } else {
+                            // Transmis dans l'air (remonte vers sonde)
+                            let echo2AirTime = echo2WaterTime - timeToBottom;
+                            if (simTime <= t2) {
+                                let echo2AirDist = echo2AirTime * V_AIR;
+                                yEcho2 = waterSurfaceY - (echo2AirDist * pxPerMeter);
+                                drawWaveSymbol(wellCtx, wellCenterX, yEcho2, 'up', '#e53e3e');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Dessine les flèches "vagues" comme sur votre figure
+        function drawWaveSymbol(ctx, x, y, dir, color = '#1a202c') {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            if (dir === 'down') {
+                ctx.moveTo(x - 10, y - 10); ctx.lineTo(x + 10, y - 10); ctx.lineTo(x, y + 5);
+            } else {
+                ctx.moveTo(x - 10, y + 10); ctx.lineTo(x + 10, y + 10); ctx.lineTo(x, y - 5);
+            }
+            ctx.fill();
+        }
+
+        function drawArrow(ctx, x1, y1, x2, y2) {
+            ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x1 - 5, y1 + 10); ctx.lineTo(x1 + 5, y1 + 10); ctx.lineTo(x1, y1); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(x2 - 5, y2 - 10); ctx.lineTo(x2 + 5, y2 - 10); ctx.lineTo(x2, y2); ctx.fill();
+        }
+
+
+        // --- DESSIN DU GRAPHE PC ---
+        function drawGraphStatic() {
+            graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+            
+            // Axes
+            graphCtx.strokeStyle = '#e2e8f0';
+            graphCtx.lineWidth = 2;
+            graphCtx.beginPath();
+            // Axe Y
+            graphCtx.moveTo(40, 20); graphCtx.lineTo(40, 180);
+            // Pointe Y
+            graphCtx.moveTo(35, 30); graphCtx.lineTo(40, 20); graphCtx.lineTo(45, 30);
+            // Axe X
+            graphCtx.moveTo(40, 180); graphCtx.lineTo(620, 180);
+            // Pointe X
+            graphCtx.moveTo(610, 175); graphCtx.lineTo(620, 180); graphCtx.lineTo(610, 185);
+            graphCtx.stroke();
+
+            // Textes Axes
+            graphCtx.fillStyle = '#e2e8f0';
+            graphCtx.font = '14px Poppins';
+            graphCtx.fillText("Amplitude", 5, 20);
+            graphCtx.fillText("t(s)", 625, 185);
+            graphCtx.fillText("0", 25, 195);
+
+            // Calcul de l'échelle X (on base max X sur t2 + 0.1s)
+            let maxX = t2 + 0.05;
+            let pxPerSec = (620 - 40) / maxX;
+
+            // Raies P1 et P2
+            let xP1 = 40 + t1 * pxPerSec;
+            let xP2 = 40 + t2 * pxPerSec;
+
+            // Dessin conditionnel pendant l'animation (Effet Scanner)
+            let drawP1 = !isAnimating || simTime >= t1;
+            let drawP2 = !isAnimating || simTime >= t2;
+
+            graphCtx.lineWidth = 3;
+
+            if (drawP1) {
+                graphCtx.strokeStyle = '#9f7aea'; // Violet clair
+                graphCtx.beginPath(); graphCtx.moveTo(xP1, 180); graphCtx.lineTo(xP1, 80); graphCtx.stroke();
+                graphCtx.fillStyle = '#fff';
+                graphCtx.fillText("P₁", xP1 - 8, 70);
+                graphCtx.fillText(`t₁=${t1.toFixed(2)}`, xP1 - 25, 200);
+            }
+
+            if (drawP2) {
+                graphCtx.strokeStyle = '#9f7aea';
+                graphCtx.beginPath(); graphCtx.moveTo(xP2, 180); graphCtx.lineTo(xP2, 60); graphCtx.stroke();
+                graphCtx.fillStyle = '#fff';
+                graphCtx.fillText("P₂", xP2 - 8, 50);
+                graphCtx.fillText(`t₂=${t2.toFixed(3)}`, xP2 - 30, 200);
+            }
+
+            // Ligne de Scan "Radar"
+            if (isAnimating) {
+                let xScan = 40 + simTime * pxPerSec;
+                if (xScan <= 620) {
+                    graphCtx.strokeStyle = 'rgba(107, 70, 193, 0.5)';
+                    graphCtx.lineWidth = 2;
+                    graphCtx.beginPath(); graphCtx.moveTo(xScan, 20); graphCtx.lineTo(xScan, 180); graphCtx.stroke();
+                    // Glow effect
+                    graphCtx.fillStyle = 'rgba(107, 70, 193, 0.2)';
+                    graphCtx.fillRect(40, 20, xScan - 40, 160);
+                }
+            }
+        }
+
+        // --- BOUCLE D'ANIMATION ---
+        function animate(timestamp) {
+            if (!isAnimating) return;
+
+            let dt = (timestamp - lastFrameTime) / 1000;
+            lastFrameTime = timestamp;
+
+            // Avancement du temps de simulation
+            simTime += dt * timeScale;
+
+            drawWell();
+            drawGraphStatic();
+
+            // Fin de l'animation quand t2 est dépassé
+            if (simTime > t2 + 0.05) {
+                isAnimating = false;
+                drawWell(); // Redessine statique
+                drawGraphStatic(); // Dessine les pics complets
+            } else {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        // Init
+        updatePhysics();
+
+    </script>
+</body>
+</html>

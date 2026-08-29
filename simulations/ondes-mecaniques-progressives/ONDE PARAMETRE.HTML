@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation - Vitesse de propagation d'une onde</title>
+    
+    <!-- Police moderne -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-blue: #3b82f6;
+            --accent-red: #ef4444;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+
+        header { text-align: center; margin-bottom: 20px; }
+        header h1 { font-size: 2rem; color: var(--accent-red); font-weight: 700; }
+        header p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .simulation-container {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+            border: 1px solid var(--border-color);
+        }
+
+        canvas {
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: block;
+            width: 100%;
+            height: 350px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 25px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 12px;
+        }
+
+        /* Panneau de gauche : Sliders */
+        .controls-left { display: flex; flex-direction: column; gap: 15px; }
+
+        .slider-group { display: flex; flex-direction: column; gap: 5px; }
+        .slider-group label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+        .slider-group label span { color: var(--text-main); font-weight: 700; }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            border: 3px solid white;
+            box-shadow: 0 0 0 1px #cbd5e1;
+            cursor: pointer;
+            margin-top: -7px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e2e8f0;
+            border-radius: 2px;
+        }
+
+        /* Panneau de droite : Chronomètre et Actions */
+        .controls-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .chrono-box {
+            background: white;
+            border: 3px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 10px 30px;
+            text-align: center;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .chrono-display {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 3.5rem;
+            color: var(--accent-red);
+            line-height: 1;
+        }
+        .chrono-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .speed-result {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .btn-group { display: flex; gap: 15px; }
+
+        button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: var(--text-muted);
+        }
+        button:hover { border-color: var(--text-main); color: var(--text-main); transform: scale(1.05); }
+        button svg { width: 20px; height: 20px; fill: currentColor; }
+
+        .btn-play { border-color: var(--accent-blue); color: var(--accent-blue); }
+        .btn-play:hover { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Paramètres influant sur la vitesse de propagation d'une onde</h1>
+        <p>Prof Mouhibi - Physique Chimie</p>
+    </header>
+
+    <div class="simulation-container">
+        <!-- Canvas -->
+        <canvas id="simCanvas" width="1000" height="350"></canvas>
+
+        <div class="dashboard">
+            <!-- Paramètres physiques -->
+            <div class="controls-left">
+                
+                <div class="slider-group">
+                    <label>distance d (C1 - C2) : <span id="valD">2.00 m</span></label>
+                    <input type="range" id="sliderD" min="0.5" max="3.0" step="0.1" value="2.0">
+                </div>
+
+                <div class="slider-group">
+                    <label>amplitude : <span id="valA">80 mm</span></label>
+                    <input type="range" id="sliderA" min="20" max="120" step="5" value="80">
+                </div>
+
+                <div class="slider-group">
+                    <label>tension de la corde (T) : <span id="valT">0.98 N</span></label>
+                    <input type="range" id="sliderT" min="0.10" max="5.00" step="0.01" value="0.98">
+                </div>
+
+                <div class="slider-group">
+                    <label>masse linéique (μ) : <span id="valMu">0.250 kg/m</span></label>
+                    <input type="range" id="sliderMu" min="0.050" max="0.500" step="0.010" value="0.250">
+                </div>
+            </div>
+
+            <!-- Affichage Chrono et Résultat -->
+            <div class="controls-right">
+                
+                <div class="chrono-box">
+                    <div class="chrono-display" id="chronoDisplay">0.00 s</div>
+                    <div class="chrono-label">chronomètre électronique</div>
+                </div>
+
+                <div class="speed-result">
+                    <input type="checkbox" id="checkSpeed">
+                    <label for="checkSpeed">Afficher la valeur de la vitesse</label>
+                </div>
+                <div id="speedDisplay" style="font-weight: 700; color: var(--accent-blue); font-size: 1.2rem; opacity: 0;">
+                    v = 1.98 m/s
+                </div>
+
+                <div class="btn-group">
+                    <button id="btnReset" title="Réinitialiser">
+                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                    </button>
+                    <button class="btn-play" id="btnPulse" title="Déclencher l'onde">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // UI Elements
+        const sliderD = document.getElementById('sliderD');
+        const sliderA = document.getElementById('sliderA');
+        const sliderT = document.getElementById('sliderT');
+        const sliderMu = document.getElementById('sliderMu');
+        const checkSpeed = document.getElementById('checkSpeed');
+        const speedDisplay = document.getElementById('speedDisplay');
+        const chronoDisplay = document.getElementById('chronoDisplay');
+        const btnPulse = document.getElementById('btnPulse');
+        const btnReset = document.getElementById('btnReset');
+
+        // Variables Physiques
+        let d = parseFloat(sliderD.value);
+        let A = parseFloat(sliderA.value);
+        let T = parseFloat(sliderT.value);
+        let mu = parseFloat(sliderMu.value);
+        let v_phys = Math.sqrt(T / mu); // Vitesse théorique en m/s
+
+        // Variables Graphiques
+        const scaleX = 200; // 1 mètre = 200 pixels
+        const startX = 100; // Position de la main
+        const baseY = 200;  // Position Y de la corde au repos
+        const posC1 = startX + 150; // Position fixe du Capteur 1 (0.75m de la source)
+        let posC2 = posC1 + d * scaleX; 
+        
+        // État de l'animation
+        let isAnimating = false;
+        let pulseX = startX;
+        let chronoState = 0; // 0=Stop, 1=Running, 2=Finished
+        let timePassed = 0; 
+        let lastFrameTime = 0;
+
+        // Mise à jour des valeurs lors de la manipulation des sliders
+        function updatePhysics() {
+            d = parseFloat(sliderD.value);
+            A = parseFloat(sliderA.value);
+            T = parseFloat(sliderT.value);
+            mu = parseFloat(sliderMu.value);
+            
+            document.getElementById('valD').innerText = d.toFixed(2) + " m";
+            document.getElementById('valA').innerText = A + " mm";
+            document.getElementById('valT').innerText = T.toFixed(2) + " N";
+            document.getElementById('valMu').innerText = mu.toFixed(3) + " kg/m";
+
+            posC2 = posC1 + d * scaleX;
+            v_phys = Math.sqrt(T / mu);
+            speedDisplay.innerText = `v = ${v_phys.toFixed(2)} m/s`;
+            
+            if(!isAnimating) drawScene();
+        }
+
+        sliderD.addEventListener('input', updatePhysics);
+        sliderA.addEventListener('input', updatePhysics);
+        sliderT.addEventListener('input', updatePhysics);
+        sliderMu.addEventListener('input', updatePhysics);
+
+        checkSpeed.addEventListener('change', () => {
+            speedDisplay.style.opacity = checkSpeed.checked ? 1 : 0;
+        });
+
+        btnPulse.addEventListener('click', () => {
+            if (isAnimating) return; // Empêche le double clic
+            isAnimating = true;
+            pulseX = startX;
+            chronoState = 0;
+            timePassed = 0;
+            chronoDisplay.innerText = "0.00 s";
+            chronoDisplay.style.color = "var(--text-main)";
+            lastFrameTime = performance.now();
+            requestAnimationFrame(animate);
+        });
+
+        btnReset.addEventListener('click', () => {
+            isAnimating = false;
+            pulseX = startX;
+            chronoState = 0;
+            chronoDisplay.innerText = "0.00 s";
+            chronoDisplay.style.color = "var(--accent-red)";
+            drawScene();
+        });
+
+        // Fonction pour dessiner un photocapteur
+        function drawSensor(x, label, isTriggered) {
+            // Boitier du capteur
+            ctx.fillStyle = '#e2e8f0';
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.roundRect(x - 15, baseY - 120, 30, 45, 5);
+            ctx.fill();
+            ctx.stroke();
+
+            // Label (C1, C2)
+            ctx.fillStyle = '#ef4444';
+            ctx.font = '14px Poppins';
+            ctx.fillText(label, x - 12, baseY - 130);
+
+            // LED (Rouge si actif, Vert/Éteint si déclenché)
+            ctx.fillStyle = isTriggered ? '#ef4444' : '#10b981'; // S'éteint brièvement quand l'onde passe
+            ctx.beginPath();
+            ctx.arc(x, baseY - 98, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Rayon Laser
+            ctx.strokeStyle = isTriggered ? 'rgba(239, 68, 68, 0.1)' : 'rgba(239, 68, 68, 0.6)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x, baseY - 75);
+            
+            // Le laser s'arrête sur l'onde
+            let laserStopY = baseY;
+            if (Math.abs(x - pulseX) < 40) {
+                // Si l'onde est sous le capteur, le laser frappe le sommet de l'onde
+                laserStopY = baseY - A * Math.exp(-Math.pow((x - pulseX) / 30, 2));
+            }
+            ctx.lineTo(x, laserStopY);
+            ctx.stroke();
+        }
+
+        // Fonction pour dessiner la cotation (Flèche d = 2.00m)
+        function drawDimension() {
+            ctx.strokeStyle = '#94a3b8';
+            ctx.fillStyle = '#64748b';
+            ctx.lineWidth = 1;
+
+            // Lignes de rappel
+            ctx.beginPath(); ctx.moveTo(posC1, baseY + 20); ctx.lineTo(posC1, baseY + 60); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(posC2, baseY + 20); ctx.lineTo(posC2, baseY + 60); ctx.stroke();
+
+            // Flèche principale
+            const arrY = baseY + 45;
+            ctx.beginPath(); ctx.moveTo(posC1, arrY); ctx.lineTo(posC2, arrY); ctx.stroke();
+
+            // Pointes de flèches
+            ctx.beginPath(); ctx.moveTo(posC1, arrY); ctx.lineTo(posC1+10, arrY-4); ctx.lineTo(posC1+10, arrY+4); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(posC2, arrY); ctx.lineTo(posC2-10, arrY-4); ctx.lineTo(posC2-10, arrY+4); ctx.fill();
+
+            // Texte
+            ctx.font = '14px Poppins';
+            ctx.textAlign = 'center';
+            ctx.fillText(`d = ${d.toFixed(2)} m`, posC1 + (posC2 - posC1)/2, arrY + 20);
+            ctx.textAlign = 'left';
+        }
+
+        function drawScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Dessiner la Corde
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = '#3b82f6';
+            ctx.lineJoin = 'round';
+
+            for (let x = startX; x <= canvas.width - 50; x++) {
+                let y = baseY;
+                
+                // Forme de l'onde (Gaussienne)
+                if (isAnimating && x > startX) {
+                    let dist = x - pulseX;
+                    let width = 30; // Largeur visuelle de la secousse
+                    if (Math.abs(dist) < width * 2) {
+                        y -= A * Math.exp(-Math.pow(dist / width, 2));
+                    }
+                }
+                
+                if (x === startX) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // 2. Dessiner la main (Source)
+            ctx.fillStyle = '#f8bbd0'; // Couleur peau schématique
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 2;
+            let handY = baseY;
+            if (isAnimating && pulseX < startX + 100) {
+                // Animation de la main
+                handY -= A * Math.exp(-Math.pow((startX - pulseX) / 30, 2));
+            }
+            // Petit dessin schématique d'une main tenant la corde
+            ctx.beginPath();
+            ctx.arc(startX, handY, 8, 0, Math.PI*2);
+            ctx.fill(); ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(startX, handY); ctx.lineTo(startX-15, handY-25); ctx.lineTo(startX-30, handY-20);
+            ctx.stroke();
+
+            // 3. Dessiner les Capteurs
+            // Le laser se coupe quand la crête de l'onde (pulseX) passe exactement sous le capteur
+            let c1_trigger = isAnimating && Math.abs(pulseX - posC1) < 15;
+            let c2_trigger = isAnimating && Math.abs(pulseX - posC2) < 15;
+            
+            drawSensor(posC1, "C1", c1_trigger);
+            drawSensor(posC2, "C2", c2_trigger);
+
+            // 4. Dessiner la cotation d
+            drawDimension();
+        }
+
+        function animate(timestamp) {
+            if (!isAnimating) return;
+
+            let deltaTime = (timestamp - lastFrameTime) / 1000; // Convert in seconds
+            lastFrameTime = timestamp;
+
+            // Avancement de l'onde (v_phys en m/s converti en pixels/s)
+            let v_px = v_phys * scaleX; 
+            pulseX += v_px * deltaTime;
+
+            // Logique du chronomètre
+            if (pulseX >= posC1 && chronoState === 0) {
+                chronoState = 1; // Start chrono
+                chronoDisplay.style.color = "var(--text-main)";
+            }
+            
+            if (chronoState === 1) {
+                // On utilise le calcul physique exact pour éviter les imprécisions des FPS de l'écran
+                let current_d_meters = (pulseX - posC1) / scaleX;
+                timePassed = current_d_meters / v_phys;
+                chronoDisplay.innerText = timePassed.toFixed(2) + " s";
+            }
+
+            if (pulseX >= posC2 && chronoState === 1) {
+                chronoState = 2; // Stop chrono
+                chronoDisplay.style.color = "var(--accent-red)";
+                // Afficher le temps théorique parfait pour l'expérience
+                let finalTime = d / v_phys; 
+                chronoDisplay.innerText = finalTime.toFixed(2) + " s";
+            }
+
+            drawScene();
+
+            // Arrêter l'animation quand l'onde sort de l'écran
+            if (pulseX > canvas.width) {
+                isAnimating = false;
+            } else {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        // Initialisation
+        updatePhysics();
+        drawScene();
+
+    </script>
+</body>
+</html>

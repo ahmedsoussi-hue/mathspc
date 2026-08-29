@@ -4782,3 +4782,55 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* ==========================================================================
+   ONDES MÉCANIQUES PROGRESSIVES — INTERACTIVE SUITE STYLES (PROF MOUHIBI)
+   ========================================================================== */
+.ondes-meca-selector-container {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 14px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.ondes-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(30, 41, 59, 0.75);
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+
+.ondes-tab-btn:hover {
+    background: rgba(56, 189, 248, 0.18);
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #38bdf8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+.ondes-tab-btn.active {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border-color: #38bdf8;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.35);
+}
+
+.ondes-meca-sims-showcase {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.ondes-meca-sims-showcase:hover {
+    border-color: rgba(56, 189, 248, 0.5);
+}
+

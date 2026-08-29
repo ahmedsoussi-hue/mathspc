@@ -6,393 +6,6 @@
 
 // --- DATA SOURCE: CHAPTERS ---
 const chaptersData = [
-    // ==========================================
-    // 2ème BAC SCIENCES ÉCONOMIQUES ET GESTION (2BAC ÉCO)
-    // ==========================================
-    {
-        id: "math-examen-national-2026-eco",
-        title: "Examen National 2026 — Mathématiques (Session Ordinaire - 2BAC Éco)",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Épreuve officielle 2026 du Baccalauréat National Sciences Économiques & Gestion avec sujet complet et corrigé détaillé pas à pas.",
-        coursePdf: {
-            file: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
-            title: "Examen National 2026 Mathématiques 2BAC Éco — Sujet & Corrigé (PDF)",
-            description: "Document officiel haute définition avec corrigé complet, barème et explications détaillées."
-        },
-        exercisePdfs: [
-            {
-                file: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
-                title: "Correction Détaillée de l'Épreuve Éco 2026 (PDF)",
-                description: "Corrigé pas à pas de l'examen national 2026 Sciences Économiques."
-            }
-        ],
-        courseContent: `
-<!-- PDF DOWNLOAD & PREVIEW BANNER -->
-<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.2), rgba(59, 130, 246, 0.2)); border: 1.5px solid rgba(217, 119, 6, 0.5); border-radius: 16px; padding: 22px 26px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 16px; backdrop-filter: blur(8px);">
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(217, 119, 6, 0.25); display: flex; align-items: center; justify-content: center; color: #d97706; font-size: 1.4rem; flex-shrink: 0;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            </div>
-            <div>
-                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 700; color: #ffffff;">Examen National 2026 — Mathématiques (Session Ordinaire - 2BAC Éco)</h4>
-                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Filière : 2ème Bac Sciences Économiques et Gestion • Sujet & Corrigé Officiel</p>
-            </div>
-        </div>
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: 30px; font-weight: 600; font-size: 0.88rem; text-decoration: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Plein Écran
-            </a>
-            <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none; box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35); background: #d97706; border-color: #d97706;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="formula-box" style="margin-bottom: 20px;">
-    <h4>Informations & Thèmes de l'épreuve</h4>
-    <ul>
-        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Économiques et Gestion (Sciences Éco & TGC)</li>
-        <li><strong>Session :</strong> Session Ordinaire 2026 | <strong>Durée :</strong> 2 heures | <strong>Coefficient :</strong> 3</li>
-        <li><strong>Contenu :</strong> Suites numériques, calcul de probabilités, fonctions exponentielles/logarithmes et optimisation du bénéfice / coût marginal.</li>
-    </ul>
-</div>
-
-<div style="width: 100%; height: 680px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); background: #0f172a; margin-top: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" style="width: 100%; height: 100%; border: none;"></iframe>
-</div>
-        `,
-        exercises: [
-            {
-                title: "Épreuve Officielle & Corrigé Intégral 2026 (2BAC Éco)",
-                statement: "Retrouvez l'intégralité du sujet d'examen national 2026 de Mathématiques (Session Ordinaire) pour la filière Sciences Économiques.",
-                solution: "Consultez le document PDF ci-dessous ou cliquez sur Télécharger pour obtenir le corrigé détaillé pas à pas."
-            }
-        ],
-        exams: [
-            { title: "Examen National 2026 - Session Ordinaire (Éco)", type: "National", year: 2026, file: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" }
-        ]
-    },
-    {
-        id: "math-eco-limites",
-        title: "Limites, Continuité & Coût Marginal",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Étude des limites, continuité, Théorème des Valeurs Intermédiaires (TVI) et applications au calcul du coût marginal et asymptotes.",
-        courseContent: `
-<!-- PDF DOWNLOAD BANNER -->
-<div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.15), rgba(59, 130, 246, 0.15)); border: 1.5px solid rgba(217, 119, 6, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-    <div style="display: flex; align-items: center; gap: 14px;">
-        <div style="background: rgba(217, 119, 6, 0.2); color: #d97706; width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
-            <i data-lucide="file-text"></i>
-        </div>
-        <div>
-            <h4 style="margin: 0 0 4px 0; color: var(--text-color); font-weight: 700;">Résumé de Cours en PDF (2BAC Éco)</h4>
-            <p style="margin: 0; color: var(--text-muted); font-size: 0.88rem;">Téléchargez le cours complet Limites & TVI avec exemples économiques.</p>
-        </div>
-    </div>
-    <a href="./pdf/2bac-eco-limites-cours.pdf" target="_blank" download class="btn" style="background: #d97706; color: #fff; border: none; font-weight: 600; padding: 10px 18px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-        <i data-lucide="download"></i> Télécharger PDF
-    </a>
-</div>
-
-<h3>1. Notion de Limite & Continuité</h3>
-<p>Pour une fonction économique de coût $C(x)$ ou de recette $R(x)$, la continuité garantit l'absence de rupture brutale dans la production.</p>
-
-<div class="formula-box">
-    <h4>Propriété clé — TVI (Théorème des Valeurs Intermédiaires)</h4>
-    <p>Si $f$ est continue sur $[a, b]$ et si $f(a) \cdot f(b) < 0$, alors l'équation <strong>$f(x) = 0$</strong> admet au moins une solution $\alpha \in ]a, b[$.</p>
-    <p><em>Application Économique :</em> Détermination du point de rentabilité (seuil de rentabilité où $R(x) - C(x) = 0$).</p>
-</div>
-
-<h3>2. Interprétation des Asymptotes</h3>
-<ul>
-    <li><strong>Asymptote verticale ($x = a$) :</strong> $\lim_{x \to a} f(x) = \pm \infty$ (surchauffe de coût lorsque la production s'approche d'une capacité limite $a$).</li>
-    <li><strong>Asymptote horizontale ($y = L$) :</strong> $\lim_{x \to +\infty} f(x) = L$ (coût moyen à long terme se stabilisant vers un coût fixe limite $L$).</li>
-</ul>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Seuil de Rentabilité & TVI",
-                statement: "Soit la fonction de bénéfice $B(x) = x^3 + 2x - 5$ en milliers de DH pour $x \in [1, 2]$ centaine d'unités.<br>1) Montrer que $B$ est strictement croissante sur $[1, 2]$.<br>2) Démontrer qu'il existe un unique niveau de production $\alpha \in ]1, 2[$ rendant le bénéfice nul.",
-                solution: "1) $B'(x) = 3x^2 + 2 > 0$ pour tout $x$, donc $B$ est strictement croissante et continue.<br>2) $B(1) = 1 + 2 - 5 = -2 < 0$ et $B(2) = 8 + 4 - 5 = 7 > 0$.<br>Comme $B(1) \cdot B(2) < 0$, d'après le TVI, l'équation $B(x) = 0$ admet une unique solution $\alpha \in ]1, 2[$ (seuil d'équilibre)."
-            }
-        ],
-        exams: [
-            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 },
-            { title: "National 2023 - Session Rattrapage (Éco)", type: "National", year: 2023 }
-        ]
-    },
-    {
-        id: "math-eco-derivation",
-        title: "Dérivation, Coût Marginal & Élasticité",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Calcul de dérivées, étude des variations, coût moyen, coût marginal et élasticité de la demande par rapport au prix.",
-        courseContent: `
-<h3>1. Coût Marginal & Coût Moyen</h3>
-<p>En sciences économiques, le coût marginal $C_m(x)$ mesure la variation du coût total engendrée par la production d'une unité supplémentaire.</p>
-<div class="formula-box">
-    <h4>Formules Fondamentales</h4>
-    <ul>
-        <li><strong>Coût Marginal :</strong> $C_m(x) = C'(x)$</li>
-        <li><strong>Coût Moyen :</strong> $C_M(x) = \frac{C(x)}{x}$</li>
-        <li><strong>Optimum de Production :</strong> Le coût moyen est minimal lorsque $C_M(x) = C_m(x)$.</li>
-    </ul>
-</div>
-
-<h3>2. Élasticité de la Demande</h3>
-<p>L'élasticité mesure la sensibilité de la demande $D(p)$ par rapport au prix $p$ :</p>
-$$\mathcal{E}(p) = \frac{D'(p)}{D(p)} \times p$$
-<ul>
-    <li>Si $|\mathcal{E}| > 1$ : Demande très élastique (les consommateurs réagissent fortement au prix).</li>
-    <li>Si $|\mathcal{E}| < 1$ : Demande inélastique (bien de première nécessité).</li>
-</ul>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Minimisation du Coût Moyen",
-                statement: "Soit $C(x) = x^2 + 100x + 400$ le coût total.<br>1) Exprimer le coût moyen $C_M(x)$.<br>2) Déterminer la quantité $x$ qui minimise le coût moyen.",
-                solution: "1) $C_M(x) = \frac{C(x)}{x} = x + 100 + \frac{400}{x}$.<br>2) $C_M'(x) = 1 - \frac{400}{x^2} = \frac{x^2 - 400}{x^2}$.<br>$C_M'(x) = 0 \implies x = 20$ unités. Le coût moyen minimum est $C_M(20) = 20 + 100 + 20 = 140$ DH."
-            }
-        ],
-        exams: [
-            { title: "National 2023 - Session Ordinaire (Éco)", type: "National", year: 2023 }
-        ]
-    },
-    {
-        id: "math-eco-logarithme",
-        coursePdf: {
-            file: "pdf/logarithme.pdf",
-            title: "Résumé de cours : Fonction Logarithme Népérien (ln) (PDF)",
-            description: "Fiche de synthèse officielle complète sur les propriétés, limites et dérivées des logarithmes."
-        },
-        title: "Fonction Logarithme Népérien (ln)",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Étude complète de la fonction ln(x), propriétés algébriques, limites, dérivée et applications aux taux de croissance et d'intérêt.",
-        courseContent: `
-<!-- EMBEDDED PDF VIEWER CARD -->
-<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
-            </div>
-            <div>
-                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Fonctions Logarithmiques)</h4>
-                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF officiel.</p>
-            </div>
-        </div>
-        <a href="./pdf/logarithme.pdf" download="logarithme.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
-        </a>
-    </div>
-    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
-        <iframe src="./pdf/logarithme.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
-    </div>
-</div>
-
-<h3>1. Définition et Propriétés Algébriques</h3>
-<p>La fonction logarithme népérien $x \mapsto \ln(x)$ est définie et strictement croissante sur $]0, +\infty[$.</p>
-<div class="formula-box">
-    <h4>Règles de Calcul ($	o a, b > 0$)</h4>
-    <ul>
-        <li>$\ln(a \cdot b) = \ln(a) + \ln(b)$</li>
-        <li>$\ln\left(\frac{a}{b}\right) = \ln(a) - \ln(b)$</li>
-        <li>$\ln(a^n) = n \ln(a)$</li>
-        <li>$\ln(1) = 0 \quad \text{et} \quad \ln(e) = 1$</li>
-    </ul>
-</div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Équation d'Investissement",
-                statement: "Résoudre dans $\mathbb{R}$ l'équation : $\ln(2x - 1) = 3$.",
-                solution: "Condition d'existence : $2x - 1 > 0 \implies x > 1/2$.<br>En appliquant l'exponentielle : $2x - 1 = e^3 \implies x = \frac{e^3 + 1}{2} \approx 10,54$."
-            }
-        ],
-        exams: [
-            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 }
-        ]
-    },
-    {
-        id: "math-eco-exponentielle",
-        title: "Fonction Exponentielle (exp)",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Fonction exponentielle e^x, équations, inéquations, dérivées, limites remarquables et calculs d'amortissement continu.",
-        courseContent: `
-<h3>1. Définition & Réciproque de ln</h3>
-<p>Pour tout $x \in \mathbb{R}$, $y = e^x \iff \ln(y) = x$ (avec $y > 0$).</p>
-<div class="formula-box">
-    <h4>Propriétés Essentielles</h4>
-    <ul>
-        <li>$e^{a+b} = e^a \cdot e^b$</li>
-        <li>$\frac{e^a}{e^b} = e^{a-b}$</li>
-        <li>$(e^a)^n = e^{n \cdot a}$</li>
-        <li>$\lim_{x \to +\infty} e^x = +\infty \quad \text{et} \quad \lim_{x \to -\infty} e^x = 0$</li>
-    </ul>
-</div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Modèle de Ventes",
-                statement: "Les ventes mensuelles d'un produit sont données par $V(t) = 500 (1 - e^{-0,2 t})$ où $t$ est en mois.<br>1) Calculer les ventes initiales $V(0)$.<br>2) Déterminer la limite des ventes à long terme.",
-                solution: "1) $V(0) = 500(1 - e^0) = 0$.<br>2) $\lim_{t \to +\infty} e^{-0,2 t} = 0$, donc $\lim_{t \to +\infty} V(t) = 500$ unités (seuil de saturation)."
-            }
-        ],
-        exams: [
-            { title: "National 2022 - Session Ordinaire (Éco)", type: "National", year: 2022 }
-        ]
-    },
-    {
-        id: "math-eco-suites",
-        coursePdf: {
-            file: "pdf/Resum_suites_By_soussi.pdf",
-            title: "Résumé de cours : Suites Numériques (PDF) — By Dr. Soussi",
-            description: "Fiche de synthèse officielle complète sur les suites numériques."
-        },
-        title: "Suites Numériques & Mathématiques Financières",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Suites arithmétiques, géométriques, intérêts composés, capitalisation, valeur acquise et annuités de remboursement.",
-        courseContent: `
-<!-- EMBEDDED PDF VIEWER CARD -->
-<div class="pdf-viewer-card" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 46px; height: 46px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; flex-shrink: 0;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
-            </div>
-            <div>
-                <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #ffffff;">📄 Fiche Résumé Officiel PDF (Suites Numériques — By Dr. Soussi)</h4>
-                <p style="margin: 3px 0 0 0; font-size: 0.85rem; color: #94a3b8;">Consultez directement le document ci-dessous ou téléchargez le fichier PDF résumé.</p>
-            </div>
-        </div>
-        <a href="./pdf/Resum_suites_By_soussi.pdf" download="Resum_suites_By_soussi.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 11px 22px; border-radius: 30px; font-weight: 700; font-size: 0.9rem; text-decoration: none; background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg> Télécharger le PDF
-        </a>
-    </div>
-    <div style="width: 100%; height: 550px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15);">
-        <iframe src="./pdf/Resum_suites_By_soussi.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
-    </div>
-</div>
-
-<h3>1. Capitalisation et Intérêts Composés</h3>
-<p>Un capital $C_0$ placé au taux d'intérêt annuel $i$ devient après $n$ années :</p>
-<div class="formula-box">
-    <h4>Formule du Capital Acquise (Intérêts Composés)</h4>
-    $$C_n = C_0 \cdot (1 + i)^n$$
-    <p>Cette suite est une <strong>suite géométrique</strong> de raison $q = 1 + i$.</p>
-</div>
-
-<h3>2. Somme des Termes d'une Suite Géométrique</h3>
-$$S_n = u_0 \cdot \frac{1 - q^{n+1}}{1 - q}$$
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Calcul de Capital",
-                statement: "Un épargnant dépose $10\,000$ DH dans un compte rémunéré à $5\%$ d'intérêts composés par an.<br>Calculer la somme disponible au bout de $6$ ans.",
-                solution: "$C_6 = 10\,000 \cdot (1 + 0{,}05)^6 = 10\,000 \cdot (1{,}05)^6 \approx 13\,400{,}96$ DH."
-            }
-        ],
-        exams: [
-            { title: "National 2023 - Session Ordinaire (Éco)", type: "National", year: 2023 }
-        ]
-    },
-    {
-        id: "math-eco-statistiques",
-        title: "Statistiques à Deux Variables & Ajustement Linéaire",
-        level: "2bac-eco",
-        subject: "math",
-        description: "Nuages de points, point moyen G, covariance, méthode des moindres carrés et prévisions économiques.",
-        courseContent: `
-<h3>1. Covariance & Point Moyen</h3>
-<p>Soit la série statistique à deux variables $(x_i, y_i)$ :</p>
-<ul>
-    <li>Point moyen : $G(\bar{x}, \bar{y})$ où $\bar{x} = \frac{1}{N}\sum x_i$ et $\bar{y} = \frac{1}{N}\sum y_i$.</li>
-    <li>Covariance : $Cov(X,Y) = \frac{1}{N}\sum x_i y_i - \bar{x}\bar{y}$.</li>
-</ul>
-
-<div class="formula-box">
-    <h4>Droite d'Ajustement par les Moindres Carrés : $y = a x + b$</h4>
-    $$a = \frac{Cov(X,Y)}{V(X)} = \frac{Cov(X,Y)}{\bar{x^2} - \bar{x}^2}$$
-    $$b = \bar{y} - a \bar{x}$$
-</div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Prévision du Chiffre d'Affaires",
-                statement: "On donne $\bar{x} = 3$, $\bar{y} = 15$, $Cov(X,Y) = 4$ et $V(X) = 2$.<br>1) Établir l'équation de la droite d'ajustement linéaire.<br>2) Estimer $y$ pour $x = 6$.",
-                solution: "1) $a = \frac{4}{2} = 2$. Puis $b = 15 - (2 \times 3) = 9$. D'où $y = 2x + 9$.<br>2) Pour $x = 6$, $y = 2(6) + 9 = 21$ (en millions de DH)."
-            }
-        ],
-        exams: [
-            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 }
-        ]
-    },
-    {
-        id: "eco-generale-marche",
-        title: "Économie Générale — Le Marché et les Agrégats Économiques",
-        level: "2bac-eco",
-        subject: "eco",
-        description: "Lois du marché (offre et demande), structures de marché (CPP, Monopole, Oligopole) et grands agrégats de la comptabilité nationale (PIB, RNBD, Épargne).",
-        courseContent: `
-<h3>1. Concept de Marché et Régimes de Concurrence</h3>
-<p>Le marché est le lieu de rencontre réel ou fictif entre l'offre et la demande qui détermine le prix d'équilibre.</p>
-<div class="formula-box">
-    <h4>Agrégats de la Comptabilité Nationale Marocaine</h4>
-    <ul>
-        <li><strong>PIB (Produit Intérieur Brut) :</strong> $\text{PIB} = \sum \text{Valeurs Ajoutées} + \text{TVA} + \text{Droits de Douane}$</li>
-        <li><strong>RNBD (Revenu National Brut Disponible) :</strong> $\text{RNBD} = \text{PIB} + \text{Revenus primaires nets de l'extérieur}$</li>
-        <li><strong>Taux de Croissance du PIB :</strong> $\frac{\text{PIB}_t - \text{PIB}_{t-1}}{\text{PIB}_{t-1}} \times 100$</li>
-    </ul>
-</div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Calcul de PIB et Croissance",
-                statement: "En 2022, le PIB du Maroc était de 1330 milliards DH. En 2023, il est passé à 1400 milliards DH.<br>Calculer le taux de croissance économique en 2023.",
-                solution: "$\text{Taux} = \frac{1400 - 1330}{1330} \times 100 = \frac{70}{1330} \times 100 \approx 5{,}26\%$."
-            }
-        ],
-        exams: [
-            { title: "National 2023 - Session Ordinaire (Éco)", type: "National", year: 2023 }
-        ]
-    },
-    {
-        id: "eco-comptabilite-amortissements",
-        title: "Comptabilité & Finance — Amortissements & Provisions",
-        level: "2bac-eco",
-        subject: "eco",
-        description: "Travaux d'inventaire, plan d'amortissement linéaire et dégressif, régularisation des stocks et écritures comptables d'inventaire.",
-        courseContent: `
-<h3>1. Amortissement Constant (Linéaire)</h3>
-<p>L'amortissement constate la dépréciation irréversible des immobilisations due à l'usure ou à l'obsolescence.</p>
-<div class="formula-box">
-    <h4>Formules Comptables Clés</h4>
-    <ul>
-        <li><strong>Taux d'amortissement :</strong> $t = \frac{100}{N}$ (où $N$ est la durée de vie)</li>
-        <li><strong>Annuité :</strong> $a = V_0 \times t \times \frac{m}{12}$</li>
-        <li><strong>Valeur Nette d'Amortissement (VNA) :</strong> $\text{VNA} = V_0 - \sum \text{Amortissements}$</li>
-    </ul>
-</div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Calcul d'Annuité d'Amortissement",
-                statement: "Une entreprise achète un matériel informatique pour $50\,000$ DH HT le 01/04/2023. Durée d'utilisation : 5 ans.<br>Calculer la première annuité pour l'exercice 2023.",
-                solution: "Taux $t = 100/5 = 20\%$.<br>Nombre de mois en 2023 (d'avril à décembre) : $m = 9$ mois.<br>Annuité 2023 = $50\,000 \times 0{,}20 \times \frac{9}{12} = 7\,500$ DH."
-            }
-        ],
-        exams: [
-            { title: "National 2024 - Session Ordinaire (Éco)", type: "National", year: 2024 }
-        ]
-    },
-
     {
         id: "math-examen-national-2026-pc",
         title: "Examen National 2026 — Mathématiques (Session Ordinaire)",
@@ -3690,6 +3303,155 @@ $$S_n = u_0 \cdot \frac{1 - q^{n+1}}{1 - q}$$
                     <div class="calc-result" id="wave-result" style="display: none; color: var(--text-primary);"></div>
                 </div>
             </div>
+
+            <div class="ondes-meca-sims-showcase" style="margin-top: 30px; background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 14px; padding: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 12px;">
+                    <div>
+                        <h4 style="margin: 0; color: #38bdf8; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;"><path d="M2 12h2.5L7 4l4 16 4-12 2.5 8H22"/></svg>
+                            4. Simulations & Laboratoires Virtuels Interactifs (Prof Mouhibi)
+                        </h4>
+                        <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 0.84rem;">Explorez les 12 simulations interactives conçues pour ce cours.</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="closeChapterModal(); navigateToAnim('ondes-mecaniques');" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; padding: 8px 14px;">
+                        <span>Ouvrir la Suite Complète (12 Modules)</span> →
+                    </button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px;">
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #38bdf8; background: rgba(56, 189, 248, 0.15); padding: 2px 8px; border-radius: 10px;">Corde Vibrante</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">1. Onde Transversale</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Propagation d'un ébranlement et d'ondes sinusoïdales le long d'une corde.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('onde-transversale');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #a855f7; background: rgba(168, 85, 247, 0.15); padding: 2px 8px; border-radius: 10px;">Ressort & Milieu</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">2. Onde Longitudinale</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Compression et dilatation des spires le long de la direction de propagation.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('onde-longitudinale');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #06b6d4; background: rgba(6, 182, 212, 0.15); padding: 2px 8px; border-radius: 10px;">Cuve à Ondes</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">3. Surface de l'Eau</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Ondes circulaires transversales créées par une source ponctuelle.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('onde-surface-eau');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.15); padding: 2px 8px; border-radius: 10px;">Facteurs Célérité</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">4. Paramètres de Célérité</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Influence de la tension T et masse linéique μ sur la célérité (v = √(T/μ)).</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('onde-parametres-vitesse');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 2px 8px; border-radius: 10px;">Acoustique</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">5. Caractère Longitudinal Son</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Compression et détente des couches d'air lors du passage du son.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('nature-onde-sonore');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #ec4899; background: rgba(236, 72, 153, 0.15); padding: 2px 8px; border-radius: 10px;">Onde Plane</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">6. Onde Sonore Plane</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Oscillation et déplacement des particules dans un tube acoustique.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('onde-sonore-plane');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.15); padding: 2px 8px; border-radius: 10px;">Milieu Matériel</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">7. Son dans le Vide</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Expérience de la cloche à vide : le son ne se propage pas dans le vide.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('onde-sonore-vide');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #14b8a6; background: rgba(20, 184, 166, 0.15); padding: 2px 8px; border-radius: 10px;">Oscilloscope</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">8. Vitesse du Son dans l'Air</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Mesure du retard temporel entre 2 microphones récepteurs sur oscilloscope.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('mesure-vitesse-son');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #8b5cf6; background: rgba(139, 92, 246, 0.15); padding: 2px 8px; border-radius: 10px;">Échoguidage</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">9. Profondeur d'un Puits</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Calcul de la profondeur par mesure de l'écho sonore réfléchi (Δt = 2d / v).</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('mesure-profondeur-puits');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #0284c7; background: rgba(2, 132, 199, 0.15); padding: 2px 8px; border-radius: 10px;">Ultrasons</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">10. Mesure par SONAR</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Sondage bathymétrique sous-marin par émission et réflexion d'ultrasons.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('sonar-mesure-profondeur');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #f97316; background: rgba(249, 115, 22, 0.15); padding: 2px 8px; border-radius: 10px;">Croisement</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">11. Superposition sur Corde</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Rencontre et croisement sans déformation de 2 ébranlements opposés.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('superposition-ondes-corde');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+
+                    <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-size: 0.72rem; font-weight: 700; color: #e11d48; background: rgba(225, 29, 72, 0.15); padding: 2px 8px; border-radius: 10px;">Interférences</span>
+                            </div>
+                            <strong style="color: #ffffff; font-size: 0.92rem;">12. Principe de Superposition</strong>
+                            <p style="color: #94a3b8; font-size: 0.8rem; margin: 4px 0 10px 0;">Somme algébrique des élongations y(x,t) = y1(x,t) + y2(x,t) et profils d'onde.</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="closeChapterModal(); navigateToAnim('principe-superposition');" style="width: 100%;">Lancer la Simulation</button>
+                    </div>
+                </div>
+            </div>
         `,
         exercises: [
             {
@@ -5339,7 +5101,7 @@ let userState = {
 const METHOD_SUBCARDS_MAP = {
     "sol-gel-spin-coating": { title: "Sol-Gel / Spin Coating", category: "Experimental Methods", desc: "Préparation sol-gel organométallique et dépôt de couches minces par étalement centrifuge (Spin-Coating)." },
     "cbd": { title: "Chemical Bath Deposition (CBD)", category: "Experimental Methods", desc: "Dépôt par bain chimique en milieu aqueux." },
-    "electrochemical-deposition": { title: "Electrochemical Deposition", category: "Experimental Methods", desc: "Électrodéposition et réduction électrochimique sur substrat conducteur." },
+    "electrochemical-deposition": { title: "Electrochemical Deposition", category: "Experimental Methods", desc: "Système à trois électrodes (WE FTO, RE, CE) et potentiostat pour le dépôt contrôlé de films minces de ZnO et ZnO:Ga." },
     "silar": { title: "SILAR", category: "Experimental Methods", desc: "Adsorption et réaction successives d'ions en couches atomiques." },
     "sputtering": { title: "Sputtering", category: "Experimental Methods", desc: "Pulvérisation cathodique radiofréquence (RF) / magnetron." },
     "thermal-evaporation": { title: "Thermal Evaporation", category: "Experimental Methods", desc: "Évaporation thermique sous vide poussé." },
@@ -7362,16 +7124,30 @@ function setupAnimations() {
             activeTitleSpan.textContent = cardTitle;
         }
 
+        const ondesMecaIds = [
+            "ondes-mecaniques", "ondes-meca",
+            "onde-transversale", "onde-longitudinale", "onde-surface-eau",
+            "onde-parametres-vitesse", "nature-onde-sonore", "onde-sonore-plane",
+            "onde-sonore-vide", "mesure-vitesse-son", "mesure-profondeur-puits",
+            "sonar-mesure-profondeur", "superposition-ondes-corde", "principe-superposition"
+        ];
+        const isOndesMeca = ondesMecaIds.includes(targetAnim);
+        const actualWorkspaceId = isOndesMeca ? "anim-ondes-mecaniques" : `anim-${targetAnim}`;
+
         // Toggle active workspace
         document.querySelectorAll(".anim-workspace").forEach(workspace => {
-            if (workspace.id === `anim-${targetAnim}`) {
+            if (workspace.id === actualWorkspaceId) {
                 workspace.style.display = "flex";
                 workspace.classList.add("active");
 
                 const canvas = workspace.querySelector("canvas");
                 if (canvas) canvas.height = animCanvasHeight;
 
-                initCanvasFor(targetAnim);
+                if (isOndesMeca) {
+                    setupOndesMecaniquesSimulator(targetAnim === "ondes-meca" || targetAnim === "ondes-mecaniques" ? "onde-transversale" : targetAnim);
+                } else {
+                    initCanvasFor(targetAnim);
+                }
                 triggerMathJax();
             } else {
                 workspace.style.display = "none";
@@ -7534,8 +7310,133 @@ function initCanvasFor(type) {
         setupGazParfaitSimulator();
     } else if (type === "transferts-thermiques") {
         setupTransfertsThermiquesSimulator();
+    } else if (type === "ondes-mecaniques" || type === "ondes-meca" || (typeof ondesMecaIds !== "undefined" && ondesMecaIds.includes(type))) {
+        setupOndesMecaniquesSimulator(type);
     }
 }
+
+// 0. Ondes Mécaniques Progressives Interactive Suite Simulator Engine (Prof Mouhibi)
+const ondesMecaniquesSimMap = {
+    "onde-transversale": {
+        file: "onde-transversale.html",
+        title: "Onde Mécanique Transversale (Corde Vibrante)",
+        desc: "Visualisez la propagation d'un ébranlement et d'une onde sinusoïdale transversale le long d'une corde élastique. Ajustez l'amplitude, l'amortissement et observez le mouvement d'un point M."
+    },
+    "onde-longitudinale": {
+        file: "onde-longitudinale.html",
+        title: "Onde Mécanique Longitudinale (Ressort & Milieu Élastique)",
+        desc: "Visualisez les compressions et dilatations des spires d'un ressort se propageant parallèlement à la direction du mouvement."
+    },
+    "onde-surface-eau": {
+        file: "onde-surface-eau.html",
+        title: "Ondes Circulaires à la Surface de l'Eau (Cuve à Ondes)",
+        desc: "Simulation de la propagation d'ondes bidimensionnelles à la surface de l'eau générées par une source ponctuelle vibrante."
+    },
+    "onde-parametres-vitesse": {
+        file: "onde-parametres-vitesse.html",
+        title: "Paramètres Influant sur la Célérité d'une Onde (v = √(T/μ))",
+        desc: "Étudiez l'effet direct de la tension de la corde T et de la masse linéique μ sur la célérité de propagation v."
+    },
+    "nature-onde-sonore": {
+        file: "nature-onde-sonore.html",
+        title: "Caractère Longitudinal de l'Onde Sonore",
+        desc: "Observez le mouvement oscillatoire longitudinal des tranches d'air et la formation de zones de compression et de détente."
+    },
+    "onde-sonore-plane": {
+        file: "onde-sonore-plane.html",
+        title: "Propagation d'une Onde Sonore Plane",
+        desc: "Visualisez le déplacement des particules de fluide lors du passage d'une onde acoustique progressive plane."
+    },
+    "onde-sonore-vide": {
+        file: "onde-sonore-vide.html",
+        title: "Le Son dans le Vide (Milieu Matériel Requis)",
+        desc: "Expérience sous cloche à vide prouvant l'impossibilité de propagation du son en l'absence de matière."
+    },
+    "mesure-vitesse-son": {
+        file: "mesure-vitesse-son.html",
+        title: "Mesure Expérimentale de la Vitesse du Son dans l'Air",
+        desc: "Mesurez le décalage temporel Δt entre deux signaux captés par deux microphones distants de d pour calculer v = d / Δt."
+    },
+    "mesure-profondeur-puits": {
+        file: "mesure-profondeur-puits.html",
+        title: "Mesure de la Profondeur d'un Puits (Échoguidage)",
+        desc: "Application de l'écho acoustique : calcul de la profondeur d d'un puits en mesurant le temps d'aller-retour du son (d = v·Δt / 2)."
+    },
+    "sonar-mesure-profondeur": {
+        file: "sonar-mesure-profondeur.html",
+        title: "Mesure de la Profondeur par SONAR (Ultrasons)",
+        desc: "Principe du SONAR sous-marin : émission d'impulsions ultrasonores et détection de l'écho réfléchi par le fond de la mer."
+    },
+    "superposition-ondes-corde": {
+        file: "superposition-ondes-corde.html",
+        title: "Superposition de Deux Ondes sur une Corde",
+        desc: "Visualisez la rencontre, le croisement et la séparation de deux perturbations se propageant en sens inverses."
+    },
+    "principe-superposition": {
+        file: "principe-superposition.html",
+        title: "Principe de Superposition & Interférences",
+        desc: "Somme vectorielle et algébrique des élongations instantanées y(x,t) = y1(x,t) + y2(x,t) lors de la superposition d'ondes."
+    }
+};
+
+window.currentOndesMecaSim = "onde-transversale";
+
+function setupOndesMecaniquesSimulator(simId) {
+    if (!simId || simId === "ondes-mecaniques" || simId === "ondes-meca") {
+        simId = window.currentOndesMecaSim || "onde-transversale";
+    }
+    window.switchOndesMecaSimulation(simId);
+}
+
+window.switchOndesMecaSimulation = function(simId) {
+    const info = ondesMecaniquesSimMap[simId] || ondesMecaniquesSimMap["onde-transversale"];
+    const actualSimId = ondesMecaniquesSimMap[simId] ? simId : "onde-transversale";
+    window.currentOndesMecaSim = actualSimId;
+
+    const iframe = document.getElementById("iframe-ondes-mecaniques");
+    if (iframe) {
+        const targetSrc = `simulations/ondes-mecaniques-progressives/${info.file}`;
+        if (!iframe.src.endsWith(info.file)) {
+            iframe.src = targetSrc;
+        }
+    }
+
+    const descEl = document.getElementById("ondes-meca-desc");
+    if (descEl) {
+        descEl.textContent = info.desc;
+    }
+
+    const activeTitle = document.getElementById("anim-active-title");
+    if (activeTitle) {
+        activeTitle.textContent = info.title;
+    }
+
+    // Update active tab buttons
+    document.querySelectorAll(".ondes-tab-btn").forEach(btn => {
+        if (btn.getAttribute("data-sim") === actualSimId) {
+            btn.classList.add("active");
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+};
+
+window.reloadOndesMecaIframe = function() {
+    const iframe = document.getElementById("iframe-ondes-mecaniques");
+    if (iframe) {
+        iframe.src = iframe.src;
+    }
+};
+
+window.openOndesMecaFullscreen = function() {
+    const simId = window.currentOndesMecaSim || "onde-transversale";
+    const info = ondesMecaniquesSimMap[simId] || ondesMecaniquesSimMap["onde-transversale"];
+    window.open(`simulations/ondes-mecaniques-progressives/${info.file}`, "_blank");
+};
 
 // 1. Wave Simulator
 let waveInterval = null;
@@ -15398,65 +15299,93 @@ function drawCBDCanvas() {
 // --- ELECTROCHEMICAL DEPOSITION ANIMATION ENGINE ---
 let electroVoltage = 2.5;
 let electroStirSpeed = 250;
-let electroTemp = 25;
+let electroTemp = 75;
+let electroGaDoping = 3.0; // at% Ga
 let electroElapsed = 0;
 let electroIsPlaying = false;
 let electroTimer = null;
 let electroCanvasAnimId = null;
 let electroAnimFrame = 0;
+let electroHistory = []; // [ {t, j, thickness} ]
+let electroBubbles = [];
+let electroIons = [];
 
 function renderElectrochemicalCustomPage() {
+    const xGa = (electroGaDoping / 100).toFixed(3);
+    const xZn = (1 - electroGaDoping / 100).toFixed(3);
+    const formulaStr = electroGaDoping > 0 ? `Zn<sub>${xZn}</sub>Ga<sub>${xGa}</sub>O` : `ZnO`;
+
     return `
     <div class="electro-workspace" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
         
         <!-- Top Banner: Electrochemical Deposition Overview -->
         <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
             <div>
-                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="zap"></i> Protocol Expérimental Officiel LMER</span>
+                <span class="badge badge-accent" style="font-size: 0.78rem; margin-bottom: 6px;"><i data-lucide="zap"></i> Three-Electrode Electrodeposition System</span>
                 <h3 style="margin: 4px 0; font-size: 1.3rem; color: #ffffff;">Electrochemical Deposition (Électrodéposition)</h3>
-                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Réduction électrochimique contrôlée par potentiostat sur substrat conducteur immergé dans l'électrolyte.</p>
+                <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">Dépôt électrochimique contrôlé de couches minces de ZnO et ZnO dopé Ga sur substrat FTO conducteur.</p>
             </div>
-            <div style="display: flex; gap: 10px;">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <span id="electro-formula-badge" class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; padding: 6px 12px;">
+                    Film : ${formulaStr}
+                </span>
                 <button class="btn btn-primary" id="btn-start-electro-anim" onclick="toggleElectroPlay()" style="padding: 10px 20px; font-weight: 700;">
                     <i data-lucide="play-circle"></i> Lancer la Simulation Interactive
                 </button>
             </div>
         </div>
 
-        <!-- Main Content Layout: Interactive Canvas Animation (Left) + Original LMER Schematic (Right) -->
+        <!-- Main Explanation Paragraph -->
+        <div style="background: rgba(15, 23, 42, 0.85); border-left: 4px solid #38bdf8; border-radius: 12px; padding: 18px 22px; line-height: 1.6; border: 1px solid rgba(56, 189, 248, 0.2); border-left-width: 4px;">
+            <h4 style="margin: 0 0 10px 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="info"></i> Three-Electrode Electrochemical Deposition Configuration
+            </h4>
+            <p style="margin: 0; color: #e2e8f0; font-size: 0.92rem; text-align: justify;">
+                The electrochemical deposition process is performed using a conventional three-electrode configuration: the <strong>working electrode (WE)</strong>, consisting of the conductive FTO substrate where the ZnO / Ga-doped ZnO film is deposited; the <strong>reference electrode (RE)</strong>, which provides a stable reference potential and allows precise control of the working-electrode potential; and the <strong>counter electrode (CE)</strong>, which completes the electrical circuit and carries the current required for the electrochemical reaction. A potentiostat controls the potential of the working electrode relative to the reference electrode, while the current flows between the working and counter electrodes, enabling controlled electrochemical deposition on the conductive substrate.
+            </p>
+        </div>
+
+        <!-- Main Content Layout: Interactive Canvas Animation (Left) + Original Setup Schematic (Right) -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
             
             <!-- Left Column: Interactive Setup & Cell Growth Animation Canvas -->
             <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                     <h4 style="margin: 0; color: #38bdf8; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
                         <i data-lucide="activity"></i> Cellule Électrochimique & Potentiostat
                     </h4>
-                    <span id="electro-thickness-badge" class="badge badge-outline" style="border-color: #38bdf8; color: #38bdf8; font-weight: 600;">Épaisseur : 0.0 nm</span>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <span id="electro-status-badge" class="badge" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.75rem;">EN ATTENTE</span>
+                        <span id="electro-thickness-badge" class="badge badge-outline" style="border-color: #38bdf8; color: #38bdf8; font-weight: 600;">Épaisseur : 0.0 nm</span>
+                    </div>
                 </div>
 
                 <!-- Canvas Container -->
-                <div style="position: relative; width: 100%; height: 340px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <canvas id="electro-canvas" width="620" height="340" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
+                <div style="position: relative; width: 100%; height: 350px; background: #070a14; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <canvas id="electro-canvas" width="620" height="350" style="width: 100%; height: 100%; object-fit: contain;"></canvas>
                 </div>
 
                 <!-- Animation Controls -->
                 <div style="display: flex; flex-direction: column; gap: 12px; background: rgba(255, 255, 255, 0.03); padding: 14px; border-radius: 10px;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 10px;">
                         <div>
-                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Potentiel (U) : <strong id="electro-volt-val" style="color: #facc15;">2.5 V</strong></label>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Potentiel WE vs RE (U) : <strong id="electro-volt-val" style="color: #facc15;">2.5 V</strong></label>
                             <input type="range" id="electro-volt-slider" min="0.5" max="5.0" step="0.1" value="2.5" oninput="onElectroParamChange()" style="width: 100%;">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Dopage Ga (at%) : <strong id="electro-doping-val" style="color: #a855f7;">3.0 %</strong></label>
+                            <input type="range" id="electro-doping-slider" min="0.0" max="5.0" step="0.5" value="3.0" oninput="onElectroParamChange()" style="width: 100%;">
                         </div>
                         <div>
                             <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Agitation : <strong id="electro-stir-val" style="color: #38bdf8;">250 RPM</strong></label>
                             <input type="range" id="electro-stir-slider" min="50" max="600" step="25" value="250" oninput="onElectroParamChange()" style="width: 100%;">
                         </div>
                         <div>
-                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Température : <strong id="electro-temp-val" style="color: #ef4444;">25 °C</strong></label>
-                            <input type="range" id="electro-temp-slider" min="15" max="75" step="5" value="25" oninput="onElectroParamChange()" style="width: 100%;">
+                            <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">Température : <strong id="electro-temp-val" style="color: #ef4444;">75 °C</strong></label>
+                            <input type="range" id="electro-temp-slider" min="20" max="90" step="5" value="75" oninput="onElectroParamChange()" style="width: 100%;">
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px; flex-wrap: wrap; gap: 8px;">
                         <button class="btn btn-primary" id="electro-play-btn" onclick="toggleElectroPlay()" style="padding: 8px 18px; font-size: 0.85rem;">
                             <i data-lucide="play"></i> Lancer la Déposition
                         </button>
@@ -15466,12 +15395,14 @@ function renderElectrochemicalCustomPage() {
                     </div>
                 </div>
 
-                <!-- Step Description Box -->
-                <div style="background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 6px;">
-                    <h5 style="margin: 0 0 4px 0; color: #ffffff; font-size: 0.92rem; font-weight: 700;">Loi de Faraday & Électrodéposition</h5>
-                    <p style="margin: 0; color: #cbd5e1; font-size: 0.82rem; line-height: 1.4;">
-                        Sous l'action du potentiel imposé par le potentiostat, les cations de la solution migrent vers la Cathode (-) où ils captent des électrons (réduction M<sup>z+</sup> + z e<sup>-</sup> &rightarrow; M<sub>solide</sub>) pour former une couche mince métallique ou d'oxyde adhérente.
-                    </p>
+                <!-- Chemical Reaction Strip -->
+                <div style="background: rgba(56, 189, 248, 0.06); border-left: 4px solid #38bdf8; padding: 12px 16px; border-radius: 6px; font-size: 0.82rem; color: #cbd5e1; line-height: 1.45;">
+                    <h5 style="margin: 0 0 6px 0; color: #ffffff; font-size: 0.88rem; font-weight: 700;">⚗️ Réactions aux Électrodes (Croissance ZnO / ZnO:Ga) :</h5>
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                        <div>• <strong>Cathode (WE - FTO) :</strong> NO<sub>3</sub><sup>-</sup> + H<sub>2</sub>O + 2e<sup>-</sup> &rightarrow; NO<sub>2</sub><sup>-</sup> + 2OH<sup>-</sup> &nbsp;|&nbsp; Zn<sup>2+</sup> + 2OH<sup>-</sup> &rightarrow; ZnO &darr; + H<sub>2</sub>O</div>
+                        <div>• <strong>Anode (CE - Pt) :</strong> 2H<sub>2</sub>O &rightarrow; O<sub>2</sub> &uarr; + 4H<sup>+</sup> + 4e<sup>-</sup> (dégagement gazeux)</div>
+                        <div>• <strong>Référence (RE) :</strong> AgCl + e<sup>-</sup> &rightleftharpoons; Ag + Cl<sup>-</sup> (E<sub>réf</sub> = +0.197 V vs ENH)</div>
+                    </div>
                 </div>
             </div>
 
@@ -15479,7 +15410,7 @@ function renderElectrochemicalCustomPage() {
             <div style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h4 style="margin: 0; color: #10b981; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
-                        <i data-lucide="image"></i> Schéma Général de l'Électrodéposition
+                        <i data-lucide="image"></i> Schéma Général du Système à 3 Électrodes
                     </h4>
                     <a href="assets/images/electrochemical_setup.jpg" target="_blank" class="badge badge-outline" style="border-color: rgba(255,255,255,0.2); color: #cbd5e1; text-decoration: none;">
                         <i data-lucide="external-link"></i> Voir Plein Écran
@@ -15493,13 +15424,12 @@ function renderElectrochemicalCustomPage() {
 
                 <!-- Protocol Specifications Card -->
                 <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px; font-size: 0.82rem; color: #cbd5e1;">
-                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-weight: 700; font-size: 0.88rem;">📋 Composants du Montage Expérimental :</h5>
-                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; line-height: 1.4;">
-                        <li><strong>Potentiostat / Electrochemical Analyzer :</strong> Générateur de potentiel stabilisé alimentant la cellule.</li>
-                        <li><strong>Anode (+) :</strong> Électrode de contre-réaction (Anode d'oxydation connectée à la borne rouge +).</li>
-                        <li><strong>Cathode (- / Substrat) :</strong> Substrat conducteur où s'effectue la réduction et la croissance du film.</li>
-                        <li><strong>Électrolyte :</strong> Solution aqueuse précurseur maintenue sous agitation magnétique (250 rpm).</li>
-                        <li><strong>Interface PC :</strong> Monitoring en temps réel de la densité de courant j(mA) et du temps de dépôt t(s).</li>
+                    <h5 style="margin: 0 0 8px 0; color: #ffffff; font-weight: 700; font-size: 0.88rem;">📋 Rôle des Composants du Montage :</h5>
+                    <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; line-height: 1.45;">
+                        <li><strong>Working Electrode (WE) :</strong> Substrat conducteur FTO sur lequel s'effectue le dépôt du film mince de ZnO / Ga-doped ZnO.</li>
+                        <li><strong>Reference Electrode (RE) :</strong> Électrode de référence (ex: Ag/AgCl ou ECS) fournissant un potentiel stable pour contrôler avec précision le potentiel de l'électrode de travail.</li>
+                        <li><strong>Counter Electrode (CE) :</strong> Contre-électrode (ex: fil/grille de Platine) fermant le circuit électrique et véhiculant le courant nécessaire à la réaction.</li>
+                        <li><strong>Potentiostat / Galvanostat :</strong> Contrôle le potentiel de la WE par rapport à la RE, tandis que le courant de réaction circule entre la WE et la CE.</li>
                     </ul>
                 </div>
             </div>
@@ -15512,6 +15442,19 @@ function renderElectrochemicalCustomPage() {
 function initElectrochemicalAnimation() {
     electroElapsed = 0;
     electroIsPlaying = false;
+    electroHistory = [];
+    electroBubbles = [];
+    electroIons = [];
+    // Seed initial ion pool
+    for (let i = 0; i < 28; i++) {
+        electroIons.push({
+            x: 185 + Math.random() * 115,
+            y: 125 + Math.random() * 90,
+            type: Math.random() < (electroGaDoping / 5.0) ? 'Ga' : (Math.random() < 0.75 ? 'Zn' : 'NO3'),
+            speed: 0.4 + Math.random() * 0.8,
+            phase: Math.random() * Math.PI * 2
+        });
+    }
     onElectroParamChange();
     startElectroCanvasLoop();
 }
@@ -15520,42 +15463,69 @@ function onElectroParamChange() {
     const voltSlider = document.getElementById("electro-volt-slider");
     const stirSlider = document.getElementById("electro-stir-slider");
     const tempSlider = document.getElementById("electro-temp-slider");
+    const dopingSlider = document.getElementById("electro-doping-slider");
 
     if (voltSlider) electroVoltage = parseFloat(voltSlider.value);
     if (stirSlider) electroStirSpeed = parseInt(stirSlider.value);
     if (tempSlider) electroTemp = parseInt(tempSlider.value);
+    if (dopingSlider) electroGaDoping = parseFloat(dopingSlider.value);
 
     const voltVal = document.getElementById("electro-volt-val");
     const stirVal = document.getElementById("electro-stir-val");
     const tempVal = document.getElementById("electro-temp-val");
+    const dopingVal = document.getElementById("electro-doping-val");
 
     if (voltVal) voltVal.textContent = `${electroVoltage.toFixed(1)} V`;
     if (stirVal) stirVal.textContent = `${electroStirSpeed} RPM`;
     if (tempVal) tempVal.textContent = `${electroTemp} °C`;
+    if (dopingVal) dopingVal.textContent = `${electroGaDoping.toFixed(1)} %`;
+
+    const formulaBadge = document.getElementById("electro-formula-badge");
+    if (formulaBadge) {
+        const xGa = (electroGaDoping / 100).toFixed(3);
+        const xZn = (1 - electroGaDoping / 100).toFixed(3);
+        formulaBadge.innerHTML = electroGaDoping > 0 ? `Film : Zn<sub>${xZn}</sub>Ga<sub>${xGa}</sub>O` : `Film : ZnO`;
+    }
 }
 
 function toggleElectroPlay() {
     electroIsPlaying = !electroIsPlaying;
     const playBtn = document.getElementById("electro-play-btn");
     const topBtn = document.getElementById("btn-start-electro-anim");
+    const statusBadge = document.getElementById("electro-status-badge");
+
     if (playBtn) {
         playBtn.innerHTML = electroIsPlaying ? `<i data-lucide="pause"></i> Pause` : `<i data-lucide="play"></i> Lancer la Déposition`;
-        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
     if (topBtn) {
         topBtn.innerHTML = electroIsPlaying ? `<i data-lucide="pause-circle"></i> Pause` : `<i data-lucide="play-circle"></i> Lancer la Simulation Interactive`;
-        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
     }
+    if (statusBadge) {
+        statusBadge.textContent = electroIsPlaying ? "EN COURS..." : "PAUSE";
+        statusBadge.style.background = electroIsPlaying ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)";
+        statusBadge.style.color = electroIsPlaying ? "#34d399" : "#f87171";
+        statusBadge.style.borderColor = electroIsPlaying ? "rgba(16, 185, 129, 0.3)" : "rgba(239, 68, 68, 0.3)";
+    }
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function resetElectroAnim() {
     electroElapsed = 0;
     electroIsPlaying = false;
+    electroHistory = [];
+    electroBubbles = [];
     const playBtn = document.getElementById("electro-play-btn");
-    if (playBtn) {
-        playBtn.innerHTML = `<i data-lucide="play"></i> Lancer la Déposition`;
-        if (window.lucide) if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+    const topBtn = document.getElementById("btn-start-electro-anim");
+    const statusBadge = document.getElementById("electro-status-badge");
+    if (playBtn) playBtn.innerHTML = `<i data-lucide="play"></i> Lancer la Déposition`;
+    if (topBtn) topBtn.innerHTML = `<i data-lucide="play-circle"></i> Lancer la Simulation Interactive`;
+    if (statusBadge) {
+        statusBadge.textContent = "EN ATTENTE";
+        statusBadge.style.background = "rgba(239, 68, 68, 0.15)";
+        statusBadge.style.color = "#f87171";
+        statusBadge.style.borderColor = "rgba(239, 68, 68, 0.3)";
     }
+    if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
 }
 
 function startElectroCanvasLoop() {
@@ -15581,172 +15551,423 @@ function drawElectrochemicalCanvas() {
     ctx.clearRect(0, 0, w, h);
 
     // Background Grid
-    ctx.strokeStyle = "rgba(56, 189, 248, 0.05)";
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
     ctx.lineWidth = 1;
-    for (let x = 0; x < w; x += 30) {
+    for (let x = 0; x < w; x += 25) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
     }
-    for (let y = 0; y < h; y += 30) {
+    for (let y = 0; y < h; y += 25) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
     }
 
-    // 1. Hot Plate / Magnetic Stirrer Base (Bottom)
-    ctx.fillStyle = "#f8fafc";
-    ctx.fillRect(140, 240, 240, 55);
-    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2;
-    ctx.strokeRect(140, 240, 240, 55);
-    
-    // Front Control Panel
-    ctx.fillStyle = "#0f172a";
-    ctx.fillRect(155, 275, 210, 16);
-    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 9px monospace"; ctx.textAlign = "left";
-    ctx.fillText(`${electroTemp} °C`, 165, 287);
-    ctx.fillText(`${electroStirSpeed} rpm`, 315, 287);
-
-    // Control Knobs
-    ctx.fillStyle = "#475569";
-    ctx.beginPath(); ctx.arc(200, 260, 10, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(320, 260, 10, 0, Math.PI * 2); ctx.fill();
-
-    // Hot Plate Surface
-    ctx.fillStyle = "#334155";
-    ctx.fillRect(130, 232, 260, 8);
-
-    // 2. Beaker & Electrolyte Solution
-    ctx.fillStyle = "rgba(56, 189, 248, 0.25)";
-    ctx.fillRect(160, 110, 200, 122);
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.85)"; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(155, 90); ctx.lineTo(155, 232); ctx.lineTo(365, 232); ctx.lineTo(365, 90); ctx.stroke();
-    // Solution label
-    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
-    ctx.fillText("Electrolyte Solution", 260, 130);
-
-    // Magnetic Stirrer capsule at bottom
-    const stirAngle = (electroAnimFrame * (electroStirSpeed / 400)) % (Math.PI * 2);
-    ctx.save();
-    ctx.translate(260, 218);
-    ctx.rotate(stirAngle);
-    ctx.fillStyle = "#475569";
-    ctx.fillRect(-14, -4, 28, 8);
-    ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 1;
-    ctx.strokeRect(-14, -4, 28, 8);
-    ctx.restore();
-
-    // 3. Stand & Electrode Holder (Left Stand)
-    ctx.fillStyle = "#64748b";
-    ctx.fillRect(45, 40, 10, 260);
-    ctx.beginPath(); ctx.arc(50, 290, 16, 0, Math.PI * 2); ctx.fill(); // base
-    // Cross Arm holding electrodes
-    ctx.fillRect(40, 60, 330, 8);
-    ctx.fillStyle = "#38bdf8";
-    ctx.fillRect(205, 54, 10, 20); // Clamp 1
-    ctx.fillRect(305, 54, 10, 20); // Clamp 2
-
-    // 4. Electrodes in Solution
-    // ANODE (+) (Orange plate on left)
-    ctx.fillStyle = "#fb923c";
-    ctx.fillRect(195, 125, 30, 75);
-    ctx.strokeStyle = "#ea580c"; ctx.lineWidth = 1.5;
-    ctx.strokeRect(195, 125, 30, 75);
-    ctx.fillStyle = "#000000"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
-    ctx.fillText("Anode (+)", 210, 165);
-
-    // CATHODE (-) (Substrate plate on right)
-    // Film thickness growth calculation by Faraday's law approximation
-    const currentDensityMa = electroVoltage * 8.5; // mA/cm2
-    const growthRateNmPerSec = (currentDensityMa * 0.15); // nm/sec
+    // Dynamic Physics Calculations
+    // Arrhenius & Butler-Volmer temperature + voltage activation
+    const tempFactor = Math.exp((electroTemp - 25) / 45);
+    const cottrellDecay = Math.max(0.65, 1.0 / Math.sqrt(Math.max(1.0, electroElapsed * 0.4)));
+    const baseCurrentMa = electroVoltage * 4.2 * tempFactor * (1 + electroStirSpeed / 1000);
+    const currentDensityMa = (baseCurrentMa * cottrellDecay).toFixed(2);
+    const growthRateNmPerSec = (parseFloat(currentDensityMa) * 0.16); // nm/sec
     const filmThicknessNm = (electroElapsed * growthRateNmPerSec).toFixed(1);
 
-    ctx.fillStyle = "#e2e8f0"; // Metal/glass base substrate
-    ctx.fillRect(295, 125, 30, 75);
-    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1.5;
-    ctx.strokeRect(295, 125, 30, 75);
-
-    // Electrodeposited Film Layer on Cathode surfaces
-    if (parseFloat(filmThicknessNm) > 0) {
-        const filmAlpha = Math.min(0.95, 0.2 + parseFloat(filmThicknessNm) / 100);
-        ctx.fillStyle = `rgba(16, 185, 129, ${filmAlpha})`;
-        ctx.fillRect(291, 125, 4, 75); // Left face towards anode
-        ctx.fillRect(325, 125, 4, 75); // Right face
+    // Store history for live chart
+    if (electroIsPlaying && electroAnimFrame % 6 === 0) {
+        electroHistory.push({ t: electroElapsed, j: parseFloat(currentDensityMa), d: parseFloat(filmThicknessNm) });
+        if (electroHistory.length > 50) electroHistory.shift();
     }
-    ctx.fillStyle = "#000000"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center";
-    ctx.fillText("Cathode (-)", 310, 165);
 
-    // 5. Potentiostat / Electrochemical Analyzer (Top Right Box)
-    const potX = 430; const potY = 15; const potW = 175; const potH = 100;
-    ctx.fillStyle = "#1e293b"; ctx.fillRect(potX, potY, potW, potH);
-    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2; ctx.strokeRect(potX, potY, potW, potH);
-    ctx.fillStyle = "#ffffff"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "left";
-    ctx.fillText("Potentiostat Analyzer", potX + 12, potY + 20);
+    // 1. Hot Plate / Magnetic Stirrer Base (Bottom)
+    const hotX = 135, hotY = 245, hotW = 240, hotH = 65;
+    // Heating Glow effect
+    if (electroTemp > 40) {
+        const glowAlpha = Math.min(0.4, (electroTemp - 40) / 100);
+        const heatGrad = ctx.createRadialGradient(hotX + hotW/2, hotY + 5, 10, hotX + hotW/2, hotY + 5, 120);
+        heatGrad.addColorStop(0, `rgba(239, 68, 68, ${glowAlpha})`);
+        heatGrad.addColorStop(1, "rgba(239, 68, 68, 0)");
+        ctx.fillStyle = heatGrad;
+        ctx.fillRect(hotX - 20, hotY - 15, hotW + 40, 40);
+    }
 
-    // Output Terminals (+) Red and (-) Black
-    ctx.fillStyle = "#ef4444"; ctx.beginPath(); ctx.arc(potX + 30, potY + 45, 9, 0, Math.PI * 2); ctx.fill(); // (+) Red
-    ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center"; ctx.fillText("+", potX + 30, potY + 48);
+    // Base body
+    ctx.fillStyle = "#1e293b";
+    ctx.fillRect(hotX, hotY, hotW, hotH);
+    ctx.strokeStyle = "rgba(148, 163, 184, 0.4)"; ctx.lineWidth = 2;
+    ctx.strokeRect(hotX, hotY, hotW, hotH);
 
-    ctx.fillStyle = "#334155"; ctx.beginPath(); ctx.arc(potX + 30, potY + 75, 9, 0, Math.PI * 2); ctx.fill(); // (-) Black
-    ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "center"; ctx.fillText("-", potX + 30, potY + 78);
+    // Ceramic top plate
+    ctx.fillStyle = electroTemp > 60 ? "#451a03" : "#334155";
+    ctx.fillRect(hotX - 10, hotY - 8, hotW + 20, 10);
+    ctx.strokeStyle = "#f97316"; ctx.lineWidth = electroTemp > 60 ? 1.5 : 0.5;
+    ctx.strokeRect(hotX - 10, hotY - 8, hotW + 20, 10);
 
-    // Potentiostat Screen Display
-    ctx.fillStyle = "#0f172a"; ctx.fillRect(potX + 60, potY + 35, 100, 50);
-    ctx.fillStyle = "#a3e635"; ctx.font = "bold 10px monospace"; ctx.textAlign = "left";
-    ctx.fillText(`U = ${electroVoltage.toFixed(1)}V`, potX + 68, potY + 52);
-    ctx.fillText(`J = ${currentDensityMa.toFixed(1)}mA`, potX + 68, potY + 70);
+    // Front Digital LED Panel
+    ctx.fillStyle = "#020617";
+    ctx.fillRect(hotX + 15, hotY + 30, hotW - 30, 24);
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.4)"; ctx.lineWidth = 1;
+    ctx.strokeRect(hotX + 15, hotY + 30, hotW - 30, 24);
 
-    // Wires from Potentiostat to Electrodes
-    // Red wire from (+) terminal to Anode (210, 125)
-    ctx.strokeStyle = "#ef4444"; ctx.lineWidth = 2.5;
+    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 9px monospace"; ctx.textAlign = "left";
+    ctx.fillText(`SET: ${electroTemp}°C`, hotX + 22, hotY + 46);
+    ctx.fillStyle = "#facc15";
+    ctx.fillText(`${electroStirSpeed} RPM`, hotX + 130, hotY + 46);
+
+    // Knobs
+    ctx.fillStyle = "#475569";
+    ctx.beginPath(); ctx.arc(hotX + 50, hotY + 18, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(hotX + 190, hotY + 18, 7, 0, Math.PI * 2); ctx.fill();
+
+    // 2. Beaker & Electrolyte Solution
+    const bkX = 150, bkY = 95, bkW = 210, bkH = 142;
+    // Glass Beaker Back
+    ctx.fillStyle = "rgba(30, 58, 138, 0.18)";
+    ctx.fillRect(bkX + 5, bkY + 15, bkW - 10, bkH - 15);
+
+    // Electrolyte Solution with dynamic wave meniscus
+    const liquidY = bkY + 24;
+    const liqGrad = ctx.createLinearGradient(0, liquidY, 0, bkY + bkH);
+    liqGrad.addColorStop(0, "rgba(56, 189, 248, 0.28)");
+    liqGrad.addColorStop(1, "rgba(14, 165, 233, 0.45)");
+    ctx.fillStyle = liqGrad;
     ctx.beginPath();
-    ctx.moveTo(potX + 30, potY + 45);
-    ctx.lineTo(210, potY + 45);
-    ctx.lineTo(210, 125);
-    ctx.stroke();
+    ctx.moveTo(bkX + 6, liquidY);
+    for (let x = bkX + 6; x <= bkX + bkW - 6; x += 10) {
+        const wave = Math.sin((x + electroAnimFrame * 3) * 0.05) * 1.5;
+        ctx.lineTo(x, liquidY + wave);
+    }
+    ctx.lineTo(bkX + bkW - 6, bkY + bkH);
+    ctx.lineTo(bkX + 6, bkY + bkH);
+    ctx.closePath();
+    ctx.fill();
 
-    // Dark wire from (-) terminal to Cathode (310, 125)
-    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(potX + 30, potY + 75);
-    ctx.lineTo(310, potY + 75);
-    ctx.lineTo(310, 125);
-    ctx.stroke();
-
-    // 6. PC Interface Monitor (Middle Right Box)
-    const pcX = 430; const pcY = 145; const pcW = 175; const pcH = 110;
-    ctx.fillStyle = "#0f172a"; ctx.fillRect(pcX, pcY, pcW, pcH);
-    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2.5; ctx.strokeRect(pcX, pcY, pcW, pcH);
-    // Monitor Stand
-    ctx.fillStyle = "#64748b"; ctx.fillRect(pcX + 70, pcY + pcH, 35, 15); ctx.fillRect(pcX + 50, pcY + pcH + 15, 75, 6);
-
-    // PC Monitor content
-    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 11px sans-serif"; ctx.textAlign = "center";
-    ctx.fillText("PC Interface (Live)", pcX + pcW / 2, pcY + 22);
-
-    ctx.fillStyle = "#cbd5e1"; ctx.font = "10px sans-serif"; ctx.textAlign = "left";
-    ctx.fillText(`Densité : ${currentDensityMa.toFixed(1)} mA/cm²`, pcX + 12, pcY + 46);
-    ctx.fillText(`Temps t : ${electroElapsed.toFixed(1)} s`, pcX + 12, pcY + 66);
-    ctx.fillStyle = "#10b981"; ctx.font = "bold 11px sans-serif";
-    ctx.fillText(`Épaisseur : ${filmThicknessNm} nm`, pcX + 12, pcY + 90);
-
-    // Communication dashed line between Potentiostat & PC
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.4)"; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(potX + potW, potY + 50); ctx.lineTo(pcX + pcW + 8, potY + 50); ctx.lineTo(pcX + pcW + 8, pcY + 50); ctx.lineTo(pcX + pcW, pcY + 50); ctx.stroke();
-    ctx.setLineDash([]);
-
-    // 7. Animated Ion Migration (Cations M+ moving to Cathode) when playing
-    if (electroIsPlaying) {
-        ctx.fillStyle = "#a3e635";
-        for (let i = 0; i < 7; i++) {
-            const ionProgress = ((electroAnimFrame * 2 + i * 25) % 100) / 100.0;
-            const ix = 225 + ionProgress * (290 - 225);
-            const iy = 135 + (i * 9);
-            ctx.beginPath(); ctx.arc(ix, iy, 3, 0, Math.PI * 2); ctx.fill();
-            // ion text
-            ctx.fillStyle = "#ffffff"; ctx.font = "7px sans-serif";
-            ctx.fillText("+", ix + 4, iy + 2);
-            ctx.fillStyle = "#a3e635";
+    // Fluid Vortex swirl lines (Stirring effect)
+    if (electroStirSpeed > 100) {
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+        ctx.lineWidth = 1;
+        const vCenter = bkX + bkW / 2;
+        const vAngle = (electroAnimFrame * (electroStirSpeed / 120)) % 360;
+        for (let r = 18; r <= 50; r += 14) {
+            ctx.beginPath();
+            ctx.ellipse(vCenter, bkY + bkH - 28, r, r * 0.35, vAngle * Math.PI / 180, 0, Math.PI * 1.4);
+            ctx.stroke();
         }
     }
 
-    // Update thickness badge UI
+    // Beaker Glass Outlines
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.8)"; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(bkX, bkY);
+    ctx.lineTo(bkX + 6, bkY + bkH);
+    ctx.lineTo(bkX + bkW - 6, bkY + bkH);
+    ctx.lineTo(bkX + bkW, bkY);
+    ctx.stroke();
+    // Beaker Rim Flange
+    ctx.beginPath(); ctx.moveTo(bkX - 4, bkY); ctx.lineTo(bkX + 8, bkY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bkX + bkW - 8, bkY); ctx.lineTo(bkX + bkW + 4, bkY); ctx.stroke();
+
+    // Solution Label
+    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 9px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("Zn(NO₃)₂ + Ga(NO₃)₃ aq.", bkX + bkW / 2, liquidY + 16);
+
+    // Magnetic Stir Bar at bottom
+    const stirAngle = (electroAnimFrame * (electroStirSpeed / 300)) % (Math.PI * 2);
+    ctx.save();
+    ctx.translate(bkX + bkW / 2, bkY + bkH - 10);
+    ctx.rotate(stirAngle);
+    ctx.fillStyle = "#f8fafc";
+    ctx.fillRect(-12, -4, 24, 8);
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 1;
+    ctx.strokeRect(-12, -4, 24, 8);
+    ctx.restore();
+
+    // 3. Stand & Clamps
+    ctx.fillStyle = "#64748b";
+    ctx.fillRect(45, 30, 8, 275);
+    ctx.beginPath(); ctx.arc(49, 298, 14, 0, Math.PI * 2); ctx.fill(); // stand foot
+    ctx.fillRect(40, 52, 335, 7); // cross arm
+
+    // Clamps holding the 3 electrodes
+    ctx.fillStyle = "#0ea5e9";
+    ctx.fillRect(178, 48, 8, 16); // Clamp 1 (CE)
+    ctx.fillRect(246, 48, 8, 16); // Clamp 2 (RE)
+    ctx.fillRect(308, 48, 8, 16); // Clamp 3 (WE)
+
+    // 4. THE THREE ELECTRODES
+    // -------------------------------------------------------------
+    // 4a. COUNTER ELECTRODE (CE - Platinum Wire/Coil) (Left)
+    const ceX = 182, ceY = 115, ceW = 16, ceH = 80;
+    // Platinum coiled wire appearance
+    ctx.strokeStyle = "#cbd5e1"; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(ceX, 60); ctx.lineTo(ceX, ceY);
+    for (let py = ceY; py <= ceY + ceH; py += 10) {
+        ctx.lineTo(ceX + 6, py + 4);
+        ctx.lineTo(ceX - 6, py + 8);
+    }
+    ctx.stroke();
+
+    // CE Label Badge
+    ctx.fillStyle = "#ef4444"; ctx.fillRect(ceX - 16, 75, 32, 14);
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("CE (Pt)", ceX, 85);
+
+    // O2 Gas Evolution Bubbles from CE
+    if (electroIsPlaying) {
+        if (Math.random() < 0.6) {
+            electroBubbles.push({
+                x: ceX - 4 + Math.random() * 8,
+                y: ceY + ceH - Math.random() * 20,
+                r: 1 + Math.random() * 2.2,
+                vy: 0.8 + Math.random() * 1.2
+            });
+        }
+    }
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+    for (let b = electroBubbles.length - 1; b >= 0; b--) {
+        const bub = electroBubbles[b];
+        if (electroIsPlaying) bub.y -= bub.vy;
+        ctx.beginPath(); ctx.arc(bub.x, bub.y, bub.r, 0, Math.PI * 2); ctx.fill();
+        if (bub.y < liquidY) electroBubbles.splice(b, 1);
+    }
+
+    // 4b. REFERENCE ELECTRODE (RE - Ag/AgCl in Glass Capillary) (Center)
+    const reX = 250, reY = 100, reW = 10, reH = 95;
+    // Glass outer tube
+    ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+    ctx.fillRect(reX - 5, reY, reW, reH);
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 1.5;
+    ctx.strokeRect(reX - 5, reY, reW, reH);
+    // Inner Ag wire coated with AgCl
+    ctx.fillStyle = "#64748b";
+    ctx.fillRect(reX - 2, 60, 4, reY - 60 + 65);
+    ctx.fillStyle = "#94a3b8";
+    ctx.fillRect(reX - 2, reY + 20, 4, 45);
+    // Porous frit tip at bottom
+    ctx.fillStyle = "#f59e0b";
+    ctx.fillRect(reX - 4, reY + reH - 6, 8, 6);
+
+    // RE Label Badge
+    ctx.fillStyle = "#38bdf8"; ctx.fillRect(reX - 22, 75, 44, 14);
+    ctx.fillStyle = "#020617"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("RE (Ag/AgCl)", reX, 85);
+
+    // 4c. WORKING ELECTRODE (WE - FTO Substrate) (Right)
+    const weX = 312, weY = 110, weW = 22, weH = 90;
+    // Transparent Glass Substrate
+    ctx.fillStyle = "rgba(226, 232, 240, 0.85)";
+    ctx.fillRect(weX, weY, weW, weH);
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 1.5;
+    ctx.strokeRect(weX, weY, weW, weH);
+
+    // FTO Conductive front layer (SnO2:F) (Yellowish shimmer line)
+    ctx.fillStyle = "#facc15";
+    ctx.fillRect(weX - 2, weY, 3, weH);
+
+    // Growing Nanostructured ZnO / Ga-ZnO Thin Film on WE front surface
+    if (parseFloat(filmThicknessNm) > 0) {
+        const filmThickPx = Math.min(8, 2 + parseFloat(filmThicknessNm) / 40);
+        // Pure ZnO = emerald green, Ga-doped = turquoise/violet shimmer
+        const isDoped = electroGaDoping > 0;
+        ctx.fillStyle = isDoped ? "#10b981" : "#22c55e";
+        ctx.fillRect(weX - 2 - filmThickPx, weY, filmThickPx, weH);
+
+        // Nanocrystal columns effect
+        ctx.strokeStyle = isDoped ? "#a855f7" : "#86efac";
+        ctx.lineWidth = 1;
+        for (let ny = weY + 4; ny < weY + weH; ny += 5) {
+            ctx.beginPath();
+            ctx.moveTo(weX - 2, ny);
+            ctx.lineTo(weX - 2 - filmThickPx, ny + (Math.sin(ny + electroAnimFrame * 0.1) * 1.5));
+            ctx.stroke();
+        }
+    }
+
+    // WE Gold Crocodile Clamp at top
+    ctx.fillStyle = "#eab308";
+    ctx.fillRect(weX - 4, weY - 14, weW + 8, 14);
+    ctx.strokeStyle = "#ca8a04"; ctx.lineWidth = 1;
+    ctx.strokeRect(weX - 4, weY - 14, weW + 8, 14);
+
+    // WE Label Badge
+    ctx.fillStyle = "#10b981"; ctx.fillRect(weX - 18, 75, 42, 14);
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("WE (FTO)", weX + 3, 85);
+
+    // 5. ION MIGRATION & PARTICLE ENGINE IN SOLUTION
+    if (electroIsPlaying) {
+        for (let i = 0; i < electroIons.length; i++) {
+            const ion = electroIons[i];
+            if (ion.type === 'Zn') {
+                // Zn2+ migrates towards WE (Cathode)
+                ion.x += ion.speed * (electroVoltage / 2.0);
+                ion.y += Math.sin(ion.phase + electroAnimFrame * 0.08) * 0.5;
+                if (ion.x > weX - 4) {
+                    ion.x = bkX + 30 + Math.random() * 40;
+                    ion.y = liquidY + 20 + Math.random() * 70;
+                }
+                ctx.fillStyle = "#38bdf8";
+                ctx.beginPath(); ctx.arc(ion.x, ion.y, 3, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = "#ffffff"; ctx.font = "bold 6px monospace";
+                ctx.fillText("Zn²⁺", ion.x, ion.y - 4);
+            } else if (ion.type === 'Ga') {
+                // Ga3+ migrates rapidly towards WE
+                ion.x += ion.speed * 1.2 * (electroVoltage / 2.0);
+                ion.y += Math.sin(ion.phase + electroAnimFrame * 0.08) * 0.5;
+                if (ion.x > weX - 4) {
+                    ion.x = bkX + 30 + Math.random() * 40;
+                    ion.y = liquidY + 20 + Math.random() * 70;
+                }
+                ctx.fillStyle = "#d946ef"; // Purple for Ga3+
+                ctx.beginPath(); ctx.arc(ion.x, ion.y, 3.5, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = "#fdf4ff"; ctx.font = "bold 6px monospace";
+                ctx.fillText("Ga³⁺", ion.x, ion.y - 4);
+            } else {
+                // NO3- / OH- byproducts
+                ion.x -= ion.speed * 0.6;
+                if (ion.x < ceX + 5) {
+                    ion.x = weX - 20 - Math.random() * 40;
+                    ion.y = liquidY + 20 + Math.random() * 70;
+                }
+                ctx.fillStyle = "rgba(244, 63, 94, 0.75)";
+                ctx.beginPath(); ctx.arc(ion.x, ion.y, 2, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+    }
+
+    // 6. POTENTIOSTAT / GALVANOSTAT (Top Right Unit)
+    const potX = 425, potY = 12, potW = 185, potH = 105;
+    ctx.fillStyle = "#0f172a"; ctx.fillRect(potX, potY, potW, potH);
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2; ctx.strokeRect(potX, potY, potW, potH);
+
+    // Header bar
+    ctx.fillStyle = "rgba(56, 189, 248, 0.15)";
+    ctx.fillRect(potX, potY, potW, 20);
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 10px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText("⚡ POTENTIOSTAT / ANALYZER", potX + 8, potY + 14);
+
+    // 3 Terminals: CE (Red), RE (Blue), WE (Black/Gray)
+    // CE Terminal (+)
+    ctx.fillStyle = "#ef4444"; ctx.beginPath(); ctx.arc(potX + 18, potY + 38, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center"; ctx.fillText("CE", potX + 18, potY + 41);
+
+    // RE Terminal (Ref)
+    ctx.fillStyle = "#38bdf8"; ctx.beginPath(); ctx.arc(potX + 18, potY + 60, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#020617"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center"; ctx.fillText("RE", potX + 18, potY + 63);
+
+    // WE Terminal (Work)
+    ctx.fillStyle = "#64748b"; ctx.beginPath(); ctx.arc(potX + 18, potY + 82, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#ffffff"; ctx.font = "bold 8px sans-serif"; ctx.textAlign = "center"; ctx.fillText("WE", potX + 18, potY + 85);
+
+    // Potentiostat Digital LCD Display
+    const lcdX = potX + 36, lcdY = potY + 28, lcdW = 140, lcdH = 68;
+    ctx.fillStyle = "#020617"; ctx.fillRect(lcdX, lcdY, lcdW, lcdH);
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.3)"; ctx.lineWidth = 1; ctx.strokeRect(lcdX, lcdY, lcdW, lcdH);
+
+    ctx.fillStyle = "#a3e635"; ctx.font = "bold 9px monospace"; ctx.textAlign = "left";
+    ctx.fillText(`E(WE/RE) : ${electroVoltage.toFixed(2)} V`, lcdX + 6, lcdY + 16);
+    ctx.fillText(`I(WE/CE) : ${currentDensityMa} mA`, lcdX + 6, lcdY + 32);
+    ctx.fillStyle = "#38bdf8";
+    ctx.fillText(`MODE: POTENTIOSTATIC`, lcdX + 6, lcdY + 48);
+    ctx.fillStyle = electroIsPlaying ? "#4ade80" : "#f87171";
+    ctx.fillText(`STATUS  : ${electroIsPlaying ? "ACTIVE (RUN)" : "STANDBY"}`, lcdX + 6, lcdY + 62);
+
+    // Circuit Wiring & Animated Electron Flow (e-)
+    // CE Wire (Red)
+    ctx.strokeStyle = "#ef4444"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(potX + 18, potY + 38); ctx.lineTo(ceX, potY + 38); ctx.lineTo(ceX, 60); ctx.stroke();
+
+    // RE Wire (Blue)
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(potX + 18, potY + 60); ctx.lineTo(reX, potY + 60); ctx.lineTo(reX, 60); ctx.stroke();
+
+    // WE Wire (Gray/Gold)
+    ctx.strokeStyle = "#94a3b8"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(potX + 18, potY + 82); ctx.lineTo(weX + 8, potY + 82); ctx.lineTo(weX + 8, 60); ctx.stroke();
+
+    // Traveling Electron Packets (e-) in Wires when running
+    if (electroIsPlaying) {
+        ctx.fillStyle = "#facc15";
+        const eProgress = (electroAnimFrame * 3) % 150;
+        // Electron moving from WE to Potentiostat
+        if (eProgress < 75) {
+            ctx.beginPath(); ctx.arc(weX + 8, 60 - eProgress * 0.2, 2.5, 0, Math.PI * 2); ctx.fill();
+        }
+        // Electron moving from Potentiostat to CE
+        ctx.beginPath(); ctx.arc(potX + 18 - (eProgress * 1.5), potY + 38, 2.5, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // 7. PC INTERFACE & LIVE CHRONOAMPEROMETRY CHART (Middle-Right)
+    const pcX = 425, pcY = 130, pcW = 185, pcH = 135;
+    ctx.fillStyle = "#020617"; ctx.fillRect(pcX, pcY, pcW, pcH);
+    ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2; ctx.strokeRect(pcX, pcY, pcW, pcH);
+
+    // PC Header
+    ctx.fillStyle = "#1e293b"; ctx.fillRect(pcX, pcY, pcW, 18);
+    ctx.fillStyle = "#38bdf8"; ctx.font = "bold 9px sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("📊 Live Chronoamperometry I(t)", pcX + pcW / 2, pcY + 13);
+
+    // Mini Chart Coordinates
+    const chX = pcX + 28, chY = pcY + 28, chW = pcW - 36, chH = 65;
+    ctx.fillStyle = "#090d16"; ctx.fillRect(chX, chY, chW, chH);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.15)"; ctx.lineWidth = 1;
+    ctx.strokeRect(chX, chY, chW, chH);
+
+    // Chart grid lines
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.1)";
+    ctx.beginPath();
+    ctx.moveTo(chX, chY + chH / 2); ctx.lineTo(chX + chW, chY + chH / 2);
+    ctx.moveTo(chX + chW / 2, chY); ctx.lineTo(chX + chW / 2, chY + chH);
+    ctx.stroke();
+
+    // Chart Axes labels
+    ctx.fillStyle = "#94a3b8"; ctx.font = "7px monospace"; ctx.textAlign = "right";
+    ctx.fillText("J", chX - 4, chY + 10);
+    ctx.fillText("0", chX - 4, chY + chH);
+    ctx.textAlign = "center";
+    ctx.fillText("t(s)", chX + chW / 2, chY + chH + 8);
+
+    // Plot dynamic I(t) curve
+    if (electroHistory.length > 1) {
+        ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+        ctx.beginPath();
+        const maxJ = Math.max(15, ...electroHistory.map(p => p.j));
+        for (let i = 0; i < electroHistory.length; i++) {
+            const px = chX + (i / (electroHistory.length - 1)) * chW;
+            const py = chY + chH - (electroHistory[i].j / maxJ) * (chH - 6) - 3;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+
+        // Glowing cursor at curve tip
+        const lastPt = electroHistory[electroHistory.length - 1];
+        const lastX = chX + chW;
+        const lastY = chY + chH - (lastPt.j / maxJ) * (chH - 6) - 3;
+        ctx.fillStyle = "#facc15";
+        ctx.beginPath(); ctx.arc(lastX, lastY, 3, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // Live Metrics readout at bottom of PC monitor
+    ctx.fillStyle = "#e2e8f0"; ctx.font = "8px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText(`J: ${currentDensityMa} mA/cm²`, pcX + 8, pcY + 115);
+    ctx.fillText(`t: ${electroElapsed.toFixed(1)} s`, pcX + 90, pcY + 115);
+    ctx.fillStyle = "#10b981"; ctx.font = "bold 9px sans-serif";
+    ctx.fillText(`Épaisseur : ${filmThicknessNm} nm`, pcX + 8, pcY + 128);
+
+    // Monitor Stand
+    ctx.fillStyle = "#475569";
+    ctx.fillRect(pcX + pcW / 2 - 12, pcY + pcH, 24, 8);
+    ctx.fillRect(pcX + pcW / 2 - 25, pcY + pcH + 8, 50, 4);
+
+    // Communication Cable from Potentiostat to PC
+    ctx.strokeStyle = "rgba(56, 189, 248, 0.6)"; ctx.lineWidth = 1.5; ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(potX + potW, potY + potH / 2);
+    ctx.lineTo(pcX + pcW + 6, potY + potH / 2);
+    ctx.lineTo(pcX + pcW + 6, pcY + 30);
+    ctx.lineTo(pcX + pcW, pcY + 30);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Update thickness badge in page header
     const badge = document.getElementById("electro-thickness-badge");
     if (badge) {
         badge.textContent = `Épaisseur : ${filmThicknessNm} nm`;
@@ -21969,124 +22190,6 @@ const examsData = [
             <div class="exam-correction-body">
                 <h3>Correction Chimie 2023</h3>
                 <p>$C_A V_A = C_B V_E \implies C_A = \frac{0{,}10 \times 15}{20} = 0{,}075\text{ mol/L}$.</p>
-            </div>
-        `
-    },
-{
-        id: "exam-2026-math-eco-ord",
-        title: "Examen National 2026 — Mathématiques (Session Ordinaire - Éco)",
-        level: "2bac-eco",
-        subject: "math",
-        year: 2026,
-        session: "ordinaire",
-        sessionLabel: "Session Ordinaire",
-        levelLabel: "2ème Bac Éco",
-        subjectLabel: "Mathématiques",
-        duration: "2 heures",
-        coefficient: "3",
-        pdfUrl: "pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf",
-        description: "Épreuve officielle 2026 pour Sciences Économiques et Gestion avec Sujet & Corrigé Complet (PDF) : Suites numériques, Probabilités et Étude de fonctions économiques.",
-        statement: `
-            <div class="exam-statement-body">
-                <div class="formula-box" style="margin-bottom: 20px;">
-                    <h4>Informations sur l'épreuve</h4>
-                    <ul>
-                        <li><strong>Filière :</strong> 2ème Année Baccalauréat — Sciences Économiques & TGC</li>
-                        <li><strong>Session :</strong> Session Ordinaire 2026</li>
-                        <li><strong>Durée :</strong> 2 heures | <strong>Coefficient :</strong> 3</li>
-                        <li><strong>Usage de la calculatrice non programmable autorisé.</strong></li>
-                    </ul>
-                </div>
-
-                <div style="background: linear-gradient(135deg, rgba(217, 119, 6, 0.12), rgba(59, 130, 246, 0.12)); border: 1.5px solid rgba(217, 119, 6, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <span style="font-size: 2rem;">📑</span>
-                        <div>
-                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Épreuve 2026 Économie & Corrigé Complet (PDF)</div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">Document original de l'examen national 2026 avec solutions et barème officiel MEN.</div>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
-                            <i data-lucide="external-link"></i> Ouvrir en Plein Écran
-                        </a>
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
-                            <i data-lucide="download"></i> Télécharger le PDF
-                        </a>
-                    </div>
-                </div>
-
-                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
-                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
-                            <i data-lucide="file-text"></i> Sujet de l'Examen National 2026 — 2BAC Éco (Visionneuse PDF intégrée)
-                        </span>
-                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">2BAC Sciences Économiques</span>
-                    </div>
-                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
-                </div>
-            </div>
-        `,
-        correction: `
-            <div class="exam-correction-body">
-                <div class="formula-box success-box" style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid rgba(16, 185, 129, 0.4); margin-bottom: 24px;">
-                    <h4>Correction Officielle Détaillée — Examen National 2026 (2BAC Éco)</h4>
-                    <p>Corrigé intégral de l'épreuve avec toutes les justifications et étapes de calcul selon le barème officiel MEN.</p>
-                </div>
-
-                <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(56, 189, 248, 0.12)); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 14px; padding: 18px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <span style="font-size: 2rem;">✅</span>
-                        <div>
-                            <div style="font-weight: 700; color: var(--text-primary); font-size: 1.05rem;">Corrigé Intégral Pas à Pas (PDF)</div>
-                            <div style="font-size: 0.85rem; color: var(--text-muted);">Solution complète et détaillée pour toutes les questions de l'épreuve 2026.</div>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
-                            <i data-lucide="external-link"></i> Visionner en Grand
-                        </a>
-                        <a href="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" download="Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; background: #d97706; border-color: #d97706;">
-                            <i data-lucide="download"></i> Télécharger la Solution PDF
-                        </a>
-                    </div>
-                </div>
-
-                <div class="pdf-preview-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #0f172a; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-                    <div style="background: rgba(15, 23, 42, 0.95); padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color);">
-                        <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; display: flex; align-items: center; gap: 8px;">
-                            <i data-lucide="check-circle"></i> Correction Détaillée Pas à Pas (Visionneuse PDF intégrée)
-                        </span>
-                        <span style="font-size: 0.8rem; color: #d97706; font-weight: 600;">Session Ordinaire 2026</span>
-                    </div>
-                    <iframe src="pdf/Examen_National_2026_Maths_Eco_Ordinaire_Corrige.pdf#toolbar=1" width="100%" height="600px" style="border: none; display: block;"></iframe>
-                </div>
-            </div>
-        `
-    },
-{
-        id: "exam-2023-math-eco-ord",
-        title: "Examen National 2023 — Mathématiques (Session Ordinaire - Éco)",
-        level: "2bac-eco",
-        subject: "math",
-        year: 2023,
-        session: "ordinaire",
-        sessionLabel: "Session Ordinaire",
-        levelLabel: "2ème Bac Éco",
-        subjectLabel: "Mathématiques",
-        duration: "2 heures",
-        coefficient: "3",
-        description: "Épreuve officielle pour Sciences Économiques : Coût moyen $C_M(x)$ et minimisation.",
-        statement: `
-            <div class="exam-statement-body">
-                <h3>Exercice : Minimisation du Coût Moyen</h3>
-                <p>Coût total $C(x) = x^2 + 4x + 16$. Déterminer la quantité $x$ qui minimise le coût moyen.</p>
-            </div>
-        `,
-        correction: `
-            <div class="exam-correction-body">
-                <h3>Correction Math Éco 2023</h3>
-                <p>$C_M(x) = x + 4 + 16/x$. $C_M'(x) = 0 \implies x = 4$ unités.</p>
             </div>
         `
     }

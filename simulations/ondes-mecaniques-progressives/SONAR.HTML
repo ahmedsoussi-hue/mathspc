@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesure de la Profondeur par SONAR - Prof Mouhibi</title>
+    
+    <!-- Polices Google Fonts (Élégantes et Scientifiques) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Quicksand:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #e0e7ff 100%);
+            --card-bg: #ffffff;
+            --accent-blue: #0284c7;
+            --accent-navy: #1e3a8a;
+            --accent-red: #e11d48;
+            --accent-green: #059669;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --border-color: #cbd5e1;
+            --font-title: 'Montserrat', sans-serif;
+            --font-text: 'Quicksand', sans-serif;
+            --font-math: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: var(--font-text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .badge-prof {
+            background: linear-gradient(90deg, #e11d48, #be123c);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-family: var(--font-title);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+            display: inline-block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            color: var(--accent-navy);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .simulation-container {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            width: 100%;
+            max-width: 1050px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .canvas-card {
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+        }
+
+        #seaCanvas {
+            height: 320px;
+            background: #f0f9ff;
+        }
+
+        #scopeCanvas {
+            height: 220px;
+            background: #0f172a; /* Écran d'oscilloscope noir/bleu nuit */
+            border-top: 3px solid var(--accent-navy);
+        }
+
+        /* Contrôles */
+        .controls-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .control-group label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .control-group label span {
+            font-family: var(--font-math);
+            color: var(--accent-blue);
+            font-weight: 700;
+            background: #e0f2fe;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        input[type=range], select {
+            width: 100%;
+            cursor: pointer;
+            font-family: var(--font-text);
+        }
+
+        select {
+            padding: 8px 12px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 700;
+            outline: none;
+        }
+
+        input[type=range] {
+            accent-color: var(--accent-blue);
+            height: 6px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-title);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-pulse { background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; }
+        .btn-reset { background: #64748b; color: white; }
+
+        button:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+
+        /* Boîte Mathématiques */
+        .math-box {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-top: 20px;
+        }
+
+        .math-title {
+            font-family: var(--font-title);
+            color: #166534;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #bbf7d0;
+            padding-bottom: 5px;
+        }
+
+        .math-step {
+            font-family: var(--font-math); /* Police code/math pour les formules */
+            font-size: 0.95rem;
+            color: #14532d;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .math-step b { font-family: var(--font-text); color: #065f46; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-prof">Prof Mouhibi</div>
+        <h1>Mesure de la Profondeur par SONAR</h1>
+        <p>Simulation au ralenti : Propagation et réflexion d'un signal ultrasonore</p>
+    </header>
+
+    <div class="simulation-container">
+        <!-- Zone Visuelle -->
+        <div class="canvas-card">
+            <canvas id="seaCanvas" width="1000" height="320"></canvas>
+            <canvas id="scopeCanvas" width="1000" height="220"></canvas>
+        </div>
+
+        <!-- Tableau de bord -->
+        <div class="controls-card">
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Profondeur de la mer ($d$) : <span id="depthVal">37.5 m</span></label>
+                    <input type="range" id="depthSlider" min="15" max="60" step="2.5" value="37.5">
+                </div>
+                <div class="control-group">
+                    <label>Célérité dans l'eau ($v$) : <span id="vEauVal">1500 m/s</span></label>
+                    <input type="range" id="vEauSlider" min="1400" max="1600" step="10" value="1500">
+                </div>
+                <div class="control-group">
+                    <label>Balayage Oscillo ($S_H$) :</label>
+                    <select id="shSelect">
+                        <option value="5">5 ms / division</option>
+                        <option value="10">10 ms / division</option>
+                        <option value="2.5">2.5 ms / division</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn-pulse" id="btnEmit">⚡ Émettre (Ralenti)</button>
+                <button class="btn-reset" id="btnReset">🔄 Effacer l'écran</button>
+            </div>
+
+            <!-- Calculs Officiels -->
+            <div class="math-box" id="mathBox">
+                <div class="math-title">Démonstration Mathématique (Épreuve du BAC)</div>
+                <div class="math-step">
+                    <b>1. Lecture du retard temporel $\Delta t$ sur l'écran :</b><br>
+                    $\Delta t = (\text{Nb de divisions}) \times S_H = <span id="m_divs">10.0</span> \text{ div} \times <span id="m_sh">5</span> \text{ ms/div} = \mathbf{<span id="m_deltat">50</span> \text{ ms}} = \mathbf{<span id="m_deltat_s">0.050</span> \text{ s}}$
+                </div>
+                <div class="math-step">
+                    <b>2. Calcul de la profondeur $d$ :</b><br>
+                    $v = \frac{2d}{\Delta t} \implies d = \frac{v \times \Delta t}{2} = \frac{1500 \times <span id="m_dt_calc">0.050</span>}{2} = \mathbf{<span id="m_depth_calc">37.5</span> \text{ m}}$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctxSea = document.getElementById('seaCanvas').getContext('2d');
+        const ctxScope = document.getElementById('scopeCanvas').getContext('2d');
+
+        // Inputs
+        const depthSlider = document.getElementById('depthSlider');
+        const vEauSlider = document.getElementById('vEauSlider');
+        const shSelect = document.getElementById('shSelect');
+        const btnEmit = document.getElementById('btnEmit');
+        const btnReset = document.getElementById('btnReset');
+
+        // Physical Variables
+        let depth = parseFloat(depthSlider.value); 
+        let vEau = parseFloat(vEauSlider.value); 
+        let sH = parseFloat(shSelect.value); 
+
+        // Animation Variables
+        let isSimulating = false;
+        let simTime = 0; 
+        let lastTimestamp = 0;
+        
+        // FACTEUR DE RALENTI (Slow Motion). Plus c'est bas, plus c'est lent !
+        // 0.015 signifie que 1 seconde réelle = 15ms sur l'oscilloscope.
+        const SLOW_MOTION_FACTOR = 0.02; 
+
+        // Geometry
+        const surfaceY = 90;
+        const maxSeabedY = 290;
+        const boatX = 420;
+        const canvasW = 1000;
+
+        function getDeltaT() {
+            return ((2 * depth) / vEau) * 1000; // ms
+        }
+
+        function updateMath() {
+            let dt_ms = getDeltaT();
+            document.getElementById('m_divs').innerText = (dt_ms / sH).toFixed(1);
+            document.getElementById('m_sh').innerText = sH;
+            document.getElementById('m_deltat').innerText = dt_ms.toFixed(1);
+            document.getElementById('m_deltat_s').innerText = (dt_ms / 1000).toFixed(3);
+            document.getElementById('m_dt_calc').innerText = (dt_ms / 1000).toFixed(3);
+            document.getElementById('m_depth_calc').innerText = depth.toFixed(1);
+        }
+
+        function handleInput() {
+            depth = parseFloat(depthSlider.value);
+            vEau = parseFloat(vEauSlider.value);
+            sH = parseFloat(shSelect.value);
+            
+            document.getElementById('depthVal').innerText = depth.toFixed(1) + " m";
+            document.getElementById('vEauVal').innerText = vEau + " m/s";
+            
+            updateMath();
+            if (!isSimulating) { drawSea(); drawScope(); }
+        }
+
+        depthSlider.addEventListener('input', handleInput);
+        vEauSlider.addEventListener('input', handleInput);
+        shSelect.addEventListener('change', handleInput);
+
+        btnEmit.onclick = () => {
+            simTime = 0;
+            lastTimestamp = performance.now();
+            isSimulating = true;
+            requestAnimationFrame(animate);
+        };
+
+        btnReset.onclick = () => {
+            isSimulating = false;
+            simTime = 0;
+            drawSea(); drawScope();
+        };
+
+        // --- DESSIN DU BATEAU & MER ---
+        function drawSea() {
+            ctxSea.clearRect(0, 0, canvasW, 320);
+
+            // Ciel
+            ctxSea.fillStyle = '#f0f9ff';
+            ctxSea.fillRect(0, 0, canvasW, surfaceY);
+
+            // Eau (Dégradé doux)
+            let grad = ctxSea.createLinearGradient(0, surfaceY, 0, 320);
+            grad.addColorStop(0, '#bae6fd');
+            grad.addColorStop(1, '#0284c7');
+            ctxSea.fillStyle = grad;
+            ctxSea.fillRect(0, surfaceY, canvasW, 320 - surfaceY);
+
+            // Vagues de surface
+            ctxSea.strokeStyle = '#38bdf8';
+            ctxSea.lineWidth = 2;
+            ctxSea.beginPath();
+            for (let x = 0; x < canvasW; x += 40) {
+                ctxSea.quadraticCurveTo(x + 20, surfaceY - 5, x + 40, surfaceY);
+            }
+            ctxSea.stroke();
+
+            // Fond marin
+            let seabedY = surfaceY + 40 + (depth / 60) * (maxSeabedY - surfaceY - 50);
+            ctxSea.fillStyle = '#78350f';
+            ctxSea.beginPath();
+            ctxSea.moveTo(0, 320); ctxSea.lineTo(0, seabedY);
+            for(let x=0; x<=canvasW; x+=50) {
+                ctxSea.lineTo(x, seabedY + Math.sin(x*0.05)*10);
+            }
+            ctxSea.lineTo(canvasW, 320);
+            ctxSea.fill();
+
+            // Texte fond
+            ctxSea.fillStyle = 'rgba(255,255,255,0.8)';
+            ctxSea.font = '700 14px Quicksand';
+            ctxSea.fillText('FOND DE LA MER', 150, seabedY + 30);
+
+            // Bateau & Sonar
+            drawBoat(boatX, surfaceY);
+
+            // Cotation 'd'
+            ctxSea.strokeStyle = '#0f172a';
+            ctxSea.lineWidth = 2;
+            ctxSea.beginPath(); ctxSea.moveTo(boatX + 250, surfaceY); ctxSea.lineTo(boatX + 250, seabedY); ctxSea.stroke();
+            ctxSea.fillStyle = '#0f172a';
+            ctxSea.font = '700 16px JetBrains Mono';
+            ctxSea.fillText(`d = ${depth.toFixed(1)}m`, boatX + 265, (surfaceY + seabedY)/2 + 5);
+
+            // --- ANIMATION ONDES ---
+            let eX = boatX + 15;
+            let rX = boatX + 65;
+            let startY = surfaceY + 10;
+            let dt = getDeltaT();
+            
+            if (isSimulating) {
+                // Trajet complet gris clair
+                ctxSea.strokeStyle = 'rgba(15,23,42,0.2)';
+                ctxSea.lineWidth = 2;
+                ctxSea.setLineDash([5, 5]);
+                ctxSea.beginPath(); ctxSea.moveTo(eX, startY); ctxSea.lineTo(boatX+40, seabedY); ctxSea.lineTo(rX, startY); ctxSea.stroke();
+                ctxSea.setLineDash([]);
+
+                let halfT = dt / 2;
+                
+                if (simTime <= halfT) {
+                    // Descente (Rouge)
+                    let prog = simTime / halfT;
+                    let currX = eX + (boatX+40 - eX) * prog;
+                    let currY = startY + (seabedY - startY) * prog;
+                    
+                    // Ligne parcourue
+                    ctxSea.strokeStyle = 'rgba(225, 29, 72, 0.6)';
+                    ctxSea.lineWidth = 3;
+                    ctxSea.beginPath(); ctxSea.moveTo(eX, startY); ctxSea.lineTo(currX, currY); ctxSea.stroke();
+                    
+                    // Front d'onde
+                    drawWaveFront(currX, currY, 'down', '#e11d48');
+                } 
+                else if (simTime <= dt) {
+                    // Ligne aller complète
+                    ctxSea.strokeStyle = 'rgba(225, 29, 72, 0.3)';
+                    ctxSea.lineWidth = 2;
+                    ctxSea.beginPath(); ctxSea.moveTo(eX, startY); ctxSea.lineTo(boatX+40, seabedY); ctxSea.stroke();
+
+                    // Remontée (Bleue)
+                    let prog = (simTime - halfT) / halfT;
+                    let currX = boatX+40 + (rX - (boatX+40)) * prog;
+                    let currY = seabedY + (startY - seabedY) * prog;
+
+                    ctxSea.strokeStyle = 'rgba(2, 132, 199, 0.8)';
+                    ctxSea.lineWidth = 3;
+                    ctxSea.beginPath(); ctxSea.moveTo(boatX+40, seabedY); ctxSea.lineTo(currX, currY); ctxSea.stroke();
+                    
+                    drawWaveFront(currX, currY, 'up', '#0284c7');
+                }
+            }
+        }
+
+        // Bateau Design
+        function drawBoat(x, y) {
+            ctxSea.fillStyle = '#ffffff';
+            ctxSea.strokeStyle = '#334155';
+            ctxSea.lineWidth = 2;
+            ctxSea.beginPath();
+            ctxSea.moveTo(x - 50, y); ctxSea.lineTo(x + 130, y);
+            ctxSea.lineTo(x + 100, y + 20); ctxSea.lineTo(x - 30, y + 20);
+            ctxSea.closePath(); ctxSea.fill(); ctxSea.stroke();
+
+            // Voile
+            ctxSea.fillStyle = '#fde047';
+            ctxSea.beginPath(); ctxSea.moveTo(x+30, y-10); ctxSea.lineTo(x+30, y-60); ctxSea.lineTo(x+80, y-10); ctxSea.fill(); ctxSea.stroke();
+
+            // Sonar (E/R)
+            ctxSea.fillStyle = '#f59e0b'; ctxSea.fillRect(x+5, y+20, 25, 8); // E
+            ctxSea.fillStyle = '#0ea5e9'; ctxSea.fillRect(x+50, y+20, 25, 8); // R
+            ctxSea.fillStyle = '#0f172a';
+            ctxSea.font = '700 12px Montserrat';
+            ctxSea.fillText('E', x+13, y+16); ctxSea.fillText('R', x+58, y+16);
+        }
+
+        // Fronts d'onde "Sonar"
+        function drawWaveFront(x, y, dir, color) {
+            ctxSea.strokeStyle = color;
+            ctxSea.lineWidth = 3;
+            ctxSea.beginPath();
+            if(dir === 'down') {
+                ctxSea.arc(x, y-10, 15, 0.2*Math.PI, 0.8*Math.PI); ctxSea.stroke();
+                ctxSea.beginPath(); ctxSea.arc(x, y-20, 25, 0.2*Math.PI, 0.8*Math.PI); ctxSea.stroke();
+            } else {
+                ctxSea.arc(x, y+10, 15, 1.2*Math.PI, 1.8*Math.PI); ctxSea.stroke();
+                ctxSea.beginPath(); ctxSea.arc(x, y+20, 25, 1.2*Math.PI, 1.8*Math.PI); ctxSea.stroke();
+            }
+        }
+
+        // --- DESSIN OSCILLOSCOPE ---
+        function drawScope() {
+            ctxScope.clearRect(0, 0, canvasW, 220);
+
+            // Grille Phosphorescente
+            ctxScope.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+            ctxScope.lineWidth = 1;
+            let divW = 70; // px par division
+            let divH = 40;
+            
+            for(let x=divW; x<canvasW; x+=divW) {
+                ctxScope.beginPath(); ctxScope.moveTo(x, 0); ctxScope.lineTo(x, 220); ctxScope.stroke();
+            }
+            for(let y=divH; y<220; y+=divH) {
+                ctxScope.beginPath(); ctxScope.moveTo(0, y); ctxScope.lineTo(canvasW, y); ctxScope.stroke();
+            }
+            // Axe central
+            ctxScope.strokeStyle = 'rgba(148, 163, 184, 0.8)';
+            ctxScope.lineWidth = 2;
+            ctxScope.beginPath(); ctxScope.moveTo(0, 110); ctxScope.lineTo(canvasW, 110); ctxScope.stroke();
+
+            // Label Sensibilité
+            ctxScope.fillStyle = '#94a3b8';
+            ctxScope.font = '600 13px JetBrains Mono';
+            ctxScope.fillText(`Sensibilité Horizontale = ${sH} ms/div`, 15, 25);
+
+            // Signaux
+            let dt = getDeltaT();
+            let pxPerMs = divW / sH;
+            
+            let startX1 = 2 * divW; // Le signal 1 commence à la div 2
+            let startX2 = startX1 + (dt * pxPerMs);
+
+            // Tracé Signal 1 (Émis - Rouge)
+            if (simTime >= 0 || !isSimulating) {
+                drawPulseOscillo(startX1, 70, '#f43f5e', '①');
+            }
+
+            // Tracé Signal 2 (Reçu - Bleu)
+            if (simTime >= dt || !isSimulating) {
+                drawPulseOscillo(startX2, 150, '#38bdf8', '②');
+                
+                // Dessin de la flèche d'écartement
+                ctxScope.strokeStyle = '#ffffff';
+                ctxScope.lineWidth = 2;
+                ctxScope.beginPath(); ctxScope.moveTo(startX1, 110); ctxScope.lineTo(startX2, 110); ctxScope.stroke();
+                
+                ctxScope.beginPath(); ctxScope.moveTo(startX1+8, 105); ctxScope.lineTo(startX1, 110); ctxScope.lineTo(startX1+8, 115); ctxScope.stroke();
+                ctxScope.beginPath(); ctxScope.moveTo(startX2-8, 105); ctxScope.lineTo(startX2, 110); ctxScope.lineTo(startX2-8, 115); ctxScope.stroke();
+
+                ctxScope.fillStyle = '#ffffff';
+                ctxScope.font = '700 14px JetBrains Mono';
+                ctxScope.fillText(`Δt = ${dt.toFixed(1)} ms`, (startX1+startX2)/2 - 40, 100);
+            }
+
+            // Ligne de balayage lumineuse (Scanner)
+            if (isSimulating) {
+                let scanX = startX1 + (simTime * pxPerMs);
+                if (scanX < canvasW) {
+                    ctxScope.strokeStyle = '#10b981'; // Vert radar
+                    ctxScope.lineWidth = 2;
+                    ctxScope.shadowBlur = 10;
+                    ctxScope.shadowColor = '#10b981';
+                    ctxScope.beginPath(); ctxScope.moveTo(scanX, 0); ctxScope.lineTo(scanX, 220); ctxScope.stroke();
+                    ctxScope.shadowBlur = 0; // reset
+                }
+            }
+        }
+
+        // Créneaux Oscilloscope
+        function drawPulseOscillo(x0, yBase, color, num) {
+            ctxScope.strokeStyle = color;
+            ctxScope.lineWidth = 3;
+            ctxScope.shadowBlur = 8;
+            ctxScope.shadowColor = color;
+            
+            ctxScope.beginPath();
+            ctxScope.moveTo(0, yBase); ctxScope.lineTo(x0, yBase);
+            
+            let amp = 25;
+            let zigW = 4;
+            let currX = x0;
+            
+            for(let i=0; i<8; i++) {
+                ctxScope.lineTo(currX, yBase - amp); currX += zigW;
+                ctxScope.lineTo(currX, yBase + amp); currX += zigW;
+            }
+            ctxScope.lineTo(currX, yBase);
+            ctxScope.lineTo(canvasW, yBase);
+            ctxScope.stroke();
+            ctxScope.shadowBlur = 0; // reset
+
+            // Numero de voie
+            ctxScope.fillStyle = color;
+            ctxScope.font = '700 16px Montserrat';
+            ctxScope.fillText(num, x0 + 15, yBase + 45);
+        }
+
+        // --- MOTEUR D'ANIMATION ---
+        function animate(timestamp) {
+            if (!isSimulating) return;
+
+            // Calcul du temps écoulé au RALENTI
+            let realDeltaTime = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+            
+            simTime += realDeltaTime * SLOW_MOTION_FACTOR;
+
+            drawSea();
+            drawScope();
+
+            let maxTime = getDeltaT() + (sH * 4); // Arrêt 4 divisions après l'écho
+            if (simTime > maxTime) {
+                isSimulating = false;
+                drawSea();
+                drawScope(); // Force l'affichage final complet
+            } else {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        // Démarrage
+        handleInput();
+    </script>
+</body>
+</html>

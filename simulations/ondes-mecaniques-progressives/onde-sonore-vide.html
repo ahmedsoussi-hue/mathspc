@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation : Le Son dans le Vide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 { color: #333; text-align: center; }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .control-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #0056b3; }
+        button.active { background-color: #dc3545; }
+        input[type=range] { width: 150px; }
+        #status { font-weight: bold; color: #555; margin-top: 10px;}
+    </style>
+</head>
+<body>
+
+    <h1>L'onde sonore est une onde mécanique</h1>
+    <p>Allumez la sonnette, puis utilisez la pompe à vide pour retirer l'air de la cloche.</p>
+
+    <div class="container">
+        <canvas id="simCanvas" width="500" height="400"></canvas>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label><strong>1. Sonnette :</strong></label>
+                <button id="btnSonnette">Allumer</button>
+            </div>
+            
+            <div class="control-group">
+                <label><strong>2. Air dans la cloche :</strong><br><span id="airPercent">100% (Pression atm)</span></label>
+                <input type="range" id="airSlider" min="0" max="100" value="100">
+            </div>
+        </div>
+        <div id="status">Statut : L'air permet au son de se propager.</div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const btnSonnette = document.getElementById('btnSonnette');
+        const airSlider = document.getElementById('airSlider');
+        const airPercentText = document.getElementById('airPercent');
+        const statusText = document.getElementById('status');
+
+        let isRinging = false;
+        let airPressure = 1.0; // 0.0 (vide) à 1.0 (plein)
+        let waves = [];
+        let particles = [];
+        let animationId;
+
+        // --- GESTION DU SON (Web Audio API) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let oscillator = null;
+        let gainNode = audioCtx.createGain();
+        gainNode.connect(audioCtx.destination);
+        gainNode.gain.value = 0; // Volume initial
+
+        function toggleSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            isRinging = !isRinging;
+            if (isRinging) {
+                btnSonnette.textContent = "Éteindre";
+                btnSonnette.classList.add("active");
+                
+                oscillator = audioCtx.createOscillator();
+                oscillator.type = 'sine';
+                oscillator.frequency.value = 800; // Fréquence de la sonnette
+                oscillator.connect(gainNode);
+                oscillator.start();
+                updateVolume();
+            } else {
+                btnSonnette.textContent = "Allumer";
+                btnSonnette.classList.remove("active");
+                if (oscillator) {
+                    oscillator.stop();
+                    oscillator.disconnect();
+                }
+            }
+        }
+
+        function updateVolume() {
+            // Le volume est proportionnel à la quantité d'air (pression)
+            // Si airPressure = 0 (vide), volume = 0 (pas de son)
+            if (isRinging) {
+                gainNode.gain.setTargetAtTime(airPressure * 0.5, audioCtx.currentTime, 0.1);
+            } else {
+                gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.1);
+            }
+            
+            if (airPressure === 0) {
+                statusText.innerHTML = "Statut : <strong>Le vide est fait. L'onde mécanique n'a plus de support pour se propager. On n'entend plus rien !</strong>";
+                statusText.style.color = "red";
+            } else {
+                statusText.innerHTML = "Statut : L'air agit comme un milieu matériel pour transporter l'onde.";
+                statusText.style.color = "#555";
+            }
+        }
+
+        btnSonnette.addEventListener('click', toggleSound);
+
+        airSlider.addEventListener('input', (e) => {
+            airPressure = e.target.value / 100;
+            airPercentText.textContent = `${e.target.value}% ${e.target.value == 0 ? '(VIDE)' : ''}`;
+            updateVolume();
+            generateParticles();
+        });
+
+        // --- ANIMATION VISUELLE ---
+        function generateParticles() {
+            particles = [];
+            const numParticles = Math.floor(200 * airPressure);
+            for(let i=0; i<numParticles; i++) {
+                particles.push({
+                    x: 120 + Math.random() * 260,
+                    y: 100 + Math.random() * 220,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2
+                });
+            }
+        }
+        generateParticles(); // Init
+
+        function drawCloche() {
+            // Table
+            ctx.fillStyle = "#555";
+            ctx.fillRect(50, 320, 400, 20);
+            ctx.fillRect(90, 340, 15, 50); // pied 1
+            ctx.fillRect(395, 340, 15, 50); // pied 2
+            
+            // Tuyau pompe à vide
+            ctx.fillStyle = "#ccc";
+            ctx.fillRect(240, 320, 20, 40);
+            ctx.strokeStyle = "#000";
+            ctx.strokeRect(240, 320, 20, 40);
+
+            // Verre de la cloche
+            ctx.beginPath();
+            ctx.moveTo(120, 320);
+            ctx.lineTo(120, 150);
+            ctx.quadraticCurveTo(120, 80, 250, 80); // Dôme
+            ctx.quadraticCurveTo(380, 80, 380, 150);
+            ctx.lineTo(380, 320);
+            
+            ctx.strokeStyle = "rgba(0, 0, 0, 0.8)";
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // Poignée en haut
+            ctx.beginPath();
+            ctx.arc(250, 70, 15, 0, Math.PI*2);
+            ctx.stroke();
+
+            // Remplissage verre (légèrement bleuté)
+            ctx.fillStyle = "rgba(173, 216, 230, 0.1)";
+            ctx.fill();
+
+            // Texte indicatif
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Cloche", 400, 150);
+            ctx.beginPath();
+            ctx.moveTo(395, 145);
+            ctx.lineTo(385, 145);
+            ctx.stroke();
+        }
+
+        function drawSonnette() {
+            let shakeX = 0;
+            let shakeY = 0;
+            
+            // Si ça sonne, on fait trembler le dessin
+            if (isRinging) {
+                shakeX = (Math.random() - 0.5) * 4;
+                shakeY = (Math.random() - 0.5) * 4;
+            }
+
+            const bx = 180 + shakeX;
+            const by = 240 + shakeY;
+
+            // Boitier
+            ctx.fillStyle = "#999";
+            ctx.fillRect(bx, by, 60, 80);
+            ctx.strokeStyle = "#000";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(bx, by, 60, 80);
+            
+            // Haut parleur / gong
+            ctx.beginPath();
+            ctx.arc(bx + 30, by + 30, 20, 0, Math.PI*2);
+            ctx.fillStyle = "#333";
+            ctx.fill();
+            ctx.stroke();
+            
+            // Boutons
+            ctx.beginPath();
+            ctx.arc(bx + 20, by + 65, 5, 0, Math.PI*2);
+            ctx.arc(bx + 40, by + 65, 5, 0, Math.PI*2);
+            ctx.fillStyle = "black";
+            ctx.fill();
+
+            // Flèche texte
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Sonnette", 20, 280);
+            ctx.beginPath();
+            ctx.moveTo(110, 275);
+            ctx.lineTo(170, 275);
+            ctx.stroke();
+            
+            // Ajouter une nouvelle onde sonore si ça sonne (et s'il y a de l'air)
+            if (isRinging && Math.random() < 0.1) {
+                waves.push({ radius: 20, alpha: 1.0 });
+            }
+        }
+
+        function drawOndes() {
+            for (let i = 0; i < waves.length; i++) {
+                let w = waves[i];
+                w.radius += 2; // Vitesse d'expansion
+                w.alpha -= 0.015; // Disparition progressive
+
+                if (w.alpha > 0) {
+                    ctx.beginPath();
+                    ctx.arc(210, 270, w.radius, 0, Math.PI * 2);
+                    // L'opacité maximale de l'onde dépend de la pression d'air !
+                    // S'il n'y a pas d'air (airPressure = 0), l'onde est invisible.
+                    ctx.strokeStyle = `rgba(0, 0, 255, ${Math.min(w.alpha, airPressure)})`;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }
+            // Nettoyer les ondes disparues
+            waves = waves.filter(w => w.alpha > 0);
+        }
+
+        function drawParticles() {
+            ctx.fillStyle = "rgba(100, 100, 100, 0.5)";
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                ctx.fill();
+                
+                // Mouvement aléatoire (agitation thermique + onde)
+                let moveAmount = isRinging ? 2 : 0.5;
+                p.x += p.vx * moveAmount;
+                p.y += p.vy * moveAmount;
+
+                // Garder les particules dans la cloche (approximatif)
+                if(p.x < 130 || p.x > 370) p.vx *= -1;
+                if(p.y < 100 || p.y > 310) p.vy *= -1;
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawParticles(); // Les molécules d'air
+            drawCloche();    // Le récipient
+            drawSonnette();  // L'objet vibrant
+            drawOndes();     // La représentation visuelle du son
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

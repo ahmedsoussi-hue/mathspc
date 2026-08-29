@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesure de la Vitesse du Son - Prof Mouhibi</title>
+    <!-- Polices Google Fonts Élégantes & Scientifiques -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 50%, #f1f5f9 100%);
+            --card-bg: #ffffff;
+            --accent-blue: #0284c7;
+            --accent-navy: #0f172a;
+            --accent-red: #e11d48;
+            --accent-green: #10b981;
+            --accent-yellow: #d97706;
+            --text-main: #0f172a;
+            --text-sub: #475569;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 15px;
+            min-height: 100vh;
+        }
+
+        /* En-tête Stylisé */
+        header {
+            text-align: center;
+            margin-bottom: 22px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .badge-prof {
+            background: linear-gradient(90deg, #e11d48, #f43f5e);
+            color: white;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
+            display: inline-block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-navy);
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            color: var(--text-sub);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Conteneur principal */
+        .simulation-container {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0,0,0,0.04);
+            padding: 24px;
+            width: 100%;
+            max-width: 1060px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .canvas-card {
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+        }
+
+        #expCanvas {
+            height: 310px;
+            background: #ffffff;
+        }
+
+        #scopeCanvas {
+            height: 230px;
+            background: #ffffff;
+            border-top: 2px solid var(--border-color);
+        }
+
+        /* Tag Mode Ralenti */
+        .slowm-badge {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            border: 1.5px solid #38bdf8;
+            color: #0284c7;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Dashboard de Contrôle */
+        .controls-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .control-group label span {
+            color: var(--accent-blue);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+        }
+
+        input[type=range], select {
+            border-radius: 8px;
+        }
+
+        select {
+            padding: 9px 12px;
+            background: white;
+            color: var(--text-main);
+            border: 1.5px solid var(--border-color);
+            font-weight: 700;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type=range] {
+            accent-color: var(--accent-blue);
+            cursor: pointer;
+            height: 6px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-pulse {
+            background: linear-gradient(135deg, #e11d48, #f43f5e);
+            color: white;
+            box-shadow: 0 4px 14px rgba(225, 29, 72, 0.3);
+        }
+
+        .btn-reset {
+            background: #64748b;
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+        }
+
+        /* Boîte de Démonstration / Calculs BAC */
+        .math-box {
+            background: #f0fdf4;
+            border: 1.5px solid #86efac;
+            border-radius: 14px;
+            padding: 16px;
+            margin-top: 8px;
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .math-title {
+            font-weight: 800;
+            color: #166534;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .math-step {
+            font-size: 0.92rem;
+            color: #14532d;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .math-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            color: var(--accent-red);
+        }
+
+        .toggle-calc {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--accent-navy);
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        .toggle-calc input {
+            width: 19px;
+            height: 19px;
+            accent-color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-prof">Prof Mouhibi</div>
+        <h1>Mesure de la Vitesse du Son dans l'Air</h1>
+        <p>Détermination du retard temporel $\tau$ entre deux microphones $R_1$ et $R_2$</p>
+    </header>
+
+    <div class="simulation-container">
+        <!-- Canvas Card (Dispositif Expérimental + Oscilloscope) -->
+        <div class="canvas-card">
+            <span class="slowm-badge">🐌 Animation Ralentie (Pédagogique)</span>
+            <canvas id="expCanvas" width="1000" height="310"></canvas>
+            <canvas id="scopeCanvas" width="1000" height="230"></canvas>
+        </div>
+
+        <!-- Dashboard de Contrôle -->
+        <div class="controls-card">
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Distance $d$ ($R_1 \rightarrow R_2$) : <span id="distVal">0.68 m</span></label>
+                    <input type="range" id="distSlider" min="0.17" max="1.02" step="0.17" value="0.68">
+                </div>
+
+                <div class="control-group">
+                    <label>Vitesse réelle $v_{\text{air}}$ : <span id="vAirVal">340 m/s</span></label>
+                    <input type="range" id="vAirSlider" min="320" max="360" step="5" value="340">
+                </div>
+
+                <div class="control-group">
+                    <label>Sensibilité Horizontale $S_H$ :</label>
+                    <select id="shSelect">
+                        <option value="0.5">0.5 ms / div</option>
+                        <option value="1.0">1.0 ms / div</option>
+                        <option value="0.2">0.2 ms / div</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Vitesse d'animation : <span id="animSpeedVal">Ralenti</span></label>
+                    <input type="range" id="animSpeedSlider" min="0.02" max="0.15" step="0.01" value="0.05">
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button class="btn-pulse" id="btnEmit">⚡ Émettre Salve Sonore (GBF)</button>
+                <button class="btn-reset" id="btnReset">🔄 Réinitialiser</button>
+            </div>
+
+            <!-- Option afficher solution détaillée -->
+            <label class="toggle-calc">
+                <input type="checkbox" id="calcToggle">
+                <span>Afficher la démonstration pas-à-pas (Style Examen BAC)</span>
+            </label>
+
+            <!-- Boîte de solution mathématique -->
+            <div class="math-box" id="mathBox">
+                <div class="math-title">📐 Démonstration officielle du BAC :</div>
+                <div class="math-step">
+                    • <b>1. Lecture du retard temporel $\tau$ sur l'oscilloscope :</b><br>
+                    $$\tau = (\text{Nombre de divisions}) \times S_H = <span class="math-num" id="m_divs">4.0</span> \text{ div} \times <span class="math-num" id="m_sh">0.5</span> \text{ ms/div} = \mathbf{<span class="math-num" id="m_tau">2.0</span> \text{ ms}} = \mathbf{<span class="math-num" id="m_tau_s">0.0020</span> \text{ s}}$$
+                </div>
+                <div class="math-step">
+                    • <b>2. Calcul de la vitesse du son $v_{\text{air}}$ :</b><br>
+                    Le son parcourt la distance $d$ entre $R_1$ et $R_2$ avec le retard $\tau$ :<br>
+                    $$v_{\text{air}} = \frac{d}{\tau} = \frac{<span class="math-num" id="m_d">0.68</span> \text{ m}}{<span class="math-num" id="m_tau_calc">0.0020</span> \text{ s}} = \mathbf{<span class="math-num" id="m_v_calc">340</span> \text{ m/s}}$$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const expCanvas = document.getElementById('expCanvas');
+        const ctxExp = expCanvas.getContext('2d');
+
+        const scopeCanvas = document.getElementById('scopeCanvas');
+        const ctxScope = scopeCanvas.getContext('2d');
+
+        // UI Controls
+        const distSlider = document.getElementById('distSlider');
+        const vAirSlider = document.getElementById('vAirSlider');
+        const shSelect = document.getElementById('shSelect');
+        const animSpeedSlider = document.getElementById('animSpeedSlider');
+
+        const btnEmit = document.getElementById('btnEmit');
+        const btnReset = document.getElementById('btnReset');
+        const calcToggle = document.getElementById('calcToggle');
+        const mathBox = document.getElementById('mathBox');
+
+        // Paramètres Physiques
+        let distanceD = parseFloat(distSlider.value); // m
+        let vAir = parseFloat(vAirSlider.value); // m/s
+        let sH = parseFloat(shSelect.value); // ms/div
+        let animSpeedFactor = parseFloat(animSpeedSlider.value); // Facteur de ralenti
+
+        // Variables d'Animation Ralentie
+        let isSimulating = false;
+        let simTime = 0; // ms virtuels
+
+        // Positions géométriques (Expérience)
+        const speakerX = 220;
+        const speakerY = 160;
+        const r1X = 400; // Position fixe de R1
+        const scalePxPerMeter = 300; // 1m = 300px
+
+        // Événements UI
+        distSlider.oninput = () => { distanceD = parseFloat(distSlider.value); document.getElementById('distVal').innerText = distanceD.toFixed(2) + " m"; updateMath(); };
+        vAirSlider.oninput = () => { vAir = parseFloat(vAirSlider.value); document.getElementById('vAirVal').innerText = vAir.toFixed(0) + " m/s"; updateMath(); };
+        shSelect.onchange = () => { sH = parseFloat(shSelect.value); updateMath(); };
+        animSpeedSlider.oninput = () => { animSpeedFactor = parseFloat(animSpeedSlider.value); };
+
+        calcToggle.onchange = () => {
+            mathBox.style.display = calcToggle.checked ? 'block' : 'none';
+        };
+
+        btnEmit.onclick = () => {
+            simTime = 0;
+            isSimulating = true;
+        };
+
+        btnReset.onclick = () => {
+            simTime = 0;
+            isSimulating = false;
+            drawExperiment();
+            drawScope();
+        };
+
+        function getTauMs() {
+            // tau = d / v en ms
+            return (distanceD / vAir) * 1000;
+        }
+
+        function updateMath() {
+            let tauMs = getTauMs();
+            let tauS = tauMs / 1000;
+            let divs = tauMs / sH;
+
+            document.getElementById('m_divs').innerText = divs.toFixed(1);
+            document.getElementById('m_sh').innerText = sH.toFixed(1);
+            document.getElementById('m_tau').innerText = tauMs.toFixed(2);
+            document.getElementById('m_tau_s').innerText = tauS.toFixed(4);
+            document.getElementById('m_d').innerText = distanceD.toFixed(2);
+            document.getElementById('m_tau_calc').innerText = tauS.toFixed(4);
+            document.getElementById('m_v_calc').innerText = vAir.toFixed(0);
+        }
+
+        // ==============================================================================
+        // DESSIN DU DISPOSITIF EXPÉRIMENTAL (Figure 3 - Haut)
+        // ==============================================================================
+        function drawExperiment() {
+            ctxExp.clearRect(0, 0, expCanvas.width, expCanvas.height);
+
+            // Position de R2 variable selon d
+            let r2X = r1X + distanceD * scalePxPerMeter;
+
+            // 1. Titre Figure 3
+            ctxExp.fillStyle = '#0f172a';
+            ctxExp.font = 'bold 18px Outfit';
+            ctxExp.fillText('Figure 3', 460, 30);
+
+            // 2. Générateur GBF (Haut Gauche)
+            drawGBF(ctxExp, 50, 40);
+
+            // 3. Haut-Parleur
+            drawLoudspeaker(ctxExp, speakerX - 60, speakerY);
+
+            // Câble rouge du GBF au Haut-parleur
+            ctxExp.strokeStyle = '#e11d48';
+            ctxExp.lineWidth = 3;
+            ctxExp.beginPath();
+            ctxExp.moveTo(140, 115);
+            ctxExp.bezierCurveTo(140, 160, 150, 170, speakerX - 60, speakerY + 10);
+            ctxExp.stroke();
+
+            // 4. Microphones R1 et R2
+            drawMicrophone(ctxExp, r1X, speakerY - 25, "R₁", "#e11d48"); // Rouge -> Voie A
+            drawMicrophone(ctxExp, r2X, speakerY + 35, "R₂", "#10b981"); // Vert -> Voie B
+
+            // Câbles des micros vers la droite (vers oscilloscope)
+            ctxExp.strokeStyle = '#e11d48';
+            ctxExp.lineWidth = 2.5;
+            ctxExp.beginPath();
+            ctxExp.moveTo(r1X + 55, speakerY - 25);
+            ctxExp.lineTo(920, speakerY - 25);
+            ctxExp.lineTo(920, 300);
+            ctxExp.stroke();
+
+            ctxExp.strokeStyle = '#10b981';
+            ctxExp.beginPath();
+            ctxExp.moveTo(r2X + 55, speakerY + 35);
+            ctxExp.lineTo(940, speakerY + 35);
+            ctxExp.lineTo(940, 300);
+            ctxExp.stroke();
+
+            // 5. Flèche de cote pour la distance d entre R1 et R2
+            drawDimensionArrow(ctxExp, r1X, speakerY + 10, r2X, speakerY + 10, `d = ${distanceD.toFixed(2)}m`);
+
+            // 6. ANIMATION DES SALVES D'ONDES SONORES DANS L'AIR
+            let tR1_ms = ((r1X - speakerX) / scalePxPerMeter / vAir) * 1000;
+            let tR2_ms = tR1_ms + getTauMs();
+
+            if (isSimulating) {
+                // Progression de l'onde dans l'espace
+                let distTraveledMeter = (vAir * (simTime / 1000));
+                let waveFrontX = speakerX + distTraveledMeter * scalePxPerMeter;
+
+                if (waveFrontX < expCanvas.width - 20) {
+                    drawSoundBurstWave(ctxExp, waveFrontX, speakerY);
+                }
+            } else {
+                // Arcs statiques indicatifs
+                ctxExp.strokeStyle = 'rgba(2, 132, 199, 0.35)';
+                ctxExp.lineWidth = 2;
+                for (let r = 20; r <= 60; r += 15) {
+                    ctxExp.beginPath();
+                    ctxExp.arc(speakerX + 10, speakerY, r, -Math.PI / 3, Math.PI / 3);
+                    ctxExp.stroke();
+                }
+            }
+        }
+
+        // ==============================================================================
+        // DESSIN DE L'OSCILLOSCOPE (Partie Basse)
+        // ==============================================================================
+        function drawScope() {
+            ctxScope.clearRect(0, 0, scopeCanvas.width, scopeCanvas.height);
+
+            let gridX0 = 60;
+            let gridY0 = 20;
+            let gridW = 880;
+            let gridH = 180;
+            let numDivsX = 11;
+            let numDivsY = 6;
+
+            let divW = gridW / numDivsX;
+            let divH = gridH / numDivsY;
+
+            // 1. Grille d'oscilloscope claire
+            ctxScope.strokeStyle = '#cbd5e1';
+            ctxScope.lineWidth = 1;
+
+            for (let i = 0; i <= numDivsX; i++) {
+                let x = gridX0 + i * divW;
+                ctxScope.beginPath(); ctxScope.moveTo(x, gridY0); ctxScope.lineTo(x, gridY0 + gridH); ctxScope.stroke();
+            }
+            for (let j = 0; j <= numDivsY; j++) {
+                let y = gridY0 + j * divH;
+                ctxScope.beginPath(); ctxScope.moveTo(gridX0, y); ctxScope.lineTo(gridX0 + gridW, y); ctxScope.stroke();
+            }
+
+            // Contour
+            ctxScope.strokeStyle = '#475569';
+            ctxScope.lineWidth = 2;
+            ctxScope.strokeRect(gridX0, gridY0, gridW, gridH);
+
+            // Axes de zéro (Lignes horizontales des Voies A et B)
+            let yAxisA = gridY0 + 2 * divH;
+            let yAxisB = gridY0 + 4.5 * divH;
+
+            ctxScope.strokeStyle = 'rgba(225, 29, 72, 0.4)';
+            ctxScope.lineWidth = 1.5;
+            ctxScope.beginPath(); ctxScope.moveTo(gridX0, yAxisA); ctxScope.lineTo(gridX0 + gridW, yAxisA); ctxScope.stroke();
+
+            ctxScope.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+            ctxScope.lineWidth = 1.5;
+            ctxScope.beginPath(); ctxScope.moveTo(gridX0, yAxisB); ctxScope.lineTo(gridX0 + gridW, yAxisB); ctxScope.stroke();
+
+            // Labels Voie A et Voie B
+            ctxScope.fillStyle = '#e11d48';
+            ctxScope.font = 'bold 14px Outfit';
+            ctxScope.fillText('Voie A (R₁)', gridX0 + gridW - 90, yAxisA - 15);
+
+            ctxScope.fillStyle = '#10b981';
+            ctxScope.fillText('Voie B (R₂)', gridX0 + gridW - 90, yAxisB - 15);
+
+            // 2. Calcul du Retard en Divisions
+            let tauMs = getTauMs();
+            let divsOffset = tauMs / sH;
+
+            let startDivA = 2.5; // Arrivée sur R1 fixée à 2.5 div
+            let startDivB = startDivA + divsOffset;
+
+            let xBurstA = gridX0 + startDivA * divW;
+            let xBurstB = gridX0 + startDivB * divW;
+
+            // Temps virtuels d'arrivée aux micros
+            let tR1_ms = ((r1X - speakerX) / scalePxPerMeter / vAir) * 1000;
+            let tR2_ms = tR1_ms + tauMs;
+
+            // Dessin Salve Voie A (Déclenchée au passage du son sur R1)
+            if (simTime >= tR1_ms || !isSimulating) {
+                drawSineBurstTrace(ctxScope, xBurstA, yAxisA, '#e11d48');
+            }
+
+            // Dessin Salve Voie B (Déclenchée au passage du son sur R2)
+            if (simTime >= tR2_ms || !isSimulating) {
+                drawSineBurstTrace(ctxScope, xBurstB, yAxisB, '#10b981');
+            }
+
+            // 3. Flèche de mesure de τ entre Voie A et Voie B
+            if (simTime >= tR2_ms || !isSimulating) {
+                let arrowY = gridY0 + 3.25 * divH;
+                ctxScope.strokeStyle = '#0f172a';
+                ctxScope.lineWidth = 2;
+
+                drawArrowLine(ctxScope, xBurstA, arrowY, xBurstB, arrowY);
+
+                // Etiquette τ
+                ctxScope.fillStyle = '#0f172a';
+                ctxScope.font = '800 14px "JetBrains Mono", monospace';
+                let midX = (xBurstA + xBurstB) / 2;
+                ctxScope.fillText(`τ = ${tauMs.toFixed(1)} ms (${divsOffset.toFixed(1)} div)`, midX - 45, arrowY - 8);
+            }
+        }
+
+        // Trace d'une Salve d'Onde Sinusoïdale sur l'Oscilloscope
+        function drawSineBurstTrace(context, x0, y0, color) {
+            let burstWidth = 110;
+            let amp = 22;
+
+            context.shadowColor = color;
+            context.shadowBlur = 5;
+
+            context.strokeStyle = color;
+            context.lineWidth = 2.5;
+            context.beginPath();
+
+            context.moveTo(x0 - 30, y0);
+            context.lineTo(x0, y0);
+
+            // Salve sinusoïdale haute fréquence
+            for (let px = 0; px <= burstWidth; px += 2) {
+                let angle = (px / burstWidth) * Math.PI * 16;
+                let env = Math.sin((px / burstWidth) * Math.PI); // Enveloppe fluide
+                let y = y0 - Math.sin(angle) * amp * env;
+                context.lineTo(x0 + px, y);
+            }
+
+            context.lineTo(x0 + burstWidth + 30, y0);
+            context.stroke();
+
+            context.shadowBlur = 0; // Reset
+        }
+
+        // Dessin du GBF (Générateur)
+        function drawGBF(context, x, y) {
+            context.fillStyle = '#fef3c7';
+            context.strokeStyle = '#d97706';
+            context.lineWidth = 2;
+            context.roundRect(x, y, 110, 75, 8);
+            context.fill();
+            context.stroke();
+
+            // Écran Digital GBF
+            context.fillStyle = '#0f172a';
+            context.fillRect(x + 10, y + 12, 90, 24);
+            context.fillStyle = '#22c55e';
+            context.font = '800 12px "JetBrains Mono", monospace';
+            context.fillText('2.500 kHz', x + 18, y + 28);
+
+            // Boutons GBF
+            context.fillStyle = '#b45309';
+            context.beginPath();
+            context.arc(x + 25, y + 55, 6, 0, Math.PI * 2);
+            context.arc(x + 55, y + 55, 6, 0, Math.PI * 2);
+            context.arc(x + 85, y + 55, 6, 0, Math.PI * 2);
+            context.fill();
+
+            // Label GBF
+            context.fillStyle = '#0f172a';
+            context.font = '800 14px Outfit';
+            context.fillText('GBF', x + 125, y + 25);
+        }
+
+        // Dessin du Haut-Parleur
+        function drawLoudspeaker(context, x, y) {
+            // Aimant arrière
+            context.fillStyle = '#475569';
+            context.fillRect(x - 20, y - 20, 20, 40);
+
+            // Cône HP
+            context.fillStyle = '#1e293b';
+            context.beginPath();
+            context.moveTo(x, y - 20);
+            context.lineTo(x + 35, y - 45);
+            context.lineTo(x + 35, y + 45);
+            context.lineTo(x, y + 20);
+            context.closePath();
+            context.fill();
+
+            // Contour rouge
+            context.strokeStyle = '#e11d48';
+            context.lineWidth = 3;
+            context.beginPath();
+            context.moveTo(x + 35, y - 45);
+            context.lineTo(x + 35, y + 45);
+            context.stroke();
+        }
+
+        // Dessin d'un Microphone
+        function drawMicrophone(context, x, y, label, color) {
+            // Corps du micro
+            context.fillStyle = '#334155';
+            context.fillRect(x + 15, y - 5, 40, 10);
+
+            // Tête du micro
+            context.fillStyle = '#94a3b8';
+            context.beginPath();
+            context.arc(x + 10, y, 10, 0, Math.PI * 2);
+            context.fill();
+            context.strokeStyle = '#1e293b';
+            context.lineWidth = 1.5;
+            context.stroke();
+
+            // Label R1 / R2
+            context.fillStyle = color;
+            context.font = '800 16px Outfit';
+            context.fillText(label, x + 5, y - 16);
+        }
+
+        // Flèche de cote d
+        function drawDimensionArrow(context, x1, y, x2, yText, text) {
+            context.strokeStyle = '#0f172a';
+            context.lineWidth = 1.8;
+
+            // Lignes verticales de repère
+            context.setLineDash([3, 3]);
+            context.beginPath();
+            context.moveTo(x1, y - 35); context.lineTo(x1, y + 5);
+            context.moveTo(x2, y + 25); context.lineTo(x2, y - 15);
+            context.stroke();
+            context.setLineDash([]);
+
+            // Ligne horizontale
+            context.beginPath();
+            context.moveTo(x1, y); context.lineTo(x2, y);
+            context.stroke();
+
+            // Tétons de flèche
+            context.beginPath();
+            context.moveTo(x1 + 7, y - 4); context.lineTo(x1, y); context.lineTo(x1 + 7, y + 4);
+            context.moveTo(x2 - 7, y - 4); context.lineTo(x2, y); context.lineTo(x2 - 7, y + 4);
+            context.stroke();
+
+            // Texte d
+            context.fillStyle = '#0f172a';
+            context.font = 'bold 15px Outfit';
+            let midX = (x1 + x2) / 2;
+            context.fillText(text, midX - 30, y + 20);
+        }
+
+        // Onde de Salve en mouvement
+        function drawSoundBurstWave(context, x, y) {
+            context.strokeStyle = '#0284c7';
+            context.lineWidth = 3;
+
+            for (let r = 10; r <= 35; r += 12) {
+                context.beginPath();
+                context.arc(x - r, y, r, -Math.PI / 3, Math.PI / 3);
+                context.stroke();
+            }
+        }
+
+        // Ligne avec double flèche
+        function drawArrowLine(context, fromx, y, tox, toy) {
+            context.beginPath(); context.moveTo(fromx, y); context.lineTo(tox, y); context.stroke();
+
+            context.beginPath(); context.moveTo(fromx + 8, y - 5); context.lineTo(fromx, y); context.lineTo(fromx + 8, y + 5); context.stroke();
+            context.beginPath(); context.moveTo(tox - 8, y - 5); context.lineTo(tox, y); context.lineTo(tox - 8, y + 5); context.stroke();
+        }
+
+        // Boucle Principale
+        function loop() {
+            let tauMs = getTauMs();
+            let tEnd_ms = ((r1X + distanceD * scalePxPerMeter - speakerX) / scalePxPerMeter / vAir) * 1000;
+
+            if (isSimulating) {
+                simTime += animSpeedFactor * 10;
+                if (simTime > tEnd_ms + 8) {
+                    isSimulating = false; // Fin de l'onde
+                }
+            }
+
+            drawExperiment();
+            drawScope();
+
+            requestAnimationFrame(loop);
+        }
+
+        // Démarrage initial
+        updateMath();
+        loop();
+    </script>
+</body>
+</html>

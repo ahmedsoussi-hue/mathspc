@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation - Onde Sonore Plane (Prof Mouhibi)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --tube-bg: #f8fafc;
+            --text-light: #f8fafc;
+            --accent-blue: #3b82f6;
+            --accent-red: #ef4444;
+            --accent-green: #10b981;
+            --border: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        header { text-align: center; margin-bottom: 20px; }
+        header h1 { font-size: 2.2rem; font-weight: 700; color: #fff; text-shadow: 0 2px 10px rgba(59, 130, 246, 0.5); }
+        header p { color: #94a3b8; font-size: 1.1rem; }
+
+        .app-container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Zone de simulation (Tube + Haut-parleur) */
+        .simulation-area {
+            background: var(--tube-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            border: 2px solid var(--border);
+        }
+
+        canvas#simCanvas {
+            display: block;
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            background: linear-gradient(to bottom, #ffffff, #f1f5f9, #ffffff);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Panneau de contrôle façon "Table de manipulation" */
+        .control-panel {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        .generator {
+            background: #2563eb;
+            border-radius: 12px;
+            padding: 15px;
+            border: 4px solid #1d4ed8;
+            box-shadow: inset 0 2px 10px rgba(255,255,255,0.2), 0 5px 15px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .generator-title {
+            text-align: center;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 5px;
+        }
+
+        .mode-tabs {
+            display: flex;
+            background: #1e3a8a;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .mode-tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #93c5fd;
+            transition: 0.3s;
+        }
+        .mode-tab.active { background: #3b82f6; color: white; }
+
+        .btn-go {
+            background: #ef4444;
+            color: white;
+            border: 3px solid #b91c1c;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #991b1b;
+            transition: all 0.1s;
+        }
+        .btn-go:active { transform: translateY(4px); box-shadow: 0 0 0 #991b1b; }
+
+        .actions {
+            background: var(--panel-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .action-btn {
+            background: #334155;
+            color: white;
+            border: 1px solid #475569;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-btn:hover { background: #475569; }
+        .action-btn.active { background: var(--accent-blue); border-color: #60a5fa; }
+
+        /* Oscilloscope */
+        .oscilloscope {
+            display: none;
+            background: #020617;
+            border: 3px solid #334155;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .oscilloscope.visible { display: block; }
+        canvas#oscCanvas {
+            width: 100%;
+            height: 150px;
+            background: #020617;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .osc-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .legend-m1 { color: #ef4444; font-weight: bold; }
+        .legend-m2 { color: #3b82f6; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Propagation d'une onde sonore plane</h1>
+        <p>Simulation dynamique - Prof Mouhibi</p>
+    </header>
+
+    <div class="app-container">
+        
+        <!-- Zone de simulation visuelle -->
+        <div class="simulation-area">
+            <canvas id="simCanvas" width="1050" height="300"></canvas>
+        </div>
+
+        <!-- Panneau de commandes -->
+        <div class="control-panel">
+            <!-- GBF Virtuel -->
+            <div class="generator">
+                <div class="generator-title">Générateur B.F.</div>
+                <div class="mode-tabs">
+                    <div class="mode-tab active" id="tab-pulse">Impulsion</div>
+                    <div class="mode-tab" id="tab-sine">Sinusoïdal</div>
+                </div>
+                <button class="btn-go" id="btn-go">GO !</button>
+            </div>
+
+            <!-- Actions Pédagogiques -->
+            <div class="actions">
+                <button class="action-btn" id="btn-pause">⏸️ Arrêt sur image</button>
+                <button class="action-btn" id="btn-markers">🔴 Afficher Repères de matière</button>
+                <button class="action-btn" id="btn-mics">🎤 Affichage Oscilloscope</button>
+                
+                <div style="width: 100%; text-align: center; color: #94a3b8; font-size: 0.9rem; margin-top: 10px;">
+                    Vitesse: <input type="range" id="speed-slider" min="1" max="5" value="3" style="vertical-align: middle; margin: 0 10px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Oscilloscope (Caché par défaut) -->
+        <div class="oscilloscope" id="oscilloscope">
+            <canvas id="oscCanvas" width="1050" height="150"></canvas>
+            <div class="osc-legend">
+                <span class="legend-m1">■ Microphone M1</span>
+                <span class="legend-m2">■ Microphone M2</span>
+                <span style="color: #64748b; margin-left: 20px;">Le décalage visuel correspond au retard temporel τ</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const simCanvas = document.getElementById('simCanvas');
+        const simCtx = simCanvas.getContext('2d');
+        const oscCanvas = document.getElementById('oscCanvas');
+        const oscCtx = oscCanvas.getContext('2d');
+
+        // Éléments UI
+        const tabPulse = document.getElementById('tab-pulse');
+        const tabSine = document.getElementById('tab-sine');
+        const btnGo = document.getElementById('btn-go');
+        const btnPause = document.getElementById('btn-pause');
+        const btnMarkers = document.getElementById('btn-markers');
+        const btnMics = document.getElementById('btn-mics');
+        const oscDiv = document.getElementById('oscilloscope');
+        const speedSlider = document.getElementById('speed-slider');
+
+        // Paramètres physiques
+        let mode = 'pulse'; // 'pulse' ou 'sine'
+        let isRunning = false;
+        let time = 0;
+        let dt = 0.05;
+        let waveSpeed = parseFloat(speedSlider.value);
+        let amplitude = 15; // Déplacement maximal des molécules
+        let frequency = 0.3; // Pour le mode sinusoïdal
+
+        // Variables des molécules d'air
+        const particles = [];
+        const cols = 45; // Nombre de colonnes
+        const rows = 9;  // Nombre de lignes
+        const startX = 150; // Position de début du tube
+        const spacingX = 18;
+        const spacingY = 22;
+        const tubeCenterY = simCanvas.height / 2;
+
+        // Variables pédagogiques
+        let showMarkers = false;
+        let showMics = false;
+        let markerCol = 15; // On colorera la 15eme colonne
+
+        // Positions des Micros
+        const mic1_X = startX + 10 * spacingX;
+        const mic2_X = startX + 25 * spacingX;
+        let oscDataM1 = [];
+        let oscDataM2 = [];
+
+        // Initialisation de la grille de particules
+        function initParticles() {
+            particles.length = 0;
+            let startY = tubeCenterY - (rows * spacingY) / 2 + spacingY / 2;
+            
+            for (let c = 0; c < cols; c++) {
+                for (let r = 0; r < rows; r++) {
+                    // Ajout d'un très léger désordre aléatoire pour un aspect gazeux plus réaliste
+                    let noiseX = (Math.random() - 0.5) * 4;
+                    let noiseY = (Math.random() - 0.5) * 4;
+                    particles.push({
+                        baseX: startX + c * spacingX + noiseX,
+                        baseY: startY + r * spacingY + noiseY,
+                        col: c
+                    });
+                }
+            }
+        }
+
+        // Calcul du déplacement d'une molécule à une position baseX et un instant t
+        function getDisplacement(x, t) {
+            let xFromSource = x - startX;
+            if (xFromSource < 0) return 0;
+
+            if (mode === 'pulse') {
+                let waveFront = waveSpeed * 10 * t; 
+                let dist = waveFront - xFromSource;
+                let wavelength = 150; // Longueur de l'impulsion
+                
+                if (dist > 0 && dist < wavelength) {
+                    // Dérivée de Gaussienne ou cycle sinus unique pour une onde sonore 
+                    // (Pousse la matière en avant, puis la ramène en arrière)
+                    return amplitude * Math.sin(2 * Math.PI * dist / wavelength);
+                }
+                return 0;
+            } else {
+                let waveFront = waveSpeed * 10 * t;
+                if (xFromSource > waveFront) return 0;
+                let k = (2 * Math.PI * frequency) / (waveSpeed * 10);
+                let w = 2 * Math.PI * frequency;
+                return amplitude * Math.cos(w * t - k * xFromSource);
+            }
+        }
+
+        // Dessin du Haut-Parleur 
+        function drawSpeaker(membraneDisplacement) {
+            const spkX = 30;
+            
+            // Aimant (Arrière)
+            simCtx.fillStyle = '#64748b';
+            simCtx.fillRect(spkX, tubeCenterY - 40, 30, 80);
+            
+            // Contour du cône
+            simCtx.beginPath();
+            simCtx.moveTo(spkX + 30, tubeCenterY - 30);
+            simCtx.lineTo(spkX + 80, tubeCenterY - 90);
+            simCtx.lineTo(spkX + 80, tubeCenterY + 90);
+            simCtx.lineTo(spkX + 30, tubeCenterY + 30);
+            simCtx.fillStyle = '#334155';
+            simCtx.fill();
+            simCtx.stroke();
+
+            // Membrane vibrante (Rouge)
+            let mX = spkX + 80 + membraneDisplacement;
+            simCtx.beginPath();
+            simCtx.moveTo(spkX + 30, tubeCenterY - 30);
+            simCtx.lineTo(mX, tubeCenterY - 90);
+            simCtx.lineTo(mX, tubeCenterY + 90);
+            simCtx.lineTo(spkX + 30, tubeCenterY + 30);
+            simCtx.lineWidth = 4;
+            simCtx.strokeStyle = '#ef4444';
+            simCtx.stroke();
+
+            // Fils électriques
+            simCtx.beginPath();
+            simCtx.moveTo(spkX + 15, tubeCenterY + 40);
+            simCtx.quadraticCurveTo(spkX, tubeCenterY + 120, spkX + 50, simCanvas.height);
+            simCtx.strokeStyle = '#ef4444'; simCtx.lineWidth = 2; simCtx.stroke();
+            simCtx.beginPath();
+            simCtx.moveTo(spkX + 25, tubeCenterY + 40);
+            simCtx.quadraticCurveTo(spkX+10, tubeCenterY + 120, spkX + 60, simCanvas.height);
+            simCtx.strokeStyle = '#000000'; simCtx.stroke();
+        }
+
+        // Dessin des Micros
+        function drawMicrophone(x, label, color) {
+            simCtx.fillStyle = '#1e293b';
+            simCtx.fillRect(x - 5, tubeCenterY + 110, 10, 40); // Pied
+            simCtx.fillStyle = color;
+            simCtx.beginPath();
+            simCtx.roundRect(x - 12, tubeCenterY + 80, 24, 30, 5); // Tête
+            simCtx.fill();
+            simCtx.fillStyle = 'white';
+            simCtx.font = '12px Poppins';
+            simCtx.fillText(label, x - 9, tubeCenterY + 100);
+        }
+
+        // Trace le signal sur l'oscilloscope
+        function drawOscilloscope() {
+            oscCtx.clearRect(0, 0, oscCanvas.width, oscCanvas.height);
+            let centerY = oscCanvas.height / 2;
+
+            // Axe central
+            oscCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+            oscCtx.lineWidth = 1;
+            oscCtx.beginPath(); oscCtx.moveTo(0, centerY); oscCtx.lineTo(oscCanvas.width, centerY); oscCtx.stroke();
+
+            function plotSignal(data, color) {
+                oscCtx.beginPath();
+                oscCtx.strokeStyle = color;
+                oscCtx.lineWidth = 2;
+                for (let i = 0; i < data.length; i++) {
+                    let x = oscCanvas.width - (data.length - i); // Défilement vers la gauche
+                    let y = centerY - data[i] * 3; // Amplification visuelle
+                    if (i === 0) oscCtx.moveTo(x, y);
+                    else oscCtx.lineTo(x, y);
+                }
+                oscCtx.stroke();
+            }
+
+            plotSignal(oscDataM1, '#ef4444');
+            plotSignal(oscDataM2, '#3b82f6');
+        }
+
+        // Boucle d'animation principale
+        function animate() {
+            simCtx.clearRect(0, 0, simCanvas.width, simCanvas.height);
+
+            // Mise à jour de la vitesse via le slider
+            waveSpeed = parseFloat(speedSlider.value);
+
+            // 1. Dessin des bords du tube
+            simCtx.strokeStyle = '#3b82f6';
+            simCtx.lineWidth = 3;
+            simCtx.beginPath();
+            simCtx.moveTo(startX, tubeCenterY - 110); simCtx.lineTo(simCanvas.width, tubeCenterY - 110);
+            simCtx.moveTo(startX, tubeCenterY + 110); simCtx.lineTo(simCanvas.width, tubeCenterY + 110);
+            simCtx.stroke();
+
+            // 2. Dessin des molécules d'air
+            simCtx.fillStyle = '#0f172a';
+            particles.forEach(p => {
+                let dx = getDisplacement(p.baseX, time);
+                let currentX = p.baseX + dx;
+
+                simCtx.beginPath();
+                simCtx.arc(currentX, p.baseY, 2.5, 0, Math.PI * 2);
+                
+                // Coloration du repère pédagogique
+                if (showMarkers && p.col === markerCol) {
+                    simCtx.fillStyle = '#ef4444';
+                    simCtx.fill();
+                    simCtx.fillStyle = '#0f172a'; // Retour au noir pour les autres
+                } else {
+                    simCtx.fill();
+                }
+            });
+
+            // Ligne de repère vertical pour visualiser l'oscillation sans avancement
+            if (showMarkers) {
+                simCtx.strokeStyle = 'rgba(239, 68, 68, 0.3)';
+                simCtx.lineWidth = 2;
+                simCtx.setLineDash([5, 5]);
+                simCtx.beginPath();
+                let refX = startX + markerCol * spacingX;
+                simCtx.moveTo(refX, tubeCenterY - 110);
+                simCtx.lineTo(refX, tubeCenterY + 110);
+                simCtx.stroke();
+                simCtx.setLineDash([]);
+            }
+
+            // 3. Dessin du haut-parleur
+            let speakerDx = getDisplacement(startX, time);
+            drawSpeaker(speakerDx);
+
+            // 4. Traitement des Micros et de l'Oscilloscope
+            if (showMics) {
+                drawMicrophone(mic1_X, "M1", '#ef4444');
+                drawMicrophone(mic2_X, "M2", '#3b82f6');
+                
+                if (isRunning) {
+                    // Enregistrement des données (Pression/Déplacement)
+                    oscDataM1.push(getDisplacement(mic1_X, time));
+                    oscDataM2.push(getDisplacement(mic2_X, time));
+                    
+                    // Limiter la taille du tableau à la largeur du canvas
+                    if (oscDataM1.length > oscCanvas.width) oscDataM1.shift();
+                    if (oscDataM2.length > oscCanvas.width) oscDataM2.shift();
+                }
+                drawOscilloscope();
+            }
+
+            if (isRunning) time += dt;
+            requestAnimationFrame(animate);
+        }
+
+        // --- GESTION DES BOUTONS ---
+
+        tabPulse.addEventListener('click', () => { mode = 'pulse'; tabPulse.classList.add('active'); tabSine.classList.remove('active'); reset(); });
+        tabSine.addEventListener('click', () => { mode = 'sine'; tabSine.classList.add('active'); tabPulse.classList.remove('active'); reset(); });
+
+        btnGo.addEventListener('click', () => {
+            reset();
+            isRunning = true;
+            btnPause.innerHTML = "⏸️ Arrêt sur image";
+            btnPause.classList.remove('active');
+        });
+
+        btnPause.addEventListener('click', () => {
+            isRunning = !isRunning;
+            btnPause.classList.toggle('active');
+            btnPause.innerHTML = isRunning ? "⏸️ Arrêt sur image" : "▶️ Reprendre";
+        });
+
+        btnMarkers.addEventListener('click', () => {
+            showMarkers = !showMarkers;
+            btnMarkers.classList.toggle('active');
+            btnMarkers.innerHTML = showMarkers ? "⭕ Masquer Repères" : "🔴 Afficher Repères de matière";
+        });
+
+        btnMics.addEventListener('click', () => {
+            showMics = !showMics;
+            btnMics.classList.toggle('active');
+            oscDiv.classList.toggle('visible');
+        });
+
+        function reset() {
+            time = 0;
+            oscDataM1 = [];
+            oscDataM2 = [];
+            isRunning = false;
+        }
+
+        // Initialisation
+        initParticles();
+        requestAnimationFrame(animate);
+
+    </script>
+</body>
+</html>
