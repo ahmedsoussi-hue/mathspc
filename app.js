@@ -3309,7 +3309,7 @@ const chaptersData = [
                     <div>
                         <h4 style="margin: 0; color: #38bdf8; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#38bdf8;"><path d="M2 12h2.5L7 4l4 16 4-12 2.5 8H22"/></svg>
-                            4. Simulations & Laboratoires Virtuels Interactifs (Prof Mouhibi)
+                            4. Simulations & Laboratoires Virtuels Interactifs
                         </h4>
                         <p style="margin: 4px 0 0 0; color: #94a3b8; font-size: 0.84rem;">Explorez les 12 simulations interactives conçues pour ce cours.</p>
                     </div>
@@ -7315,7 +7315,7 @@ function initCanvasFor(type) {
     }
 }
 
-// 0. Ondes Mécaniques Progressives Interactive Suite Simulator Engine (Prof Mouhibi)
+// 0. Ondes Mécaniques Progressives Interactive Suite Simulator Engine
 const ondesMecaniquesSimMap = {
     "onde-transversale": {
         file: "onde-transversale.html",
