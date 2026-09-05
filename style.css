@@ -4120,66 +4120,106 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     /* Navbar & Mobile Header */
-    .navbar {
-        padding: 10px 14px !important;
-    }
-    .nav-container {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .nav-links {
-        display: flex;
-        overflow-x: auto;
-        white-space: nowrap;
-        width: 100%;
-        padding-bottom: 6px;
-        -webkit-overflow-scrolling: touch;
-        gap: 8px;
-    }
-    .nav-link {
-        padding: 6px 12px;
-        font-size: 0.82rem;
+    .header-container {
+        padding: 10px 16px !important;
+        position: relative !important;
     }
 
-    /* Mobile Dropdown Menu Positioning & Visibility */
+    .mobile-menu-btn {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        cursor: pointer;
+        font-size: 1.25rem;
+    }
+
+    .nav-links {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: rgba(6, 78, 59, 0.98) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4) !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 0 16px !important;
+        max-height: 0 !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+        pointer-events: none !important;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease !important;
+        gap: 6px !important;
+        z-index: 1000 !important;
+        white-space: normal !important;
+    }
+
+    .main-header.mobile-menu-open .nav-links {
+        max-height: 85vh !important;
+        opacity: 1 !important;
+        overflow-y: auto !important;
+        pointer-events: auto !important;
+        padding: 14px 16px 20px 16px !important;
+    }
+
+    .nav-link {
+        padding: 12px 16px !important;
+        font-size: 0.95rem !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+        color: #ffffff !important;
+    }
+
+    /* Mobile Dropdown Menu */
     .nav-dropdown {
+        width: 100% !important;
         position: static !important;
     }
-    .dropdown-menu {
-        position: fixed !important;
-        top: 65px !important;
-        left: 5vw !important;
-        width: 90vw !important;
-        min-width: 0 !important;
-        transform: none !important;
-        background: #0f172a !important;
-        border: 1.5px solid rgba(16, 185, 129, 0.4) !important;
-        border-radius: 16px !important;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85) !important;
-        z-index: 10000 !important;
-        padding: 10px 6px !important;
+
+    .nav-dropdown .dropdown-toggle {
+        width: 100% !important;
+        justify-content: space-between !important;
     }
+
+    .nav-dropdown .dropdown-menu {
+        position: static !important;
+        display: none !important;
+        width: 100% !important;
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: none !important;
+        border-radius: 10px !important;
+        margin-top: 6px !important;
+        margin-bottom: 6px !important;
+        padding: 6px !important;
+        transform: none !important;
+    }
+
     .nav-dropdown.active .dropdown-menu {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        animation: fadeIn 0.2s ease !important;
     }
+
     .dropdown-item {
-        padding: 12px 18px !important;
-        font-size: 0.95rem !important;
-        font-weight: 600 !important;
-        color: #ffffff !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 11px 16px !important;
+        font-size: 0.9rem !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
         border-radius: 8px !important;
     }
+
     .dropdown-item:last-child {
         border-bottom: none !important;
-    }
-    .dropdown-item:hover,
-    .dropdown-item:active {
-        background: rgba(16, 185, 129, 0.2) !important;
-        color: #34d399 !important;
     }
 
     /* Grids & Cards */
@@ -4833,4 +4873,334 @@ h1, h2, h3, h4, h5, h6 {
 .ondes-meca-sims-showcase:hover {
     border-color: rgba(56, 189, 248, 0.5);
 }
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE & PHONE RESPONSIVE ADAPTATIONS (RECENT FEATURES)
+   Optimized for iOS, Android, and tablets (<= 768px & <= 480px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    /* 1. Header & Navigation Actions */
+    .header-container {
+        padding: 8px 12px !important;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 1.1rem !important;
+        gap: 6px !important;
+    }
+
+    .logo-icon {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 6px !important;
+    }
+
+    .header-actions {
+        gap: 6px !important;
+    }
+
+    .btn-auth-header {
+        padding: 6px 12px !important;
+        font-size: 0.8rem !important;
+        border-radius: 20px !important;
+        white-space: nowrap;
+    }
+
+    #userProfileBtn {
+        padding: 6px 8px !important;
+        border-radius: 8px !important;
+    }
+
+    #userProfileBtn .user-name {
+        display: none !important;
+    }
+
+    .user-account-dropdown {
+        right: 0 !important;
+        left: auto !important;
+        width: 270px !important;
+        max-width: calc(100vw - 24px) !important;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7) !important;
+        z-index: 10001 !important;
+    }
+
+    /* 2. Authentication Modal (Login & Sign Up) */
+    .auth-modal-card {
+        width: 94vw !important;
+        max-width: 440px !important;
+        height: auto !important;
+        max-height: 92vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+        margin: auto !important;
+        border-radius: 18px !important;
+    }
+
+    .auth-modal-body {
+        padding: 18px 16px !important;
+    }
+
+    .auth-tabs {
+        padding: 0 16px 12px 16px !important;
+        gap: 6px !important;
+    }
+
+    .auth-tab-btn {
+        padding: 8px 10px !important;
+        font-size: 0.82rem !important;
+        min-height: 40px !important;
+    }
+
+    .auth-input-group input,
+    .auth-select {
+        font-size: 16px !important; /* Prevents auto-zoom on iOS */
+        padding: 10px 12px !important;
+        min-height: 42px !important;
+    }
+
+    .btn-auth-submit {
+        min-height: 46px !important;
+        font-size: 0.95rem !important;
+    }
+
+    .demo-accounts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .demo-acc-btn {
+        padding: 10px 12px !important;
+        min-height: 44px !important;
+    }
+
+    /* 3. Ondes Mécaniques Progressives Simulation Suite */
+    .ondes-meca-selector-container {
+        padding: 10px 12px !important;
+        border-radius: 12px !important;
+        margin-top: 8px !important;
+    }
+
+    .ondes-meca-tabs-grid {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        gap: 6px !important;
+        padding-bottom: 8px !important;
+    }
+
+    .ondes-tab-btn {
+        flex-shrink: 0 !important;
+        white-space: nowrap !important;
+        padding: 8px 12px !important;
+        font-size: 0.78rem !important;
+        border-radius: 20px !important;
+        min-height: 38px !important;
+        scroll-snap-align: start;
+    }
+
+    #iframe-ondes-mecaniques {
+        height: 520px !important;
+        border-radius: 12px !important;
+    }
+
+    .canvas-container:has(#iframe-ondes-mecaniques),
+    #anim-ondes-mecaniques .canvas-container {
+        min-height: auto !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* 4. Optical Simulators (Fresnel, Young, Fiber, Prism) */
+    .prism-hud-grid {
+        grid-template-columns: repeat(auto-fit, minmax(95px, 1fr)) !important;
+        gap: 6px !important;
+        margin: 6px 0 !important;
+    }
+
+    .prism-hud-card {
+        padding: 6px 4px !important;
+        border-radius: 8px !important;
+    }
+
+    .prism-hud-label {
+        font-size: 0.68rem !important;
+        line-height: 1.15 !important;
+    }
+
+    .prism-hud-value {
+        font-size: 0.82rem !important;
+    }
+
+    .workspace-controls {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        padding: 12px 10px !important;
+    }
+
+    .workspace-controls .control-group {
+        width: 100% !important;
+    }
+
+    .workspace-controls select,
+    .focometrie-select {
+        font-size: 16px !important;
+        width: 100% !important;
+        min-height: 42px !important;
+    }
+
+    .workspace-controls input[type="range"]::-webkit-slider-thumb {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .workspace-controls input[type="range"]::-moz-range-thumb {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .canvas-container canvas {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        touch-action: none !important;
+    }
+
+    /* 5. Examens Nationaux & Modals */
+    #examModal .modal-card {
+        width: 96vw !important;
+        height: 94vh !important;
+        margin: 3vh auto !important;
+        border-radius: 16px !important;
+    }
+
+    #examModal .modal-header {
+        padding: 12px 14px !important;
+    }
+
+    #examModal .modal-tabs {
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 6px 10px !important;
+        gap: 6px !important;
+    }
+
+    #examModal .modal-tab-btn {
+        padding: 8px 12px !important;
+        font-size: 0.8rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    #examModal .modal-body {
+        padding: 14px !important;
+    }
+
+    #examModal .modal-footer {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        padding: 12px 14px !important;
+    }
+
+    #examModal .modal-footer > div {
+        width: 100% !important;
+        display: flex !important;
+        gap: 8px !important;
+    }
+
+    #examModal .modal-footer .btn {
+        flex: 1 !important;
+        min-height: 42px !important;
+        justify-content: center !important;
+    }
+
+    /* 6. Profile / Contact Modal */
+    .profile-modal-card {
+        width: 94vw !important;
+        max-width: 440px !important;
+        height: auto !important;
+        max-height: 90vh !important;
+        border-radius: 16px !important;
+        margin: auto !important;
+    }
+
+    .profile-modal-body {
+        padding: 16px !important;
+        gap: 14px !important;
+    }
+
+    .instagram-profile-header {
+        gap: 14px !important;
+    }
+
+    .instagram-avatar-wrapper {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    /* 7. Gallery Toolbar & Filter Inputs */
+    .anim-gallery-toolbar {
+        padding: 12px 10px !important;
+        border-radius: 14px !important;
+    }
+
+    .anim-search-wrapper input {
+        font-size: 16px !important;
+    }
+
+    .anim-card-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    .filter-bar {
+        gap: 10px !important;
+    }
+
+    .filter-group {
+        flex: 1 1 calc(50% - 6px) !important;
+        min-width: 130px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 6px 10px !important;
+    }
+
+    .logo span {
+        font-size: 0.95rem !important;
+    }
+
+    .btn-auth-header {
+        padding: 5px 9px !important;
+        font-size: 0.75rem !important;
+    }
+
+    #iframe-ondes-mecaniques {
+        height: 470px !important;
+    }
+
+    .prism-hud-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .auth-options {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+
+    .filter-group {
+        flex: 1 1 100% !important;
+    }
+
+    .hero-search input {
+        font-size: 16px !important;
+    }
+}
+
 

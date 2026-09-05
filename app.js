@@ -23403,6 +23403,28 @@ function setupMiroirFresnelSimulator() {
         isDraggingScreen = false;
     };
 
+    canvas.addEventListener("touchstart", (e) => {
+        const pos = getCanvasCoords(e);
+        if (pos.x >= 650) {
+            isDraggingScreen = true;
+            cursorScreenY = Math.max(35, Math.min(435, pos.y));
+            updateCalculations();
+            if (e.cancelable) e.preventDefault();
+        }
+    }, { passive: false });
+
+    window.addEventListener("touchmove", (e) => {
+        if (!isDraggingScreen) return;
+        const pos = getCanvasCoords(e);
+        cursorScreenY = Math.max(35, Math.min(435, pos.y));
+        updateCalculations();
+        if (e.cancelable) e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener("touchend", () => {
+        isDraggingScreen = false;
+    });
+
     updateCalculations();
     requestAnimationFrame(updateCalculations);
 }
@@ -24449,6 +24471,46 @@ function setupPrismeOptiqueSimulator() {
         isDraggingScreen = false;
     };
 
+    canvas.addEventListener("touchstart", (e) => {
+        const pos = getCanvasCoords(e);
+        const screenX = Math.min(canvas.width - 25, 390 + 160 + screenDist);
+        if (Math.abs(pos.x - screenX) < 35) {
+            isDraggingScreen = true;
+            if (e.cancelable) e.preventDefault();
+        } else if (pos.x < 390) {
+            isDraggingRay = true;
+            if (e.cancelable) e.preventDefault();
+        }
+    }, { passive: false });
+
+    window.addEventListener("touchmove", (e) => {
+        if (!isDraggingRay && !isDraggingScreen) return;
+        if (e.cancelable) e.preventDefault();
+        const pos = getCanvasCoords(e);
+        if (isDraggingScreen) {
+            const newDist = Math.max(100, Math.min(380, pos.x - 550));
+            screenDist = newDist;
+            if (sliderScreen) sliderScreen.value = screenDist;
+            updateCalculations();
+        } else if (isDraggingRay) {
+            const P1 = { x: 390 - 240 * Math.tan(angleA * Math.PI / 360) * 0.52, y: 100 + 240 * 0.52 };
+            const dx = P1.x - pos.x;
+            const dy = P1.y - pos.y;
+            const angleMouse = Math.atan2(dy, dx);
+            const normInward = (angleA * Math.PI / 360);
+            let newI = (normInward - angleMouse) * 180 / Math.PI;
+            newI = Math.max(-75, Math.min(75, newI));
+            angleI = parseFloat(newI.toFixed(1));
+            if (sliderI) sliderI.value = angleI;
+            updateCalculations();
+        }
+    }, { passive: false });
+
+    window.addEventListener("touchend", () => {
+        isDraggingRay = false;
+        isDraggingScreen = false;
+    });
+
     updateCalculations();
     requestAnimationFrame(updateCalculations);
 }
@@ -25293,6 +25355,31 @@ function setupFibreOptiqueSimulator() {
         isDraggingTorch = false;
     };
 
+    canvas.addEventListener("touchstart", (e) => {
+        const pos = getCanvasCoords(e);
+        if (pos.x < 230) {
+            isDraggingTorch = true;
+            if (e.cancelable) e.preventDefault();
+        }
+    }, { passive: false });
+
+    window.addEventListener("touchmove", (e) => {
+        if (!isDraggingTorch) return;
+        if (e.cancelable) e.preventDefault();
+        const pos = getCanvasCoords(e);
+        const dx = 230 - pos.x;
+        const dy = 225 - pos.y;
+        let newAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+        newAngle = Math.max(-50, Math.min(50, newAngle));
+        theta0 = parseFloat(newAngle.toFixed(1));
+        if (sliderTheta) sliderTheta.value = theta0;
+        updateCalculations();
+    }, { passive: false });
+
+    window.addEventListener("touchend", () => {
+        isDraggingTorch = false;
+    });
+
     updateCalculations();
     requestAnimationFrame(updateCalculations);
 }
@@ -26057,6 +26144,28 @@ function setupTrousYoungSimulator() {
     window.onmouseup = () => {
         isDraggingScreen = false;
     };
+
+    canvas.addEventListener("touchstart", (e) => {
+        const pos = getCanvasCoords(e);
+        if (pos.x >= 700) {
+            isDraggingScreen = true;
+            cursorScreenY = Math.max(35, Math.min(435, pos.y));
+            updateCalculations();
+            if (e.cancelable) e.preventDefault();
+        }
+    }, { passive: false });
+
+    window.addEventListener("touchmove", (e) => {
+        if (!isDraggingScreen) return;
+        if (e.cancelable) e.preventDefault();
+        const pos = getCanvasCoords(e);
+        cursorScreenY = Math.max(35, Math.min(435, pos.y));
+        updateCalculations();
+    }, { passive: false });
+
+    window.addEventListener("touchend", () => {
+        isDraggingScreen = false;
+    });
 
     updateCalculations();
     requestAnimationFrame(updateCalculations);
