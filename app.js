@@ -3567,6 +3567,488 @@ const chaptersData = [
             { title: "Session Ordinaire 2024 - Sciences Physiques", type: "National", year: 2024 }
         ]
     },
+        // ==========================================
+    // 2ÈME BAC SCIENCES ÉCONOMIQUES & GESTION (2BAC ÉCO) - MATHÉMATIQUES
+    // ==========================================
+    {
+        id: "2bac-eco-math-limites-continuite",
+        title: "Limites, Continuité & Applications Économiques",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Analyse & Modélisation",
+        duration: "14 heures",
+        difficulty: "Intermédiaire",
+        progress: 0,
+        description: "Limites finies et infinies, calcul des formes indéterminées, continuité sur un intervalle, Théorème des Valeurs Intermédiaires (TVI) et calcul du point d'équilibre marché (offre et demande).",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Limites d'une Fonction Numérique & Formes Indéterminées</h3>
+                <p>Le calcul des limites permet d'analyser le comportement à long terme des grandeurs économiques (coûts asymptotiques, seuils de saturation, capacités maximales de production).</p>
+                <div class="formula-box">
+                    <h4>1. Les 4 Formes Indéterminées Fondamentales</h4>
+                    <p>$$\left[\frac{0}{0}\right], \quad \left[\frac{\infty}{\infty}\right], \quad [0 \times \infty], \quad [+\infty - \infty]$$</p>
+                    <p>Pour lever une indétermination : factorisation par le monôme de plus haut degré en $\pm\infty$, factorisation par $(x - a)$ en un point fini, ou multiplication par l'expression conjuguée $\sqrt{A} - \sqrt{B} = \frac{A - B}{\sqrt{A} + \sqrt{B}}$.</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Continuité & Théorème des Valeurs Intermédiaires (TVI)</h3>
+                <div class="tip-box">
+                    <strong>Définition :</strong> Une fonction $f$ est continue en $x_0$ si $\lim_{x \to x_0} f(x) = f(x_0)$. Elle est continue sur un intervalle $I$ si elle est continue en tout point de $I$. Les fonctions polynômes et rationnelles sont continues sur leurs ensembles de définition.
+                </div>
+                <div class="formula-box">
+                    <h4>Théorème des Valeurs Intermédiaires (TVI)</h4>
+                    <p>Si $f$ est une fonction <strong>continue</strong> sur un intervalle $[a, b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un réel $c \in [a, b]$ tel que :</p>
+                    <p>$$f(c) = k$$</p>
+                    <p><strong>Corollaire d'Unicité (Bijection) :</strong> Si de plus $f$ est <strong>strictement monotone</strong> sur $[a, b]$, alors l'équation $f(x) = k$ admet une <strong>unique solution</strong> $\alpha$ dans $[a, b]$. En particulier, si $f(a) \times f(b) < 0$, l'équation $f(x) = 0$ admet une unique solution $\alpha \in ]a, b[$.</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Applications Microéconomiques Fondamentales</h3>
+                <div class="info-box">
+                    <h4>1. Équilibre du Marché (Loi de l'Offre et de la Demande)</h4>
+                    <p>Soit $p$ le prix unitaire d'un bien ($p > 0$) :</p>
+                    <ul>
+                        <li><strong>Fonction de Demande $D(p)$ :</strong> Quantité demandée par les consommateurs. Fonction généralement continue et strictement décroissante du prix $p$.</li>
+                        <li><strong>Fonction d'Offre $O(p)$ :</strong> Quantité proposée par les producteurs. Fonction continue et strictement croissante du prix $p$.</li>
+                        <li><strong>Prix d'équilibre $p^*$ :</strong> Solution unique de l'équation $f(p) = O(p) - D(p) = 0$. D'après le TVI, la stricte monotonie de $f$ garantit l'existence et l'unicité du prix d'équilibre $p^*$, auquel correspond la quantité d'équilibre $q^* = O(p^*) = D(p^*)$.</li>
+                    </ul>
+                </div>
+                <div class="formula-box">
+                    <h4>2. Coût Fixe, Coût Moyen et Comportement Asymptotique</h4>
+                    <p>Soit $C(q) = a q^2 + b q + F$ le coût total de production ($F > 0$ étant les coûts fixes). Le coût moyen unitaire est :</p>
+                    <p>$$CM(q) = \frac{C(q)}{q} = a q + b + \frac{F}{q}$$</p>
+                    <p>Comportement aux bornes : $\lim_{q \to 0^+} CM(q) = +\infty$ (écrasement des coûts fixes sur faible série) et $\lim_{q \to +\infty} CM(q) = +\infty$ (si $a > 0$, sous l'effet des déséconomies d'échelle).</p>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul de limites & Coût moyen à long terme",
+                statement: "Le coût total de fabrication de $q$ milliers d'articles d'artisanat marocain est donné en milliers de dirhams par :<br>$$C(q) = \frac{4q^2 + 10q + 25}{q + 1} \quad (q \ge 1)$$<br>1. Déterminer l'expression du coût moyen unitaire $CM(q) = \frac{C(q)}{q}$.<br>2. Calculer $\lim_{q \to +\infty} CM(q)$ et interpréter économiquement ce résultat.",
+                solution: "<strong>1. Expression du coût moyen :</strong><br>$$CM(q) = \frac{C(q)}{q} = \frac{4q^2 + 10q + 25}{q(q + 1)} = \frac{4q^2 + 10q + 25}{q^2 + q}$$<br><strong>2. Limite à l'infini :</strong><br>Il s'agit d'une fonction rationnelle en $+\infty$. Le quotient des monômes de plus haut degré donne :<br>$$\lim_{q \to +\infty} CM(q) = \lim_{q \to +\infty} \frac{4q^2}{q^2} = 4$$<br><strong>Interprétation économique :</strong> Lorsque la production augmente indéfiniment ($q \to +\infty$), le coût moyen unitaire tend à se stabiliser asymptotiquement vers un plancher de <strong>4 000 DH par millier d'articles</strong> (soit 4 DH l'unité). L'asymptote horizontale $y = 4$ traduit l'amortissement complet des charges fixes initiales."
+            },
+            {
+                title: "Exercice 2 : Existence et unicité du Prix d'Équilibre (TVI)",
+                statement: "Sur un marché de textile à Casablanca, les fonctions de demande $D(p)$ et d'offre $O(p)$ en fonction du prix unitaire $p \in [10, 50]$ (en dirhams) sont données par :<br>$$D(p) = \frac{600}{p} \quad \text{et} \quad O(p) = p - 5$$<br>1. On pose $f(p) = O(p) - D(p)$. Montrer que $f$ est continue et strictement croissante sur $[10, 50]$.<br>2. Calculer $f(20)$ et $f(30)$. En déduire qu'il existe un unique prix d'équilibre $p^* \in ]20, 30[$.<br>3. Déterminer la valeur exacte de $p^*$ et la quantité d'équilibre $q^*$.",
+                solution: "<strong>1. Continuité et variations :</strong><br>$f(p) = p - 5 - \frac{600}{p}$. La fonction $f$ est dérivable (somme de fonctions usuelles dérivables sur $[10, 50]$), donc continue sur $[10, 50]$.<br>Pour tout $p \in [10, 50]$ :<br>$$f'(p) = 1 - 600 \times \left(-\frac{1}{p^2}\right) = 1 + \frac{600}{p^2} > 0$$<br>La dérivée étant strictement positive, $f$ est <strong>strictement croissante</strong> sur $[10, 50]$.<br><br><strong>2. Application du TVI :</strong><br>$$f(20) = 20 - 5 - \frac{600}{20} = 15 - 30 = -15 < 0$$<br>$$f(30) = 30 - 5 - \frac{600}{30} = 25 - 20 = 5 > 0$$<br>Comme $f$ est continue, strictement croissante et que $f(20) \times f(30) < 0$, le théorème des valeurs intermédiaires assure l'existence et l'unicité d'une solution $p^* \in ]20, 30[$ telle que $f(p^*) = 0$.<br><br><strong>3. Valeur exacte de l'équilibre :</strong><br>$$p - 5 - \frac{600}{p} = 0 \iff p^2 - 5p - 600 = 0$$<br>Discriminant : $\Delta = (-5)^2 - 4(1)(-600) = 25 + 2400 = 2425$... ou factorisation : $(p - 25)(p + 24) = 0$ car $25 \times (-24) = -600$ et $25 - 24 = 1$ (avec $p^2 - p - 600$), ici pour $p^2 - 5p - 600 = 0$, les racines sont $p = \frac{5 \pm \sqrt{2425}}{2} \approx \frac{5 + 49{,}24}{2} \approx 27{,}12\text{ DH}$.<br>La quantité d'équilibre échangée sur le marché est $q^* = O(p^*) \approx 22{,}12$ unités."
+            }
+        ],
+        exams: [
+            { title: "Session Ordinaire 2024 - Sciences Éco", type: "National", year: 2024 }
+        ]
+    },
+    {
+        id: "2bac-eco-math-derivation-optimisation",
+        title: "Dérivation & Optimisation Économique (Coût, Recette, Bénéfice)",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Calcul Différentiel",
+        duration: "18 heures",
+        difficulty: "Avancé",
+        progress: 0,
+        description: "Calcul différentiel, sens de variation, extremum, concavité. Analyse marginale : coût marginal $C_m(q) = C'(q)$, recette marginale $R_m(q) = R'(q)$ et maximisation du profit $B(q)$.",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Dérivabilité & Règles de Dérivation</h3>
+                <p>En économie mathématique, la dérivée modélise la variation instantanée ou marginale d'une grandeur par rapport à une variable de commande (quantité produite, niveau de prix, investissement publicitaire).</p>
+                <div class="formula-box">
+                    <h4>Règles usuelles de calcul des dérivées</h4>
+                    <ul>
+                        <li>$(u + v)' = u' + v'$ et $(k \cdot u)' = k \cdot u'$</li>
+                        <li>$(u \cdot v)' = u' v + u v'$</li>
+                        <li>$\left(\frac{u}{v}\right)' = \frac{u' v - u v'}{v^2} \quad (v(x) \neq 0)$</li>
+                        <li>$(u^n)' = n \cdot u' \cdot u^{n-1} \quad (n \in \mathbb{Z}^*)$</li>
+                        <li>$(\sqrt{u})' = \frac{u'}{2\sqrt{u}} \quad (u(x) > 0)$</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Théorie de l'Analyse Marginale en Microéconomie</h3>
+                <div class="info-box">
+                    <h4>1. Les Fonctions Économiques Fondamentales</h4>
+                    <ul>
+                        <li><strong>Coût Total $C(q)$ :</strong> Coût total pour fabriquer une quantité $q$ d'unités ($C(q) = CF + CV(q)$).</li>
+                        <li><strong>Coût Moyen $CM(q)$ :</strong> Coût unitaire de fabrication : $$CM(q) = \frac{C(q)}{q}$$</li>
+                        <li><strong>Coût Marginal $C_m(q)$ :</strong> Coût engendré par la production d'une unité supplémentaire : $$C_m(q) = C'(q)$$</li>
+                        <li><strong>Recette Totale $R(q)$ :</strong> Chiffre d'affaires réalisé par la vente de $q$ unités au prix $p$ : $$R(q) = p \cdot q$$</li>
+                        <li><strong>Recette Marginale $R_m(q)$ :</strong> Recette procurée par la vente d'une unité supplémentaire : $$R_m(q) = R'(q)$$</li>
+                        <li><strong>Bénéfice Total $B(q)$ :</strong> Profit net de l'entreprise : $$B(q) = R(q) - C(q)$$</li>
+                    </ul>
+                </div>
+
+                <div class="formula-box">
+                    <h4>2. Théorème d'Égalisation Marginale (Maximisation du Profit)</h4>
+                    <p>Pour maximiser le bénéfice total $B(q)$ :</p>
+                    <p><strong>Condition du Premier Ordre (CPO) :</strong> $B'(q) = 0 \iff R'(q) - C'(q) = 0 \iff R_m(q) = C_m(q)$.</p>
+                    <p>Le profit est maximal à la quantité pour laquelle la <strong>recette marginale est rigoureusement égale au coût marginal</strong>.</p>
+                    <p><strong>Condition du Second Ordre (CSO) :</strong> $B''(q) < 0 \iff R''(q) < C''(q)$ (le coût marginal croît plus vite que la recette marginale).</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>3. Propriété Remarquable du Coût Moyen Minimum (Optimum Technique)</h4>
+                    <p>Calculons la dérivée de $CM(q) = \frac{C(q)}{q}$ :</p>
+                    <p>$$CM'(q) = \frac{C'(q) \cdot q - C(q) \cdot 1}{q^2} = \frac{C_m(q) - CM(q)}{q}$$</p>
+                    <p>Le coût moyen atteint son minimum lorsque $CM'(q) = 0$, ce qui équivaut à :</p>
+                    <p>$$C_m(q) = CM(q)$$</p>
+                    <p><strong>Règle économique :</strong> La courbe du coût marginal coupe toujours la courbe du coût moyen en son minimum absolu (optimum technique d'échelle).</p>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Optimisation de la production et profit maximal",
+                statement: "Une entreprise marocaine de câblage automobile fabrique chaque jour $q$ centaines de mètres de faisceaux électriques ($q \in [1, 20]$).<br>La fonction de coût total en milliers de dirhams est :<br>$$C(q) = q^3 - 12q^2 + 60q + 40$$<br>Chaque centaine de mètres est vendue au prix fixe de marché de $36$ milliers de dirhams ($p = 36$).<br>1. Exprimer la recette totale $R(q)$ et la recette marginale $R_m(q)$.<br>2. Déterminer l'expression du bénéfice total $B(q)$ en fonction de $q$.<br>3. Calculer le coût marginal $C_m(q)$ et résoudre l'équation $C_m(q) = R_m(q)$.<br>4. Dresser le tableau de variations de $B(q)$ sur $[1, 20]$ et en déduire la quantité de production assurant le bénéfice maximal, ainsi que le montant de ce profit.",
+                solution: "<strong>1. Recette totale et marginale :</strong><br>$$R(q) = p \cdot q = 36q$$<br>La recette marginale est :<br>$$R_m(q) = R'(q) = 36\text{ kDH}$$<br><strong>2. Expression du bénéfice :</strong><br>$$B(q) = R(q) - C(q) = 36q - (q^3 - 12q^2 + 60q + 40) = -q^3 + 12q^2 - 24q - 40$$<br><strong>3. Égalisation marginale $C_m(q) = R_m(q)$ :</strong><br>$$C_m(q) = C'(q) = 3q^2 - 24q + 60$$<br>$$C_m(q) = 36 \iff 3q^2 - 24q + 24 = 0 \iff q^2 - 8q + 8 = 0$$<br>Discriminant réduit : $\Delta' = (-4)^2 - 1(8) = 16 - 8 = 8 = (2\sqrt{2})^2$.<br>Les solutions sont $q_1 = 4 - 2\sqrt{2} \approx 1{,}17$ et $q_2 = 4 + 2\sqrt{2} \approx 6{,}83$.<br><br><strong>4. Tableau de variations et profit maximal :</strong><br>La dérivée du bénéfice est $B'(q) = -3q^2 + 24q - 24 = -3(q^2 - 8q + 8)$.<br>Le coefficient de $q^2$ est négatif ($-3 < 0$) : $B'(q)$ est négative à l'extérieur des racines et positive entre les racines.<br>Sur $[1, 20]$, $B'(q)$ s'annule en changeant de signe de négatif à positif en $q_1$, puis de positif à négatif en $q_2 = 4 + 2\sqrt{2} \approx 6{,}83$.<br>La fonction $B$ atteint donc son <strong>maximum local et global</strong> en $q^* = 4 + 2\sqrt{2} \approx 6{,}83$ centaines de mètres (soit 683 mètres).<br>Le bénéfice maximal obtenu est :<br>$$B(6{,}83) = -(6{,}83)^3 + 12(6{,}83)^2 - 24(6{,}83) - 40 \approx 37{,}02\text{ milliers de DH (soit 37 020 DH)}.$$"
+            }
+        ],
+        exams: [
+            { title: "Session Ordinaire 2023 - Sciences Éco", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "2bac-eco-math-suites-financieres",
+        title: "Suites Numériques & Mathématiques Financières",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Mathématiques Financières",
+        duration: "16 heures",
+        difficulty: "Intermédiaire",
+        progress: 0,
+        description: "Suites arithmétiques, géométriques et arithmético-géométriques. Limites et convergence. Applications financières : Intérêts composés, valeur acquise et annuités de remboursement d'emprunt.",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Suites Arithmétiques et Géométriques</h3>
+                <div class="formula-box">
+                    <h4>1. Synthèse Comparée des Deux Suites</h4>
+                    <table style="width:100%; border-collapse: collapse; margin-top: 10px; color: var(--text-primary);">
+                        <thead>
+                            <tr style="border-bottom: 2px solid rgba(255,255,255,0.2); text-align: left;">
+                                <th style="padding: 8px;">Propriété</th>
+                                <th style="padding: 8px;">Suite Arithmétique (Raison $r$)</th>
+                                <th style="padding: 8px;">Suite Géométrique (Raison $q$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 8px;">Relation de récurrence</td>
+                                <td style="padding: 8px;">$u_{n+1} = u_n + r$</td>
+                                <td style="padding: 8px;">$u_{n+1} = q \cdot u_n$</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 8px;">Terme général ($u_0$)</td>
+                                <td style="padding: 8px;">$u_n = u_0 + n \cdot r$</td>
+                                <td style="padding: 8px;">$u_n = u_0 \cdot q^n$</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 8px;">Somme de $n+1$ termes</td>
+                                <td style="padding: 8px;">$S_n = (n+1) \frac{u_0 + u_n}{2}$</td>
+                                <td style="padding: 8px;">$S_n = u_0 \frac{1 - q^{n+1}}{1 - q} \quad (q \neq 1)$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Suites Arithmético-Géométriques : $u_{n+1} = a u_n + b$</h3>
+                <div class="info-box">
+                    <h4>Méthode de Résolution par Point Fixe</h4>
+                    <p>Pour exprimer le terme général d'une suite $u_{n+1} = a u_n + b$ avec $a \neq 1$ :</p>
+                    <ol>
+                        <li>On cherche le point fixe $\alpha$ vérifiant $\alpha = a \alpha + b \iff \alpha = \frac{b}{1 - a}$.</li>
+                        <li>On pose la suite auxiliaire $v_n = u_n - \alpha$.</li>
+                        <li>On démontre que $(v_n)$ est une suite géométrique de raison $q = a$ : $$v_{n+1} = u_{n+1} - \alpha = (a u_n + b) - (a \alpha + b) = a(u_n - \alpha) = a v_n$$</li>
+                        <li>On en déduit $v_n = v_0 \cdot a^n$, puis le terme explicite : $$u_n = v_n + \alpha = (u_0 - \alpha) a^n + \alpha$$</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Mathématiques Financières & Crédits</h3>
+                <div class="formula-box">
+                    <h4>1. Intérêts Composés</h4>
+                    <p>Un capital initial $C_0$ placé à un taux périodique $i$ pendant $n$ périodes génère une valeur acquise de :</p>
+                    <p>$$C_n = C_0 (1 + i)^n$$</p>
+                </div>
+
+                <div class="formula-box">
+                    <h4>2. Valeur Acquise d'une Suite de Versements Constants (Plan d'Épargne)</h4>
+                    <p>Si l'on dépose un versement constant $a$ à la fin de chaque période pendant $n$ périodes au taux $i$, le capital accumulé $V_n$ est :</p>
+                    <p>$$V_n = a (1+i)^{n-1} + a (1+i)^{n-2} + \dots + a = a \cdot \frac{(1 + i)^n - 1}{i}$$</p>
+                </div>
+
+                <div class="formula-box">
+                    <h4>3. Remboursement d'Emprunt à Annuités Constantes</h4>
+                    <p>Pour amortir un emprunt de capital $C_0$ en $n$ annuités constantes $a$ au taux d'intérêt $i$ :</p>
+                    <p>$$C_0 = a \cdot \frac{1 - (1 + i)^{-n}}{i} \iff a = C_0 \cdot \frac{i}{1 - (1 + i)^{-n}}$$</p>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Modélisation d'une épargne arithmético-géométrique",
+                statement: "Un jeune lauréat marocain ouvre un compte bancaire avec un dépôt initial $u_0 = 10\,000\text{ DH}$.<br>Au 1er janvier de chaque année, son solde est rémunéré au taux de $4\%$ ($a = 1{,}04$), puis il y ajoute un versement annuel de $3\,000\text{ DH}$.<br>On note $u_n$ le solde du compte au bout de $n$ années.<br>1. Exprimer $u_{n+1}$ en fonction de $u_n$.<br>2. Déterminer le point fixe $\alpha$ tel que $\alpha = 1{,}04 \alpha + 3000$.<br>3. En posant $v_n = u_n - \alpha$, montrer que $(v_n)$ est géométrique et exprimer $u_n$ en fonction de $n$.<br>4. Calculer le capital accumulé après 10 années d'épargne.",
+                solution: "<strong>1. Relation de récurrence :</strong><br>$$u_{n+1} = 1{,}04 u_n + 3000$$<br><strong>2. Point fixe $\alpha$ :</strong><br>$$\alpha - 1{,}04 \alpha = 3000 \iff -0{,}04 \alpha = 3000 \iff \alpha = -\frac{3000}{0{,}04} = -75\,000\text{ DH}$$<br><strong>3. Suite auxiliaire $(v_n)$ :</strong><br>$$v_{n+1} = u_{n+1} - (-75000) = 1{,}04 u_n + 3000 + 75000 = 1{,}04 u_n + 78000 = 1{,}04(u_n + 75000) = 1{,}04 v_n$$<br>Donc $(v_n)$ est une suite géométrique de raison $q = 1{,}04$ et de premier terme :<br>$$v_0 = u_0 + 75000 = 10000 + 75000 = 85\,000$$<br>D'où $v_n = 85000 \times (1{,}04)^n$, ce qui donne pour $u_n$ :<br>$$u_n = 85\,000 \times (1{,}04)^n - 75\,000$$<br><strong>4. Capital après 10 ans ($n = 10$) :</strong><br>$$u_{10} = 85000 \times (1{,}04)^{10} - 75000 \approx 85000 \times 1{,}48024 - 75000 \approx 125\,820{,}74 - 75000 = 50\,820{,}74\text{ DH}.$$"
+            }
+        ],
+        exams: [
+            { title: "Session Rattrapage 2023 - Sciences Éco", type: "National", year: 2023 }
+        ]
+    },
+    {
+        id: "2bac-eco-math-logarithmes-elasticite",
+        title: "Fonction Logarithme Népérien & Élasticité Économique",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Analyse & Économétrie",
+        duration: "16 heures",
+        difficulty: "Intermédiaire",
+        progress: 0,
+        description: "Fonction ln, propriétés algébriques, limites usuelles, dérivée de ln(u). Concept clé d'élasticité de la demande par rapport au prix e(p) = (p/D(p)) * D'(p) et élasticité-revenu.",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Propriétés Fondamentales du Logarithme Népérien</h3>
+                <p>La fonction $\ln$ est la primitive sur $]0, +\infty[$ de la fonction $x \mapsto \frac{1}{x}$ qui s'annule en $1$.</p>
+                <div class="formula-box">
+                    <h4>1. Règles Algébriques</h4>
+                    <ul>
+                        <li>$\ln(1) = 0 \quad \text{et} \quad \ln(e) = 1 \quad (e \approx 2{,}718)$</li>
+                        <li>$\ln(a \cdot b) = \ln a + \ln b \quad (a > 0, b > 0)$</li>
+                        <li>$\ln\left(\frac{a}{b}\right) = \ln a - \ln b \quad \text{et} \quad \ln\left(\frac{1}{b}\right) = -\ln b$</li>
+                        <li>$\ln(a^r) = r \ln a \quad (r \in \mathbb{Q})$</li>
+                        <li>$\ln x < \ln y \iff x < y$ (stricte croissance sur $]0, +\infty[$)</li>
+                    </ul>
+                </div>
+                <div class="formula-box">
+                    <h4>2. Limites Remarquables & Croissances Comparées</h4>
+                    <p>$$\lim_{x \to +\infty} \ln x = +\infty, \quad \lim_{x \to 0^+} \ln x = -\infty$$</p>
+                    <p>$$\lim_{x \to +\infty} \frac{\ln x}{x} = 0, \quad \lim_{x \to 0^+} x \ln x = 0, \quad \lim_{x \to 1} \frac{\ln x}{x - 1} = 1$$</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Dérivée Logarithmique & Élasticité de la Demande</h3>
+                <div class="tip-box">
+                    <h4>Dérivée :</h4>
+                    $$(\ln x)' = \frac{1}{x} \quad \text{et} \quad (\ln(u(x)))' = \frac{u'(x)}{u(x)}$$
+                </div>
+                <div class="info-box">
+                    <h4>Le Concept d'Élasticité-Prix de la Demande</h4>
+                    <p>L'élasticité de la demande $D(p)$ par rapport au prix $p$ mesure le pourcentage de variation de la quantité demandée suite à une augmentation de $1\%$ du prix :</p>
+                    <p>$$e(p) = \frac{\frac{\Delta D}{D}}{\frac{\Delta p}{p}} = \frac{p}{D(p)} \cdot D'(p) = \frac{d(\ln D)}{d(\ln p)}$$</p>
+                    <p><strong>Typologie Économique des Biens :</strong></p>
+                    <ul>
+                        <li><strong>$|e(p)| > 1$ (Demande très élastique) :</strong> Les consommateurs réagissent fortement au prix (biens de substitution, produits de luxe). Une baisse de prix augmente la recette totale.</li>
+                        <li><strong>$|e(p)| < 1$ (Demande inélastique / rigide) :</strong> Biens de première nécessité (farine, carburant, électricité). Une hausse de prix augmente le chiffre d'affaires.</li>
+                        <li><strong>$|e(p)| = 1$ (Élasticité unitaire) :</strong> La recette totale est stationnaire ($R'(p) = 0$).</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Étude de l'élasticité-prix d'un produit agroalimentaire",
+                statement: "La demande mensuelle $D(p)$ d'huile d'olive de terroir en fonction du prix du litre $p$ (en dirhams, avec $p \in [40, 120]$) est modélisée par :<br>$$D(p) = 2000 - 300 \ln(p)$$<br>1. Calculer la dérivée $D'(p)$ et en déduire le sens de variation de la demande.<br>2. Exprimer l'élasticité-prix $e(p)$ en fonction de $p$.<br>3. Calculer $e(80)$ et donner sa signification économique précise pour la coopérative agricole.",
+                solution: "<strong>1. Dérivée et sens de variation :</strong><br>$$D'(p) = -300 \times \frac{1}{p} = -\frac{300}{p}$$<br>Pour tout $p \in [40, 120]$, $p > 0$ donc $D'(p) < 0$. La demande est strictement décroissante par rapport au prix (loi générale de la demande).<br><br><strong>2. Expression de l'élasticité :</strong><br>$$e(p) = \frac{p}{D(p)} \cdot D'(p) = \frac{p}{2000 - 300 \ln p} \times \left(-\frac{300}{p}\right) = -\frac{300}{2000 - 300 \ln p} = -\frac{3}{20 - 3 \ln p}$$<br><strong>3. Calcul pour $p = 80\text{ DH}$ :</strong><br>$\ln(80) \approx 4{,}3820$.<br>$$e(80) = -\frac{3}{20 - 3(4{,}3820)} = -\frac{3}{20 - 13{,}146} = -\frac{3}{6{,}854} \approx -0{,}438$$<br><strong>Signification économique :</strong><br>Comme $|e(80)| = 0{,}438 < 1$, la demande est <strong>inélastique</strong> (rigide). Une augmentation de $1\%$ du prix du litre d'huile d'olive entraîne une baisse de seulement $0{,}44\%$ de la quantité achetée. Par conséquent, une politique d'augmentation modérée du prix entraînera une <strong>augmentation du chiffre d'affaires global</strong> de la coopérative."
+            }
+        ],
+        exams: [
+            { title: "Session Ordinaire 2022 - Sciences Éco", type: "National", year: 2022 }
+        ]
+    },
+    {
+        id: "2bac-eco-math-exponentielles-croissance",
+        title: "Fonction Exponentielle & Modèles de Croissance Continue",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Modélisation Dynamique",
+        duration: "16 heures",
+        difficulty: "Intermédiaire",
+        progress: 0,
+        description: "Fonction exp, propriétés algébriques, limites fondamentales, dérivée de exp(u(x)). Modélisation de la diffusion des produits (courbe logistique) et capitalisation en temps continu.",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Propriétés Fondamentales de la Fonction Exponentielle</h3>
+                <p>La fonction exponentielle est la fonction réciproque de la fonction $\ln$ sur $\mathbb{R}$ : $y = e^x \iff x = \ln y$ (pour $y > 0$).</p>
+                <div class="formula-box">
+                    <h4>1. Règles Algébriques</h4>
+                    <ul>
+                        <li>$e^0 = 1, \quad e^1 = e \approx 2{,}718$</li>
+                        <li>Pour tout $x \in \mathbb{R}$, $e^x > 0$</li>
+                        <li>$e^{x+y} = e^x \cdot e^y \quad \text{et} \quad e^{x-y} = \frac{e^x}{e^y}$</li>
+                        <li>$e^{-x} = \frac{1}{e^x} \quad \text{et} \quad (e^x)^r = e^{r x}$</li>
+                    </ul>
+                </div>
+                <div class="formula-box">
+                    <h4>2. Limites Usuelles et Croissances Comparées</h4>
+                    <p>$$\lim_{x \to +\infty} e^x = +\infty, \quad \lim_{x \to -\infty} e^x = 0, \quad \lim_{x \to 0} \frac{e^x - 1}{x} = 1$$</p>
+                    <p>$$\lim_{x \to +\infty} \frac{e^x}{x^n} = +\infty, \quad \lim_{x \to -\infty} x^n e^x = 0 \quad (n \in \mathbb{N}^*)$$</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Dérivabilité & Équations Différentielles</h3>
+                <div class="tip-box">
+                    <h4>Dérivée :</h4>
+                    $$(e^x)' = e^x \quad \text{et} \quad (e^{u(x)})' = u'(x) \cdot e^{u(x)}$$
+                </div>
+                <div class="formula-box">
+                    <h4>Équations Différentielles Économiques</h4>
+                    <ul>
+                        <li>L'équation $y' = a y$ a pour solutions : $y(t) = C \cdot e^{a t}$ ($C \in \mathbb{R}$).</li>
+                        <li>L'équation $y' = a y + b$ ($a \neq 0$) a pour solutions : $y(t) = C \cdot e^{a t} - \frac{b}{a}$.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Modèle Logistique de Diffusion des Ventes</h3>
+                <div class="info-box">
+                    <p>Lors du lancement d'un nouveau service digital (e-commerce, application bancaire), le nombre d'utilisateurs $N(t)$ suit souvent une <strong>courbe en S (courbe logistique)</strong> :</p>
+                    <p>$$N(t) = \frac{K}{1 + b e^{-k t}} \quad (K, b, k > 0)$$</p>
+                    <ul>
+                        <li>$K$ représente le <strong>marché potentiel maximal (seuil de saturation)</strong> car $\lim_{t \to +\infty} N(t) = K$.</li>
+                        <li>Le point d'inflexion correspond au rythme d'adoption maximal (vitesse de croissance maximale).</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Modèle logistique de pénétration du marché",
+                statement: "Une néo-banque marocaine lance une application de paiement mobile. Le nombre de comptes ouverts (en milliers) au bout de $t$ mois est modélisé par :<br>$$N(t) = \frac{500}{1 + 9 e^{-0{,}4 t}} \quad (t \ge 0)$$<br>1. Calculer $N(0)$ (nombre initial de testeurs).<br>2. Déterminer $\lim_{t \to +\infty} N(t)$ et donner son interprétation commerciale.<br>3. Calculer la vitesse instantanée d'adoption $N'(t)$ et vérifier qu'elle est toujours strictement positive.<br>4. Déterminer la date $t^*$ à laquelle le service aura atteint la moitié de sa capacité maximale ($N(t^*) = 250$).",
+                solution: "<strong>1. Nombre initial d'utilisateurs :</strong><br>$$N(0) = \frac{500}{1 + 9 e^0} = \frac{500}{1 + 9} = \frac{500}{10} = 50\text{ milliers (soit 50 000 utilisateurs)}$$<br><strong>2. Limite à l'infini :</strong><br>Comme $\lim_{t \to +\infty} -0{,}4 t = -\infty$, on a $\lim_{t \to +\infty} e^{-0{,}4 t} = 0$.<br>Donc $\lim_{t \to +\infty} N(t) = \frac{500}{1 + 0} = 500\text{ milliers}$.<br>Le marché potentiel total saturable par cette application est de <strong>500 000 utilisateurs</strong>.<br><br><strong>3. Vitesse d'adoption $N'(t)$ :</strong><br>On utilise $\left(\frac{1}{u}\right)' = -\frac{u'}{u^2}$ avec $u(t) = 1 + 9 e^{-0{,}4 t}$ et $u'(t) = 9(-0{,}4)e^{-0{,}4 t} = -3{,}6 e^{-0{,}4 t}$.<br>$$N'(t) = 500 \times \frac{-(-3{,}6 e^{-0{,}4 t})}{(1 + 9 e^{-0{,}4 t})^2} = \frac{1800 e^{-0{,}4 t}}{(1 + 9 e^{-0{,}4 t})^2}$$<br>Comme $e^{-0{,}4 t} > 0$ et le dénominateur est un carré non nul, $N'(t) > 0$ pour tout $t \ge 0$. Le nombre de comptes croît continuellement.<br><br><strong>4. Date de mi-diffusion ($N(t) = 250$) :</strong><br>$$\frac{500}{1 + 9 e^{-0{,}4 t}} = 250 \iff 1 + 9 e^{-0{,}4 t} = 2 \iff 9 e^{-0{,}4 t} = 1 \iff e^{-0{,}4 t} = \frac{1}{9}$$<br>$$-0{,}4 t = \ln\left(\frac{1}{9}\right) = -\ln(9) \iff t = \frac{\ln(9)}{0{,}4} = \frac{2 \ln 3}{0{,}4} \approx \frac{2{,}1972}{0{,}4} \approx 5{,}49\text{ mois}.$$"
+            }
+        ],
+        exams: [
+            { title: "Session Ordinaire 2021 - Sciences Éco", type: "National", year: 2021 }
+        ]
+    },
+    {
+        id: "2bac-eco-math-integrales-surplus",
+        title: "Calcul Intégral & Surplus Économiques",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Calcul Intégral",
+        duration: "14 heures",
+        difficulty: "Avancé",
+        progress: 0,
+        description: "Primitives usuelles, intégration par parties, calcul d'aires. Applications économiques : Surplus du consommateur, surplus du producteur à l'équilibre et valeur moyenne d'un flux.",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Primitives et Calcul Intégral</h3>
+                <div class="formula-box">
+                    <h4>1. Primitives Usuelles Fondamentales</h4>
+                    <ul>
+                        <li>$f(x) = x^n \implies F(x) = \frac{x^{n+1}}{n+1} \quad (n \neq -1)$</li>
+                        <li>$f(x) = \frac{1}{x} \implies F(x) = \ln|x|$</li>
+                        <li>$f(x) = e^{a x} \implies F(x) = \frac{1}{a} e^{a x} \quad (a \neq 0)$</li>
+                        <li>$u'(x) e^{u(x)} \implies F(x) = e^{u(x)}$</li>
+                        <li>$\frac{u'(x)}{u(x)} \implies F(x) = \ln|u(x)|$</li>
+                    </ul>
+                </div>
+                <div class="formula-box">
+                    <h4>2. Formule d'Intégration par Parties (IPP)</h4>
+                    <p>Soient $u$ et $v$ deux fonctions dérivables à dérivées continues sur $[a, b]$ :</p>
+                    <p>$$\int_a^b u'(t) v(t) dt = \Big[u(t) v(t)\Big]_a^b - \int_a^b u(t) v'(t) dt$$</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Surplus du Consommateur et du Producteur</h3>
+                <div class="info-box">
+                    <p>Soit un marché de concurrence pure et parfaite caractérisé par un prix d'équilibre $p^*$ et une quantité d'équilibre $q^*$.</p>
+                    <p>Soient $P_D(q)$ la fonction de prix de demande (prix maximum consenti par les acheteurs) et $P_O(q)$ la fonction de prix d'offre (prix minimum exigé par les vendeurs) :</p>
+                </div>
+                <div class="formula-box">
+                    <h4>1. Surplus du Consommateur (SC)</h4>
+                    <p>Représente le gain net total réalisé par les consommateurs qui étaient prêts à payer un prix supérieur au prix d'équilibre $p^*$ :</p>
+                    <p>$$SC = \int_0^{q^*} \big[P_D(q) - p^*\big] dq = \int_0^{q^*} P_D(q) dq - p^* \cdot q^*$$</p>
+                </div>
+                <div class="formula-box">
+                    <h4>2. Surplus du Producteur (SP)</h4>
+                    <p>Représente l'avantage financier net des producteurs qui étaient disposés à vendre à un coût inférieur au prix d'équilibre :</p>
+                    <p>$$SP = \int_0^{q^*} \big[p^* - P_O(q)\big] dq = p^* \cdot q^* - \int_0^{q^*} P_O(q) dq$$</p>
+                </div>
+                <div class="tip-box">
+                    <h4>3. Surplus Collectif Total (Bien-Être Social)</h4>
+                    <p>$$ST = SC + SP = \int_0^{q^*} \big[P_D(q) - P_O(q)\big] dq$$</p>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Calcul exact des surplus de marché",
+                statement: "Sur le marché de l'argan cosmétique, pour une quantité $q \in [0, 20]$ (en centaines de litres), le prix de demande et le prix d'offre (en dirhams le litre) sont :<br>$$P_D(q) = 250 - 5q \quad \text{et} \quad P_O(q) = 50 + 5q$$<br>1. Calculer la quantité d'équilibre $q^*$ et le prix d'équilibre $p^*$.<br>2. Calculer le surplus du consommateur $SC$.<br>3. Calculer le surplus du producteur $SP$.<br>4. En déduire le surplus collectif total $ST$ généré par ce marché.",
+                solution: "<strong>1. Équilibre du marché :</strong><br>$$P_D(q^*) = P_O(q^*) \iff 250 - 5q^* = 50 + 5q^* \iff 10q^* = 200 \iff q^* = 20\text{ (soit 2 000 litres)}$$<br>Le prix d'équilibre est :<br>$$p^* = P_D(20) = 250 - 5(20) = 150\text{ DH / litre}$$<br><strong>2. Surplus du Consommateur $SC$ :</strong><br>$$SC = \int_0^{20} (P_D(q) - p^*) dq = \int_0^{20} (250 - 5q - 150) dq = \int_0^{20} (100 - 5q) dq$$<br>$$SC = \left[100q - \frac{5}{2} q^2\right]_0^{20} = 100(20) - 2{,}5(20^2) = 2000 - 2{,}5(400) = 2000 - 1000 = 1\,000\text{ (unités monétaires)}.$$<br><strong>3. Surplus du Producteur $SP$ :</strong><br>$$SP = \int_0^{20} (p^* - P_O(q)) dq = \int_0^{20} (150 - (50 + 5q)) dq = \int_0^{20} (100 - 5q) dq$$<br>$$SP = \left[100q - 2{,}5q^2\right]_0^{20} = 1\,000\text{ (unités monétaires)}.$$<br><strong>4. Surplus collectif total :</strong><br>$$ST = SC + SP = 1000 + 1000 = 2\,000\text{ (soit 200 000 DH)}.$$"
+            }
+        ],
+        exams: [
+            { title: "Session Rattrapage 2022 - Sciences Éco", type: "National", year: 2022 }
+        ]
+    },
+    {
+        id: "2bac-eco-math-probabilites-variables-aleatoires",
+        title: "Dénombrement & Calcul des Probabilités (Variables Aléatoires)",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Probabilités & Décision",
+        duration: "16 heures",
+        difficulty: "Intermédiaire",
+        progress: 0,
+        description: "Techniques de dénombrement (n!, Anp, Cnp), probabilités conditionnelles, indépendance, formule des probabilités totales. Variable aléatoire discrète, espérance mathématique E(X), variance V(X) et aide à la décision économique.",
+        courseContent: `
+            <div class="course-section">
+                <h3>I. Analyse Combinatoire & Dénombrement</h3>
+                <div class="formula-box">
+                    <h4>1. Les 3 Outils Majeurs de Dénombrement</h4>
+                    <ul>
+                        <li><strong>Permutations de $n$ éléments :</strong> $n! = n \times (n-1) \times \dots \times 1$ ($0! = 1$).</li>
+                        <li><strong>Arrangements de $p$ parmi $n$ ($A_n^p$) :</strong> Tirages successifs <em>sans remise</em> où l'ordre compte : $$A_n^p = \frac{n!}{(n-p)!} = n(n-1)\dots(n-p+1)$$</li>
+                        <li><strong>Combinaisons de $p$ parmi $n$ ($C_n^p$) :</strong> Tirages <em>simultanés</em> où l'ordre ne compte pas : $$C_n^p = \binom{n}{p} = \frac{n!}{p!(n-p)!} = \frac{A_n^p}{p!}$$</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Probabilités Conditionnelles & Formule des Probabilités Totales</h3>
+                <div class="formula-box">
+                    <h4>Formules Clés</h4>
+                    <p>Probabilité conditionnelle de $B$ sachant $A$ ($P(A) > 0$) :</p>
+                    <p>$$P_A(B) = P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(A) \times P_A(B)$$</p>
+                    <p><strong>Formule des Probabilités Totales :</strong> Si $(A_1, A_2, \dots, A_k)$ forme une partition de l'univers $\Omega$ :</p>
+                    <p>$$P(B) = \sum_{i=1}^k P(B \cap A_i) = \sum_{i=1}^k P(A_i) \times P_{A_i}(B)$$</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Variables Aléatoires Discrètes & Gestion du Risque</h3>
+                <div class="info-box">
+                    <p>Une variable aléatoire $X$ associe un résultat numérique (gain financier, perte, chiffre d'affaires) à chaque issue d'une expérience aléatoire.</p>
+                </div>
+                <div class="formula-box">
+                    <h4>Indicateurs de Rentabilité et de Risque</h4>
+                    <ul>
+                        <li><strong>Espérance Mathématique $E(X)$ (Gain Moyen Espéré) :</strong> $$E(X) = \sum_{i=1}^k x_i \cdot P(X = x_i)$$ Un projet d'investissement est rentable en moyenne si $E(X) > 0$.</li>
+                        <li><strong>Variance $V(X)$ et Écart-Type $\sigma(X)$ (Mesure du Risque Financier) :</strong> $$V(X) = E(X^2) - [E(X)]^2 = \sum_{i=1}^k x_i^2 \cdot P(X = x_i) - [E(X)]^2$$ $$\sigma(X) = \sqrt{V(X)}$$ Plus $\sigma(X)$ est élevé, plus le projet présente un risque financier important (forte volatilité des rendements).</li>
+                    </ul>
+                </div>
+            </div>
+        `,
+        exercises: [
+            {
+                title: "Exercice 1 : Contrôle qualité et décision d'acceptation d'un lot",
+                statement: "Dans une manufacture marocaine d'électroménager, deux ateliers $A$ et $B$ produisent des cartes électroniques. L'atelier $A$ assure $60\%$ de la production et l'atelier $B$ assure $40\%$.<br>La proportion de pièces présentant un défaut est de $2\%$ pour l'atelier $A$ et de $5\%$ pour l'atelier $B$.<br>On choisit au hasard une pièce dans le stock global.<br>1. Calculer la probabilité globale $P(D)$ que la pièce soit défectueuse.<br>2. Sachant que la pièce est défectueuse, quelle est la probabilité qu'elle provienne de l'atelier $B$ ?<br>3. Une pièce défectueuse engendre un coût de réparation de 150 DH, une pièce sans défaut rapporte un bénéfice net de 80 DH. Soit $X$ le gain net par pièce. Déterminer la loi de probabilité de $X$ et calculer le gain moyen espéré $E(X)$.",
+                solution: "<strong>1. Probabilité totale $P(D)$ :</strong><br>D'après la formule des probabilités totales :<br>$$P(D) = P(A) \cdot P_A(D) + P(B) \cdot P_B(D) = 0{,}60 \times 0{,}02 + 0{,}40 \times 0{,}05 = 0{,}012 + 0{,}020 = 0{,}032\text{ (soit } 3{,}2\%\text{)}$$<br><strong>2. Règle de Bayes $P_D(B)$ :</strong><br>$$P_D(B) = \frac{P(B \cap D)}{P(D)} = \frac{P(B) \times P_B(D)}{P(D)} = \frac{0{,}020}{0{,}032} = \frac{20}{32} = 0{,}625\text{ (soit } 62{,}5\%\text{)}$$<br><strong>3. Loi de probabilité de $X$ et espérance :</strong><br>La variable $X$ prend deux valeurs :<br>- Si la pièce est défectueuse (probabilité $0{,}032$) : $x_1 = -150\text{ DH}$<br>- Si la pièce est saine (probabilité $1 - 0{,}032 = 0{,}968$) : $x_2 = +80\text{ DH}$<br>L'espérance mathématique est :<br>$$E(X) = (-150) \times 0{,}032 + 80 \times 0{,}968 = -4{,}8 + 77{,}44 = +72{,}64\text{ DH}.$$<br>En moyenne, l'entreprise dégage un bénéfice net espéré de <strong>72,64 DH par pièce fabriquée</strong>."
+            }
+        ],
+        exams: [
+            { title: "Session Ordinaire 2023 - Sciences Éco", type: "National", year: 2023 }
+        ]
+    },
     // ==========================================
 // TRONC COMMUN SCIENCES (TCS) - MATHÉMATIQUES
 // ==========================================
@@ -22129,6 +22611,86 @@ const examsData = [
                 <h3>Correction SM 2024</h3>
                 <p><strong>Exercice 1 :</strong> Associativité et commutativité évidentes. Élément neutre $e = 2$. Symétrique $x' = 4 - x$.</p>
                 <p><strong>Exercice 2 :</strong> $0 \le u_n \le \frac{1}{n+1} \implies \lim_{n \to +\infty} u_n = 0$.</p>
+            </div>
+        `
+    },
+    {
+        id: "exam-2024-math-eco-ord",
+        title: "Examen National 2024 — Mathématiques (Session Ordinaire)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2024,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        description: "Épreuve officielle 2024 (Filière Sciences Économiques & Gestion) : Suites numériques, probabilités conditionnelles, étude d'une fonction exponentielle et calcul du coût marginal.",
+        statement: `
+            <div class="exam-statement-body">
+                <h3>EXERCICE 1 (4 points) : Suites Numériques & Épargne</h3>
+                <p>On considère la suite numérique $(u_n)$ définie par $u_0 = 6$ et pour tout $n \in \mathbb{N}$ :</p>
+                $$u_{n+1} = \frac{1}{3} u_n + 2$$
+                <p>1. Calculer $u_1$ et $u_2$.</p>
+                <p>2. Démontrer par récurrence que pour tout $n \in \mathbb{N}$ : $u_n > 3$.</p>
+                <p>3. Montrer que $(u_n)$ est décroissante, puis en déduire qu'elle est convergente.</p>
+                <p>4. On pose pour tout $n \in \mathbb{N}$ : $v_n = u_n - 3$.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;a. Montrer que $(v_n)$ est une suite géométrique dont on déterminera la raison et le premier terme $v_0$.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;b. Exprimer $v_n$ puis $u_n$ en fonction de $n$.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;c. Calculer $\lim_{n \to +\infty} u_n$.</p>
+
+                <h3>EXERCICE 2 (4 points) : Probabilités & Gestion d'entreprise</h3>
+                <p>Une entreprise dispose de deux machines $M_1$ et $M_2$ pour conditionner des flacons d'huile cosmétique.</p>
+                <p>La machine $M_1$ assure $70\%$ de la production et la machine $M_2$ assure $30\%$.</p>
+                <p>La probabilité qu'un flacon présente un défaut sachant qu'il provient de $M_1$ est $0{,}03$.</p>
+                <p>La probabilité qu'un flacon présente un défaut sachant qu'il provient de $M_2$ est $0{,}05$.</p>
+                <p>1. Montrer que la probabilité qu'un flacon choisi au hasard soit défectueux est $P(D) = 0{,}036$.</p>
+                <p>2. Un client constate un défaut sur son flacon. Quelle est la probabilité qu'il ait été produit par $M_1$ ?</p>
+                <p>3. On prélève au hasard 5 flacons de manière indépendante. Calculer la probabilité d'avoir exactement un flacon défectueux.</p>
+
+                <h3>PROBLÈME (12 points) : Étude de Fonction & Analyse Marginale</h3>
+                <p><strong>Partie A :</strong> Soit la fonction $g$ définie sur $\mathbb{R}$ par $g(x) = e^x - x - 1$.</p>
+                <p>1. Calculer $g'(x)$ pour tout $x \in \mathbb{R}$.</p>
+                <p>2. Dresser le tableau de variations de $g$ et en déduire que pour tout $x \in \mathbb{R}$ : $g(x) \ge 0$.</p>
+                <p><strong>Partie B :</strong> Soit la fonction $f$ définie sur $[0, +\infty[$ par :</p>
+                $$f(x) = (x - 1) e^x + 2$$
+                <p>1. Déterminer $\lim_{x \to +\infty} f(x)$.</p>
+                <p>2. Montrer que pour tout $x \ge 0$ : $f'(x) = x e^x$.</p>
+                <p>3. En déduire les variations de $f$ sur $[0, +\infty[$ et dresser son tableau de variations.</p>
+                <p>4. Déterminer l'équation de la tangente $(T)$ à la courbe $(\mathcal{C}_f)$ au point d'abscisse $x_0 = 1$.</p>
+                <p><strong>Partie C (Application Économique) :</strong></p>
+                <p>Une entreprise fabrique $x$ centaines d'unités ($x \in [1, 5]$). Le coût total de production en milliers de dirhams est modélisé par la fonction $f(x)$.</p>
+                <p>1. Calculer le coût marginal $C_m(x)$ pour une production de 200 unités ($x = 2$).</p>
+                <p>2. Chaque unité est vendue 100 DH (soit 10 kDH par centaine d'unités). Déterminer le bénéfice pour $x = 2$.</p>
+            </div>
+        `,
+        correction: `
+            <div class="exam-correction-body">
+                <h3>Corrigé Détaillé de l'Examen National 2024 — Mathématiques Éco</h3>
+                <p><strong>EXERCICE 1 :</strong></p>
+                <p>1. $u_1 = \frac{1}{3}(6) + 2 = 4$, $u_2 = \frac{1}{3}(4) + 2 = \frac{10}{3} \approx 3{,}33$.</p>
+                <p>2. Pour $n=0$ : $u_0 = 6 > 3$ (vrai). Supposons $u_n > 3$. Alors $\frac{1}{3} u_n > 1 \implies \frac{1}{3} u_n + 2 > 3 \implies u_{n+1} > 3$. Conclusion : pour tout $n \in \mathbb{N}$, $u_n > 3$.</p>
+                <p>3. $u_{n+1} - u_n = \frac{1}{3} u_n + 2 - u_n = -\frac{2}{3} u_n + 2 = -\frac{2}{3}(u_n - 3) < 0$ car $u_n > 3$. La suite est strictement décroissante et minorée par $3$, elle est donc <strong>convergente</strong>.</p>
+                <p>4. a. $v_{n+1} = u_{n+1} - 3 = \frac{1}{3} u_n + 2 - 3 = \frac{1}{3} u_n - 1 = \frac{1}{3}(u_n - 3) = \frac{1}{3} v_n$. $(v_n)$ est géométrique de raison $q = \frac{1}{3}$ et de premier terme $v_0 = u_0 - 3 = 3$.</p>
+                <p>b. $v_n = 3 \left(\frac{1}{3}\right)^n = \left(\frac{1}{3}\right)^{n-1}$. Par suite, $u_n = v_n + 3 = 3 \left(\frac{1}{3}\right)^n + 3$.</p>
+                <p>c. Comme $-1 < \frac{1}{3} < 1$, $\lim_{n \to +\infty} \left(\frac{1}{3}\right)^n = 0$, donc $\lim_{n \to +\infty} u_n = 3$.</p>
+
+                <p><strong>EXERCICE 2 :</strong></p>
+                <p>1. $P(D) = P(M_1) P(D|M_1) + P(M_2) P(D|M_2) = 0{,}70 \times 0{,}03 + 0{,}30 \times 0{,}05 = 0{,}021 + 0{,}015 = 0{,}036$.</p>
+                <p>2. $P(M_1|D) = \frac{P(M_1 \cap D)}{P(D)} = \frac{0{,}021}{0{,}036} = \frac{21}{36} = \frac{7}{12} \approx 0{,}5833\text{ (soit } 58{,}33\%\text{)}$.</p>
+                <p>3. Loi binomiale $\mathcal{B}(5, 0{,}036)$ : $P(Y = 1) = \binom{5}{1} (0{,}036)^1 (1 - 0{,}036)^4 = 5 \times 0{,}036 \times (0{,}964)^4 \approx 0{,}1554$.</p>
+
+                <p><strong>PROBLÈME :</strong></p>
+                <p><strong>Partie A :</strong> $g'(x) = e^x - 1$. $g'(x) > 0 \iff x > 0$. $g$ admet un minimum en $x = 0$ valant $g(0) = e^0 - 0 - 1 = 0$. Donc pour tout $x \in \mathbb{R}$, $g(x) \ge 0$.</p>
+                <p><strong>Partie B :</strong></p>
+                <p>1. $\lim_{x \to +\infty} (x-1) = +\infty$ et $\lim_{x \to +\infty} e^x = +\infty \implies \lim_{x \to +\infty} f(x) = +\infty$.</p>
+                <p>2. $f'(x) = 1 \cdot e^x + (x-1) e^x + 0 = e^x(1 + x - 1) = x e^x$.</p>
+                <p>3. Pour $x \ge 0$, $x \ge 0$ et $e^x > 0$ donc $f'(x) \ge 0$. La fonction $f$ est strictement croissante sur $[0, +\infty[$. $f(0) = -1 + 2 = 1$.</p>
+                <p>4. En $x_0 = 1$ : $f(1) = 0 + 2 = 2$. $f'(1) = 1 \cdot e^1 = e$. Équation de la tangente : $y = e(x - 1) + 2 = ex - e + 2$.</p>
+                <p><strong>Partie C :</strong></p>
+                <p>1. Coût marginal : $C_m(x) = f'(x) = x e^x$. Pour $x = 2$ : $C_m(2) = 2 e^2 \approx 2 \times 7{,}389 = 14{,}778\text{ kDH (soit } 14\,778\text{ DH)}$.</p>
+                <p>2. Pour $x = 2$ centaines d'unités : Recette $R(2) = 10 \times 2 = 20\text{ kDH}$. Coût total $C(2) = f(2) = (2 - 1) e^2 + 2 = e^2 + 2 \approx 9{,}389\text{ kDH}$. Bénéfice : $B(2) = R(2) - C(2) = 20 - 9{,}389 = 10{,}611\text{ kDH (soit } 10\,611\text{ DH)}$.</p>
             </div>
         `
     },
