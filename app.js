@@ -3567,486 +3567,1061 @@ const chaptersData = [
             { title: "Session Ordinaire 2024 - Sciences Physiques", type: "National", year: 2024 }
         ]
     },
-        // ==========================================
-    // 2ÈME BAC SCIENCES ÉCONOMIQUES & GESTION (2BAC ÉCO) - MATHÉMATIQUES
+    // ==========================================
+    // 2ÈME BAC SCIENCES ÉCONOMIQUES & GESTION (2BAC ÉCO) - PROGRAMME DIMAMATH
     // ==========================================
     {
-        id: "2bac-eco-math-limites-continuite",
-        title: "Limites, Continuité & Applications Économiques",
+        id: "2bac-eco-math-01-limites-et-continuite",
+        title: "Limites et Continuité",
         level: "2bac-eco",
         subject: "math",
-        category: "Analyse & Modélisation",
+        category: "Analyse",
         duration: "14 heures",
         difficulty: "Intermédiaire",
         progress: 0,
-        description: "Limites finies et infinies, calcul des formes indéterminées, continuité sur un intervalle, Théorème des Valeurs Intermédiaires (TVI) et calcul du point d'équilibre marché (offre et demande).",
+        description: "Limites finies et infinies, formes indéterminées, continuité d'une fonction numérique, Théorème des Valeurs Intermédiaires (TVI), et applications économiques (prix et équilibre de marché).",
+        coursePdf: {
+            file: "pdf/2bac-eco/01_limites_et_continuite_cours_1.pdf",
+            title: "Cours 1 : Limites et Continuité (DimaMath PDF)",
+            description: "Cours complet et officiel de DimaMath pour la 2ème année Baccalauréat Sciences Économiques & Gestion."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/01_limites_et_continuite_serie_1.pdf",
+                title: "Série d'Exercices 1 : Calcul de Limites & Formes Indéterminées (PDF)",
+                description: "Exercices progressifs d'application et de levée d'indétermination."
+            },
+            {
+                file: "pdf/2bac-eco/01_limites_et_continuite_serie_2.pdf",
+                title: "Série d'Exercices 2 : Continuité & Théorème des Valeurs Intermédiaires (PDF)",
+                description: "Exercices sur la continuité en un point, sur intervalle et équations f(x) = k."
+            },
+            {
+                file: "pdf/2bac-eco/01_limites_et_continuite_serie_3.pdf",
+                title: "Série d'Exercices 3 : Synthèse & Problèmes d'Approfondissement (PDF)",
+                description: "Série de synthèse type devoir surveillé et examen national."
+            },
+        ],
         courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Limites et Continuité — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/01_limites_et_continuite_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/01_limites_et_continuite_cours_1.pdf" download="01_limites_et_continuite_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/01_limites_et_continuite_serie_1.pdf" download="01_limites_et_continuite_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/01_limites_et_continuite_serie_2.pdf" download="01_limites_et_continuite_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                <a href="pdf/2bac-eco/01_limites_et_continuite_serie_3.pdf" download="01_limites_et_continuite_serie_3.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 3
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/01_limites_et_continuite_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
             <div class="course-section">
                 <h3>I. Limites d'une Fonction Numérique & Formes Indéterminées</h3>
-                <p>Le calcul des limites permet d'analyser le comportement à long terme des grandeurs économiques (coûts asymptotiques, seuils de saturation, capacités maximales de production).</p>
+                <p>Le calcul des limites permet d'étudier le comportement asymptotique des grandeurs économiques (coûts à long terme, seuils de saturation, production maximale).</p>
                 <div class="formula-box">
                     <h4>1. Les 4 Formes Indéterminées Fondamentales</h4>
                     <p>$$\left[\frac{0}{0}\right], \quad \left[\frac{\infty}{\infty}\right], \quad [0 \times \infty], \quad [+\infty - \infty]$$</p>
-                    <p>Pour lever une indétermination : factorisation par le monôme de plus haut degré en $\pm\infty$, factorisation par $(x - a)$ en un point fini, ou multiplication par l'expression conjuguée $\sqrt{A} - \sqrt{B} = \frac{A - B}{\sqrt{A} + \sqrt{B}}$.</p>
+                    <p>Techniques usuelles : Factorisation par le terme dominant en $\pm\infty$, factorisation par $(x - a)$ en un point fini, ou multiplication par l'expression conjuguée $\sqrt{A} - \sqrt{B} = \frac{A - B}{\sqrt{A} + \sqrt{B}}$.</p>
                 </div>
             </div>
 
             <div class="course-section">
                 <h3>II. Continuité & Théorème des Valeurs Intermédiaires (TVI)</h3>
                 <div class="tip-box">
-                    <strong>Définition :</strong> Une fonction $f$ est continue en $x_0$ si $\lim_{x \to x_0} f(x) = f(x_0)$. Elle est continue sur un intervalle $I$ si elle est continue en tout point de $I$. Les fonctions polynômes et rationnelles sont continues sur leurs ensembles de définition.
+                    <strong>Définition :</strong> Une fonction $f$ est continue en $x_0$ si $\lim_{x \to x_0} f(x) = f(x_0)$. Les fonctions polynômes et rationnelles sont continues sur leurs domaines de définition.
                 </div>
                 <div class="formula-box">
                     <h4>Théorème des Valeurs Intermédiaires (TVI)</h4>
-                    <p>Si $f$ est une fonction <strong>continue</strong> sur un intervalle $[a, b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un réel $c \in [a, b]$ tel que :</p>
-                    <p>$$f(c) = k$$</p>
-                    <p><strong>Corollaire d'Unicité (Bijection) :</strong> Si de plus $f$ est <strong>strictement monotone</strong> sur $[a, b]$, alors l'équation $f(x) = k$ admet une <strong>unique solution</strong> $\alpha$ dans $[a, b]$. En particulier, si $f(a) \times f(b) < 0$, l'équation $f(x) = 0$ admet une unique solution $\alpha \in ]a, b[$.</p>
+                    <p>Si $f$ est une fonction <strong>continue</strong> sur $[a, b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un réel $c \in [a, b]$ tel que $f(c) = k$.</p>
+                    <p><strong>Corollaire de la Bijection (Unicité) :</strong> Si $f$ est de plus <strong>strictement monotone</strong> sur $[a, b]$, alors pour tout $k \in f([a, b])$, l'équation $f(x) = k$ admet une <strong>unique solution</strong> $\alpha \in [a, b]$. En particulier si $f(a) \times f(b) < 0$, l'équation $f(x) = 0$ possède une unique solution $\alpha \in ]a, b[$.</p>
                 </div>
             </div>
 
             <div class="course-section">
                 <h3>III. Applications Microéconomiques Fondamentales</h3>
                 <div class="info-box">
-                    <h4>1. Équilibre du Marché (Loi de l'Offre et de la Demande)</h4>
+                    <h4>1. Prix et Quantité d'Équilibre du Marché</h4>
                     <p>Soit $p$ le prix unitaire d'un bien ($p > 0$) :</p>
                     <ul>
-                        <li><strong>Fonction de Demande $D(p)$ :</strong> Quantité demandée par les consommateurs. Fonction généralement continue et strictement décroissante du prix $p$.</li>
-                        <li><strong>Fonction d'Offre $O(p)$ :</strong> Quantité proposée par les producteurs. Fonction continue et strictement croissante du prix $p$.</li>
-                        <li><strong>Prix d'équilibre $p^*$ :</strong> Solution unique de l'équation $f(p) = O(p) - D(p) = 0$. D'après le TVI, la stricte monotonie de $f$ garantit l'existence et l'unicité du prix d'équilibre $p^*$, auquel correspond la quantité d'équilibre $q^* = O(p^*) = D(p^*)$.</li>
+                        <li><strong>Demande $D(p)$ :</strong> Quantité demandée (fonction continue, strictement décroissante du prix).</li>
+                        <li><strong>Offre $O(p)$ :</strong> Quantité offerte (fonction continue, strictement croissante du prix).</li>
+                        <li><strong>Équilibre $p^*$ :</strong> Solution unique de l'équation $O(p) - D(p) = 0$, garantie par le TVI. Quantité d'équilibre : $q^* = D(p^*) = O(p^*)$.</li>
                     </ul>
                 </div>
                 <div class="formula-box">
-                    <h4>2. Coût Fixe, Coût Moyen et Comportement Asymptotique</h4>
-                    <p>Soit $C(q) = a q^2 + b q + F$ le coût total de production ($F > 0$ étant les coûts fixes). Le coût moyen unitaire est :</p>
-                    <p>$$CM(q) = \frac{C(q)}{q} = a q + b + \frac{F}{q}$$</p>
-                    <p>Comportement aux bornes : $\lim_{q \to 0^+} CM(q) = +\infty$ (écrasement des coûts fixes sur faible série) et $\lim_{q \to +\infty} CM(q) = +\infty$ (si $a > 0$, sous l'effet des déséconomies d'échelle).</p>
+                    <h4>2. Coût Fixe et Coût Moyen Asymptotique</h4>
+                    <p>Soit $C(q) = a q^2 + b q + F$ le coût total ($F > 0$ coûts fixes). Le coût unitaire moyen est $CM(q) = \frac{C(q)}{q} = a q + b + \frac{F}{q}$. Lorsque $q \to +\infty$, le coût moyen tend vers la droite asymptote, traduisant les rendements d'échelle.</p>
                 </div>
             </div>
+        
         `,
         exercises: [
             {
-                title: "Exercice 1 : Calcul de limites & Coût moyen à long terme",
-                statement: "Le coût total de fabrication de $q$ milliers d'articles d'artisanat marocain est donné en milliers de dirhams par :<br>$$C(q) = \frac{4q^2 + 10q + 25}{q + 1} \quad (q \ge 1)$$<br>1. Déterminer l'expression du coût moyen unitaire $CM(q) = \frac{C(q)}{q}$.<br>2. Calculer $\lim_{q \to +\infty} CM(q)$ et interpréter économiquement ce résultat.",
-                solution: "<strong>1. Expression du coût moyen :</strong><br>$$CM(q) = \frac{C(q)}{q} = \frac{4q^2 + 10q + 25}{q(q + 1)} = \frac{4q^2 + 10q + 25}{q^2 + q}$$<br><strong>2. Limite à l'infini :</strong><br>Il s'agit d'une fonction rationnelle en $+\infty$. Le quotient des monômes de plus haut degré donne :<br>$$\lim_{q \to +\infty} CM(q) = \lim_{q \to +\infty} \frac{4q^2}{q^2} = 4$$<br><strong>Interprétation économique :</strong> Lorsque la production augmente indéfiniment ($q \to +\infty$), le coût moyen unitaire tend à se stabiliser asymptotiquement vers un plancher de <strong>4 000 DH par millier d'articles</strong> (soit 4 DH l'unité). L'asymptote horizontale $y = 4$ traduit l'amortissement complet des charges fixes initiales."
+                title: "Exercice 1 : Calcul de limites & Coût moyen unitaire",
+                statement: "Le coût total de fabrication de $q$ milliers d'articles artisanaux (en kDH) est :<br>$$C(q) = \frac{3q^2 + 8q + 18}{q + 1} \quad (q \ge 1)$$<br>1. Exprimer le coût moyen unitaire $CM(q) = \frac{C(q)}{q}$.<br>2. Calculer $\lim_{q \to +\infty} CM(q)$ et donner l'interprétation économique.",
+                solution: "<strong>1. Coût moyen unitaire :</strong><br>$$CM(q) = \frac{3q^2 + 8q + 18}{q(q+1)} = \frac{3q^2 + 8q + 18}{q^2 + q}$$<br><strong>2. Limite à l'infini :</strong><br>$$\lim_{q \to +\infty} CM(q) = \lim_{q \to +\infty} \frac{3q^2}{q^2} = 3$$<br><strong>Interprétation :</strong> Lorsque la production augmente fortement ($q \to +\infty$), le coût moyen se stabilise vers un seuil plancher incompressible de <strong>3 000 DH par millier d'articles</strong> (3 DH/unité)."
             },
             {
-                title: "Exercice 2 : Existence et unicité du Prix d'Équilibre (TVI)",
-                statement: "Sur un marché de textile à Casablanca, les fonctions de demande $D(p)$ et d'offre $O(p)$ en fonction du prix unitaire $p \in [10, 50]$ (en dirhams) sont données par :<br>$$D(p) = \frac{600}{p} \quad \text{et} \quad O(p) = p - 5$$<br>1. On pose $f(p) = O(p) - D(p)$. Montrer que $f$ est continue et strictement croissante sur $[10, 50]$.<br>2. Calculer $f(20)$ et $f(30)$. En déduire qu'il existe un unique prix d'équilibre $p^* \in ]20, 30[$.<br>3. Déterminer la valeur exacte de $p^*$ et la quantité d'équilibre $q^*$.",
-                solution: "<strong>1. Continuité et variations :</strong><br>$f(p) = p - 5 - \frac{600}{p}$. La fonction $f$ est dérivable (somme de fonctions usuelles dérivables sur $[10, 50]$), donc continue sur $[10, 50]$.<br>Pour tout $p \in [10, 50]$ :<br>$$f'(p) = 1 - 600 \times \left(-\frac{1}{p^2}\right) = 1 + \frac{600}{p^2} > 0$$<br>La dérivée étant strictement positive, $f$ est <strong>strictement croissante</strong> sur $[10, 50]$.<br><br><strong>2. Application du TVI :</strong><br>$$f(20) = 20 - 5 - \frac{600}{20} = 15 - 30 = -15 < 0$$<br>$$f(30) = 30 - 5 - \frac{600}{30} = 25 - 20 = 5 > 0$$<br>Comme $f$ est continue, strictement croissante et que $f(20) \times f(30) < 0$, le théorème des valeurs intermédiaires assure l'existence et l'unicité d'une solution $p^* \in ]20, 30[$ telle que $f(p^*) = 0$.<br><br><strong>3. Valeur exacte de l'équilibre :</strong><br>$$p - 5 - \frac{600}{p} = 0 \iff p^2 - 5p - 600 = 0$$<br>Discriminant : $\Delta = (-5)^2 - 4(1)(-600) = 25 + 2400 = 2425$... ou factorisation : $(p - 25)(p + 24) = 0$ car $25 \times (-24) = -600$ et $25 - 24 = 1$ (avec $p^2 - p - 600$), ici pour $p^2 - 5p - 600 = 0$, les racines sont $p = \frac{5 \pm \sqrt{2425}}{2} \approx \frac{5 + 49{,}24}{2} \approx 27{,}12\text{ DH}$.<br>La quantité d'équilibre échangée sur le marché est $q^* = O(p^*) \approx 22{,}12$ unités."
-            }
+                title: "Exercice 2 : Existence et Unicité du Prix d'Équilibre (TVI)",
+                statement: "Sur un marché de distribution, les fonctions de demande et d'offre pour un prix $p \in [10, 40]$ (en DH) sont :<br>$$D(p) = \frac{800}{p} \quad \text{et} \quad O(p) = 2p - 10$$<br>1. Poser $f(p) = O(p) - D(p)$. Montrer que $f$ est continue et strictement croissante sur $[10, 40]$.<br>2. Montrer qu'il existe un unique prix d'équilibre $p^* \in ]20, 25[$.",
+                solution: "<strong>1. Continuité et monotonie :</strong><br>$f(p) = 2p - 10 - \frac{800}{p}$. La dérivée est $f'(p) = 2 + \frac{800}{p^2} > 0$. $f$ est dérivable donc continue, et strictement croissante sur $[10, 40]$.<br><strong>2. Application du TVI :</strong><br>$f(20) = 40 - 10 - 40 = -10 < 0$ et $f(25) = 50 - 10 - 32 = 8 > 0$.<br>Comme $f(20) \times f(25) < 0$, d'après le TVI, il existe un unique $p^* \in ]20, 25[$ tel que $O(p^*) = D(p^*)$."
+            },
         ],
         exams: [
-            { title: "Session Ordinaire 2024 - Sciences Éco", type: "National", year: 2024 }
+            { title: "Examen National 2026 - Sciences Éco (Session Normale)", type: "National", year: 2026 },
+            { title: "Examen National 2025 - Sciences Éco (Session Normale)", type: "National", year: 2025 },
         ]
     },
     {
-        id: "2bac-eco-math-derivation-optimisation",
-        title: "Dérivation & Optimisation Économique (Coût, Recette, Bénéfice)",
+        id: "2bac-eco-math-02-derivation-et-ses-applications",
+        title: "Dérivation et ses Applications",
         level: "2bac-eco",
         subject: "math",
         category: "Calcul Différentiel",
-        duration: "18 heures",
+        duration: "16 heures",
         difficulty: "Avancé",
         progress: 0,
-        description: "Calcul différentiel, sens de variation, extremum, concavité. Analyse marginale : coût marginal $C_m(q) = C'(q)$, recette marginale $R_m(q) = R'(q)$ et maximisation du profit $B(q)$.",
+        description: "Nombre dérivé, dérivabilité sur un intervalle, calcul des dérivées, sens de variation, extremums et analyse marginale microéconomique (coût marginal, recette marginale et maximisation du profit).",
+        coursePdf: {
+            file: "pdf/2bac-eco/02_derivation_et_ses_applications_cours_1.pdf",
+            title: "Cours 1 : Dérivation et ses Applications (DimaMath PDF)",
+            description: "Cours complet DimaMath : règles de dérivation, tangentes, extremums et applications économiques."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/02_derivation_et_ses_applications_serie_1.pdf",
+                title: "Série d'Exercices 1 : Règles de Dérivation & Tangentes (PDF)",
+                description: "Calculs des dérivées usuelles et équations de la tangente."
+            },
+            {
+                file: "pdf/2bac-eco/02_derivation_et_ses_applications_serie_2.pdf",
+                title: "Série d'Exercices 2 : Extremums & Analyse Marginale Économique (PDF)",
+                description: "Problèmes d'optimisation économique et étude de rentabilité."
+            },
+        ],
         courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Dérivation et ses Applications — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/02_derivation_et_ses_applications_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/02_derivation_et_ses_applications_cours_1.pdf" download="02_derivation_et_ses_applications_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/02_derivation_et_ses_applications_serie_1.pdf" download="02_derivation_et_ses_applications_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/02_derivation_et_ses_applications_serie_2.pdf" download="02_derivation_et_ses_applications_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/02_derivation_et_ses_applications_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
             <div class="course-section">
-                <h3>I. Dérivabilité & Règles de Dérivation</h3>
-                <p>En économie mathématique, la dérivée modélise la variation instantanée ou marginale d'une grandeur par rapport à une variable de commande (quantité produite, niveau de prix, investissement publicitaire).</p>
+                <h3>I. Dérivabilité & Règles Fondamentales</h3>
+                <p>La dérivée $f'(x_0) = \lim_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}$ représente la pente de la tangente au point d'abscisse $x_0$. Équation de la tangente :</p>
                 <div class="formula-box">
-                    <h4>Règles usuelles de calcul des dérivées</h4>
+                    <p>$$y = f'(x_0)(x - x_0) + f(x_0)$$</p>
+                </div>
+                <div class="formula-box">
+                    <h4>Règles de Calcul Différentiel</h4>
                     <ul>
-                        <li>$(u + v)' = u' + v'$ et $(k \cdot u)' = k \cdot u'$</li>
+                        <li>$(u + v)' = u' + v', \quad (k \cdot u)' = k \cdot u'$</li>
                         <li>$(u \cdot v)' = u' v + u v'$</li>
-                        <li>$\left(\frac{u}{v}\right)' = \frac{u' v - u v'}{v^2} \quad (v(x) \neq 0)$</li>
-                        <li>$(u^n)' = n \cdot u' \cdot u^{n-1} \quad (n \in \mathbb{Z}^*)$</li>
-                        <li>$(\sqrt{u})' = \frac{u'}{2\sqrt{u}} \quad (u(x) > 0)$</li>
+                        <li>$\left(\frac{u}{v}\right)' = \frac{u' v - u v'}{v^2} \quad (v \neq 0)$</li>
+                        <li>$(u^n)' = n \cdot u' \cdot u^{n-1}, \quad (\sqrt{u})' = \frac{u'}{2\sqrt{u}}$</li>
                     </ul>
                 </div>
             </div>
 
             <div class="course-section">
-                <h3>II. Théorie de l'Analyse Marginale en Microéconomie</h3>
+                <h3>II. Analyse Marginale & Optimisation Microéconomique</h3>
                 <div class="info-box">
-                    <h4>1. Les Fonctions Économiques Fondamentales</h4>
+                    <h4>1. Coût Marginal et Coût Moyen</h4>
+                    <p>Pour une production de $q$ unités :</p>
                     <ul>
-                        <li><strong>Coût Total $C(q)$ :</strong> Coût total pour fabriquer une quantité $q$ d'unités ($C(q) = CF + CV(q)$).</li>
-                        <li><strong>Coût Moyen $CM(q)$ :</strong> Coût unitaire de fabrication : $$CM(q) = \frac{C(q)}{q}$$</li>
-                        <li><strong>Coût Marginal $C_m(q)$ :</strong> Coût engendré par la production d'une unité supplémentaire : $$C_m(q) = C'(q)$$</li>
-                        <li><strong>Recette Totale $R(q)$ :</strong> Chiffre d'affaires réalisé par la vente de $q$ unités au prix $p$ : $$R(q) = p \cdot q$$</li>
-                        <li><strong>Recette Marginale $R_m(q)$ :</strong> Recette procurée par la vente d'une unité supplémentaire : $$R_m(q) = R'(q)$$</li>
-                        <li><strong>Bénéfice Total $B(q)$ :</strong> Profit net de l'entreprise : $$B(q) = R(q) - C(q)$$</li>
+                        <li><strong>Coût Marginal :</strong> $C_m(q) = C'(q)$ (coût de fabrication d'une unité supplémentaire).</li>
+                        <li><strong>Coût Moyen :</strong> $CM(q) = \frac{C(q)}{q}$. Le coût moyen est minimal lorsque le coût marginal est égal au coût moyen : $C_m(q) = CM(q)$.</li>
                     </ul>
                 </div>
-
                 <div class="formula-box">
-                    <h4>2. Théorème d'Égalisation Marginale (Maximisation du Profit)</h4>
-                    <p>Pour maximiser le bénéfice total $B(q)$ :</p>
-                    <p><strong>Condition du Premier Ordre (CPO) :</strong> $B'(q) = 0 \iff R'(q) - C'(q) = 0 \iff R_m(q) = C_m(q)$.</p>
-                    <p>Le profit est maximal à la quantité pour laquelle la <strong>recette marginale est rigoureusement égale au coût marginal</strong>.</p>
-                    <p><strong>Condition du Second Ordre (CSO) :</strong> $B''(q) < 0 \iff R''(q) < C''(q)$ (le coût marginal croît plus vite que la recette marginale).</p>
-                </div>
-
-                <div class="tip-box">
-                    <h4>3. Propriété Remarquable du Coût Moyen Minimum (Optimum Technique)</h4>
-                    <p>Calculons la dérivée de $CM(q) = \frac{C(q)}{q}$ :</p>
-                    <p>$$CM'(q) = \frac{C'(q) \cdot q - C(q) \cdot 1}{q^2} = \frac{C_m(q) - CM(q)}{q}$$</p>
-                    <p>Le coût moyen atteint son minimum lorsque $CM'(q) = 0$, ce qui équivaut à :</p>
-                    <p>$$C_m(q) = CM(q)$$</p>
-                    <p><strong>Règle économique :</strong> La courbe du coût marginal coupe toujours la courbe du coût moyen en son minimum absolu (optimum technique d'échelle).</p>
+                    <h4>2. Maximisation du Bénéfice (Règle d'or)</h4>
+                    <p>Soit $R(q) = p \cdot q$ la recette totale et $B(q) = R(q) - C(q)$ le bénéfice net :</p>
+                    <p>$$B'(q) = R'(q) - C'(q) = R_m(q) - C_m(q)$$</p>
+                    <p>Le profit est maximal pour la quantité $q^*$ vérifiant :</p>
+                    <p>$$B'(q^*) = 0 \iff R_m(q^*) = C_m(q^*) \quad \text{avec} \quad B''(q^*) < 0$$</p>
                 </div>
             </div>
+        
         `,
         exercises: [
             {
-                title: "Exercice 1 : Optimisation de la production et profit maximal",
-                statement: "Une entreprise marocaine de câblage automobile fabrique chaque jour $q$ centaines de mètres de faisceaux électriques ($q \in [1, 20]$).<br>La fonction de coût total en milliers de dirhams est :<br>$$C(q) = q^3 - 12q^2 + 60q + 40$$<br>Chaque centaine de mètres est vendue au prix fixe de marché de $36$ milliers de dirhams ($p = 36$).<br>1. Exprimer la recette totale $R(q)$ et la recette marginale $R_m(q)$.<br>2. Déterminer l'expression du bénéfice total $B(q)$ en fonction de $q$.<br>3. Calculer le coût marginal $C_m(q)$ et résoudre l'équation $C_m(q) = R_m(q)$.<br>4. Dresser le tableau de variations de $B(q)$ sur $[1, 20]$ et en déduire la quantité de production assurant le bénéfice maximal, ainsi que le montant de ce profit.",
-                solution: "<strong>1. Recette totale et marginale :</strong><br>$$R(q) = p \cdot q = 36q$$<br>La recette marginale est :<br>$$R_m(q) = R'(q) = 36\text{ kDH}$$<br><strong>2. Expression du bénéfice :</strong><br>$$B(q) = R(q) - C(q) = 36q - (q^3 - 12q^2 + 60q + 40) = -q^3 + 12q^2 - 24q - 40$$<br><strong>3. Égalisation marginale $C_m(q) = R_m(q)$ :</strong><br>$$C_m(q) = C'(q) = 3q^2 - 24q + 60$$<br>$$C_m(q) = 36 \iff 3q^2 - 24q + 24 = 0 \iff q^2 - 8q + 8 = 0$$<br>Discriminant réduit : $\Delta' = (-4)^2 - 1(8) = 16 - 8 = 8 = (2\sqrt{2})^2$.<br>Les solutions sont $q_1 = 4 - 2\sqrt{2} \approx 1{,}17$ et $q_2 = 4 + 2\sqrt{2} \approx 6{,}83$.<br><br><strong>4. Tableau de variations et profit maximal :</strong><br>La dérivée du bénéfice est $B'(q) = -3q^2 + 24q - 24 = -3(q^2 - 8q + 8)$.<br>Le coefficient de $q^2$ est négatif ($-3 < 0$) : $B'(q)$ est négative à l'extérieur des racines et positive entre les racines.<br>Sur $[1, 20]$, $B'(q)$ s'annule en changeant de signe de négatif à positif en $q_1$, puis de positif à négatif en $q_2 = 4 + 2\sqrt{2} \approx 6{,}83$.<br>La fonction $B$ atteint donc son <strong>maximum local et global</strong> en $q^* = 4 + 2\sqrt{2} \approx 6{,}83$ centaines de mètres (soit 683 mètres).<br>Le bénéfice maximal obtenu est :<br>$$B(6{,}83) = -(6{,}83)^3 + 12(6{,}83)^2 - 24(6{,}83) - 40 \approx 37{,}02\text{ milliers de DH (soit 37 020 DH)}.$$"
-            }
+                title: "Exercice : Maximisation du Bénéfice d'une Entreprise",
+                statement: "Une entreprise fabrique $q$ centaines d'appareils ($q \in [1, 15]$). Le coût total en kDH est :<br>$$C(q) = q^3 - 12q^2 + 60q + 50$$<br>Chaque centaine d'appareils est vendue au prix de marché $p = 45$ kDH.<br>1. Exprimer la recette totale $R(q)$ et le bénéfice $B(q)$.<br>2. Calculer le bénéfice marginal $B'(q)$.<br>3. Déterminer la quantité $q^*$ qui maximise le profit et calculer le bénéfice maximal correspondant.",
+                solution: "<strong>1. Recette et Bénéfice :</strong><br>$R(q) = 45q$<br>$B(q) = R(q) - C(q) = 45q - (q^3 - 12q^2 + 60q + 50) = -q^3 + 12q^2 - 15q - 50$<br><strong>2. Bénéfice marginal :</strong><br>$B'(q) = -3q^2 + 24q - 15 = -3(q^2 - 8q + 5)$<br><strong>3. Optimisation :</strong><br>Discriminant de $q^2 - 8q + 5 = 0$ : $\Delta = 64 - 20 = 44$. Les racines sont $q = \frac{8 \pm \sqrt{44}}{2} = 4 \pm \sqrt{11}$.<br>Sur $[1, 15]$, $q^* = 4 + \sqrt{11} \approx 7{,}32$ centaines (soit 732 appareils).<br>$B''(q) = -6q + 24$, pour $q^* \approx 7{,}32$, $B''(q^*) < 0$, confirmant un <strong>maximum local</strong>."
+            },
         ],
         exams: [
-            { title: "Session Ordinaire 2023 - Sciences Éco", type: "National", year: 2023 }
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
+            { title: "Examen National 2024 - Sciences Éco", type: "National", year: 2024 },
         ]
     },
     {
-        id: "2bac-eco-math-suites-financieres",
-        title: "Suites Numériques & Mathématiques Financières",
+        id: "2bac-eco-math-03-etude-des-fonctions",
+        title: "Étude des Fonctions",
         level: "2bac-eco",
         subject: "math",
-        category: "Mathématiques Financières",
-        duration: "16 heures",
+        category: "Analyse",
+        duration: "14 heures",
+        difficulty: "Avancé",
+        progress: 0,
+        description: "Branches infinies, asymptotes verticales, horizontales et obliques, concavité et points d'inflexion ($f''(x)$), tableau de variation complet et construction graphique.",
+        coursePdf: {
+            file: "pdf/2bac-eco/03_etude_des_fonctions_cours_1.pdf",
+            title: "Cours 1 : Étude des Fonctions (DimaMath PDF)",
+            description: "Méthode pas à pas pour l'étude complète et le tracé de la courbe représentative."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/03_etude_des_fonctions_serie_1.pdf",
+                title: "Série d'Exercices 1 : Branches Infinies & Asymptotes (PDF)",
+                description: "Détermination des asymptotes et directions asymptotiques."
+            },
+            {
+                file: "pdf/2bac-eco/03_etude_des_fonctions_serie_2.pdf",
+                title: "Série d'Exercices 2 : Concavité, Points d'Inflexion & Tracé (PDF)",
+                description: "Étude de la dérivée seconde et construction géométrique de courbes."
+            },
+        ],
+        courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Étude des Fonctions — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/03_etude_des_fonctions_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/03_etude_des_fonctions_cours_1.pdf" download="03_etude_des_fonctions_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/03_etude_des_fonctions_serie_1.pdf" download="03_etude_des_fonctions_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/03_etude_des_fonctions_serie_2.pdf" download="03_etude_des_fonctions_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/03_etude_des_fonctions_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
+            <div class="course-section">
+                <h3>I. Branches Infinies & Asymptotes</h3>
+                <div class="formula-box">
+                    <h4>Classification des Asymptotes</h4>
+                    <ul>
+                        <li><strong>Asymptote Verticale :</strong> $\lim_{x \to a^\pm} f(x) = \pm\infty \implies (x = a)$ est asymptote verticale.</li>
+                        <li><strong>Asymptote Horizontale :</strong> $\lim_{x \to \pm\infty} f(x) = L \implies (y = L)$ est asymptote horizontale en $\pm\infty$.</li>
+                        <li><strong>Asymptote Oblique :</strong> Si $\lim_{x \to \pm\infty} [f(x) - (ax + b)] = 0$, la droite $(y = ax + b)$ est asymptote oblique.</li>
+                        <li><strong>Branches Paraboliques :</strong>
+                            <ul>
+                                <li>$\lim_{x \to \pm\infty} \frac{f(x)}{x} = \pm\infty$ : direction axe $(Oy)$.</li>
+                                <li>$\lim_{x \to \pm\infty} \frac{f(x)}{x} = 0$ : direction axe $(Ox)$.</li>
+                                <li>$\lim_{x \to \pm\infty} \frac{f(x)}{x} = a \neq 0$ et $\lim [f(x) - ax] = \pm\infty$ : direction droite $y = ax$.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Concavité & Points d'Inflexion</h3>
+                <div class="tip-box">
+                    <strong>Règle de la Dérivée Seconde :</strong>
+                    <ul>
+                        <li>Si $f''(x) \ge 0$ sur $I$, la courbe est <strong>convexe</strong> (tournée vers le haut).</li>
+                        <li>Si $f''(x) \le 0$ sur $I$, la courbe est <strong>concave</strong> (tournée vers le bas).</li>
+                        <li>Si $f''(x)$ s'annule en $x_0$ en changeant de signe, le point $I(x_0, f(x_0))$ est un <strong>point d'inflexion</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        
+        `,
+        exercises: [
+            {
+                title: "Exercice : Étude Complète d'une Fonction Rationnelle",
+                statement: "Soit $f(x) = \frac{2x - 3}{x + 1}$ définie sur $\mathbb{R} \setminus \{-1\}$.<br>1. Déterminer les limites de $f$ aux bornes de son domaine.<br>2. En déduire les équations des asymptotes à $(\mathcal{C}_f)$.<br>3. Calculer $f'(x)$ et dresser le tableau de variations.",
+                solution: "<strong>1. Limites aux bornes :</strong><br>$\lim_{x \to \pm\infty} f(x) = \lim_{x \to \pm\infty} \frac{2x}{x} = 2$.<br>$\lim_{x \to -1^-} f(x) = \frac{-5}{0^-} = +\infty$ et $\lim_{x \to -1^+} f(x) = \frac{-5}{0^+} = -\infty$.<br><strong>2. Asymptotes :</strong><br>La droite $y = 2$ est asymptote horizontale en $\pm\infty$. La droite $x = -1$ est asymptote verticale.<br><strong>3. Dérivée et variations :</strong><br>$f'(x) = \frac{2(x+1) - (2x-3)(1)}{(x+1)^2} = \frac{2x + 2 - 2x + 3}{(x+1)^2} = \frac{5}{(x+1)^2} > 0$.<br>$f$ est strictement croissante sur $]-\infty, -1[$ et sur $]-1, +\infty[$."
+            },
+        ],
+        exams: [
+            { title: "Examen National 2025 - Sciences Éco", type: "National", year: 2025 },
+        ]
+    },
+    {
+        id: "2bac-eco-math-04-suites-numeriques",
+        title: "Suites Numériques",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Algèbre & Suites",
+        duration: "14 heures",
         difficulty: "Intermédiaire",
         progress: 0,
-        description: "Suites arithmétiques, géométriques et arithmético-géométriques. Limites et convergence. Applications financières : Intérêts composés, valeur acquise et annuités de remboursement d'emprunt.",
+        description: "Raisonnement par récurrence, suites arithmétiques, suites géométriques, suites arithmético-géométriques $u_{n+1} = a u_n + b$, convergence, et mathématiques financières (intérêts composés, valeur acquise et amortissements).",
+        coursePdf: {
+            file: "pdf/2bac-eco/04_suites_numeriques_cours_1.pdf",
+            title: "Cours 1 : Suites Numériques (DimaMath PDF)",
+            description: "Cours complet DimaMath sur les suites et leurs applications financières."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/04_suites_numeriques_serie_1.pdf",
+                title: "Série d'Exercices 1 : Récurrence & Suites Arithmétiques / Géométriques (PDF)",
+                description: "Exercices fondamentaux sur le calcul de termes et sommes."
+            },
+            {
+                file: "pdf/2bac-eco/04_suites_numeriques_serie_2.pdf",
+                title: "Série d'Exercices 2 : Suites Récurrentes & Mathématiques Financières (PDF)",
+                description: "Problèmes de capitalisation, placements et plans d'épargne."
+            },
+        ],
         courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Suites Numériques — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/04_suites_numeriques_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/04_suites_numeriques_cours_1.pdf" download="04_suites_numeriques_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/04_suites_numeriques_serie_1.pdf" download="04_suites_numeriques_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/04_suites_numeriques_serie_2.pdf" download="04_suites_numeriques_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/04_suites_numeriques_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
             <div class="course-section">
-                <h3>I. Suites Arithmétiques et Géométriques</h3>
+                <h3>I. Suites Arithmétiques & Géométriques</h3>
                 <div class="formula-box">
-                    <h4>1. Synthèse Comparée des Deux Suites</h4>
-                    <table style="width:100%; border-collapse: collapse; margin-top: 10px; color: var(--text-primary);">
-                        <thead>
-                            <tr style="border-bottom: 2px solid rgba(255,255,255,0.2); text-align: left;">
-                                <th style="padding: 8px;">Propriété</th>
-                                <th style="padding: 8px;">Suite Arithmétique (Raison $r$)</th>
-                                <th style="padding: 8px;">Suite Géométrique (Raison $q$)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <td style="padding: 8px;">Relation de récurrence</td>
-                                <td style="padding: 8px;">$u_{n+1} = u_n + r$</td>
-                                <td style="padding: 8px;">$u_{n+1} = q \cdot u_n$</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <td style="padding: 8px;">Terme général ($u_0$)</td>
-                                <td style="padding: 8px;">$u_n = u_0 + n \cdot r$</td>
-                                <td style="padding: 8px;">$u_n = u_0 \cdot q^n$</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <td style="padding: 8px;">Somme de $n+1$ termes</td>
-                                <td style="padding: 8px;">$S_n = (n+1) \frac{u_0 + u_n}{2}$</td>
-                                <td style="padding: 8px;">$S_n = u_0 \frac{1 - q^{n+1}}{1 - q} \quad (q \neq 1)$</td>
-                            </tr>
-                        </tbody>
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <th style="padding: 8px;">Propriété</th>
+                            <th style="padding: 8px;">Suite Arithmétique ($r$)</th>
+                            <th style="padding: 8px;">Suite Géométrique ($q$)</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 8px;">Relation de récurrence</td>
+                            <td style="padding: 8px;">$u_{n+1} = u_n + r$</td>
+                            <td style="padding: 8px;">$u_{n+1} = q \cdot u_n$</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <td style="padding: 8px;">Terme général</td>
+                            <td style="padding: 8px;">$u_n = u_p + (n-p)r$</td>
+                            <td style="padding: 8px;">$u_n = u_p \cdot q^{n-p}$</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">Somme des termes</td>
+                            <td style="padding: 8px;">$S = \frac{n-p+1}{2}(u_p + u_n)$</td>
+                            <td style="padding: 8px;">$S = u_p \cdot \frac{1 - q^{n-p+1}}{1 - q} \quad (q \neq 1)$</td>
+                        </tr>
                     </table>
                 </div>
             </div>
 
             <div class="course-section">
-                <h3>II. Suites Arithmético-Géométriques : $u_{n+1} = a u_n + b$</h3>
+                <h3>II. Suites Arithmético-Géométriques & Modélisation Financière</h3>
                 <div class="info-box">
-                    <h4>Méthode de Résolution par Point Fixe</h4>
-                    <p>Pour exprimer le terme général d'une suite $u_{n+1} = a u_n + b$ avec $a \neq 1$ :</p>
+                    <h4>Résolution de $u_{n+1} = a u_n + b$ ($a \neq 1$)</h4>
                     <ol>
-                        <li>On cherche le point fixe $\alpha$ vérifiant $\alpha = a \alpha + b \iff \alpha = \frac{b}{1 - a}$.</li>
-                        <li>On pose la suite auxiliaire $v_n = u_n - \alpha$.</li>
-                        <li>On démontre que $(v_n)$ est une suite géométrique de raison $q = a$ : $$v_{n+1} = u_{n+1} - \alpha = (a u_n + b) - (a \alpha + b) = a(u_n - \alpha) = a v_n$$</li>
-                        <li>On en déduit $v_n = v_0 \cdot a^n$, puis le terme explicite : $$u_n = v_n + \alpha = (u_0 - \alpha) a^n + \alpha$$</li>
+                        <li>Trouver le point fixe : $\alpha = a\alpha + b \iff \alpha = \frac{b}{1 - a}$.</li>
+                        <li>Poser la suite auxiliaire : $v_n = u_n - \alpha$. Alors $(v_n)$ est une suite <strong>géométrique</strong> de raison $a$ : $v_n = v_0 \cdot a^n$.</li>
+                        <li>En déduire le terme général : $u_n = v_0 \cdot a^n + \alpha$. Si $|a| < 1$, alors $\lim_{n \to +\infty} u_n = \alpha$.</li>
                     </ol>
                 </div>
             </div>
-
-            <div class="course-section">
-                <h3>III. Mathématiques Financières & Crédits</h3>
-                <div class="formula-box">
-                    <h4>1. Intérêts Composés</h4>
-                    <p>Un capital initial $C_0$ placé à un taux périodique $i$ pendant $n$ périodes génère une valeur acquise de :</p>
-                    <p>$$C_n = C_0 (1 + i)^n$$</p>
-                </div>
-
-                <div class="formula-box">
-                    <h4>2. Valeur Acquise d'une Suite de Versements Constants (Plan d'Épargne)</h4>
-                    <p>Si l'on dépose un versement constant $a$ à la fin de chaque période pendant $n$ périodes au taux $i$, le capital accumulé $V_n$ est :</p>
-                    <p>$$V_n = a (1+i)^{n-1} + a (1+i)^{n-2} + \dots + a = a \cdot \frac{(1 + i)^n - 1}{i}$$</p>
-                </div>
-
-                <div class="formula-box">
-                    <h4>3. Remboursement d'Emprunt à Annuités Constantes</h4>
-                    <p>Pour amortir un emprunt de capital $C_0$ en $n$ annuités constantes $a$ au taux d'intérêt $i$ :</p>
-                    <p>$$C_0 = a \cdot \frac{1 - (1 + i)^{-n}}{i} \iff a = C_0 \cdot \frac{i}{1 - (1 + i)^{-n}}$$</p>
-                </div>
-            </div>
+        
         `,
         exercises: [
             {
-                title: "Exercice 1 : Modélisation d'une épargne arithmético-géométrique",
-                statement: "Un jeune lauréat marocain ouvre un compte bancaire avec un dépôt initial $u_0 = 10\,000\text{ DH}$.<br>Au 1er janvier de chaque année, son solde est rémunéré au taux de $4\%$ ($a = 1{,}04$), puis il y ajoute un versement annuel de $3\,000\text{ DH}$.<br>On note $u_n$ le solde du compte au bout de $n$ années.<br>1. Exprimer $u_{n+1}$ en fonction de $u_n$.<br>2. Déterminer le point fixe $\alpha$ tel que $\alpha = 1{,}04 \alpha + 3000$.<br>3. En posant $v_n = u_n - \alpha$, montrer que $(v_n)$ est géométrique et exprimer $u_n$ en fonction de $n$.<br>4. Calculer le capital accumulé après 10 années d'épargne.",
-                solution: "<strong>1. Relation de récurrence :</strong><br>$$u_{n+1} = 1{,}04 u_n + 3000$$<br><strong>2. Point fixe $\alpha$ :</strong><br>$$\alpha - 1{,}04 \alpha = 3000 \iff -0{,}04 \alpha = 3000 \iff \alpha = -\frac{3000}{0{,}04} = -75\,000\text{ DH}$$<br><strong>3. Suite auxiliaire $(v_n)$ :</strong><br>$$v_{n+1} = u_{n+1} - (-75000) = 1{,}04 u_n + 3000 + 75000 = 1{,}04 u_n + 78000 = 1{,}04(u_n + 75000) = 1{,}04 v_n$$<br>Donc $(v_n)$ est une suite géométrique de raison $q = 1{,}04$ et de premier terme :<br>$$v_0 = u_0 + 75000 = 10000 + 75000 = 85\,000$$<br>D'où $v_n = 85000 \times (1{,}04)^n$, ce qui donne pour $u_n$ :<br>$$u_n = 85\,000 \times (1{,}04)^n - 75\,000$$<br><strong>4. Capital après 10 ans ($n = 10$) :</strong><br>$$u_{10} = 85000 \times (1{,}04)^{10} - 75000 \approx 85000 \times 1{,}48024 - 75000 \approx 125\,820{,}74 - 75000 = 50\,820{,}74\text{ DH}.$$"
-            }
+                title: "Exercice : Épargne Mensuelle & Évolution de Capital",
+                statement: "Un particulier place un capital initial de $u_0 = 10\,000$ DH sur un compte rémunéré à $0{,}5\%$ d'intérêts mensuels, et effectue chaque fin de mois un versement supplémentaire fixe de $500$ DH.<br>1. Exprimer $u_{n+1}$ en fonction de $u_n$.<br>2. On pose $v_n = u_n + 100\,000$. Montrer que $(v_n)$ est géométrique de raison $1{,}005$.<br>3. Exprimer $u_n$ en fonction de $n$ et calculer le capital acquis après 2 ans ($n = 24$).",
+                solution: "<strong>1. Formule de récurrence :</strong><br>Chaque mois, le capital augmente de $0{,}5\%$ puis reçoit $500$ DH :<br>$$u_{n+1} = 1{,}005 u_n + 500$$<br><strong>2. Nature de $(v_n)$ :</strong><br>$$v_{n+1} = u_{n+1} + 100\,000 = 1{,}005 u_n + 500 + 100\,000 = 1{,}005 u_n + 100\,500 = 1{,}005(u_n + 100\,000) = 1{,}005 v_n$$<br>$(v_n)$ est géométrique de raison $q = 1{,}005$ et $v_0 = 10\,000 + 100\,000 = 110\,000$ DH.<br><strong>3. Capital au bout de 24 mois :</strong><br>$v_n = 110\,000 \times (1{,}005)^n \implies u_n = 110\,000 \times (1{,}005)^n - 100\,000$.<br>Pour $n = 24$ : $u_{24} = 110\,000 \times (1{,}005)^{24} - 100\,000 \approx 110\,000 \times 1{,}12716 - 100\,000 \approx 23\,987{,}57$ DH."
+            },
         ],
         exams: [
-            { title: "Session Rattrapage 2023 - Sciences Éco", type: "National", year: 2023 }
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
+            { title: "Examen National 2025 - Sciences Éco", type: "National", year: 2025 },
         ]
     },
     {
-        id: "2bac-eco-math-logarithmes-elasticite",
-        title: "Fonction Logarithme Népérien & Élasticité Économique",
-        level: "2bac-eco",
-        subject: "math",
-        category: "Analyse & Économétrie",
-        duration: "16 heures",
-        difficulty: "Intermédiaire",
-        progress: 0,
-        description: "Fonction ln, propriétés algébriques, limites usuelles, dérivée de ln(u). Concept clé d'élasticité de la demande par rapport au prix e(p) = (p/D(p)) * D'(p) et élasticité-revenu.",
-        courseContent: `
-            <div class="course-section">
-                <h3>I. Propriétés Fondamentales du Logarithme Népérien</h3>
-                <p>La fonction $\ln$ est la primitive sur $]0, +\infty[$ de la fonction $x \mapsto \frac{1}{x}$ qui s'annule en $1$.</p>
-                <div class="formula-box">
-                    <h4>1. Règles Algébriques</h4>
-                    <ul>
-                        <li>$\ln(1) = 0 \quad \text{et} \quad \ln(e) = 1 \quad (e \approx 2{,}718)$</li>
-                        <li>$\ln(a \cdot b) = \ln a + \ln b \quad (a > 0, b > 0)$</li>
-                        <li>$\ln\left(\frac{a}{b}\right) = \ln a - \ln b \quad \text{et} \quad \ln\left(\frac{1}{b}\right) = -\ln b$</li>
-                        <li>$\ln(a^r) = r \ln a \quad (r \in \mathbb{Q})$</li>
-                        <li>$\ln x < \ln y \iff x < y$ (stricte croissance sur $]0, +\infty[$)</li>
-                    </ul>
-                </div>
-                <div class="formula-box">
-                    <h4>2. Limites Remarquables & Croissances Comparées</h4>
-                    <p>$$\lim_{x \to +\infty} \ln x = +\infty, \quad \lim_{x \to 0^+} \ln x = -\infty$$</p>
-                    <p>$$\lim_{x \to +\infty} \frac{\ln x}{x} = 0, \quad \lim_{x \to 0^+} x \ln x = 0, \quad \lim_{x \to 1} \frac{\ln x}{x - 1} = 1$$</p>
-                </div>
-            </div>
-
-            <div class="course-section">
-                <h3>II. Dérivée Logarithmique & Élasticité de la Demande</h3>
-                <div class="tip-box">
-                    <h4>Dérivée :</h4>
-                    $$(\ln x)' = \frac{1}{x} \quad \text{et} \quad (\ln(u(x)))' = \frac{u'(x)}{u(x)}$$
-                </div>
-                <div class="info-box">
-                    <h4>Le Concept d'Élasticité-Prix de la Demande</h4>
-                    <p>L'élasticité de la demande $D(p)$ par rapport au prix $p$ mesure le pourcentage de variation de la quantité demandée suite à une augmentation de $1\%$ du prix :</p>
-                    <p>$$e(p) = \frac{\frac{\Delta D}{D}}{\frac{\Delta p}{p}} = \frac{p}{D(p)} \cdot D'(p) = \frac{d(\ln D)}{d(\ln p)}$$</p>
-                    <p><strong>Typologie Économique des Biens :</strong></p>
-                    <ul>
-                        <li><strong>$|e(p)| > 1$ (Demande très élastique) :</strong> Les consommateurs réagissent fortement au prix (biens de substitution, produits de luxe). Une baisse de prix augmente la recette totale.</li>
-                        <li><strong>$|e(p)| < 1$ (Demande inélastique / rigide) :</strong> Biens de première nécessité (farine, carburant, électricité). Une hausse de prix augmente le chiffre d'affaires.</li>
-                        <li><strong>$|e(p)| = 1$ (Élasticité unitaire) :</strong> La recette totale est stationnaire ($R'(p) = 0$).</li>
-                    </ul>
-                </div>
-            </div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Étude de l'élasticité-prix d'un produit agroalimentaire",
-                statement: "La demande mensuelle $D(p)$ d'huile d'olive de terroir en fonction du prix du litre $p$ (en dirhams, avec $p \in [40, 120]$) est modélisée par :<br>$$D(p) = 2000 - 300 \ln(p)$$<br>1. Calculer la dérivée $D'(p)$ et en déduire le sens de variation de la demande.<br>2. Exprimer l'élasticité-prix $e(p)$ en fonction de $p$.<br>3. Calculer $e(80)$ et donner sa signification économique précise pour la coopérative agricole.",
-                solution: "<strong>1. Dérivée et sens de variation :</strong><br>$$D'(p) = -300 \times \frac{1}{p} = -\frac{300}{p}$$<br>Pour tout $p \in [40, 120]$, $p > 0$ donc $D'(p) < 0$. La demande est strictement décroissante par rapport au prix (loi générale de la demande).<br><br><strong>2. Expression de l'élasticité :</strong><br>$$e(p) = \frac{p}{D(p)} \cdot D'(p) = \frac{p}{2000 - 300 \ln p} \times \left(-\frac{300}{p}\right) = -\frac{300}{2000 - 300 \ln p} = -\frac{3}{20 - 3 \ln p}$$<br><strong>3. Calcul pour $p = 80\text{ DH}$ :</strong><br>$\ln(80) \approx 4{,}3820$.<br>$$e(80) = -\frac{3}{20 - 3(4{,}3820)} = -\frac{3}{20 - 13{,}146} = -\frac{3}{6{,}854} \approx -0{,}438$$<br><strong>Signification économique :</strong><br>Comme $|e(80)| = 0{,}438 < 1$, la demande est <strong>inélastique</strong> (rigide). Une augmentation de $1\%$ du prix du litre d'huile d'olive entraîne une baisse de seulement $0{,}44\%$ de la quantité achetée. Par conséquent, une politique d'augmentation modérée du prix entraînera une <strong>augmentation du chiffre d'affaires global</strong> de la coopérative."
-            }
-        ],
-        exams: [
-            { title: "Session Ordinaire 2022 - Sciences Éco", type: "National", year: 2022 }
-        ]
-    },
-    {
-        id: "2bac-eco-math-exponentielles-croissance",
-        title: "Fonction Exponentielle & Modèles de Croissance Continue",
-        level: "2bac-eco",
-        subject: "math",
-        category: "Modélisation Dynamique",
-        duration: "16 heures",
-        difficulty: "Intermédiaire",
-        progress: 0,
-        description: "Fonction exp, propriétés algébriques, limites fondamentales, dérivée de exp(u(x)). Modélisation de la diffusion des produits (courbe logistique) et capitalisation en temps continu.",
-        courseContent: `
-            <div class="course-section">
-                <h3>I. Propriétés Fondamentales de la Fonction Exponentielle</h3>
-                <p>La fonction exponentielle est la fonction réciproque de la fonction $\ln$ sur $\mathbb{R}$ : $y = e^x \iff x = \ln y$ (pour $y > 0$).</p>
-                <div class="formula-box">
-                    <h4>1. Règles Algébriques</h4>
-                    <ul>
-                        <li>$e^0 = 1, \quad e^1 = e \approx 2{,}718$</li>
-                        <li>Pour tout $x \in \mathbb{R}$, $e^x > 0$</li>
-                        <li>$e^{x+y} = e^x \cdot e^y \quad \text{et} \quad e^{x-y} = \frac{e^x}{e^y}$</li>
-                        <li>$e^{-x} = \frac{1}{e^x} \quad \text{et} \quad (e^x)^r = e^{r x}$</li>
-                    </ul>
-                </div>
-                <div class="formula-box">
-                    <h4>2. Limites Usuelles et Croissances Comparées</h4>
-                    <p>$$\lim_{x \to +\infty} e^x = +\infty, \quad \lim_{x \to -\infty} e^x = 0, \quad \lim_{x \to 0} \frac{e^x - 1}{x} = 1$$</p>
-                    <p>$$\lim_{x \to +\infty} \frac{e^x}{x^n} = +\infty, \quad \lim_{x \to -\infty} x^n e^x = 0 \quad (n \in \mathbb{N}^*)$$</p>
-                </div>
-            </div>
-
-            <div class="course-section">
-                <h3>II. Dérivabilité & Équations Différentielles</h3>
-                <div class="tip-box">
-                    <h4>Dérivée :</h4>
-                    $$(e^x)' = e^x \quad \text{et} \quad (e^{u(x)})' = u'(x) \cdot e^{u(x)}$$
-                </div>
-                <div class="formula-box">
-                    <h4>Équations Différentielles Économiques</h4>
-                    <ul>
-                        <li>L'équation $y' = a y$ a pour solutions : $y(t) = C \cdot e^{a t}$ ($C \in \mathbb{R}$).</li>
-                        <li>L'équation $y' = a y + b$ ($a \neq 0$) a pour solutions : $y(t) = C \cdot e^{a t} - \frac{b}{a}$.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="course-section">
-                <h3>III. Modèle Logistique de Diffusion des Ventes</h3>
-                <div class="info-box">
-                    <p>Lors du lancement d'un nouveau service digital (e-commerce, application bancaire), le nombre d'utilisateurs $N(t)$ suit souvent une <strong>courbe en S (courbe logistique)</strong> :</p>
-                    <p>$$N(t) = \frac{K}{1 + b e^{-k t}} \quad (K, b, k > 0)$$</p>
-                    <ul>
-                        <li>$K$ représente le <strong>marché potentiel maximal (seuil de saturation)</strong> car $\lim_{t \to +\infty} N(t) = K$.</li>
-                        <li>Le point d'inflexion correspond au rythme d'adoption maximal (vitesse de croissance maximale).</li>
-                    </ul>
-                </div>
-            </div>
-        `,
-        exercises: [
-            {
-                title: "Exercice 1 : Modèle logistique de pénétration du marché",
-                statement: "Une néo-banque marocaine lance une application de paiement mobile. Le nombre de comptes ouverts (en milliers) au bout de $t$ mois est modélisé par :<br>$$N(t) = \frac{500}{1 + 9 e^{-0{,}4 t}} \quad (t \ge 0)$$<br>1. Calculer $N(0)$ (nombre initial de testeurs).<br>2. Déterminer $\lim_{t \to +\infty} N(t)$ et donner son interprétation commerciale.<br>3. Calculer la vitesse instantanée d'adoption $N'(t)$ et vérifier qu'elle est toujours strictement positive.<br>4. Déterminer la date $t^*$ à laquelle le service aura atteint la moitié de sa capacité maximale ($N(t^*) = 250$).",
-                solution: "<strong>1. Nombre initial d'utilisateurs :</strong><br>$$N(0) = \frac{500}{1 + 9 e^0} = \frac{500}{1 + 9} = \frac{500}{10} = 50\text{ milliers (soit 50 000 utilisateurs)}$$<br><strong>2. Limite à l'infini :</strong><br>Comme $\lim_{t \to +\infty} -0{,}4 t = -\infty$, on a $\lim_{t \to +\infty} e^{-0{,}4 t} = 0$.<br>Donc $\lim_{t \to +\infty} N(t) = \frac{500}{1 + 0} = 500\text{ milliers}$.<br>Le marché potentiel total saturable par cette application est de <strong>500 000 utilisateurs</strong>.<br><br><strong>3. Vitesse d'adoption $N'(t)$ :</strong><br>On utilise $\left(\frac{1}{u}\right)' = -\frac{u'}{u^2}$ avec $u(t) = 1 + 9 e^{-0{,}4 t}$ et $u'(t) = 9(-0{,}4)e^{-0{,}4 t} = -3{,}6 e^{-0{,}4 t}$.<br>$$N'(t) = 500 \times \frac{-(-3{,}6 e^{-0{,}4 t})}{(1 + 9 e^{-0{,}4 t})^2} = \frac{1800 e^{-0{,}4 t}}{(1 + 9 e^{-0{,}4 t})^2}$$<br>Comme $e^{-0{,}4 t} > 0$ et le dénominateur est un carré non nul, $N'(t) > 0$ pour tout $t \ge 0$. Le nombre de comptes croît continuellement.<br><br><strong>4. Date de mi-diffusion ($N(t) = 250$) :</strong><br>$$\frac{500}{1 + 9 e^{-0{,}4 t}} = 250 \iff 1 + 9 e^{-0{,}4 t} = 2 \iff 9 e^{-0{,}4 t} = 1 \iff e^{-0{,}4 t} = \frac{1}{9}$$<br>$$-0{,}4 t = \ln\left(\frac{1}{9}\right) = -\ln(9) \iff t = \frac{\ln(9)}{0{,}4} = \frac{2 \ln 3}{0{,}4} \approx \frac{2{,}1972}{0{,}4} \approx 5{,}49\text{ mois}.$$"
-            }
-        ],
-        exams: [
-            { title: "Session Ordinaire 2021 - Sciences Éco", type: "National", year: 2021 }
-        ]
-    },
-    {
-        id: "2bac-eco-math-integrales-surplus",
-        title: "Calcul Intégral & Surplus Économiques",
+        id: "2bac-eco-math-05-fonctions-primitives",
+        title: "Fonctions Primitives",
         level: "2bac-eco",
         subject: "math",
         category: "Calcul Intégral",
-        duration: "14 heures",
-        difficulty: "Avancé",
+        duration: "8 heures",
+        difficulty: "Intermédiaire",
         progress: 0,
-        description: "Primitives usuelles, intégration par parties, calcul d'aires. Applications économiques : Surplus du consommateur, surplus du producteur à l'équilibre et valeur moyenne d'un flux.",
+        description: "Définition d'une primitive, primitives des fonctions élémentaires, linéarité, condition initiale $F(x_0) = y_0$, et reconstitution de la fonction de coût total à partir du coût marginal.",
+        coursePdf: {
+            file: "pdf/2bac-eco/05_fonctions_primitives_cours_1.pdf",
+            title: "Cours 1 : Fonctions Primitives (DimaMath PDF)",
+            description: "Tableaux des primitives usuelles et méthodes de détermination."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/05_fonctions_primitives_serie_1.pdf",
+                title: "Série d'Exercices 1 : Primitives Usuelles & Conditions Initiales (PDF)",
+                description: "Exercices d'application du tableau des primitives."
+            },
+        ],
         courseContent: `
-            <div class="course-section">
-                <h3>I. Primitives et Calcul Intégral</h3>
-                <div class="formula-box">
-                    <h4>1. Primitives Usuelles Fondamentales</h4>
-                    <ul>
-                        <li>$f(x) = x^n \implies F(x) = \frac{x^{n+1}}{n+1} \quad (n \neq -1)$</li>
-                        <li>$f(x) = \frac{1}{x} \implies F(x) = \ln|x|$</li>
-                        <li>$f(x) = e^{a x} \implies F(x) = \frac{1}{a} e^{a x} \quad (a \neq 0)$</li>
-                        <li>$u'(x) e^{u(x)} \implies F(x) = e^{u(x)}$</li>
-                        <li>$\frac{u'(x)}{u(x)} \implies F(x) = \ln|u(x)|$</li>
-                    </ul>
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Fonctions Primitives — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/05_fonctions_primitives_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/05_fonctions_primitives_cours_1.pdf" download="05_fonctions_primitives_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
                 </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/05_fonctions_primitives_serie_1.pdf" download="05_fonctions_primitives_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/05_fonctions_primitives_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
+            <div class="course-section">
+                <h3>I. Définition & Propriétés Fondamentales</h3>
                 <div class="formula-box">
-                    <h4>2. Formule d'Intégration par Parties (IPP)</h4>
-                    <p>Soient $u$ et $v$ deux fonctions dérivables à dérivées continues sur $[a, b]$ :</p>
-                    <p>$$\int_a^b u'(t) v(t) dt = \Big[u(t) v(t)\Big]_a^b - \int_a^b u(t) v'(t) dt$$</p>
+                    <p>Soit $f$ une fonction définie sur un intervalle $I$. On appelle <strong>primitive</strong> de $f$ sur $I$ toute fonction $F$ dérivable sur $I$ telle que :</p>
+                    <p>$$\forall x \in I, \quad F'(x) = f(x)$$</p>
+                    <p>Toute fonction continue sur un intervalle $I$ admet des primitives. Si $F$ est une primitive de $f$, alors l'ensemble des primitives de $f$ est la famille des fonctions $x \mapsto F(x) + C$ ($C \in \mathbb{R}$).</p>
                 </div>
             </div>
 
             <div class="course-section">
-                <h3>II. Surplus du Consommateur et du Producteur</h3>
-                <div class="info-box">
-                    <p>Soit un marché de concurrence pure et parfaite caractérisé par un prix d'équilibre $p^*$ et une quantité d'équilibre $q^*$.</p>
-                    <p>Soient $P_D(q)$ la fonction de prix de demande (prix maximum consenti par les acheteurs) et $P_O(q)$ la fonction de prix d'offre (prix minimum exigé par les vendeurs) :</p>
-                </div>
+                <h3>II. Tableau des Primitives Usuelles</h3>
                 <div class="formula-box">
-                    <h4>1. Surplus du Consommateur (SC)</h4>
-                    <p>Représente le gain net total réalisé par les consommateurs qui étaient prêts à payer un prix supérieur au prix d'équilibre $p^*$ :</p>
-                    <p>$$SC = \int_0^{q^*} \big[P_D(q) - p^*\big] dq = \int_0^{q^*} P_D(q) dq - p^* \cdot q^*$$</p>
-                </div>
-                <div class="formula-box">
-                    <h4>2. Surplus du Producteur (SP)</h4>
-                    <p>Représente l'avantage financier net des producteurs qui étaient disposés à vendre à un coût inférieur au prix d'équilibre :</p>
-                    <p>$$SP = \int_0^{q^*} \big[p^* - P_O(q)\big] dq = p^* \cdot q^* - \int_0^{q^*} P_O(q) dq$$</p>
-                </div>
-                <div class="tip-box">
-                    <h4>3. Surplus Collectif Total (Bien-Être Social)</h4>
-                    <p>$$ST = SC + SP = \int_0^{q^*} \big[P_D(q) - P_O(q)\big] dq$$</p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <th style="padding: 8px;">Fonction $f(x)$</th>
+                            <th style="padding: 8px;">Primitive $F(x)$</th>
+                            <th style="padding: 8px;">Conditions</th>
+                        </tr>
+                        <tr><td style="padding: 6px;">$a$ (constante)</td><td style="padding: 6px;">$ax + C$</td><td style="padding: 6px;">$\mathbb{R}$</td></tr>
+                        <tr><td style="padding: 6px;">$x^n$ ($n \neq -1$)</td><td style="padding: 6px;">$\frac{x^{n+1}}{n+1} + C$</td><td style="padding: 6px;">$n \in \mathbb{N}$</td></tr>
+                        <tr><td style="padding: 6px;">$u' \cdot u^n$</td><td style="padding: 6px;">$\frac{u^{n+1}}{n+1} + C$</td><td style="padding: 6px;">$n \neq -1$</td></tr>
+                        <tr><td style="padding: 6px;">$\frac{u'}{\sqrt{u}}$</td><td style="padding: 6px;">$2\sqrt{u} + C$</td><td style="padding: 6px;">$u(x) > 0$</td></tr>
+                        <tr><td style="padding: 6px;">$u' e^u$</td><td style="padding: 6px;">$e^u + C$</td><td style="padding: 6px;">$\mathbb{R}$</td></tr>
+                        <tr><td style="padding: 6px;">$\frac{u'}{u}$</td><td style="padding: 6px;">$\ln|u| + C$</td><td style="padding: 6px;">$u(x) \neq 0$</td></tr>
+                    </table>
                 </div>
             </div>
+
+            <div class="course-section">
+                <h3>III. Application Économique : Reconstitution du Coût Total</h3>
+                <div class="info-box">
+                    <p>Le coût marginal étant la dérivée du coût total ($C_m(q) = C'(q)$), la fonction de coût total est la <strong>primitive du coût marginal</strong> satisfaisant la condition de coût fixe $C(0) = CF$ :</p>
+                    <p>$$C(q) = \int C_m(q) dq = F(q) + CF$$</p>
+                </div>
+            </div>
+        
         `,
         exercises: [
             {
-                title: "Exercice 1 : Calcul exact des surplus de marché",
-                statement: "Sur le marché de l'argan cosmétique, pour une quantité $q \in [0, 20]$ (en centaines de litres), le prix de demande et le prix d'offre (en dirhams le litre) sont :<br>$$P_D(q) = 250 - 5q \quad \text{et} \quad P_O(q) = 50 + 5q$$<br>1. Calculer la quantité d'équilibre $q^*$ et le prix d'équilibre $p^*$.<br>2. Calculer le surplus du consommateur $SC$.<br>3. Calculer le surplus du producteur $SP$.<br>4. En déduire le surplus collectif total $ST$ généré par ce marché.",
-                solution: "<strong>1. Équilibre du marché :</strong><br>$$P_D(q^*) = P_O(q^*) \iff 250 - 5q^* = 50 + 5q^* \iff 10q^* = 200 \iff q^* = 20\text{ (soit 2 000 litres)}$$<br>Le prix d'équilibre est :<br>$$p^* = P_D(20) = 250 - 5(20) = 150\text{ DH / litre}$$<br><strong>2. Surplus du Consommateur $SC$ :</strong><br>$$SC = \int_0^{20} (P_D(q) - p^*) dq = \int_0^{20} (250 - 5q - 150) dq = \int_0^{20} (100 - 5q) dq$$<br>$$SC = \left[100q - \frac{5}{2} q^2\right]_0^{20} = 100(20) - 2{,}5(20^2) = 2000 - 2{,}5(400) = 2000 - 1000 = 1\,000\text{ (unités monétaires)}.$$<br><strong>3. Surplus du Producteur $SP$ :</strong><br>$$SP = \int_0^{20} (p^* - P_O(q)) dq = \int_0^{20} (150 - (50 + 5q)) dq = \int_0^{20} (100 - 5q) dq$$<br>$$SP = \left[100q - 2{,}5q^2\right]_0^{20} = 1\,000\text{ (unités monétaires)}.$$<br><strong>4. Surplus collectif total :</strong><br>$$ST = SC + SP = 1000 + 1000 = 2\,000\text{ (soit 200 000 DH)}.$$"
-            }
+                title: "Exercice : Reconstitution du Coût Total",
+                statement: "Le coût marginal d'une manufacture en fonction de la production $q \ge 0$ est donné en dirhams par :<br>$$C_m(q) = 6q^2 - 18q + 40$$<br>Les charges fixes de structure s'élèvent à $CF = 2500$ DH.<br>1. Déterminer l'expression générale des primitives de $C_m(q)$.<br>2. En déduire l'expression exacte de la fonction de coût total $C(q)$.<br>3. Calculer le coût total pour une série de $q = 10$ unités.",
+                solution: "<strong>1. Primitives de $C_m(q)$ :</strong><br>$$F(q) = 6 \frac{q^3}{3} - 18 \frac{q^2}{2} + 40q + C = 2q^3 - 9q^2 + 40q + C$$<br><strong>2. Coût total :</strong><br>Puisque les coûts fixes sont $C(0) = 2500$, on a $C = 2500$.<br>Donc : $$C(q) = 2q^3 - 9q^2 + 40q + 2500$$<br><strong>3. Pour $q = 10$ :</strong><br>$$C(10) = 2(1000) - 9(100) + 40(10) + 2500 = 2000 - 900 + 400 + 2500 = 4000\text{ DH}.$$"
+            },
         ],
         exams: [
-            { title: "Session Rattrapage 2022 - Sciences Éco", type: "National", year: 2022 }
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
         ]
     },
     {
-        id: "2bac-eco-math-probabilites-variables-aleatoires",
-        title: "Dénombrement & Calcul des Probabilités (Variables Aléatoires)",
+        id: "2bac-eco-math-06-fonctions-logarithmiques",
+        title: "Fonctions Logarithmiques",
         level: "2bac-eco",
         subject: "math",
-        category: "Probabilités & Décision",
+        category: "Analyse",
         duration: "16 heures",
-        difficulty: "Intermédiaire",
+        difficulty: "Avancé",
         progress: 0,
-        description: "Techniques de dénombrement (n!, Anp, Cnp), probabilités conditionnelles, indépendance, formule des probabilités totales. Variable aléatoire discrète, espérance mathématique E(X), variance V(X) et aide à la décision économique.",
+        description: "Logarithme népérien $\ln(x)$, propriétés algébriques, limites usuelles et croissances comparées, dérivée de $\ln(u)$, équations et inéquations, et élasticité-prix de la demande.",
+        coursePdf: {
+            file: "pdf/2bac-eco/06_fonctions_logarithmiques_cours_1.pdf",
+            title: "Cours 1 : Fonctions Logarithmiques (DimaMath PDF)",
+            description: "Cours officiel DimaMath : propriétés de ln, limites et études de fonctions logarithmiques."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/06_fonctions_logarithmiques_serie_1.pdf",
+                title: "Série d'Exercices 1 : Propriétés Algébriques & Équations Logarithmiques (PDF)",
+                description: "Simplification d'expressions, résolutions d'équations et inéquations avec ln."
+            },
+            {
+                file: "pdf/2bac-eco/06_fonctions_logarithmiques_serie_2.pdf",
+                title: "Série d'Exercices 2 : Étude de Fonctions & Élasticité Économique (PDF)",
+                description: "Limites, dérivées de ln(u), étude de courbes et calculs d'élasticité."
+            },
+        ],
         courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Fonctions Logarithmiques — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/06_fonctions_logarithmiques_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/06_fonctions_logarithmiques_cours_1.pdf" download="06_fonctions_logarithmiques_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/06_fonctions_logarithmiques_serie_1.pdf" download="06_fonctions_logarithmiques_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/06_fonctions_logarithmiques_serie_2.pdf" download="06_fonctions_logarithmiques_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/06_fonctions_logarithmiques_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
             <div class="course-section">
-                <h3>I. Analyse Combinatoire & Dénombrement</h3>
+                <h3>I. Définition & Propriétés Algébriques</h3>
                 <div class="formula-box">
-                    <h4>1. Les 3 Outils Majeurs de Dénombrement</h4>
+                    <p>La fonction logarithme népérien, notée $\ln$, est l'unique primitive sur $]0, +\infty[$ de la fonction $x \mapsto \frac{1}{x}$ qui s'annule en $1$ : $\ln(1) = 0$ et $\ln(e) = 1$.</p>
+                    <h4>Propriétés algébriques fondamentales ($
+orall a, b > 0$)</h4>
                     <ul>
-                        <li><strong>Permutations de $n$ éléments :</strong> $n! = n \times (n-1) \times \dots \times 1$ ($0! = 1$).</li>
-                        <li><strong>Arrangements de $p$ parmi $n$ ($A_n^p$) :</strong> Tirages successifs <em>sans remise</em> où l'ordre compte : $$A_n^p = \frac{n!}{(n-p)!} = n(n-1)\dots(n-p+1)$$</li>
-                        <li><strong>Combinaisons de $p$ parmi $n$ ($C_n^p$) :</strong> Tirages <em>simultanés</em> où l'ordre ne compte pas : $$C_n^p = \binom{n}{p} = \frac{n!}{p!(n-p)!} = \frac{A_n^p}{p!}$$</li>
+                        <li>$\ln(a \cdot b) = \ln(a) + \ln(b)$</li>
+                        <li>$\ln\left(\frac{a}{b}\right) = \ln(a) - \ln(b), \quad \ln\left(\frac{1}{a}\right) = -\ln(a)$</li>
+                        <li>$\ln(a^r) = r \cdot \ln(a) \quad (r \in \mathbb{Q}), \quad \ln(\sqrt{a}) = \frac{1}{2} \ln(a)$</li>
                     </ul>
                 </div>
             </div>
 
             <div class="course-section">
-                <h3>II. Probabilités Conditionnelles & Formule des Probabilités Totales</h3>
+                <h3>II. Limites Fondamentales & Dérivation</h3>
                 <div class="formula-box">
-                    <h4>Formules Clés</h4>
-                    <p>Probabilité conditionnelle de $B$ sachant $A$ ($P(A) > 0$) :</p>
-                    <p>$$P_A(B) = P(B|A) = \frac{P(A \cap B)}{P(A)} \implies P(A \cap B) = P(A) \times P_A(B)$$</p>
-                    <p><strong>Formule des Probabilités Totales :</strong> Si $(A_1, A_2, \dots, A_k)$ forme une partition de l'univers $\Omega$ :</p>
-                    <p>$$P(B) = \sum_{i=1}^k P(B \cap A_i) = \sum_{i=1}^k P(A_i) \times P_{A_i}(B)$$</p>
+                    <p>$$\lim_{x \to +\infty} \ln(x) = +\infty, \quad \lim_{x \to 0^+} \ln(x) = -\infty$$</p>
+                    <p>$$\lim_{x \to +\infty} \frac{\ln(x)}{x} = 0, \quad \lim_{x \to 0^+} x \ln(x) = 0, \quad \lim_{x \to 1} \frac{\ln(x)}{x-1} = 1$$</p>
+                    <p><strong>Règle de dérivation :</strong> $(\ln(u))' = \frac{u'}{u} \quad (u(x) > 0)$.</p>
                 </div>
             </div>
 
             <div class="course-section">
-                <h3>III. Variables Aléatoires Discrètes & Gestion du Risque</h3>
+                <h3>III. Application Économique : Élasticité de la Demande</h3>
                 <div class="info-box">
-                    <p>Une variable aléatoire $X$ associe un résultat numérique (gain financier, perte, chiffre d'affaires) à chaque issue d'une expérience aléatoire.</p>
-                </div>
-                <div class="formula-box">
-                    <h4>Indicateurs de Rentabilité et de Risque</h4>
+                    <p>L'élasticité-prix de la demande mesure la sensibilité relative de la demande $D(p)$ face à une variation relative de prix :</p>
+                    <p>$$e(p) = \frac{\frac{dD}{D}}{\frac{dp}{p}} = \frac{p \cdot D'(p)}{D(p)}$$</p>
                     <ul>
-                        <li><strong>Espérance Mathématique $E(X)$ (Gain Moyen Espéré) :</strong> $$E(X) = \sum_{i=1}^k x_i \cdot P(X = x_i)$$ Un projet d'investissement est rentable en moyenne si $E(X) > 0$.</li>
-                        <li><strong>Variance $V(X)$ et Écart-Type $\sigma(X)$ (Mesure du Risque Financier) :</strong> $$V(X) = E(X^2) - [E(X)]^2 = \sum_{i=1}^k x_i^2 \cdot P(X = x_i) - [E(X)]^2$$ $$\sigma(X) = \sqrt{V(X)}$$ Plus $\sigma(X)$ est élevé, plus le projet présente un risque financier important (forte volatilité des rendements).</li>
+                        <li>Si $|e(p)| > 1$ : la demande est <strong>élastique</strong> (forte réaction aux prix).</li>
+                        <li>Si $|e(p)| < 1$ : la demande est <strong>inélastique</strong> (bien de première nécessité).</li>
                     </ul>
                 </div>
             </div>
+        
         `,
         exercises: [
             {
-                title: "Exercice 1 : Contrôle qualité et décision d'acceptation d'un lot",
-                statement: "Dans une manufacture marocaine d'électroménager, deux ateliers $A$ et $B$ produisent des cartes électroniques. L'atelier $A$ assure $60\%$ de la production et l'atelier $B$ assure $40\%$.<br>La proportion de pièces présentant un défaut est de $2\%$ pour l'atelier $A$ et de $5\%$ pour l'atelier $B$.<br>On choisit au hasard une pièce dans le stock global.<br>1. Calculer la probabilité globale $P(D)$ que la pièce soit défectueuse.<br>2. Sachant que la pièce est défectueuse, quelle est la probabilité qu'elle provienne de l'atelier $B$ ?<br>3. Une pièce défectueuse engendre un coût de réparation de 150 DH, une pièce sans défaut rapporte un bénéfice net de 80 DH. Soit $X$ le gain net par pièce. Déterminer la loi de probabilité de $X$ et calculer le gain moyen espéré $E(X)$.",
-                solution: "<strong>1. Probabilité totale $P(D)$ :</strong><br>D'après la formule des probabilités totales :<br>$$P(D) = P(A) \cdot P_A(D) + P(B) \cdot P_B(D) = 0{,}60 \times 0{,}02 + 0{,}40 \times 0{,}05 = 0{,}012 + 0{,}020 = 0{,}032\text{ (soit } 3{,}2\%\text{)}$$<br><strong>2. Règle de Bayes $P_D(B)$ :</strong><br>$$P_D(B) = \frac{P(B \cap D)}{P(D)} = \frac{P(B) \times P_B(D)}{P(D)} = \frac{0{,}020}{0{,}032} = \frac{20}{32} = 0{,}625\text{ (soit } 62{,}5\%\text{)}$$<br><strong>3. Loi de probabilité de $X$ et espérance :</strong><br>La variable $X$ prend deux valeurs :<br>- Si la pièce est défectueuse (probabilité $0{,}032$) : $x_1 = -150\text{ DH}$<br>- Si la pièce est saine (probabilité $1 - 0{,}032 = 0{,}968$) : $x_2 = +80\text{ DH}$<br>L'espérance mathématique est :<br>$$E(X) = (-150) \times 0{,}032 + 80 \times 0{,}968 = -4{,}8 + 77{,}44 = +72{,}64\text{ DH}.$$<br>En moyenne, l'entreprise dégage un bénéfice net espéré de <strong>72,64 DH par pièce fabriquée</strong>."
-            }
+                title: "Exercice : Calcul de l'Élasticité-Prix de la Demande",
+                statement: "La demande d'un service d'abonnement en fonction du tarif mensuel $p > 0$ (en dirhams) est :<br>$$D(p) = 500 - 50 \ln(p) \quad (1 < p < 1000)$$<br>1. Calculer la demande $D(p)$ pour $p = 100$ DH (on donne $\ln(100) \approx 4{,}605$).<br>2. Calculer $D'(p)$ et donner la formule de l'élasticité $e(p)$.<br>3. Calculer $e(100)$ et interpréter le comportement des consommateurs.",
+                solution: "<strong>1. Demande pour $p = 100$ :</strong><br>$$D(100) = 500 - 50(4{,}605) = 500 - 230{,}25 = 269{,}75 \approx 270\text{ abonnements}.$$<br><strong>2. Dérivée et élasticité :</strong><br>$$D'(p) = -50 \times \frac{1}{p} = -\frac{50}{p}$$<br>$$e(p) = \frac{p \cdot D'(p)}{D(p)} = \frac{p \left(-\frac{50}{p}\right)}{500 - 50 \ln(p)} = \frac{-50}{500 - 50\ln(p)} = \frac{-1}{10 - \ln(p)}$$<br><strong>3. Valeur en $p = 100$ :</strong><br>$$e(100) = \frac{-1}{10 - 4{,}605} = \frac{-1}{5{,}395} \approx -0{,}185$$<br><strong>Interprétation :</strong> Comme $|e(100)| \approx 0{,}185 < 1$, la demande est <strong>très inélastique</strong>. Une hausse de $1\%$ du tarif ne provoque qu'une baisse de seulement $0{,}185\%$ du nombre d'abonnés."
+            },
         ],
         exams: [
-            { title: "Session Ordinaire 2023 - Sciences Éco", type: "National", year: 2023 }
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
+            { title: "Examen National 2025 - Sciences Éco", type: "National", year: 2025 },
+        ]
+    },
+    {
+        id: "2bac-eco-math-07-fonctions-exponentielles",
+        title: "Fonctions Exponentielles",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Analyse",
+        duration: "14 heures",
+        difficulty: "Avancé",
+        progress: 0,
+        description: "Fonction exponentielle népérienne $e^x$, propriétés algébriques, limites usuelles et croissances comparées, dérivation de $e^{u(x)}$, capitalisation continue et modèles de diffusion.",
+        coursePdf: {
+            file: "pdf/2bac-eco/07_fonctions_exponentielles_cours_1.pdf",
+            title: "Cours 1 : Fonctions Exponentielles (DimaMath PDF)",
+            description: "Cours complet officiel DimaMath : propriétés de exp(x), limites de référence et étude de courbes."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/07_fonctions_exponentielles_serie_1.pdf",
+                title: "Série d'Exercices 1 : Propriétés & Résolutions Exponentielles (PDF)",
+                description: "Équations, inéquations et simplification avec la fonction exponentielle."
+            },
+            {
+                file: "pdf/2bac-eco/07_fonctions_exponentielles_serie_2.pdf",
+                title: "Série d'Exercices 2 : Étude de Fonctions Exponentielles (PDF)",
+                description: "Dérivation, limites aux bornes et tracé de fonctions exponentielles."
+            },
+        ],
+        courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Fonctions Exponentielles — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/07_fonctions_exponentielles_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/07_fonctions_exponentielles_cours_1.pdf" download="07_fonctions_exponentielles_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/07_fonctions_exponentielles_serie_1.pdf" download="07_fonctions_exponentielles_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/07_fonctions_exponentielles_serie_2.pdf" download="07_fonctions_exponentielles_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/07_fonctions_exponentielles_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
+            <div class="course-section">
+                <h3>I. Définition & Propriétés de la Fonction Exponentielle</h3>
+                <div class="formula-box">
+                    <p>La fonction exponentielle, notée $\exp$ ou $x \mapsto e^x$, est la fonction bijection réciproque du logarithme népérien sur $\mathbb{R}$ :</p>
+                    <p>$$e^x = y \iff x = \ln(y) \quad (x \in \mathbb{R}, y > 0)$$</p>
+                    <h4>Propriétés algébriques fondamentales</h4>
+                    <ul>
+                        <li>$e^0 = 1, \quad e^1 = e \approx 2{,}718$</li>
+                        <li>$e^{a+b} = e^a \cdot e^b, \quad e^{a-b} = \frac{e^a}{e^b}, \quad e^{-a} = \frac{1}{e^a}$</li>
+                        <li>$(e^a)^n = e^{n \cdot a} \quad (n \in \mathbb{Z})$</li>
+                        <li>$\forall x \in \mathbb{R}, \quad e^x > 0$</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Limites de Référence & Dérivation</h3>
+                <div class="formula-box">
+                    <p>$$\lim_{x \to +\infty} e^x = +\infty, \quad \lim_{x \to -\infty} e^x = 0, \quad \lim_{x \to 0} \frac{e^x - 1}{x} = 1$$</p>
+                    <p><strong>Croissances comparées :</strong> $\lim_{x \to +\infty} \frac{e^x}{x^n} = +\infty, \quad \lim_{x \to -\infty} x^n e^x = 0$.</p>
+                    <p><strong>Dérivation :</strong> $(e^x)' = e^x \quad \text{et} \quad (e^{u(x)})' = u'(x) \cdot e^{u(x)}$.</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Modélisation Économique : Capitalisation Continue</h3>
+                <div class="info-box">
+                    <p>Un capital $C_0$ placé à un taux d'intérêt annuel $r$ en capitalisation continue atteint à l'instant $t$ (en années) la valeur :</p>
+                    <p>$$C(t) = C_0 \cdot e^{r \cdot t}$$</p>
+                </div>
+            </div>
+        
+        `,
+        exercises: [
+            {
+                title: "Exercice : Capitalisation Continue & Temps de Doublement",
+                statement: "Une société d'investissement place un capital de $C_0 = 200\,000$ DH au taux d'intérêt continu de $r = 6\%$ par an ($r = 0{,}06$).<br>1. Exprimer le capital acquis $C(t)$ après $t$ années.<br>2. Calculer le capital acquis au bout de 5 ans.<br>3. Déterminer le temps nécessaire $T$ pour que le capital initial double.",
+                solution: "<strong>1. Formule du capital :</strong><br>$$C(t) = 200\,000 \cdot e^{0{,}06 t}$$<br><strong>2. Capital après 5 ans :</strong><br>$$C(5) = 200\,000 \cdot e^{0{,}06 \times 5} = 200\,000 \cdot e^{0{,}30} \approx 200\,000 \times 1{,}34986 = 269\,972\text{ DH}.$$<br><strong>3. Temps de doublement ($C(T) = 2 C_0$) :</strong><br>$$200\,000 e^{0{,}06 T} = 400\,000 \iff e^{0{,}06 T} = 2 \iff 0{,}06 T = \ln(2)$$<br>$$T = \frac{\ln(2)}{0{,}06} \approx \frac{0{,}69315}{0{,}06} \approx 11{,}55\text{ ans (environ 11 ans et 7 mois)}.$$"
+            },
+        ],
+        exams: [
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
+            { title: "Examen National 2024 - Sciences Éco", type: "National", year: 2024 },
+        ]
+    },
+    {
+        id: "2bac-eco-math-08-calcul-integral",
+        title: "Calcul Intégral",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Calcul Intégral",
+        duration: "12 heures",
+        difficulty: "Avancé",
+        progress: 0,
+        description: "Intégrale d'une fonction continue, relation de Chasles, linéarité, méthode d'intégration par parties, calcul d'aires planes et surplus économique (surplus du consommateur et du producteur).",
+        coursePdf: {
+            file: "pdf/2bac-eco/08_calcul_integral_cours_1.pdf",
+            title: "Cours 1 : Calcul Intégral (DimaMath PDF)",
+            description: "Intégration par parties, théorèmes fondamentaux et calculs d'aires."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/08_calcul_integral_serie_1.pdf",
+                title: "Série d'Exercices 1 : Calculs d'Intégrales & Intégration par Parties (PDF)",
+                description: "Techniques de calcul intégral et intégrations par parties types bac."
+            },
+            {
+                file: "pdf/2bac-eco/08_calcul_integral_serie_2.pdf",
+                title: "Série d'Exercices 2 : Calculs d'Aires & Surplus Économique (PDF)",
+                description: "Applications géométriques et surplus économique."
+            },
+        ],
+        courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Calcul Intégral — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/08_calcul_integral_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/08_calcul_integral_cours_1.pdf" download="08_calcul_integral_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/08_calcul_integral_serie_1.pdf" download="08_calcul_integral_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/08_calcul_integral_serie_2.pdf" download="08_calcul_integral_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/08_calcul_integral_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
+            <div class="course-section">
+                <h3>I. Intégrale d'une Fonction Continue</h3>
+                <div class="formula-box">
+                    <p>Soit $f$ une fonction continue sur $[a, b]$ et $F$ une primitive de $f$ sur $[a, b]$. L'intégrale de $f$ de $a$ à $b$ est :</p>
+                    <p>$$\int_a^b f(x) dx = [F(x)]_a^b = F(b) - F(a)$$</p>
+                    <h4>Propriétés fondamentales</h4>
+                    <ul>
+                        <li><strong>Linéarité :</strong> $\int_a^b (\alpha f(x) + \beta g(x)) dx = \alpha \int_a^b f(x) dx + \beta \int_a^b g(x) dx$</li>
+                        <li><strong>Relation de Chasles :</strong> $\int_a^c f(x) dx + \int_c^b f(x) dx = \int_a^b f(x) dx$</li>
+                        <li><strong>Valeur moyenne :</strong> $\mu = \frac{1}{b - a} \int_a^b f(x) dx$</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Formule d'Intégration par Parties (IPP)</h3>
+                <div class="formula-box">
+                    <p>Pour deux fonctions $u$ et $v$ dérivables sur $[a, b]$ de dérivées continues :</p>
+                    <p>$$\int_a^b u'(x) v(x) dx = [u(x) v(x)]_a^b - \int_a^b u(x) v'(x) dx$$</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Applications Économiques : Surplus du Consommateur & du Producteur</h3>
+                <div class="info-box">
+                    <p>Soit $(p^*, q^*)$ le point d'équilibre du marché où la demande est $p = D(q)$ et l'offre $p = O(q)$ :</p>
+                    <ul>
+                        <li><strong>Surplus du Consommateur ($SC$) :</strong> Gain des consommateurs prêts à payer plus cher que le prix d'équilibre :
+                        $$SC = \int_0^{q^*} [D(q) - p^*] dq$$</li>
+                        <li><strong>Surplus du Producteur ($SP$) :</strong> Gain des producteurs prêts à vendre moins cher que le prix d'équilibre :
+                        $$SP = \int_0^{q^*} [p^* - O(q)] dq$$</li>
+                    </ul>
+                </div>
+            </div>
+        
+        `,
+        exercises: [
+            {
+                title: "Exercice : Intégration par Parties & Calcul d'Aire",
+                statement: "1. À l'aide d'une intégration par parties, calculer :<br>$$I = \int_1^e x \ln(x) dx$$<br>2. En déduire la valeur moyenne de la fonction $f(x) = x \ln(x)$ sur $[1, e]$.",
+                solution: "<strong>1. Intégration par parties :</strong><br>On pose :<br>$u'(x) = x \implies u(x) = \frac{x^2}{2}$<br>$v(x) = \ln(x) \implies v'(x) = \frac{1}{x}$<br>$$I = \left[\frac{x^2}{2} \ln(x)\right]_1^e - \int_1^e \frac{x^2}{2} \cdot \frac{1}{x} dx = \left(\frac{e^2}{2} \cdot 1 - 0\right) - \frac{1}{2} \int_1^e x dx$$<br>$$I = \frac{e^2}{2} - \frac{1}{2} \left[\frac{x^2}{2}\right]_1^e = \frac{e^2}{2} - \frac{1}{4}(e^2 - 1) = \frac{e^2 + 1}{4} \approx 2{,}097.$$<br><strong>2. Valeur moyenne :</strong><br>$$\mu = \frac{1}{e - 1} I = \frac{e^2 + 1}{4(e - 1)} \approx \frac{8{,}389}{4(1{,}718)} \approx 1{,}221.$$"
+            },
+        ],
+        exams: [
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
+            { title: "Examen National 2025 - Sciences Éco", type: "National", year: 2025 },
+        ]
+    },
+    {
+        id: "2bac-eco-math-09-denombrement-et-probabilite",
+        title: "Dénombrement et Probabilités",
+        level: "2bac-eco",
+        subject: "math",
+        category: "Probabilités",
+        duration: "14 heures",
+        difficulty: "Intermédiaire",
+        progress: 0,
+        description: "Outils de dénombrement (p-listes, arrangements, combinaisons), probabilité sur un univers fini, probabilités conditionnelles, indépendance, variables aléatoires discrètes, espérance mathématique et contrôle qualité.",
+        coursePdf: {
+            file: "pdf/2bac-eco/09_denombrement_et_probabilite_cours_1.pdf",
+            title: "Cours 1 : Dénombrement et Probabilité (DimaMath PDF)",
+            description: "Cours officiel DimaMath : combinatoire, arbres de probabilités et variables aléatoires."
+        },
+        exercisePdfs: [
+            {
+                file: "pdf/2bac-eco/09_denombrement_et_probabilite_serie_1.pdf",
+                title: "Série d'Exercices 1 : Dénombrement & Tirages (PDF)",
+                description: "Tirages simultanés, successifs avec/sans remise et combinatoire."
+            },
+            {
+                file: "pdf/2bac-eco/09_denombrement_et_probabilite_serie_2.pdf",
+                title: "Série d'Exercices 2 : Probabilités Conditionnelles & Variables Aléatoires (PDF)",
+                description: "Formule des probabilités totales, espérance et applications concrètes."
+            },
+        ],
+        courseContent: `
+            <!-- DIMAMATH RESSOURCES OFFICIELLES BANNER -->
+            <div class="pdf-download-card" style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.35), rgba(16, 185, 129, 0.2)); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 16px; padding: 20px 24px; margin-bottom: 22px; backdrop-filter: blur(8px);">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.3rem; flex-shrink: 0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <div>
+                            <span class="anim-card-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 0.72rem; border: 1px solid rgba(16, 185, 129, 0.3); margin-bottom: 4px; display: inline-block;">Filière Sciences Économiques & Gestion</span>
+                            <h4 style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #ffffff;">Dénombrement et Probabilités — Support de Cours & Séries Officielles (DimaMath)</h4>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="pdf/2bac-eco/09_denombrement_et_probabilite_cours_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; font-weight: 600; font-size: 0.85rem; text-decoration: none;">
+                            <i data-lucide="external-link" style="width:14px;height:14px;"></i> Ouvrir Plein Écran
+                        </a>
+                        <a href="pdf/2bac-eco/09_denombrement_et_probabilite_cours_1.pdf" download="09_denombrement_et_probabilite_cours_1.pdf" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 25px; font-weight: 700; font-size: 0.85rem; text-decoration: none; background: #10b981; border-color: #10b981;">
+                            <i data-lucide="download" style="width:14px;height:14px;"></i> Télécharger le Cours PDF
+                        </a>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+                    <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Séries d'exercices associées :</span>
+                    
+                <a href="pdf/2bac-eco/09_denombrement_et_probabilite_serie_1.pdf" download="09_denombrement_et_probabilite_serie_1.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 1
+                </a>
+                <a href="pdf/2bac-eco/09_denombrement_et_probabilite_serie_2.pdf" download="09_denombrement_et_probabilite_serie_2.pdf" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; font-weight: 600; font-size: 0.82rem; text-decoration: none; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);">
+                    <i data-lucide="file-text" style="width:14px;height:14px;"></i> Série d'Exercices 2
+                </a>
+                </div>
+            </div>
+
+            <!-- EMBEDDED PDF VIEWER -->
+            <div style="width: 100%; height: 580px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.15); margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+                <iframe src="./pdf/2bac-eco/09_denombrement_et_probabilite_cours_1.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+
+            <!-- SYNTHÈSE DU COURS ET APPLICATIONS ÉCONOMIQUES -->
+            
+            <div class="course-section">
+                <h3>I. Outils de Dénombrement</h3>
+                <div class="formula-box">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <th style="padding: 8px;">Type de tirage</th>
+                            <th style="padding: 8px;">Ordre ?</th>
+                            <th style="padding: 8px;">Répétition ?</th>
+                            <th style="padding: 8px;">Formule</th>
+                        </tr>
+                        <tr><td style="padding: 6px;">Successif avec remise</td><td style="padding: 6px;">Oui</td><td style="padding: 6px;">Oui</td><td style="padding: 6px;">$n^p$ ($p$-liste)</td></tr>
+                        <tr><td style="padding: 6px;">Successif sans remise</td><td style="padding: 6px;">Oui</td><td style="padding: 6px;">Non</td><td style="padding: 6px;">$A_n^p = \frac{n!}{(n-p)!}$</td></tr>
+                        <tr><td style="padding: 6px;">Simultané</td><td style="padding: 6px;">Non</td><td style="padding: 6px;">Non</td><td style="padding: 6px;">$C_n^p = \frac{n!}{p!(n-p)!}$</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>II. Probabilités Conditionnelles & Formule Totale</h3>
+                <div class="formula-box">
+                    <p>$$P_B(A) = \frac{P(A \cap B)}{P(B)} \quad (P(B) > 0)$$</p>
+                    <p><strong>Formule des Probabilités Totales :</strong> Si $B_1, B_2, \dots, B_k$ forment une partition de $\Omega$ :</p>
+                    <p>$$P(A) = \sum_{i=1}^k P(A \cap B_i) = \sum_{i=1}^k P(B_i) \cdot P_{B_i}(A)$$</p>
+                </div>
+            </div>
+
+            <div class="course-section">
+                <h3>III. Variables Aléatoires & Espérance Économique</h3>
+                <div class="info-box">
+                    <p>Soit $X$ une variable aléatoire prenant les valeurs $\{x_1, x_2, \dots, x_n\}$ avec les probabilités $p_i = P(X = x_i)$ :</p>
+                    <ul>
+                        <li><strong>Espérance Mathématique (Gain espéré moyen) :</strong> $E(X) = \sum_{i=1}^n x_i p_i$</li>
+                        <li><strong>Variance (Risque/dispersion) :</strong> $V(X) = E(X^2) - [E(X)]^2$</li>
+                        <li><strong>Écart-type :</strong> $\sigma(X) = \sqrt{V(X)}$</li>
+                    </ul>
+                </div>
+            </div>
+        
+        `,
+        exercises: [
+            {
+                title: "Exercice : Contrôle Qualité & Décision Économique",
+                statement: "Dans une usine à Tanger, deux ateliers $A$ et $B$ produisent des puces électroniques : $A$ produit $65\%$ de la production (taux de défectuosité $2\%$) et $B$ produit $35\%$ (taux de défectuosité $4\%$).<br>1. Calculer la probabilité qu'une puce choisie au hasard soit défectueuse.<br>2. Sachant qu'une puce est défectueuse, calculer la probabilité qu'elle provienne de l'atelier $A$.",
+                solution: "<strong>1. Probabilité totale $P(D)$ :</strong><br>$$P(D) = P(A) \cdot P_A(D) + P(B) \cdot P_B(D) = 0{,}65 \times 0{,}02 + 0{,}35 \times 0{,}04 = 0{,}013 + 0{,}014 = 0{,}027\text{ (soit } 2{,}7\%\text{)}.$$<br><strong>2. Probabilité a posteriori (Bayes) :</strong><br>$$P_D(A) = \frac{P(A \cap D)}{P(D)} = \frac{0{,}013}{0{,}027} = \frac{13}{27} \approx 0{,}4815\text{ (soit } 48{,}15\%\text{)}.$$"
+            },
+        ],
+        exams: [
+            { title: "Examen National 2026 - Sciences Éco", type: "National", year: 2026 },
+            { title: "Examen National 2025 - Sciences Éco", type: "National", year: 2025 },
         ]
     },
     // ==========================================
@@ -22615,6 +23190,99 @@ const examsData = [
         `
     },
     {
+        id: "exam-2026-math-eco-ord",
+        title: "Examen National 2026 — Mathématiques (Session Ordinaire)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2026,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/examen_national_2026_sn_sujet.pdf",
+        corrigePdfUrl: "pdf/2bac-eco/examen_national_2026_sn_corrige.pdf",
+        description: "Épreuve officielle 2026 (Filière Sciences Économiques & Gestion) : Sujet intégral et Corrigé officiel DimaMath.",
+        statement: `<div class="exam-statement-body">
+                    <h3>Épreuve Officielle 2026 (Session Normale) — Sciences Économiques</h3>
+                    <p>L'épreuve comprend 4 exercices couvrant le programme officiel de 2BAC Sciences Économiques :</p>
+                    <ul>
+                        <li><strong>Exercice 1 (4 pts) :</strong> Suites numériques, raisonnement par récurrence, suites arithmético-géométriques et capitalisation.</li>
+                        <li><strong>Exercice 2 (4 pts) :</strong> Calcul des probabilités, tirages et formule des probabilités conditionnelles / totales.</li>
+                        <li><strong>Problème (12 pts) :</strong> Étude d'une fonction numérique (exponentielle ou logarithme), calcul des limites, branches infinies, dérivée, tracé de la courbe et analyse marginale microéconomique.</li>
+                    </ul>
+                </div>`,
+        correction: `<div class="exam-correction-body">
+                    <h3>Corrigé Officiel 2026 — Session Ordinaire (DimaMath)</h3>
+                    <p>Consultez le corrigé officiel pas à pas directement dans l'onglet PDF ci-dessus ou téléchargez le document officiel haute définition.</p>
+                </div>`
+    },
+    {
+        id: "exam-2026-math-eco-rat",
+        title: "Examen National 2026 — Mathématiques (Session Rattrapage)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2026,
+        session: "rattrapage",
+        sessionLabel: "Session Rattrapage",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/examen_national_2026_sr_sujet.pdf",
+        description: "Épreuve officielle de rattrapage 2026 — Filière Sciences Économiques & Gestion (Sujet complet).",
+        statement: `<div class="exam-statement-body">
+                    <h3>Épreuve de Rattrapage 2026 — Sciences Économiques</h3>
+                    <p>Sujet officiel complet de la session de rattrapage 2026 du Baccalauréat marocain.</p>
+                </div>`,
+        correction: `<div class="exam-correction-body">
+                    <p>Corrigé de rattrapage 2026 en cours d'indexation.</p>
+                </div>`
+    },
+    {
+        id: "exam-2025-math-eco-ord",
+        title: "Examen National 2025 — Mathématiques (Session Ordinaire)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2025,
+        session: "ordinaire",
+        sessionLabel: "Session Ordinaire",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/examen_national_2025_sn_sujet.pdf",
+        corrigePdfUrl: "pdf/2bac-eco/examen_national_2025_sn_corrige.pdf",
+        description: "Épreuve officielle 2025 (Filière Sciences Économiques) avec Sujet et Corrigé complet DimaMath.",
+        statement: `<div class="exam-statement-body">
+                    <h3>Épreuve Officielle 2025 (Session Normale)</h3>
+                    <p>Sujet complet téléchargeable en PDF dans l'onglet dédié.</p>
+                </div>`,
+        correction: `<div class="exam-correction-body">
+                    <h3>Corrigé Officiel 2025 (Session Normale)</h3>
+                    <p>Corrigé complet téléchargeable en PDF dans l'onglet dédié.</p>
+                </div>`
+    },
+    {
+        id: "exam-2025-math-eco-rat",
+        title: "Examen National 2025 — Mathématiques (Session Rattrapage)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2025,
+        session: "rattrapage",
+        sessionLabel: "Session Rattrapage",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/examen_national_2025_sr_sujet.pdf",
+        corrigePdfUrl: "pdf/2bac-eco/examen_national_2025_sr_corrige.pdf",
+        description: "Épreuve officielle de rattrapage 2025 avec Sujet et Corrigé officiel DimaMath.",
+        statement: `<div class='exam-statement-body'><p>Sujet disponible en PDF.</p></div>`,
+        correction: `<div class='exam-correction-body'><p>Corrigé disponible en PDF.</p></div>`
+    },
+    {
         id: "exam-2024-math-eco-ord",
         title: "Examen National 2024 — Mathématiques (Session Ordinaire)",
         level: "2bac-eco",
@@ -22626,73 +23294,95 @@ const examsData = [
         subjectLabel: "Mathématiques",
         duration: "2 heures",
         coefficient: "4",
-        description: "Épreuve officielle 2024 (Filière Sciences Économiques & Gestion) : Suites numériques, probabilités conditionnelles, étude d'une fonction exponentielle et calcul du coût marginal.",
-        statement: `
-            <div class="exam-statement-body">
-                <h3>EXERCICE 1 (4 points) : Suites Numériques & Épargne</h3>
-                <p>On considère la suite numérique $(u_n)$ définie par $u_0 = 6$ et pour tout $n \in \mathbb{N}$ :</p>
-                $$u_{n+1} = \frac{1}{3} u_n + 2$$
-                <p>1. Calculer $u_1$ et $u_2$.</p>
-                <p>2. Démontrer par récurrence que pour tout $n \in \mathbb{N}$ : $u_n > 3$.</p>
-                <p>3. Montrer que $(u_n)$ est décroissante, puis en déduire qu'elle est convergente.</p>
-                <p>4. On pose pour tout $n \in \mathbb{N}$ : $v_n = u_n - 3$.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;a. Montrer que $(v_n)$ est une suite géométrique dont on déterminera la raison et le premier terme $v_0$.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;b. Exprimer $v_n$ puis $u_n$ en fonction de $n$.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;c. Calculer $\lim_{n \to +\infty} u_n$.</p>
+        sujetPdfUrl: "pdf/2bac-eco/examen_national_2024_sn_sujet.pdf",
+        description: "Épreuve officielle 2024 (Sciences Éco) : Suites numériques, probabilités conditionnelles, étude d'une fonction exponentielle et calcul du coût marginal.",
+        statement: `<div class="exam-statement-body">
+                    <h3>EXERCICE 1 (4 points) : Suites Numériques & Épargne</h3>
+                    <p>On considère la suite numérique $(u_n)$ définie par $u_0 = 6$ et pour tout $n \in \mathbb{N}$ :</p>
+                    $$u_{n+1} = \frac{1}{3} u_n + 2$$
+                    <p>1. Calculer $u_1$ et $u_2$.</p>
+                    <p>2. Démontrer par récurrence que pour tout $n \in \mathbb{N}$ : $u_n > 3$.</p>
+                    <p>3. Montrer que $(u_n)$ est décroissante, puis en déduire qu'elle est convergente.</p>
+                    <p>4. On pose pour tout $n \in \mathbb{N}$ : $v_n = u_n - 3$.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;a. Montrer que $(v_n)$ est une suite géométrique de raison $q = \frac{1}{3}$ et déterminer $v_0$.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;b. Exprimer $v_n$ puis $u_n$ en fonction de $n$.</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;c. Calculer $\lim_{n \to +\infty} u_n$.</p>
 
-                <h3>EXERCICE 2 (4 points) : Probabilités & Gestion d'entreprise</h3>
-                <p>Une entreprise dispose de deux machines $M_1$ et $M_2$ pour conditionner des flacons d'huile cosmétique.</p>
-                <p>La machine $M_1$ assure $70\%$ de la production et la machine $M_2$ assure $30\%$.</p>
-                <p>La probabilité qu'un flacon présente un défaut sachant qu'il provient de $M_1$ est $0{,}03$.</p>
-                <p>La probabilité qu'un flacon présente un défaut sachant qu'il provient de $M_2$ est $0{,}05$.</p>
-                <p>1. Montrer que la probabilité qu'un flacon choisi au hasard soit défectueux est $P(D) = 0{,}036$.</p>
-                <p>2. Un client constate un défaut sur son flacon. Quelle est la probabilité qu'il ait été produit par $M_1$ ?</p>
-                <p>3. On prélève au hasard 5 flacons de manière indépendante. Calculer la probabilité d'avoir exactement un flacon défectueux.</p>
+                    <h3>EXERCICE 2 (4 points) : Probabilités & Gestion d'entreprise</h3>
+                    <p>Une entreprise dispose de deux machines $M_1$ (70% de la production) et $M_2$ (30%).</p>
+                    <p>Taux de défauts : 3% pour $M_1$ et 5% pour $M_2$.</p>
+                    <p>1. Montrer que la probabilité globale d'un flacon défectueux est $P(D) = 0{,}036$.</p>
+                    <p>2. Un flacon est défectueux : calculer la probabilité qu'il vienne de $M_1$.</p>
 
-                <h3>PROBLÈME (12 points) : Étude de Fonction & Analyse Marginale</h3>
-                <p><strong>Partie A :</strong> Soit la fonction $g$ définie sur $\mathbb{R}$ par $g(x) = e^x - x - 1$.</p>
-                <p>1. Calculer $g'(x)$ pour tout $x \in \mathbb{R}$.</p>
-                <p>2. Dresser le tableau de variations de $g$ et en déduire que pour tout $x \in \mathbb{R}$ : $g(x) \ge 0$.</p>
-                <p><strong>Partie B :</strong> Soit la fonction $f$ définie sur $[0, +\infty[$ par :</p>
-                $$f(x) = (x - 1) e^x + 2$$
-                <p>1. Déterminer $\lim_{x \to +\infty} f(x)$.</p>
-                <p>2. Montrer que pour tout $x \ge 0$ : $f'(x) = x e^x$.</p>
-                <p>3. En déduire les variations de $f$ sur $[0, +\infty[$ et dresser son tableau de variations.</p>
-                <p>4. Déterminer l'équation de la tangente $(T)$ à la courbe $(\mathcal{C}_f)$ au point d'abscisse $x_0 = 1$.</p>
-                <p><strong>Partie C (Application Économique) :</strong></p>
-                <p>Une entreprise fabrique $x$ centaines d'unités ($x \in [1, 5]$). Le coût total de production en milliers de dirhams est modélisé par la fonction $f(x)$.</p>
-                <p>1. Calculer le coût marginal $C_m(x)$ pour une production de 200 unités ($x = 2$).</p>
-                <p>2. Chaque unité est vendue 100 DH (soit 10 kDH par centaine d'unités). Déterminer le bénéfice pour $x = 2$.</p>
-            </div>
-        `,
-        correction: `
-            <div class="exam-correction-body">
-                <h3>Corrigé Détaillé de l'Examen National 2024 — Mathématiques Éco</h3>
-                <p><strong>EXERCICE 1 :</strong></p>
-                <p>1. $u_1 = \frac{1}{3}(6) + 2 = 4$, $u_2 = \frac{1}{3}(4) + 2 = \frac{10}{3} \approx 3{,}33$.</p>
-                <p>2. Pour $n=0$ : $u_0 = 6 > 3$ (vrai). Supposons $u_n > 3$. Alors $\frac{1}{3} u_n > 1 \implies \frac{1}{3} u_n + 2 > 3 \implies u_{n+1} > 3$. Conclusion : pour tout $n \in \mathbb{N}$, $u_n > 3$.</p>
-                <p>3. $u_{n+1} - u_n = \frac{1}{3} u_n + 2 - u_n = -\frac{2}{3} u_n + 2 = -\frac{2}{3}(u_n - 3) < 0$ car $u_n > 3$. La suite est strictement décroissante et minorée par $3$, elle est donc <strong>convergente</strong>.</p>
-                <p>4. a. $v_{n+1} = u_{n+1} - 3 = \frac{1}{3} u_n + 2 - 3 = \frac{1}{3} u_n - 1 = \frac{1}{3}(u_n - 3) = \frac{1}{3} v_n$. $(v_n)$ est géométrique de raison $q = \frac{1}{3}$ et de premier terme $v_0 = u_0 - 3 = 3$.</p>
-                <p>b. $v_n = 3 \left(\frac{1}{3}\right)^n = \left(\frac{1}{3}\right)^{n-1}$. Par suite, $u_n = v_n + 3 = 3 \left(\frac{1}{3}\right)^n + 3$.</p>
-                <p>c. Comme $-1 < \frac{1}{3} < 1$, $\lim_{n \to +\infty} \left(\frac{1}{3}\right)^n = 0$, donc $\lim_{n \to +\infty} u_n = 3$.</p>
-
-                <p><strong>EXERCICE 2 :</strong></p>
-                <p>1. $P(D) = P(M_1) P(D|M_1) + P(M_2) P(D|M_2) = 0{,}70 \times 0{,}03 + 0{,}30 \times 0{,}05 = 0{,}021 + 0{,}015 = 0{,}036$.</p>
-                <p>2. $P(M_1|D) = \frac{P(M_1 \cap D)}{P(D)} = \frac{0{,}021}{0{,}036} = \frac{21}{36} = \frac{7}{12} \approx 0{,}5833\text{ (soit } 58{,}33\%\text{)}$.</p>
-                <p>3. Loi binomiale $\mathcal{B}(5, 0{,}036)$ : $P(Y = 1) = \binom{5}{1} (0{,}036)^1 (1 - 0{,}036)^4 = 5 \times 0{,}036 \times (0{,}964)^4 \approx 0{,}1554$.</p>
-
-                <p><strong>PROBLÈME :</strong></p>
-                <p><strong>Partie A :</strong> $g'(x) = e^x - 1$. $g'(x) > 0 \iff x > 0$. $g$ admet un minimum en $x = 0$ valant $g(0) = e^0 - 0 - 1 = 0$. Donc pour tout $x \in \mathbb{R}$, $g(x) \ge 0$.</p>
-                <p><strong>Partie B :</strong></p>
-                <p>1. $\lim_{x \to +\infty} (x-1) = +\infty$ et $\lim_{x \to +\infty} e^x = +\infty \implies \lim_{x \to +\infty} f(x) = +\infty$.</p>
-                <p>2. $f'(x) = 1 \cdot e^x + (x-1) e^x + 0 = e^x(1 + x - 1) = x e^x$.</p>
-                <p>3. Pour $x \ge 0$, $x \ge 0$ et $e^x > 0$ donc $f'(x) \ge 0$. La fonction $f$ est strictement croissante sur $[0, +\infty[$. $f(0) = -1 + 2 = 1$.</p>
-                <p>4. En $x_0 = 1$ : $f(1) = 0 + 2 = 2$. $f'(1) = 1 \cdot e^1 = e$. Équation de la tangente : $y = e(x - 1) + 2 = ex - e + 2$.</p>
-                <p><strong>Partie C :</strong></p>
-                <p>1. Coût marginal : $C_m(x) = f'(x) = x e^x$. Pour $x = 2$ : $C_m(2) = 2 e^2 \approx 2 \times 7{,}389 = 14{,}778\text{ kDH (soit } 14\,778\text{ DH)}$.</p>
-                <p>2. Pour $x = 2$ centaines d'unités : Recette $R(2) = 10 \times 2 = 20\text{ kDH}$. Coût total $C(2) = f(2) = (2 - 1) e^2 + 2 = e^2 + 2 \approx 9{,}389\text{ kDH}$. Bénéfice : $B(2) = R(2) - C(2) = 20 - 9{,}389 = 10{,}611\text{ kDH (soit } 10\,611\text{ DH)}$.</p>
-            </div>
-        `
+                    <h3>PROBLÈME (12 points) : Étude de Fonction & Coût Marginal</h3>
+                    <p>Soit la fonction $f(x) = (x - 1) e^x + 2$ sur $[0, +\infty[$.</p>
+                    <p>1. Déterminer $\lim_{x \to +\infty} f(x)$.</p>
+                    <p>2. Montrer que $f'(x) = x e^x$ et dresser le tableau de variations.</p>
+                    <p>3. Application économique : calculer le coût marginal pour $x = 2$ ($200$ unités).</p>
+                </div>`,
+        correction: `<div class="exam-correction-body">
+                    <h3>Corrigé Pas à Pas de l'Épreuve 2024</h3>
+                    <p><strong>Exercice 1 :</strong> $u_1 = 4$, $u_2 = \frac{10}{3}$. Par récurrence, $u_n > 3$. $u_{n+1} - u_n = -\frac{2}{3}(u_n - 3) < 0$ (décroissante et minorée $\implies$ convergente). $v_n = 3 \cdot (1/3)^n$, $\lim u_n = 3$.</p>
+                    <p><strong>Exercice 2 :</strong> $P(D) = 0{,}7 \times 0{,}03 + 0{,}3 \times 0{,}05 = 0{,}036$. $P(M_1|D) = \frac{0{,}021}{0{,}036} = \frac{7}{12} \approx 58{,}33\%$.</p>
+                    <p><strong>Problème :</strong> $f'(x) = 1 \cdot e^x + (x-1)e^x = xe^x > 0$ sur $]0, +\infty[$. $f$ est strictement croissante. Coût marginal $C_m(2) = 2e^2 \approx 14{,}78$ kDH.</p>
+                </div>`
+    },
+    {
+        id: "exam-2024-math-eco-rat",
+        title: "Examen National 2024 — Mathématiques (Session Rattrapage)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2024,
+        session: "rattrapage",
+        sessionLabel: "Session Rattrapage",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/examen_national_2024_sr_sujet.pdf",
+        description: "Épreuve de rattrapage 2024 — Filière Sciences Économiques & Gestion (Sujet officiel complet).",
+        statement: `<div class='exam-statement-body'><p>Sujet officiel consultable et téléchargeable en PDF.</p></div>`,
+        correction: `<div class='exam-correction-body'><p>Corrigé consultable en PDF.</p></div>`
+    },
+    {
+        id: "exam-2bac-eco-ds-semestre-1",
+        title: "Devoirs Surveillés 1, 2 & 3 — Semestre 1 (DimaMath)",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2026,
+        session: "normale",
+        sessionLabel: "Contrôle Continu",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/devoir_surveille_1_s1.pdf",
+        description: "Sujets de devoirs surveillés modèles du Semestre 1 (Limites, Continuité, Dérivation, Suites numériques).",
+        statement: `<div class="exam-statement-body">
+                    <h3>Devoirs Surveillés — Semestre 1</h3>
+                    <p>Modèles officiels d'évaluation continue pour la préparation aux devoirs et aux examens nationaux.</p>
+                </div>`,
+        correction: `<div class='exam-correction-body'><p>Corrigés disponibles via les séries d'exercices DimaMath.</p></div>`
+    },
+    {
+        id: "exam-2bac-eco-bac-blanc",
+        title: "Sujets de Bac Blanc — Mathématiques 2BAC Éco",
+        level: "2bac-eco",
+        subject: "math",
+        year: 2026,
+        session: "normale",
+        sessionLabel: "Bac Blanc",
+        levelLabel: "2BAC Économie",
+        subjectLabel: "Mathématiques",
+        duration: "2 heures",
+        coefficient: "4",
+        sujetPdfUrl: "pdf/2bac-eco/bac_blanc_sujet_1.pdf",
+        description: "Épreuves complètes d'entraînement intensif au Baccalauréat National (Sujets 1 et 2 avec barème officiel).",
+        statement: `<div class="exam-statement-body">
+                    <h3>Sujet de Bac Blanc Complet</h3>
+                    <p>Épreuve blanche conforme au cadre de référence du Ministère de l'Éducation Nationale.</p>
+                </div>`,
+        correction: `<div class='exam-correction-body'><p>Correction méthodique selon le barème officiel MEN.</p></div>`
     },
 {
         id: "exam-2024-pc-pc-ord",
